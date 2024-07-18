@@ -1,0 +1,43 @@
+{
+  "name": "upthrust-competence",
+  "version": "0.0.1",
+  "description": "A simple solid ui lib screw built with unocss",
+  "keywords": [
+    "solid",
+    "unocss",
+    "vite",
+    "component",
+    "ui",
+    "solid admin",
+    "solid component"
+  ],
+  "type": "module",
+  "exports": {
+    ".": {
+      "types": "./types/index.d.ts",
+      "require": "./dist/upthrust-competence.umd.cjs",
+      "import": "./dist/upthrust-competence.js"
+    }
+  },
+  "main": "./dist/upthrust.cjs",
+  "unpkg": "./dist/upthrust-competence.umd.cjs",
+  "module": "./dist/upthrust-competence.js",
+  "types": "./types/index.d.ts",
+  "files": [
+    "dist",
+    "types"
+  ],
+  "scripts": {
+    "watch": "vite build --mode watch",
+    "build": "vite build",
+    "test": "vite test"
+  },
+  "license": "MIT",
+  "peerDependencies": {
+    "solid-js": "^1.8.17"
+  },
+  "devDependencies": {
+    "lodash": "4.17.5",
+    "@types/lodash": "^4.17.5"
+  }
+}

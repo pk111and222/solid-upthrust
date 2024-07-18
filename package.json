@@ -1,12 +1,36 @@
 {
-  "name": "solid-upthrust",
+  "name": "upthrust-ui",
   "version": "0.0.1",
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev::preset": "cd packages/preset && npm run watch",
+    "dev::competence": "cd packages/competence && npm run watch",
+    "dev::component": "cd packages/component && npm run watch",
+    "dev::example": "cd example && npm run dev",
+    "build": "pnpm run dev::build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Upthrust/upthrust-ui.git"
   },
   "keywords": [],
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "@types/node": "^20.14.2",
+    "@unocss/preset-wind": "^0.61.0",
+    "@unocss/preset-icons": "^0.61.0",
+    "@unocss/vite": "^0.61.0",
+    "solid-devtools": "^0.29.2",
+    "typescript": "^5.4.5",
+    "vite": "^5.2.13",
+    "vite-plugin-solid": "^2.10.2",
+    "vite-plugin-dts": "^3.9.1"
+  },
+  "engines": {
+    "node": ">=14",
+    "pnpm": ">=8"
+  }
 }

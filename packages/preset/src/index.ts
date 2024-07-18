@@ -1,0 +1,24 @@
+import type { Preset } from '@unocss/core'
+import type { Theme } from '@unocss/preset-mini'
+import rules from './rules'
+import shortcuts from './shortcuts'
+import theme from './theme'
+
+export const colors = Object.keys(theme.colors!)
+
+export default function presetUpthrust(): Preset<Theme> {
+  return {
+    name: 'upthrust-unocss-preset',
+    theme,
+    shortcuts,
+    rules,
+    safelist: [
+      // common
+      ...colors.map(c => `a-${c}`),
+      ...colors.map(c => `!a-${c}`),
+
+      // shortcuts
+      ...Object.keys(shortcuts),
+    ],
+  }
+}
