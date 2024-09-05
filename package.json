@@ -7,7 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev::preset": "cd packages/preset && npm run watch",
     "dev::competence": "cd packages/competence && npm run watch",
-    "dev::component": "cd packages/component && npm run watch",
+    "dev::component": "cd packages/components && npm run watch",
     "dev::example": "cd example && npm run dev",
     "build": "pnpm run dev::build"
   },
@@ -20,9 +20,9 @@
   "license": "ISC",
   "devDependencies": {
     "@types/node": "^20.14.2",
-    "@unocss/preset-wind": "^0.61.0",
-    "@unocss/preset-icons": "^0.61.0",
-    "@unocss/vite": "^0.61.0",
+    "@unocss/preset-wind": "^0.62.2",
+    "@unocss/preset-icons": "^0.62.2",
+    "@unocss/vite": "^0.62.2",
     "solid-devtools": "^0.29.2",
     "typescript": "^5.4.5",
     "vite": "^5.2.13",

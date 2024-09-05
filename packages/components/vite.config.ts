@@ -7,6 +7,12 @@ import dts from 'vite-plugin-dts';
 import UnocssPlugin from '@unocss/vite';
 
 export default defineConfig(({ command, mode }) => ({
+  resolve: {
+    alias: {
+      'lib': resolve(__dirname, 'lib'),
+      'utils': resolve(__dirname, 'utils'),
+    }
+  },
   build: {
     watch: mode === 'watch' ? {} : null,
     target: 'esnext',

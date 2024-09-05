@@ -8,10 +8,10 @@ export default defineConfig({
   presets: [
     presetWind(),
     presetIcons({
-      // prefix: 'i-',
-      // collections: {
-      //   mdi: () => import('@iconify-json/mdi/icons.json').then(i => i.default),
-      // }
+      prefix: 'i-',
+      collections: {
+        mdi: () => import('@iconify-json/mdi/icons.json').then(i => i.default),
+      }
     }),
     presetUpthrust(),
   ],

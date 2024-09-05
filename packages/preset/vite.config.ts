@@ -4,7 +4,6 @@ import solidPlugin from 'vite-plugin-solid';
 import dts from 'vite-plugin-dts';
 
 // import devtools from 'solid-devtools/vite';
-import UnocssPlugin from '@unocss/vite';
 
 export default defineConfig(({ command, mode }) => ({
   build: {

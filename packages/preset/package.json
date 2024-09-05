@@ -29,11 +29,11 @@
   },
   "license": "MIT",
   "devDependencies": {
-    "@material/material-color-utilities": "^0.3.0",
-    "@unocss/core": "^0.61.0",
-    "@unocss/preset-wind": "^0.61.0",
-    "@unocss/preset-icons": "^0.61.0",
-    "@unocss/preset-mini": "^0.61.0",
-    "@iconify-json/mdi": "^1.1.64"
+    "solid-material-color": "^1.1.0",
+    "@unocss/core": "^0.62.2",
+    "@unocss/preset-icons": "^0.62.2",
+    "@unocss/preset-uno": "^0.62.2",
+    "@iconify-json/mdi": "^1.1.64",
+    "unocss-preset-theme": "^0.13.0"
   }
 }

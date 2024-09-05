@@ -1,11 +1,17 @@
 import { defineConfig } from '@unocss/vite';
-import { presetWind } from '@unocss/preset-wind';
-// import transformerCompileClass from '@unocss/transformer-compile-class';
+import { presetIcons, presetUno } from 'unocss'
+import presetUpthrust from 'upthrust-unocss-preset';
 
 export default defineConfig({
-  
   presets: [
-    presetWind(),
+    presetUno(),
+    presetIcons({
+      prefix: 'i-',
+      collections: {
+        mdi: () => import('@iconify-json/mdi/icons.json').then(i => i.default),
+      }
+    }),
+    presetUpthrust()
   ],
   // transformers: [
   //   transformerCompileClass(),

@@ -1,5 +1,5 @@
 import 'uno.css';
-import '@unocss/reset/normalize.css';
+import '@unocss/reset/tailwind-compat.css';
 import 'upthrust-ui/style.css';
 import { render } from 'solid-js/web';
 

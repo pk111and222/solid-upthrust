@@ -1,8 +1,9 @@
 import { Component, JSX } from 'solid-js';
 import { SizeType } from '../../common/type';
+import { ButtonIns } from 'upthrust-competence';
 
-type ButtonType = 'primary' | 'link' | 'text' | 'secondary' | 'danger' | 'dashed';
-type ButtonSemantic = 'button' | 'icon' | 'text';
+type ButtonType = 'primary' | 'link' | 'text' | 'default' | 'danger' | 'dashed';
+type ButtonSemantic = 'button' | 'loading' | 'text' | 'anchor';
 export interface ButtonProps {
     classGroup?: Record<ButtonSemantic, Record<string, boolean>>;
     type?: ButtonType;
@@ -15,9 +16,11 @@ export interface ButtonProps {
     loading?: boolean;
     shape?: 'default' | 'circle' | 'round';
     size?: SizeType;
-    target?: string;
+    target?: HTMLAnchorElement['target'];
+    rel?: HTMLAnchorElement['rel'];
     onClick?: (event: MouseEvent) => void;
-    children: JSX.Element;
+    children?: JSX.Element;
+    ref?: (val: ButtonIns) => void;
 }
 declare const Button: Component<ButtonProps>;
 export default Button;

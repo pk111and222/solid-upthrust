@@ -11,9 +11,13 @@
   },
   "license": "MIT",
   "devDependencies": {
+    "unocss": "^0.62.2",
     "tailwind-merge": "^2.3.0",
-    "@unocss/reset": "^0.61.0",
+    "@unocss/reset": "^0.62.2",
     "@solidjs/router": "^0.13.5",
+    "@unocss/preset-uno": "^0.62.2",
+    "@iconify-json/mdi": "^1.1.66",
+    "upthrust-unocss-preset": "workspace:*",
     "upthrust-ui": "workspace:*"
   },
   "dependencies": {

@@ -12,12 +12,12 @@ const buttonVariants = cva(
   {
     variants: {
       type: {
-        primary: ["text-white", "bg-primary", "border-primary", "hover:bg-white"],
-        secondary: ["text-black ", "bg-white", "border-black", "hover:text-primary", "hover:border-primary"],
-        danger: ["text-white", "bg-error", "border-black"],
-        link: ["text-link", "bg-transparent", "border-none"],
-        text: ["text-black", "bg-transparent", "border-none"],
-        dashed: ["text-black", "border-dashed", "bg-transparent", "border-black"]
+        primary: ["text-white", "bg-primary", "border-primary", "hover:focus:bg-primary-container", "hover:focus:border-primary-container"],
+        default: ["text-primary", "bg-white", "border-primary", "hover:focus:border-primary-container", "text-primary-container"],
+        danger: ["text-white", "bg-error", "border-black", "hover:focus:bg-on-error-container", "hover:focus:border-on-error-container"],
+        link: ["text-primary", "bg-transparent", "border-none", "hover:focus:text-primary-container", "hover:focus:border-primary-container"],
+        text: ["text-gray-900	", "bg-transparent", "border-none", "hover:focus:text-gray-950"],
+        dashed: ["text-primary", "border-dashed", "bg-transparent", "border-primary", "hover:focus:text-primary-container", "hover:focus:border-primary-container"]
       },
       size: {
         small: ["px-4", "py-0.85", "text-sm"],
@@ -30,13 +30,17 @@ const buttonVariants = cva(
         circle: ["rounded-full"],
       },
       disabled: {
-        true: ["opacity-50", "cursor-not-allowed"],
+        true: ["opacity-50", "cursor-not-allowed", "pointer-events-none"],
         false: ["cursor-pointer"],
       },
       block: {
         true: ["block", "w-full"],
         false: ["inline-block"],
-      }
+      },
+      loading: {
+        true: ["pointer-events-none", "opacity-50"],
+        false: ["pointer-events-auto"],
+      },
     },
     // compoundVariants: [
     //   {
@@ -54,7 +58,6 @@ const buttonVariants = cva(
     },
   });
 
-export interface ButtonVariants extends VariantProps<typeof buttonVariants> { }
+// export interface ButtonVariants extends VariantProps<typeof buttonVariants> { }
 
-export const buttonClass = (variants: ButtonVariants) =>
-  twMerge(buttonVariants(variants));
+export const buttonClass = (variants: VariantProps<typeof buttonVariants>) => twMerge(buttonVariants(variants));

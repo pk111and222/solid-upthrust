@@ -1,4 +1,3 @@
-declare const shortcuts: {
-    'custom-shortcut': string;
-};
-export default shortcuts;
+export declare const shortcuts: {};
+declare const createShortcuts: (name?: string) => {};
+export default createShortcuts;
