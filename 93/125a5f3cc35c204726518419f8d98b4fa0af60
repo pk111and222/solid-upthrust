@@ -1,0 +1,285 @@
+packages/components/types/Breadcrumb/index.d.ts
+  s_89dbccb07edd29::t_f6e574b9f139bf 1-26
+example/src/pages/Splitter.tsx
+  s_d85b423ecba4d6::t_5096c14b2e85a7 1-57
+packages/components/types/Typography/index.d.ts
+  s_67c8ffefcdf13b::t_2e11ff90c3382b 1-42
+example/src/pages/LayoutDemo.tsx
+  s_d85b423ecba4d6::t_77d7934678ae50 1-59
+packages/components/lib/Splitter/index.tsx
+  s_d85b423ecba4d6::t_8b2e705c7d3764 2-5,9-26,28-35,44-51,56-95,98-99,105,107,109-112,114-123
+  s_d85b423ecba4d6::t_5dcc76f684e75c 1,6-8,27,36-43,52-55,96-97,100-104,106,108,113
+example/src/pages/Menu.tsx
+  s_89dbccb07edd29::t_ada671da7dc7e2 1-105
+packages/components/types/Anchor/index.d.ts
+  s_89dbccb07edd29::t_f6e574b9f139bf 1-22
+packages/competence/types/dropdown.d.ts
+  s_89dbccb07edd29::t_841e9fd1d3847c 1-25
+README.md
+  s_8a8fa11573b38e::t_6d395ccd96c094 1-109
+packages/competence/src/tabs.ts
+  s_89dbccb07edd29::t_d2e349d5db2214 1-97
+packages/preset/README.md
+  s_8a8fa11573b38e::t_92acf191866b4e 1-92
+packages/components/types/Dropdown/styles.d.ts
+  s_89dbccb07edd29::t_f6e574b9f139bf 1-15
+packages/components/types/Tabs/index.d.ts
+  s_89dbccb07edd29::t_f6e574b9f139bf 1-22
+packages/components/lib/Icon/styles.ts
+  s_67c8ffefcdf13b::t_f5e0611724af5b 1-37
+packages/preset/package.json
+  s_67c8ffefcdf13b::t_a2439b2de3ed57 32
+example/src/pages/Divider.tsx
+  s_d85b423ecba4d6::t_76977ea3fd8dda 1-2,4-38,41
+example/src/pages/Grid.tsx
+  s_d85b423ecba4d6::t_3cf9a29080c172 1-95
+packages/components/types/Typography/styles.d.ts
+  s_67c8ffefcdf13b::t_2e11ff90c3382b 1-18
+packages/components/types/Flex/styles.d.ts
+  s_d85b423ecba4d6::t_242b13eb6ab3dd 1-11
+packages/components/types/Grid/index.d.ts
+  s_d85b423ecba4d6::t_242b13eb6ab3dd 1-29
+packages/components/types/Masonry/styles.d.ts
+  s_d85b423ecba4d6::t_242b13eb6ab3dd 1-7
+example/src/App.tsx
+  s_89dbccb07edd29::t_7544fb7656fd02 1,3-5,8-22,25-37
+packages/components/lib/Breadcrumb/index.tsx
+  s_89dbccb07edd29::t_8cec3517d4f438 1-84
+packages/components/lib/Typography/index.tsx
+  s_67c8ffefcdf13b::t_6a03c1fc6d0392 1-141
+packages/components/lib/Steps/index.tsx
+  s_89dbccb07edd29::t_1189084a8e7052 1-92
+packages/competence/src/anchor.ts
+  s_89dbccb07edd29::t_086762a590e05f 1-132
+packages/competence/src/menu.ts
+  s_89dbccb07edd29::t_48d54ac5887eab 1-115
+packages/components/lib/Menu/index.tsx
+  s_89dbccb07edd29::t_7be09355bafda7 1-120
+packages/competence/types/steps.d.ts
+  s_89dbccb07edd29::t_841e9fd1d3847c 1-31
+packages/components/types/Dropdown/index.d.ts
+  s_89dbccb07edd29::t_f6e574b9f139bf 1-32
+packages/components/types/Menu/styles.d.ts
+  s_89dbccb07edd29::t_f6e574b9f139bf 1-26
+packages/components/lib/Flex/index.tsx
+  s_d85b423ecba4d6::t_bfc300c65ddc3f 1-68
+.cursorrules
+  s_8a8fa11573b38e::t_db4c08683aa372 1-20
+packages/components/types/Layout/index.d.ts
+  s_d85b423ecba4d6::t_242b13eb6ab3dd 1-48
+packages/components/types/Breadcrumb/styles.d.ts
+  s_89dbccb07edd29::t_f6e574b9f139bf 1-11
+packages/components/lib/Anchor/styles.ts
+  s_89dbccb07edd29::t_c3cc2c4e91b568 1-40
+packages/components/lib/Layout/index.tsx
+  s_d85b423ecba4d6::t_c0a5dbc75d6f27 1-156
+packages/competence/README.md
+  s_8a8fa11573b38e::t_255299fa1d2bb5 1-80
+packages/components/lib/Masonry/styles.ts
+  s_d85b423ecba4d6::t_d7994b705f3586 1-20
+packages/components/types/Alert/styles.d.ts
+  s_67c8ffefcdf13b::t_2e11ff90c3382b 3,6-8,11-17,19
+packages/components/types/Space/index.d.ts
+  s_d85b423ecba4d6::t_242b13eb6ab3dd 1-24
+packages/components/lib/Typography/styles.ts
+  s_67c8ffefcdf13b::t_9f15206d315790 1-85
+packages/preset/types/theme/index.d.ts
+  s_67c8ffefcdf13b::t_e04f8e361a8433 13,16
+example/src/pages/Space.tsx
+  s_d85b423ecba4d6::t_08deb5a457d0fb 1-81
+example/src/router.ts
+  s_89dbccb07edd29::t_c3b7960507a7b1 4-26,37,41
+example/src/pages/Typography.tsx
+  s_67c8ffefcdf13b::t_7a5cab33069cc9 1-69
+packages/components/lib/Flex/styles.ts
+  s_d85b423ecba4d6::t_d13029b7ff9bec 1-56
+packages/components/types/Divider/styles.d.ts
+  s_d85b423ecba4d6::t_242b13eb6ab3dd 1-14
+packages/components/lib/Tabs/styles.ts
+  s_89dbccb07edd29::t_ae1e24b8711399 1-97
+example/src/pages/Anchor.tsx
+  s_89dbccb07edd29::t_974acd67a2547b 1-70
+packages/competence/types/pagination.d.ts
+  s_89dbccb07edd29::t_841e9fd1d3847c 1-31
+packages/components/types/Anchor/styles.d.ts
+  s_89dbccb07edd29::t_f6e574b9f139bf 1-12
+packages/components/lib/Layout/styles.ts
+  s_d85b423ecba4d6::t_85c67fd4e57099 1-54
+packages/components/types/Pagination/index.d.ts
+  s_89dbccb07edd29::t_f6e574b9f139bf 1-20
+CLAUDE.md
+  s_8a8fa11573b38e::t_9adbc4478583d9 1-114
+packages/components/lib/Breadcrumb/styles.ts
+  s_89dbccb07edd29::t_006ce1a354bd89 1-30
+example/README.md
+  s_8a8fa11573b38e::t_73fe2b7c12069b 1-60
+packages/components/lib/Dropdown/index.tsx
+  s_89dbccb07edd29::t_e127f88a49075a 1-91
+packages/competence/types/tabs.d.ts
+  s_89dbccb07edd29::t_841e9fd1d3847c 1-30
+packages/components/types/Flex/index.d.ts
+  s_d85b423ecba4d6::t_242b13eb6ab3dd 1-18
+packages/components/types/Splitter/styles.d.ts
+  s_d85b423ecba4d6::t_242b13eb6ab3dd 1-16
+packages/competence/src/steps.ts
+  s_89dbccb07edd29::t_1e64e9e79ff4bd 1-71
+example/src/pages/Icon.tsx
+  s_67c8ffefcdf13b::t_4c31e52a0b2805 1-49
+packages/competence/types/menu.d.ts
+  s_89dbccb07edd29::t_841e9fd1d3847c 1-42
+packages/components/lib/Divider/styles.ts
+  s_d85b423ecba4d6::t_77db9b74ba37e4 1-57
+packages/components/lib/Space/styles.ts
+  s_d85b423ecba4d6::t_3071f4681c3a1f 1-57
+packages/components/lib/Masonry/index.tsx
+  s_d85b423ecba4d6::t_03d7339c36d8e8 1-111
+packages/components/types/Grid/styles.d.ts
+  s_d85b423ecba4d6::t_242b13eb6ab3dd 1-11
+packages/components/README.md
+  s_8a8fa11573b38e::t_cfe896491f41e3 1-65
+packages/components/lib/Splitter/styles.ts
+  s_d85b423ecba4d6::t_8fe60ce8683ed9 1-61
+packages/competence/src/pagination.ts
+  s_89dbccb07edd29::t_8ccccc78bdc48a 1-107
+packages/components/types/Icon/styles.d.ts
+  s_67c8ffefcdf13b::t_2e11ff90c3382b 1-9
+example/src/pages/Tabs.tsx
+  s_89dbccb07edd29::t_90ea11a04129ea 1-103
+packages/components/lib/Divider/index.tsx
+  s_d85b423ecba4d6::t_78e898842127c0 1-93
+packages/components/lib/Icon/index.tsx
+  s_67c8ffefcdf13b::t_4eebc5ed74ea7e 1-44
+packages/components/types/Menu/index.d.ts
+  s_89dbccb07edd29::t_f6e574b9f139bf 1-22
+packages/components/lib/Anchor/index.tsx
+  s_89dbccb07edd29::t_f9bcd5330b2668 1-84
+packages/components/types/Pagination/styles.d.ts
+  s_89dbccb07edd29::t_f6e574b9f139bf 1-17
+example/src/pages/Breadcrumb.tsx
+  s_89dbccb07edd29::t_fb5bd360fe414b 1-59
+packages/components/types/Steps/styles.d.ts
+  s_89dbccb07edd29::t_f6e574b9f139bf 1-29
+packages/components/types/index.d.ts
+  s_89dbccb07edd29::t_f6e574b9f139bf 24-37
+  s_67c8ffefcdf13b::t_2e11ff90c3382b 6-9
+  s_d85b423ecba4d6::t_242b13eb6ab3dd 10-23
+packages/components/lib/Steps/styles.ts
+  s_89dbccb07edd29::t_4a7a9e4ea6c77f 1-104
+packages/competence/src/dropdown.ts
+  s_89dbccb07edd29::t_831c225f1e4b1d 1-143
+example/src/pages/Pagination.tsx
+  s_89dbccb07edd29::t_608a117933e1a5 1-67
+packages/components/types/Steps/index.d.ts
+  s_89dbccb07edd29::t_f6e574b9f139bf 1-15
+packages/components/lib/Space/index.tsx
+  s_d85b423ecba4d6::t_3f52850c8a5f84 1-106
+AGENTS.md
+  s_8a8fa11573b38e::t_e5bfbc3dddb7c6 1-195
+packages/components/types/Divider/index.d.ts
+  s_d85b423ecba4d6::t_242b13eb6ab3dd 1-14
+pnpm-workspace.yaml
+  s_8c32b7222c3366::t_8a205b3fb02ad4 7
+  s_8c32b7222c3366::t_c01ea541008820 8-9
+  s_67c8ffefcdf13b::t_9a30a1a2145953 1,5
+  s_8c32b7222c3366::t_a1f30c1578ac4a 6
+packages/components/types/Splitter/index.d.ts
+  s_d85b423ecba4d6::t_242b13eb6ab3dd 1-25
+packages/components/types/Tabs/styles.d.ts
+  s_89dbccb07edd29::t_f6e574b9f139bf 1-26
+CODEX.md
+  s_8a8fa11573b38e::t_e48af207c0503c 1-34
+.github/copilot-instructions.md
+  s_8a8fa11573b38e::t_0c2eb60d44df6b 1-5
+packages/components/lib/index.ts
+  s_89dbccb07edd29::t_9acc112b8ed933 27-42
+  s_67c8ffefcdf13b::t_f619a128d2fa4d 6-9
+  s_d85b423ecba4d6::t_82c9e7385f8222 23
+  s_d85b423ecba4d6::t_c33d5174ee484d 10-22,24-26
+packages/competence/src/index.ts
+  s_89dbccb07edd29::t_882e610eb6ecbb 2-8
+example/src/pages/Masonry.tsx
+  s_d85b423ecba4d6::t_8bd1130603fc59 1-69
+packages/components/lib/Pagination/index.tsx
+  s_89dbccb07edd29::t_7a3ed09304b7e6 1-121
+example/src/pages/Steps.tsx
+  s_89dbccb07edd29::t_350c973b98f5be 1-96
+packages/components/lib/Pagination/styles.ts
+  s_89dbccb07edd29::t_2d878cdeb5d504 1-55
+packages/competence/types/index.d.ts
+  s_89dbccb07edd29::t_841e9fd1d3847c 3-8
+packages/components/lib/Tabs/index.tsx
+  s_89dbccb07edd29::t_40075f33ca1641 1-90
+packages/components/types/Icon/index.d.ts
+  s_67c8ffefcdf13b::t_2e11ff90c3382b 1-13
+example/src/pages/Dropdown.tsx
+  s_89dbccb07edd29::t_aba850580919fd 1-117
+packages/components/types/Masonry/index.d.ts
+  s_d85b423ecba4d6::t_242b13eb6ab3dd 1-12
+packages/components/lib/Menu/styles.ts
+  s_89dbccb07edd29::t_699c8fc1fb88e2 1-89
+packages/components/lib/Grid/index.tsx
+  s_d85b423ecba4d6::t_4607072d7b56e3 1-8,10-135
+  s_d85b423ecba4d6::t_3584bbee0d5b96 9
+packages/competence/types/anchor.d.ts
+  s_89dbccb07edd29::t_841e9fd1d3847c 1-24
+packages/components/lib/Grid/styles.ts
+  s_d85b423ecba4d6::t_a415cb316d0d45 1-45
+packages/components/lib/Dropdown/styles.ts
+  s_89dbccb07edd29::t_08528218998a1b 1-46
+example/src/pages/Flex.tsx
+  s_d85b423ecba4d6::t_5f3f354c010bae 1-76
+packages/components/types/Layout/styles.d.ts
+  s_d85b423ecba4d6::t_242b13eb6ab3dd 1-17
+packages/components/types/Space/styles.d.ts
+  s_d85b423ecba4d6::t_242b13eb6ab3dd 1-15
+pnpm-lock.yaml
+  s_67c8ffefcdf13b::t_867756222c7871 1,13,16,22,25,31,34,37,43,47,50,59,62,74,78,87,91,94,103,112,115,127,133,138-139,146,150-151,153,156-157,160-161,164-165,168-169,172-173,176-177,180-181,186-187,190-191,194,198-199,202-203,208-209,212-213,216-217,222-223,226-227,230-231,234-235,238-239,242-243,247-248,253-254,259-260,265-266,271-272,277-278,281-282,285-286,289-293,295-296,301-302,307-314,319-320,325-332,337-338,343-350,355-356,361-362,367-374,379-386,391-392,397-404,409-410,415-422,427-428,433-434,439-446,451-458,463-464,469-476,481-482,487-494,499-500,505-506,511-518,523-530,535-536,541-548,553-554,559-566,571-572,577-578,583-590,595-608,613-614,619-620,625-632,637-638,643-656,661-662,667-668,673-680,685-692,697-698,703-710,715-716,721-722,724,727-728,730-733,737-740,744,748-754,757,760-761,763,766,769,773-777,779,782,785,788,791,794,797,800,803-804,806-807,815-816,820-821,825-826,830-831,835-846,851-852,857-858,863-864,869-882,887-894,899-906,911-912,917-918,923-934,938-939,943-949,953,961,964,972,975,979-980,984-985,990,995-996,1000-1001,1005-1006,1010-1011,1015-1016,1020-1021,1025-1026,1030-1031,1035-1036,1040-1041,1045,1050-1051,1055,1060-1061,1065-1066,1070,1075,1078,1081-1082,1084,1087-1088,1090-1091,1093-1094,1096-1097,1099,1107,1112,1116-1117,1119,1122,1125,1128,1134,1137,1140,1143,1146,1149,1152,1155,1158,1161,1165,1169,1172,1175,1178,1181,1184,1187,1192,1195,1198,1201-1202,1204-1205,1207,1215-1216,1218-1219,1223,1226,1230-1231,1233-1234,1238-1239,1242-1245,1247-1248,1250-1255,1259-1260,1262-1263,1265,1269-1270,1274-1275,1280,1284-1285,1287,1291-1292,1294,1298,1301-1302,1304,1307,1310-1311,1313-1314,1317,1320-1324,1328-1329,1331,1334-1335,1343-1344,1346-1347,1349,1352-1357,1359-1360,1363-1368,1371-1378,1382-1384,1386,1389-1393,1396,1399-1401,1408,1412-1416,1420,1425,1428,1432-1434,1436,1440,1443,1447,1451-1452,1455,1459,1462,1465-1469,1473-1474,1476,1480-1482,1484,1488,1492,1496-1500,1504-1507,1511-1512,1515,1518,1521-1523,1526,1529,1534-1537,1540,1543,1547,1551-1555,1557,1559,1561,1563-1564,1566,1569,1572,1576,1579,1582-1586,1589,1593-1594,1596-1604,1607-1608,1610-1611,1614-1615,1617,1620-1621,1625-1626,1628-1630,1632,1636-1645,1647-1660,1662,1665-1673,1676,1679-1682,1685-1686,1688-1689,1692-1693,1696-1697,1699-1700,1702-1703,1706,1710,1714,1717-1719,1722-1723,1727,1731,1736-1737,1741-1742,1747-1748,1751-1762,1766-1767,1771,1778-1779,1781,1786-1787,1790-1791,1796-1797,1800,1804,1807,1811-1815,1819,1823,1827-1828,1830-1831,1834,1838,1842-1843,1845-1846,1850,1855,1860-1861,1863,1866-1867,1869,1873,1878,1890-1891,1896,1899-1900,1903,1913-1914,1916,1918,1923-1924,1951-1952,1954,1959,1962,1968-1973,1976,1979-1980,1983-3793,3797,3799
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.22",
+  "base_commit_sha": "93125a5f3cc35c204726518419f8d98b4fa0af60",
+  "prompts": {},
+  "sessions": {
+    "s_67c8ffefcdf13b": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "32a18492-1a7f-4cc2-8966-4c3f670769b0",
+        "model": "claude-opus-4-6"
+      },
+      "human_author": "pk111and222 <pk111and222@sina.cn>"
+    },
+    "s_89dbccb07edd29": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "4e8952f3-3956-47fb-a8c7-bce49ec2a8e6",
+        "model": "claude-opus-4-6"
+      },
+      "human_author": "pk111and222 <pk111and222@sina.cn>"
+    },
+    "s_8a8fa11573b38e": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "6c0fb659-493f-474a-814a-df7f351773d8",
+        "model": "claude-opus-4-6"
+      },
+      "human_author": "pk111and222 <pk111and222@sina.cn>"
+    },
+    "s_8c32b7222c3366": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "ff94ccdb-5b85-4a07-a30a-0bafed741316",
+        "model": "claude-opus-4-6"
+      },
+      "human_author": "pk111and222 <pk111and222@sina.cn>"
+    },
+    "s_d85b423ecba4d6": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "4ead4776-ecc1-481b-a34b-3ba44130a76a",
+        "model": "claude-opus-4-6"
+      },
+      "human_author": "pk111and222 <pk111and222@sina.cn>"
+    }
+  }
+}
