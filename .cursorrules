@@ -1,0 +1,20 @@
+This is a SolidJS enterprise component library (upthrust-ui) monorepo styled with UnoCSS.
+
+Architecture:
+- packages/components — UI layer (JSX + UnoCSS classes)
+- packages/competence — Headless behavior (create* composables, no JSX)
+- packages/preset — UnoCSS theme preset (tokens, shortcuts, rules)
+- example/ — Dev playground with per-component demo pages
+
+Rules:
+- Visual design follows Ant Design — never import antd
+- All styling via UnoCSS utility classes only
+- Components with interactive state must import logic from competence
+- Pure layout/style components do NOT need competence
+- Every new component/feature requires a demo in example/src/pages/
+- Use SolidJS idioms: createSignal, createMemo, splitProps, Show, For
+- TypeScript strict, all props interfaces exported
+- Use cva (class-variance-authority) for variant composition
+- Use twMerge (tailwind-merge) for class deduplication
+
+See AGENTS.md for full specification.

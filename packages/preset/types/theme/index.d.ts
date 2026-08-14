@@ -10,10 +10,10 @@ export type ThemeOption = {
     defaultGap?: string | number;
     gapAlgr?: (value: ThemeOption['defaultGap']) => GapTheme;
 };
-declare const createTheme: (option?: ThemeOption) => (GapTheme | {
+declare const createTheme: (option?: ThemeOption) => ({
     dark: import('solid-material-color').SimpleDynamicScheme;
     light: import('solid-material-color').SimpleDynamicScheme;
-} | import('@unocss/core').Preset<{
+} | GapTheme | import('@unocss/core').Preset<{
     colors: import('solid-material-color').SimpleDynamicScheme;
 } | {
     colors: import('solid-material-color').SimpleDynamicScheme;
