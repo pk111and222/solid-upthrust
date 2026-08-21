@@ -1,21 +1,10 @@
 {
+  "extends": "../../tsconfig.json",
   "compilerOptions": {
-    "target": "ESNext",
-    "module": "ESNext",
-    "moduleResolution": "node",
-    "resolveJsonModule": true,
-    "allowSyntheticDefaultImports": true,
-    "allowImportingTsExtensions": true,
-    "esModuleInterop": true,
-    "jsx": "preserve",
-    "jsxImportSource": "solid-js",
-    "types": ["vite/client"],
-    "noEmit": true,
-    "isolatedModules": true,
-    "baseUrl": ".",
-    "paths": {
-      "lib/*": ["lib/*"],
-      "utils/*": ["utils/*"]
-    }
+    "noEmit": false,
+    "declaration": true,
+    "declarationDir": "./types",
+    "emitDeclarationOnly": true
   },
+  "include": ["lib", "common", "utils"]
 }

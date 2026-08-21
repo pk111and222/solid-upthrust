@@ -1,5 +1,5 @@
 // Convert camelCase to kebab-case
-export function camelToHyphen(str) {
+export function camelToHyphen(str: string) {
   return str.replace(/([A-Z])/g, '-$1').toLowerCase().replace(/^-/, '');
 }
 

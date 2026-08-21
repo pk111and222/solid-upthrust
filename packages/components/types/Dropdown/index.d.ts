@@ -1,6 +1,6 @@
-import { Component, JSX } from 'solid-js';
-import { DropdownPlacement, DropdownTrigger } from 'upthrust-competence';
-
+import { Component } from 'solid-js';
+import { JSX } from '@solidjs/web';
+import { TriggerPlacement } from 'upthrust-competence';
 export interface DropdownMenuItem {
     key: string;
     label: string | JSX.Element;
@@ -14,6 +14,8 @@ export interface DropdownMenuProps {
     items: DropdownMenuItem[];
     onClick?: (key: string) => void;
 }
+export type DropdownTrigger = 'click' | 'hover' | 'contextMenu';
+export type DropdownPlacement = TriggerPlacement;
 export interface DropdownProps {
     menu: DropdownMenuProps;
     trigger?: DropdownTrigger;

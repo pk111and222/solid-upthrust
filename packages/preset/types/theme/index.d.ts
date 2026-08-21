@@ -1,7 +1,8 @@
 import { PresetThemeOptions } from 'unocss-preset-theme';
 import { MaterialColorOptions } from './colors/material';
 import { GapTheme } from './gap';
-
+import { SizeTokens } from './size';
+import { StyleTokens } from './style';
 export type ThemeOption = {
     selectors: PresetThemeOptions<any>['selectors'];
     prefix: string;
@@ -9,13 +10,17 @@ export type ThemeOption = {
     colors?: string | MaterialColorOptions;
     defaultGap?: string | number;
     gapAlgr?: (value: ThemeOption['defaultGap']) => GapTheme;
+    sizeTokens?: Partial<SizeTokens>;
+    styleTokens?: Partial<StyleTokens>;
 };
-declare const createTheme: (option?: ThemeOption) => ({
-    dark: import('solid-material-color').SimpleDynamicScheme;
-    light: import('solid-material-color').SimpleDynamicScheme;
-} | GapTheme | import('@unocss/core').Preset<{
-    colors: import('solid-material-color').SimpleDynamicScheme;
+declare const createTheme: (option?: ThemeOption) => readonly [import('@unocss/core').Preset<{
+    colors: import('solid-material-color').SimpleDynamicScheme | null;
 } | {
-    colors: import('solid-material-color').SimpleDynamicScheme;
-}>)[];
+    colors: import('solid-material-color').SimpleDynamicScheme | null;
+}>, {
+    dark: import('solid-material-color').SimpleDynamicScheme | null;
+    light: import('solid-material-color').SimpleDynamicScheme | null;
+}, GapTheme | undefined, SizeTokens, StyleTokens];
 export default createTheme;
+export type { SizeTokens } from './size';
+export type { StyleTokens } from './style';

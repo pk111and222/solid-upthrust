@@ -4,20 +4,20 @@ import { Typography, Text, Title, Paragraph, Link } from 'upthrust-ui';
 const TypographyPage: Component = () => {
   return <>
     <h3>标题 Title</h3>
-    <Title level={1}>h1. Ant Design</Title>
-    <Title level={2}>h2. Ant Design</Title>
-    <Title level={3}>h3. Ant Design</Title>
-    <Title level={4}>h4. Ant Design</Title>
-    <Title level={5}>h5. Ant Design</Title>
+    <Title level={1}>h1. Upthrust UI</Title>
+    <Title level={2}>h2. Upthrust UI</Title>
+    <Title level={3}>h3. Upthrust UI</Title>
+    <Title level={4}>h4. Upthrust UI</Title>
+    <Title level={5}>h5. Upthrust UI</Title>
 
     <h3 class="mt-4">文本类型 Text Types</h3>
     <div class="flex flex-col gap-2">
-      <Text>Ant Design (default)</Text>
-      <Text type="secondary">Ant Design (secondary)</Text>
-      <Text type="success">Ant Design (success)</Text>
-      <Text type="warning">Ant Design (warning)</Text>
-      <Text type="danger">Ant Design (danger)</Text>
-      <Text disabled>Ant Design (disabled)</Text>
+      <Text>Upthrust UI (default)</Text>
+      <Text type="secondary">Upthrust UI (secondary)</Text>
+      <Text type="success">Upthrust UI (success)</Text>
+      <Text type="warning">Upthrust UI (warning)</Text>
+      <Text type="danger">Upthrust UI (danger)</Text>
+      <Text disabled>Upthrust UI (disabled)</Text>
     </div>
 
     <h3 class="mt-4">文字装饰 Decorations</h3>
@@ -40,20 +40,20 @@ const TypographyPage: Component = () => {
 
     <h3 class="mt-4">段落 Paragraph</h3>
     <Paragraph>
-      Ant Design, a design language for background applications, is refined by Ant UED Team.
-      Ant Design, a design language for background applications, is refined by Ant UED Team.
+      Upthrust UI, a design language for background applications, is refined by the Upthrust team.
+      Upthrust UI, a design language for background applications, is refined by the Upthrust team.
     </Paragraph>
     <Paragraph type="secondary">
-      Ant Design, a design language for background applications, is refined by Ant UED Team.
+      Upthrust UI, a design language for background applications, is refined by the Upthrust team.
     </Paragraph>
 
     <h3 class="mt-4">省略号 Ellipsis</h3>
     <div class="w-md">
       <Paragraph ellipsis>
-        Ant Design, a design language for background applications, is refined by Ant UED Team. Ant Design, a design language for background applications, is refined by Ant UED Team. Ant Design, a design language for background applications, is refined by Ant UED Team.
+        Upthrust UI, a design language for background applications, is refined by the Upthrust team. Upthrust UI, a design language for background applications, is refined by the Upthrust team. Upthrust UI, a design language for background applications, is refined by the Upthrust team.
       </Paragraph>
       <Paragraph ellipsis={{ rows: 2 }}>
-        Ant Design, a design language for background applications, is refined by Ant UED Team. Ant Design, a design language for background applications, is refined by Ant UED Team. Ant Design, a design language for background applications, is refined by Ant UED Team. Ant Design, a design language for background applications.
+        Upthrust UI, a design language for background applications, is refined by the Upthrust team. Upthrust UI, a design language for background applications, is refined by the Upthrust team. Upthrust UI, a design language for background applications, is refined by the Upthrust team. Upthrust UI, a design language for background applications.
       </Paragraph>
     </div>
 

@@ -1,5 +1,6 @@
-import { Component, JSX, Show, createMemo, mergeProps } from 'solid-js'
-import { dividerClass, dividerTextClass } from './styles'
+import { Component,  Show, createMemo, merge } from 'solid-js'
+import type { JSX } from '@solidjs/web'
+import { dividerClass, dividerTextClass, dividerLineClass } from './styles'
 
 export interface DividerProps {
   type?: 'horizontal' | 'vertical'
@@ -13,7 +14,7 @@ export interface DividerProps {
 }
 
 const Divider: Component<DividerProps> = (rawProps) => {
-  const props = mergeProps(
+  const props = merge(
     { type: 'horizontal' as const, dashed: false, orientation: 'center' as const, plain: false },
     rawProps
   )
@@ -21,51 +22,28 @@ const Divider: Component<DividerProps> = (rawProps) => {
   const hasChildren = createMemo(() => props.children !== undefined && props.children !== null)
   const isHorizontal = createMemo(() => props.type === 'horizontal')
 
-  const _class = createMemo(() => {
-    const base = dividerClass({ type: props.type, dashed: props.dashed, plain: props.plain })
-    if (isHorizontal() && hasChildren()) {
-      return `${base} flex items-center border-t-0 my-6 ${props.class || ''}`.trim()
+  const _class = createMemo(() =>
+    `${dividerClass({ type: props.type, dashed: !!props.dashed, hasText: isHorizontal() && hasChildren() })} ${props.class || ''}`.trim()
+  )
+
+  const _lineClass = createMemo(() => dividerLineClass({ dashed: !!props.dashed }))
+
+  const leftStyle = createMemo((): JSX.CSSProperties => {
+    if (props.orientationMargin !== undefined && props.orientation === 'left') {
+      const w = typeof props.orientationMargin === 'number' ? `${props.orientationMargin}px` : props.orientationMargin
+      return { flex: 'none', width: w }
     }
-    return `${base} ${props.class || ''}`.trim()
+    if (props.orientation === 'left') return { flex: '0 0 5%' }
+    return { flex: '1' }
   })
 
-  const lineClass = createMemo(() => {
-    const base = 'flex-1 border-0 border-t border-solid border-outline/20'
-    return props.dashed ? `${base} border-dashed` : base
-  })
-
-  const leftFlex = createMemo(() => {
-    if (props.orientationMargin !== undefined) return undefined
-    if (props.orientation === 'left') return '0 0 5%'
-    if (props.orientation === 'right') return '1'
-    return '1'
-  })
-
-  const rightFlex = createMemo(() => {
-    if (props.orientationMargin !== undefined) return undefined
-    if (props.orientation === 'right') return '0 0 5%'
-    if (props.orientation === 'left') return '1'
-    return '1'
-  })
-
-  const leftWidth = createMemo(() => {
-    if (props.orientationMargin === undefined) return undefined
-    if (props.orientation === 'left') {
-      return typeof props.orientationMargin === 'number'
-        ? `${props.orientationMargin}px`
-        : props.orientationMargin
+  const rightStyle = createMemo((): JSX.CSSProperties => {
+    if (props.orientationMargin !== undefined && props.orientation === 'right') {
+      const w = typeof props.orientationMargin === 'number' ? `${props.orientationMargin}px` : props.orientationMargin
+      return { flex: 'none', width: w }
     }
-    return undefined
-  })
-
-  const rightWidth = createMemo(() => {
-    if (props.orientationMargin === undefined) return undefined
-    if (props.orientation === 'right') {
-      return typeof props.orientationMargin === 'number'
-        ? `${props.orientationMargin}px`
-        : props.orientationMargin
-    }
-    return undefined
+    if (props.orientation === 'right') return { flex: '0 0 5%' }
+    return { flex: '1' }
   })
 
   return (
@@ -74,17 +52,11 @@ const Divider: Component<DividerProps> = (rawProps) => {
       fallback={<div class={_class()} style={props.style} role="separator" />}
     >
       <div class={_class()} style={props.style} role="separator">
-        <span
-          class={lineClass()}
-          style={{ flex: leftFlex(), width: leftWidth(), 'min-width': leftWidth() ? '0' : undefined }}
-        />
-        <span class={dividerTextClass({ orientation: props.orientation, plain: props.plain })} style={{ padding: '0 1em' }}>
+        <span class={_lineClass()} style={leftStyle()} />
+        <span class={dividerTextClass({ plain: !!props.plain })}>
           {props.children}
         </span>
-        <span
-          class={lineClass()}
-          style={{ flex: rightFlex(), width: rightWidth(), 'min-width': rightWidth() ? '0' : undefined }}
-        />
+        <span class={_lineClass()} style={rightStyle()} />
       </div>
     </Show>
   )

@@ -1,5 +1,5 @@
 This is a SolidJS enterprise (B-end) component library monorepo styled with UnoCSS.
-Visual design follows Ant Design patterns — never import antd directly.
+Visual design follows solidjs-upthrust patterns — never import third-party UI libraries directly.
 
 ## Packages
 

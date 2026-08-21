@@ -1,43 +1,57 @@
 {
   "name": "upthrust-competence",
   "version": "0.0.1",
-  "description": "A simple solid ui lib screw built with unocss",
+  "description": "Headless component logic for upthrust-ui",
   "keywords": [
     "solid",
-    "unocss",
-    "vite",
+    "headless",
     "component",
-    "ui",
-    "solid admin",
     "solid component"
   ],
   "type": "module",
   "exports": {
     ".": {
+      "source": "./src/index.ts",
       "types": "./types/index.d.ts",
-      "require": "./dist/upthrust-competence.umd.cjs",
+      "require": "./dist/upthrust-competence.cjs",
       "import": "./dist/upthrust-competence.js"
+    },
+    "./es": {
+      "types": "./types/index.d.ts",
+      "import": "./dist/es/index.js"
+    },
+    "./es/*": {
+      "types": "./types/*.d.ts",
+      "import": "./dist/es/*.js"
+    },
+    "./source": {
+      "source": "./src/index.ts",
+      "types": "./src/index.ts"
     }
   },
-  "main": "./dist/upthrust.cjs",
-  "unpkg": "./dist/upthrust-competence.umd.cjs",
-  "module": "./dist/upthrust-competence.js",
+  "main": "./dist/upthrust-competence.cjs",
+  "module": "./dist/es/index.js",
   "types": "./types/index.d.ts",
   "files": [
     "dist",
-    "types"
+    "types",
+    "src"
   ],
   "scripts": {
     "watch": "vite build --mode watch",
-    "build": "vite build",
-    "test": "vite test"
+    "build": "vite build && vite build --mode preserve",
+    "build:bundle": "vite build",
+    "build:es": "vite build --mode preserve",
+    "test": "vitest run"
   },
   "license": "MIT",
   "peerDependencies": {
-    "solid-js": "^1.8.17"
+    "solid-js": "^2.0.0-rc.0"
+  },
+  "dependencies": {
+    "lodash": "^4.18.1"
   },
   "devDependencies": {
-    "lodash": "4.17.5",
-    "@types/lodash": "^4.17.5"
+    "@types/lodash": "^4.17.25"
   }
 }

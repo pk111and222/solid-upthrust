@@ -3,7 +3,7 @@ import { cva, type VariantProps } from "class-variance-authority";
 import { twMerge } from "tailwind-merge";
 
 const rowVariants = cva(
-  ["flex", "flex-wrap"],
+  ["flex"],
   {
     variants: {
       justify: {
@@ -35,11 +35,9 @@ const rowVariants = cva(
 
 const colVariants = cva(
   ["relative", "max-w-full"],
-  {
-    variants: {},
-    defaultVariants: {},
-  }
+  { variants: {}, defaultVariants: {} }
 );
 
-export const rowClass = (variants: VariantProps<typeof rowVariants>) => twMerge(rowVariants(variants));
+export type RowStyleVariants = VariantProps<typeof rowVariants>;
+export const rowClass = (variants: RowStyleVariants) => twMerge(rowVariants(variants));
 export const colClass = (variants: VariantProps<typeof colVariants>) => twMerge(colVariants(variants));

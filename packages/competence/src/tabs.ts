@@ -1,4 +1,5 @@
-import { createMemo, createSignal, onCleanup, onMount } from "solid-js";
+import { createMemo, createSignal } from "solid-js";
+import { createOwnerCleanup } from "./utils";
 
 export type TabItem = {
   key: string
@@ -24,6 +25,7 @@ export type TabsIns = {
 }
 
 export const createTabs = (config: TabsConfig) => {
+  const onOwnerCleanup = createOwnerCleanup();
   const getDefaultKey = () => {
     if (config.defaultActiveKey) return config.defaultActiveKey
     const first = config.items.find(item => !item.disabled)
@@ -71,7 +73,7 @@ export const createTabs = (config: TabsConfig) => {
       }
     }
     el.addEventListener('keydown', handleKeyDown)
-    onCleanup(() => {
+    onOwnerCleanup(() => {
       el.removeEventListener('keydown', handleKeyDown)
     })
   }

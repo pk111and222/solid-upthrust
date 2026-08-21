@@ -1,5 +1,7 @@
-import { Component, JSX } from 'solid-js';
-
+import { Component } from 'solid-js';
+import { JSX } from '@solidjs/web';
+import { Breakpoint, SiderCollapseType } from 'upthrust-competence';
+import { SiderTheme } from './styles';
 export interface LayoutProps {
     hasSider?: boolean;
     class?: string;
@@ -27,10 +29,12 @@ export interface SiderProps {
     collapsed?: boolean;
     defaultCollapsed?: boolean;
     collapsible?: boolean;
-    breakpoint?: 'xs' | 'sm' | 'md' | 'lg' | 'xl' | 'xxl';
-    onCollapse?: (collapsed: boolean) => void;
+    breakpoint?: Breakpoint;
+    onCollapse?: (collapsed: boolean, type: SiderCollapseType) => void;
+    onBreakpoint?: (broken: boolean) => void;
     trigger?: JSX.Element | null;
     reverseArrow?: boolean;
+    theme?: SiderTheme;
     class?: string;
     style?: JSX.CSSProperties;
     children?: JSX.Element;

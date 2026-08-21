@@ -1,5 +1,5 @@
-import { Component, JSX } from 'solid-js';
-
+import { Component } from 'solid-js';
+import { JSX } from '@solidjs/web';
 export interface DividerProps {
     type?: 'horizontal' | 'vertical';
     dashed?: boolean;

@@ -1,8 +1,10 @@
-import { Component, JSX, For, createMemo, mergeProps, children as resolveChildren } from 'solid-js'
-import { spaceClass, compactClass } from './styles'
+import { Component,  For, createMemo, merge, children as resolveChildren } from 'solid-js'
+import type { JSX } from '@solidjs/web'
+import type { SizeType } from '../../common/type'
+import { spaceClass, compactClass, SPACE_GAP_CLASS, SPACE_COL_GAP_CLASS, SPACE_ROW_GAP_CLASS } from './styles'
 import { twMerge } from 'tailwind-merge'
 
-type SpaceSize = 'small' | 'middle' | 'large' | number
+type SpaceSize = SizeType | number
 
 export interface SpaceProps {
   direction?: 'horizontal' | 'vertical'
@@ -24,19 +26,13 @@ export interface CompactProps {
   children?: JSX.Element
 }
 
-const SIZE_MAP: Record<string, number> = {
-  small: 8,
-  middle: 16,
-  large: 24,
-}
-
-function resolveSize(size: SpaceSize): string {
+function resolveGapStyle(size: SpaceSize): string | undefined {
   if (typeof size === 'number') return `${size}px`
-  return `${SIZE_MAP[size] || 8}px`
+  return undefined
 }
 
-const Space: Component<SpaceProps> = (rawProps) => {
-  const props = mergeProps(
+const SpaceBase: Component<SpaceProps> = (rawProps) => {
+  const props = merge(
     { direction: 'horizontal' as const, size: 'small' as SpaceSize, wrap: false, block: false },
     rawProps
   )
@@ -45,25 +41,42 @@ const Space: Component<SpaceProps> = (rawProps) => {
 
   const items = createMemo(() => {
     const c = resolved()
-    if (Array.isArray(c)) return c.filter((item) => item !== null && item !== undefined && item !== false && item !== true)
-    if (c !== null && c !== undefined && c !== false && c !== true) return [c]
+    if (Array.isArray(c)) return c.filter((item) => item != null && item !== false && item !== true && item !== '')
+    if (c != null && c !== false && c !== true && c !== '') return [c]
     return []
   })
 
-  const _class = createMemo(() =>
-    twMerge(
-      spaceClass({ direction: props.direction, wrap: props.wrap, align: props.align, block: props.block }),
-      props.class || ''
-    )
-  )
+  const _class = createMemo(() => {
+    const base = spaceClass({
+      direction: props.direction,
+      wrap: !!props.wrap,
+      align: props.align,
+      block: !!props.block,
+    })
+
+    const gapCls: string[] = []
+    if (Array.isArray(props.size)) {
+      const [colSize, rowSize] = props.size
+      if (typeof colSize === 'string' && SPACE_COL_GAP_CLASS[colSize]) gapCls.push(SPACE_COL_GAP_CLASS[colSize])
+      if (typeof rowSize === 'string' && SPACE_ROW_GAP_CLASS[rowSize]) gapCls.push(SPACE_ROW_GAP_CLASS[rowSize])
+    } else if (typeof props.size === 'string' && SPACE_GAP_CLASS[props.size]) {
+      gapCls.push(SPACE_GAP_CLASS[props.size])
+    }
+
+    return twMerge(base, ...gapCls, props.class || '')
+  })
 
   const _style = createMemo((): JSX.CSSProperties => {
     const s: JSX.CSSProperties = { ...props.style }
     if (Array.isArray(props.size)) {
-      s['column-gap'] = resolveSize(props.size[0])
-      s['row-gap'] = resolveSize(props.size[1])
+      const [colSize, rowSize] = props.size
+      const colGap = resolveGapStyle(colSize)
+      const rowGap = resolveGapStyle(rowSize)
+      if (colGap) s['column-gap'] = colGap
+      if (rowGap) s['row-gap'] = rowGap
     } else {
-      s.gap = resolveSize(props.size)
+      const gap = resolveGapStyle(props.size)
+      if (gap) s.gap = gap
     }
     return s
   })
@@ -83,17 +96,10 @@ const Space: Component<SpaceProps> = (rawProps) => {
 }
 
 export const Compact: Component<CompactProps> = (rawProps) => {
-  const props = mergeProps({ direction: 'horizontal' as const, block: false }, rawProps)
+  const props = merge({ direction: 'horizontal' as const, block: false }, rawProps)
 
   const _class = createMemo(() =>
-    twMerge(
-      compactClass({ direction: props.direction, block: props.block }),
-      '[&>.space-item:not(:first-child):not(:last-child)]:rounded-none',
-      props.direction === 'horizontal'
-        ? '[&>.space-item:not(:first-child)]:ml-[-1px] [&>.space-item:first-child]:rounded-r-none [&>.space-item:last-child]:rounded-l-none'
-        : '[&>.space-item:not(:first-child)]:mt-[-1px] [&>.space-item:first-child]:rounded-b-none [&>.space-item:last-child]:rounded-t-none',
-      props.class || ''
-    )
+    twMerge(compactClass({ direction: props.direction, block: !!props.block }), props.class || '')
   )
 
   return (
@@ -103,4 +109,5 @@ export const Compact: Component<CompactProps> = (rawProps) => {
   )
 }
 
+const Space = Object.assign(SpaceBase, { Compact })
 export default Space

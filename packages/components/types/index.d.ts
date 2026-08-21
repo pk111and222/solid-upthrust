@@ -1,9 +1,8 @@
-
 export { default as Button } from './Button';
 export type { ButtonProps } from './Button';
 export { default as Alert } from './Alert';
 export type { AlertProps } from './Alert';
-export { default as Icon } from './Icon';
+export { default as Icon, toIconClass } from './Icon';
 export type { IconProps } from './Icon';
 export { default as Typography, Text, Title, Paragraph, Link } from './Typography';
 export type { TextProps, TitleProps, ParagraphProps, LinkProps } from './Typography';
@@ -35,3 +34,13 @@ export { default as Steps } from './Steps';
 export type { StepsProps } from './Steps';
 export { default as Tabs } from './Tabs';
 export type { TabsProps, TabsItem } from './Tabs';
+export { default as Avatar, AvatarGroup } from './Avatar';
+export type { AvatarProps, AvatarGroupProps, AvatarSize } from './Avatar';
+export { default as Empty, PRESENTED_IMAGE_DEFAULT, PRESENTED_IMAGE_SIMPLE } from './Empty';
+export type { EmptyProps } from './Empty';
+export { default as QRCode } from './QRCode';
+export type { QRCodeProps, QRCodeStatus, QRCodeErrorCorrectionLevel } from './QRCode';
+export { default as Statistic, StatisticCountdown } from './Statistic';
+export type { StatisticProps, CountdownProps } from './Statistic';
+export { default as Timeline } from './Timeline';
+export type { TimelineProps, TimelineItemProps } from './Timeline';

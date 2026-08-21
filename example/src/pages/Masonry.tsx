@@ -1,69 +1,91 @@
-import { Component } from "solid-js";
-import { Masonry, Divider } from 'upthrust-ui';
+import { Component, For } from "solid-js";
+import { Masonry } from 'upthrust-ui';
+
+const itemClass = (height: number) =>
+  `flex items-center justify-center rounded bg-surface-variant/60 text-on-surface text-[14px]`;
+
+const heights = [80, 120, 96, 140, 104, 88, 132, 112, 92, 124, 100, 116];
+
+const Items: Component<{ count: number; offset?: number }> = (props) => (
+  <For each={heights.slice(0, props.count)}>
+    {(h, i) => (
+      <div class={itemClass(h)} style={{ height: `${h + (props.offset ?? 0)}px` }}>
+        Item {i() + 1}
+      </div>
+    )}
+  </For>
+);
 
 const MasonryPage: Component = () => {
-  const heights = [120, 200, 150, 180, 100, 250, 160, 140, 220, 130, 190, 170]
-  const colors = ['#0055ff20', '#00aa5520', '#ff550020', '#aa00ff20', '#ffaa0020', '#00ccff20']
+  return <div class="space-y-8">
+    {/* Fixed columns */}
+    <section>
+      <h3 class="text-[16px] font-medium mb-4 text-on-surface">基本使用（固定列数）</h3>
+      <div class="border border-outline-variant rounded-lg p-sm">
+        <Masonry columns={3}>
+          <Items count={9} />
+        </Masonry>
+      </div>
+    </section>
 
-  return (
-    <div class="p-6 max-w-5xl">
-      <h2 class="text-2xl font-semibold mb-4">Masonry 瀑布流</h2>
+    {/* Responsive named breakpoints */}
+    <section>
+      <h3 class="text-[16px] font-medium mb-4 text-on-surface">响应式列数（命名断点）</h3>
+      <p class="mb-2 text-[14px] text-on-surface-variant">
+        columns={'{{ xs: 1, md: 2, xl: 4 }}'}：视口 ≥768px 双列、≥1200px 四列、更窄单列。拖动浏览器窗口观察。
+      </p>
+      <div class="border border-outline-variant rounded-lg p-sm">
+        <Masonry columns={{ xs: 1, md: 2, xl: 4 }}>
+          <Items count={12} />
+        </Masonry>
+      </div>
+    </section>
 
-      <h3 class="text-lg font-medium mb-2">基本使用 (4列)</h3>
-      <Masonry columns={4} gutter={12}>
-        {heights.map((h, i) => (
-          <div
-            class="rounded-lg flex items-center justify-center text-sm font-medium border border-solid border-outline/20"
-            style={{ height: `${h}px`, background: colors[i % colors.length] }}
-          >
-            Item {i + 1}
+    {/* Sequential vs round-robin */}
+    <section>
+      <h3 class="text-[16px] font-medium mb-4 text-on-surface">分配模式 sequential</h3>
+      <div class="grid grid-cols-2 gap-4">
+        <div>
+          <div class="text-[14px] text-on-surface-variant mb-2">轮询（默认）：12 项 5 列均匀轮转</div>
+          <div class="border border-outline-variant rounded-lg p-sm">
+            <Masonry columns={5}>
+              <Items count={12} offset={-20} />
+            </Masonry>
           </div>
-        ))}
-      </Masonry>
-
-      <Divider />
-
-      <h3 class="text-lg font-medium mb-2">3列 + 大间距</h3>
-      <Masonry columns={3} gutter={24}>
-        {heights.map((h, i) => (
-          <div
-            class="rounded-lg flex items-center justify-center text-sm font-medium border border-solid border-outline/20"
-            style={{ height: `${h}px`, background: colors[i % colors.length] }}
-          >
-            Item {i + 1}
+        </div>
+        <div>
+          <div class="text-[14px] text-on-surface-variant mb-2">sequential：顺序填满（3/3/2/2/2，无空列）</div>
+          <div class="border border-outline-variant rounded-lg p-sm">
+            <Masonry columns={5} sequential>
+              <Items count={12} offset={-20} />
+            </Masonry>
           </div>
-        ))}
-      </Masonry>
+        </div>
+      </div>
+    </section>
 
-      <Divider />
-
-      <h3 class="text-lg font-medium mb-2">顺序排列 (sequential)</h3>
-      <Masonry columns={3} gutter={12} sequential>
-        {heights.map((h, i) => (
-          <div
-            class="rounded-lg flex items-center justify-center text-sm font-medium border border-solid border-outline/20"
-            style={{ height: `${h}px`, background: colors[i % colors.length] }}
-          >
-            Item {i + 1}
+    {/* Gutter */}
+    <section>
+      <h3 class="text-[16px] font-medium mb-4 text-on-surface">间距 gutter</h3>
+      <div class="space-y-4">
+        <div>
+          <div class="text-[14px] text-on-surface-variant mb-2">命名档位 small(8) / middle(16) / large(24)</div>
+          <div class="grid grid-cols-3 gap-4">
+            <div class="border border-outline-variant rounded-lg p-sm"><Masonry columns={2} gutter="small"><Items count={4} offset={-30} /></Masonry></div>
+            <div class="border border-outline-variant rounded-lg p-sm"><Masonry columns={2} gutter="middle"><Items count={4} offset={-30} /></Masonry></div>
+            <div class="border border-outline-variant rounded-lg p-sm"><Masonry columns={2} gutter="large"><Items count={4} offset={-30} /></Masonry></div>
           </div>
-        ))}
-      </Masonry>
-
-      <Divider />
-
-      <h3 class="text-lg font-medium mb-2">不同行列间距 gutter=[16, 8]</h3>
-      <Masonry columns={4} gutter={[16, 8]}>
-        {heights.slice(0, 8).map((h, i) => (
-          <div
-            class="rounded-lg flex items-center justify-center text-sm font-medium border border-solid border-outline/20"
-            style={{ height: `${h}px`, background: colors[i % colors.length] }}
-          >
-            Item {i + 1}
+        </div>
+        <div>
+          <div class="text-[14px] text-on-surface-variant mb-2">数值 24 与 数组 [24, 8]（列间距 24、条目间距 8）</div>
+          <div class="grid grid-cols-2 gap-4">
+            <div class="border border-outline-variant rounded-lg p-sm"><Masonry columns={3} gutter={24}><Items count={6} offset={-30} /></Masonry></div>
+            <div class="border border-outline-variant rounded-lg p-sm"><Masonry columns={3} gutter={[24, 8]}><Items count={6} offset={-30} /></Masonry></div>
           </div>
-        ))}
-      </Masonry>
-    </div>
-  )
-}
+        </div>
+      </div>
+    </section>
+  </div>
+};
 
-export default MasonryPage
+export default MasonryPage;

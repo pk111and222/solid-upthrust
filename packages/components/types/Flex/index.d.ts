@@ -1,5 +1,5 @@
-import { Component, JSX } from 'solid-js';
-
+import { Component } from 'solid-js';
+import { JSX } from '@solidjs/web';
 type FlexGap = 'small' | 'middle' | 'large' | number | string;
 export interface FlexProps {
     vertical?: boolean;

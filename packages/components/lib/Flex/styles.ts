@@ -3,7 +3,7 @@ import { cva, type VariantProps } from "class-variance-authority";
 import { twMerge } from "tailwind-merge";
 
 const flexVariants = cva(
-  ["flex"],
+  [],
   {
     variants: {
       vertical: {
@@ -34,15 +34,9 @@ const flexVariants = cva(
       },
       inline: {
         true: ["inline-flex"],
-        false: [],
+        false: ["flex"],
       },
     },
-    compoundVariants: [
-      {
-        inline: true,
-        class: ["!inline-flex"],
-      },
-    ],
     defaultVariants: {
       vertical: false,
       wrap: "nowrap",
@@ -53,4 +47,5 @@ const flexVariants = cva(
   }
 );
 
-export const flexClass = (variants: VariantProps<typeof flexVariants>) => twMerge(flexVariants(variants));
+export type FlexStyleVariants = VariantProps<typeof flexVariants>;
+export const flexClass = (variants: FlexStyleVariants) => twMerge(flexVariants(variants));

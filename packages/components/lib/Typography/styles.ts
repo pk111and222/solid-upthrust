@@ -3,19 +3,17 @@ import { cva, type VariantProps } from "class-variance-authority";
 import { twMerge } from "tailwind-merge";
 
 export const typographyVariants = cva(
-  [
-    "text-on-surface"
-  ],
+  ["text-body", "text-on-surface"],
   {
     variants: {
       type: {
-        secondary: ["text-on-surface-variant", "opacity-65"],
+        secondary: ["text-on-surface-variant"],
         success: ["text-green-600"],
-        warning: ["text-amber-600"],
+        warning: ["text-amber-500"],
         danger: ["text-error"],
       },
       disabled: {
-        true: ["opacity-40", "cursor-not-allowed", "select-none"],
+        true: ["text-on-surface/25", "cursor-not-allowed", "select-none"],
         false: [],
       },
       ellipsis: {
@@ -31,52 +29,41 @@ export const typographyVariants = cva(
 );
 
 export const titleVariants = cva(
-  [
-    "font-semibold", "leading-tight", "m-0", "mb-2"
-  ],
+  ["font-semibold", "m-0", "mb-[0.5em]", "text-on-surface"],
   {
     variants: {
       level: {
-        1: ["text-4xl"],
-        2: ["text-3xl"],
-        3: ["text-2xl"],
-        4: ["text-xl"],
-        5: ["text-lg"],
+        1: ["text-heading-1"],
+        2: ["text-heading-2"],
+        3: ["text-heading-3"],
+        4: ["text-heading-4"],
+        5: ["text-heading-5"],
       },
     },
-    defaultVariants: {
-      level: 1,
-    },
+    defaultVariants: { level: 1 },
   }
 );
 
 export const linkVariants = cva(
   [
     "text-primary", "cursor-pointer", "no-underline",
-    "hover:text-primary-container",
-    "transition", "duration-100",
+    "transition-upthrust-fast",
+    "hover:text-primary/70",
   ],
   {
     variants: {
       disabled: {
-        true: ["pointer-events-none", "opacity-40", "cursor-not-allowed"],
+        true: ["pointer-events-none", "text-on-surface/25", "cursor-not-allowed"],
         false: [],
       },
     },
-    defaultVariants: {
-      disabled: false,
-    },
+    defaultVariants: { disabled: false },
   }
 );
 
 export const paragraphVariants = cva(
-  [
-    "mb-4", "leading-relaxed"
-  ],
-  {
-    variants: {},
-    defaultVariants: {},
-  }
+  ["mb-[1em]", "text-body"],
+  { variants: {}, defaultVariants: {} }
 );
 
 export const typographyClass = (variants: VariantProps<typeof typographyVariants>) => twMerge(typographyVariants(variants));

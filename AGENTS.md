@@ -7,7 +7,7 @@
 
 - **Name**: Solid Upthrust / upthrust-ui
 - **Type**: SolidJS enterprise (B-end) component library
-- **Style System**: UnoCSS (Ant Design-inspired visual language)
+- **Style System**: UnoCSS (classic B-end enterprise visual language)
 - **Monorepo Tool**: pnpm workspace
 
 ## Directory Structure
@@ -146,7 +146,7 @@ const categoryMap = {
 ## Constraints & Guardrails
 
 1. **Example required** — Any new component, prop, or feature MUST include an example demo page. PRs without examples should be rejected.
-2. **No Ant Design dependency** — Visual design references Ant Design; never import `antd` or `@ant-design/*`.
+2. **No third-party UI dependency** — Visual design follows the classic B-end enterprise style; never import third-party UI libraries.
 3. **UnoCSS only** — No CSS modules, styled-components, or Tailwind CSS (we use preset-wind via UnoCSS).
 4. **SolidJS idioms** — `createSignal`, `createMemo`, `createEffect`, `splitProps`, `mergeProps`, `Show`, `For`, `Dynamic`. Never use React hooks or patterns.
 5. **Tree-shakeable** — Named exports, no top-level side effects (except `import 'uno.css'` in the barrel).

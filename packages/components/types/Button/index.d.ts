@@ -1,20 +1,24 @@
-import { Component, JSX } from 'solid-js';
+import { Component } from 'solid-js';
+import { JSX } from '@solidjs/web';
 import { SizeType } from '../../common/type';
-import { ButtonIns } from 'upthrust-competence';
-
-type ButtonType = 'primary' | 'link' | 'text' | 'default' | 'danger' | 'dashed';
-type ButtonSemantic = 'button' | 'loading' | 'text' | 'anchor';
+import { ButtonIns, ButtonVariant, ButtonColor } from 'upthrust-competence';
+type ButtonType = 'primary' | 'link' | 'text' | 'default' | 'dashed';
+type ButtonShape = 'default' | 'circle' | 'round';
 export interface ButtonProps {
-    classGroup?: Record<ButtonSemantic, Record<string, boolean>>;
+    variant?: ButtonVariant;
+    color?: ButtonColor;
     type?: ButtonType;
     block?: boolean;
     danger?: boolean;
     disabled?: boolean;
     ghost?: boolean;
     href?: string;
-    icon?: Component;
-    loading?: boolean;
-    shape?: 'default' | 'circle' | 'round';
+    icon?: JSX.Element;
+    iconPlacement?: 'start' | 'end';
+    loading?: boolean | {
+        delay: number;
+    };
+    shape?: ButtonShape;
     size?: SizeType;
     target?: HTMLAnchorElement['target'];
     rel?: HTMLAnchorElement['rel'];

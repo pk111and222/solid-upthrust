@@ -1,9 +1,14 @@
-import { Component, JSX } from 'solid-js';
-
+import { Component } from 'solid-js';
+import { JSX } from '@solidjs/web';
+import { DropdownMenuProps } from '../Dropdown';
 export interface BreadcrumbItemType {
     title: string | JSX.Element;
     href?: string;
+    /** Dropdown menu rendered on this item. */
+    menu?: DropdownMenuProps;
     onClick?: (e: MouseEvent) => void;
+    /** Render an ellipsis instead of the title (dropdown behavior is via menu). */
+    dropdownRender?: JSX.Element;
 }
 export interface BreadcrumbProps {
     separator?: JSX.Element;

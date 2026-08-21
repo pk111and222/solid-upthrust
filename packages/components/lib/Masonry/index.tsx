@@ -1,17 +1,30 @@
-import { Component, JSX, For, createMemo, createSignal, mergeProps, onMount, onCleanup, children as resolveChildren } from 'solid-js'
+import { Component,  For, createMemo, merge, children as resolveChildren } from 'solid-js'
+import type { JSX } from '@solidjs/web'
+import { createMasonry, type MasonryColumns } from 'upthrust-competence'
+import type { SizeType } from '../../common/type'
+import { masonryClass, masonryColumnClass } from './styles'
 import { twMerge } from 'tailwind-merge'
 
+type MasonryGutter = SizeType | number | [number, number]
+
 export interface MasonryProps {
-  columns?: number | Record<string, number>
-  gutter?: number | [number, number]
+  /** Fixed column count, or named breakpoints mapping to a column count. */
+  columns?: MasonryColumns
+  gutter?: MasonryGutter
   sequential?: boolean
   class?: string
   style?: JSX.CSSProperties
   children?: JSX.Element
 }
 
+const NAMED_GUTTERS: readonly string[] = ['small', 'middle', 'large']
+
+function isNamedGutter(g: MasonryGutter): g is SizeType {
+  return typeof g === 'string' && (NAMED_GUTTERS as readonly string[]).includes(g)
+}
+
 const Masonry: Component<MasonryProps> = (rawProps) => {
-  const props = mergeProps({ columns: 4, gutter: 8, sequential: false }, rawProps)
+  const props = merge({ columns: 4, gutter: 'small' as MasonryGutter, sequential: false }, rawProps)
 
   const resolved = resolveChildren(() => rawProps.children)
 
@@ -21,83 +34,50 @@ const Masonry: Component<MasonryProps> = (rawProps) => {
     return c ? [c] : []
   })
 
-  const [columnCount, setColumnCount] = createSignal(
-    typeof props.columns === 'number' ? props.columns : 4
-  )
-
-  const resolveGutter = createMemo((): [number, number] => {
-    if (Array.isArray(props.gutter)) return props.gutter
-    return [props.gutter, props.gutter]
+  const masonry = createMasonry<JSX.Element>({
+    get columns() { return props.columns },
+    get sequential() { return props.sequential },
   })
 
-  const updateColumns = () => {
-    if (typeof props.columns === 'number') {
-      setColumnCount(props.columns)
-      return
-    }
+  const columns = createMemo(() => masonry.distribute(items()))
 
-    const breakpoints = props.columns as Record<string, number>
-    const width = window.innerWidth
-    const sorted = Object.entries(breakpoints)
-      .map(([bp, cols]) => [parseInt(bp), cols] as [number, number])
-      .sort((a, b) => b[0] - a[0])
-
-    for (const [bp, cols] of sorted) {
-      if (width >= bp) {
-        setColumnCount(cols)
-        return
-      }
-    }
-    setColumnCount(sorted[sorted.length - 1]?.[1] || 4)
-  }
-
-  onMount(() => {
-    if (typeof props.columns !== 'number') {
-      updateColumns()
-      window.addEventListener('resize', updateColumns)
-    }
-  })
-
-  onCleanup(() => {
-    if (typeof props.columns !== 'number') {
-      window.removeEventListener('resize', updateColumns)
-    }
-  })
-
-  const columns = createMemo(() => {
-    const count = columnCount()
-    const cols: JSX.Element[][] = Array.from({ length: count }, () => [])
-    const allItems = items()
-
-    if (props.sequential) {
-      const perCol = Math.ceil(allItems.length / count)
-      allItems.forEach((item, i) => {
-        const colIdx = Math.floor(i / perCol)
-        cols[Math.min(colIdx, count - 1)].push(item)
-      })
-    } else {
-      allItems.forEach((item, i) => {
-        cols[i % count].push(item)
-      })
-    }
-
-    return cols
+  const gutterVariant = createMemo(() => {
+    return isNamedGutter(props.gutter) ? props.gutter : undefined
   })
 
   const _class = createMemo(() =>
-    twMerge('flex', props.class || '')
+    twMerge(masonryClass({ gutter: gutterVariant() }), props.class || '')
   )
 
-  const [hGap, vGap] = [
-    createMemo(() => resolveGutter()[0]),
-    createMemo(() => resolveGutter()[1]),
-  ]
+  const _style = createMemo((): JSX.CSSProperties => {
+    const s: JSX.CSSProperties = { ...props.style }
+    if (!isNamedGutter(props.gutter)) {
+      if (Array.isArray(props.gutter)) {
+        s['column-gap'] = `${props.gutter[0]}px`
+      } else {
+        s.gap = `${props.gutter}px`
+      }
+    }
+    return s
+  })
+
+  const _colStyle = createMemo((): JSX.CSSProperties => {
+    if (!isNamedGutter(props.gutter)) {
+      if (Array.isArray(props.gutter)) {
+        return { 'row-gap': `${props.gutter[1]}px` }
+      }
+      return { gap: `${props.gutter}px` }
+    }
+    return {}
+  })
+
+  const _colClass = createMemo(() => masonryColumnClass({ gutter: gutterVariant() }))
 
   return (
-    <div class={_class()} style={{ gap: `${hGap()}px`, ...props.style }}>
+    <div class={_class()} style={_style()}>
       <For each={columns()}>
         {(col) => (
-          <div class="flex-1 flex flex-col" style={{ gap: `${vGap()}px` }}>
+          <div class={_colClass()} style={_colStyle()}>
             <For each={col}>
               {(item) => <>{item}</>}
             </For>

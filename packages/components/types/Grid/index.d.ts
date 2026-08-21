@@ -1,5 +1,5 @@
-import { Component, JSX } from 'solid-js';
-
+import { Component } from 'solid-js';
+import { JSX } from '@solidjs/web';
 export interface RowProps {
     gutter?: number | [number, number];
     justify?: 'start' | 'center' | 'end' | 'space-between' | 'space-around' | 'space-evenly';

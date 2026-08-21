@@ -1,4 +1,5 @@
-import { createSignal, onCleanup, onMount, createMemo } from "solid-js";
+import { createSignal, onCleanup, createMemo } from "solid-js";
+import { createOwnerCleanup } from "./utils";
 
 export type DropdownPlacement = 'bottomLeft' | 'bottomRight' | 'topLeft' | 'topRight' | 'bottom' | 'top'
 export type DropdownTrigger = 'click' | 'hover' | 'contextMenu'
@@ -19,6 +20,7 @@ export type DropdownIns = {
 }
 
 export const createDropdown = (config: DropdownConfig = {}) => {
+  const onOwnerCleanup = createOwnerCleanup();
   const [_open, _setOpen] = createSignal(config.defaultOpen ?? false)
 
   const open = createMemo(() => config.open !== undefined ? config.open : _open())
@@ -45,7 +47,7 @@ export const createDropdown = (config: DropdownConfig = {}) => {
         toggle()
       }
       el.addEventListener('click', handleClick)
-      onCleanup(() => el.removeEventListener('click', handleClick))
+      onOwnerCleanup(() => el.removeEventListener('click', handleClick))
     } else if (trigger === 'hover') {
       const handleEnter = () => {
         if (_hoverTimeout) clearTimeout(_hoverTimeout)
@@ -56,7 +58,7 @@ export const createDropdown = (config: DropdownConfig = {}) => {
       }
       el.addEventListener('mouseenter', handleEnter)
       el.addEventListener('mouseleave', handleLeave)
-      onCleanup(() => {
+      onOwnerCleanup(() => {
         el.removeEventListener('mouseenter', handleEnter)
         el.removeEventListener('mouseleave', handleLeave)
       })
@@ -66,7 +68,7 @@ export const createDropdown = (config: DropdownConfig = {}) => {
         setOpen(true)
       }
       el.addEventListener('contextmenu', handleContext)
-      onCleanup(() => el.removeEventListener('contextmenu', handleContext))
+      onOwnerCleanup(() => el.removeEventListener('contextmenu', handleContext))
     }
   }
 
@@ -83,23 +85,22 @@ export const createDropdown = (config: DropdownConfig = {}) => {
       }
       el.addEventListener('mouseenter', handleEnter)
       el.addEventListener('mouseleave', handleLeave)
-      onCleanup(() => {
+      onOwnerCleanup(() => {
         el.removeEventListener('mouseenter', handleEnter)
         el.removeEventListener('mouseleave', handleLeave)
       })
     }
   }
 
-  onMount(() => {
-    const handleClickOutside = (e: PointerEvent) => {
-      if (!open()) return
-      const target = e.target as Node
-      if (_triggerEl?.contains(target) || _overlayEl?.contains(target)) return
-      setOpen(false)
-    }
-    document.addEventListener('pointerdown', handleClickOutside)
-    onCleanup(() => document.removeEventListener('pointerdown', handleClickOutside))
-  })
+  // One-shot subscription (no reactive reads): register directly per Solid 2 guidance.
+  const handleClickOutside = (e: PointerEvent) => {
+    if (!open()) return
+    const target = e.target as Node
+    if (_triggerEl?.contains(target) || _overlayEl?.contains(target)) return
+    setOpen(false)
+  }
+  document.addEventListener('pointerdown', handleClickOutside)
+  onCleanup(() => document.removeEventListener('pointerdown', handleClickOutside))
 
   const overlayStyle = createMemo((): Record<string, string> => {
     if (!_triggerEl) return { position: 'absolute' }

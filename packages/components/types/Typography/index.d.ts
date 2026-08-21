@@ -1,5 +1,5 @@
-import { Component, JSX } from 'solid-js';
-
+import { Component } from 'solid-js';
+import { JSX } from '@solidjs/web';
 interface TypographyBaseProps {
     type?: 'secondary' | 'success' | 'warning' | 'danger';
     strong?: boolean;

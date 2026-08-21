@@ -13,8 +13,9 @@ export type GapTheme = {
 }
 
 export function createGapTheme (size?: string | number, customLogic?: (value: string | number) => GapTheme) {
-  if(isFunction(customLogic)) return customLogic(size)
-  return generateSizeLevels(size ?? BASE_SIZE)
+  const resolvedSize = size ?? BASE_SIZE
+  if(typeof customLogic === 'function') return customLogic(resolvedSize)
+  return generateSizeLevels(resolvedSize)
 }
 
 // px类型
@@ -54,10 +55,13 @@ export function generateSizeLevels(base: string | number): GapTheme {
       switch (unit) {
         case 'px':
           sizeSet = generateSizeByPx(number, 'px')
+          break
         case 'em':
           sizeSet = generateSizeByEm(number, 'em')
+          break
         case 'rem':
           sizeSet = generateSizeByEm(number, 'rem')
+          break
         default:
           sizeSet = generateSizeByPx(number, unit)
       }

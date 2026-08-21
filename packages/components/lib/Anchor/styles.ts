@@ -7,34 +7,54 @@ const anchorContainerVariants = cva(
   {
     variants: {
       direction: {
-        vertical: ["border-l-2", "border-outline/20", "pl-0"],
-        horizontal: ["flex", "items-center", "gap-4", "border-b-2", "border-outline/20", "pb-0"],
+        vertical: [],
+        horizontal: ["flex", "items-center", "gap-0", "border-b", "border-outline-variant"],
       },
     },
     defaultVariants: { direction: "vertical" },
   }
 );
 
+// Merged active × direction variant keys instead of compoundVariants —
+// UnoCSS static scanning cannot extract classes from compoundVariants.
 const anchorLinkVariants = cva(
-  ["block", "py-1", "text-sm", "transition-colors", "cursor-pointer", "no-underline"],
+  [
+    "block", "py-[4px]", "text-[14px]", "text-on-surface-variant",
+    "transition-upthrust-fast", "cursor-pointer", "no-underline", "hover:text-primary",
+  ],
   {
     variants: {
-      active: {
-        true: ["text-primary", "font-medium"],
-        false: ["text-on-surface-variant", "hover:text-primary"],
-      },
       direction: {
-        vertical: ["pl-4", "border-l-2", "border-transparent", "-ml-[2px]"],
-        horizontal: ["pb-2", "border-b-2", "border-transparent", "-mb-[2px]"],
+        vertical: ["pl-[16px]", "border-l-2", "border-transparent", "-ml-[1px]"],
+        horizontal: ["px-[16px]", "pb-[8px]", "border-b-2", "border-transparent", "-mb-[1px]"],
+      },
+      state: {
+        idle: [],
+        "active-vertical": ["text-primary", "border-l-primary"],
+        "active-horizontal": ["text-primary", "border-b-primary"],
       },
     },
-    compoundVariants: [
-      { active: true, direction: "vertical", class: ["border-l-primary"] },
-      { active: true, direction: "horizontal", class: ["border-b-primary"] },
-    ],
-    defaultVariants: { active: false, direction: "vertical" },
+    defaultVariants: { direction: "vertical", state: "idle" },
+  }
+);
+
+// Sliding ink indicator (has a small ball/wand under the active
+// link; the ink bar animates between link positions).
+const anchorInkVariants = cva(
+  ["absolute", "bg-primary", "transition-all", "duration-mid", "ease-upthrust", "pointer-events-none"],
+  {
+    variants: {
+      direction: {
+        vertical: ["left-0", "w-[2px]"],
+        horizontal: ["bottom-0", "h-[2px]"],
+      },
+    },
+    defaultVariants: { direction: "vertical" },
   }
 );
 
 export const anchorContainerClass = (variants: VariantProps<typeof anchorContainerVariants>) => twMerge(anchorContainerVariants(variants));
 export const anchorLinkClass = (variants: VariantProps<typeof anchorLinkVariants>) => twMerge(anchorLinkVariants(variants));
+export const anchorInkClass = (variants: VariantProps<typeof anchorInkVariants>) => twMerge(anchorInkVariants(variants));
+
+export type AnchorLinkVariants = VariantProps<typeof anchorLinkVariants>;

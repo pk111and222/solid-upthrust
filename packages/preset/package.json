@@ -1,17 +1,17 @@
 {
   "name": "upthrust-unocss-preset",
   "version": "0.0.1",
-  "description": "A simple solid ui lib built with unocss",
+  "description": "UnoCSS theme preset for upthrust-ui",
   "keywords": [
-    "solid",
     "unocss",
-    "vite"
+    "preset",
+    "theme"
   ],
   "type": "module",
   "exports": {
     ".": {
       "types": "./types/index.d.ts",
-      "require": "./dist/upthrust-ui-preset.umd.cjs",
+      "require": "./dist/upthrust-ui-preset.cjs",
       "import": "./dist/upthrust-ui-preset.js"
     }
   },
@@ -25,15 +25,15 @@
   "scripts": {
     "watch": "vite build --mode watch",
     "build": "vite build",
-    "test": "vite test"
+    "test": "vitest run"
   },
   "license": "MIT",
   "devDependencies": {
+    "@iconify-json/mdi": "^1.2.3",
+    "@unocss/core": "~66.7.5",
+    "@unocss/preset-icons": "~66.7.5",
+    "@unocss/preset-wind4": "~66.7.5",
     "solid-material-color": "^1.0.3",
-    "@unocss/core": "^0.62.2",
-    "@unocss/preset-icons": "^0.62.2",
-    "@unocss/preset-uno": "^0.62.2",
-    "@iconify-json/mdi": "^1.1.64",
-    "unocss-preset-theme": "^0.13.0"
+    "unocss-preset-theme": "^0.14.1"
   }
 }

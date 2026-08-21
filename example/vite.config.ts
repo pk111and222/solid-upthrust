@@ -5,19 +5,16 @@ import UnocssPlugin from '@unocss/vite';
 
 export default defineConfig({
   plugins: [
-    /* 
-    Uncomment the following line to enable solid-devtools.
-    For more info see https://github.com/thetarnav/solid-devtools/tree/main/packages/extension#readme
-    */
-    // devtools(),
     solidPlugin({
       hot: true
-    }
-    ),
-    UnocssPlugin({
-      // your config or in uno.config.ts
     }),
+    UnocssPlugin(),
   ],
+  resolve: {
+    alias: {
+      'solid-js/web': '@solidjs/web',
+    },
+  },
   server: {
     port: 5656,
   },

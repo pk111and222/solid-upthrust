@@ -11,16 +11,19 @@
   },
   "license": "MIT",
   "devDependencies": {
-    "unocss": "^0.62.2",
-    "tailwind-merge": "^2.3.0",
-    "@unocss/reset": "^0.62.2",
-    "@solidjs/router": "^0.13.5",
-    "@unocss/preset-uno": "^0.62.2",
-    "@iconify-json/mdi": "^1.1.66",
-    "upthrust-unocss-preset": "workspace:*",
-    "upthrust-ui": "workspace:*"
+    "@iconify-json/mdi": "^1.2.3",
+    "@solidjs/router": "^2.0.0-next.16",
+    "@unocss/preset-wind4": "~66.7.5",
+    "@unocss/preset-icons": "~66.7.5",
+    "@unocss/reset": "~66.7.5",
+    "@unocss/vite": "~66.7.5",
+    "tailwind-merge": "^3.6.0",
+    "upthrust-ui": "workspace:^",
+    "upthrust-unocss-preset": "workspace:^"
   },
   "dependencies": {
-    "solid-js": "^1.8.17"
+    "solid-js": "^2.0.0-rc.0",
+    "@solidjs/web": "^2.0.0-rc.0",
+    "upthrust-competence": "workspace:^"
   }
 }

@@ -1,53 +1,81 @@
-import { Component, JSX, Show, createMemo, splitProps, Ref } from 'solid-js'
+import { Component,  Show, createMemo, createSignal } from 'solid-js'
+import type { JSX } from '@solidjs/web'
 import { createAlert, type AlertIns } from 'upthrust-competence'
-import { isString } from 'lodash'
-import { alertClass } from './styles'
+import { alertContainerClass, alertIconClass, alertMessageClass, alertDescriptionClass, alertCloseClass } from './styles'
 
-type AlertType = 'primary' | 'default' | 'danger' | 'dashed'
-type AlertSemantic = 'button' | 'icon' | 'text' | ''
-type IconMap = 'info' | 'success' | 'warning' | 'error' | 'wait'
+type AlertType = 'success' | 'info' | 'warning' | 'error'
 
 export interface AlertProps {
-  classGroup?: Record<AlertSemantic, Record<string, boolean>>
-  type?: AlertType,
-  action?: Component
-  showIcon?: boolean,
-  icon?: JSX.Element | IconMap,
-  onClose?: (e: Event) => void,
-  afterClose?: () => void,
-  closable?: boolean,
-  message?: string,
-  description?: string,
+  type?: AlertType
+  message?: JSX.Element
+  description?: JSX.Element
+  showIcon?: boolean
+  closable?: boolean
+  banner?: boolean
+  icon?: JSX.Element
+  action?: JSX.Element
+  onClose?: (e: Event) => void
+  afterClose?: () => void
   children?: JSX.Element
   ref?: (val: AlertIns) => void
 }
 
 const Alert: Component<AlertProps> = (props = {}) => {
-  const {alert, close, status, refs} = createAlert({onClose: props?.onClose })
+  const {alert, close, status, refs} = createAlert({onClose: props?.onClose})
+  const [closed, setClosed] = createSignal(false)
 
-  const _showIcon = createMemo(() => props.showIcon ?? true)
-  const _showClose = createMemo(() => props.closable ?? true)
+  const hasDescription = createMemo(() => !!props.description)
+  const showIcon = createMemo(() => props.showIcon ?? true)
+  const closable = createMemo(() => props.closable ?? false)
+  const alertType = createMemo(() => props.type ?? 'info')
 
-  const _icon = createMemo(() => {
-    if (!props.icon) return null
-    if (!isString(props.icon)) return props.icon as JSX.Element
-    return <div class='inline-flex items-center'></div>
-  })
+  const handleClose = (e: MouseEvent) => {
+    setClosed(true)
+    props.onClose?.(e)
+    props.afterClose?.()
+  }
 
-  return <div ref={alert} class=''>
-    <div class='flex items-center'>
-      <Show when={_showIcon && _icon}>
-        <div class='inline-flex '>
-          {_icon()}
+  props.ref?.(refs)
+
+  return <Show when={!closed()}>
+    <div
+      ref={alert}
+      class={alertContainerClass({
+        type: alertType(),
+        hasDescription: hasDescription(),
+        banner: props.banner,
+      })}
+    >
+      <Show when={showIcon() && !props.icon}>
+        <div class={alertIconClass({ type: alertType(), hasDescription: hasDescription() })} />
+      </Show>
+      <Show when={showIcon() && props.icon}>
+        <div class="shrink-0 mr-[8px]">{props.icon}</div>
+      </Show>
+      <div class="flex-1 min-w-0">
+        <div class={alertMessageClass({ hasDescription: hasDescription() })}>
+          {props.message || props.children}
         </div>
+        <Show when={hasDescription()}>
+          <div class={alertDescriptionClass({})}>
+            {props.description}
+          </div>
+        </Show>
+      </div>
+      <Show when={props.action}>
+        <div class="ml-[8px]">{props.action}</div>
       </Show>
-      <div class='flex-1'>
-      <Show when={_showClose}>
-        <button ref={close} class=''></button>
+      <Show when={closable()}>
+        <button
+          ref={close}
+          class={alertCloseClass({ hasDescription: hasDescription() })}
+          onClick={handleClose}
+        >
+          <div class="i-mdi-close text-[14px]" />
+        </button>
       </Show>
     </div>
-    </div>
-  </div>
+  </Show>
 }
 
 export default Alert

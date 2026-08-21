@@ -1,5 +1,7 @@
-import { Component, JSX, Show, createMemo, createSignal, mergeProps, children as resolveChildren } from 'solid-js'
-import { layoutClass, headerClass, footerClass, contentClass, siderClass } from './styles'
+import { Component,  Show, createMemo, merge } from 'solid-js'
+import type { JSX } from '@solidjs/web'
+import { createSider, type Breakpoint, type SiderCollapseType } from 'upthrust-competence'
+import { layoutClass, headerClass, footerClass, contentClass, siderClass, siderTriggerClass, type SiderTheme } from './styles'
 import { twMerge } from 'tailwind-merge'
 
 export interface LayoutProps {
@@ -33,17 +35,19 @@ export interface SiderProps {
   collapsed?: boolean
   defaultCollapsed?: boolean
   collapsible?: boolean
-  breakpoint?: 'xs' | 'sm' | 'md' | 'lg' | 'xl' | 'xxl'
-  onCollapse?: (collapsed: boolean) => void
+  breakpoint?: Breakpoint
+  onCollapse?: (collapsed: boolean, type: SiderCollapseType) => void
+  onBreakpoint?: (broken: boolean) => void
   trigger?: JSX.Element | null
   reverseArrow?: boolean
+  theme?: SiderTheme
   class?: string
   style?: JSX.CSSProperties
   children?: JSX.Element
 }
 
 const LayoutBase: Component<LayoutProps> = (rawProps) => {
-  const props = mergeProps({}, rawProps)
+  const props = merge({}, rawProps)
 
   const _class = createMemo(() =>
     twMerge(
@@ -60,7 +64,7 @@ const LayoutBase: Component<LayoutProps> = (rawProps) => {
 }
 
 export const Header: Component<HeaderProps> = (rawProps) => {
-  const props = mergeProps({}, rawProps)
+  const props = merge({}, rawProps)
 
   const _class = createMemo(() =>
     twMerge(headerClass({}), props.class || '')
@@ -74,7 +78,7 @@ export const Header: Component<HeaderProps> = (rawProps) => {
 }
 
 export const Footer: Component<FooterProps> = (rawProps) => {
-  const props = mergeProps({}, rawProps)
+  const props = merge({}, rawProps)
 
   const _class = createMemo(() =>
     twMerge(footerClass({}), props.class || '')
@@ -88,7 +92,7 @@ export const Footer: Component<FooterProps> = (rawProps) => {
 }
 
 export const Content: Component<ContentProps> = (rawProps) => {
-  const props = mergeProps({}, rawProps)
+  const props = merge({}, rawProps)
 
   const _class = createMemo(() =>
     twMerge(contentClass({}), props.class || '')
@@ -102,14 +106,20 @@ export const Content: Component<ContentProps> = (rawProps) => {
 }
 
 export const Sider: Component<SiderProps> = (rawProps) => {
-  const props = mergeProps(
-    { width: 200, collapsedWidth: 80, collapsible: false, reverseArrow: false },
+  const props = merge(
+    { width: 200, collapsedWidth: 80, collapsible: false, reverseArrow: false, theme: 'dark' as const },
     rawProps
   )
 
-  const [collapsed, setCollapsed] = createSignal(props.defaultCollapsed ?? props.collapsed ?? false)
+  const sider = createSider({
+    get collapsed() { return props.collapsed },
+    get defaultCollapsed() { return props.defaultCollapsed },
+    get breakpoint() { return props.breakpoint },
+    get onCollapse() { return props.onCollapse },
+    get onBreakpoint() { return props.onBreakpoint },
+  })
 
-  const isCollapsed = createMemo(() => props.collapsed !== undefined ? props.collapsed : collapsed())
+  const isCollapsed = sider.collapsed
 
   const currentWidth = createMemo(() => {
     const w = isCollapsed() ? props.collapsedWidth : props.width
@@ -117,7 +127,7 @@ export const Sider: Component<SiderProps> = (rawProps) => {
   })
 
   const _class = createMemo(() =>
-    twMerge(siderClass({ collapsed: isCollapsed() }), props.class || '')
+    twMerge(siderClass({ theme: props.theme }), props.class || '')
   )
 
   const _style = createMemo((): JSX.CSSProperties => ({
@@ -127,10 +137,11 @@ export const Sider: Component<SiderProps> = (rawProps) => {
     ...props.style,
   }))
 
-  const handleToggle = () => {
-    const next = !isCollapsed()
-    setCollapsed(next)
-    props.onCollapse?.(next)
+  const handleKeyDown = (e: KeyboardEvent) => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault()
+      sider.toggle()
+    }
   }
 
   return (
@@ -138,11 +149,23 @@ export const Sider: Component<SiderProps> = (rawProps) => {
       <div class="h-full">{props.children}</div>
       <Show when={props.collapsible && props.trigger !== null}>
         <div
-          class="absolute bottom-0 left-0 right-0 h-12 flex items-center justify-center cursor-pointer border-t border-solid border-outline/10 bg-surface-variant/20 hover:bg-surface-variant/40 transition-colors"
-          onClick={handleToggle}
+          class={siderTriggerClass({ theme: props.theme })}
+          role="button"
+          tabindex={0}
+          aria-expanded={isCollapsed() ? 'false' : 'true'}
+          aria-label="Toggle sidebar"
+          onClick={() => sider.toggle()}
+          onKeyDown={handleKeyDown}
         >
           <Show when={props.trigger} fallback={
-            <div class={`i-mdi-chevron-${isCollapsed() ? (props.reverseArrow ? 'left' : 'right') : (props.reverseArrow ? 'right' : 'left')} text-xl text-on-surface-variant`} />
+            <Show
+              when={isCollapsed()
+                ? (props.reverseArrow ? 'i-mdi-chevron-left' : 'i-mdi-chevron-right')
+                : (props.reverseArrow ? 'i-mdi-chevron-right' : 'i-mdi-chevron-left')}
+              keyed
+            >
+              {(iconClass) => <div class={`${iconClass} text-xl`} />}
+            </Show>
           }>
             {props.trigger}
           </Show>

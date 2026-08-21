@@ -5,7 +5,7 @@ const BreadcrumbPage: Component = () => {
   return (
     <div class="p-6 max-w-4xl">
       <h2 class="text-2xl font-bold mb-4">Breadcrumb 面包屑</h2>
-      <p class="text-gray-600 mb-6">显示当前页面在系统层级结构中的位置，并能向上返回。</p>
+      <p class="text-on-surface-variant mb-6">显示当前页面在系统层级结构中的位置，并能向上返回。</p>
 
       <h3 class="text-lg font-semibold mb-3">基本使用</h3>
       <Breadcrumb
@@ -37,6 +37,29 @@ const BreadcrumbPage: Component = () => {
           { title: '应用', href: '/' },
           { title: '设置', href: '/settings' },
           { title: '通知' },
+        ]}
+      />
+
+      <Divider />
+
+      <h3 class="text-lg font-semibold mb-3">带下拉菜单的层级</h3>
+      <Breadcrumb
+        items={[
+          { title: '首页', href: '/' },
+          {
+            title: '组件',
+            menu: {
+              items: [
+                { key: 'general', label: '通用' },
+                { key: 'layout', label: '布局' },
+                { key: 'nav', label: '导航' },
+                { key: 'feedback', label: '反馈' },
+              ],
+              onClick: (key) => console.log('menu click:', key),
+            },
+          },
+          { title: '导航' },
+          { title: '面包屑' },
         ]}
       />
 

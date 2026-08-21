@@ -1,121 +1,99 @@
 // @unocss-include
 import { cva, type VariantProps } from "class-variance-authority";
-import { classCreate } from 'utils/styles'
+import { twMerge } from "tailwind-merge";
 
-// alert contanier
-export const alertClass = classCreate(cva(
+const alertContainerVariants = cva(
   [
-    "alert", "border", "border-solid", "transition", "duration-100", "relative", "break-words"
+    "relative", "flex", "items-start", "break-words",
+    "border", "border-solid", "transition-upthrust",
   ],
   {
     variants: {
       type: {
-        primary: ["text-on-primary-container", "bg-primary-container", "border-primary"],
-        default: [],
-        danger: [],
-        dashed: [],
+        success: ["bg-[#f6ffed]", "border-[#b7eb8f]"],
+        info: ["bg-primary-container/15", "border-primary/30"],
+        warning: ["bg-[#fffbe6]", "border-[#ffe58f]"],
+        error: ["bg-[#fff2f0]", "border-[#ffccc7]"],
       },
-      size: {
-        small: ["px-4", "py-0.85", "text-sm"],
-        medium: ["px-5", "py-1", "text-base"],
-        large: ["px-6", "py-1.15", "text-lg"],
+      hasDescription: {
+        true: ["py-[20px]", "px-[24px]", "rounded-lg"],
+        false: ["py-[8px]", "px-[12px]", "rounded-lg"],
       },
       banner: {
-        true: [""],
-        false: ["rounded-lg"]
-      }
-    },
-    // compoundVariants: [
-    //   {
-    //     type: ["primary", "secondary", "danger"],
-    //     disabled: false,
-    //     class: [''],
-    //   },
-    // ],
-    defaultVariants: {
-      type: "primary",
-      size: 'medium',
-    },
-  }));
-
-// message
-export const alertMessageClass = classCreate(cva(
-  [],
-  {
-    variants: {
-      type: {
-        primary: ["text-white", "bg-primary", "border-primary", "hover:focus:bg-primary-container", "hover:focus:border-primary-container"],
-        default: ["text-primary", "bg-white", "border-primary", "hover:focus:border-primary-container", "text-primary-container"],
-        danger: ["text-white", "bg-error", "border-black", "hover:focus:bg-on-error-container", "hover:focus:border-on-error-container"],
-        dashed: ["text-primary", "bg-white", "border-dashed", "border-primary", "hover:focus:border-primary-container"],
-      },
-      size: {
-        small: ["px-4", "py-0.85", "text-sm"],
-        medium: ["px-5", "py-1", "text-base"],
-        large: ["px-6", "py-1.15", "text-lg"],
-      },
-    },
-    defaultVariants: {
-      type: "primary",
-      size: 'medium',
-    },
-  }));
-
-// description
-export const alertDescClass = classCreate(cva(
-  [
-    "peer", "btn", "peer-[.btn]:ms-1.5",
-    "border", "border-solid",
-    "text-center",
-    "transition", "duration-100"
-  ],
-  {
-    variants: {
-      type: {
-        primary: ["text-white", "bg-primary", "border-primary", "hover:focus:bg-primary-container", "hover:focus:border-primary-container"],
-        default: ["text-primary", "bg-white", "border-primary", "hover:focus:border-primary-container", "text-primary-container"],
-        danger: ["text-white", "bg-error", "border-black", "hover:focus:bg-on-error-container", "hover:focus:border-on-error-container"],
-        dashed: ["text-primary", "bg-white", "border-dashed", "border-primary", "hover:focus:border-primary-container"],
-      },
-      size: {
-        small: ["px-4", "py-0.85", "text-sm"],
-        medium: ["px-5", "py-1", "text-base"],
-        large: ["px-6", "py-1.15", "text-lg"],
-      },
-    },
-    // compoundVariants: [
-    //   {
-    //     type: ["primary", "secondary", "danger"],
-    //     disabled: false,
-    //     class: [''],
-    //   },
-    // ],
-    defaultVariants: {
-      type: "primary",
-      size: 'medium',
-    },
-  }));
-
-// icon
-export const alertIconClass = classCreate(cva(
-  [],
-  {
-    variants: {
-      type: {
-        'info': ['i-mdi-alert-circle'],
-        'success': ['i-mdi-check-circle'],
-        'warning': ['i-mdi-alarm-light'],
-        'error': ['i-mdi-close-circle'],
-        'wait': ['i-mdi-clock'],
-      },
-      size: {
-        small: ["text-sm"],
-        medium: ["text-base"],
-        large: ["text-lg"],
+        true: ["!rounded-none", "border-x-0", "border-t-0"],
+        false: [],
       },
     },
     defaultVariants: {
       type: "info",
-      size: 'medium',
+      hasDescription: false,
+      banner: false,
     },
-  }));
+  }
+);
+
+const alertIconVariants = cva(
+  ["shrink-0", "mr-[8px]"],
+  {
+    variants: {
+      type: {
+        success: ["text-[#52c41a]", "i-mdi-check-circle"],
+        info: ["text-primary", "i-mdi-information"],
+        warning: ["text-[#faad14]", "i-mdi-alert"],
+        error: ["text-error", "i-mdi-close-circle"],
+      },
+      hasDescription: {
+        true: ["text-[24px]", "mt-[1px]"],
+        false: ["text-[16px]", "mt-[1px]"],
+      },
+    },
+    defaultVariants: {
+      type: "info",
+      hasDescription: false,
+    },
+  }
+);
+
+const alertMessageVariants = cva(
+  ["text-on-surface"],
+  {
+    variants: {
+      hasDescription: {
+        true: ["text-[16px]", "font-medium", "mb-[4px]"],
+        false: ["text-[14px]"],
+      },
+    },
+    defaultVariants: { hasDescription: false },
+  }
+);
+
+const alertDescriptionVariants = cva(
+  ["text-[14px]", "text-on-surface-variant", "leading-[1.5714]"],
+  { variants: {}, defaultVariants: {} }
+);
+
+const alertCloseVariants = cva(
+  [
+    "absolute", "top-[8px]", "right-[12px]",
+    "inline-flex", "items-center", "justify-center",
+    "w-[22px]", "h-[22px]",
+    "text-on-surface-variant", "cursor-pointer", "border-none", "bg-transparent",
+    "rounded-sm", "transition-upthrust-fast",
+    "hover:text-on-surface",
+  ],
+  {
+    variants: {
+      hasDescription: {
+        true: ["top-[20px]", "right-[24px]"],
+        false: [],
+      },
+    },
+    defaultVariants: { hasDescription: false },
+  }
+);
+
+export const alertContainerClass = (variants: VariantProps<typeof alertContainerVariants>) => twMerge(alertContainerVariants(variants));
+export const alertIconClass = (variants: VariantProps<typeof alertIconVariants>) => twMerge(alertIconVariants(variants));
+export const alertMessageClass = (variants: VariantProps<typeof alertMessageVariants>) => twMerge(alertMessageVariants(variants));
+export const alertDescriptionClass = (variants: VariantProps<typeof alertDescriptionVariants>) => twMerge(alertDescriptionVariants(variants));
+export const alertCloseClass = (variants: VariantProps<typeof alertCloseVariants>) => twMerge(alertCloseVariants(variants));

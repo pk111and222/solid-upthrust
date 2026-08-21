@@ -19,7 +19,7 @@ export type TabsIns = {
     prevTab: () => void;
 };
 export declare const createTabs: (config: TabsConfig) => {
-    activeKey: import('solid-js').Accessor<string>;
+    activeKey: import('solid-js').SourceAccessor<string>;
     setActiveKey: (key: string) => void;
     isActive: (key: string) => boolean;
     nextTab: () => void;

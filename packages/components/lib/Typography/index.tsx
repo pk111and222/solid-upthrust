@@ -1,5 +1,6 @@
-import { Component, JSX, createMemo, mergeProps } from 'solid-js'
-import { Dynamic } from 'solid-js/web'
+import { Component,  createMemo, merge } from 'solid-js'
+import type { JSX } from '@solidjs/web'
+import { Dynamic } from '@solidjs/web'
 import { twMerge } from 'tailwind-merge'
 import { typographyClass, titleClass, linkClass, paragraphClass } from './styles'
 
@@ -39,9 +40,9 @@ function wrapDecorations(children: JSX.Element, props: TypographyBaseProps): JSX
   if (props.italic) content = <em>{content}</em>
   if (props.underline) content = <u>{content}</u>
   if (props.delete) content = <del>{content}</del>
-  if (props.code) content = <code class="px-1 py-0.5 mx-0.5 rounded bg-surface-variant text-sm font-mono">{content}</code>
-  if (props.mark) content = <mark class="px-0.5 bg-amber-200 rounded-sm">{content}</mark>
-  if (props.keyboard) content = <kbd class="px-1.5 py-0.5 mx-0.5 border border-solid border-outline rounded text-sm font-mono">{content}</kbd>
+  if (props.code) content = <code class="px-[0.2em] py-[0.1em] text-[85%] bg-on-surface/4 border border-solid border-outline-variant/30 rounded-xs font-mono">{content}</code>
+  if (props.mark) content = <mark class="px-[0.1em] bg-amber-200/80 rounded-xs">{content}</mark>
+  if (props.keyboard) content = <kbd class="px-[0.4em] py-[0.15em] text-[90%] bg-on-surface/4 border border-solid border-outline-variant/30 rounded-xs font-mono">{content}</kbd>
   return content
 }
 
@@ -58,11 +59,11 @@ function ellipsisStyle(ellipsis?: boolean | { rows?: number }): JSX.CSSPropertie
 }
 
 export const Text: Component<TextProps> = (rawProps) => {
-  const props = mergeProps({}, rawProps)
+  const props = merge({}, rawProps)
 
   const _class = createMemo(() =>
     twMerge(
-      typographyClass({ type: props.type, disabled: props.disabled, ellipsis: props.ellipsis === true }),
+      typographyClass({ type: props.type, disabled: !!props.disabled, ellipsis: props.ellipsis === true }),
       props.class || ''
     )
   )
@@ -78,13 +79,13 @@ export const Text: Component<TextProps> = (rawProps) => {
 }
 
 export const Title: Component<TitleProps> = (rawProps) => {
-  const props = mergeProps({ level: 1 as const }, rawProps)
+  const props = merge({ level: 1 as const }, rawProps)
 
   const _tag = createMemo(() => `h${props.level}` as keyof JSX.IntrinsicElements)
 
   const _class = createMemo(() =>
     twMerge(
-      typographyClass({ type: props.type, disabled: props.disabled, ellipsis: props.ellipsis === true }),
+      typographyClass({ type: props.type, disabled: !!props.disabled, ellipsis: props.ellipsis === true }),
       titleClass({ level: props.level }),
       props.class || ''
     )
@@ -101,11 +102,11 @@ export const Title: Component<TitleProps> = (rawProps) => {
 }
 
 export const Paragraph: Component<ParagraphProps> = (rawProps) => {
-  const props = mergeProps({}, rawProps)
+  const props = merge({}, rawProps)
 
   const _class = createMemo(() =>
     twMerge(
-      typographyClass({ type: props.type, disabled: props.disabled, ellipsis: props.ellipsis === true }),
+      typographyClass({ type: props.type, disabled: !!props.disabled, ellipsis: props.ellipsis === true }),
       paragraphClass({}),
       props.class || ''
     )
@@ -122,12 +123,12 @@ export const Paragraph: Component<ParagraphProps> = (rawProps) => {
 }
 
 export const Link: Component<LinkProps> = (rawProps) => {
-  const props = mergeProps({}, rawProps)
+  const props = merge({}, rawProps)
 
   const _class = createMemo(() =>
     twMerge(
-      typographyClass({ type: props.type, disabled: props.disabled, ellipsis: props.ellipsis === true }),
-      linkClass({ disabled: props.disabled }),
+      typographyClass({ type: props.type, disabled: !!props.disabled, ellipsis: props.ellipsis === true }),
+      linkClass({ disabled: !!props.disabled }),
       props.class || ''
     )
   )

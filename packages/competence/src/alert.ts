@@ -1,18 +1,20 @@
-import { createMemo, createSignal, onCleanup } from "solid-js";
+import { createMemo, createSignal } from "solid-js";
 import { isBoolean, isFunction, isNumber, isObject } from "lodash";
+import { createOwnerCleanup } from "./utils";
 
 export type AlertConfig = {
   onClose?: (e: Event) => void;
 }
 
 export type AlertIns = {
-  alertEle: () => Element;
-  closeEle: () => HTMLButtonElement;
+  alertEle: () => Element | undefined;
+  closeEle: () => HTMLButtonElement | undefined;
   close: () => void;
   getStuas: () => boolean;
 }
 
 export function createAlert(config: AlertConfig = {}) {
+  const onOwnerCleanup = createOwnerCleanup();
   const [closeBtnElem, setCloseBtnElem] = createSignal<HTMLButtonElement>()
   const [alertElem, setAlertElem]  = createSignal<Element>()
 
@@ -25,7 +27,7 @@ export function createAlert(config: AlertConfig = {}) {
         _setStatus(false)
     }
     el.addEventListener('click', _click)
-    onCleanup(() => {
+    onOwnerCleanup(() => {
       el.removeEventListener('click', _click)
       _setStatus(false)
     })
@@ -38,7 +40,7 @@ export function createAlert(config: AlertConfig = {}) {
   const refs = {
     alertEle: () => alertElem(),
     closeEle: () => closeBtnElem(),
-    close: () => closeBtnElem() && closeBtnElem().click(),
+    close: () => closeBtnElem()?.click(),
     getStuas: () => _status()
   }
   return {alert, close, status: _status, refs}

@@ -1,5 +1,6 @@
-import { Component, JSX, createMemo, mergeProps } from 'solid-js'
-import { Dynamic } from 'solid-js/web'
+import { Component,  createMemo, merge } from 'solid-js'
+import type { JSX } from '@solidjs/web'
+import { Dynamic } from '@solidjs/web'
 import { flexClass } from './styles'
 import { twMerge } from 'tailwind-merge'
 
@@ -19,38 +20,36 @@ export interface FlexProps {
   children?: JSX.Element
 }
 
-const GAP_MAP: Record<string, string> = {
-  small: '8px',
-  middle: '16px',
-  large: '24px',
+const GAP_CLASS: Record<string, string> = {
+  small: 'gap-xs',
+  middle: 'gap-md',
+  large: 'gap-lg',
 }
 
 const Flex: Component<FlexProps> = (rawProps) => {
-  const props = mergeProps(
+  const props = merge(
     { vertical: false, wrap: 'nowrap' as const, justify: 'normal' as const, align: 'normal' as const, inline: false, component: 'div' },
     rawProps
   )
 
-  const _class = createMemo(() =>
-    twMerge(
-      flexClass({
-        vertical: props.vertical,
-        wrap: props.wrap,
-        justify: props.justify,
-        align: props.align,
-        inline: props.inline,
-      }),
-      props.class || ''
-    )
-  )
+  const _class = createMemo(() => {
+    const base = flexClass({
+      vertical: !!props.vertical,
+      wrap: props.wrap,
+      justify: props.justify,
+      align: props.align,
+      inline: !!props.inline,
+    })
+    const gapCls = typeof props.gap === 'string' && GAP_CLASS[props.gap] ? GAP_CLASS[props.gap] : ''
+    return twMerge(base, gapCls, props.class || '')
+  })
 
   const _style = createMemo((): JSX.CSSProperties => {
     const s: JSX.CSSProperties = { ...props.style }
-    if (props.gap !== undefined) {
-      const gapValue = typeof props.gap === 'number'
-        ? `${props.gap}px`
-        : (GAP_MAP[props.gap] || props.gap)
-      s.gap = gapValue
+    if (props.gap !== undefined && typeof props.gap === 'number') {
+      s.gap = `${props.gap}px`
+    } else if (typeof props.gap === 'string' && !GAP_CLASS[props.gap]) {
+      s.gap = props.gap
     }
     if (props.flex !== undefined) {
       s.flex = typeof props.flex === 'number' ? `${props.flex} ${props.flex} auto` : props.flex

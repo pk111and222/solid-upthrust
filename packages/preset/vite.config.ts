@@ -5,6 +5,8 @@ import dts from 'vite-plugin-dts';
 
 // import devtools from 'solid-devtools/vite';
 
+const packageRoot = import.meta.dirname
+
 export default defineConfig(({ command, mode }) => ({
   build: {
     watch: mode === 'watch' ? {} : null,
@@ -21,10 +23,11 @@ export default defineConfig(({ command, mode }) => ({
         globals: {
           unocss: "unocss",
         },
+        exports: 'named',
       },
     },
     lib: {
-      entry: resolve(__dirname, 'src/index.ts'),
+      entry: resolve(packageRoot, 'src/index.ts'),
       name: "upthrust-ui-preset",
       fileName: "upthrust-ui-preset",
       formats: ["es", "umd", "cjs"],
@@ -32,8 +35,9 @@ export default defineConfig(({ command, mode }) => ({
   },
   plugins: [
     dts({
-      entryRoot: resolve(__dirname, 'src'),
-      outDir: resolve(__dirname, 'types'),
+      tsconfigPath: resolve(packageRoot, 'tsconfig.json'),
+      entryRoot: resolve(packageRoot, 'src'),
+      outDir: resolve(packageRoot, 'types'),
       // rollupTypes: true
       // copyDtsFiles: true
     })

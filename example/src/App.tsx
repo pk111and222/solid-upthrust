@@ -1,11 +1,14 @@
-import { For, createMemo, type Component } from 'solid-js';
-import { Router, RouteSectionProps } from "@solidjs/router";
+import { For, createMemo, Loading, type Component } from 'solid-js';
+import { createRouter, useLocation } from "@solidjs/router";
 import routes, { type AppRoute } from './router';
 
-const categoryOrder = ['通用', '布局', '导航', '其他']
+const categoryOrder = ['通用', '布局', '导航', '数据展示', '其他']
 
-const Layout: Component<RouteSectionProps> = (props) => {
-  const activeItem = (item) => `/${item.path}` === props.location.pathname
+const Router = createRouter({ routes })
+
+const Layout: Component<{ children?: any }> = (props) => {
+  const location = useLocation()
+  const activeItem = (item: AppRoute | undefined) => item !== undefined && `/${item.path}` === location.pathname
 
   const grouped = createMemo(() => {
     const groups: Record<string, AppRoute[]> = {}
@@ -23,14 +26,14 @@ const Layout: Component<RouteSectionProps> = (props) => {
 
   return <div data-appid='app' class="h-screen flex items-center justify-center bg-white ">
   <div data-appid='menu' class='w-60 h-full overflow-y-auto shadow border-e border-cyan-100 p-t-4'>
-    <a href="/" class='m-4 p-l-6 block leading-10 rounded-md bg-blue-50 hover:bg-blue-300 hover:text-white transition-all' classList={{'bg-blue-200': activeItem(homeRoute)}}>首页</a>
+    <a href="/" class={['m-4 p-l-6 block leading-10 rounded-md bg-blue-50 hover:bg-blue-300 hover:text-white transition-all', activeItem(homeRoute) && 'bg-blue-200']}>首页</a>
     <For each={grouped()}>
       {(group) => (
         <>
           <div class="px-4 pt-4 pb-1 text-xs font-bold text-gray-400 uppercase tracking-wider">{group.category}</div>
           <For each={group.items}>
             {(item) => (
-              <a href={item.path} class='mx-4 p-l-6 block leading-9 rounded-md hover:bg-blue-100 hover:text-blue-600 transition-all text-sm' classList={{'bg-blue-100 text-blue-600 font-medium': activeItem(item)}}>{item.title}</a>
+              <a href={item.path} class={['mx-4 p-l-6 block leading-9 rounded-md hover:bg-blue-100 hover:text-blue-600 transition-all text-sm', activeItem(item) && 'bg-blue-100 text-blue-600 font-medium']}>{item.title}</a>
             )}
           </For>
         </>
@@ -38,13 +41,15 @@ const Layout: Component<RouteSectionProps> = (props) => {
     </For>
   </div>
   <div data-appid='content' class='flex-1 h-full overflow-y-auto m-l-8 m-t-8'>
-    {props.children}
+    <Loading fallback={<div class="p-6 text-sm text-on-surface-variant">加载中…</div>}>
+      {props.children}
+    </Loading>
   </div>
 </div>;
 }
 
 const App: Component = () => {
-  return <Router root={Layout}>{routes}</Router>
+  return <Router>{(props) => <Layout>{props.children}</Layout>}</Router>
 };
 
 export default App;

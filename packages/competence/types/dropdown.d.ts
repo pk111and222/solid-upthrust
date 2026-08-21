@@ -14,12 +14,12 @@ export type DropdownIns = {
     toggle: () => void;
 };
 export declare const createDropdown: (config?: DropdownConfig) => {
-    open: import('solid-js').Accessor<boolean>;
+    open: import('solid-js').SourceAccessor<boolean>;
     setOpen: (v: boolean) => void;
     toggle: () => void;
     triggerRef: (el: HTMLElement) => void;
     overlayRef: (el: HTMLElement) => void;
-    overlayStyle: import('solid-js').Accessor<Record<string, string>>;
+    overlayStyle: import('solid-js').SourceAccessor<Record<string, string>>;
     refs: DropdownIns;
 };
 export declare const dropdownSplits: (keyof DropdownConfig)[];

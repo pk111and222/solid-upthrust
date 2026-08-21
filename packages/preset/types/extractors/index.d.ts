@@ -1,0 +1,1 @@
+export { extractorIcons } from './icons';

@@ -2,15 +2,31 @@
   "compilerOptions": {
     "target": "ESNext",
     "module": "ESNext",
-    "moduleResolution": "node",
+    "moduleResolution": "bundler",
     "resolveJsonModule": true,
     "allowSyntheticDefaultImports": true,
     "allowImportingTsExtensions": true,
     "esModuleInterop": true,
     "jsx": "preserve",
-    "jsxImportSource": "solid-js",
-    "types": ["vite/client"],
+    "jsxImportSource": "@solidjs/web",
+    "types": ["node", "vite/client"],
     "noEmit": true,
-    "isolatedModules": true
+    "isolatedModules": true,
+    "strict": true,
+    "skipLibCheck": true,
+    "paths": {
+      "lib/*": ["./packages/components/lib/*"],
+      "utils/*": ["./packages/components/utils/*"]
+    }
   },
+  "include": [
+    "packages/*/src",
+    "packages/components/lib",
+    "packages/components/common",
+    "packages/components/utils",
+    "example/src",
+    "*.config.ts",
+    "example/*.config.ts",
+    "packages/*/*.config.ts"
+  ]
 }

@@ -14,42 +14,66 @@
   "type": "module",
   "exports": {
     ".": {
+      "source": "./lib/index.ts",
       "types": "./types/index.d.ts",
-      "require": "./dist/upthrust.umd.cjs",
+      "require": "./dist/upthrust.cjs",
       "import": "./dist/upthrust.js"
     },
+    "./es": {
+      "types": "./types/index.d.ts",
+      "import": "./dist/es/index.js"
+    },
+    "./es/*": {
+      "types": "./types/*/index.d.ts",
+      "import": "./dist/es/*/index.js"
+    },
+    "./source": {
+      "source": "./lib/index.ts",
+      "types": "./lib/index.ts"
+    },
+    "./source/*": {
+      "source": "./lib/*/index.tsx",
+      "types": "./lib/*/index.tsx"
+    },
     "./style.css": {
-      "import": "./dist/style.css"
+      "import": "./dist/upthrust.css"
     }
   },
   "main": "./dist/upthrust.cjs",
-  "unpkg": "./dist/upthrust.umd.cjs",
-  "module": "./dist/upthrust.js",
+  "module": "./dist/es/index.js",
   "types": "./types/index.d.ts",
   "files": [
     "dist",
-    "types"
+    "types",
+    "lib"
   ],
   "scripts": {
     "watch": "vite build --mode watch",
-    "build": "vite build",
-    "test": "vite test"
+    "build": "vite build && vite build --mode preserve",
+    "build:bundle": "vite build",
+    "build:es": "vite build --mode preserve",
+    "test": "vitest run"
   },
   "license": "MIT",
   "peerDependencies": {
-    "solid-js": "^1.8.17"
+    "@solidjs/web": "^2.0.0-rc.0",
+    "solid-js": "^2.0.0-rc.0"
+  },
+  "dependencies": {
+    "class-variance-authority": "^0.7.1",
+    "tailwind-merge": "^3.6.0"
   },
   "devDependencies": {
-    "lodash": "4.17.5",
-    "solid-motionone": "^1.0.0",
-    "class-variance-authority": "^0.7.0",
-    "tailwind-merge": "^2.3.0",
-    "upthrust-unocss-preset": "workspace:*",
-    "upthrust-competence": "workspace:*",
-    "@unocss/preset-icons": "^0.62.2",
-    "@iconify-json/mdi": "^1.1.66",
-    "@unocss/preset-wind": "^0.62.2",
-    "@unocss/transformer-compile-class": "^0.62.2",
-    "clsx": "^2.1.1"
+    "@iconify-json/mdi": "^1.2.3",
+    "@types/lodash": "^4.17.25",
+    "@types/qrcode-generator": "^1.0.6",
+    "@unocss/preset-icons": "~66.7.5",
+    "@unocss/preset-wind4": "~66.7.5",
+    "@unocss/transformer-compile-class": "~66.7.5",
+    "clsx": "^2.1.1",
+    "lodash": "^4.18.1",
+    "qrcode-generator": "^2.0.4",
+    "upthrust-competence": "workspace:^",
+    "upthrust-unocss-preset": "workspace:^"
   }
 }

@@ -1,3 +1,3 @@
-export declare const shortcuts: {};
-declare const createShortcuts: (name?: string) => {};
+export declare const shortcuts: Record<string, string>;
+declare const createShortcuts: (name?: string) => Record<string, string>;
 export default createShortcuts;

@@ -1,19 +1,23 @@
 import { VariantProps } from 'class-variance-authority';
-
-export declare const alertClass: (v: VariantProps<(props?: {
-    type?: "default" | "primary" | "danger" | "dashed";
-    size?: "small" | "medium" | "large";
-    banner?: boolean;
-} & import('class-variance-authority/dist/types').ClassProp) => string>) => string;
-export declare const alertMessageClass: (v: VariantProps<(props?: {
-    type?: "default" | "primary" | "danger" | "dashed";
-    size?: "small" | "medium" | "large";
-} & import('class-variance-authority/dist/types').ClassProp) => string>) => string;
-export declare const alertDescClass: (v: VariantProps<(props?: {
-    type?: "default" | "primary" | "danger" | "dashed";
-    size?: "small" | "medium" | "large";
-} & import('class-variance-authority/dist/types').ClassProp) => string>) => string;
-export declare const alertIconClass: (v: VariantProps<(props?: {
-    type?: "info" | "success" | "warning" | "error" | "wait";
-    size?: "small" | "medium" | "large";
-} & import('class-variance-authority/dist/types').ClassProp) => string>) => string;
+declare const alertContainerVariants: (props?: ({
+    type?: "success" | "info" | "warning" | "error" | null | undefined;
+    hasDescription?: boolean | null | undefined;
+    banner?: boolean | null | undefined;
+} & import('class-variance-authority/types').ClassProp) | undefined) => string;
+declare const alertIconVariants: (props?: ({
+    type?: "success" | "info" | "warning" | "error" | null | undefined;
+    hasDescription?: boolean | null | undefined;
+} & import('class-variance-authority/types').ClassProp) | undefined) => string;
+declare const alertMessageVariants: (props?: ({
+    hasDescription?: boolean | null | undefined;
+} & import('class-variance-authority/types').ClassProp) | undefined) => string;
+declare const alertDescriptionVariants: (props?: ({} & import('class-variance-authority/types').ClassProp) | undefined) => string;
+declare const alertCloseVariants: (props?: ({
+    hasDescription?: boolean | null | undefined;
+} & import('class-variance-authority/types').ClassProp) | undefined) => string;
+export declare const alertContainerClass: (variants: VariantProps<typeof alertContainerVariants>) => string;
+export declare const alertIconClass: (variants: VariantProps<typeof alertIconVariants>) => string;
+export declare const alertMessageClass: (variants: VariantProps<typeof alertMessageVariants>) => string;
+export declare const alertDescriptionClass: (variants: VariantProps<typeof alertDescriptionVariants>) => string;
+export declare const alertCloseClass: (variants: VariantProps<typeof alertCloseVariants>) => string;
+export {};

@@ -1,12 +1,12 @@
 import { defineConfig } from '@unocss/vite';
-import { presetWind } from '@unocss/preset-wind';
+import { presetWind4 } from '@unocss/preset-wind4';
 import presetIcons from '@unocss/preset-icons';
 import presetUpthrust from 'upthrust-unocss-preset';
 
 
 export default defineConfig({
   presets: [
-    presetWind(),
+    presetWind4(),
     presetIcons({
       prefix: 'i-',
       collections: {
@@ -15,7 +15,4 @@ export default defineConfig({
     }),
     presetUpthrust(),
   ],
-  // transformers: [
-  //   transformerCompileClass(),
-  // ],
 });

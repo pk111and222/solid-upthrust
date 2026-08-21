@@ -1,4 +1,5 @@
-import { Component, JSX, createMemo, mergeProps, createContext, useContext } from 'solid-js'
+import { Component,  createMemo, merge, createContext, useContext } from 'solid-js'
+import type { JSX } from '@solidjs/web'
 import { rowClass, colClass } from './styles'
 import { twMerge } from 'tailwind-merge'
 
@@ -31,7 +32,7 @@ export interface ColProps {
 }
 
 export const Row: Component<RowProps> = (rawProps) => {
-  const props = mergeProps(
+  const props = merge(
     { gutter: 0 as number | [number, number], justify: 'start' as const, align: 'top' as const, wrap: true },
     rawProps
   )
@@ -43,7 +44,7 @@ export const Row: Component<RowProps> = (rawProps) => {
 
   const _class = createMemo(() =>
     twMerge(
-      rowClass({ justify: props.justify, align: props.align, wrap: props.wrap }),
+      rowClass({ justify: props.justify, align: props.align, wrap: !!props.wrap }),
       props.class || ''
     )
   )
@@ -62,16 +63,16 @@ export const Row: Component<RowProps> = (rawProps) => {
   })
 
   return (
-    <RowContext.Provider value={{ gutter }}>
+    <RowContext value={{ gutter }}>
       <div class={_class()} style={_style()}>
         {props.children}
       </div>
-    </RowContext.Provider>
+    </RowContext>
   )
 }
 
 export const Col: Component<ColProps> = (rawProps) => {
-  const props = mergeProps({ span: 24, offset: 0, push: 0, pull: 0 }, rawProps)
+  const props = merge({ span: 24, offset: 0, push: 0, pull: 0 }, rawProps)
   const { gutter } = useContext(RowContext)
 
   const _class = createMemo(() => {

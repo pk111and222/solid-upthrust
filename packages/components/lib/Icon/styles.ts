@@ -4,14 +4,14 @@ import { twMerge } from "tailwind-merge";
 
 const iconVariants = cva(
   [
-    "inline-block", "align-middle"
+    "inline-block", "align-middle", "transition-upthrust-fast"
   ],
   {
     variants: {
       size: {
-        small: ["text-sm"],
-        medium: ["text-xl"],
-        large: ["text-2xl"],
+        small: ["text-[14px]"],
+        middle: ["text-[16px]"],
+        large: ["text-[20px]"],
       },
       color: {
         primary: ["text-primary"],
@@ -27,7 +27,7 @@ const iconVariants = cva(
       },
     },
     defaultVariants: {
-      size: "medium",
+      size: "middle",
       color: "inherit",
       spin: false,
     },

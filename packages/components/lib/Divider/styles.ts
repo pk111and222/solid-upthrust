@@ -3,55 +3,57 @@ import { cva, type VariantProps } from "class-variance-authority";
 import { twMerge } from "tailwind-merge";
 
 const dividerVariants = cva(
-  [
-    "border-0", "border-outline/20"
-  ],
+  ["border-0", "border-outline-variant/40"],
   {
     variants: {
       type: {
-        horizontal: ["w-full", "my-6", "border-t", "border-solid"],
-        vertical: ["inline-block", "align-middle", "h-[0.9em]", "mx-2", "border-l", "border-solid", "self-stretch"],
+        horizontal: ["w-full", "my-lg", "border-t", "border-solid"],
+        vertical: ["inline-block", "align-middle", "h-[0.9em]", "mx-xs", "border-l", "border-solid"],
       },
       dashed: {
         true: ["border-dashed"],
         false: [],
       },
-      plain: {
-        true: ["font-normal", "text-sm"],
-        false: ["font-semibold"],
+      hasText: {
+        true: ["!border-t-0", "!my-md", "flex", "items-center"],
+        false: [],
       },
     },
     defaultVariants: {
       type: "horizontal",
       dashed: false,
-      plain: false,
+      hasText: false,
     },
   }
 );
 
 const dividerTextVariants = cva(
-  [
-    "inline-flex", "items-center", "whitespace-nowrap",
-    "text-on-surface", "text-sm", "font-semibold",
-  ],
+  ["whitespace-nowrap", "px-md", "text-body", "text-on-surface"],
   {
     variants: {
-      orientation: {
-        left: [],
-        center: [],
-        right: [],
-      },
       plain: {
-        true: ["font-normal", "text-sm"],
-        false: ["font-semibold"],
+        true: ["font-normal", "text-on-surface-variant"],
+        false: ["font-medium"],
       },
     },
-    defaultVariants: {
-      orientation: "center",
-      plain: false,
-    },
+    defaultVariants: { plain: false },
   }
 );
 
-export const dividerClass = (variants: VariantProps<typeof dividerVariants>) => twMerge(dividerVariants(variants));
+const dividerLineVariants = cva(
+  ["flex-1", "border-0", "border-t", "border-solid", "border-outline-variant/40"],
+  {
+    variants: {
+      dashed: {
+        true: ["border-dashed"],
+        false: [],
+      },
+    },
+    defaultVariants: { dashed: false },
+  }
+);
+
+export type DividerStyleVariants = VariantProps<typeof dividerVariants>;
+export const dividerClass = (variants: DividerStyleVariants) => twMerge(dividerVariants(variants));
 export const dividerTextClass = (variants: VariantProps<typeof dividerTextVariants>) => twMerge(dividerTextVariants(variants));
+export const dividerLineClass = (variants: VariantProps<typeof dividerLineVariants>) => twMerge(dividerLineVariants(variants));

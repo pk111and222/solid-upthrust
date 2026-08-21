@@ -1,6 +1,6 @@
-import { Component, JSX } from 'solid-js';
+import { Component } from 'solid-js';
+import { JSX } from '@solidjs/web';
 import { MenuItem, MenuMode } from 'upthrust-competence';
-
 export type { MenuItem } from 'upthrust-competence';
 export interface MenuProps {
     items?: MenuItem[];

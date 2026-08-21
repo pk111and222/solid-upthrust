@@ -1,6 +1,6 @@
-import { Component, JSX } from 'solid-js';
+import { Component } from 'solid-js';
+import { JSX } from '@solidjs/web';
 import { TabItem } from 'upthrust-competence';
-
 export type TabsItem = TabItem & {
     children?: JSX.Element;
 };

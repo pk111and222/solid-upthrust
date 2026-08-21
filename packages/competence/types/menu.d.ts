@@ -29,8 +29,8 @@ export type MenuIns = {
     toggleOpen: (key: string) => void;
 };
 export declare const createMenu: (config: MenuConfig) => {
-    selectedKeys: import('solid-js').Accessor<string[]>;
-    openKeys: import('solid-js').Accessor<string[]>;
+    selectedKeys: import('solid-js').SourceAccessor<string[]>;
+    openKeys: import('solid-js').SourceAccessor<string[]>;
     select: (key: string) => void;
     toggleOpen: (key: string) => void;
     openSub: (key: string) => void;

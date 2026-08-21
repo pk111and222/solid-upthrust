@@ -1,11 +1,21 @@
-import type { Theme } from '@unocss/preset-uno'
+import type { Theme } from '@unocss/preset-wind4'
 import presetTheme, {type PresetThemeOptions} from 'unocss-preset-theme'
 import {getMaterialColor, type MaterialColorOptions} from './colors/material'
-import { isString } from '../utils'
+import { isString, camelToHyphen } from '../utils'
 import { DEFAULT_PREFIX } from '../index'
 import { createGapTheme, type GapTheme} from './gap'
+import { createSizeTokens, type SizeTokens } from './size'
+import { createStyleTokens, type StyleTokens } from './style'
 
-const DEFAULT_PRIMIRY = '#0055ff'
+const DEFAULT_PRIMIRY = '#1677ff'
+
+function toKebabKeys(obj: Record<string, any>): Record<string, any> {
+  const result: Record<string, any> = {}
+  for (const [key, value] of Object.entries(obj)) {
+    result[camelToHyphen(key)] = value
+  }
+  return result
+}
 
 export type ThemeOption = {
   selectors: PresetThemeOptions<any>['selectors']
@@ -14,6 +24,8 @@ export type ThemeOption = {
   colors?: string | MaterialColorOptions
   defaultGap?: string | number
   gapAlgr?: (value: ThemeOption['defaultGap']) => GapTheme
+  sizeTokens?: Partial<SizeTokens>
+  styleTokens?: Partial<StyleTokens>
 }
 
 const createTheme = (option?: ThemeOption) => {
@@ -21,24 +33,28 @@ const createTheme = (option?: ThemeOption) => {
 
   const palette = getMaterialColor({color: DEFAULT_PRIMIRY, ...colorOption})
 
-  const gap = createGapTheme(option?.defaultGap, option?.gapAlgr)
+  const gap = option?.gapAlgr
+    ? createGapTheme(option?.defaultGap, option?.gapAlgr)
+    : undefined
+
+  const sizeTokens = createSizeTokens(option?.sizeTokens)
+  const styleTokens = createStyleTokens(option?.styleTokens)
 
   return [presetTheme({
     theme: {
-      // color-palette => light & dark
       dark: {
-        colors: palette.dark
+        colors: toKebabKeys(palette.dark)
       },
       light: {
-        colors: palette.light
+        colors: toKebabKeys(palette.light)
       },
-      
-      // custom-theme
       ...option?.theme
     },
     prefix: option?.prefix || DEFAULT_PREFIX,
     selectors: option?.selectors
-  }), palette, gap]
+  }), { dark: toKebabKeys(palette.dark), light: toKebabKeys(palette.light) }, gap, sizeTokens, styleTokens] as const
 }
 
 export default createTheme
+export type { SizeTokens } from './size'
+export type { StyleTokens } from './style'

@@ -1,7 +1,7 @@
 // @unocss-include
-import { Component, For } from "solid-js";
+import { For } from "solid-js";
 
-function camelToHyphen(str) {
+function camelToHyphen(str: string) {
   return str.replace(/([A-Z])/g, '-$1').toLowerCase().replace(/^-/, '');
 }
 

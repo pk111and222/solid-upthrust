@@ -3,14 +3,15 @@ import { Menu, Divider } from 'upthrust-ui'
 
 const MenuPage: Component = () => {
   const [selected, setSelected] = createSignal<string[]>(['1'])
+  const [openKeys, setOpenKeys] = createSignal<string[]>(['sub1'])
 
   return (
     <div class="p-6 max-w-4xl">
       <h2 class="text-2xl font-bold mb-4">Menu 导航菜单</h2>
-      <p class="text-gray-600 mb-6">为页面和功能提供导航的菜单列表。</p>
+      <p class="text-on-surface-variant mb-6">为页面和功能提供导航的菜单列表。</p>
 
       <h3 class="text-lg font-semibold mb-3">垂直菜单</h3>
-      <div class="w-60 border border-gray-200 rounded-lg p-2">
+      <div class="w-60 rounded-lg border border-outline-variant p-2">
         <Menu
           items={[
             { key: '1', label: '导航一', icon: 'i-mdi-home' },
@@ -24,37 +25,47 @@ const MenuPage: Component = () => {
           ]}
           selectedKeys={selected()}
           onSelect={({ selectedKeys }) => setSelected(selectedKeys)}
-          defaultOpenKeys={['sub1']}
+          openKeys={openKeys()}
+          onOpenChange={setOpenKeys}
         />
       </div>
-      <p class="mt-2 text-sm text-gray-500">当前选中: {selected().join(', ')}</p>
+      <p class="mt-2 text-sm text-on-surface-variant">当前选中: {selected().join(', ')}</p>
 
       <Divider />
 
-      <h3 class="text-lg font-semibold mb-3">水平菜单</h3>
+      <h3 class="text-lg font-semibold mb-3">水平菜单（子菜单浮层弹出）</h3>
       <Menu
         mode="horizontal"
         items={[
           { key: 'h1', label: '首页', icon: 'i-mdi-home' },
-          { key: 'h2', label: '文档', icon: 'i-mdi-file-document' },
-          { key: 'h3', label: '组件', icon: 'i-mdi-puzzle' },
+          { key: 'h2', label: '文档', icon: 'i-mdi-file-document', children: [
+            { key: 'h2-1', label: '快速上手' },
+            { key: 'h2-2', label: 'API 参考' },
+            { key: 'h2-3', label: '更新日志' },
+          ]},
+          { key: 'h3', label: '组件', icon: 'i-mdi-puzzle', children: [
+            { key: 'h3-1', label: '通用' },
+            { key: 'h3-2', label: '布局' },
+            { key: 'h3-3', label: '导航' },
+          ]},
           { key: 'h4', label: '关于', icon: 'i-mdi-information' },
         ]}
         defaultSelectedKeys={['h1']}
       />
+      <p class="mt-2 text-sm text-on-surface-variant">水平模式下子菜单以浮层弹出，不再挤压下方内容。</p>
 
       <Divider />
 
       <h3 class="text-lg font-semibold mb-3">分组和分割线</h3>
-      <div class="w-60 border border-gray-200 rounded-lg p-2">
+      <div class="w-60 rounded-lg border border-outline-variant p-2">
         <Menu
           items={[
-            { key: 'g1', label: '分组1', type: 'group', children: [
+            { key: 'g1', label: '分组一', type: 'group', children: [
               { key: '1', label: '选项一' },
               { key: '2', label: '选项二' },
             ]},
             { key: 'd1', label: '', type: 'divider' },
-            { key: 'g2', label: '分组2', type: 'group', children: [
+            { key: 'g2', label: '分组二', type: 'group', children: [
               { key: '3', label: '选项三' },
               { key: '4', label: '选项四' },
             ]},
@@ -65,7 +76,7 @@ const MenuPage: Component = () => {
       <Divider />
 
       <h3 class="text-lg font-semibold mb-3">禁用与危险项</h3>
-      <div class="w-60 border border-gray-200 rounded-lg p-2">
+      <div class="w-60 rounded-lg border border-outline-variant p-2">
         <Menu
           items={[
             { key: '1', label: '正常项' },
@@ -78,8 +89,8 @@ const MenuPage: Component = () => {
 
       <Divider />
 
-      <h3 class="text-lg font-semibold mb-3">多级嵌套</h3>
-      <div class="w-64 border border-gray-200 rounded-lg p-2">
+      <h3 class="text-lg font-semibold mb-3">多级嵌套（inline 展开）</h3>
+      <div class="w-64 rounded-lg border border-outline-variant p-2">
         <Menu
           items={[
             { key: '1', label: '用户管理', icon: 'i-mdi-account-group', children: [

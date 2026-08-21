@@ -19,9 +19,14 @@ export type PaginationIns = {
   prev: () => void
 }
 
+/** Page token in the rendered pager: a page number or an ellipsis marker. */
+export type PageItem = number | 'prev-ellipsis' | 'next-ellipsis'
+
 export const createPagination = (config: PaginationConfig) => {
-  const [_current, _setCurrent] = createSignal(config.defaultCurrent ?? 1)
-  const [_pageSize, _setPageSize] = createSignal(config.defaultPageSize ?? 10)
+  // ownedWrite: goTo/changePageSize are imperative APIs fired from event
+  // handlers, not template computations.
+  const [_current, _setCurrent] = createSignal(config.defaultCurrent ?? 1, { ownedWrite: true })
+  const [_pageSize, _setPageSize] = createSignal(config.defaultPageSize ?? 10, { ownedWrite: true })
 
   const current = createMemo(() => config.current !== undefined ? config.current : _current())
   const pageSize = createMemo(() => config.pageSize !== undefined ? config.pageSize : _pageSize())
@@ -30,10 +35,16 @@ export const createPagination = (config: PaginationConfig) => {
   const hasPrev = createMemo(() => current() > 1)
   const hasNext = createMemo(() => current() < totalPages())
 
-  const pageRange = createMemo(() => {
+  /**
+   * Standard pager (rc-pagination semantics): middle pages show a 3-wide
+   * window around `cur`; within 4 pages of an edge the window widens to 5
+   * consecutive numbers (cur ≤ 4 → 1..5 … n; cur ≥ n-3 → 1 … n-4..n).
+   * Fewer than 8 pages render all numbers.
+   */
+  const pageRange = createMemo((): PageItem[] => {
     const total = totalPages()
     const cur = current()
-    const range: (number | 'prev-ellipsis' | 'next-ellipsis')[] = []
+    const range: PageItem[] = []
 
     if (total <= 7) {
       for (let i = 1; i <= total; i++) range.push(i)
@@ -42,18 +53,28 @@ export const createPagination = (config: PaginationConfig) => {
 
     range.push(1)
 
-    if (cur > 3) {
-      range.push('prev-ellipsis')
+    let start: number
+    let end: number
+    if (cur <= 4) {
+      start = 2
+      end = 5
+    } else if (cur >= total - 3) {
+      start = total - 4
+      end = total - 1
+    } else {
+      start = cur - 1
+      end = cur + 1
     }
 
-    const start = Math.max(2, cur - 1)
-    const end = Math.min(total - 1, cur + 1)
+    if (start > 2) {
+      range.push('prev-ellipsis')
+    }
 
     for (let i = start; i <= end; i++) {
       range.push(i)
     }
 
-    if (cur < total - 2) {
+    if (end < total - 1) {
       range.push('next-ellipsis')
     }
 
@@ -62,9 +83,39 @@ export const createPagination = (config: PaginationConfig) => {
     return range
   })
 
+  // ---- Table-ready slice API ---------------------------------------------
+  // The one integration a data component (Table/List) needs: which rows of
+  // the source array are on the current page. Derived entirely from the
+  // reactive state above, so it stays correct through controlled updates,
+  // pageSize changes and total changes.
+
+  /** Zero-based index of the first row on the current page. */
+  const offset = createMemo(() => (current() - 1) * pageSize())
+
+  /** [start, end) half-open range of source-array indices on this page. */
+  const rangeFor = createMemo((): [number, number] => {
+    const start = Math.min(offset(), Math.max(0, config.total))
+    const end = Math.min(start + pageSize(), Math.max(0, config.total))
+    return [start, end]
+  })
+
+  /** Slice of a source array for the current page (generic, length-safe). */
+  const slice = <T,>(items: readonly T[]): T[] => {
+    const [start, end] = rangeFor()
+    return items.slice(start, end) as T[]
+  }
+
+  /** [firstItem, lastItem] 1-based display range — feeds showTotal. */
+  const itemRange = createMemo((): [number, number] => {
+    if (config.total <= 0) return [0, 0]
+    const [start, end] = rangeFor()
+    return [start + 1, end]
+  })
+
   const goTo = (page: number) => {
     if (config.disabled) return
     const clamped = Math.max(1, Math.min(page, totalPages()))
+    if (clamped === current()) return
     _setCurrent(clamped)
     config.onChange?.(clamped, pageSize())
   }
@@ -73,11 +124,13 @@ export const createPagination = (config: PaginationConfig) => {
   const next = () => { if (hasNext()) goTo(current() + 1) }
 
   const changePageSize = (size: number) => {
-    _setPageSize(size)
+    if (config.disabled || size === pageSize()) return
     const maxPage = Math.max(1, Math.ceil(config.total / size))
     const newCur = Math.min(current(), maxPage)
+    _setPageSize(size)
     _setCurrent(newCur)
     config.onShowSizeChange?.(newCur, size)
+    // fires onChange too when size change moves the page.
     config.onChange?.(newCur, size)
   }
 
@@ -100,6 +153,11 @@ export const createPagination = (config: PaginationConfig) => {
     prev,
     next,
     changePageSize,
+    // Table-ready slice API
+    offset,
+    rangeFor,
+    slice,
+    itemRange,
     refs
   }
 }

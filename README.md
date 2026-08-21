@@ -1,6 +1,6 @@
 # Solid Upthrust (upthrust-ui)
 
-A SolidJS enterprise component library styled with UnoCSS, following Ant Design visual specifications.
+A SolidJS enterprise component library styled with UnoCSS, following solidjs-upthrust visual specifications.
 
 ## Features
 
