@@ -1,0 +1,1089 @@
+packages/components/lib/Menu/index.tsx
+  s_0addb92ad802c6::t_03417731443d97 103-113
+packages/components/types/Popover/index.d.ts
+  s_0addb92ad802c6::t_0affb6be9c79c9 1-27
+packages/competence/types/message.d.ts
+  s_7051126e04ac51::t_357df8b52afdef 22
+  s_0addb92ad802c6::t_13837e74b6b716 1-21,23-84
+packages/components/types/Carousel/index.d.ts
+  s_7051126e04ac51::t_ad226231ba1325 18-23,28-31
+  s_7051126e04ac51::t_0985a3b1326f0e 1-17,24-27,32-41
+packages/components/types/Progress/styles.d.ts
+  s_0addb92ad802c6::t_8d9f45960d4087 1-33
+packages/components/lib/Tooltip/styles.ts
+  s_0addb92ad802c6::t_3b4a4c94884548 46-50,54-58
+  s_7051126e04ac51::t_8e13166d29ab24 13
+  s_0addb92ad802c6::t_bf56bf3118b558 29-34
+  s_0addb92ad802c6::t_42ed899eba187a 45,51-53,59
+  s_0addb92ad802c6::t_8dce66ae29636b 1-12,14-28,35-44
+packages/competence/src/progress.test.ts
+  s_0addb92ad802c6::t_12937b155a8e0f 1-14,16-17,20-95
+  s_0addb92ad802c6::t_099b63aef8e4f0 15,18-19
+packages/components/lib/List/styles.ts
+  s_cc93052f14d10a::t_00d00840656dd9 8-12,14
+  s_cc93052f14d10a::t_b834d407ec6c11 72-88,95-98
+  s_cc93052f14d10a::t_6d45eae982a94a 1-7,13,15-71,89-94
+packages/components/lib/Alert/styles.ts
+  s_7051126e04ac51::t_4351da884523dc 160
+  s_cc93052f14d10a::t_f6d2de00095da0 75-76,156-158
+  s_0addb92ad802c6::t_6ade4c4bb6a3c6 27
+  s_0addb92ad802c6::t_58eb35dd409da0 21-24,26
+  s_7051126e04ac51::t_975342a56767ab 9-16,42-45,57-74
+  s_7051126e04ac51::t_4608ca028c72f5 8,41,46,52
+  s_7051126e04ac51::t_6a93f27f4b5e63 118-121,124,135,142-155
+  s_7051126e04ac51::t_24597dcc11b9de 165
+  s_7051126e04ac51::t_d3b8d1be063b1e 7,30-35
+  s_cc93052f14d10a::t_9fdbfc49092acb 77
+packages/components/lib/Descriptions/index.tsx
+  s_ff4ecdee5dd13e::t_81b80d9bbafe23 85-86
+  s_cc93052f14d10a::t_4da0c7433339a9 10-16,26,30-32,61,69,71,91-95,97-98,104,108,119,121,123,149-155,157,159,182,189-190,192-193,223-224,226,229-240,242-257,259,262,272-273,314,318-320,325-326
+  s_ff4ecdee5dd13e::t_ef787a5a85995b 87-90,96,99-103,105-107,109,112-118,120,122,124-131,135-139,141-143,146-148,156,158
+  s_ff4ecdee5dd13e::t_52fbade765f476 19
+  s_ff4ecdee5dd13e::t_ad648ca177d579 183-185
+  s_ff4ecdee5dd13e::t_000513a19abacb 186-188,191,194-222
+  s_ff4ecdee5dd13e::t_302cca64c8f6db 267-271,286
+  s_cc93052f14d10a::t_04d10d06c89229 1-8,17-18,20-25,27-29,33-60,62-68,70,72-80,110-111,132-134,140,144-145,160-166,168-175,177-181,225,227-228,258,260-261,315-317,321-324,327-340,346-350
+  s_cc93052f14d10a::t_3e41426d5a0a32 81-84
+  s_ff4ecdee5dd13e::t_f03a34ec66028b 263-266,274-285,287-313
+  s_cc93052f14d10a::t_721929939c94ec 241
+  s_ff4ecdee5dd13e::t_ceeac42b0d5693 341-345
+  s_cc93052f14d10a::t_506d1213105b7d 176
+  s_cc93052f14d10a::t_90c5e5de85e0ca 167
+  s_ff4ecdee5dd13e::t_766442a23e6a49 9
+packages/components/lib/Badge/styles.ts
+  s_2b37f4cff497a8::t_feb886b002836d 1-10,18-24,26-239
+  s_2b37f4cff497a8::t_8e359ba0b0a336 11-17,25
+packages/competence/src/watermark.ts
+  s_0addb92ad802c6::t_11b39f63bea667 1-72,78-105,107
+  s_0addb92ad802c6::t_88cd7de6abb20f 106
+  s_0addb92ad802c6::t_dbca5e656f4943 73-77
+packages/components/lib/Tooltip/index.tsx
+  s_0addb92ad802c6::t_63a6421c00d77a 77-85
+  s_0addb92ad802c6::t_0b9783fef8ac66 2-3,5-34,39,42-61,91-96
+  s_0addb92ad802c6::t_84d65df596858d 73-76,86-88
+  s_0addb92ad802c6::t_4ea3dacb7e0b76 1
+  s_0addb92ad802c6::t_a7fa45ed2cc5c6 35-38
+  s_0addb92ad802c6::t_d3e2ecaa19ddc0 62-72,89-90
+  s_0addb92ad802c6::t_96160f0bf201ba 40-41
+  s_0addb92ad802c6::t_2d08ebe869ef34 4
+packages/competence/src/calendarDate.ts
+  s_29512fbb2cdfef::t_283314216a26fe 2-5
+  s_29512fbb2cdfef::t_d92726e381053e 1,6-207,210-214,218
+  s_29512fbb2cdfef::t_c4519686dd912d 208-209,215-217
+packages/competence/src/progress.ts
+  s_0addb92ad802c6::t_e79ad78bb4e654 85-90,95-96
+  s_0addb92ad802c6::t_68facc9fafd326 1-56,61-62,64-84,91-94,97-101
+  s_0addb92ad802c6::t_8212450d1fdf8e 57-60,63
+packages/competence/src/calendarDate.test.ts
+  s_29512fbb2cdfef::t_eae4156f994b6a 2-131,133,135-137,139-141,143-147,149-169,171-172,177-178
+  s_29512fbb2cdfef::t_90aba4729a0bb3 148
+  s_29512fbb2cdfef::t_b450900c51bb24 1,134,138,142
+  s_29512fbb2cdfef::t_6bb12d24ece2dc 132
+  s_29512fbb2cdfef::t_c4bb90c1a5d54f 170,173-176
+packages/components/lib/Dropdown/styles.ts
+  s_0addb92ad802c6::t_27e218ac9f5713 28-33
+  s_7051126e04ac51::t_8e13166d29ab24 12
+packages/components/lib/Calendar/styles.ts
+  s_29512fbb2cdfef::t_636c5aa664414b 144-146
+  s_29512fbb2cdfef::t_e68febaa3ad351 216-220,224
+  s_29512fbb2cdfef::t_b9bb133360c5f1 89-91
+  s_29512fbb2cdfef::t_fa60338b740fec 323-324
+  s_29512fbb2cdfef::t_1f056dd89b06f3 166-168,176
+  s_29512fbb2cdfef::t_bdcc0ab2f383d4 111,118-120
+  s_29512fbb2cdfef::t_d0925a93b8328b 106,115-117,122-127,129-133
+  s_29512fbb2cdfef::t_2d2dff41801bbe 101-104,110
+  s_29512fbb2cdfef::t_57955f051ea9d6 143
+  s_29512fbb2cdfef::t_b5bb53015b3b89 1-88,92-100,105,107-109,112-114,134-136,147-151,157-165,169-175,177-207,211,213-215,221-222,225-245,248-258,260,262,264-282,284,286,288-299,301-322,327-346
+  s_29512fbb2cdfef::t_19e898ecdeb565 152-156
+  s_29512fbb2cdfef::t_c3f440a204aea1 121,128
+  s_29512fbb2cdfef::t_f53b6e592239c5 137-142
+  s_29512fbb2cdfef::t_253a7164b27080 300
+  s_29512fbb2cdfef::t_6b1c116dc11c78 325-326
+  s_29512fbb2cdfef::t_8947ab323cacbd 246-247,259,261,263,283,285,287
+  s_29512fbb2cdfef::t_095ef58597fc8e 223
+  s_29512fbb2cdfef::t_4b169ae6b0e00f 208-210,212
+packages/components/package.json
+  s_29512fbb2cdfef::t_ca9ba16d01e5b2 60
+packages/competence/types/drag.d.ts
+  s_cc93052f14d10a::t_119ff158feb577 1,31-32,35-37,47,50-51,53,55,57,101,128-129
+  s_cc93052f14d10a::t_f7b034c3dca2e0 2-30,33-34,38-46,48-49,52,54,56,58-100,102-127,130
+packages/competence/src/message.ts
+  s_0addb92ad802c6::t_de5a406eb00709 1-24,26-41,48-89,100-103,121-124,144-146,158-160,162-164,166-211
+  s_0addb92ad802c6::t_0f14a14a199762 125-136,138-143
+  s_7051126e04ac51::t_ed878459548156 25
+  s_7051126e04ac51::t_0a72a00f5a8503 147-157
+  s_0addb92ad802c6::t_6b5d1bd93042f6 42-47,116,137
+  s_0addb92ad802c6::t_93c2c2dde0c5a8 90-99,104-115,117-120,161,165
+example/src/pages/Tooltip.tsx
+  s_0addb92ad802c6::t_c7aaaf7fb2b1f2 24,32-39
+  s_0addb92ad802c6::t_6401d7f07beabc 1-23,25-31,40-87
+packages/preset/src/index.ts
+  s_2b37f4cff497a8::t_a8286f574fca06 92-94,99
+  s_7051126e04ac51::t_d141e7e45b7c5d 46-54
+  s_0addb92ad802c6::t_6d3350247c6825 89-91,95-98,100
+packages/competence/package.json
+  s_29512fbb2cdfef::t_cb318aad3bb08d 49
+packages/components/types/index.d.ts
+  s_29512fbb2cdfef::t_26a4b2c1bb9650 85-86
+  s_cc93052f14d10a::t_a81cda60cac2e8 73-74
+  s_cc93052f14d10a::t_fb2648c95bc463 77-78
+  s_cc93052f14d10a::t_8e7c155f7eed8b 79-80
+  s_0addb92ad802c6::t_0affb6be9c79c9 41-42,49-50,59-60
+  s_cc93052f14d10a::t_ad8df5fc210fb2 83-84
+  s_29512fbb2cdfef::t_f60c7164ca89d8 87-88
+  s_0addb92ad802c6::t_13837e74b6b716 51-52
+  s_7051126e04ac51::t_e406563894c59d 55-58
+  s_7051126e04ac51::t_489dc9a86032cf 71-72
+  s_0addb92ad802c6::t_8d9f45960d4087 61-70
+  s_7051126e04ac51::t_636371068f57b9 53-54
+  s_2b37f4cff497a8::t_e51bc99a458630 75-76
+  s_7051126e04ac51::t_4a37a8a25751a7 81-82
+packages/competence/types/steps.d.ts
+  s_0addb92ad802c6::t_8d9b480358c65f 16
+packages/competence/src/watermark.test.ts
+  s_0addb92ad802c6::t_7540d7ac639d5e 59,73-83
+  s_0addb92ad802c6::t_6fd375708b0e95 1-13,16-58,60-72,84-87
+  s_0addb92ad802c6::t_2e112ea6c2069d 14-15
+packages/competence/types/calendarDate.d.ts
+  s_29512fbb2cdfef::t_42704c6af7c7e4 1-74
+packages/components/lib/Spin/index.tsx
+  s_0addb92ad802c6::t_aca3d66de784bf 39-41,58-59,63,67-68
+  s_0addb92ad802c6::t_676a5038227df7 71
+  s_0addb92ad802c6::t_e3280e5cef72cb 5
+  s_0addb92ad802c6::t_5df5f56a3a4715 2-4,6-23,32-34,36,76-110
+  s_0addb92ad802c6::t_56476616cadf2c 42-48,50-55
+  s_0addb92ad802c6::t_a4e5d60b67177f 1,24-31,35,37-38,49,56-57,60-62,64-66,69-70,72-75
+packages/components/lib/Result/styles.ts
+  s_0addb92ad802c6::t_cb01983c75b0f9 1-16,23,25-81
+  s_0addb92ad802c6::t_5efc766c84b398 17-22,24
+packages/competence/types/tooltip.d.ts
+  s_0addb92ad802c6::t_8d5659c643bb84 43
+  s_0addb92ad802c6::t_f5f135072836fe 45-49
+  s_0addb92ad802c6::t_12029353ad6c2a 44
+  s_0addb92ad802c6::t_8d9b480358c65f 1-42,50-51
+example/src/pages/Calendar.tsx
+  s_29512fbb2cdfef::t_c037f835e9f906 104,108-109
+  s_29512fbb2cdfef::t_2432f10722222e 69-73
+  s_29512fbb2cdfef::t_fcb40ef004dd97 1-68,74-103,105-107,110-123,133-245
+  s_29512fbb2cdfef::t_f3fcf32b9d7713 124-132
+packages/competence/types/trigger.d.ts
+  s_0addb92ad802c6::t_f5f135072836fe 38-46,65-76,95-97,102-108,111-117,120-121,125-128,142-147
+  s_0addb92ad802c6::t_8d9b480358c65f 2,24,26-27,148-152
+  s_0addb92ad802c6::t_8d5659c643bb84 11,98-101,139
+  s_0addb92ad802c6::t_12029353ad6c2a 28-37,140-141
+  s_7051126e04ac51::t_c3f367031085b7 122-124,129
+  s_0addb92ad802c6::t_ed3e175b447fd0 109-110,118-119
+packages/components/lib/Watermark/styles.ts
+  s_0addb92ad802c6::t_6d318be0fefb85 1-21
+packages/competence/types/badge.d.ts
+  s_2b37f4cff497a8::t_e0af8ee15d1f01 1-62
+packages/competence/types/progress.d.ts
+  s_0addb92ad802c6::t_1a1fe211c3b6c1 1-47,54-55
+  s_0addb92ad802c6::t_003a69c8e59199 48-53
+packages/components/lib/Collapse/index.tsx
+  s_cc93052f14d10a::t_4e919117cfc5d2 159
+  s_cc93052f14d10a::t_690b5484dd1a07 175-178
+  s_cc93052f14d10a::t_5e46be64c1f1f8 155
+  s_cc93052f14d10a::t_b1d72032aa43a7 3-10,12-52,54-98,108-115,124-154,156-158,160-174,179-189
+  s_cc93052f14d10a::t_d2ade150a2fc53 116-123
+  s_cc93052f14d10a::t_cb7320c4c81986 11
+  s_cc93052f14d10a::t_afb2756e1581a9 99-107
+  s_cc93052f14d10a::t_cf6a71061b03c0 53
+  s_cc93052f14d10a::t_9cbc511aae5e71 1-2
+packages/components/lib/Skeleton/index.tsx
+  s_0addb92ad802c6::t_ef3408bde4b848 1-37,41-55,61,64-68,73,90-91,93-96,100-107
+  s_0addb92ad802c6::t_7f9936971c8d15 56-60
+  s_0addb92ad802c6::t_c8053297791e92 69-72,74-89,92,97-99
+  s_0addb92ad802c6::t_2d85d776e9ca82 62-63
+  s_0addb92ad802c6::t_d82d059b1b4233 38-40
+example/src/pages/Progress.tsx
+  s_0addb92ad802c6::t_72f9500a0d8a90 1,9-12
+  s_0addb92ad802c6::t_16f14bc8ca72d7 2-8,13-87
+packages/components/lib/Badge/index.tsx
+  s_2b37f4cff497a8::t_f3f1e46d8ce559 197
+  s_2b37f4cff497a8::t_3bdb77b6736f64 1-10,14-66,68-72,77-122,126-128,130-134,139-141,143-145,157-194,196,198-203,209-259
+  s_2b37f4cff497a8::t_62303ead8ed0fc 123-125,129
+  s_2b37f4cff497a8::t_01005f12907e74 135-138,142
+  s_2b37f4cff497a8::t_02945a6813ac2b 67,73-76
+  s_2b37f4cff497a8::t_8ccf77ad191441 146-156
+  s_2b37f4cff497a8::t_58f7b74f99b948 11-13
+  s_2b37f4cff497a8::t_16fd3a28b7283e 204-208
+  s_2b37f4cff497a8::t_ce7280abd6a016 195
+packages/components/lib/Card/styles.ts
+  s_29512fbb2cdfef::t_58d953b70e4d0b 325
+  s_29512fbb2cdfef::t_a30aab465d5f10 5-10,27-29,32,97,112,118-130,133,154-159,162-163,234-245,267,272,294,310-311,321
+  s_29512fbb2cdfef::t_145a6651b38231 1-4,11-26,30-31,33-46,50-61,66-67,70-72,77-78,87,89-91,96,108-109,111,113-115,131-132,134-136,142,144-146,153,160-161,164-166,168-170,177-185,189-212,214-223,228,246-256,258-266,268-271,273-276,281-285,287-293,295-306,309,312-319,322-324,326-328
+  s_29512fbb2cdfef::t_486487daf42951 137-141,143
+  s_29512fbb2cdfef::t_f9c159ae845253 277-280,286
+  s_29512fbb2cdfef::t_e02b8a427eba56 47-49,68,73-76,92,98-100,103-107,110,116-117,147-152,167,171-176,186-188,213,224-227,229-233,257,307-308,320
+  s_29512fbb2cdfef::t_b6b0c696a98738 93-95,101-102
+  s_29512fbb2cdfef::t_888286b6200692 88
+  s_29512fbb2cdfef::t_153807ab377cd3 62-65,69
+  s_29512fbb2cdfef::t_7c241d11fd6bf5 79-86
+packages/components/lib/Popconfirm/index.tsx
+  s_0addb92ad802c6::t_739b37aa77c5eb 1-3,5-75,86-110,127-132
+  s_0addb92ad802c6::t_f3fa9470c64a3c 76-85
+  s_0addb92ad802c6::t_4e0c372fb86695 111-114,122-124
+  s_0addb92ad802c6::t_f288ad59cc73b1 115-121
+  s_0addb92ad802c6::t_9ed040d9d07c2b 4
+  s_0addb92ad802c6::t_d2ed36ae5f42bc 125-126
+packages/competence/src/calendar.ts
+  s_29512fbb2cdfef::t_57ea8f54bd67ad 105-110
+  s_29512fbb2cdfef::t_5740e79c3f8875 54-55
+  s_29512fbb2cdfef::t_2e4448fe7e02ae 80-83,93-96
+  s_29512fbb2cdfef::t_573f4f8b77f23f 1-53,56-79,84-91,101-104,111-113,116-117,120-161,163,165-166,168-207
+  s_29512fbb2cdfef::t_99b9479871c61a 92,97-100
+  s_29512fbb2cdfef::t_3e03a546e1ec46 164
+  s_29512fbb2cdfef::t_d20c362ba7dded 162,167
+  s_29512fbb2cdfef::t_5da5d253b9a0e6 114-115,118-119
+example/src/pages/Spin.tsx
+  s_0addb92ad802c6::t_72f9500a0d8a90 1,11-17
+  s_0addb92ad802c6::t_43f0e836d0b7d5 49-55
+  s_0addb92ad802c6::t_ed0ecd67e44081 2,43-45
+  s_0addb92ad802c6::t_9d2d8d68716456 3-10,18-42,46-48,56-86
+packages/preset/src/rules/index.ts
+  s_7051126e04ac51::t_9f25eed581edc6 5,7-12,14-22
+  s_7051126e04ac51::t_27ea7d20fbd37f 88-101,103-113
+  s_7051126e04ac51::t_c26ff20b91e9c6 68-78
+  s_7051126e04ac51::t_dfbc948a7a907f 6,13,23-24
+  s_cc93052f14d10a::t_d87cd2164a54d0 32-36
+  s_2b37f4cff497a8::t_7ab2fd12107e64 132-137
+  s_cc93052f14d10a::t_f6d2de00095da0 87
+  s_7051126e04ac51::t_0639ecd12d96ca 102
+  s_0addb92ad802c6::t_0ba6cf4e775946 119-131
+  s_7051126e04ac51::t_b2c09998af52b0 79-86
+packages/competence/src/dialog.test.ts
+  s_7051126e04ac51::t_7abd9d48291fa5 212,215
+  s_7051126e04ac51::t_4d79c031a5390f 1-211,213-214,216-220
+packages/competence/types/imageGroup.d.ts
+  s_cc93052f14d10a::t_e270526ca2bada 1-57
+example/src/pages/Carousel.tsx
+  s_7051126e04ac51::t_3957e2f459a414 70-79
+  s_7051126e04ac51::t_a30f6e6ae6308e 1-69,80-84
+example/src/pages/Result.tsx
+  s_0addb92ad802c6::t_866a10513229e3 1-98
+packages/competence/vite.config.ts
+  s_29512fbb2cdfef::t_644963654a89cb 56
+  s_29512fbb2cdfef::t_69bcf84af1188f 26-33
+packages/components/types/Card/index.d.ts
+  s_29512fbb2cdfef::t_f60c7164ca89d8 1-71
+packages/components/common/calendar.ts
+  s_29512fbb2cdfef::t_283314216a26fe 2
+  s_29512fbb2cdfef::t_c78c48b2c69cc8 1,3-13
+packages/components/types/Drawer/index.d.ts
+  s_7051126e04ac51::t_e406563894c59d 1-33,40-51
+  s_7051126e04ac51::t_29c3e3cf5200bb 34-39
+packages/preset/src/preset.test.ts
+  s_7051126e04ac51::t_9e1a499fc345e6 55-98
+packages/components/lib/Spin/styles.ts
+  s_0addb92ad802c6::t_9ad157b676a1f4 1-6,16-18,22-25,34-82,84-104
+  s_0addb92ad802c6::t_058ca457f0d53b 7-10,19-21,83
+  s_0addb92ad802c6::t_9643a960e59c36 33
+  s_0addb92ad802c6::t_3e46386a8b579a 11-15,31-32
+  s_0addb92ad802c6::t_9f79354d3b2531 26-30
+packages/components/lib/List/index.tsx
+  s_cc93052f14d10a::t_a6f3404753c874 137,144-145
+  s_cc93052f14d10a::t_aee0a57a9c172b 21-25,42,61,161,164-165,180-182,185-189,191-199,201-203,211,233-236,276,279-280
+  s_cc93052f14d10a::t_f4f4574406a85c 106-107
+  s_cc93052f14d10a::t_eb347d0b41eaea 212-228
+  s_cc93052f14d10a::t_96553b2177c01b 4
+  s_cc93052f14d10a::t_461cf9f2ae3310 150-152,162-163
+  s_cc93052f14d10a::t_7c54e31b0a0fa1 277-278
+  s_cc93052f14d10a::t_68883eba8f8b82 1
+  s_cc93052f14d10a::t_3a3d52b92b37b8 184,190
+  s_cc93052f14d10a::t_116bab32461341 200
+  s_cc93052f14d10a::t_26711780cf68da 271-273,275,281
+  s_cc93052f14d10a::t_799f294957369f 108-110
+  s_cc93052f14d10a::t_d4d14d5de82b2d 43-48
+  s_cc93052f14d10a::t_6c9aa3949bc229 2-3,5-20,26-41,49-60,62-105,111-112,114-116,128-131,146-149,153-160,166-179,183,204-210,237,242-252,267-268,284-289
+  s_cc93052f14d10a::t_12f25481faf087 113,117-127
+  s_cc93052f14d10a::t_daedb93d861960 132-136,138-143
+  s_cc93052f14d10a::t_aee915cc8a694a 230-232
+  s_cc93052f14d10a::t_08289b70076a45 253-266
+  s_cc93052f14d10a::t_5693e6443682f1 282
+  s_cc93052f14d10a::t_ad7b42d5b78143 229,238-241,269-270,274,283
+packages/competence/types/carousel.d.ts
+  s_7051126e04ac51::t_9150fefe9e1c16 1-59
+packages/components/types/Progress/index.d.ts
+  s_0addb92ad802c6::t_8d9f45960d4087 1-30
+packages/competence/src/skeleton.ts
+  s_0addb92ad802c6::t_6e78589f75bcc0 1-90
+packages/competence/types/watermark.d.ts
+  s_0addb92ad802c6::t_1a1fe211c3b6c1 1-41
+packages/competence/src/popconfirm.ts
+  s_0addb92ad802c6::t_17ce57c22d2450 48
+  s_0addb92ad802c6::t_66cee586d8b6e7 1-47,49-99
+packages/competence/src/message.test.ts
+  s_0addb92ad802c6::t_1ac0375f5c3910 165-189
+  s_0addb92ad802c6::t_0f14a14a199762 122,134
+  s_7051126e04ac51::t_541ccfcfc06feb 140-149
+  s_0addb92ad802c6::t_e94ff25dd6f276 1-121,123-133,135-139,150-164
+packages/components/types/Watermark/styles.d.ts
+  s_0addb92ad802c6::t_8d9f45960d4087 1-6
+packages/competence/src/drag.ts
+  s_cc93052f14d10a::t_b828dcaf1d10c8 221-223,225,228
+  s_cc93052f14d10a::t_4acf4b0bc5105a 185-188,192-193,213-214
+  s_cc93052f14d10a::t_5e10257bf2a851 194-196,198-200,202-210,212,219
+  s_cc93052f14d10a::t_3cef0f922c5a71 1
+  s_cc93052f14d10a::t_66e23b9cc02407 4-5,7,9-32,37-38,42-53,56,58,60,62-129,131,133,135-136,139-147,150-157,159-160,162-166,168-170,174-175,189-191,197,201,211,215-217,226-227,229-236,248-250,253-275,277-278,282-284,288-290,292,295,298-300,302-304,307-309,312-314,316,318-338,341-344,348-360,362,367
+  s_cc93052f14d10a::t_c35a79d6719b78 2-3,6,8,33-36,39-41,54-55,57,59,61,137-138,148-149,158,161,167,171-173,176-184,251-252,276,279-281,285-287,291,293-294,296-297,301,305-306,315,317,339-340,345-347,361,363-366,368-369
+  s_cc93052f14d10a::t_bf6c8a0231f4b3 220,224
+  s_cc93052f14d10a::t_2fddd15d3dc0c0 237-247
+  s_cc93052f14d10a::t_fcfda0b4fdc160 310
+  s_cc93052f14d10a::t_1bed554206c7b1 218
+  s_cc93052f14d10a::t_c33fb6a7a76e56 130,132,134
+  s_cc93052f14d10a::t_7fc4e2e958b64e 311
+packages/components/lib/Popconfirm/styles.ts
+  s_0addb92ad802c6::t_aa604f6038d321 28-33
+  s_0addb92ad802c6::t_e4f6069f449036 78,84-86,92
+  s_7051126e04ac51::t_8e13166d29ab24 12
+  s_0addb92ad802c6::t_cf729cad5db2d7 1-11,13-27,34-77
+  s_0addb92ad802c6::t_af78461b280720 79-83,87-91
+packages/components/lib/index.ts
+  s_7051126e04ac51::t_247f9c44c5a1ad 63-64
+  s_29512fbb2cdfef::t_11bbdb60a9b94b 107-113
+  s_2b37f4cff497a8::t_c280908e29d144 92
+  s_cc93052f14d10a::t_5e32737cedede2 105-106
+  s_0addb92ad802c6::t_f4a6294c26d7a2 61-62
+  s_7051126e04ac51::t_108e5d17dd9e5d 85,102-104
+  s_cc93052f14d10a::t_d408ff2387aeb2 98-101
+  s_7051126e04ac51::t_c06e93859ffd9b 65-68
+  s_7051126e04ac51::t_c9ad332e04a254 81-84
+  s_2b37f4cff497a8::t_e7e8a479185ec3 90-91,93
+  s_29512fbb2cdfef::t_6755b2a6756cee 114-119
+  s_cc93052f14d10a::t_3f6f792606c131 86-89
+  s_cc93052f14d10a::t_06214af5e55109 94-97
+  s_0addb92ad802c6::t_770bfb2234e7cf 71-80
+  s_0addb92ad802c6::t_42b35dd449ba96 49-50,57-60,69-70
+packages/competence/src/carousel.test.ts
+  s_7051126e04ac51::t_b5ae3036896e00 1-150
+packages/competence/src/image.ts
+  s_7051126e04ac51::t_678d1342ed7665 1-26,32-81,89-103,114-116,118-126,137-138,141-192
+  s_cc93052f14d10a::t_f892e30b72fee0 27-31
+  s_7051126e04ac51::t_d9b63002d0b80d 104-108,127,129-130,132-136,139
+  s_cc93052f14d10a::t_f25c026c5fa086 109-113,117,128,131,140
+  s_cc93052f14d10a::t_a3007d675424b4 82-88
+packages/competence/src/list.ts
+  s_cc93052f14d10a::t_96bda096e1cb01 277
+  s_cc93052f14d10a::t_db34fc3ff92960 1
+  s_cc93052f14d10a::t_14c83bc7f6c0e5 218
+  s_cc93052f14d10a::t_a38b96b9ad01a5 456
+  s_cc93052f14d10a::t_188b711577b05f 234-237,239,247
+  s_cc93052f14d10a::t_4550c919ceac60 184,189,203
+  s_cc93052f14d10a::t_116aca46f3874d 255-262,269-275
+  s_cc93052f14d10a::t_b241d35d5b412e 292-293,296,302
+  s_cc93052f14d10a::t_41062dfcebdece 187,193,199-200
+  s_cc93052f14d10a::t_fea8ebabb31ae4 233,246
+  s_cc93052f14d10a::t_ae72da16d44641 253-254,264-268,276,279-281
+  s_cc93052f14d10a::t_e8f5c186a9a822 358-377
+  s_cc93052f14d10a::t_877b0e5a7d4fe7 219
+  s_cc93052f14d10a::t_61923335c79c31 396-397
+  s_cc93052f14d10a::t_4037ab22ab9a77 211-215,222,224
+  s_cc93052f14d10a::t_eb799d1ecb6b21 452
+  s_cc93052f14d10a::t_3897cf3fe67142 473
+  s_cc93052f14d10a::t_a86e544235ba53 126,129-140,146-150,156-160,165-170
+  s_cc93052f14d10a::t_c085e2688c374b 91-97
+  s_cc93052f14d10a::t_a24696aa949f57 114-121
+  s_cc93052f14d10a::t_4bd216d61eb46c 383-388
+  s_cc93052f14d10a::t_ced1e1cb34f9a2 220-221
+  s_cc93052f14d10a::t_fc1cdb27aafd11 398
+  s_cc93052f14d10a::t_a033c45b7f2d98 2-90,98-113,122-125,127-128,171-183,185-186,188,190-192,194-198,201-202,204-210,216-217,223,225-232,238,240-245,248-252,263,278,282-291,294-295,297-301,303-357,378-382,389-395,399-451,453-455,457-472,474-478
+  s_cc93052f14d10a::t_85289f90b6412e 161-164
+  s_cc93052f14d10a::t_6afc12e9913a26 141-145,151-155
+packages/competence/types/popconfirm.d.ts
+  s_0addb92ad802c6::t_8d5659c643bb84 47
+  s_0addb92ad802c6::t_8d9b480358c65f 1-46,54-55
+  s_0addb92ad802c6::t_12029353ad6c2a 48
+  s_0addb92ad802c6::t_f5f135072836fe 49-53
+example/src/pages/Notification.tsx
+  s_7051126e04ac51::t_40022177ef3be4 2-125
+  s_7051126e04ac51::t_86ea3c32f41b28 1
+packages/competence/types/index.d.ts
+  s_7051126e04ac51::t_2525d432006ae0 21
+  s_0addb92ad802c6::t_13837e74b6b716 20
+  s_cc93052f14d10a::t_e270526ca2bada 25
+  s_29512fbb2cdfef::t_42704c6af7c7e4 29-30
+  s_2b37f4cff497a8::t_e0af8ee15d1f01 18
+  s_7051126e04ac51::t_b1d945dd221ff9 22
+  s_0addb92ad802c6::t_1a1fe211c3b6c1 16-17,19
+  s_cc93052f14d10a::t_119dfc49197912 26
+  s_cc93052f14d10a::t_56e4c8fdae650e 28
+  s_0addb92ad802c6::t_8d9b480358c65f 14-15
+  s_cc93052f14d10a::t_775a201934a681 27
+  s_7051126e04ac51::t_9150fefe9e1c16 23
+  s_7051126e04ac51::t_1f214e98b735b5 24
+packages/components/lib/Result/index.tsx
+  s_0addb92ad802c6::t_1fdf308e848614 1-79
+packages/components/types/Drawer/styles.d.ts
+  s_7051126e04ac51::t_e406563894c59d 1-29
+example/src/pages/Popconfirm.tsx
+  s_0addb92ad802c6::t_12c5c552881be8 45
+  s_0addb92ad802c6::t_180226ce5cee07 76-81
+  s_0addb92ad802c6::t_47e9a39f3fa1f5 108
+  s_0addb92ad802c6::t_55f65263edb987 24-25
+  s_0addb92ad802c6::t_c67a6de72e45a1 49
+  s_0addb92ad802c6::t_7e9c2e15277e33 29
+  s_0addb92ad802c6::t_ba6367217f58a3 55
+  s_0addb92ad802c6::t_f77acf66b17145 1-23,26-28,30-44,46-48,50-54,56-75,86-98,100-107,109-118
+  s_0addb92ad802c6::t_1506c11cba1c22 82-85
+  s_0addb92ad802c6::t_9f8606286d30cb 99
+packages/components/lib/Modal/index.tsx
+  s_7051126e04ac51::t_ebd73fc2408519 119-124
+  s_7051126e04ac51::t_e66bf7bf1dfb14 111-118,125-129
+  s_7051126e04ac51::t_a3f321138e772b 136-144,146-151
+  s_7051126e04ac51::t_c078409c9b2bdb 238
+  s_7051126e04ac51::t_dcc5cf72bfabcd 240
+  s_7051126e04ac51::t_d0eaf2e6d85fb7 145
+  s_7051126e04ac51::t_b055f955efac68 108-110,130-131
+  s_7051126e04ac51::t_856fbd93babb6a 172-178
+  s_7051126e04ac51::t_89f898e5eb5eff 1
+  s_7051126e04ac51::t_4460e07e97c02d 222,226,239
+  s_7051126e04ac51::t_0dd463fbbb184c 227
+  s_7051126e04ac51::t_5d0192887738e2 2-8,10-107,132-135,152-171,179-221,223-225,228-237,241-247,250-251,253-254,258-282
+  s_7051126e04ac51::t_4df0b9aaca3291 9
+  s_cc93052f14d10a::t_88be0d478d47ab 248-249,252,255-257
+packages/competence/src/notification.ts
+  s_7051126e04ac51::t_19cbebb6769568 126-145
+  s_7051126e04ac51::t_515911838704bc 210
+  s_7051126e04ac51::t_1198b94cb737a1 1-125,146-168,182-193,195-209,211-221,225-308
+  s_7051126e04ac51::t_e5820fa115ffd6 194
+  s_7051126e04ac51::t_c5d97b2169ba33 173-176,179-181
+  s_7051126e04ac51::t_716974a8fd6850 169-172,177-178,222-224
+packages/components/lib/Image/PreviewGroup.tsx
+  s_cc93052f14d10a::t_2e2fb5a60863a1 120
+  s_cc93052f14d10a::t_b57d46fcb19453 121
+  s_cc93052f14d10a::t_23e36d3391d1dd 2,4-39,44-59,66-118,122-192
+  s_cc93052f14d10a::t_2414f0b0b797c9 1
+  s_cc93052f14d10a::t_3ef7d2f50b4932 119
+  s_cc93052f14d10a::t_20daeda29d95bc 40-43
+  s_cc93052f14d10a::t_6cb1f66288d1bf 60-65
+  s_cc93052f14d10a::t_cc6eb3f3da835c 3
+packages/competence/src/tooltip.test.ts
+  s_0addb92ad802c6::t_4aceeecfe5269c 1-65
+CLAUDE.md
+  s_7051126e04ac51::t_011b982b60d2ba 196-197
+  s_7051126e04ac51::t_a4d627b890d018 198
+  s_7051126e04ac51::t_0efa7d5f5725c2 128
+packages/components/lib/_dialogStack.ts
+  s_7051126e04ac51::t_9c73a0bfe44c00 1-65
+packages/components/lib/Descriptions/styles.ts
+  s_cc93052f14d10a::t_830678864fde89 1,4,6,13-14,17-19,22-24,73-75,79,82,84,94-96,100,103,105,113-115,119-120,122,148-151,154,156-161,165,167,169-170,172-173,178-182,184,186,196-204,221-224
+  s_ff4ecdee5dd13e::t_aeb1020766691c 205-206
+  s_ff4ecdee5dd13e::t_2ae6e2d6cfc52e 152,162-164,175,183
+  s_ff4ecdee5dd13e::t_aa0204c67a972c 225-226
+  s_ff4ecdee5dd13e::t_77d8fd2bc4c447 28-47,50-58,62,68,89
+  s_ff4ecdee5dd13e::t_9f2c0b07166745 63-65,80-81,83,101-102,104
+  s_cc93052f14d10a::t_41b0aa29ca65e7 2-3,5,7-12,15-16,20-21,25-27,48-49,59-61,66-67,69-72,76-78,85-88,90-93,97-99,106-112,116-118,121,123-147,153,155,168,171,174,176-177,195,207-220
+  s_ff4ecdee5dd13e::t_83d92b3f8eb7f6 166,185,187-194
+packages/competence/src/notification.test.ts
+  s_7051126e04ac51::t_1b6a8a600d5276 1-187
+packages/components/lib/Carousel/index.tsx
+  s_7051126e04ac51::t_37bc270790f866 2-6,8-24,31-34,39-54,56-73,76-110,117-128,130-131,135-136,140,181-183,185-188,190-201
+  s_7051126e04ac51::t_c56ef98969d8b1 7,25-30,35-38,55,74-75,111-116,129,141-146,148-149,153-154,156-157,161-165,167-168,172-173,175-176,180,184,189
+  s_cc93052f14d10a::t_a5d9bd59782583 137-139,147,150-152,155,158-160,166,169-171,174,177-179
+  s_7051126e04ac51::t_4c6d46a7a43201 1,132-134
+packages/competence/src/badge.test.ts
+  s_2b37f4cff497a8::t_1e8f8f6ad5a149 1-112
+packages/components/lib/Dropdown/index.tsx
+  s_0addb92ad802c6::t_6f7f93a24342bc 140-145,147-180
+packages/components/types/Collapse/styles.d.ts
+  s_cc93052f14d10a::t_a81cda60cac2e8 1-16,19-27,29-31
+  s_cc93052f14d10a::t_c5ee240afddb96 17-18,28
+example/src/pages/Badge.tsx
+  h_38a2eb1039bc81 150
+  s_2b37f4cff497a8::t_a6889123441e4b 76
+  s_2b37f4cff497a8::t_6067c9b5590bc0 31,106,147
+  s_2b37f4cff497a8::t_4b0ba3fad621c9 1-7,10,12-30,32-75,77-105,107-146,148-149,151-192
+  s_2b37f4cff497a8::t_be53df220ac2e5 8-9,11
+packages/components/types/Badge/index.d.ts
+  s_2b37f4cff497a8::t_e51bc99a458630 1-66
+packages/components/lib/Card/index.tsx
+  s_29512fbb2cdfef::t_06f1d5b679ad7d 66
+  s_29512fbb2cdfef::t_45cedb51cf07ad 75,79
+  s_29512fbb2cdfef::t_699607c07ac537 1
+  s_29512fbb2cdfef::t_96d86df6bc19e7 125-127
+  s_29512fbb2cdfef::t_7466dcd506ebc7 5
+  s_29512fbb2cdfef::t_8af1e52b0130f0 2-4,6-62,71-74,76-78,80-81,83-112,117-122,124,128-142,144-157,166-176,178-182,184-225,229-232,238-275
+  s_29512fbb2cdfef::t_e965b0be1773d6 113-116
+  s_29512fbb2cdfef::t_13b9a3095e3564 226-228,233-237
+  s_29512fbb2cdfef::t_0cbecf9872f419 82
+  s_29512fbb2cdfef::t_45f52e4cac16cd 158-165
+  s_29512fbb2cdfef::t_44873020324982 177
+  s_29512fbb2cdfef::t_9199ec220c38d2 143
+  s_29512fbb2cdfef::t_73790cb5e059c7 123
+  s_29512fbb2cdfef::t_e5352a9bac6656 63-65,67-70
+  s_29512fbb2cdfef::t_ea86dae0474f1d 183
+packages/components/types/Image/styles.d.ts
+  s_7051126e04ac51::t_4a37a8a25751a7 1-15,21-30,33-39,42
+  s_cc93052f14d10a::t_ad8df5fc210fb2 16-20,31-32,40-41
+packages/competence/types/button.d.ts
+  s_7051126e04ac51::t_089ab376589761 18-19
+packages/components/types/common/calendar.d.ts
+  s_29512fbb2cdfef::t_26a4b2c1bb9650 1-7
+packages/components/lib/Modal/styles.ts
+  s_7051126e04ac51::t_703578f30cfcd3 1-50,52-93,98-103,105-129
+  s_7051126e04ac51::t_8e13166d29ab24 51
+  s_7051126e04ac51::t_f9fb7b37f89e50 94-97,104
+packages/components/lib/Image/index.tsx
+  s_cc93052f14d10a::t_ae4834711fe655 1,11
+  s_cc93052f14d10a::t_8c802d91a7e347 80-95,97-98,100,115
+  s_cc93052f14d10a::t_0c46a872c888fe 167-168,170-180,186-190,192,206-217,219-221
+  s_cc93052f14d10a::t_0d04ad19335ff3 57-62
+  s_7051126e04ac51::t_7bfea4611553a1 2-10,12-56,63-79,96,99,101-114,116-128,133-134,136-138,140-166,181-185,191,197-202,204,218,222-229
+  s_cc93052f14d10a::t_b79178ff8da692 230-235
+  s_7051126e04ac51::t_2732664e9b9f29 135
+  s_7051126e04ac51::t_07796f9cbd7215 129-132,139,169,193-196,203,205
+packages/components/types/common/colors.d.ts
+  s_0addb92ad802c6::t_8c375e21a098d3 1-15
+packages/components/types/Popconfirm/styles.d.ts
+  s_0addb92ad802c6::t_f5f135072836fe 17
+  s_0addb92ad802c6::t_0affb6be9c79c9 1-3,5-16,18
+  s_0addb92ad802c6::t_8d5659c643bb84 4
+packages/components/lib/Drawer/styles.ts
+  s_7051126e04ac51::t_829c630a12f41e 1-37,41-44,46-117,119-150
+  s_7051126e04ac51::t_091c7c65a21077 38-40,45
+  s_7051126e04ac51::t_269007526bfdf1 118
+packages/components/lib/Popover/styles.ts
+  s_0addb92ad802c6::t_b14dc03e638467 45-46,48-57
+  s_0addb92ad802c6::t_84b6a4e0fa5551 66,72-74,80
+  s_0addb92ad802c6::t_c4c16feb362e0b 67-71,75-79
+  s_0addb92ad802c6::t_c126ee583d200a 1-11,13-27,34-44,47,58-65
+  s_7051126e04ac51::t_8e13166d29ab24 12
+  s_0addb92ad802c6::t_60d18c95229a5a 28-33
+example/src/pages/Modal.tsx
+  s_7051126e04ac51::t_59822991b59161 1-87
+packages/components/lib/Menu/styles.ts
+  s_7051126e04ac51::t_8e13166d29ab24 64
+packages/components/lib/Alert/index.tsx
+  s_7051126e04ac51::t_07ff89031e53da 4
+  s_7051126e04ac51::t_e2cde50876b98f 27-28
+  s_7051126e04ac51::t_9c8ea7b067bb63 59,67
+  s_7051126e04ac51::t_1b667938b023f7 64,66,68-72
+  s_7051126e04ac51::t_cc90557a663f37 1
+  s_7051126e04ac51::t_2569d060373ec0 26,35-38,40-41,43-51
+  s_7051126e04ac51::t_d84f6860c13d3e 55
+  s_7051126e04ac51::t_7a86aaa7325617 74-83,85-92
+packages/competence/src/listDrag.ts
+  s_cc93052f14d10a::t_f7588fa4bd1869 112-132
+  s_cc93052f14d10a::t_b9f055d4cac5d6 86-90,92-94,96,100-105,108
+  s_cc93052f14d10a::t_b6c56793dd9edf 2
+  s_cc93052f14d10a::t_92f58db7bf875d 239,243,249-250
+  s_cc93052f14d10a::t_a0a692f0f7793b 320-323,329-331,333-334
+  s_cc93052f14d10a::t_b04b3e28f0fe35 72-73
+  s_cc93052f14d10a::t_de86271275d4e1 185-189,193,198-199,202-206,210,212-216,218,226-230,232-235
+  s_cc93052f14d10a::t_d381e25feacbaf 52-57,70-71,74-75
+  s_cc93052f14d10a::t_76ae228fb6dce4 207-209,217,221-222,225,231
+  s_cc93052f14d10a::t_fe3f24daeab2a2 47-51
+  s_cc93052f14d10a::t_c29b6ee4549705 1,3-27,30-46,58-69,76-85,133-183,238,240-242,244-248,251-266,268-270,273-280,282,288,290-295,298-314,324-328,335-336
+  s_cc93052f14d10a::t_2d4525b128ddeb 267,271-272,281,296-297
+  s_cc93052f14d10a::t_98b7e841197a6d 283-287,289
+  s_cc93052f14d10a::t_e9cce631c889eb 315-319,332
+  s_cc93052f14d10a::t_16517e74e37172 184,190-192,194-197,200-201,211,236-237
+  s_cc93052f14d10a::t_90f1a3c328f4eb 28-29
+  s_cc93052f14d10a::t_f4a1f4979e81a9 219-220,223-224
+  s_cc93052f14d10a::t_54cfa48b253e32 91,95,97-99,106-107,109-111
+packages/components/types/Result/index.d.ts
+  s_0addb92ad802c6::t_8d9f45960d4087 1-18
+packages/competence/types/dialog.d.ts
+  s_7051126e04ac51::t_b1d945dd221ff9 1-60
+packages/components/types/Modal/styles.d.ts
+  s_7051126e04ac51::t_e406563894c59d 1-28
+packages/components/lib/Message/styles.ts
+  s_7051126e04ac51::t_b2c09998af52b0 39
+  s_7051126e04ac51::t_96c0022bcb7f34 6-7,15-19
+  s_0addb92ad802c6::t_dbd4811767430c 1-5,8-14,20-32,34-35,40-52,57-102
+  s_0addb92ad802c6::t_5ed277b802c07b 33,36-38,53-56
+packages/components/types/Image/PreviewGroup.d.ts
+  s_cc93052f14d10a::t_ad8df5fc210fb2 1-29,31-32
+  s_cc93052f14d10a::t_18215a1065690c 30
+packages/components/lib/Collapse/styles.ts
+  s_cc93052f14d10a::t_8a7ba1a0ab5ca5 109-116,118-126
+  s_cc93052f14d10a::t_c23863581ba54d 160-161
+  s_cc93052f14d10a::t_2d28804cc2ec86 1-108,117,127-159,162-165
+packages/competence/src/popconfirm.test.ts
+  s_0addb92ad802c6::t_b892d73556f25c 1-94
+example/src/router.ts
+  s_7051126e04ac51::t_0b22d3aa671cfe 37
+  s_7051126e04ac51::t_bb6d1623d08e7d 47
+  s_cc93052f14d10a::t_39b61666a1e0c0 48
+  s_0addb92ad802c6::t_f3ad1a0b7857df 31,35-36
+  s_0addb92ad802c6::t_bc80e8f7c0c55a 38
+  s_7051126e04ac51::t_6bc981e3991c82 49
+  s_cc93052f14d10a::t_771ad17c06a917 50
+  s_cc93052f14d10a::t_1af5a724647a8b 51
+  s_7051126e04ac51::t_014343042c6c03 39
+  s_29512fbb2cdfef::t_523ba6b56b3822 52
+  s_29512fbb2cdfef::t_1aa302fd94b6e4 53
+  s_2b37f4cff497a8::t_eb781032a7327f 29
+  s_0addb92ad802c6::t_b31c721c16ac63 40-44
+  s_7051126e04ac51::t_bb64929dbb1ad0 45-46
+example/package.json
+  s_cc93052f14d10a::t_f6d2de00095da0 14,18,28
+  s_29512fbb2cdfef::t_2787f7d897edf1 27
+packages/components/lib/Progress/index.tsx
+  s_0addb92ad802c6::t_9a0a6ab8a11758 172,179
+  s_0addb92ad802c6::t_e839826b663c2c 153-164,170-171,177-178
+  s_0addb92ad802c6::t_e5849e07d8b046 78-81,88
+  s_0addb92ad802c6::t_fc478ff167d5cb 181-182
+  s_0addb92ad802c6::t_201352f565a915 1-77,82-87,89-152,165-169,173-176,180,183-189
+packages/competence/types/list.d.ts
+  s_cc93052f14d10a::t_6130fc16592d53 1-88,96-104
+  s_cc93052f14d10a::t_c4d746d306c017 89-95
+example/src/pages/List.tsx
+  s_cc93052f14d10a::t_e3650c02c72459 171
+  s_cc93052f14d10a::t_8f1caba226c901 1
+  s_cc93052f14d10a::t_3dbe4a49eb89a3 3-4,58-74,116-122,124-132,134-146,149-159,161-164,166-170,172-178,180-182,184-194,197-198,200-218,220-228,230-233,241-259
+  s_cc93052f14d10a::t_5b1a13e5c39f5b 2,5-57,75-115,123,133,147-148,160,165,179,183,195-196,199,234-240
+  s_cc93052f14d10a::t_5c9c7df40549f0 219,229
+example/src/pages/Image.tsx
+  s_cc93052f14d10a::t_cf07342e53ab8a 73-104
+  s_cc93052f14d10a::t_b1d456c2f58818 2,9-14,19-20
+  s_7051126e04ac51::t_d50ecb3a4d5282 1,3-8,15-18,21-72,105-109
+packages/components/types/Spin/index.d.ts
+  s_0addb92ad802c6::t_8d9f45960d4087 1-19,28-29
+  s_0addb92ad802c6::t_34e9febb3a41c6 20-27
+example/src/pages/Message.tsx
+  s_7051126e04ac51::t_3d10c342ed9bce 2
+  s_0addb92ad802c6::t_ef5fabf2c1fddc 1,3-8,10-24,26,40-105,119-123
+  s_7051126e04ac51::t_60ca11c9c9be8d 9
+  s_0addb92ad802c6::t_08a5287c0d8f51 25,27-39
+  s_7051126e04ac51::t_daf5f13bfa2668 108-110,112,118
+  s_7051126e04ac51::t_612e3aa9198b60 106-107,111,113-117
+packages/components/lib/Progress/styles.ts
+  s_0addb92ad802c6::t_6587a2a2c1cf9d 1-25,27-141
+  s_0addb92ad802c6::t_ad803ec6f5daad 26
+packages/competence/types/breakpoint.d.ts
+  s_0addb92ad802c6::t_8d9b480358c65f 3
+packages/components/types/List/index.d.ts
+  s_cc93052f14d10a::t_3ff5d0aa029082 38-43
+  s_cc93052f14d10a::t_f4ddf89f48f0d9 1-37,44-59
+packages/competence/src/listDrag.test.ts
+  s_cc93052f14d10a::t_885df5906459ef 1-4,10-36,40-81,86-91,93,95,97-137,139-142,144-145,147-186
+  s_cc93052f14d10a::t_7d562424d027f1 143,146
+  s_cc93052f14d10a::t_158f8be4388958 82-84,92,94
+  s_cc93052f14d10a::t_f51a20f23bc4d6 138
+  s_cc93052f14d10a::t_cb095c91d7b092 5-9
+  s_cc93052f14d10a::t_e83cd574681a1e 85,96
+  s_cc93052f14d10a::t_407fe5f661834a 37-39
+packages/competence/types/spin.d.ts
+  s_0addb92ad802c6::t_1a1fe211c3b6c1 1-21
+example/src/pages/Card.tsx
+  s_29512fbb2cdfef::t_e9706b51ba3cdd 16,33,48,153
+  s_29512fbb2cdfef::t_93efbb242dad46 60-62,76-77,80-83,85-87
+  s_29512fbb2cdfef::t_8e75294b309423 3-15,22,24-32,34-47,49-59,63-75,78-79,84,88-123,133-152,154-165
+  s_29512fbb2cdfef::t_9f97373907cdf6 1-2
+  s_29512fbb2cdfef::t_4b29d1f128184a 17-21,23
+  s_29512fbb2cdfef::t_9d4e0919618133 124-132
+packages/components/lib/Watermark/index.tsx
+  s_0addb92ad802c6::t_ad2a13f81e2557 26-29,56-59
+  s_0addb92ad802c6::t_334bc782afb691 1-25,30-55,60-77
+packages/components/types/Message/index.d.ts
+  s_0addb92ad802c6::t_4796c53c7c5109 44-45
+  s_0addb92ad802c6::t_13837e74b6b716 1-43,46-47
+packages/competence/src/skeleton.test.ts
+  s_0addb92ad802c6::t_8272ff6f661af5 2-35,37,39-40,42-48
+  s_0addb92ad802c6::t_a636e2b3937b39 1,36,38,41
+packages/components/types/Image/index.d.ts
+  s_cc93052f14d10a::t_ad8df5fc210fb2 36
+  s_7051126e04ac51::t_4a37a8a25751a7 1-35
+packages/competence/types/notification.d.ts
+  s_7051126e04ac51::t_2525d432006ae0 1-107
+packages/components/types/Dropdown/styles.d.ts
+  s_0addb92ad802c6::t_ab0c87d4d240d6 4
+example/src/pages/Alert.tsx
+  s_7051126e04ac51::t_c86d6490263609 70
+  s_7051126e04ac51::t_ebb7f85cad8e5d 7-9
+  s_7051126e04ac51::t_9325e502cd1254 83-94
+packages/competence/src/imageGroup.ts
+  s_cc93052f14d10a::t_9b86a1157b9d26 1-128
+packages/competence/src/badge.ts
+  s_2b37f4cff497a8::t_b8194a9af78038 83-86
+  s_2b37f4cff497a8::t_4e546d5b549f39 70-74
+  s_2b37f4cff497a8::t_72c37215f7d77b 1-69,75-82,87-131
+example/src/pages/Watermark.tsx
+  s_0addb92ad802c6::t_c7ce6bc912659e 1-74
+packages/components/types/Popover/styles.d.ts
+  s_0addb92ad802c6::t_f5f135072836fe 13
+  s_0addb92ad802c6::t_cc5ddf4b1f5964 7-9
+  s_0addb92ad802c6::t_8d5659c643bb84 4
+  s_0addb92ad802c6::t_0affb6be9c79c9 1-3,5-6,10-12,14
+.gitignore
+  h_38a2eb1039bc81 4
+  s_cc93052f14d10a::t_2dcf2b1ed6ca67 3
+package.json
+  s_2b37f4cff497a8::t_a5596e4fab783e 40-42
+packages/competence/src/imageGroup.test.ts
+  s_cc93052f14d10a::t_ff515339fb31dd 1-166
+packages/components/vite.config.ts
+  s_29512fbb2cdfef::t_51a8f0e5772c94 34-38
+  s_29512fbb2cdfef::t_2e26bea37bea70 69
+packages/components/types/List/styles.d.ts
+  s_cc93052f14d10a::t_f4ddf89f48f0d9 1-10,13-15,18
+  s_cc93052f14d10a::t_3ff5d0aa029082 11-12,16-17
+packages/components/types/Message/styles.d.ts
+  s_7051126e04ac51::t_d17386146f8211 7
+  s_0addb92ad802c6::t_13837e74b6b716 1-2,4-6,8-18
+  s_7051126e04ac51::t_76bfd9838d382b 3
+example/src/pages/Drawer.tsx
+  s_7051126e04ac51::t_caa87dab84da73 97
+  s_7051126e04ac51::t_f9f21d1268a960 86
+  s_7051126e04ac51::t_db0693edb7818e 1-81,83,85,98-109
+  s_7051126e04ac51::t_a6f7296fd1ea3d 82
+  s_7051126e04ac51::t_b05f417e3ea974 84,87-96
+packages/components/types/Modal/index.d.ts
+  s_7051126e04ac51::t_e406563894c59d 1-50
+packages/components/types/Calendar/styles.d.ts
+  s_29512fbb2cdfef::t_26a4b2c1bb9650 1-14,16-17,21-49,52-63
+  s_29512fbb2cdfef::t_ac9cbb58d8eef3 15,18-20,50-51
+packages/competence/types/listDrag.d.ts
+  s_cc93052f14d10a::t_119ff158feb577 24-25,41-44,63-64
+  s_cc93052f14d10a::t_f7b034c3dca2e0 45-50,61-62,65-66
+  s_cc93052f14d10a::t_775a201934a681 1-23,26-40,51-60,67-69
+packages/components/types/Descriptions/styles.d.ts
+  s_cc93052f14d10a::t_4515063b912d2c 1-5,13,16,18,21,23-24,28-29,32-34,37,39-42,51-52,54
+  s_ff4ecdee5dd13e::t_a04a7789426fbb 14-15,19-20,31,36,38,53
+  s_cc93052f14d10a::t_3d46376b3085d1 30,35
+  s_cc93052f14d10a::t_7aebd68b8e2ed7 12,17,22,25-27,44-50
+  s_ff4ecdee5dd13e::t_d84422d3d60ff8 6-11,43
+packages/components/types/Result/styles.d.ts
+  s_0addb92ad802c6::t_8d9f45960d4087 1-18
+packages/components/types/Notification/styles.d.ts
+  s_7051126e04ac51::t_d17386146f8211 6
+  s_7051126e04ac51::t_636371068f57b9 1-5,7-38
+packages/competence/src/index.ts
+  s_cc93052f14d10a::t_92639a7ce95cbb 27
+  s_2b37f4cff497a8::t_a4fee29974c13b 18
+  s_cc93052f14d10a::t_aa5dccb327cb4d 28
+  s_7051126e04ac51::t_b2bf9163dd4610 23
+  s_0addb92ad802c6::t_47be58938285d7 20
+  s_0addb92ad802c6::t_265b56e9eb73f4 16-17,19
+  s_29512fbb2cdfef::t_c9d0665a03df58 29-30
+  s_7051126e04ac51::t_3420bea57c57a7 21
+  s_0addb92ad802c6::t_5b3ef488f7681f 14-15
+  s_cc93052f14d10a::t_f6037216eb02fc 26
+  s_7051126e04ac51::t_1261760fcbad8e 22
+  s_cc93052f14d10a::t_6717480e16f382 25
+  s_7051126e04ac51::t_22aaac47cde3fe 24
+packages/components/types/Watermark/index.d.ts
+  s_0addb92ad802c6::t_8c375e21a098d3 22-25
+  s_0addb92ad802c6::t_8d9f45960d4087 1-21,26-31
+packages/competence/types/skeleton.d.ts
+  s_0addb92ad802c6::t_1a1fe211c3b6c1 1-41
+packages/components/types/_dialogStack.d.ts
+  s_7051126e04ac51::t_57784af9971625 1-26
+packages/components/lib/Avatar/index.tsx
+  s_cc93052f14d10a::t_2382a845ae3b59 81-85,94
+  s_cc93052f14d10a::t_b4d41a48a31451 183-186,195
+  s_cc93052f14d10a::t_4a1441db0630e5 1-2
+packages/competence/types/calendar.d.ts
+  s_29512fbb2cdfef::t_42704c6af7c7e4 1-67
+packages/components/types/Tooltip/index.d.ts
+  s_0addb92ad802c6::t_0affb6be9c79c9 1-30
+packages/components/types/Badge/styles.d.ts
+  s_2b37f4cff497a8::t_e51bc99a458630 1-34
+packages/components/types/Descriptions/index.d.ts
+  s_ff4ecdee5dd13e::t_d84422d3d60ff8 57-62
+  s_cc93052f14d10a::t_774b519bf0ab85 1-5,7-9,13-37,39-45,47,49-56,63-64
+  s_cc93052f14d10a::t_55cc62cb269a36 6,10-12,38,46,48
+packages/components/types/Card/styles.d.ts
+  s_29512fbb2cdfef::t_475ddd26f1a86d 12
+  s_29512fbb2cdfef::t_f60c7164ca89d8 1-11,13,20,22-34,36,38-43,46-52
+  s_29512fbb2cdfef::t_66289b4e9d1cf5 17-19,21,37,45
+  s_29512fbb2cdfef::t_8d43f7e85a259a 14-16,35,44
+packages/competence/src/calendar.test.ts
+  s_29512fbb2cdfef::t_4f782bb2a8da19 1-199
+packages/components/lib/Message/index.tsx
+  s_7051126e04ac51::t_dcd7be5a03f15d 121-123,125,129
+  s_7051126e04ac51::t_872e8d155a51c5 131-133
+  s_7051126e04ac51::t_7d8f2010307b30 29-35,38-39,53-55,57-59,61
+  s_0addb92ad802c6::t_6b5d1bd93042f6 138-140,142-144,146,151-152
+  s_7051126e04ac51::t_2d25cffd7fb057 69-84
+  s_7051126e04ac51::t_62fd69f40f2d18 56,60,62-67
+  s_7051126e04ac51::t_0c0c7d25108a90 104-113
+  s_7051126e04ac51::t_95b53d2f6d745a 95-97,100
+  s_7051126e04ac51::t_29492f0348e56f 159-164,167-168
+  s_7051126e04ac51::t_4ac4ff19050683 88-94,98-99,101
+  s_0addb92ad802c6::t_86d7abaaf751d3 177,212-213
+  s_7051126e04ac51::t_95959db9ebcef5 1
+  s_0addb92ad802c6::t_ec58211b69b5d9 192
+  s_7051126e04ac51::t_0c9374859d7f07 147-149,155,170
+  s_0addb92ad802c6::t_384ed9f6f9422c 2-28,40-52,68,85-87,102-103,114-120,124,126-128,136-137,141,145,150,153-154,156-158,165-166,169,171-176,178-191,193-211,214-216
+  s_0addb92ad802c6::t_2b7502c8cddeac 130,134-135
+  s_7051126e04ac51::t_fc0fcc91c9fe64 36-37
+packages/components/lib/Button/index.tsx
+  s_7051126e04ac51::t_501fe2a519cf3b 70
+  s_7051126e04ac51::t_3ede1dad2a3b23 41-45
+  s_7051126e04ac51::t_e59539b412f51a 111
+example/src/pages/Collapse.tsx
+  s_cc93052f14d10a::t_53eccd9696f7a0 11-15
+  s_cc93052f14d10a::t_ba97a9e22892db 115,117-125,127-128
+  s_cc93052f14d10a::t_74dbfce32e7bbb 2
+  s_cc93052f14d10a::t_45d723227e9b74 54,62,74,88,100,106,113,138
+  s_cc93052f14d10a::t_62b31b070e611e 1,3-10,16-53,55-61,63-73,75-87,89-99,101,103-105,107-112,114,116,126,129-137,139-151
+  s_cc93052f14d10a::t_f6271c15734b3b 102
+packages/components/lib/Carousel/styles.ts
+  s_cc93052f14d10a::t_28383f97dce414 45-47
+  s_7051126e04ac51::t_44345403b7e9f0 1-10,15-23,30,32-34,37-41,48-49,51-61,66-76,80,82-84,86,91-92,105-107,110-111,113-117,125-126,134-151
+  s_7051126e04ac51::t_b132c38ca04096 11-14,24-29,31,35-36,42-44,50,62-65,77-79,81,85,87-90,93-104,108-109,112,118-124,127-133,152-153
+packages/competence/src/dialog.ts
+  s_7051126e04ac51::t_de3310e8203790 155-160,163-166,168-172,176
+  s_7051126e04ac51::t_f0d4320be0fe02 1-154,161-162,167,173-175,177-204
+packages/components/types/Carousel/styles.d.ts
+  s_7051126e04ac51::t_0985a3b1326f0e 1-4,6-8,10-13,15-17,19-27,30
+  s_7051126e04ac51::t_ad226231ba1325 5,9,14,18,28-29
+packages/components/lib/Drawer/index.tsx
+  s_7051126e04ac51::t_f2e47a484a3201 130-139,141-146
+  s_cc93052f14d10a::t_4ed6ac3117c74c 260-261,264,267-269
+  s_7051126e04ac51::t_5e37c27f409b0f 10
+  s_7051126e04ac51::t_ef79c321cfd459 1
+  s_7051126e04ac51::t_1af0fc6ef80ab0 14-17,46-51
+  s_7051126e04ac51::t_8d61c0f3f7b828 211-216,222,224
+  s_7051126e04ac51::t_ca04b4f4bd17c6 109-117
+  s_7051126e04ac51::t_8004ef48adba46 210,218
+  s_7051126e04ac51::t_46a8feb96780b3 251
+  s_7051126e04ac51::t_a0e6405922b881 209,217,219-220,223,225-226
+  s_7051126e04ac51::t_38172455145d55 221
+  s_7051126e04ac51::t_313ceeb627abe0 140
+  s_7051126e04ac51::t_1064c1080b5e8b 250
+  s_7051126e04ac51::t_c6f9d37e7bba3b 2-9,11-13,18-45,52-97,127-129,147-208,227-249,252-259,262-263,265-266,270-295
+  s_7051126e04ac51::t_f834c3758cf2e5 98-100,123-126
+  s_7051126e04ac51::t_714bc413388c6e 101-108,118-122
+packages/components/types/Notification/index.d.ts
+  s_7051126e04ac51::t_636371068f57b9 1-56
+packages/components/lib/Skeleton/styles.ts
+  s_0addb92ad802c6::t_06cdac959e0d99 6-7,20-22
+  s_0addb92ad802c6::t_ddcad3e1fd8b4c 25-27
+  s_0addb92ad802c6::t_0302bb3a316a83 40,57-58,60,70-71,80
+  s_0addb92ad802c6::t_f76637dfda7426 41-43,45-54
+  s_0addb92ad802c6::t_08c276f149d714 1-5,8-19,23-24,28-39,44,55-56,59,61-69,72-79,81-101
+packages/competence/src/list.test.ts
+  s_cc93052f14d10a::t_6cb50a1fe62449 147-150,152-153,158-165
+  s_cc93052f14d10a::t_1fe2c3d4cbaf1e 151,167
+  s_cc93052f14d10a::t_1b90a34b25b3a9 267-272,274,288-289,293-294
+  s_cc93052f14d10a::t_9074b937444bf6 123-127,133-134,136-141,143
+  s_cc93052f14d10a::t_aa3b961e774d79 1-122,128-132,142,144-146,154-157,166,168-266,273,275-287,290-292,295-369
+  s_cc93052f14d10a::t_82de70b3f62c76 135
+packages/components/types/Calendar/index.d.ts
+  s_29512fbb2cdfef::t_26a4b2c1bb9650 1-62
+packages/components/lib/Notification/styles.ts
+  s_7051126e04ac51::t_269007526bfdf1 134
+  s_7051126e04ac51::t_652749c14d2462 40,69
+  s_7051126e04ac51::t_33b771906a98d7 1-39,41-68,70-133,135-188
+packages/components/types/Collapse/index.d.ts
+  s_cc93052f14d10a::t_a81cda60cac2e8 1-51
+packages/components/unocss.config.ts
+  s_7051126e04ac51::t_58e41ef0c12fd1 9,11-14
+  s_7051126e04ac51::t_86f2fcb96b2f67 15-21
+  s_7051126e04ac51::t_8c00cad34fa4bd 10
+packages/competence/src/button.ts
+  s_7051126e04ac51::t_36be9d3ffb7152 98-99
+packages/components/types/Alert/styles.d.ts
+  s_7051126e04ac51::t_d17386146f8211 6-7,23-25,32
+  s_7051126e04ac51::t_905f2cc4877a31 8-10,27
+packages/competence/src/image.test.ts
+  s_cc93052f14d10a::t_d5527955a156e6 69
+  s_7051126e04ac51::t_a89083448980ab 81
+  s_7051126e04ac51::t_7080b882ab3132 1,83,87,89-90
+  s_7051126e04ac51::t_42b633464c462e 79-80
+  s_cc93052f14d10a::t_d1ac10546cda75 6,9-10
+  s_7051126e04ac51::t_434d0b5e364a08 2-5,7-8,11-28,30,33-35,44,50-53,55-58,60,74-78,82,84-86,88,91-164
+  s_7051126e04ac51::t_09c6bae81ad3dd 29,31-32,36-43,45-49,54,59,61-68,70-73
+packages/components/lib/Calendar/index.tsx
+  s_29512fbb2cdfef::t_55edfb05699b37 8
+  s_29512fbb2cdfef::t_69496d77dc9a5a 1-6,9-11,16-141,146-236,242-252,257-262,269-272,274-283,290-293,304-312,314-320,327-336,343-365,384-406
+  s_29512fbb2cdfef::t_a4c0337ab6ca2b 313,321-326,337-342
+  s_29512fbb2cdfef::t_37526223be57a0 241
+  s_29512fbb2cdfef::t_613454a19d6827 294-298,300
+  s_29512fbb2cdfef::t_2cf3f49af759b4 299,301-303
+  s_29512fbb2cdfef::t_0411acb28a9461 366-377,380
+  s_29512fbb2cdfef::t_335c4263f3058c 12
+  s_29512fbb2cdfef::t_e521d48737ccc8 237-240
+  s_29512fbb2cdfef::t_1eb4fb074e00ba 253-256,263-268,273,284-289
+  s_29512fbb2cdfef::t_d56eac761b32ae 145
+  s_29512fbb2cdfef::t_fe2d8f2d2aba0c 142-144
+  s_29512fbb2cdfef::t_93bdfd904fe844 378-379,381-383
+  s_29512fbb2cdfef::t_7026816919ff58 13-15
+  s_29512fbb2cdfef::t_7654865824eff0 7
+packages/components/types/Tooltip/styles.d.ts
+  s_0addb92ad802c6::t_0affb6be9c79c9 1-3,5-7,9
+  s_0addb92ad802c6::t_8d5659c643bb84 4
+  s_0addb92ad802c6::t_f5f135072836fe 8
+packages/components/types/Skeleton/styles.d.ts
+  s_0addb92ad802c6::t_b7dfc93c2b4d32 7-9
+  s_0addb92ad802c6::t_8d9f45960d4087 1-6,10-22
+example/src/pages/Skeleton.tsx
+  s_0addb92ad802c6::t_72f9500a0d8a90 1
+  s_0addb92ad802c6::t_757b0f8ce91e44 9-10
+  s_0addb92ad802c6::t_8c4ba5e5bf5921 2
+  s_0addb92ad802c6::t_25e475ba3cbdde 3-8,11-71
+packages/components/types/Spin/styles.d.ts
+  s_0addb92ad802c6::t_8d9f45960d4087 1-22
+packages/components/lib/Notification/index.tsx
+  s_7051126e04ac51::t_729694df2838d6 189-191,204,207,227
+  s_7051126e04ac51::t_90b10cead3283a 237
+  s_cc93052f14d10a::t_dab88f9f78af57 267-268,271,274-276
+  s_7051126e04ac51::t_dcf420bd4965db 1-188,192-203,205-206,208-226,228-236,238-266,269-270,272-273,277-325
+packages/competence/src/trigger.ts
+  s_0addb92ad802c6::t_be329bbbb6aa63 36-37
+  s_0addb92ad802c6::t_2f17f8efa1bb0b 207-208
+  s_0addb92ad802c6::t_9ffc23a419371f 597-598,607
+  s_0addb92ad802c6::t_2caddec415184b 246-252
+  s_0addb92ad802c6::t_689ddb617301c0 581
+  s_0addb92ad802c6::t_f9f15ff23dd28b 73-80
+  s_0addb92ad802c6::t_3608fd8613404a 264
+  s_0addb92ad802c6::t_1d2af21a4943c9 518
+  s_0addb92ad802c6::t_222346eda3de50 334-336,338,351,360
+  s_0addb92ad802c6::t_9ccd76d5428eda 48-56
+  s_0addb92ad802c6::t_1b38fde571fbea 259-263,265
+  s_0addb92ad802c6::t_d7ea1abe9610ad 253
+  s_0addb92ad802c6::t_3b59a876a888c3 161,164,169-195,201-204,213-214,216-228,230-236,238-239
+  s_0addb92ad802c6::t_4e2179eb324ae6 90-95,98-101,114-132,134-151
+  s_0addb92ad802c6::t_08b038fbc06ea6 279
+  s_0addb92ad802c6::t_cd80f2772c8bf6 1
+  s_0addb92ad802c6::t_ce1bb0d48521af 577-580,599-600,608
+  s_0addb92ad802c6::t_1ac39f1cca062b 287-292,313-326
+  s_0addb92ad802c6::t_f84695fa9a27e8 478
+  s_0addb92ad802c6::t_2f07aa70a5f485 346-349,353,366
+  s_0addb92ad802c6::t_1d8fd457bb0dd4 545-546,548
+  s_0addb92ad802c6::t_c73850b70fa0f3 337
+  s_0addb92ad802c6::t_153cd73a65bc3b 18-19
+  s_0addb92ad802c6::t_50200fce4a3eed 564-570
+  s_0addb92ad802c6::t_b00f85f7600005 196,198-200,205-206,209-212,215,229,237,240-241
+  s_0addb92ad802c6::t_b37acdad4e2679 38-47
+  s_0addb92ad802c6::t_bc4fc183a9b1fb 430-437,440
+  s_0addb92ad802c6::t_65e7c3378a8032 344,350,352,354-358,361-365,369-385
+  s_0addb92ad802c6::t_917cd14eb8ef2d 395-398
+  s_0addb92ad802c6::t_09fbab1ed6082b 268-271
+  s_0addb92ad802c6::t_6ff15a2705d132 541-543
+  s_2b37f4cff497a8::t_c2d3e701414a3d 197,345
+packages/competence/src/drag.test.ts
+  s_cc93052f14d10a::t_ce7d6d485a4b79 3,7-8,10-27,29-30,35,38-40,42-46,51,53-60,62-65,70,72-80,82-87,91,93-94,96-98,100-107,112,114-120,122-125,129,131-132,134-153,158,160-163,165-168,172,174-175,177-181,183-187,192,194-198,200-201,206,208-209,211,213
+  s_cc93052f14d10a::t_6b36d5a60159f6 212
+  s_cc93052f14d10a::t_386d10b5cb6e06 2,4-6,9,28,31-34,36-37,41,47-50,52,61,66-69,71,81,88-90,92,95,99,108-111,113,121,126-128,130,133,154-157,159,164,169-171,173,176,182,188-191,193,199,202-205,207,210,214-217
+  s_cc93052f14d10a::t_f917b3cafa7f89 1
+packages/components/types/Skeleton/index.d.ts
+  s_0addb92ad802c6::t_8d9f45960d4087 1-28
+packages/competence/types/image.d.ts
+  s_cc93052f14d10a::t_4f2ee4a92c6414 23-27
+  s_7051126e04ac51::t_1f214e98b735b5 1-22,28-71
+packages/components/lib/Popover/index.tsx
+  s_0addb92ad802c6::t_5fb9a8ce88c044 77-80,88-90
+  s_0addb92ad802c6::t_5147be9eebd754 75
+  s_0addb92ad802c6::t_41d5da76a605db 2-3
+  s_0addb92ad802c6::t_3c1a15e8ca1c21 49
+  s_0addb92ad802c6::t_5b48c726ce6249 81-87
+  s_0addb92ad802c6::t_82a81f32bf717f 61-74,76,91-92
+  s_0addb92ad802c6::t_53a94019696bf0 4
+  s_0addb92ad802c6::t_7049e674584536 1,5-48,50-60,93-98
+example/src/pages/Popover.tsx
+  s_0addb92ad802c6::t_1506c11cba1c22 43-48
+  s_0addb92ad802c6::t_b15dcc7575fef8 1-42,49-81
+example/src/pages/Descriptions.tsx
+  s_cc93052f14d10a::t_1a7269ce1b04d7 1
+  s_cc93052f14d10a::t_1684dadbfc8794 12-16,20-37,40-45,54,64-68,74,76,79,89,92,97-106,111,115,121,124-125,130,166,179,185
+  s_cc93052f14d10a::t_d3a81bfc50d492 2
+  s_cc93052f14d10a::t_1672250d845a24 3-11,17-19,38-39,46-53,55-63,69-73,75,77-78,80-88,90-91,93-96,107-110,112-114,116-120,122-123,126-129,131-165,167-178,180-184,186-200,202-224
+  s_cc93052f14d10a::t_8b52d53f402d5f 201
+example/src/App.tsx
+  s_0addb92ad802c6::t_fdd74589e1f321 53-55,57-59
+  s_0addb92ad802c6::t_7240902129cde0 6
+  s_7051126e04ac51::t_ace460b2a53933 56
+  s_7051126e04ac51::t_ab8fdfbfb10423 4
+packages/components/types/Popconfirm/index.d.ts
+  s_0addb92ad802c6::t_0affb6be9c79c9 1-41
+packages/competence/src/trigger.test.ts
+  s_0addb92ad802c6::t_47ac0138248cfa 277-308,344-355,363
+  s_0addb92ad802c6::t_7b8a7de395d3ed 437-446,448-466
+  s_0addb92ad802c6::t_3b44520e82e3ee 309-343
+  s_0addb92ad802c6::t_30bb3e62fd1777 356-362
+  s_0addb92ad802c6::t_01eb1ed0e9c106 447
+  s_0addb92ad802c6::t_523d42ecfd942c 167-215,221-222,225-235
+  s_0addb92ad802c6::t_dd78bf9f0ee105 25-29,34
+  s_0addb92ad802c6::t_f44ac3ceaf0a05 244,252,264,272
+  s_0addb92ad802c6::t_5b892869e44d12 378,402-404
+  s_0addb92ad802c6::t_890d44f29ea9ae 220,224
+  s_0addb92ad802c6::t_e0cc58adbe920d 366-377,379-401,405-436
+  s_0addb92ad802c6::t_acebd5e7404245 216-219,223
+  s_0addb92ad802c6::t_c7f2c5e15014fa 2-5
+  s_0addb92ad802c6::t_5ada8a501ba8fe 7
+  s_0addb92ad802c6::t_e3bff0087ef65f 236-243,245-251,253-263,265-271,273-276,364-365
+packages/competence/src/carousel.ts
+  s_7051126e04ac51::t_0e9d38dfdfe88d 86,92-93
+  s_7051126e04ac51::t_9c1f6aec8b1fa6 87-91
+  s_7051126e04ac51::t_96d70db927ba9d 1-74,95-96,98-106,108,111-113,115,118-120,122,125-140,146-152
+  s_7051126e04ac51::t_bbd8172d831960 75-85,94,97,107,109-110,114,116-117,121,123-124
+  s_7051126e04ac51::t_571e7211d70a7e 141-145
+packages/components/lib/Image/styles.ts
+  s_cc93052f14d10a::t_e15b8605b14425 111-112,121-162
+  s_cc93052f14d10a::t_81ad22911efe15 187-190,199-200
+  s_7051126e04ac51::t_7eef6d297e7a5c 1-55,58-60,62-96,100-103,105-110,113-117,119-120,163-186,191-198
+  s_7051126e04ac51::t_a28bc032b78daa 104,118
+  s_cc93052f14d10a::t_8a820cdf182b43 97-99
+  s_7051126e04ac51::t_7dc954f61abc2f 56-57,61
+packages/competence/src/tooltip.ts
+  s_0addb92ad802c6::t_d562f2316ed622 1-48,50-69
+  s_0addb92ad802c6::t_01c082711334ab 49
+pnpm-lock.yaml
+  s_29512fbb2cdfef::t_1f3d7b7ef00d71 14-17,58-60,68-70,101-103,123-125,326-328,812-814,1551-1554,1964-1965
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.0",
+  "base_commit_sha": "488ba15dd19e1dbfaa5e468277cde57853f348aa",
+  "prompts": {},
+  "humans": {
+    "h_38a2eb1039bc81": {
+      "author": "pk111and222 <pk111and222@sina.cn>"
+    }
+  },
+  "sessions": {
+    "s_0addb92ad802c6": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "5eb0a1f5-3edc-4794-b6be-926651985976",
+        "model": "GLM-5.3-joybuilder"
+      },
+      "human_author": null
+    },
+    "s_29512fbb2cdfef": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "bdde09d2-4fea-4b98-9dc5-b7a418605f5a",
+        "model": "GLM-5.3-joybuilder"
+      },
+      "human_author": "pk111and222 <pk111and222@sina.cn>"
+    },
+    "s_2b37f4cff497a8": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "67238fd2-6360-46bf-aac7-d06a0fa04153",
+        "model": "GLM-5.3-joybuilder"
+      },
+      "human_author": "pk111and222 <pk111and222@sina.cn>"
+    },
+    "s_7051126e04ac51": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "bd7ccddc-3e0b-4b76-b795-dba2943256f5",
+        "model": "GLM-5.3-joybuilder"
+      },
+      "human_author": null
+    },
+    "s_cc93052f14d10a": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "fc714893-396e-4a2d-bea6-9c28120a5a5d",
+        "model": "GLM-5.3-joybuilder"
+      },
+      "human_author": "pk111and222 <pk111and222@sina.cn>"
+    },
+    "s_ff4ecdee5dd13e": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "97a6b12e-b53d-46f4-9ec0-9352dde380cb",
+        "model": "GLM-5.3-joybuilder"
+      },
+      "human_author": "pk111and222 <pk111and222@sina.cn>"
+    }
+  }
+}
