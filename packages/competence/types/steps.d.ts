@@ -13,7 +13,7 @@ export type StepsConfig = {
     status?: StepStatus;
     onChange?: (current: number) => void;
     /**
-     * Navigation guard for clicks (antd semantics): clicks may only move
+     * Navigation guard for clicks: clicks may only move
      * BACKWARD to a finished step or stay on/step to the current one — never
      * jump forward past an unfinished step. Set false to allow free jumping.
      */

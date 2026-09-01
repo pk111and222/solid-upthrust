@@ -95,7 +95,8 @@ export const createButton = (config: ButtonConfig = {}) => {
   return {
     loading: getRealLoading,
     waveActive: _waveActive,
-    disabled: config.disabled,
+    /** Reactive disabled getter — reads through the props proxy so updates flow. */
+    disabled: () => !!config.disabled,
     button,
     anchor,
     refs

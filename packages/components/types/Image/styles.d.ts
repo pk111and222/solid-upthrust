@@ -1,0 +1,42 @@
+import { VariantProps } from 'class-variance-authority';
+declare const imageWrapperVariants: (props?: ({} & import('class-variance-authority/types').ClassProp) | undefined) => string;
+declare const imageImgVariants: (props?: ({
+    interactive?: boolean | null | undefined;
+} & import('class-variance-authority/types').ClassProp) | undefined) => string;
+declare const imagePlaceholderVariants: (props?: ({} & import('class-variance-authority/types').ClassProp) | undefined) => string;
+declare const imageErrorVariants: (props?: ({} & import('class-variance-authority/types').ClassProp) | undefined) => string;
+declare const imageMaskVariants: (props?: ({} & import('class-variance-authority/types').ClassProp) | undefined) => string;
+declare const imagePreviewVariants: (props?: ({
+    visible?: boolean | null | undefined;
+} & import('class-variance-authority/types').ClassProp) | undefined) => string;
+declare const imagePreviewImgVariants: (props?: ({} & import('class-variance-authority/types').ClassProp) | undefined) => string;
+declare const imagePreviewToolbarVariants: (props?: ({} & import('class-variance-authority/types').ClassProp) | undefined) => string;
+declare const imagePreviewOpVariants: (props?: ({} & import('class-variance-authority/types').ClassProp) | undefined) => string;
+declare const imagePreviewCloseVariants: (props?: ({} & import('class-variance-authority/types').ClassProp) | undefined) => string;
+declare const imagePreviewArrowVariants: (props?: ({
+    side?: "left" | "right" | null | undefined;
+    disabled?: boolean | null | undefined;
+} & import('class-variance-authority/types').ClassProp) | undefined) => string;
+declare const imagePreviewCountVariants: (props?: ({} & import('class-variance-authority/types').ClassProp) | undefined) => string;
+export declare const imageWrapperClass: (variants: VariantProps<typeof imageWrapperVariants>) => string;
+export declare const imageImgClass: (variants: VariantProps<typeof imageImgVariants>) => string;
+export declare const imagePlaceholderClass: (variants: VariantProps<typeof imagePlaceholderVariants>) => string;
+export declare const imageErrorClass: (variants: VariantProps<typeof imageErrorVariants>) => string;
+export declare const imageMaskClass: (variants: VariantProps<typeof imageMaskVariants>) => string;
+export declare const imagePreviewClass: (variants: VariantProps<typeof imagePreviewVariants>) => string;
+export declare const imagePreviewImgClass: (variants: VariantProps<typeof imagePreviewImgVariants>) => string;
+export declare const imagePreviewToolbarClass: (variants: VariantProps<typeof imagePreviewToolbarVariants>) => string;
+export declare const imagePreviewOpClass: (variants: VariantProps<typeof imagePreviewOpVariants>) => string;
+export declare const imagePreviewCloseClass: (variants: VariantProps<typeof imagePreviewCloseVariants>) => string;
+export declare const imagePreviewArrowClass: (variants: VariantProps<typeof imagePreviewArrowVariants>) => string;
+export declare const imagePreviewCountClass: (variants: VariantProps<typeof imagePreviewCountVariants>) => string;
+export declare const IMAGE_ERROR_ICON = "i-mdi-image-broken-variant";
+export declare const IMAGE_MASK_ICON = "i-mdi-eye-outline";
+export declare const IMAGE_ZOOM_IN_ICON = "i-mdi-magnify-plus-outline";
+export declare const IMAGE_ZOOM_OUT_ICON = "i-mdi-magnify-minus-outline";
+export declare const IMAGE_ROTATE_LEFT_ICON = "i-mdi-rotate-left";
+export declare const IMAGE_ROTATE_RIGHT_ICON = "i-mdi-rotate-right";
+export declare const IMAGE_CLOSE_ICON = "i-mdi-close";
+export declare const IMAGE_CHEVRON_LEFT_ICON = "i-mdi-chevron-left";
+export declare const IMAGE_CHEVRON_RIGHT_ICON = "i-mdi-chevron-right";
+export {};

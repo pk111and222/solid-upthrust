@@ -61,7 +61,7 @@ const menuSubPopupVariants = cva(
     "rounded-lg", "shadow", "py-1",
     // Only opacity/scale — position changes come from createTrigger and must
     // never animate (transition-all would make the popup fly across screen).
-    "transition-[opacity,transform]", "duration-fast", "ease-upthrust", "origin-top-left",
+    "transition-overlay", "duration-fast", "ease-upthrust", "origin-top-left",
   ],
   {
     variants: {

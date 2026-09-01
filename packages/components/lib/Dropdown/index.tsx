@@ -137,45 +137,47 @@ const Dropdown: Component<DropdownProps> = (rawProps) => {
         {props.children}
       </div>
       <Portal>
-        <div
-          ref={(el) => { trigger.layerRef(el); trigger.bindLayerHover() }}
-          class={twMerge(
-            dropdownOverlayClass({ visible: trigger.open(), placement: trigger.actualPlacement() }),
-            props.overlayClass
-          )}
-          style={{ ...trigger.layerStyle(), ...props.overlayStyle }}
-          role="menu"
-          tabindex={-1}
-          onKeyDown={handleOverlayKeyDown}
-        >
-          <For each={props.menu.items}>
-            {(item) => (
-              <Show
-                when={item.type !== 'divider'}
-                fallback={<div class={dropdownDividerClass({})} />}
-              >
-                <div
-                  ref={(el) => registerItem(el, enabledItems().indexOf(item))}
-                  class={dropdownItemClass({
-                    disabled: item.disabled,
-                    danger: item.danger,
-                    focused: enabledItems()[focusIndex()] === item,
-                  })}
-                  tabindex={-1}
-                  role="menuitem"
-                  aria-disabled={item.disabled ? 'true' : undefined}
-                  onClick={() => handleItemClick(item)}
-                  onMouseEnter={() => setFocusIndex(enabledItems().indexOf(item))}
-                >
-                  <Show when={item.icon}>
-                    <span class={item.icon} />
-                  </Show>
-                  {item.label}
-                </div>
-              </Show>
+        <Show when={trigger.mounted()}>
+          <div
+            ref={(el) => { trigger.layerRef(el); trigger.bindLayerHover() }}
+            class={twMerge(
+              dropdownOverlayClass({ visible: trigger.open(), placement: trigger.actualPlacement() }),
+              props.overlayClass
             )}
-          </For>
-        </div>
+            style={{ ...trigger.layerStyle(), ...props.overlayStyle }}
+            role="menu"
+            tabindex={-1}
+            onKeyDown={handleOverlayKeyDown}
+          >
+            <For each={props.menu.items}>
+              {(item) => (
+                <Show
+                  when={item.type !== 'divider'}
+                  fallback={<div class={dropdownDividerClass({})} />}
+                >
+                  <div
+                    ref={(el) => registerItem(el, enabledItems().indexOf(item))}
+                    class={dropdownItemClass({
+                      disabled: item.disabled,
+                      danger: item.danger,
+                      focused: enabledItems()[focusIndex()] === item,
+                    })}
+                    tabindex={-1}
+                    role="menuitem"
+                    aria-disabled={item.disabled ? 'true' : undefined}
+                    onClick={() => handleItemClick(item)}
+                    onMouseEnter={() => setFocusIndex(enabledItems().indexOf(item))}
+                  >
+                    <Show when={item.icon}>
+                      <span class={item.icon} />
+                    </Show>
+                    {item.label}
+                  </div>
+                </Show>
+              )}
+            </For>
+          </div>
+        </Show>
       </Portal>
     </div>
   )

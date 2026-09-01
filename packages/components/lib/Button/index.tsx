@@ -38,7 +38,11 @@ const TYPE_MAP: Record<ButtonType, { variant: ButtonVariant; color: ButtonColor 
 }
 
 const Button: Component<ButtonProps> = (props = {}) => {
-  const {loading, disabled = false, waveActive, button, anchor, refs} = createButton(props as any)
+  const {loading, waveActive, button, anchor, refs} = createButton(props as any)
+  // `disabled` must be read through the props proxy on every evaluation — the
+  // competence layer snapshots config.disabled at call time, so a destructured
+  // copy would freeze the mount-time value and never react to updates.
+  const disabled = () => !!props.disabled
 
   const resolvedVariant = createMemo((): ButtonVariant => {
     if (props.variant) return props.variant
@@ -63,7 +67,7 @@ const Button: Component<ButtonProps> = (props = {}) => {
     colorScheme: colorScheme(),
     size: props.size || 'middle',
     shape: props.shape || 'default',
-    disabled: !!disabled,
+    disabled: disabled(),
     ghost: props.ghost || false,
     block: props.block || false,
     loading: loading(),
@@ -104,7 +108,7 @@ const Button: Component<ButtonProps> = (props = {}) => {
   )
 
   return (
-    <button ref={button} class={buttonClass(_styleChoice())} disabled={!!disabled}>
+    <button ref={button} class={buttonClass(_styleChoice())} disabled={disabled()}>
       {content}
       <Show when={_needsWave() && waveActive()}>
         <span class={waveClass({ active: true })} style={{ color: 'inherit' }} />

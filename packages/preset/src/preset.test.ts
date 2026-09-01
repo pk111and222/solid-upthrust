@@ -52,3 +52,47 @@ describe('createRules token wiring', () => {
   })
 })
 
+
+describe('arbitrary-value transition interceptor', () => {
+  const generate = async (classes: string) => {
+    const uno = await createGenerator({
+      rules: createRules(createSizeTokens(), createStyleTokens()),
+    } as any)
+    const { css } = await uno.generate(classes)
+    return css
+  }
+
+  it('generates a correct rule when the list names translate/scale (wind4 would emit nothing)', async () => {
+    const css = await generate('transition-[opacity,transform,translate,scale]')
+    expect(css).toContain('transition-property:opacity, transform, translate, scale')
+  })
+
+  it('keeps single individual-transform lists working', async () => {
+    const css = await generate('transition-[scale]')
+    expect(css).toContain('transition-property:scale')
+  })
+
+  it('ignores lists without individual transforms so wind4 handles them natively', async () => {
+    const css = await generate('transition-[margin]')
+    // our interceptor defers: the rule body must NOT come from us (no comma-joined
+    // list signature); wind4 in this bare-rules generator also won't fire, so the
+    // class produces nothing here either way — the important part is no bad output.
+    expect(css).not.toContain('transition-property:margin')
+  })
+
+  it('rejects lists with unknown properties (falls back to wind4 behaviour)', async () => {
+    const css = await generate('transition-[opacity,nonsense-prop]')
+    expect(css).not.toContain('nonsense-prop')
+  })
+
+  it('supports rotate in the list', async () => {
+    const css = await generate('transition-[transform,rotate]')
+    expect(css).toContain('transition-property:transform, rotate')
+  })
+
+  it('overlay shorthands emit the full motion property sets', async () => {
+    const css = await generate('transition-overlay transition-overlay-stack')
+    expect(css).toContain('transition-property:opacity, transform, translate, scale')
+    expect(css).toContain('transition-property:opacity, transform, translate, scale, margin, max-height, padding')
+  })
+})

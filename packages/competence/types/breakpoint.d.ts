@@ -1,6 +1,6 @@
 /**
  * Responsive breakpoint constants (px), shared by Sider breakpoint collapsing
- * and Masonry responsive columns. Values follow the antd spec.
+ * and Masonry responsive columns. Values follow standard breakpoint spec.
  */
 export declare const BREAKPOINTS: {
     readonly xs: 480;

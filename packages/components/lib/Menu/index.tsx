@@ -100,15 +100,17 @@ const MenuItemRender: Component<{ item: MenuItem; level?: number }> = (props) =>
                 <span class={`i-mdi-chevron-down text-base transition-transform duration-200 ${ctx.isOpen(props.item.key) ? 'rotate-180' : ''}`} />
               </div>
               <Portal>
-                <div
-                  ref={popup.layerRef}
-                  class={menuSubPopupClass({ open: popup.open() })}
-                  style={popup.layerStyle()}
-                >
-                  <For each={props.item.children}>
-                    {(child) => <MenuItemRender item={child} level={0} />}
-                  </For>
-                </div>
+                <Show when={popup.mounted()}>
+                  <div
+                    ref={popup.layerRef}
+                    class={menuSubPopupClass({ open: popup.open() })}
+                    style={popup.layerStyle()}
+                  >
+                    <For each={props.item.children}>
+                      {(child) => <MenuItemRender item={child} level={0} />}
+                    </For>
+                  </div>
+                </Show>
               </Portal>
             </div>
           </Show>

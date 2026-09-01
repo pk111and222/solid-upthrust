@@ -1,8 +1,9 @@
 import { For, createMemo, Loading, type Component } from 'solid-js';
 import { createRouter, useLocation } from "@solidjs/router";
 import routes, { type AppRoute } from './router';
+import { MessageProvider, NotificationProvider } from 'upthrust-ui';
 
-const categoryOrder = ['通用', '布局', '导航', '数据展示', '其他']
+const categoryOrder = ['通用', '布局', '导航', '数据展示', '反馈', '其他']
 
 const Router = createRouter({ routes })
 
@@ -49,7 +50,13 @@ const Layout: Component<{ children?: any }> = (props) => {
 }
 
 const App: Component = () => {
-  return <Router>{(props) => <Layout>{props.children}</Layout>}</Router>
+  return (
+    <>
+      <MessageProvider />
+      <NotificationProvider />
+      <Router>{(props) => <Layout>{props.children}</Layout>}</Router>
+    </>
+  )
 };
 
 export default App;

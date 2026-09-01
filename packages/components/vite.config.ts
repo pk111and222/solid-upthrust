@@ -31,7 +31,11 @@ export default defineConfig(({ command, mode }) => {
           formats: ['es'],
         },
         rollupOptions: {
-          external: ["solid-js", "solid-js/web", "@solidjs/web", "@solidjs/signals", "upthrust-competence", "class-variance-authority", "tailwind-merge", "clsx", "lodash", /^virtual:/, /\buno\.css$/],
+          // dayjs AND its plugin subpaths must stay external — a bare string
+          // only matches the exact specifier, so `dayjs/plugin/localeData`
+          // would be inlined into dist with a node_modules/.pnpm relative
+          // import no consumer can resolve (same fix as competence).
+          external: ["solid-js", "solid-js/web", "@solidjs/web", "@solidjs/signals", "upthrust-competence", "class-variance-authority", "tailwind-merge", "clsx", "lodash", "qrcode-generator", /^dayjs(\/|$)/, /^virtual:/, /\buno\.css$/],
           output: {
             format: 'es',
             preserveModules: true,
@@ -62,7 +66,7 @@ export default defineConfig(({ command, mode }) => {
       minify: mode === 'watch' ? false : true,
       sourcemap: true,
       rollupOptions: {
-        external: ["solid-js", "solid-js/web", "@solidjs/web", "@solidjs/signals"],
+        external: ["solid-js", "solid-js/web", "@solidjs/web", "@solidjs/signals", "upthrust-competence", "dayjs"],
         output: {
           globals: {
             "solid-js": "Solid",

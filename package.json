@@ -37,5 +37,8 @@
   "engines": {
     "node": ">=18",
     "pnpm": ">=9"
+  },
+  "dependencies": {
+    "dayjs": "^1.11.23"
   }
 }

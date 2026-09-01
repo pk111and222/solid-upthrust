@@ -1,4 +1,5 @@
-import { Component, For, Show, children as resolveChildren, createContext, createEffect, createMemo, createSignal, merge, onCleanup, useContext } from 'solid-js'
+import { Component, For, Show, children as resolveChildren, createContext, createEffect, createMemo, createSignal, merge, useContext } from 'solid-js'
+import { createOwnerCleanup } from 'upthrust-competence'
 import type { JSX } from '@solidjs/web'
 import { avatarClass, avatarGroupClass, avatarGroupItemClass, avatarGroupMoreClass } from './styles'
 
@@ -77,6 +78,11 @@ const Avatar: Component<AvatarProps> = (rawProps) => {
   const [selfVw, setSelfVw] = createSignal(typeof window !== 'undefined' ? window.innerWidth : 1280)
   const vw = () => ctx?.vw() ?? selfVw()
 
+  // Solid 2 (rc) runs the dual-function createEffect's effect callback
+  // under a null owner — onCleanup there warns NO_OWNER_CLEANUP and never
+  // runs. Bind to the owner captured at component creation instead.
+  const onOwnerCleanup = createOwnerCleanup()
+
   // Responsive size needs a resize listener; bind only when actually used
   // (numeric/named sizes never re-resolve, so no listener for them).
   createEffect(
@@ -85,7 +91,7 @@ const Avatar: Component<AvatarProps> = (rawProps) => {
       if (!need || typeof window === 'undefined') return
       const onResize = () => setSelfVw(window.innerWidth)
       window.addEventListener('resize', onResize)
-      onCleanup(() => window.removeEventListener('resize', onResize))
+      onOwnerCleanup(() => window.removeEventListener('resize', onResize))
     },
   )
 
@@ -174,6 +180,10 @@ const AvatarGroup: Component<AvatarGroupProps> = (rawProps) => {
   const props = merge({ shape: 'circle' as const }, rawProps)
   const [vw, setVw] = createSignal(typeof window !== 'undefined' ? window.innerWidth : 1280)
 
+  // Owner-bound cleanup (dual-function effect callbacks run under null
+  // owner in Solid 2 rc — see standalone Avatar above).
+  const onOwnerCleanup = createOwnerCleanup()
+
   // The group owns the viewport signal only when its size form is responsive
   // (object). Fixed sizes never change, so no listener churn.
   createEffect(
@@ -182,7 +192,7 @@ const AvatarGroup: Component<AvatarGroupProps> = (rawProps) => {
       if (!isResponsive || typeof window === 'undefined') return
       const onResize = () => setVw(window.innerWidth)
       window.addEventListener('resize', onResize)
-      onCleanup(() => window.removeEventListener('resize', onResize))
+      onOwnerCleanup(() => window.removeEventListener('resize', onResize))
     },
   )
 

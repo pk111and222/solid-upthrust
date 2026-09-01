@@ -46,6 +46,7 @@
   },
   "license": "MIT",
   "peerDependencies": {
+    "dayjs": "^1.11.0",
     "solid-js": "^2.0.0-rc.0"
   },
   "dependencies": {

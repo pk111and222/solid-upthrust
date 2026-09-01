@@ -43,7 +43,15 @@ const createPreset: PresetFactory<Theme, PresetUpthrustOptions> = (options = {})
     ...switchedTheme,
     name: 'upthrust-unocss-preset',
     theme: {
-      color: {...themeColor},
+      color: {
+        // Native keyword colors wind4's rules reference via CSS variables
+        // (bg-black/85 compiles to color-mix(var(--colors-black) ...)). Our
+        // MD3 palette REPLACES wind4's color theme, so re-register the two
+        // keyword colors or every `bg-black/…` silently resolves to nothing.
+        black: '#000',
+        white: '#fff',
+        ...themeColor,
+      },
       spacing,
       text: {
         'heading-1': { fontSize: sizeTokens.fontSizeHeading1, lineHeight: '1.2105' },
@@ -78,7 +86,18 @@ const createPreset: PresetFactory<Theme, PresetUpthrustOptions> = (options = {})
     preflights: [
       ...(switchedTheme.preflights || []),
       {
-        getCSS: () => `@keyframes wave-spread{0%{box-shadow:0 0 0 0 currentColor;opacity:.35}100%{box-shadow:0 0 0 6px currentColor;opacity:0}}`,
+        // Shared keyframes. Spin: antd's spinner easing — a slightly
+        // off-balance rotate so the loop doesn't read as metronomic.
+        // Skeleton: antd's wave gradient sweep.
+        // Badge processing: antd's status pulse — the dot itself stays put
+        // while an expanding ring fades out (consumed via
+        // `after:animate-badge-processing` on the dot's ::after).
+        getCSS: () => [
+          `@keyframes wave-spread{0%{box-shadow:0 0 0 0 currentColor;opacity:.35}100%{box-shadow:0 0 0 6px currentColor;opacity:0}}`,
+          `@keyframes ut-spin-rotate{0%{transform:rotate(0deg)}50%{transform:rotate(180deg)}100%{transform:rotate(360deg)}}`,
+          `@keyframes ut-skeleton-wave{0%{background-position:100% 50%}100%{background-position:0 50%}}`,
+          `@keyframes ut-badge-processing{0%{transform:scale(0.8);opacity:0.5}100%{transform:scale(2.4);opacity:0}}`,
+        ].join(''),
       },
     ],
     extractors: [

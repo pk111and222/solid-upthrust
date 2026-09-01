@@ -15,7 +15,8 @@ export type ButtonIns = {
 export declare const createButton: (config?: ButtonConfig) => {
     loading: () => boolean;
     waveActive: import('solid-js').SourceAccessor<boolean>;
-    disabled: boolean | undefined;
+    /** Reactive disabled getter — reads through the props proxy so updates flow. */
+    disabled: () => boolean;
     button: (el: HTMLButtonElement) => void;
     anchor: (el: HTMLAnchorElement) => void;
     refs: ButtonIns;

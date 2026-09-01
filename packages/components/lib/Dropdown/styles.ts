@@ -9,7 +9,7 @@ import { twMerge } from "tailwind-merge";
 const dropdownOverlayVariants = cva(
   [
     "bg-surface", "rounded-lg", "shadow", "py-1", "min-w-[120px]",
-    "transition-[opacity,transform]", "duration-fast", "ease-upthrust", "origin-top",
+    "transition-overlay", "duration-fast", "ease-upthrust", "origin-top",
     "outline-none",
   ],
   {
@@ -25,6 +25,12 @@ const dropdownOverlayVariants = cva(
         topLeft: ["origin-bottom-left"],
         topRight: ["origin-bottom-right"],
         top: ["origin-bottom"],
+        leftTop: ["origin-top-right"],
+        leftBottom: ["origin-bottom-right"],
+        left: ["origin-right"],
+        rightTop: ["origin-top-left"],
+        rightBottom: ["origin-bottom-left"],
+        right: ["origin-left"],
       },
     },
     defaultVariants: { visible: false, placement: "bottomLeft" },
