@@ -9,16 +9,16 @@ import { createMemo } from "solid-js";
  */
 
 export type SkeletonBlock = {
-  /** 'title' | 'paragraph' rows have different heights. */
+  /** Distinguishes title spacing from paragraph spacing. */
   kind: 'title' | 'paragraph'
-  /** Width in px; undefined = full width. Last paragraph row is ~60%. */
+  /** Numbers are pixels, strings are CSS lengths; undefined fills the column. */
   width?: number | string
 }
 
 export type SkeletonConfig = {
   loading?: boolean
   active?: boolean
-  /** Round line ends (avatar stays round regardless). */
+  /** Round title and paragraph line ends; avatar uses its own shape. */
   round?: boolean
   title?: boolean | { width?: number | string }
   paragraph?: boolean | { rows?: number; width?: number | string | Array<number | string> }
@@ -32,34 +32,7 @@ export type SkeletonIns = {
 export const createSkeleton = (config: SkeletonConfig = {}) => {
   const loading = createMemo(() => config.loading ?? true)
 
-  /**
-   * Derive the skeleton block list. Pure — exported for tests.
-   * Layout order follows antd: avatar (if any) on the left, then
-   * title + paragraph column on the right.
-   */
-  const blocks = createMemo((): SkeletonBlock[] => {
-    const out: SkeletonBlock[] = []
-    const title = config.title
-    if (title !== false) {
-      out.push({ kind: 'title', width: title === true || title === undefined ? undefined : title.width })
-    }
-    const paragraph = config.paragraph
-    if (paragraph !== false) {
-      const rows = paragraph === true || paragraph === undefined ? 3
-        : paragraph.rows ?? 3
-      const widths = paragraph && paragraph !== true && Array.isArray(paragraph.width)
-        ? paragraph.width
-        : undefined
-      const singleWidth = paragraph && paragraph !== true && !Array.isArray(paragraph.width)
-        ? paragraph.width
-        : undefined
-      for (let i = 0; i < rows; i++) {
-        const w = widths?.[i] ?? singleWidth
-        out.push({ kind: 'paragraph', width: w })
-      }
-    }
-    return out
-  })
+  const blocks = createMemo(() => skeletonBlocks(config))
 
   const refs: SkeletonIns = { loading }
 
@@ -75,7 +48,8 @@ export const skeletonBlocks = (config: SkeletonConfig): SkeletonBlock[] => {
   }
   const paragraph = config.paragraph
   if (paragraph !== false) {
-    const rows = paragraph === true || paragraph === undefined ? 3 : paragraph.rows ?? 3
+    const requestedRows = paragraph === true || paragraph === undefined ? 3 : paragraph.rows ?? 3
+    const rows = Number.isFinite(requestedRows) ? Math.max(0, Math.floor(requestedRows)) : 0
     const widths = paragraph && paragraph !== true && Array.isArray(paragraph.width) ? paragraph.width : undefined
     const singleWidth = paragraph && paragraph !== true && !Array.isArray(paragraph.width) ? paragraph.width : undefined
     for (let i = 0; i < rows; i++) {

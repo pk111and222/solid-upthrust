@@ -1,14 +1,18 @@
-import { Component,  Show, createMemo } from 'solid-js'
+import { useComponentProps } from '../ConfigProvider/context'
+import { Component, Show, createMemo, untrack } from 'solid-js'
 import type { JSX } from '@solidjs/web'
 import type { SizeType } from '../../common/type'
-import { createButton, ButtonIns, type ButtonVariant, type ButtonColor } from 'upthrust-competence'
+import { createButton, type ButtonIns, type ButtonVariant, type ButtonColor } from 'upthrust-competence'
 import { buttonClass, waveClass, type ButtonStyleVariants } from './styles'
 
-type ButtonType = 'primary' | 'link' | 'text' | 'default' | 'dashed'
-type ButtonShape = 'default' | 'circle' | 'round'
+export type ButtonType = 'primary' | 'link' | 'text' | 'default' | 'dashed'
+export type ButtonShape = 'default' | 'circle' | 'round'
 type ColorScheme = `${ButtonVariant}-${ButtonColor}`
 
-export interface ButtonProps {
+export type { ButtonIns, ButtonVariant, ButtonColor } from 'upthrust-competence'
+export interface ButtonProps extends Omit<JSX.ButtonHTMLAttributes<HTMLElement>, 'type' | 'color' | 'onClick' | 'ref' | 'children'> {
+  htmlType?: 'button' | 'submit' | 'reset'
+
   variant?: ButtonVariant
   color?: ButtonColor
   type?: ButtonType
@@ -37,11 +41,9 @@ const TYPE_MAP: Record<ButtonType, { variant: ButtonVariant; color: ButtonColor 
   link: { variant: 'link', color: 'default' },
 }
 
-const Button: Component<ButtonProps> = (props = {}) => {
-  const {loading, waveActive, button, anchor, refs} = createButton(props as any)
-  // `disabled` must be read through the props proxy on every evaluation — the
-  // competence layer snapshots config.disabled at call time, so a destructured
-  // copy would freeze the mount-time value and never react to updates.
+const Button: Component<ButtonProps> = (providedProps = {}) => {
+  const props = useComponentProps('Button', providedProps)
+  const {loading, waveActive, button, anchor, refs} = createButton(props)
   const disabled = () => !!props.disabled
 
   const resolvedVariant = createMemo((): ButtonVariant => {
@@ -78,7 +80,15 @@ const Button: Component<ButtonProps> = (props = {}) => {
     return v !== 'link' && v !== 'text'
   })
 
-  props.ref?.(refs)
+  untrack(() => props.ref?.(refs))
+  const excluded = new Set<string>([
+    'variant', 'color', 'type', 'htmlType', 'block', 'danger', 'disabled', 'ghost',
+    'href', 'icon', 'iconPlacement', 'loading', 'shape', 'size', 'target', 'rel',
+    'onClick', 'children', 'ref', 'class',
+  ])
+  // Materialize only native keys: passing the merged proxy through a spread can
+  // expose omitted event properties and register onClick twice in Solid 2 RC.
+  const native = createMemo(() => Object.fromEntries(Object.entries(props).filter(([key]) => !excluded.has(key))))
 
   const iconNode = createMemo(() => {
     if (_showLoading()) {
@@ -88,33 +98,33 @@ const Button: Component<ButtonProps> = (props = {}) => {
     return null
   })
 
-  const content = (
+  const content = () => (
     <>
       <Show when={iconNode() && _iconPlacement() === 'start'}>
-        <span class="inline-flex items-center text-current">{iconNode()}</span>
+        <span aria-hidden="true" class="inline-flex items-center text-current">{iconNode()}</span>
       </Show>
-      <Show when={_isAnchor()}>
-        <a ref={anchor} href={props.href} target={props.target || '_self'} rel={props.rel} class="text-current no-underline">
-          {props.children}
-        </a>
-      </Show>
-      <Show when={!_isAnchor() && props.children}>
-        <span>{props.children}</span>
+      <Show when={props.children !== undefined && props.children !== null}>
+        <span>{typeof props.children === 'number' ? String(props.children) : props.children}</span>
       </Show>
       <Show when={iconNode() && _iconPlacement() === 'end'}>
-        <span class="inline-flex items-center text-current">{iconNode()}</span>
+        <span aria-hidden="true" class="inline-flex items-center text-current">{iconNode()}</span>
       </Show>
     </>
   )
 
-  return (
-    <button ref={button} class={buttonClass(_styleChoice())} disabled={disabled()}>
-      {content}
-      <Show when={_needsWave() && waveActive()}>
-        <span class={waveClass({ active: true })} style={{ color: 'inherit' }} />
-      </Show>
-    </button>
-  )
+  const contents = () => <>{content()}<Show when={_needsWave() && waveActive()}>
+    <span aria-hidden="true" class={waveClass({active: true})} />
+  </Show></>
+  const classes = () => `${buttonClass(_styleChoice())} ${props.class ?? ''}`
+  return <Show when={_isAnchor()} fallback={
+    <button {...native()} ref={button} type={props.htmlType ?? 'button'} class={classes()}
+      disabled={disabled()} aria-busy={loading() ? 'true' : undefined}>{contents()}</button>
+  }>
+    <a {...native()} ref={anchor} href={disabled() || loading() ? undefined : props.href}
+      role="link" target={props.target} rel={props.rel}
+      tabindex={disabled() ? -1 : props.tabindex} aria-disabled={disabled() || loading() ? 'true' : undefined}
+      aria-busy={loading() ? 'true' : undefined} class={classes()}>{contents()}</a>
+  </Show>
 };
 
 export default Button

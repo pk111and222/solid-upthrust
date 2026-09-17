@@ -80,6 +80,17 @@ const ModalPage: Component = () => {
       <h3 class="text-lg font-semibold mb-3">生命周期回调</h3>
       <p class="mt-1"><Text type="secondary">最近操作：{lastAction()}</Text></p>
       <p class="mt-2"><Text type="secondary">afterClose 在离场动画结束后触发；afterOpenChange 在开/关两侧都会触发（ true → 打开完成，false → 关闭完成）。快速开关时（动画未结束就重开），pending 的销毁会被取消，DOM 复用。</Text></p>
+      <Divider />
+      <h3 class="text-lg font-semibold mb-3">静态方法与更新</h3>
+      <Space wrap>
+        <Button onClick={() => Modal.confirm({ title: '删除确认', content: '确认后异步提交，失败将保留弹窗以便重试。', onOk: () => new Promise(resolve => setTimeout(resolve, 800)) })}>Modal.confirm</Button>
+        <Button onClick={() => Modal.info({ title: '提示', content: '支持无需预先挂载的静态入口。' })}>info</Button>
+        <Button onClick={() => Modal.success({ title: '完成', content: '操作成功' })}>success</Button>
+        <Button onClick={() => Modal.warning({ title: '警告', content: '请检查输入' })}>warning</Button>
+        <Button onClick={() => Modal.error({ title: '错误', content: '稍后重试' })}>error</Button>
+        <Button onClick={() => { const instance = Modal.info({ title: '正在准备', content: '稍后自动更新' }); setTimeout(() => instance.update({ title: '已准备好', content: '可调用返回值的 destroy() 关闭' }), 1000) }}>动态更新</Button>
+        <Button onClick={() => Modal.destroyAll()}>关闭全部静态弹窗</Button>
+      </Space>
     </div>
   )
 }

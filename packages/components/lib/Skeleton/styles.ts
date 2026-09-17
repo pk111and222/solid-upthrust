@@ -17,14 +17,10 @@ const skeletonElementVariants = cva(
         square: [],
       },
       active: {
-        // Colors bridge the preset tokens: base = outline-variant/25 tone,
-        // hi = a lighter highlight. The gradient must be 200% wide for the
-        // wave keyframes (100%→0 background-position) to travel.
+        // Resolve the same outline token as static placeholders in each theme.
         true: [
-          "animate-skeleton-wave",
-          // Hard colors (wind4 rejects --var-[value] arbitrary classes):
-          // base matches outline-variant/25 tone, hi is the highlight sweep.
-          "bg-[linear-gradient(90deg,#e1e2ec_25%,#f0f1f5_37%,#e1e2ec_63%)]",
+          "animate-skeleton-wave", "motion-reduce:animate-none",
+          "bg-[linear-gradient(90deg,rgb(var(--upthrust-colors-outline-variant)/0.25)_25%,rgb(var(--upthrust-colors-outline-variant)/0.1)_37%,rgb(var(--upthrust-colors-outline-variant)/0.25)_63%)]",
         ],
         false: [],
       },

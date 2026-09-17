@@ -1,5 +1,6 @@
-import { Component, For, Show, merge, createMemo, createSignal, createEffect, onCleanup } from 'solid-js'
-import { Portal, type JSX } from '@solidjs/web'
+import { ConfigPortal as Portal } from '../ConfigProvider/Portal'
+import { type Component, For, Show, merge, createMemo, createSignal, createEffect, onCleanup, createUniqueId } from 'solid-js'
+import type { JSX } from '@solidjs/web'
 import { createTrigger, type TriggerPlacement } from 'upthrust-competence'
 import { dropdownOverlayClass, dropdownItemClass, dropdownDividerClass } from './styles'
 import { twMerge } from 'tailwind-merge'
@@ -19,7 +20,6 @@ export interface DropdownMenuProps {
   onClick?: (key: string) => void
 }
 
-// Kept for API compatibility — createTrigger uses the same placement names.
 export type DropdownTrigger = 'click' | 'hover' | 'contextMenu'
 export type DropdownPlacement = TriggerPlacement
 
@@ -38,12 +38,12 @@ export interface DropdownProps {
   style?: JSX.CSSProperties
 }
 
-const Dropdown: Component<DropdownProps> = (rawProps) => {
+const Dropdown: Component<DropdownProps> = rawProps => {
   const props = merge(
     { trigger: 'hover' as DropdownTrigger, placement: 'bottomLeft' as DropdownPlacement },
-    rawProps
+    rawProps,
   )
-
+  const menuId = `dropdown-menu-${createUniqueId()}`
   const trigger = createTrigger({
     get open() { return props.open },
     get defaultOpen() { return props.defaultOpen },
@@ -53,128 +53,155 @@ const Dropdown: Component<DropdownProps> = (rawProps) => {
     get onOpenChange() { return props.onOpenChange },
   })
 
-  // ---- keyboard navigation ---------------------------------------------
-  // Arrow keys move focus among enabled items; Escape closes; Enter
-  // activates the focused item. Focus lives in the overlay so Tab order of
-  // the page is untouched until the menu opens.
-  const [focusIndex, setFocusIndex] = createSignal(-1)
-  let itemEls: HTMLDivElement[] = []
-
-  const enabledItems = createMemo(() => props.menu.items.filter(i => i.type !== 'divider' && !i.disabled))
+  // Refs follow keys rather than initial indexes, so reordered items remain navigable.
+  const itemEls = new Map<string, HTMLDivElement>()
+  const [focusedKey, setFocusedKey] = createSignal<string | undefined>(undefined, { ownedWrite: true })
+  const enabledItems = createMemo(() => props.menu.items.filter(item => item.type !== 'divider' && !item.disabled))
+  let triggerEl: HTMLDivElement | undefined
+  let layerEl: HTMLDivElement | undefined
+  let restoreFocus: HTMLElement | undefined
+  let focusedElement: HTMLElement | undefined
+  let keyboardOpen: 'first' | 'last' | undefined
 
   const focusItem = (index: number) => {
     const items = enabledItems()
-    if (!items.length) return
-    const next = ((index % items.length) + items.length) % items.length
-    setFocusIndex(next)
-    itemEls[next]?.focus()
-  }
-
-  const resetKeyboard = () => setFocusIndex(-1)
-
-  const handleOverlayKeyDown = (e: KeyboardEvent) => {
-    if (!trigger.open()) return
-    const count = enabledItems().length
-    if (e.key === 'Escape') {
-      e.preventDefault()
-      trigger.setOpen(false)
+    if (!items.length) {
+      setFocusedKey(undefined)
+      layerEl?.focus({ preventScroll: true })
       return
     }
-    if (e.key === 'ArrowDown') {
-      e.preventDefault()
-      focusItem(focusIndex() + 1)
-    } else if (e.key === 'ArrowUp') {
-      e.preventDefault()
-      focusItem(focusIndex() - 1)
-    } else if (e.key === 'Enter' || e.key === ' ') {
-      const item = enabledItems()[focusIndex()]
-      if (item) {
-        e.preventDefault()
-        handleItemClick(item)
-      }
-    } else if (e.key === 'Tab' && count) {
-      // Keep focus cycling inside the menu while open.
-      e.preventDefault()
-      focusItem(focusIndex() + 1)
-    }
+    const next = ((index % items.length) + items.length) % items.length
+    setFocusedKey(items[next].key)
+    itemEls.get(items[next].key)?.focus({ preventScroll: true })
   }
 
   const handleItemClick = (item: DropdownMenuItem) => {
-    if (item.disabled) return
+    if (!trigger.open() || props.disabled || item.disabled || item.type === 'divider') return
     item.onClick?.()
     props.menu.onClick?.(item.key)
     trigger.setOpen(false)
-    resetKeyboard()
   }
 
-  // Move focus into the overlay when it opens (click/contextMenu triggers —
-  // hover keeps focus where the user's pointer is).
-  createEffect(
-    () => trigger.open(),
-    (isOpen) => {
-      if (isOpen && props.trigger !== 'hover') {
-        // Focus after the entrance animation settles (~160ms ≈ duration-fast
-        // plus a frame). Focusing earlier is fragile: the layer is parked
-        // hidden for one frame while createTrigger measures (focus on a
-        // hidden element is dropped), and the click's implicit focus on the
-        // trigger is applied asynchronously — both race a same-frame focus.
-        const t = setTimeout(() => focusItem(0), 160)
-        onCleanup(() => clearTimeout(t))
-      } else if (!isOpen) {
-        resetKeyboard()
-      }
+  const handleOverlayKeyDown = (event: KeyboardEvent) => {
+    if (!trigger.open() || props.disabled) return
+    const items = enabledItems()
+    // The actual focused node wins over a mouse-hover highlight and pending signal writes.
+    const active = items.findIndex(item => itemEls.get(item.key) === document.activeElement)
+    const index = active >= 0 ? active : items.findIndex(item => item.key === focusedKey())
+    if (event.key === 'Escape') {
+      event.preventDefault()
+      event.stopPropagation()
+      trigger.setOpen(false)
+    } else if (event.key === 'Tab' && !items.length) {
+      trigger.setOpen(false)
+    } else if (event.key === 'ArrowDown' || event.key === 'ArrowUp' || event.key === 'Tab') {
+      event.preventDefault()
+      const backwards = event.key === 'ArrowUp' || (event.key === 'Tab' && event.shiftKey)
+      focusItem(index < 0 ? (backwards ? items.length - 1 : 0) : index + (backwards ? -1 : 1))
+    } else if (event.key === 'Enter' || event.key === ' ') {
+      event.preventDefault()
+      if (items[index]) handleItemClick(items[index])
     }
-  )
-  onCleanup(() => { itemEls = [] })
-
-  const registerItem = (el: HTMLDivElement, index: number) => {
-    itemEls[index] = el
   }
+
+  const handleTriggerKeyDown = (event: KeyboardEvent) => {
+    if (props.disabled || event.defaultPrevented) return
+    const arrow = event.key === 'ArrowDown' || event.key === 'ArrowUp'
+    // Click triggers keep the child's native Enter/Space activation (one click only).
+    if (!arrow && !(props.trigger !== 'click' && (event.key === 'Enter' || event.key === ' '))) return
+    event.preventDefault()
+    if (trigger.open()) {
+      focusItem(event.key === 'ArrowUp' ? -1 : 0)
+    } else {
+      keyboardOpen = event.key === 'ArrowUp' ? 'last' : 'first'
+      trigger.setOpen(true)
+    }
+  }
+
+  // Let measurement and the triggering click settle before moving focus. Returning
+  // cleanup cancels each pending focus on close, not just on component disposal.
+  createEffect(
+    () => ({ isOpen: trigger.open(), action: props.trigger }),
+    ({ isOpen, action }) => {
+      if (!isOpen) {
+        setFocusedKey(undefined)
+        focusedElement = undefined
+        keyboardOpen = undefined
+        if (restoreFocus?.isConnected && (layerEl?.contains(document.activeElement) || document.activeElement === document.body)) {
+          restoreFocus.focus({ preventScroll: true })
+        }
+        restoreFocus = undefined
+        return
+      }
+      if (action === 'hover' && !keyboardOpen) return
+      const timer = setTimeout(() => {
+        if (!trigger.open()) return
+        const active = document.activeElement
+        restoreFocus = active instanceof HTMLElement && active !== document.body && !layerEl?.contains(active)
+          ? active
+          : triggerEl?.querySelector<HTMLElement>('button:not(:disabled), a[href], input:not(:disabled), [tabindex]:not([tabindex="-1"])') ?? undefined
+        focusItem(keyboardOpen === 'last' ? -1 : 0)
+        keyboardOpen = undefined
+      }, 160)
+      return () => clearTimeout(timer)
+    },
+  )
+  createEffect(
+    () => ({ items: enabledItems(), isOpen: trigger.open() }),
+    ({ items, isOpen }) => {
+      if (!isOpen || !focusedElement) return
+      const active = document.activeElement
+      if (active !== focusedElement && !(active === document.body && !focusedElement.isConnected)) return
+      if (!items.some(item => itemEls.get(item.key) === focusedElement)) focusItem(0)
+    },
+  )
+  onCleanup(() => { itemEls.clear(); restoreFocus = undefined; focusedElement = undefined; layerEl = undefined; triggerEl = undefined })
 
   return (
-    <div class={twMerge("relative inline-block", props.class)} style={props.style}>
-      <div ref={trigger.triggerRef}>
-        {props.children}
+    <div class={twMerge('relative inline-block', props.class)} style={props.style}>
+      <div
+        ref={el => { triggerEl = el; trigger.triggerRef(el) }}
+        aria-haspopup="menu"
+        aria-expanded={trigger.open() ? 'true' : 'false'}
+        aria-controls={trigger.mounted() ? menuId : undefined}
+        aria-disabled={props.disabled ? 'true' : undefined}
+        onKeyDown={handleTriggerKeyDown}
+      >
+        {typeof props.children === 'number' ? String(props.children) : props.children}
       </div>
       <Portal>
         <Show when={trigger.mounted()}>
           <div
-            ref={(el) => { trigger.layerRef(el); trigger.bindLayerHover() }}
-            class={twMerge(
-              dropdownOverlayClass({ visible: trigger.open(), placement: trigger.actualPlacement() }),
-              props.overlayClass
-            )}
+            ref={el => { layerEl = el; trigger.layerRef(el); trigger.bindLayerHover() }}
+            class={twMerge(dropdownOverlayClass({ visible: trigger.open(), placement: trigger.actualPlacement() }), props.overlayClass)}
             style={{ ...trigger.layerStyle(), ...props.overlayStyle }}
+            id={menuId}
             role="menu"
+            aria-hidden={!trigger.open() ? 'true' : undefined}
+            inert={!trigger.open()}
             tabindex={-1}
             onKeyDown={handleOverlayKeyDown}
           >
             <For each={props.menu.items}>
-              {(item) => (
-                <Show
-                  when={item.type !== 'divider'}
-                  fallback={<div class={dropdownDividerClass({})} />}
-                >
+              {item => {
+                let element: HTMLDivElement | undefined
+                onCleanup(() => { if (itemEls.get(item.key) === element) itemEls.delete(item.key) })
+                return <Show when={item.type !== 'divider'} fallback={<div role="separator" class={dropdownDividerClass({})} />}>
                   <div
-                    ref={(el) => registerItem(el, enabledItems().indexOf(item))}
-                    class={dropdownItemClass({
-                      disabled: item.disabled,
-                      danger: item.danger,
-                      focused: enabledItems()[focusIndex()] === item,
-                    })}
+                    ref={el => { element = el; itemEls.set(item.key, el) }}
+                    class={dropdownItemClass({ disabled: !!item.disabled, danger: !!item.danger, focused: !item.disabled && focusedKey() === item.key })}
                     tabindex={-1}
                     role="menuitem"
                     aria-disabled={item.disabled ? 'true' : undefined}
                     onClick={() => handleItemClick(item)}
-                    onMouseEnter={() => setFocusIndex(enabledItems().indexOf(item))}
+                    onFocus={event => { focusedElement = event.currentTarget; if (!item.disabled) setFocusedKey(item.key) }}
+                    onMouseEnter={() => setFocusedKey(item.disabled ? undefined : item.key)}
                   >
-                    <Show when={item.icon}>
-                      <span class={item.icon} />
-                    </Show>
-                    {item.label}
+                    <Show when={item.icon}><span aria-hidden="true" class={item.icon} /></Show>
+                    {typeof item.label === 'number' ? String(item.label) : item.label}
                   </div>
                 </Show>
-              )}
+              }}
             </For>
           </div>
         </Show>

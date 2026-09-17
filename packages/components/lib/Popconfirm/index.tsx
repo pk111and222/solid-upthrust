@@ -1,5 +1,6 @@
+import { ConfigPortal as Portal } from '../ConfigProvider/Portal'
 import { Component, createMemo, merge, Show } from 'solid-js'
-import { Portal, type JSX } from '@solidjs/web'
+import { type JSX } from '@solidjs/web'
 import { createPopconfirm, type PopconfirmIns, type TriggerPlacement, type TriggerAction } from 'upthrust-competence'
 import { popconfirmOverlayClass, popconfirmMessageClass, popconfirmDescriptionClass, popconfirmIconClass, popconfirmActionsClass, popconfirmArrowClass } from './styles'
 import Button, { type ButtonProps } from '../Button'

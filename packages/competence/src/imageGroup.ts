@@ -50,7 +50,7 @@ export type ImageGroupIns = {
   /** src of the currently-previewed member, by registry order. */
   currentSrc: () => string | undefined
   /** All member srcs in mount order (reactive). */
-  sources: () => string[]
+  sources: () => (string | undefined)[]
   /**
    * Register a member Image. Returns its unregister fn; the registry count
    * feeds the carousel reactively.

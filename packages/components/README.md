@@ -51,7 +51,7 @@ utils/
 | Splitter | — | Layout |
 | Anchor | `createAnchor` | Navigation |
 | Breadcrumb | — | Navigation |
-| Dropdown | `createDropdown` | Navigation |
+| Dropdown | `createTrigger`（旧 `createDropdown` 仅为兼容保留） | Navigation |
 | Menu | `createMenu` | Navigation |
 | Pagination | `createPagination` | Navigation |
 | Steps | `createSteps` | Navigation |

@@ -1,8 +1,14 @@
-import { Component } from "solid-js";
+import { Component, createSignal } from "solid-js";
 import { Typography, Text, Title, Paragraph, Link } from 'upthrust-ui';
 
 const TypographyPage: Component = () => {
+  const [text, setText] = createSignal('点击编辑按钮修改这段文本')
   return <>
+    <h3>复制与编辑</h3>
+    <Paragraph copyable>可以复制的段落</Paragraph>
+    <Text copyable={{ text: '自定义复制内容' }}>复制指定内容</Text>
+    <Paragraph editable={{ text: text(), onChange: setText, maxLength: 100 }} copyable>{text()}</Paragraph>
+    <Paragraph editable>非受控编辑：Enter 保存，Escape 取消，Shift+Enter 换行。</Paragraph>
     <h3>标题 Title</h3>
     <Title level={1}>h1. Upthrust UI</Title>
     <Title level={2}>h2. Upthrust UI</Title>

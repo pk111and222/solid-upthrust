@@ -1,0 +1,38 @@
+[
+  {
+    "name": "key",
+    "type": "string",
+    "default": "—（必填）",
+    "description": "唯一标识；用于 activeKey、onChange、onEdit 的 target 及排序"
+  },
+  {
+    "name": "label",
+    "type": "string",
+    "default": "—（必填）",
+    "description": "标签文字"
+  },
+  {
+    "name": "children",
+    "type": "JSX.Element",
+    "default": "—",
+    "description": "对应面板内容；仅 UI 层的 TabsItem 携带（headless TabItem 不含此字段）"
+  },
+  {
+    "name": "icon",
+    "type": "string",
+    "default": "—",
+    "description": "图标类名（如 iconify 的 i-mdi-home），需可被 UnoCSS 静态扫描"
+  },
+  {
+    "name": "disabled",
+    "type": "boolean",
+    "default": "false",
+    "description": "禁用该标签：不可点击、不可作为拖拽源/目标，会被 nextTab/prevTab 跳过"
+  },
+  {
+    "name": "closable",
+    "type": "boolean",
+    "default": "true",
+    "description": "editable 模式下是否显示关闭按钮；显式设为 false 可锁定固定页签"
+  }
+]

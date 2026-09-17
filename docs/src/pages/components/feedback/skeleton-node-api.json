@@ -1,0 +1,32 @@
+[
+  {
+    "name": "active",
+    "type": "boolean",
+    "default": "false",
+    "description": "是否开启渐变动画；系统减少动态效果时停止动画"
+  },
+  {
+    "name": "size",
+    "type": "small | middle | large | number",
+    "default": "不传为 100px",
+    "description": "控制宽高；不传为 100px，显式 small/middle/large 为 24/32/40px，数字为 px"
+  },
+  {
+    "name": "children",
+    "type": "JSX.Element",
+    "default": "—",
+    "description": "仅放装饰内容，不放可聚焦或交互元素"
+  },
+  {
+    "name": "class",
+    "type": "string",
+    "default": "—",
+    "description": "根 span 的自定义类名"
+  },
+  {
+    "name": "style",
+    "type": "JSX.CSSProperties",
+    "default": "—",
+    "description": "根 span 的内联样式，可覆盖计算出的宽高"
+  }
+]

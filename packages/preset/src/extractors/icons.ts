@@ -15,6 +15,11 @@ export function extractorIcons(): Extractor {
         const name = match[2]
         results.add(`i-${collection}-${name}`)
       }
+      // Icon 的 mdi 简写同样需要在构建期可见；动态名称仍需调用方 safelist。
+      const shorthand = /<Icon\b[^>]*?\bname\s*=\s*(?:["']([a-z0-9]+(?:-[a-z0-9]+)*)["']|\{\s*["']([a-z0-9]+(?:-[a-z0-9]+)*)["']\s*\})/g
+      while ((match = shorthand.exec(code)) !== null) {
+        results.add(`i-mdi-${match[1] ?? match[2]}`)
+      }
       return results
     },
   }

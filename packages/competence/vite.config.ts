@@ -30,6 +30,7 @@ export default defineConfig(({ command, mode }) => {
           external: [
             "solid-js", "solid-js/web", "@solidjs/web", "@solidjs/signals", "lodash",
             /^dayjs(\/|$)/,
+            /^async-validator(\/|$)/,
           ],
           output: {
             format: 'es',
@@ -53,7 +54,7 @@ export default defineConfig(({ command, mode }) => {
       minify: mode === 'watch' ? false : true,
       sourcemap: true,
       rollupOptions: {
-        external: ["solid-js", "solid-js/web", "@solidjs/web", "@solidjs/signals", "dayjs"],
+        external: ["solid-js", "solid-js/web", "@solidjs/web", "@solidjs/signals", "dayjs", /^async-validator(\/|$)/],
         output: {
           globals: {
             "solid-js": "Solid",

@@ -27,6 +27,10 @@
     "example/src",
     "*.config.ts",
     "example/*.config.ts",
-    "packages/*/*.config.ts"
+    "packages/*/*.config.ts",
+    "packages/testing/headless",
+    "packages/testing/smoke",
+    "packages/testing/render",
+    "packages/testing/utils"
   ]
 }

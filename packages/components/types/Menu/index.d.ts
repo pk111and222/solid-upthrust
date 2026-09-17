@@ -3,6 +3,8 @@ import { JSX } from '@solidjs/web';
 import { MenuItem, MenuMode } from 'upthrust-competence';
 export type { MenuItem } from 'upthrust-competence';
 export interface MenuProps {
+    /** Render a label as JSX, for example a native navigation link. */
+    renderLabel?: (item: MenuItem) => JSX.Element;
     items?: MenuItem[];
     mode?: MenuMode;
     selectedKeys?: string[];

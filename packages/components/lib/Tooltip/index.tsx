@@ -1,9 +1,12 @@
-import { Component, createMemo, merge, Show } from 'solid-js'
-import { Portal, type JSX } from '@solidjs/web'
+import { ConfigPortal as Portal } from '../ConfigProvider/Portal'
+import { useComponentProps } from '../ConfigProvider/context'
+import { Component, createMemo, merge, Show, untrack } from 'solid-js'
+import { type JSX } from '@solidjs/web'
 import { createTooltip, type TooltipIns, type TriggerPlacement, type TriggerAction } from 'upthrust-competence'
 import { tooltipOverlayClass, tooltipArrowClass } from './styles'
 import { twMerge } from 'tailwind-merge'
 
+export type { TooltipIns } from 'upthrust-competence'
 export type TooltipPlacement = TriggerPlacement
 export type TooltipTrigger = TriggerAction
 
@@ -31,13 +34,14 @@ export interface TooltipProps {
   ref?: (val: TooltipIns) => void
 }
 
-const Tooltip: Component<TooltipProps> = (rawProps) => {
+const Tooltip: Component<TooltipProps> = (providedProps) => {
+  const rawProps = useComponentProps('Tooltip', providedProps)
   const props = merge(
     { trigger: 'hover' as TooltipTrigger, placement: 'top' as TooltipPlacement },
     rawProps
   )
 
-  const hasTitle = createMemo(() => props.title !== undefined && props.title !== null && props.title !== '')
+  const hasTitle = createMemo(() => props.title !== undefined && props.title !== null && props.title !== '' && props.title !== false)
 
   const tooltip = createTooltip({
     get open() { return props.open },
@@ -51,23 +55,27 @@ const Tooltip: Component<TooltipProps> = (rawProps) => {
     get getContainer() { return props.getContainer },
   })
 
-  props.ref?.(tooltip.refs)
+  const visible = createMemo(() => tooltip.open() && hasTitle())
+
+  untrack(() => props.ref?.(tooltip.refs))
 
   return (
     <div class={twMerge("relative inline-block", props.class)} style={props.style}>
       <div ref={tooltip.triggerRef}>
         {props.children}
       </div>
-      <Portal>
+      <Portal mount={props.getContainer?.()}>
         <Show when={tooltip.mounted()}>
           <div
             ref={(el) => { tooltip.layerRef(el); tooltip.bindLayerHover() }}
             class={twMerge(
-              tooltipOverlayClass({ visible: tooltip.open(), placement: tooltip.actualPlacement() }),
+              tooltipOverlayClass({ visible: visible(), placement: tooltip.actualPlacement() }),
               props.overlayClass
             )}
             style={{ ...tooltip.layerStyle(), ...props.overlayStyle }}
             role="tooltip"
+            aria-hidden={!visible() ? 'true' : undefined}
+            inert={!visible()}
           >
             {props.title}
             <Show when={tooltip.arrow()}>

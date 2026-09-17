@@ -1,87 +1,48 @@
-import { type Component, createSignal } from 'solid-js'
-import { Tooltip, Divider, Button, Space } from 'upthrust-ui'
+import Basic from '../../../docs/src/examples/tooltip/basic'
+import Trigger from '../../../docs/src/examples/tooltip/trigger'
+import Controlled from '../../../docs/src/examples/tooltip/controlled'
+import DisabledDelay from '../../../docs/src/examples/tooltip/disabled-delay'
+import Style from '../../../docs/src/examples/tooltip/style'
+import Container from '../../../docs/src/examples/tooltip/container'
+import Ref from '../../../docs/src/examples/tooltip/ref'
+import Placement from '../../../docs/src/examples/tooltip/placement'
 
-const TooltipPage: Component = () => {
-  const [open, setOpen] = createSignal(false)
-
-  return (
-    <div class="p-6 max-w-4xl">
-      <h2 class="text-2xl font-bold mb-4">Tooltip 文字提示</h2>
-      <p class="text-on-surface-variant mb-6">简单的文字提示气泡。默认悬停触发、显示在上方，深色背景适配明暗主题。</p>
-
-      <h3 class="text-lg font-semibold mb-3">基本使用</h3>
-      <Space size="middle">
-        <Tooltip title="默认提示（上方）">
-          <Button>悬停我</Button>
-        </Tooltip>
-        <Tooltip title="这条提示文本很长，可以自动换行，最大宽度 250px，超出部分会折行显示">
-          <Button variant="outlined">长文本提示</Button>
-        </Tooltip>
-      </Space>
-
-      <Divider />
-
-      <h3 class="text-lg font-semibold mb-3">位置（12 种方向）</h3>
-      <div class="flex flex-wrap gap-4">
-        <Tooltip title="上左" placement="topLeft"><Button variant="outlined">TL</Button></Tooltip>
-        <Tooltip title="上中" placement="top"><Button variant="outlined">Top</Button></Tooltip>
-        <Tooltip title="上右" placement="topRight"><Button variant="outlined">TR</Button></Tooltip>
-        <Tooltip title="下左" placement="bottomLeft"><Button variant="outlined">BL</Button></Tooltip>
-        <Tooltip title="下中" placement="bottom"><Button variant="outlined">Bottom</Button></Tooltip>
-        <Tooltip title="下右" placement="bottomRight"><Button variant="outlined">BR</Button></Tooltip>
-      </div>
-      <div class="flex flex-wrap gap-4 mt-4">
-        <Tooltip title="左上" placement="leftTop"><Button variant="outlined">LT</Button></Tooltip>
-        <Tooltip title="左中" placement="left"><Button variant="outlined">Left</Button></Tooltip>
-        <Tooltip title="左下" placement="leftBottom"><Button variant="outlined">LB</Button></Tooltip>
-        <Tooltip title="右上" placement="rightTop"><Button variant="outlined">RT</Button></Tooltip>
-        <Tooltip title="右中" placement="right"><Button variant="outlined">Right</Button></Tooltip>
-        <Tooltip title="右下" placement="rightBottom"><Button variant="outlined">RB</Button></Tooltip>
-      </div>
-
-      <Divider />
-
-      <h3 class="text-lg font-semibold mb-3">触发方式</h3>
-      <Space size="middle">
-        <Tooltip title="悬停触发（默认）" trigger="hover">
-          <Button>hover</Button>
-        </Tooltip>
-        <Tooltip title="点击触发" trigger="click">
-          <Button>click</Button>
-        </Tooltip>
-        <Tooltip title="聚焦触发" trigger="focus">
-          <Button variant="outlined">focus</Button>
-        </Tooltip>
-      </Space>
-
-      <Divider />
-
-      <h3 class="text-lg font-semibold mb-3">受控模式</h3>
-      <Space size="middle">
-        <Button variant={open() ? 'solid' : 'outlined'} onClick={() => setOpen(!open())}>
-          {open() ? '隐藏' : '显示'}提示
-        </Button>
-        <Tooltip title="受控打开的提示" open={open()} onOpenChange={setOpen}>
-          <Button variant="outlined">受控触发器</Button>
-        </Tooltip>
-      </Space>
-
-      <Divider />
-
-      <h3 class="text-lg font-semibold mb-3">禁用与延迟</h3>
-      <Space size="middle">
-        <Tooltip title="这条提示永远不会出现" disabled>
-          <Button disabled>禁用触发器</Button>
-        </Tooltip>
-        <Tooltip title="悬停 500ms 后才显示" mouseEnterDelay={500}>
-          <Button variant="outlined">延迟打开</Button>
-        </Tooltip>
-        <Tooltip title="离开 800ms 后才隐藏" mouseLeaveDelay={800}>
-          <Button variant="outlined">延迟关闭</Button>
-        </Tooltip>
-      </Space>
-    </div>
-  )
+export default function TooltipPage() {
+  return <div class="space-y-8 pb-96">
+    {/* pb-96: 与文档站不同，此页无长篇正文；"十二种位置" demo 若恰好落在页面末尾，
+        scrollIntoView({block:'center'}) 无法真正居中，bottom 系列按钮下方可用视口
+        空间不足会被翻转策略误判。补足尾部空间，保证任意 demo 居中时上下都有余量。 */}
+    <section data-tooltip-demo="basic">
+      <h3 class="text-base font-medium mb-4">基本使用</h3>
+      <Basic />
+    </section>
+    <section data-tooltip-demo="trigger">
+      <h3 class="text-base font-medium mb-4">触发方式</h3>
+      <Trigger />
+    </section>
+    <section data-tooltip-demo="controlled">
+      <h3 class="text-base font-medium mb-4">受控与 defaultOpen</h3>
+      <Controlled />
+    </section>
+    <section data-tooltip-demo="disabled-delay">
+      <h3 class="text-base font-medium mb-4">禁用与延迟</h3>
+      <DisabledDelay />
+    </section>
+    <section data-tooltip-demo="style">
+      <h3 class="text-base font-medium mb-4">自定义样式</h3>
+      <Style />
+    </section>
+    <section data-tooltip-demo="container">
+      <h3 class="text-base font-medium mb-4">局部主题与 getContainer</h3>
+      <Container />
+    </section>
+    <section data-tooltip-demo="ref">
+      <h3 class="text-base font-medium mb-4">ref 命令式控制</h3>
+      <Ref />
+    </section>
+    <section data-tooltip-demo="placement">
+      <h3 class="text-base font-medium mb-4">十二种位置</h3>
+      <Placement />
+    </section>
+  </div>
 }
-
-export default TooltipPage

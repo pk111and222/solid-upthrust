@@ -1,0 +1,532 @@
+- generic [ref=f1e1]:
+  - link "跳至正文" [ref=f1e2] [cursor=pointer]:
+    - /url: "#main-content"
+  - generic [ref=f1e3]:
+    - generic [ref=f1e4]:
+      - link "↗ Solid Upthrust" [ref=f1e5] [cursor=pointer]:
+        - /url: /
+        - generic [ref=f1e6]: ↗
+        - generic [ref=f1e7]: Solid Upthrust
+      - navigation "主导航" [ref=f1e8]:
+        - link "开发指南" [ref=f1e9] [cursor=pointer]:
+          - /url: /guide/
+        - link "组件" [ref=f1e10] [cursor=pointer]:
+          - /url: /components/
+        - generic [ref=f1e11]: Solid 2 RC
+    - generic [ref=f1e12]:
+      - complementary [ref=f1e13]:
+        - navigation "文档目录" [ref=f1e14]:
+          - menu [ref=f1e15]:
+            - generic [ref=f1e16]:
+              - generic [ref=f1e17]: 开始使用
+              - menuitem [ref=f1e18] [cursor=pointer]:
+                - link "Solid Upthrust" [ref=f1e19]:
+                  - /url: /
+              - menuitem [ref=f1e20] [cursor=pointer]:
+                - link "工程入门" [ref=f1e21]:
+                  - /url: /guide/
+              - menuitem [ref=f1e22] [cursor=pointer]:
+                - link "文档与示例渲染" [ref=f1e23]:
+                  - /url: /guide/rendering/
+            - generic [ref=f1e24]:
+              - generic [ref=f1e25]: 研发指南
+              - menuitem [ref=f1e26] [cursor=pointer]:
+                - link "架构与目录" [ref=f1e27]:
+                  - /url: /guide/architecture/
+              - menuitem [ref=f1e28] [cursor=pointer]:
+                - link "四层测试" [ref=f1e29]:
+                  - /url: /guide/testing/
+              - menuitem [ref=f1e30] [cursor=pointer]:
+                - link "功能交付清单" [ref=f1e31]:
+                  - /url: /guide/contributing/
+            - generic [ref=f1e32]:
+              - generic [ref=f1e33]: 组件
+              - menuitem [ref=f1e34] [cursor=pointer]:
+                - link "组件总览" [ref=f1e35]:
+                  - /url: /components/
+              - menuitem [ref=f1e36] [cursor=pointer]:
+                - link "Button 按钮" [ref=f1e37]:
+                  - /url: /components/general/button/
+              - menuitem [ref=f1e38] [cursor=pointer]:
+                - link "ConfigProvider 全局配置" [ref=f1e39]:
+                  - /url: /components/general/config-provider/
+              - menuitem [ref=f1e40] [cursor=pointer]:
+                - link "Icon 图标" [ref=f1e41]:
+                  - /url: /components/general/icon/
+              - menuitem [ref=f1e42] [cursor=pointer]:
+                - link "Dropdown 下拉菜单" [ref=f1e43]:
+                  - /url: /components/navigation/dropdown/
+              - menuitem [ref=f1e44] [cursor=pointer]:
+                - link "Tabs 标签页" [ref=f1e45]:
+                  - /url: /components/navigation/tabs/
+              - menuitem [ref=f1e46] [cursor=pointer]:
+                - link "Skeleton 骨架屏" [ref=f1e47]:
+                  - /url: /components/feedback/skeleton/
+              - menuitem [ref=f1e48] [cursor=pointer]:
+                - link "Tooltip 文字提示" [ref=f1e49]:
+                  - /url: /components/data-display/tooltip/
+              - menuitem [ref=f1e50] [cursor=pointer]:
+                - link "Popover 气泡卡片" [ref=f1e51]:
+                  - /url: /components/data-display/popover/
+        - generic [ref=f1e52]: 面向 SolidJS 的企业级组件库
+      - main [ref=f1e53]:
+        - article [ref=f1e55]:
+          - generic [ref=f1e56]:
+            - generic [ref=f1e57]: 文档
+            - generic [ref=f1e58]: /
+            - generic [ref=f1e59]: Tabs 标签页
+          - heading "Tabs 标签页" [level=1] [ref=f1e60]
+          - paragraph [ref=f1e61]: 选项卡切换组件；线条式带滑动指示条（ink bar），卡片式造型。
+          - region [ref=f1e62]:
+            - heading "使用方式" [level=2] [ref=f1e63]
+            - generic [ref=f1e64]:
+              - paragraph [ref=f1e65]: Tabs 通过 items 声明标签及对应面板内容；每项至少有 key、label，UI 层的 children 是该标签对应的面板内容。
+              - code [ref=f1e67]: "import { Tabs } from 'upthrust-ui'"
+              - paragraph [ref=f1e68]: 默认 line 类型带滑动指示条（ink bar），随激活标签变化重新测量位置；card / editable-card 类型没有指示条，靠标签自身边框构成视觉结构，激活项会擦除朝向内容区一侧的边框以与面板视觉融合。
+          - region [ref=f1e69]:
+            - heading "代码演示" [level=2] [ref=f1e70]
+            - generic [ref=f1e71]:
+              - generic [ref=f1e72]:
+                - region "基本使用" [ref=f1e73]:
+                  - generic [ref=f1e75]:
+                    - tablist [ref=f1e76]:
+                      - tab "选项卡一" [selected] [ref=f1e77] [cursor=pointer]
+                      - tab "选项卡二" [ref=f1e78] [cursor=pointer]
+                      - tab "选项卡三" [ref=f1e79] [cursor=pointer]
+                    - tabpanel [ref=f1e82]:
+                      - generic [ref=f1e83]: 选项卡一的内容
+                  - generic [ref=f1e84]:
+                    - heading "基本使用" [level=3] [ref=f1e85]
+                    - paragraph [ref=f1e86]: 非受控模式，默认选中第一个非禁用项。
+                  - group [ref=f1e87]:
+                    - generic "TSX 〈/〉 展开代码" [ref=f1e88] [cursor=pointer]:
+                      - generic [ref=f1e89]: TSX
+                      - generic [ref=f1e90]: 〈/〉 展开代码
+                - region "受控模式" [ref=f1e91]:
+                  - generic [ref=f1e93]:
+                    - tablist [ref=f1e94]:
+                      - tab "标签一" [selected] [ref=f1e95] [cursor=pointer]
+                      - tab "标签二" [ref=f1e96] [cursor=pointer]
+                      - tab "标签三" [ref=f1e97] [cursor=pointer]
+                    - tabpanel [ref=f1e100]:
+                      - generic [ref=f1e101]: 内容一：当前选中 1
+                  - generic [ref=f1e102]:
+                    - heading "受控模式" [level=3] [ref=f1e103]
+                    - paragraph [ref=f1e104]: activeKey 由外部信号控制，onChange 只报告切换请求。
+                  - group [ref=f1e105]:
+                    - generic "TSX 〈/〉 展开代码" [ref=f1e106] [cursor=pointer]:
+                      - generic [ref=f1e107]: TSX
+                      - generic [ref=f1e108]: 〈/〉 展开代码
+                - region "禁用标签" [ref=f1e109]:
+                  - generic [ref=f1e111]:
+                    - tablist [ref=f1e112]:
+                      - tab "可用" [selected] [ref=f1e113] [cursor=pointer]
+                      - tab "禁用" [disabled]
+                      - tab "可用" [ref=f1e114] [cursor=pointer]
+                    - tabpanel [ref=f1e117]:
+                      - generic [ref=f1e118]: 可用标签的内容
+                  - generic [ref=f1e119]:
+                    - heading "禁用标签" [level=3] [ref=f1e120]
+                    - paragraph [ref=f1e121]: 禁用标签不可点击，键盘方向导航与 nextTab/prevTab 都会跳过。
+                  - group [ref=f1e122]:
+                    - generic "TSX 〈/〉 展开代码" [ref=f1e123] [cursor=pointer]:
+                      - generic [ref=f1e124]: TSX
+                      - generic [ref=f1e125]: 〈/〉 展开代码
+                - region "带图标" [ref=f1e126]:
+                  - generic [ref=f1e128]:
+                    - tablist [ref=f1e129]:
+                      - tab "首页" [selected] [ref=f1e130] [cursor=pointer]
+                      - tab "设置" [ref=f1e132] [cursor=pointer]
+                      - tab "用户" [ref=f1e134] [cursor=pointer]
+                    - tabpanel [ref=f1e138]:
+                      - generic [ref=f1e139]: 首页内容
+                  - generic [ref=f1e140]:
+                    - heading "带图标" [level=3] [ref=f1e141]
+                    - paragraph [ref=f1e142]: icon 是可被 UnoCSS 静态扫描的图标类名。
+                  - group [ref=f1e143]:
+                    - generic "TSX 〈/〉 展开代码" [ref=f1e144] [cursor=pointer]:
+                      - generic [ref=f1e145]: TSX
+                      - generic [ref=f1e146]: 〈/〉 展开代码
+                - region "卡片类型" [ref=f1e147]:
+                  - generic [ref=f1e149]:
+                    - tablist [ref=f1e150]:
+                      - tab "选项卡一" [selected] [ref=f1e151] [cursor=pointer]
+                      - tab "选项卡二" [ref=f1e152] [cursor=pointer]
+                      - tab "选项卡三" [ref=f1e153] [cursor=pointer]
+                    - tabpanel [ref=f1e155]:
+                      - generic [ref=f1e156]: 卡片选项卡一的内容
+                  - generic [ref=f1e157]:
+                    - heading "卡片类型" [level=3] [ref=f1e158]
+                    - paragraph [ref=f1e159]: card 类型无滑动指示条，标签自身边框构成结构。
+                  - group [ref=f1e160]:
+                    - generic "TSX 〈/〉 展开代码" [ref=f1e161] [cursor=pointer]:
+                      - generic [ref=f1e162]: TSX
+                      - generic [ref=f1e163]: 〈/〉 展开代码
+                - region "尺寸" [ref=f1e164]:
+                  - generic [ref=f1e166]:
+                    - generic [ref=f1e167]:
+                      - tablist [ref=f1e168]:
+                        - tab "选项卡一" [selected] [ref=f1e169] [cursor=pointer]
+                        - tab "选项卡二" [ref=f1e170] [cursor=pointer]
+                      - tabpanel [ref=f1e173]:
+                        - generic [ref=f1e174]: 小尺寸内容
+                    - generic [ref=f1e175]:
+                      - tablist [ref=f1e176]:
+                        - tab "选项卡一" [selected] [ref=f1e177] [cursor=pointer]
+                        - tab "选项卡二" [ref=f1e178] [cursor=pointer]
+                      - tabpanel [ref=f1e181]:
+                        - generic [ref=f1e182]: 大尺寸内容
+                  - generic [ref=f1e183]:
+                    - heading "尺寸" [level=3] [ref=f1e184]
+                    - paragraph [ref=f1e185]: small / large 两档对照；middle 为默认值。
+                  - group [ref=f1e186]:
+                    - generic "TSX 〈/〉 展开代码" [ref=f1e187] [cursor=pointer]:
+                      - generic [ref=f1e188]: TSX
+                      - generic [ref=f1e189]: 〈/〉 展开代码
+                - region "居中" [ref=f1e190]:
+                  - generic [ref=f1e192]:
+                    - tablist [ref=f1e193]:
+                      - tab "选项一" [selected] [ref=f1e194] [cursor=pointer]
+                      - tab "选项二" [ref=f1e195] [cursor=pointer]
+                      - tab "选项三" [ref=f1e196] [cursor=pointer]
+                    - tabpanel [ref=f1e199]:
+                      - generic [ref=f1e200]: 居中的选项卡内容一
+                  - generic [ref=f1e201]:
+                    - heading "居中" [level=3] [ref=f1e202]
+                    - paragraph [ref=f1e203]: 标签栏在主轴上居中，不影响标签数量或宽度。
+                  - group [ref=f1e204]:
+                    - generic "TSX 〈/〉 展开代码" [ref=f1e205] [cursor=pointer]:
+                      - generic [ref=f1e206]: TSX
+                      - generic [ref=f1e207]: 〈/〉 展开代码
+                - region "懒渲染（destroyInactiveTabPane）" [ref=f1e208]:
+                  - generic [ref=f1e210]:
+                    - generic [ref=f1e211]:
+                      - tablist [ref=f1e212]:
+                        - tab "保留状态" [selected] [ref=f1e213] [cursor=pointer]
+                        - tab "懒挂载" [ref=f1e214] [cursor=pointer]
+                      - tabpanel [ref=f1e217]:
+                        - generic [ref=f1e218]: 切走再回来，这个面板会被销毁重建（状态丢失）
+                    - paragraph [ref=f1e219]: 默认模式下所有面板都会渲染（display 切换），保留各自内部状态；destroyInactiveTabPane 会让未激活面板整个不挂载。
+                  - generic [ref=f1e220]:
+                    - heading "懒渲染（destroyInactiveTabPane）" [level=3] [ref=f1e221]
+                    - paragraph [ref=f1e222]: 未激活面板整个不挂载，切走即销毁（状态丢失是预期行为）。
+                  - group [ref=f1e223]:
+                    - generic "TSX 〈/〉 展开代码" [ref=f1e224] [cursor=pointer]:
+                      - generic [ref=f1e225]: TSX
+                      - generic [ref=f1e226]: 〈/〉 展开代码
+                - region "可编辑页签与拖拽排序" [ref=f1e227]:
+                  - generic [ref=f1e229]:
+                    - generic [ref=f1e230]:
+                      - tablist [ref=f1e231]:
+                        - tab "固定页签" [selected] [ref=f1e232] [cursor=pointer]
+                        - tab [ref=f1e233] [cursor=pointer]:
+                          - text: 工作页
+                          - button "关闭 工作页" [ref=f1e234]
+                        - tab [ref=f1e780] [cursor=pointer]:
+                          - text: 新页签 3
+                          - button "关闭 新页签 3" [ref=f1e781]
+                        - button "新增页签" [active] [ref=f1e236] [cursor=pointer]
+                      - tabpanel [ref=f1e238]: 首页内容
+                    - paragraph [ref=f1e239]: 点击 + 新增；关闭按钮或 Delete 删除；拖动页签或 Alt+左右方向键排序。固定页签不允许关闭。
+                  - generic [ref=f1e240]:
+                    - heading "可编辑页签与拖拽排序" [level=3] [ref=f1e241]
+                    - paragraph [ref=f1e242]: type='editable-card' 开启新增/关闭；draggable 开启拖拽或 Alt+方向键排序。
+                  - group [ref=f1e243]:
+                    - generic "TSX 〈/〉 展开代码" [ref=f1e244] [cursor=pointer]:
+                      - generic [ref=f1e245]: TSX
+                      - generic [ref=f1e246]: 〈/〉 展开代码
+                - region "ref 命令式控制" [ref=f1e247]:
+                  - generic [ref=f1e249]:
+                    - generic [ref=f1e250]:
+                      - button "上一个" [ref=f1e252] [cursor=pointer]
+                      - button "下一个" [ref=f1e255] [cursor=pointer]
+                      - button "跳到选项卡三" [ref=f1e258] [cursor=pointer]
+                    - generic [ref=f1e260]:
+                      - tablist [ref=f1e261]:
+                        - tab "选项卡一" [selected] [ref=f1e262] [cursor=pointer]
+                        - tab "选项卡二" [ref=f1e263] [cursor=pointer]
+                        - tab "选项卡三" [ref=f1e264] [cursor=pointer]
+                      - tabpanel [ref=f1e267]:
+                        - generic [ref=f1e268]: 通过 ref 命令式控制
+                  - generic [ref=f1e269]:
+                    - heading "ref 命令式控制" [level=3] [ref=f1e270]
+                    - paragraph [ref=f1e271]: ref 暴露 activeKey()/setActiveKey()/nextTab()/prevTab()。
+                  - group [ref=f1e272]:
+                    - generic "TSX 〈/〉 展开代码" [ref=f1e273] [cursor=pointer]:
+                      - generic [ref=f1e274]: TSX
+                      - generic [ref=f1e275]: 〈/〉 展开代码
+              - region "四个位置" [ref=f1e276]:
+                - generic [ref=f1e278]:
+                  - generic [ref=f1e279]:
+                    - tablist [ref=f1e280]:
+                      - tab "菜单一" [selected] [ref=f1e281] [cursor=pointer]
+                      - tab "菜单二" [ref=f1e282] [cursor=pointer]
+                      - tab "菜单三" [ref=f1e283] [cursor=pointer]
+                    - tabpanel [ref=f1e285]:
+                      - generic [ref=f1e286]: 左侧卡片菜单一的内容
+                  - generic [ref=f1e287]:
+                    - tablist [ref=f1e288]:
+                      - tab "选项卡一" [selected] [ref=f1e289] [cursor=pointer]
+                      - tab "选项卡二" [ref=f1e290] [cursor=pointer]
+                    - tabpanel [ref=f1e293]:
+                      - generic [ref=f1e294]: 底部位置：指示条在标签上方
+                - generic [ref=f1e295]:
+                  - heading "四个位置" [level=3] [ref=f1e296]
+                  - paragraph [ref=f1e297]: top（默认）/ bottom / left / right；卡片 + 左侧位置演示纵向排列。
+                - group [ref=f1e298]:
+                  - generic "TSX 〈/〉 展开代码" [ref=f1e299] [cursor=pointer]:
+                    - generic [ref=f1e300]: TSX
+                    - generic [ref=f1e301]: 〈/〉 展开代码
+          - region [ref=f1e302]:
+            - heading "TabsProps API" [level=2] [ref=f1e303]
+            - table "API 属性表格" [ref=f1e308]:
+              - rowgroup [ref=f1e314]:
+                - row [ref=f1e315]:
+                  - columnheader "属性" [ref=f1e316]
+                  - columnheader "说明" [ref=f1e319]
+                  - columnheader "类型" [ref=f1e322]
+                  - columnheader "默认值" [ref=f1e325]
+              - rowgroup [ref=f1e328]:
+                - row [ref=f1e329]:
+                  - cell [ref=f1e330]:
+                    - code [ref=f1e333]: items
+                  - cell "标签数据；每项含 key、label，可选 icon/disabled/closable，UI 层额外接受 children" [ref=f1e334]
+                  - cell [ref=f1e337]:
+                    - code [ref=f1e340]: TabsItem[]
+                  - cell [ref=f1e341]:
+                    - code [ref=f1e344]: —（必填）
+                - row [ref=f1e345]:
+                  - cell [ref=f1e346]:
+                    - code [ref=f1e349]: activeKey
+                  - cell "受控当前激活标签；传入后由父层决定实际选中项，onChange 只报告切换请求" [ref=f1e350]
+                  - cell [ref=f1e353]:
+                    - code [ref=f1e356]: string
+                  - cell [ref=f1e357]:
+                    - code [ref=f1e360]: —（非受控）
+                - row [ref=f1e361]:
+                  - cell [ref=f1e362]:
+                    - code [ref=f1e365]: defaultActiveKey
+                  - cell "非受控实例首次挂载时的激活标签，后续变化使用 activeKey 控制" [ref=f1e366]
+                  - cell [ref=f1e369]:
+                    - code [ref=f1e372]: string
+                  - cell [ref=f1e373]:
+                    - code [ref=f1e376]: 第一个非禁用项
+                - row [ref=f1e377]:
+                  - cell [ref=f1e378]:
+                    - code [ref=f1e381]: onChange
+                  - cell "激活标签变化时触发；受控时需自行更新 activeKey" [ref=f1e382]
+                  - cell [ref=f1e385]:
+                    - code [ref=f1e388]: "(activeKey: string) => void"
+                  - cell [ref=f1e389]:
+                    - code [ref=f1e392]: —
+                - row [ref=f1e393]:
+                  - cell [ref=f1e394]:
+                    - code [ref=f1e397]: onTabClick
+                  - cell "点击任意标签（含点击当前已激活标签）时触发，携带原始 MouseEvent；禁用标签不触发" [ref=f1e398]
+                  - cell [ref=f1e401]:
+                    - code [ref=f1e404]: "(key: string, e: MouseEvent) => void"
+                  - cell [ref=f1e405]:
+                    - code [ref=f1e408]: —
+                - row [ref=f1e409]:
+                  - cell [ref=f1e410]:
+                    - code [ref=f1e413]: type
+                  - cell "视觉样式；'editable-card' 额外隐式开启 editable（除非显式传入 editable 覆盖）" [ref=f1e414]
+                  - cell [ref=f1e417]:
+                    - code [ref=f1e420]: "'line' | 'card' | 'editable-card'"
+                  - cell [ref=f1e421]:
+                    - code [ref=f1e424]: "'line'"
+                - row [ref=f1e425]:
+                  - cell [ref=f1e426]:
+                    - code [ref=f1e429]: size
+                  - cell "标签栏尺寸；card 类型的标签内部尺寸固定为 middle，不随此项变化" [ref=f1e430]
+                  - cell [ref=f1e433]:
+                    - code [ref=f1e436]: "'small' | 'middle' | 'large'"
+                  - cell [ref=f1e437]:
+                    - code [ref=f1e440]: "'middle'"
+                - row [ref=f1e441]:
+                  - cell [ref=f1e442]:
+                    - code [ref=f1e445]: tabPosition
+                  - cell "标签栏方位；left/right 时指示条垂直滑动，容器切换为横向排列" [ref=f1e446]
+                  - cell [ref=f1e449]:
+                    - code [ref=f1e452]: "'top' | 'bottom' | 'left' | 'right'"
+                  - cell [ref=f1e453]:
+                    - code [ref=f1e456]: "'top'"
+                - row [ref=f1e457]:
+                  - cell [ref=f1e458]:
+                    - code [ref=f1e461]: centered
+                  - cell "标签栏在主轴上居中，不影响标签数量或宽度" [ref=f1e462]
+                  - cell [ref=f1e465]:
+                    - code [ref=f1e468]: boolean
+                  - cell [ref=f1e469]:
+                    - code [ref=f1e472]: "false"
+                - row [ref=f1e473]:
+                  - cell [ref=f1e474]:
+                    - code [ref=f1e477]: destroyInactiveTabPane
+                  - cell "true 时未激活面板完全不挂载（切走销毁，状态丢失）；false 时始终挂载，用 display 切换可见性" [ref=f1e478]
+                  - cell [ref=f1e481]:
+                    - code [ref=f1e484]: boolean
+                  - cell [ref=f1e485]:
+                    - code [ref=f1e488]: "false"
+                - row [ref=f1e489]:
+                  - cell [ref=f1e490]:
+                    - code [ref=f1e493]: editable
+                  - cell "显式覆盖是否显示关闭按钮与新增按钮；未传时由 type 推导" [ref=f1e494]
+                  - cell [ref=f1e497]:
+                    - code [ref=f1e500]: boolean
+                  - cell [ref=f1e501]:
+                    - code [ref=f1e504]: type === 'editable-card'
+                - row [ref=f1e505]:
+                  - cell [ref=f1e506]:
+                    - code [ref=f1e509]: hideAdd
+                  - cell "editable 为真时隐藏新增按钮，仍保留关闭按钮" [ref=f1e510]
+                  - cell [ref=f1e513]:
+                    - code [ref=f1e516]: boolean
+                  - cell [ref=f1e517]:
+                    - code [ref=f1e520]: "false"
+                - row [ref=f1e521]:
+                  - cell [ref=f1e522]:
+                    - code [ref=f1e525]: addIcon
+                  - cell "自定义新增按钮的图标内容" [ref=f1e526]
+                  - cell [ref=f1e529]:
+                    - code [ref=f1e532]: JSX.Element
+                  - cell [ref=f1e533]:
+                    - code [ref=f1e536]: i-mdi-plus 图标
+                - row [ref=f1e537]:
+                  - cell [ref=f1e538]:
+                    - code [ref=f1e541]: onEdit
+                  - cell "点击新增（target 为原始事件）或关闭（target 为被关闭项的 key）时触发；items 归调用者所有，组件不直接修改传入数组" [ref=f1e542]
+                  - cell [ref=f1e545]:
+                    - code [ref=f1e548]: "(target: string | MouseEvent, action: 'add' | 'remove') => void"
+                  - cell [ref=f1e549]:
+                    - code [ref=f1e552]: —
+                - row [ref=f1e553]:
+                  - cell [ref=f1e554]:
+                    - code [ref=f1e557]: draggable
+                  - cell "允许拖拽排序（原生 HTML5 drag/drop），或 Alt+方向键排序；禁用项不可作为拖拽源或目标" [ref=f1e558]
+                  - cell [ref=f1e561]:
+                    - code [ref=f1e564]: boolean
+                  - cell [ref=f1e565]:
+                    - code [ref=f1e568]: "false"
+                - row [ref=f1e569]:
+                  - cell [ref=f1e570]:
+                    - code [ref=f1e573]: onReorder
+                  - cell "拖拽或键盘排序完成后触发，携带重排后的完整 items 数组与移动信息；组件内部临时排序，父层未同步 items 时下次渲染会用父层的原始顺序覆盖" [ref=f1e574]
+                  - cell [ref=f1e577]:
+                    - code [ref=f1e580]: "(items: TabsItem[], info: { key: string; from: number; to: number }) => void"
+                  - cell [ref=f1e581]:
+                    - code [ref=f1e584]: —
+                - row [ref=f1e585]:
+                  - cell [ref=f1e586]:
+                    - code [ref=f1e589]: class
+                  - cell "根容器的 UnoCSS 类" [ref=f1e590]
+                  - cell [ref=f1e593]:
+                    - code [ref=f1e596]: string
+                  - cell [ref=f1e597]:
+                    - code [ref=f1e600]: —
+                - row [ref=f1e601]:
+                  - cell [ref=f1e602]:
+                    - code [ref=f1e605]: style
+                  - cell "根容器的内联样式" [ref=f1e606]
+                  - cell [ref=f1e609]:
+                    - code [ref=f1e612]: JSX.CSSProperties
+                  - cell [ref=f1e613]:
+                    - code [ref=f1e616]: —
+                - row [ref=f1e617]:
+                  - cell [ref=f1e618]:
+                    - code [ref=f1e621]: ref
+                  - cell "暴露 activeKey()/setActiveKey(key)/nextTab()/prevTab() 命令式接口；nextTab/prevTab 只在可用（非禁用）标签间移动" [ref=f1e622]
+                  - cell [ref=f1e625]:
+                    - code [ref=f1e628]: "(val: TabsIns) => void"
+                  - cell [ref=f1e629]:
+                    - code [ref=f1e632]: —
+          - region [ref=f1e633]:
+            - heading "TabsItem API" [level=2] [ref=f1e634]
+            - generic [ref=f1e635]:
+              - paragraph [ref=f1e636]: 每个标签是数据对象，不是子组件；label 是纯文本（不支持 JSX），面板内容通过 children 传入。
+              - table "API 属性表格" [ref=f1e640]:
+                - rowgroup [ref=f1e646]:
+                  - row [ref=f1e647]:
+                    - columnheader "属性" [ref=f1e648]
+                    - columnheader "说明" [ref=f1e651]
+                    - columnheader "类型" [ref=f1e654]
+                    - columnheader "默认值" [ref=f1e657]
+                - rowgroup [ref=f1e660]:
+                  - row [ref=f1e661]:
+                    - cell [ref=f1e662]:
+                      - code [ref=f1e665]: key
+                    - cell "唯一标识；用于 activeKey、onChange、onEdit 的 target 及排序" [ref=f1e666]
+                    - cell [ref=f1e669]:
+                      - code [ref=f1e672]: string
+                    - cell [ref=f1e673]:
+                      - code [ref=f1e676]: —（必填）
+                  - row [ref=f1e677]:
+                    - cell [ref=f1e678]:
+                      - code [ref=f1e681]: label
+                    - cell "标签文字" [ref=f1e682]
+                    - cell [ref=f1e685]:
+                      - code [ref=f1e688]: string
+                    - cell [ref=f1e689]:
+                      - code [ref=f1e692]: —（必填）
+                  - row [ref=f1e693]:
+                    - cell [ref=f1e694]:
+                      - code [ref=f1e697]: children
+                    - cell "对应面板内容；仅 UI 层的 TabsItem 携带（headless TabItem 不含此字段）" [ref=f1e698]
+                    - cell [ref=f1e701]:
+                      - code [ref=f1e704]: JSX.Element
+                    - cell [ref=f1e705]:
+                      - code [ref=f1e708]: —
+                  - row [ref=f1e709]:
+                    - cell [ref=f1e710]:
+                      - code [ref=f1e713]: icon
+                    - cell "图标类名（如 iconify 的 i-mdi-home），需可被 UnoCSS 静态扫描" [ref=f1e714]
+                    - cell [ref=f1e717]:
+                      - code [ref=f1e720]: string
+                    - cell [ref=f1e721]:
+                      - code [ref=f1e724]: —
+                  - row [ref=f1e725]:
+                    - cell [ref=f1e726]:
+                      - code [ref=f1e729]: disabled
+                    - cell "禁用该标签：不可点击、不可作为拖拽源/目标，会被 nextTab/prevTab 跳过" [ref=f1e730]
+                    - cell [ref=f1e733]:
+                      - code [ref=f1e736]: boolean
+                    - cell [ref=f1e737]:
+                      - code [ref=f1e740]: "false"
+                  - row [ref=f1e741]:
+                    - cell [ref=f1e742]:
+                      - code [ref=f1e745]: closable
+                    - cell "editable 模式下是否显示关闭按钮；显式设为 false 可锁定固定页签" [ref=f1e746]
+                    - cell [ref=f1e749]:
+                      - code [ref=f1e752]: boolean
+                    - cell [ref=f1e753]:
+                      - code [ref=f1e756]: "true"
+          - region [ref=f1e757]:
+            - heading "键盘与无障碍" [level=2] [ref=f1e758]
+            - generic [ref=f1e759]:
+              - paragraph [ref=f1e760]:
+                - text: 标签栏本身遵循 WAI-ARIA APG 的 tabs 模式：容器
+                - code [ref=f1e761]: role="tablist"
+                - text: 不占用独立的 Tab 停靠点（
+                - code [ref=f1e762]: tabindex=-1
+                - text: ），只有当前激活的标签是 Tab 键唯一停靠点（
+                - code [ref=f1e763]: tabindex=0
+                - text: ），其余标签
+                - code [ref=f1e764]: tabindex=-1
+                - text: 。
+              - list [ref=f1e765]:
+                - listitem [ref=f1e766]: 方向键（ArrowRight/ArrowDown 前进，ArrowLeft/ArrowUp 后退）在可用标签间循环切换 activeKey，并把 DOM 焦点跟随移动到新激活的标签，跳过禁用项；焦点已经在标签栏内时才会跟随，避免受控 activeKey 从页面其他地方更新时意外抢焦点。
+                - listitem [ref=f1e767]: editable 模式下，聚焦某个标签后按 Delete 请求关闭该标签（等同点击关闭按钮）。
+                - listitem [ref=f1e768]: draggable 模式下，Alt+ArrowLeft / Alt+ArrowRight 在不使用鼠标的情况下与相邻标签互换顺序。
+              - paragraph [ref=f1e769]:
+                - text: 面板
+                - code [ref=f1e770]: role="tabpanel"
+                - text: ；默认模式下非激活面板仍挂载但
+                - code [ref=f1e771]: "display: none"
+                - text: 隐藏，不会被无障碍工具读到。
+          - region [ref=f1e772]:
+            - heading "状态与支持边界" [level=2] [ref=f1e773]
+            - generic [ref=f1e774]:
+              - paragraph [ref=f1e775]: 不传 activeKey 时为非受控模式，defaultActiveKey 仅决定初次挂载的选中项（默认取第一个非禁用项）；传入 activeKey 后为受控模式，onChange 只报告切换请求，父层需更新 activeKey 才会改变实际选中项。
+              - paragraph [ref=f1e776]: items 归调用者所有：add/remove/reorder 都只通过 onEdit/onReorder 请求变更，组件不会直接修改传入的数组，也不在内部维持一份脱离 props 的影子列表——onReorder 触发后若父层未同步更新 items，下一次渲染会用父层的原始顺序覆盖临时排序结果。
+              - paragraph [ref=f1e777]: draggable 基于原生 HTML5 drag/drop API；触摸设备没有对应的拖拽手势支持，依赖 draggable 的排序在触摸设备上请提供 Alt+方向键之外的替代交互（例如上下移动按钮），本库不内置触摸拖拽回退。
+              - paragraph [ref=f1e778]: 当前没有可关闭确认（关闭即立即请求，不等待用户确认对话框）、没有溢出滚动/更多菜单（标签数量超出容器宽度时不会自动出现滚动箭头或折叠菜单，需要调用者自行控制 items 数量或换行样式）。不承诺与其他组件库完全一致；请以本页公开类型与行为约定为准。
+          - generic [ref=f1e779]: Solid Upthrust · 基于 Solid 2 构建

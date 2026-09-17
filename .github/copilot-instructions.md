@@ -1,5 +1,10 @@
-See AGENTS.md for full project specification.
-See CLAUDE.md for Claude Code specific instructions.
-See CODEX.md for OpenAI Codex / GPT instructions.
+Read `AGENTS.md` as the canonical project specification, then
+`docs/contributing/ai-workflow.md` for the required AI workflow.
 
-All three files describe the same project constraints — use whichever your agent reads by convention.
+- Testing rules: `docs/contributing/testing.md` and `packages/testing/README.md`.
+- Feature/fix completion: `docs/contributing/feature-checklist.md`.
+- Documentation architecture and deployment: `docs/README.md`.
+- `CLAUDE.md` retains historical component notes, not an independent normative spec.
+
+All tests live in `packages/testing`. Runtime APIs are Solid 2 RC, not Solid 1.
+Prose/code use SSR; docs examples mount on the client. Preserve unrelated worktree changes.

@@ -1,8 +1,11 @@
-import { Component, For, Show, createMemo, merge } from 'solid-js'
+import { Component, For, Show, createMemo, merge, untrack } from 'solid-js'
 import type { JSX } from '@solidjs/web'
 import { createSkeleton, type SkeletonIns } from 'upthrust-competence'
 import { skeletonElementClass, skeletonRowClass, skeletonTitleClass, skeletonBlockClass, skeletonAvatarClass } from './styles'
 import { twMerge } from 'tailwind-merge'
+import { SkeletonButton, SkeletonAvatar, SkeletonInput, SkeletonNode } from './parts'
+export * from './parts'
+export type { SkeletonIns } from 'upthrust-competence'
 
 export interface SkeletonProps {
   loading?: boolean
@@ -13,14 +16,14 @@ export interface SkeletonProps {
   title?: boolean | { width?: number | string }
   paragraph?: boolean | { rows?: number; width?: number | string | Array<number | string> }
   avatar?: boolean | { size?: number | string; shape?: 'circle' | 'square' }
-  /** Real content; shown when loading is false (antd parity). */
+  /** Real content; shown when loading is false. */
   children?: JSX.Element
   class?: string
   style?: JSX.CSSProperties
   ref?: (val: SkeletonIns) => void
 }
 
-const Skeleton: Component<SkeletonProps> = (rawProps) => {
+const SkeletonComponent: Component<SkeletonProps> = (rawProps) => {
   const props = merge({ active: false, round: false } as const, rawProps)
 
   const sk = createSkeleton({
@@ -36,7 +39,7 @@ const Skeleton: Component<SkeletonProps> = (rawProps) => {
     const a = props.avatar
     if (!a) return undefined
     if (a === true) return { size: 32 as number, shape: 'circle' as const }
-    const size = typeof a.size === 'number' ? a.size : 32
+    const size = a.size ?? 32
     return { size, shape: a.shape ?? 'circle' as const }
   })
 
@@ -45,11 +48,11 @@ const Skeleton: Component<SkeletonProps> = (rawProps) => {
     return typeof width === 'number' ? { width: `${width}px` } : { width }
   }
 
-  props.ref?.(sk.refs)
+  untrack(() => props.ref?.(sk.refs))
 
   return (
-    <Show when={sk.loading()} fallback={props.children}>
-      <div class={twMerge(skeletonBlockClass({ hasAvatar: !!avatarConfig() }), props.class)} style={props.style}>
+    <Show when={sk.loading()} fallback={typeof props.children === 'number' ? String(props.children) : props.children}>
+      <div aria-hidden="true" class={twMerge(skeletonBlockClass({ hasAvatar: !!avatarConfig() }), props.class)} style={props.style}>
         <Show when={avatarConfig()}>
           {(av) => (
             <span
@@ -59,8 +62,8 @@ const Skeleton: Component<SkeletonProps> = (rawProps) => {
               // conflicting groups.
               class={twMerge(skeletonElementClass({ active: props.active }), skeletonAvatarClass({ shape: av().shape }))}
               style={{
-                width: `${av().size}px`,
-                height: `${av().size}px`,
+                width: typeof av().size === 'number' ? `${av().size}px` : String(av().size),
+                height: typeof av().size === 'number' ? `${av().size}px` : String(av().size),
               }}
             />
           )}
@@ -104,4 +107,5 @@ const Skeleton: Component<SkeletonProps> = (rawProps) => {
   )
 }
 
+const Skeleton = /* @__PURE__ */ Object.assign(SkeletonComponent, { Button: SkeletonButton, Avatar: SkeletonAvatar, Input: SkeletonInput, Node: SkeletonNode })
 export default Skeleton

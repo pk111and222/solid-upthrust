@@ -5,6 +5,9 @@ import presetUpthrust from 'upthrust-unocss-preset';
 
 
 export default defineConfig({
+  // Keep vendor-specific pseudo-elements out of ordinary selector lists.
+  // An unsupported pseudo-element otherwise invalidates the whole rule.
+  mergeSelectors: false,
   presets: [
     // No preflights in the LIBRARY stylesheet: consumers load a reset of
     // their own (the example app imports @unocss/reset/tailwind-compat.css).

@@ -1,0 +1,44 @@
+[
+  {
+    "name": "key",
+    "type": "string",
+    "default": "—（必填）",
+    "description": "同一菜单中唯一且稳定的标识；menu.onClick 返回此值，分隔线也需提供"
+  },
+  {
+    "name": "label",
+    "type": "string | JSX.Element",
+    "default": "—（必填）",
+    "description": "标签内容，可使用 JSX；分隔线不显示标签，仍按类型提供空字符串；不要放嵌套交互控件"
+  },
+  {
+    "name": "icon",
+    "type": "string",
+    "default": "—",
+    "description": "前置图标的类名，例如 i-mdi-pencil；不是 JSX 图标节点，图标类需可静态扫描"
+  },
+  {
+    "name": "disabled",
+    "type": "boolean",
+    "default": "false",
+    "description": "禁止该项激活并从键盘导航中跳过；可以与 danger 同时设置"
+  },
+  {
+    "name": "danger",
+    "type": "boolean",
+    "default": "false",
+    "description": "危险操作外观，不改变回调流程；disabled 为 true 时仍不可激活"
+  },
+  {
+    "name": "type",
+    "type": "'divider'",
+    "default": "—（普通项）",
+    "description": "设为 divider 时渲染分隔线，不参与选中或键盘导航；不支持分组和嵌套子菜单"
+  },
+  {
+    "name": "onClick",
+    "type": "() => void",
+    "default": "—",
+    "description": "启用项激活时首先调用；不接收事件或 key，随后调用 menu.onClick(key) 并请求关闭"
+  }
+]

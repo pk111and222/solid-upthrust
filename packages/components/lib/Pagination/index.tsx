@@ -1,3 +1,4 @@
+import { useComponentProps } from '../ConfigProvider/context'
 import { Component, For, Show, merge, createMemo, createSignal } from 'solid-js'
 import type { JSX } from '@solidjs/web'
 import { createPagination } from 'upthrust-competence'
@@ -30,7 +31,8 @@ export interface PaginationProps {
 
 const DEFAULT_PAGE_SIZE_OPTIONS = [10, 20, 50, 100]
 
-const Pagination: Component<PaginationProps> = (rawProps) => {
+const Pagination: Component<PaginationProps> = (providedProps) => {
+  const rawProps = useComponentProps('Pagination', providedProps)
   const props = merge(
     { size: 'default' as const, align: 'start' as const, total: 0 },
     rawProps

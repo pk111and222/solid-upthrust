@@ -1,3 +1,4 @@
+import { useComponentProps } from '../ConfigProvider/context'
 import { Component, For, Show, createMemo, merge, untrack } from 'solid-js'
 import type { JSX } from '@solidjs/web'
 import { createList, createOwnerCleanup, type ListGroupConfig, type ListIns, type ListRow, type ListScrollToConfig } from 'upthrust-competence'
@@ -68,7 +69,8 @@ const resolveKeyGetter = <T,>(rowKey: ListProps<T>['rowKey']) => {
   return (item: T) => (item as Record<string, unknown>)[rowKey as string] as string | number
 }
 
-const List = <T, K = unknown>(rawProps: ListProps<T, K>) => {
+const List = <T, K = unknown>(providedProps: ListProps<T, K>) => {
+  const rawProps = useComponentProps('List', providedProps)
   const props = merge(
     {
       items: [] as T[],

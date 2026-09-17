@@ -1,5 +1,6 @@
+import { ConfigPortal as Portal } from '../ConfigProvider/Portal'
 import { Component, Show, createContext, createEffect, createMemo, merge, onCleanup } from 'solid-js'
-import { Portal, type JSX } from '@solidjs/web'
+import { type JSX } from '@solidjs/web'
 import { createImage, createImageGroup, type ImageGroupIns } from 'upthrust-competence'
 import {
   imagePreviewClass, imagePreviewImgClass, imagePreviewToolbarClass, imagePreviewOpClass,

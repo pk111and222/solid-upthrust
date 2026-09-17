@@ -1,5 +1,6 @@
 import { createSignal } from "solid-js";
-import { isBoolean, isFunction, isObject } from "lodash";
+import isBoolean from "lodash/isBoolean.js";
+import isObject from "lodash/isObject.js";
 import { createOwnerCleanup } from "./utils";
 
 export type ButtonVariant = 'outlined' | 'solid' | 'filled' | 'text' | 'link' | 'dashed'
@@ -23,8 +24,18 @@ export const createButton = (config: ButtonConfig = {}) => {
   const [_loading, _setLoading] = createSignal(false, { ownedWrite: true });
   const [_waveActive, _setWaveActive] = createSignal(false, { ownedWrite: true });
 
-  const [_btnEle, _setBtnEle] = createSignal<HTMLButtonElement>(undefined, { ownedWrite: true })
-  const [_anchorEle, _setAnchorEle] = createSignal<HTMLAnchorElement>(undefined, { ownedWrite: true })
+  const [_btnEle, _setBtnEle] = createSignal<HTMLButtonElement | undefined>(undefined, { ownedWrite: true })
+  const [_anchorEle, _setAnchorEle] = createSignal<HTMLAnchorElement | undefined>(undefined, { ownedWrite: true })
+
+  let loadingTimer: ReturnType<typeof setTimeout> | undefined
+  let detach: (() => void) | undefined
+  onOwnerCleanup(() => {
+    detach?.()
+    clearTimeout(loadingTimer)
+    if (_waveTimer) clearTimeout(_waveTimer)
+    _setBtnEle(undefined)
+    _setAnchorEle(undefined)
+  })
 
   let _waveTimer: ReturnType<typeof setTimeout> | null = null
 
@@ -39,7 +50,8 @@ export const createButton = (config: ButtonConfig = {}) => {
   const changeLoading = () => {
     if(isObject(config.loading) && typeof config.loading.delay === 'number') {
       _setLoading(true)
-      setTimeout(() => {
+      clearTimeout(loadingTimer)
+      loadingTimer = setTimeout(() => {
         _setLoading(false)
       }, config.loading?.delay)
     }
@@ -54,41 +66,31 @@ export const createButton = (config: ButtonConfig = {}) => {
     }, 400)
   }
 
-  function anchor (el: HTMLAnchorElement) {
-    _setAnchorEle(el)
-    onOwnerCleanup(() => {
-      _setAnchorEle(undefined)
-    })
-  }
-
-  function button (el: HTMLButtonElement) {
-    _setBtnEle(el)
-    const _click = (e: MouseEvent) => {
-      if(config.disabled) return
-      if(getRealLoading()) return
+  function bind(el: HTMLButtonElement | HTMLAnchorElement) {
+    detach?.()
+    _setBtnEle(el.tagName === 'BUTTON' ? el as HTMLButtonElement : undefined)
+    _setAnchorEle(el.tagName === 'A' ? el as HTMLAnchorElement : undefined)
+    const click = (e: MouseEvent) => {
+      if (config.disabled || getRealLoading()) {
+        e.preventDefault()
+        e.stopPropagation()
+        return
+      }
       changeLoading()
       triggerWave()
-      const anchorElement = _anchorEle()
-      if(anchorElement) {
-        anchorElement.click()
-      }
-      if(isFunction(config.onClick)) config.onClick(e)
+      config.onClick?.(e)
     }
-    el.addEventListener('click', _click)
-    onOwnerCleanup(() => {
-      _setLoading(false)
-      _setWaveActive(false)
-      if (_waveTimer) clearTimeout(_waveTimer)
-      _setBtnEle(undefined)
-      el.removeEventListener('click', _click)
-    })
+    el.addEventListener('click', click as EventListener)
+    detach = () => el.removeEventListener('click', click as EventListener)
   }
+  const anchor = (el: HTMLAnchorElement) => bind(el)
+  const button = (el: HTMLButtonElement) => bind(el)
 
   const refs: ButtonIns = {
     buttonEle: () => _btnEle(),
     anchorEle: () => _anchorEle(),
     click() {
-      _btnEle()?.click()
+      (_btnEle() ?? _anchorEle())?.click()
     }
   }
 

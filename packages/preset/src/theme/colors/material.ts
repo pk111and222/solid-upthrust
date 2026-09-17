@@ -17,6 +17,7 @@ export function getMaterialColor(option: MaterialColorOptions) {
     variant: option.variant || 'content',
     isDark: false
   })
+  if (!drakSchema || !lightSchema) throw new Error(`Invalid theme color: ${option.color}`)
   return {dark: drakSchema, light: lightSchema}
 }
 

@@ -24,7 +24,7 @@ const EmptyPage: Component = () => {
       <Divider />
 
       <h3 class="text-lg font-semibold mb-3">简洁样式</h3>
-      <Empty image={PRESENTED_IMAGE_SIMPLE} description="暂无搜索结果" />
+      <Empty image={<PRESENTED_IMAGE_SIMPLE />} description="暂无搜索结果" />
 
       <Divider />
 
@@ -50,7 +50,7 @@ const EmptyPage: Component = () => {
         <Show
           when={hasData()}
           fallback={
-            <Empty image={PRESENTED_IMAGE_SIMPLE} description="列表为空">
+            <Empty image={<PRESENTED_IMAGE_SIMPLE />} description="列表为空">
               <Button size="small" onClick={() => setHasData(true)}>添加一条</Button>
             </Empty>
           }

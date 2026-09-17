@@ -1,10 +1,13 @@
-import { Component,  createMemo, merge } from 'solid-js'
+import { Component, Show, createMemo, merge } from 'solid-js'
+import { createTypography, type TypographyCopyConfig, type TypographyEditableConfig } from 'upthrust-competence'
 import type { JSX } from '@solidjs/web'
 import { Dynamic } from '@solidjs/web'
 import { twMerge } from 'tailwind-merge'
 import { typographyClass, titleClass, linkClass, paragraphClass } from './styles'
 
-interface TypographyBaseProps {
+export interface TypographyBaseProps {
+  copyable?: boolean | (TypographyCopyConfig & { icon?: JSX.Element; tooltips?: string | false })
+  editable?: boolean | (TypographyEditableConfig & { icon?: JSX.Element; tooltip?: string | false })
   type?: 'secondary' | 'success' | 'warning' | 'danger'
   strong?: boolean
   italic?: boolean
@@ -18,6 +21,47 @@ interface TypographyBaseProps {
   class?: string
   style?: JSX.CSSProperties
   children?: JSX.Element
+}
+
+const TypographyContent: Component<TypographyBaseProps> = props => {
+  let content: HTMLSpanElement | undefined
+  const state = createTypography({
+    text: () => typeof props.children === 'string' || typeof props.children === 'number' ? String(props.children) : content?.textContent ?? '',
+    get disabled() { return props.disabled },
+    get copyable() { return props.copyable },
+    get editable() { return props.editable },
+    async writeClipboard(text) {
+      if (navigator.clipboard?.writeText) { await navigator.clipboard.writeText(text); return }
+      const previous = document.activeElement as HTMLElement | null
+      const field = document.createElement('textarea')
+      field.value = text; field.setAttribute('aria-hidden', 'true'); field.className = 'fixed opacity-0 pointer-events-none'
+      document.body.append(field); field.select()
+      try { if (!document.execCommand('copy')) throw new Error('Clipboard is unavailable') }
+      finally { field.remove(); previous?.focus() }
+    },
+  })
+  const editOptions = () => typeof props.editable === 'object' ? props.editable : {}
+  const copyOptions = () => typeof props.copyable === 'object' ? props.copyable : {}
+  return <Show when={state.editing()} fallback={<>
+    <span ref={content}>{wrapDecorations(editOptions().text ?? state.localText() ?? props.children, props)}</span>
+    <Show when={props.editable && !props.disabled}>
+      <button type="button" class="inline-flex align-middle ml-1 p-0 border-0 bg-transparent text-primary cursor-pointer" aria-label="编辑"
+        title={editOptions().tooltip || undefined} onClick={state.startEdit}>{editOptions().icon ?? <span class="i-mdi-pencil-outline" />}</button>
+    </Show>
+    <Show when={props.copyable && !props.disabled}>
+      <button type="button" class="inline-flex align-middle ml-1 p-0 border-0 bg-transparent text-primary cursor-pointer" aria-label={state.copied() ? '已复制' : '复制'}
+        title={copyOptions().tooltips || undefined} disabled={state.copying()} onClick={() => void state.copy()}>
+        <Show when={state.copied()} fallback={copyOptions().icon ?? <span class="i-mdi-content-copy" />}><span class="i-mdi-check text-green-600" /></Show>
+      </button>
+      <span role="status" class="sr-only">{state.copied() ? '已复制' : ''}</span>
+    </Show>
+  </>}>
+    <textarea aria-label="编辑文本" class="w-full box-border rounded border border-solid border-primary bg-transparent text-inherit p-1 outline-none"
+      ref={el => { el.value = state.text(); state.setDraft(state.text()); queueMicrotask(() => { if (el.isConnected) { el.focus(); el.setSelectionRange(el.value.length, el.value.length) } }) }}
+      value={state.draft()} maxlength={editOptions().maxLength}
+      onInput={e => state.setDraft(e.currentTarget.value)} onBlur={e => state.finishEdit(e.currentTarget.value)}
+      onKeyDown={e => { if (e.isComposing) return; if (e.key === 'Escape') { e.preventDefault(); state.cancelEdit() } else if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); state.finishEdit(e.currentTarget.value) } }} />
+  </Show>
 }
 
 export interface TextProps extends TypographyBaseProps {}
@@ -74,7 +118,7 @@ export const Text: Component<TextProps> = (rawProps) => {
   }))
 
   return <span class={_class()} style={_style()}>
-    {wrapDecorations(props.children, props)}
+    <TypographyContent {...props} />
   </span>
 }
 
@@ -97,7 +141,7 @@ export const Title: Component<TitleProps> = (rawProps) => {
   }))
 
   return <Dynamic component={_tag()} class={_class()} style={_style()}>
-    {wrapDecorations(props.children, props)}
+    <TypographyContent {...props} />
   </Dynamic>
 }
 
@@ -118,7 +162,7 @@ export const Paragraph: Component<ParagraphProps> = (rawProps) => {
   }))
 
   return <div class={_class()} style={_style()}>
-    {wrapDecorations(props.children, props)}
+    <TypographyContent {...props} />
   </div>
 }
 

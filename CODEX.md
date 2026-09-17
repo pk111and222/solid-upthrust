@@ -1,3 +1,8 @@
+> Required entry: read `AGENTS.md` → `docs/contributing/ai-workflow.md`.
+> Tests: `docs/contributing/testing.md`; feature completion: `docs/contributing/feature-checklist.md`.
+> All tests belong in `packages/testing`; documentation is in root `docs` (Solid 2 SSR + client-only examples, no SolidStart).
+> `AGENTS.md` is canonical; preserve the historical notes below, but resolve conflicts against the current source/types and canonical workflow.
+
 This is a SolidJS enterprise (B-end) component library monorepo styled with UnoCSS.
 Visual design follows solidjs-upthrust patterns — never import third-party UI libraries directly.
 
@@ -14,7 +19,7 @@ Visual design follows solidjs-upthrust patterns — never import third-party UI 
 2. Components with interactive state import logic from competence via createXxx()
 3. Pure layout components (Flex, Grid, Divider, Space, etc.) do NOT need competence
 4. All styling through UnoCSS utilities — no CSS files
-5. Use SolidJS patterns: createSignal, createMemo, splitProps, mergeProps, Show, For
+5. Use SolidJS patterns: createSignal, createMemo, omit, merge, Show, For (verify installed Solid 2 types)
 6. TypeScript strict — export all props interfaces
 7. Use pnpm workspace protocol for cross-package references
 

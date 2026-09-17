@@ -1,0 +1,56 @@
+[
+  {
+    "name": "children",
+    "type": "JSX.Element",
+    "default": "—",
+    "description": "配置区域的内容"
+  },
+  {
+    "name": "wrapper",
+    "type": "boolean",
+    "default": "true",
+    "description": "false 时不渲染 div，只提供默认属性；不可同时设置 theme/class/style"
+  },
+  {
+    "name": "componentSize",
+    "type": "small | middle | large",
+    "default": "继承父层",
+    "description": "仅传递给支持尺寸的控件"
+  },
+  {
+    "name": "componentDisabled",
+    "type": "boolean",
+    "default": "继承父层",
+    "description": "仅传递给支持禁用的控件"
+  },
+  {
+    "name": "components",
+    "type": "ComponentDefaults",
+    "default": "{}",
+    "description": "按组件名浅合并，嵌套对象整体替换；只支持类型声明列出的默认属性"
+  },
+  {
+    "name": "theme",
+    "type": "ConfigTheme",
+    "default": "—",
+    "description": "colors 为颜色字符串映射，prefix 默认 --upthrust"
+  },
+  {
+    "name": "inherit",
+    "type": "boolean",
+    "default": "true",
+    "description": "false 重置组件配置，CSS 颜色仍按 DOM 继承"
+  },
+  {
+    "name": "class",
+    "type": "string",
+    "default": "—",
+    "description": "区域 div 类名"
+  },
+  {
+    "name": "style",
+    "type": "JSX.CSSProperties",
+    "default": "—",
+    "description": "覆盖 theme 同名 CSS 变量"
+  }
+]

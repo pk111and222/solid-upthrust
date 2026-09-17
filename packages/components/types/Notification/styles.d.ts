@@ -1,13 +1,13 @@
 import { VariantProps } from 'class-variance-authority';
 declare const notificationViewportVariants: (props?: ({
-    placement?: "bottom" | "top" | "bottomLeft" | "bottomRight" | "topLeft" | "topRight" | null | undefined;
+    placement?: "bottomLeft" | "bottomRight" | "bottom" | "topLeft" | "topRight" | "top" | null | undefined;
 } & import('class-variance-authority/types').ClassProp) | undefined) => string;
 declare const notificationNoticeVariants: (props?: ({
-    state?: "closing" | "visible" | "enter" | null | undefined;
-    side?: "center" | "left" | "right" | null | undefined;
+    state?: "visible" | "enter" | "closing" | null | undefined;
+    side?: "left" | "right" | "center" | null | undefined;
 } & import('class-variance-authority/types').ClassProp) | undefined) => string;
 declare const notificationEnterVariants: (props?: ({
-    side?: "center" | "left" | "right" | null | undefined;
+    side?: "left" | "right" | "center" | null | undefined;
 } & import('class-variance-authority/types').ClassProp) | undefined) => string;
 declare const notificationBodyVariants: (props?: ({} & import('class-variance-authority/types').ClassProp) | undefined) => string;
 declare const notificationMessageVariants: (props?: ({
@@ -17,7 +17,7 @@ declare const notificationDescriptionVariants: (props?: ({
     withIcon?: boolean | null | undefined;
 } & import('class-variance-authority/types').ClassProp) | undefined) => string;
 declare const notificationIconVariants: (props?: ({
-    type?: "success" | "info" | "warning" | "error" | null | undefined;
+    type?: "error" | "warning" | "success" | "info" | null | undefined;
 } & import('class-variance-authority/types').ClassProp) | undefined) => string;
 declare const notificationCloseVariants: (props?: ({} & import('class-variance-authority/types').ClassProp) | undefined) => string;
 declare const notificationActionsVariants: (props?: ({} & import('class-variance-authority/types').ClassProp) | undefined) => string;

@@ -1,0 +1,14 @@
+[
+  {
+    "name": "items",
+    "type": "DropdownMenuItem[]",
+    "default": "—（必填）",
+    "description": "菜单项数组，可动态替换；空数组不自动补充空状态或可操作项"
+  },
+  {
+    "name": "onClick",
+    "type": "(key: string) => void",
+    "default": "—",
+    "description": "启用项激活后接收该项 key；调用顺序为 item.onClick → menu.onClick → 关闭请求；分隔线和禁用项不调用"
+  }
+]

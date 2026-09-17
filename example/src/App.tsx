@@ -3,7 +3,7 @@ import { createRouter, useLocation } from "@solidjs/router";
 import routes, { type AppRoute } from './router';
 import { MessageProvider, NotificationProvider } from 'upthrust-ui';
 
-const categoryOrder = ['通用', '布局', '导航', '数据展示', '反馈', '其他']
+const categoryOrder = ['通用', '布局', '导航', '数据录入', '数据展示', '反馈', '其他']
 
 const Router = createRouter({ routes })
 

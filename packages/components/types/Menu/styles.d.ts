@@ -1,19 +1,19 @@
 import { VariantProps } from 'class-variance-authority';
 declare const menuContainerVariants: (props?: ({
-    mode?: "inline" | "horizontal" | "vertical" | null | undefined;
+    mode?: "horizontal" | "vertical" | "inline" | null | undefined;
 } & import('class-variance-authority/types').ClassProp) | undefined) => string;
 declare const menuItemVariants: (props?: ({
     state?: "idle" | "selected-vertical" | "selected-inline" | "selected-horizontal" | null | undefined;
     disabled?: boolean | null | undefined;
     danger?: boolean | null | undefined;
-    mode?: "inline" | "horizontal" | "vertical" | null | undefined;
+    mode?: "horizontal" | "vertical" | "inline" | null | undefined;
 } & import('class-variance-authority/types').ClassProp) | undefined) => string;
 declare const menuSubPopupVariants: (props?: ({
     open?: boolean | null | undefined;
 } & import('class-variance-authority/types').ClassProp) | undefined) => string;
 declare const menuSubTitleVariants: (props?: ({
     open?: boolean | null | undefined;
-    mode?: "inline" | "horizontal" | "vertical" | null | undefined;
+    mode?: "horizontal" | "vertical" | "inline" | null | undefined;
 } & import('class-variance-authority/types').ClassProp) | undefined) => string;
 declare const menuGroupTitleVariants: (props?: ({} & import('class-variance-authority/types').ClassProp) | undefined) => string;
 declare const menuDividerVariants: (props?: ({} & import('class-variance-authority/types').ClassProp) | undefined) => string;

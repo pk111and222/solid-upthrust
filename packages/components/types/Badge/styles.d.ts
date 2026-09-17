@@ -4,17 +4,17 @@ declare const badgeWrapperVariants: (props?: ({
 } & import('class-variance-authority/types').ClassProp) | undefined) => string;
 declare const badgeCountVariants: (props?: ({
     sizeMode?: "middle-wrapped" | "middle-standalone" | "small-wrapped" | "small-standalone" | null | undefined;
-    color?: "primary" | "gray" | "success" | "warning" | "error" | "processing" | "custom" | null | undefined;
+    color?: "error" | "warning" | "success" | "primary" | "gray" | "processing" | "custom" | null | undefined;
     words?: boolean | null | undefined;
     visible?: boolean | null | undefined;
 } & import('class-variance-authority/types').ClassProp) | undefined) => string;
 declare const badgeDotVariants: (props?: ({
     mode?: "wrapped" | "standalone" | null | undefined;
-    color?: "primary" | "gray" | "success" | "warning" | "error" | "processing" | "custom" | null | undefined;
+    color?: "error" | "warning" | "success" | "primary" | "gray" | "processing" | "custom" | null | undefined;
     visible?: boolean | null | undefined;
 } & import('class-variance-authority/types').ClassProp) | undefined) => string;
 declare const badgeStatusDotVariants: (props?: ({
-    status?: "default" | "gray" | "success" | "warning" | "error" | "processing" | null | undefined;
+    status?: "error" | "warning" | "success" | "default" | "gray" | "processing" | null | undefined;
 } & import('class-variance-authority/types').ClassProp) | undefined) => string;
 declare const badgeStatusTextVariants: (props?: ({} & import('class-variance-authority/types').ClassProp) | undefined) => string;
 declare const ribbonVariants: (props?: ({

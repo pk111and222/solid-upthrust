@@ -1,4 +1,4 @@
-import { createSignal, onCleanup, createMemo } from "solid-js";
+import { createSignal, createMemo, untrack } from "solid-js";
 import { createOwnerCleanup } from "./utils";
 
 export type DropdownPlacement = 'bottomLeft' | 'bottomRight' | 'topLeft' | 'topRight' | 'bottom' | 'top'
@@ -19,14 +19,17 @@ export type DropdownIns = {
   toggle: () => void
 }
 
+/** @deprecated Compatibility API for inline overlays; new floating layers use createTrigger. */
 export const createDropdown = (config: DropdownConfig = {}) => {
   const onOwnerCleanup = createOwnerCleanup();
-  const [_open, _setOpen] = createSignal(config.defaultOpen ?? false)
+  const [_open, _setOpen] = createSignal(untrack(() => config.defaultOpen ?? false), { ownedWrite: true })
+  const [hasTrigger, setHasTrigger] = createSignal(false, { ownedWrite: true })
+  let disposed = false
 
   const open = createMemo(() => config.open !== undefined ? config.open : _open())
 
   const setOpen = (v: boolean) => {
-    if (config.disabled) return
+    if (disposed || config.disabled) return
     _setOpen(v)
     config.onOpenChange?.(v)
   }
@@ -39,6 +42,7 @@ export const createDropdown = (config: DropdownConfig = {}) => {
 
   const triggerRef = (el: HTMLElement) => {
     _triggerEl = el
+    setHasTrigger(true)
     const trigger = config.trigger ?? 'hover'
 
     if (trigger === 'click') {
@@ -54,6 +58,7 @@ export const createDropdown = (config: DropdownConfig = {}) => {
         setOpen(true)
       }
       const handleLeave = () => {
+        if (_hoverTimeout) clearTimeout(_hoverTimeout)
         _hoverTimeout = setTimeout(() => setOpen(false), 100)
       }
       el.addEventListener('mouseenter', handleEnter)
@@ -81,6 +86,7 @@ export const createDropdown = (config: DropdownConfig = {}) => {
         if (_hoverTimeout) clearTimeout(_hoverTimeout)
       }
       const handleLeave = () => {
+        if (_hoverTimeout) clearTimeout(_hoverTimeout)
         _hoverTimeout = setTimeout(() => setOpen(false), 100)
       }
       el.addEventListener('mouseenter', handleEnter)
@@ -99,11 +105,19 @@ export const createDropdown = (config: DropdownConfig = {}) => {
     if (_triggerEl?.contains(target) || _overlayEl?.contains(target)) return
     setOpen(false)
   }
-  document.addEventListener('pointerdown', handleClickOutside)
-  onCleanup(() => document.removeEventListener('pointerdown', handleClickOutside))
+  if (typeof document !== 'undefined') {
+    document.addEventListener('pointerdown', handleClickOutside)
+    onOwnerCleanup(() => document.removeEventListener('pointerdown', handleClickOutside))
+  }
+  onOwnerCleanup(() => {
+    disposed = true
+    if (_hoverTimeout) clearTimeout(_hoverTimeout)
+    _triggerEl = undefined
+    _overlayEl = undefined
+  })
 
   const overlayStyle = createMemo((): Record<string, string> => {
-    if (!_triggerEl) return { position: 'absolute' }
+    if (!hasTrigger()) return { position: 'absolute' }
     const placement = config.placement ?? 'bottomLeft'
     const base: Record<string, string> = { position: 'absolute', 'z-index': '1050' }
 

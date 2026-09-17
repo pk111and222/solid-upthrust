@@ -1,5 +1,6 @@
+import { ConfigPortal as Portal } from '../ConfigProvider/Portal'
 import { Component, For, Show, createEffect, createMemo, createSignal, merge, onCleanup } from 'solid-js'
-import { Portal, type JSX } from '@solidjs/web'
+import { type JSX } from '@solidjs/web'
 import {
   getNotificationManager,
   NOTIFICATION_PLACEMENTS,

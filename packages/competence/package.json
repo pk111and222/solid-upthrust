@@ -27,6 +27,18 @@
     "./source": {
       "source": "./src/index.ts",
       "types": "./src/index.ts"
+    },
+    "./es/table": {
+      "types": "./types/table/index.d.ts",
+      "import": "./dist/es/table/index.js"
+    },
+    "./es/colorPicker": {
+      "types": "./types/colorPicker/index.d.ts",
+      "import": "./dist/es/colorPicker/index.js"
+    },
+    "./es/tour": {
+      "types": "./types/tour/index.d.ts",
+      "import": "./dist/es/tour/index.js"
     }
   },
   "main": "./dist/upthrust-competence.cjs",
@@ -42,7 +54,7 @@
     "build": "vite build && vite build --mode preserve",
     "build:bundle": "vite build",
     "build:es": "vite build --mode preserve",
-    "test": "vitest run"
+    "test": "pnpm --dir ../testing run test:competence"
   },
   "license": "MIT",
   "peerDependencies": {
@@ -50,6 +62,7 @@
     "solid-js": "^2.0.0-rc.0"
   },
   "dependencies": {
+    "async-validator": "4.2.5",
     "lodash": "^4.18.1"
   },
   "devDependencies": {

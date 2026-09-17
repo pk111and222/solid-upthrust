@@ -1,7 +1,7 @@
 import { VariantProps } from 'class-variance-authority';
 declare const dropdownOverlayVariants: (props?: ({
     visible?: boolean | null | undefined;
-    placement?: "left" | "right" | "bottom" | "top" | "bottomLeft" | "bottomRight" | "topLeft" | "topRight" | "leftTop" | "leftBottom" | "rightTop" | "rightBottom" | null | undefined;
+    placement?: "left" | "right" | "bottomLeft" | "bottomRight" | "bottom" | "topLeft" | "topRight" | "top" | "leftTop" | "leftBottom" | "rightTop" | "rightBottom" | null | undefined;
 } & import('class-variance-authority/types').ClassProp) | undefined) => string;
 declare const dropdownItemVariants: (props?: ({
     disabled?: boolean | null | undefined;

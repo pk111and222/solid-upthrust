@@ -5,6 +5,6 @@ export interface MaterialColorOptions {
     variant?: VariantType;
 }
 export declare function getMaterialColor(option: MaterialColorOptions): {
-    dark: import('solid-material-color').SimpleDynamicScheme | null;
-    light: import('solid-material-color').SimpleDynamicScheme | null;
+    dark: import('solid-material-color').SimpleDynamicScheme;
+    light: import('solid-material-color').SimpleDynamicScheme;
 };

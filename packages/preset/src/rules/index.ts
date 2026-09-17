@@ -38,6 +38,10 @@ export function createRules(sizeTokens: SizeTokens, styleTokens: StyleTokens): R
     [/^h-control$/, () => ({ height: sizeTokens.controlHeight, 'line-height': sizeTokens.controlHeight })],
     [/^h-control-sm$/, () => ({ height: sizeTokens.controlHeightSM, 'line-height': sizeTokens.controlHeightSM })],
     [/^h-control-lg$/, () => ({ height: sizeTokens.controlHeightLG, 'line-height': sizeTokens.controlHeightLG })],
+    // min-height twins (antd form control-input minHeight per size)
+    [/^min-h-control$/, () => ({ 'min-height': sizeTokens.controlHeight })],
+    [/^min-h-control-sm$/, () => ({ 'min-height': sizeTokens.controlHeightSM })],
+    [/^min-h-control-lg$/, () => ({ 'min-height': sizeTokens.controlHeightLG })],
 
     // Motion duration utilities
     [/^duration-fast$/, () => ({ 'transition-duration': styleTokens.motionDurationFast })],
@@ -134,6 +138,22 @@ export function createRules(sizeTokens: SizeTokens, styleTokens: StyleTokens): R
     // scales up 0.8→2.4 while fading 0.5→0. Applied to the dot's ::after.
     [/^animate-badge-processing$/, () => ({
       animation: `ut-badge-processing 1.2s ease-in-out infinite`,
+    })],
+
+    // Form feedback icon entrance (antd antZoomIn): scale 0.2→1 with fade.
+    // Duration/easing per antd: motionDurationMid + motionEaseOutBack.
+    [/^animate-feedback-zoom-in$/, () => ({
+      animation: `ut-zoom-in ${styleTokens.motionDurationMid} cubic-bezier(0.34, 1.56, 0.64, 1)`,
+    })],
+
+    // Form explain (validation message) item entrance (antd show-help-item):
+    // slide up 5px + fade + collapse height. The height leg needs the real
+    // height at 100%, so the keyframe animates max-height 0→200px alongside
+    // — the visual read matches antd's measured-height transition closely
+    // enough at message row heights.
+    [/^animate-form-explain-item$/, () => ({
+      overflow: 'hidden',
+      animation: `ut-form-explain-item ${styleTokens.motionDurationFast} ${styleTokens.motionEaseInOut}`,
     })],
   ]
 }

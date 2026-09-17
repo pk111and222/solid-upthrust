@@ -1,0 +1,86 @@
+[
+  {
+    "name": "title",
+    "type": "JSX.Element",
+    "default": "—",
+    "description": "卡片标题；与 content 都为空时视为空内容，不会打开浮层"
+  },
+  {
+    "name": "content",
+    "type": "JSX.Element",
+    "default": "—",
+    "description": "卡片内容，可承载任意元素（包括按钮等交互控件）；与 title 都为空时视为空内容"
+  },
+  {
+    "name": "children",
+    "type": "JSX.Element",
+    "default": "—（必填）",
+    "description": "触发区域内容"
+  },
+  {
+    "name": "trigger",
+    "type": "'hover' | 'click' | 'contextMenu' | 'focus'",
+    "default": "'hover'",
+    "description": "单一触发方式；右键菜单仍以触发元素为定位锚点，不跟随鼠标坐标"
+  },
+  {
+    "name": "placement",
+    "type": "PopoverPlacement（12 个位置，见下方说明）",
+    "default": "'top'",
+    "description": "首选弹出位置；空间不足时可翻转或偏移，实际位置以视口内可见区域为准"
+  },
+  {
+    "name": "open",
+    "type": "boolean",
+    "default": "—（非受控）",
+    "description": "受控展开状态；传入后由父层决定实际开关，优先于 defaultOpen，disabled 不覆盖该值"
+  },
+  {
+    "name": "defaultOpen",
+    "type": "boolean",
+    "default": "false",
+    "description": "非受控实例首次挂载时的展开状态，后续变化使用 open 控制"
+  },
+  {
+    "name": "onOpenChange",
+    "type": "(open: boolean) => void",
+    "default": "—",
+    "description": "用户开关请求的回调，只提供布尔值；受控时需自行更新 open"
+  },
+  {
+    "name": "disabled",
+    "type": "boolean",
+    "default": "false",
+    "description": "阻止用户开关请求；title 与 content 都为空时内部也会等效禁用。已经打开的浮层不会被强制关闭，但会立即隐藏（不留空卡片），内容恢复后无需重新触发即可重新可见"
+  },
+  {
+    "name": "getContainer",
+    "type": "() => HTMLElement",
+    "default": "—（最近 ConfigProvider 主题作用域，否则 document.body）",
+    "description": "浮层实际挂载的 Portal 容器；不传时使用最近的局部主题作用域"
+  },
+  {
+    "name": "class",
+    "type": "string",
+    "default": "—",
+    "description": "触发区域根容器的 UnoCSS 类，不作用于 Portal 浮层"
+  },
+  {
+    "name": "style",
+    "type": "JSX.CSSProperties",
+    "default": "—",
+    "description": "触发区域根容器的内联样式"
+  },
+  {
+    "name": "overlayClass",
+    "type": "string",
+    "default": "—",
+    "description": "浮层的类，与内置类合并；UnoCSS 工具类需可静态扫描"
+  },
+  {
+    "name": "overlayStyle",
+    "type": "JSX.CSSProperties",
+    "default": "—",
+    "description": "浮层内联样式，合并在内部定位样式之后；可用于覆盖 z-index 等字段，但避免破坏 position/top/left 定位"
+  }
+]

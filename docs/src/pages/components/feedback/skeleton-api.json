@@ -1,0 +1,56 @@
+[
+  {
+    "name": "loading",
+    "type": "boolean",
+    "default": "true",
+    "description": "为 false 时渲染 children"
+  },
+  {
+    "name": "active",
+    "type": "boolean",
+    "default": "false",
+    "description": "开启渐变动画，遵循减少动态效果偏好"
+  },
+  {
+    "name": "round",
+    "type": "boolean",
+    "default": "false",
+    "description": "标题和段落使用圆角端点，不改变头像形状"
+  },
+  {
+    "name": "title",
+    "type": "boolean | { width?: number | string }",
+    "default": "true",
+    "description": "标题显示和宽度，默认全宽"
+  },
+  {
+    "name": "paragraph",
+    "type": "boolean | { rows?: number; width?: number | string | (number | string)[] }",
+    "default": "{ rows: 3 }",
+    "description": "段落开关、行数、单值或逐行宽度"
+  },
+  {
+    "name": "avatar",
+    "type": "boolean | { size?: number | string; shape?: 'circle' | 'square' }",
+    "default": "false",
+    "description": "显示头像；启用后默认 32px、circle"
+  },
+  {
+    "name": "children",
+    "type": "JSX.Element",
+    "default": "—",
+    "description": "不加载时的真实内容"
+  },
+  {
+    "name": "class / style",
+    "type": "string / JSX.CSSProperties",
+    "default": "—",
+    "description": "占位容器样式"
+  },
+  {
+    "name": "ref",
+    "type": "(instance: SkeletonIns) => void",
+    "default": "—",
+    "description": "读取 loading()"
+  }
+]

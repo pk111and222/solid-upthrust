@@ -1,6 +1,7 @@
 import { Component } from 'solid-js';
 import { JSX } from '@solidjs/web';
 import { TooltipIns, TriggerPlacement, TriggerAction } from 'upthrust-competence';
+export type { TooltipIns } from 'upthrust-competence';
 export type TooltipPlacement = TriggerPlacement;
 export type TooltipTrigger = TriggerAction;
 export interface TooltipProps {

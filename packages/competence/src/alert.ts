@@ -1,5 +1,8 @@
 import { createMemo, createSignal } from "solid-js";
-import { isBoolean, isFunction, isNumber, isObject } from "lodash";
+import isBoolean from "lodash/isBoolean.js";
+import isFunction from "lodash/isFunction.js";
+import isNumber from "lodash/isNumber.js";
+import isObject from "lodash/isObject.js";
 import { createOwnerCleanup } from "./utils";
 
 export type AlertConfig = {

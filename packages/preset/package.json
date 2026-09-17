@@ -25,7 +25,7 @@
   "scripts": {
     "watch": "vite build --mode watch",
     "build": "vite build",
-    "test": "vitest run"
+    "test": "pnpm --dir ../testing run test:preset"
   },
   "license": "MIT",
   "devDependencies": {

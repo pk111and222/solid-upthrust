@@ -1,2 +1,2 @@
-import type { Extractor } from '@unocss/core';
+import { Extractor } from '@unocss/core';
 export declare function extractorIcons(): Extractor;

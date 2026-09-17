@@ -1,3 +1,4 @@
+import { useComponentProps } from '../ConfigProvider/context'
 import { Component, For, Show, createMemo, merge } from 'solid-js'
 import type { JSX } from '@solidjs/web'
 import { twMerge } from 'tailwind-merge'
@@ -161,7 +162,8 @@ const toRows = (items: DescriptionsItem[], column: number): DescriptionsRowCell[
   return rows
 }
 
-const Descriptions: Component<DescriptionsProps> = (rawProps) => {
+const Descriptions: Component<DescriptionsProps> = (providedProps) => {
+  const rawProps = useComponentProps('Descriptions', providedProps)
   const props = merge(
     {
       column: 3 as DescriptionsColumn,

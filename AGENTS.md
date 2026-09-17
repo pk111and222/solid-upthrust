@@ -1,7 +1,23 @@
 # Solid Upthrust - Agent Specification
 
 > This file is the canonical agent instruction set for this repository.
-> Compatible with: Claude Code (CLAUDE.md symlink), OpenAI Codex, Cursor, Windsurf, Copilot Workspace, and other AI coding agents.
+> Compatible with: Claude Code (CLAUDE.md entry point), OpenAI Codex, Cursor, Windsurf, Copilot Workspace, and other AI coding agents.
+
+## AI Entry Workflow (REQUIRED)
+
+> 临时回归任务：接手仓库回归前先读根目录 [TODO.md](TODO.md)，按其中的组件顺序、领取台账与验收要求协作；全部完成并归档后删除该文件和本行。
+
+1. Read this file, then `docs/contributing/ai-workflow.md` before changing code.
+2. For tests, read `docs/contributing/testing.md` and `packages/testing/README.md`.
+3. For any feature/fix, apply `docs/contributing/feature-checklist.md`; use its
+   `templates/feature.md` to map capability IDs to source, demos, docs and tests.
+4. For the documentation site, read `docs/README.md` (file routes, SSR/CSR boundaries,
+   base paths and static deployment). It uses Solid 2 directly, NOT SolidStart.
+5. Inspect the dirty worktree and installed/locked versions. Preserve unrelated edits.
+   Never claim skipped/unrun tests, placeholder docs or an undeployed site are complete.
+
+`AGENTS.md` is canonical. `CLAUDE.md` contains additional component history; if its
+legacy details conflict with this file, the current source/types and this workflow win.
 
 ## Identity
 
@@ -9,6 +25,8 @@
 - **Type**: SolidJS enterprise (B-end) component library
 - **Style System**: UnoCSS (classic B-end enterprise visual language)
 - **Monorepo Tool**: pnpm workspace
+- **Runtime**: Solid 2 RC (`solid-js` + `@solidjs/web`); exact versions in lockfile. Do not silently upgrade.
+- **Release**: wait for Solid 2 stable AND release checks; do not assume a release date.
 
 ## Directory Structure
 
@@ -42,16 +60,29 @@ solid-upthrust/
 │   │   ├── types/           #   Generated .d.ts output
 │   │   └── dist/            #   Build output
 │   │
-│   └── preset/              # @pkg: upthrust-unocss-preset
-│       ├── src/
-│       │   ├── index.ts     #   definePreset entry (presetUpthrust)
-│       │   ├── theme/       #   Color palettes, spacing tokens, sizes
-│       │   ├── rules/       #   Custom UnoCSS rules
-│       │   ├── shortcuts.ts #   Component shortcut classes (ut-* prefix)
-│       │   ├── safelist.ts  #   Always-included utilities
-│       │   └── utils/       #   Helpers (color conversion, sequences)
-│       ├── types/
-│       └── dist/
+│   ├── preset/              # @pkg: upthrust-unocss-preset
+│   │   ├── src/
+│   │   │   ├── index.ts     #   definePreset entry (presetUpthrust)
+│   │   │   ├── theme/       #   Color palettes, spacing tokens, sizes
+│   │   │   ├── rules/       #   Custom UnoCSS rules
+│   │   │   ├── shortcuts.ts #   Component shortcut classes (ut-* prefix)
+│   │   │   ├── safelist.ts  #   Always-included utilities
+│   │   │   └── utils/       #   Helpers (color conversion, sequences)
+│   │   ├── types/
+│   │   └── dist/
+│
+│   └── testing/             # private: upthrust-testing (all executable tests)
+│       ├── headless/        # L1: state, logic, preset; docs routing tools
+│       ├── smoke/           # L2: basic imports/configuration/mounting
+│       ├── render/          # L3: simulated-DOM contracts
+│       ├── browser/         # L4: real-browser tests (docs runner exists)
+│       └── utils/           # Explicit helpers and fixtures
+│
+├── docs/                    # private: upthrust-docs (Solid SSR + static output)
+│   ├── contributing/       # AI workflow, testing guide, completion checklist
+│   ├── src/pages/          # File-based routes; SSR prose and code
+│   ├── src/examples/       # Browser-only component demonstrations
+│   └── scripts/            # Prerender/build and static preview
 │
 ├── example/                 # Dev playground & demo pages
 │   ├── src/
@@ -96,9 +127,10 @@ solid-upthrust/
 - Anchor (scroll tracking, active link)
 - Dropdown (open/close, placement)
 - Menu (expand/collapse, selection)
+- Layout.Sider, Masonry, Splitter (breakpoint/collapse, distribution, resizing)
 
 **Does NOT need competence** (pure layout/presentation):
-- Flex, Grid, Space, Divider, Layout, Masonry, Splitter
+- Flex, Grid, Space, Divider, static Layout slots
 - Typography, Icon, Breadcrumb
 
 ### 3. Styling Approach
@@ -143,12 +175,21 @@ const categoryMap = {
 }
 ```
 
+### Step 6: Complete tests and documentation (REQUIRED)
+
+- Keep all tests in `packages/testing`; select applicable L1–L4 checks and document
+  why a layer is not applicable. “Not implemented yet” is NOT “not applicable”.
+- Add/update `docs/src/pages/` content and `docs/src/examples/` client demonstrations.
+  SSR pages use `Demo` IDs and `?raw` source, never execute example imports on the server.
+- Follow `docs/contributing/feature-checklist.md`: public types/exports, `example`
+  demos, test mapping, docs, relevant builds and evidence are one delivery.
+
 ## Constraints & Guardrails
 
 1. **Example required** — Any new component, prop, or feature MUST include an example demo page. PRs without examples should be rejected.
 2. **No third-party UI dependency** — Visual design follows the classic B-end enterprise style; never import third-party UI libraries.
 3. **UnoCSS only** — No CSS modules, styled-components, or Tailwind CSS (we use preset-wind via UnoCSS).
-4. **SolidJS idioms** — `createSignal`, `createMemo`, `createEffect`, `splitProps`, `mergeProps`, `Show`, `For`, `Dynamic`. Never use React hooks or patterns.
+4. **SolidJS 2 idioms** — use the installed RC APIs (`createSignal`, `createMemo`, `merge`, `omit`, `Show`, `For`; DOM APIs from `@solidjs/web`). JSX import source is `@solidjs/web`; contexts use `<Context value={...}>`. Do not copy Solid 1 `splitProps`/`mergeProps` or React patterns without checking current types.
 5. **Tree-shakeable** — Named exports, no top-level side effects (except `import 'uno.css'` in the barrel).
 6. **TypeScript strict** — All props interfaces exported, no `any` without justification.
 7. **pnpm workspace** — Cross-package references use `workspace:*` protocol.
@@ -163,13 +204,46 @@ pnpm install
 pnpm run dev::preset       # Terminal 1: watch preset
 pnpm run dev::competence   # Terminal 2: watch competence  
 pnpm run dev::component    # Terminal 3: watch components
-pnpm run dev::example      # Terminal 4: dev server at localhost:5173
+pnpm run dev::example      # Terminal 4: dev server at localhost:5656
 
-# Build all
+# Build production packages + example
 pnpm run build
+
+# Independent docs app (does not require production dist builds)
+pnpm run dev:docs          # localhost:5657
+pnpm run check:docs        # docs typecheck + static SSR build
+pnpm run test:docs         # docs unit/DOM contracts
+pnpm run test:docs:browser # real static site at root + repository base
 ```
 
-## Existing Components
+## Testing
+
+All tests live in the private `packages/testing` workspace; do not add colocated
+production-package tests. Its layers are `headless` (L1: state/logic, including
+preset tests), `smoke` (L2: basic component usability), `render` (L3: DOM contracts),
+and `browser` (L4: real-browser rendering/interaction). Shared helpers and fixtures
+belong in `packages/testing/utils`.
+
+Within each layer, group tests directly by material: `<layer>/<Material>/<capability>.test.ts(x)`
+(or `.spec.ts` for browser). Use the same PascalCase material name across all four
+layers; do not add a `competence`/`components` namespace between the layer and material.
+Keep child capabilities with the owning material (e.g. `Form/field.test.ts`,
+`DatePicker/range.test.ts`, `Layout/sider.test.ts`). Shared production behaviors live
+in `headless/shared/<Module>/`; `preset` and `docs` are reserved infrastructure groups.
+Split complex suites by behavior, never by arbitrary line counts; test files must not
+import each other. Create an empty layer's material folder with its first real test,
+not a placeholder passing test. Existing aggregate files can be split during regression.
+
+Run `pnpm test` for the centralized Vitest suite, or `pnpm run test:headless` /
+`pnpm run test:render` for a layer. Root `pnpm run typecheck` includes migrated tests.
+Component L2 is still reserved; L4 currently has a documentation-site Playwright
+runner, not full component/visual coverage. The browser directory is excluded from
+L1–L3 Vitest. See `packages/testing/README.md` for commands and
+`docs/contributing/testing.md` for owner/disposal, assertions and coverage rules.
+Do not compare JSX return objects in L3; assert DOM contracts. happy-dom cannot
+validate actual browser layout or painting. Root typecheck remains a separate gate.
+
+## Selected Existing Components (non-exhaustive; inspect source exports)
 
 ### General (通用)
 - **Button** — type, size, loading, disabled, ghost, danger, block, shape, icon, href

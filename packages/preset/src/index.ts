@@ -19,7 +19,7 @@ export interface PresetUpthrustOptions {
 
 const createPreset: PresetFactory<Theme, PresetUpthrustOptions> = (options = {}) => {
 
-  const [switchedTheme, palettes, gap, sizeTokens, styleTokens] = createTheme(options.switchedTheme)
+  const [switchedTheme, palettes, gap, sizeTokens, styleTokens] = createTheme(options.switchedTheme, options.defaultTheme, options.theme?.colors)
 
   // preset-wind4's default radius/shadow scales — spread so our overrides only
   // replace the spec entries and keep wind4's remaining keys (rounded-full,
@@ -27,7 +27,8 @@ const createPreset: PresetFactory<Theme, PresetUpthrustOptions> = (options = {})
   const wind4Defaults = presetWind4().theme ?? {}
 
   const defaultTheme = options.defaultTheme ?? 'light'
-  const themeColor = options.switchedTheme?.theme?.[defaultTheme] ?? (defaultTheme === 'dark' ? palettes.dark : palettes.light)
+  const configuredColors = options.switchedTheme?.theme?.[defaultTheme]?.colors
+  const themeColor = configuredColors ?? (defaultTheme === 'dark' ? palettes.dark : palettes.light)
 
   const spacing: Record<string, string> = {
     ...(gap ?? {}),
@@ -43,7 +44,8 @@ const createPreset: PresetFactory<Theme, PresetUpthrustOptions> = (options = {})
     ...switchedTheme,
     name: 'upthrust-unocss-preset',
     theme: {
-      color: {
+      ...options.theme,
+      colors: {
         // Native keyword colors wind4's rules reference via CSS variables
         // (bg-black/85 compiles to color-mix(var(--colors-black) ...)). Our
         // MD3 palette REPLACES wind4's color theme, so re-register the two
@@ -51,8 +53,9 @@ const createPreset: PresetFactory<Theme, PresetUpthrustOptions> = (options = {})
         black: '#000',
         white: '#fff',
         ...themeColor,
+        ...options.theme?.colors,
       },
-      spacing,
+      spacing: { ...spacing, ...options.theme?.spacing },
       text: {
         'heading-1': { fontSize: sizeTokens.fontSizeHeading1, lineHeight: '1.2105' },
         'heading-2': { fontSize: sizeTokens.fontSizeHeading2, lineHeight: '1.2667' },
@@ -62,6 +65,7 @@ const createPreset: PresetFactory<Theme, PresetUpthrustOptions> = (options = {})
         'body': { fontSize: sizeTokens.fontSize, lineHeight: sizeTokens.lineHeight },
         'body-sm': { fontSize: sizeTokens.fontSizeSM, lineHeight: sizeTokens.lineHeight },
         'body-lg': { fontSize: sizeTokens.fontSizeLG, lineHeight: '1.5' },
+        ...options.theme?.text,
       },
       // Theme keys must match preset-wind4's rule lookups: `rounded-*` reads
       // theme.radius (NOT borderRadius) and `shadow-*` reads theme.shadow
@@ -73,12 +77,14 @@ const createPreset: PresetFactory<Theme, PresetUpthrustOptions> = (options = {})
         'sm': styleTokens.borderRadiusSM,
         DEFAULT: styleTokens.borderRadius,
         'lg': styleTokens.borderRadiusLG,
+        ...options.theme?.radius,
       },
       shadow: {
         ...wind4Defaults.shadow,
         DEFAULT: styleTokens.boxShadow,
         'secondary': styleTokens.boxShadowSecondary,
         'tertiary': styleTokens.boxShadowTertiary,
+        ...options.theme?.shadow,
       },
     },
     rules: [...(switchedTheme.rules || []), ...createRules(sizeTokens, styleTokens)],
@@ -97,6 +103,8 @@ const createPreset: PresetFactory<Theme, PresetUpthrustOptions> = (options = {})
           `@keyframes ut-spin-rotate{0%{transform:rotate(0deg)}50%{transform:rotate(180deg)}100%{transform:rotate(360deg)}}`,
           `@keyframes ut-skeleton-wave{0%{background-position:100% 50%}100%{background-position:0 50%}}`,
           `@keyframes ut-badge-processing{0%{transform:scale(0.8);opacity:0.5}100%{transform:scale(2.4);opacity:0}}`,
+          `@keyframes ut-zoom-in{0%{transform:scale(0.2);opacity:0}100%{transform:scale(1);opacity:1}}`,
+          `@keyframes ut-form-explain-item{0%{transform:translateY(-5px);opacity:0;max-height:0}100%{transform:translateY(0);opacity:1;max-height:64px}}`,
         ].join(''),
       },
     ],

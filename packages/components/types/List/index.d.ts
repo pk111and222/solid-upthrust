@@ -55,5 +55,5 @@ export interface ListProps<T = any, K = unknown> {
     style?: JSX.CSSProperties;
     ref?: (val: ListRef<T, K>) => void;
 }
-declare const List: <T, K = unknown>(rawProps: ListProps<T, K>) => JSX.Element;
+declare const List: <T, K = unknown>(providedProps: ListProps<T, K>) => JSX.Element;
 export default List;

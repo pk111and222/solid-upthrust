@@ -37,7 +37,7 @@ export default defineConfig(({ command, mode }) => ({
     dts({
       tsconfigPath: resolve(packageRoot, 'tsconfig.json'),
       entryRoot: resolve(packageRoot, 'src'),
-      outDir: resolve(packageRoot, 'types'),
+      outDirs: resolve(packageRoot, 'types'),
       // rollupTypes: true
       // copyDtsFiles: true
     })

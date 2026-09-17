@@ -1,0 +1,116 @@
+[
+  {
+    "name": "items",
+    "type": "TabsItem[]",
+    "default": "—（必填）",
+    "description": "标签数据；每项含 key、label，可选 icon/disabled/closable，UI 层额外接受 children"
+  },
+  {
+    "name": "activeKey",
+    "type": "string",
+    "default": "—（非受控）",
+    "description": "受控当前激活标签；传入后由父层决定实际选中项，onChange 只报告切换请求"
+  },
+  {
+    "name": "defaultActiveKey",
+    "type": "string",
+    "default": "第一个非禁用项",
+    "description": "非受控实例首次挂载时的激活标签，后续变化使用 activeKey 控制"
+  },
+  {
+    "name": "onChange",
+    "type": "(activeKey: string) => void",
+    "default": "—",
+    "description": "激活标签变化时触发；受控时需自行更新 activeKey"
+  },
+  {
+    "name": "onTabClick",
+    "type": "(key: string, e: MouseEvent) => void",
+    "default": "—",
+    "description": "点击任意标签（含点击当前已激活标签）时触发，携带原始 MouseEvent；禁用标签不触发"
+  },
+  {
+    "name": "type",
+    "type": "'line' | 'card' | 'editable-card'",
+    "default": "'line'",
+    "description": "视觉样式；'editable-card' 额外隐式开启 editable（除非显式传入 editable 覆盖）"
+  },
+  {
+    "name": "size",
+    "type": "'small' | 'middle' | 'large'",
+    "default": "'middle'",
+    "description": "标签栏尺寸；card 类型的标签内部尺寸固定为 middle，不随此项变化"
+  },
+  {
+    "name": "tabPosition",
+    "type": "'top' | 'bottom' | 'left' | 'right'",
+    "default": "'top'",
+    "description": "标签栏方位；left/right 时指示条垂直滑动，容器切换为横向排列"
+  },
+  {
+    "name": "centered",
+    "type": "boolean",
+    "default": "false",
+    "description": "标签栏在主轴上居中，不影响标签数量或宽度"
+  },
+  {
+    "name": "destroyInactiveTabPane",
+    "type": "boolean",
+    "default": "false",
+    "description": "true 时未激活面板完全不挂载（切走销毁，状态丢失）；false 时始终挂载，用 display 切换可见性"
+  },
+  {
+    "name": "editable",
+    "type": "boolean",
+    "default": "type === 'editable-card'",
+    "description": "显式覆盖是否显示关闭按钮与新增按钮；未传时由 type 推导"
+  },
+  {
+    "name": "hideAdd",
+    "type": "boolean",
+    "default": "false",
+    "description": "editable 为真时隐藏新增按钮，仍保留关闭按钮"
+  },
+  {
+    "name": "addIcon",
+    "type": "JSX.Element",
+    "default": "i-mdi-plus 图标",
+    "description": "自定义新增按钮的图标内容"
+  },
+  {
+    "name": "onEdit",
+    "type": "(target: string | MouseEvent, action: 'add' | 'remove') => void",
+    "default": "—",
+    "description": "点击新增（target 为原始事件）或关闭（target 为被关闭项的 key）时触发；items 归调用者所有，组件不直接修改传入数组"
+  },
+  {
+    "name": "draggable",
+    "type": "boolean",
+    "default": "false",
+    "description": "允许拖拽排序（原生 HTML5 drag/drop），或 Alt+方向键排序；禁用项不可作为拖拽源或目标"
+  },
+  {
+    "name": "onReorder",
+    "type": "(items: TabsItem[], info: { key: string; from: number; to: number }) => void",
+    "default": "—",
+    "description": "拖拽或键盘排序完成后触发，携带重排后的完整 items 数组与移动信息；组件内部临时排序，父层未同步 items 时下次渲染会用父层的原始顺序覆盖"
+  },
+  {
+    "name": "class",
+    "type": "string",
+    "default": "—",
+    "description": "根容器的 UnoCSS 类"
+  },
+  {
+    "name": "style",
+    "type": "JSX.CSSProperties",
+    "default": "—",
+    "description": "根容器的内联样式"
+  },
+  {
+    "name": "ref",
+    "type": "(val: TabsIns) => void",
+    "default": "—",
+    "description": "暴露 activeKey()/setActiveKey(key)/nextTab()/prevTab() 命令式接口；nextTab/prevTab 只在可用（非禁用）标签间移动"
+  }
+]

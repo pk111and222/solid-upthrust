@@ -1,6 +1,7 @@
 packages:
   - 'packages/*'
   - 'example'
+  - 'docs'
 
 overrides:
   "@solid-primitives/refs": "1.1.3"

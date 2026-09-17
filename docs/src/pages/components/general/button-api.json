@@ -1,0 +1,122 @@
+[
+  {
+    "name": "type",
+    "type": "default | primary | dashed | text | link",
+    "default": "default",
+    "description": "外观简写，不是 HTML type"
+  },
+  {
+    "name": "variant",
+    "type": "outlined | solid | filled | dashed | text | link",
+    "default": "由 type 决定",
+    "description": "优先于 type 的外观"
+  },
+  {
+    "name": "color",
+    "type": "default | primary | danger",
+    "default": "由 type 决定",
+    "description": "颜色；type=primary 使用 primary，其他使用 default"
+  },
+  {
+    "name": "danger",
+    "type": "boolean",
+    "default": "false",
+    "description": "危险颜色，优先于 color"
+  },
+  {
+    "name": "size",
+    "type": "small | middle | large",
+    "default": "middle",
+    "description": "24 / 32 / 40px，可继承 ConfigProvider"
+  },
+  {
+    "name": "shape",
+    "type": "default | round | circle",
+    "default": "default",
+    "description": "圆角或圆形"
+  },
+  {
+    "name": "block",
+    "type": "boolean",
+    "default": "false",
+    "description": "宽度填满容器"
+  },
+  {
+    "name": "ghost",
+    "type": "boolean",
+    "default": "false",
+    "description": "透明背景"
+  },
+  {
+    "name": "disabled",
+    "type": "boolean",
+    "default": "false",
+    "description": "禁止激活，可继承 ConfigProvider"
+  },
+  {
+    "name": "loading",
+    "type": "boolean | { delay: number }",
+    "default": "false",
+    "description": "布尔受控；对象为点击后的加载时长（毫秒）"
+  },
+  {
+    "name": "icon",
+    "type": "JSX.Element",
+    "default": "—",
+    "description": "自定义图标；加载时替换为转圈图标"
+  },
+  {
+    "name": "iconPlacement",
+    "type": "start | end",
+    "default": "start",
+    "description": "图标位置"
+  },
+  {
+    "name": "children",
+    "type": "JSX.Element",
+    "default": "—",
+    "description": "按钮内容"
+  },
+  {
+    "name": "href",
+    "type": "string",
+    "default": "—",
+    "description": "非空时渲染 a，否则 button"
+  },
+  {
+    "name": "target / rel",
+    "type": "string",
+    "default": "—",
+    "description": "链接原生属性"
+  },
+  {
+    "name": "htmlType",
+    "type": "button | submit | reset",
+    "default": "button",
+    "description": "button 分支的表单行为"
+  },
+  {
+    "name": "onClick",
+    "type": "(event: MouseEvent) => void",
+    "default": "—",
+    "description": "非禁用且非加载时调用一次"
+  },
+  {
+    "name": "ref",
+    "type": "(instance: ButtonIns) => void",
+    "default": "—",
+    "description": "元素 getter 与 click() 实例"
+  },
+  {
+    "name": "class / style",
+    "type": "string / JSX.CSSProperties",
+    "default": "—",
+    "description": "根节点样式"
+  },
+  {
+    "name": "原生属性",
+    "type": "ButtonHTMLAttributes<HTMLElement>",
+    "default": "—",
+    "description": "id、name、value、title、tabindex、ARIA、data-* 和原生事件"
+  }
+]

@@ -2,9 +2,11 @@ import { Component } from 'solid-js';
 import { JSX } from '@solidjs/web';
 import { SizeType } from '../../common/type';
 import { ButtonIns, ButtonVariant, ButtonColor } from 'upthrust-competence';
-type ButtonType = 'primary' | 'link' | 'text' | 'default' | 'dashed';
-type ButtonShape = 'default' | 'circle' | 'round';
-export interface ButtonProps {
+export type ButtonType = 'primary' | 'link' | 'text' | 'default' | 'dashed';
+export type ButtonShape = 'default' | 'circle' | 'round';
+export type { ButtonIns, ButtonVariant, ButtonColor } from 'upthrust-competence';
+export interface ButtonProps extends Omit<JSX.ButtonHTMLAttributes<HTMLElement>, 'type' | 'color' | 'onClick' | 'ref' | 'children'> {
+    htmlType?: 'button' | 'submit' | 'reset';
     variant?: ButtonVariant;
     color?: ButtonColor;
     type?: ButtonType;

@@ -1,6 +1,15 @@
 import { Component } from 'solid-js';
+import { TypographyCopyConfig, TypographyEditableConfig } from 'upthrust-competence';
 import { JSX } from '@solidjs/web';
-interface TypographyBaseProps {
+export interface TypographyBaseProps {
+    copyable?: boolean | (TypographyCopyConfig & {
+        icon?: JSX.Element;
+        tooltips?: string | false;
+    });
+    editable?: boolean | (TypographyEditableConfig & {
+        icon?: JSX.Element;
+        tooltip?: string | false;
+    });
     type?: 'secondary' | 'success' | 'warning' | 'danger';
     strong?: boolean;
     italic?: boolean;

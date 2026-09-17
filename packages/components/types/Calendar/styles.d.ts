@@ -23,19 +23,19 @@ declare const calendarGridVariants: (props?: ({
     layout?: "date" | "month" | "date-week" | null | undefined;
 } & import('class-variance-authority/types').ClassProp) | undefined) => string;
 declare const calendarFullDateVariants: (props?: ({
-    state?: "disabled" | "selected" | "idle" | "prev-next" | "today" | "today-prev-next" | "selected-prev-next" | null | undefined;
+    state?: "selected" | "disabled" | "today" | "idle" | "prev-next" | "today-prev-next" | "selected-prev-next" | null | undefined;
 } & import('class-variance-authority/types').ClassProp) | undefined) => string;
 declare const calendarFullDateValueVariants: (props?: ({
     selected?: boolean | null | undefined;
 } & import('class-variance-authority/types').ClassProp) | undefined) => string;
 declare const calendarMiniDateVariants: (props?: ({
-    state?: "disabled" | "selected" | "idle" | "prev-next" | "today" | "today-prev-next" | "selected-prev-next" | null | undefined;
+    state?: "selected" | "disabled" | "today" | "idle" | "prev-next" | "today-prev-next" | "selected-prev-next" | null | undefined;
 } & import('class-variance-authority/types').ClassProp) | undefined) => string;
 declare const calendarFullMonthVariants: (props?: ({
-    state?: "disabled" | "selected" | "idle" | "prev-next" | "today" | "today-prev-next" | "selected-prev-next" | null | undefined;
+    state?: "selected" | "disabled" | "today" | "idle" | "prev-next" | "today-prev-next" | "selected-prev-next" | null | undefined;
 } & import('class-variance-authority/types').ClassProp) | undefined) => string;
 declare const calendarMiniMonthVariants: (props?: ({
-    state?: "disabled" | "selected" | "idle" | "prev-next" | "today" | "today-prev-next" | "selected-prev-next" | null | undefined;
+    state?: "selected" | "disabled" | "today" | "idle" | "prev-next" | "today-prev-next" | "selected-prev-next" | null | undefined;
 } & import('class-variance-authority/types').ClassProp) | undefined) => string;
 export type CalendarStyleVariants = {
     fullscreen: boolean;

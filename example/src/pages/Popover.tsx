@@ -1,81 +1,43 @@
-import { type Component, createSignal } from 'solid-js'
-import { Popover, Divider, Button, Space } from 'upthrust-ui'
+import Basic from '../../../docs/src/examples/popover/basic'
+import Trigger from '../../../docs/src/examples/popover/trigger'
+import Controlled from '../../../docs/src/examples/popover/controlled'
+import Disabled from '../../../docs/src/examples/popover/disabled'
+import Style from '../../../docs/src/examples/popover/style'
+import Container from '../../../docs/src/examples/popover/container'
+import Placement from '../../../docs/src/examples/popover/placement'
 
-const PopoverPage: Component = () => {
-  const [open, setOpen] = createSignal(false)
-  const [clicks, setClicks] = createSignal(0)
-
-  const content = (
-    <div>
-      <p class="m-0">这是一段卡片内容，可以放置任意元素。</p>
-      <p class="m-0">点击按钮会更新计数：</p>
-      <Button size="small" variant="outlined" onClick={() => setClicks(clicks() + 1)}>
-        点了 {clicks()} 次
-      </Button>
-    </div>
-  )
-
-  return (
-    <div class="p-6 max-w-4xl">
-      <h2 class="text-2xl font-bold mb-4">Popover 气泡卡片</h2>
-      <p class="text-on-surface-variant mb-6">点击/悬停浮出的卡片容器，可承载标题与任意内容。底层直接复用 createTrigger 浮层机制。</p>
-
-      <h3 class="text-lg font-semibold mb-3">基本使用（悬停触发）</h3>
-      <Space size="middle">
-        <Popover title="卡片标题" content={content}>
-          <Button>悬停查看卡片</Button>
-        </Popover>
-        <Popover content="只有内容没有标题的卡片">
-          <Button variant="outlined">无标题</Button>
-        </Popover>
-      </Space>
-
-      <Divider />
-
-      <h3 class="text-lg font-semibold mb-3">位置</h3>
-      <div class="flex flex-wrap gap-4">
-        <Popover title="上左" content="topLeft" placement="topLeft"><Button variant="outlined">TL</Button></Popover>
-        <Popover title="上中" content="top" placement="top"><Button variant="outlined">Top</Button></Popover>
-        <Popover title="上右" content="topRight" placement="topRight"><Button variant="outlined">TR</Button></Popover>
-        <Popover title="下左" content="bottomLeft" placement="bottomLeft"><Button variant="outlined">BL</Button></Popover>
-        <Popover title="下中" content="bottom" placement="bottom"><Button variant="outlined">Bottom</Button></Popover>
-        <Popover title="下右" content="bottomRight" placement="bottomRight"><Button variant="outlined">BR</Button></Popover>
-        <Popover title="左上" content="leftTop" placement="leftTop"><Button variant="outlined">LT</Button></Popover>
-        <Popover title="左中" content="left" placement="left"><Button variant="outlined">Left</Button></Popover>
-        <Popover title="左下" content="leftBottom" placement="leftBottom"><Button variant="outlined">LB</Button></Popover>
-        <Popover title="右上" content="rightTop" placement="rightTop"><Button variant="outlined">RT</Button></Popover>
-        <Popover title="右中" content="right" placement="right"><Button variant="outlined">Right</Button></Popover>
-        <Popover title="右下" content="rightBottom" placement="rightBottom"><Button variant="outlined">RB</Button></Popover>
-      </div>
-
-      <Divider />
-
-      <h3 class="text-lg font-semibold mb-3">触发方式</h3>
-      <Space size="middle">
-        <Popover title="悬停触发" content="鼠标移入卡片区域不会关闭" trigger="hover">
-          <Button>hover</Button>
-        </Popover>
-        <Popover title="点击触发" content="点击外部或按 Esc 关闭" trigger="click">
-          <Button>click</Button>
-        </Popover>
-        <Popover title="聚焦触发" content="focus" trigger="focus">
-          <Button variant="outlined">focus</Button>
-        </Popover>
-      </Space>
-
-      <Divider />
-
-      <h3 class="text-lg font-semibold mb-3">受控模式</h3>
-      <Space size="middle">
-        <Button variant={open() ? 'solid' : 'outlined'} onClick={() => setOpen(!open())}>
-          {open() ? '关闭' : '打开'}卡片
-        </Button>
-        <Popover title="受控卡片" content="由外部信号控制开关" open={open()} onOpenChange={setOpen} trigger="click">
-          <Button variant="outlined">受控触发器</Button>
-        </Popover>
-      </Space>
-    </div>
-  )
+export default function PopoverPage() {
+  return <div class="space-y-8 pb-96">
+    {/* pb-96：与 Tooltip 页同理，"十二种位置" demo 若恰好落在页面末尾，
+        scrollIntoView({block:'center'}) 无法真正居中，bottom 系列按钮下方可用视口
+        空间不足会被翻转策略误判，补足尾部空间保证任意 demo 居中时上下都有余量。 */}
+    <section data-popover-demo="basic">
+      <h3 class="text-base font-medium mb-4">基本使用</h3>
+      <Basic />
+    </section>
+    <section data-popover-demo="trigger">
+      <h3 class="text-base font-medium mb-4">触发方式</h3>
+      <Trigger />
+    </section>
+    <section data-popover-demo="controlled">
+      <h3 class="text-base font-medium mb-4">受控与 defaultOpen</h3>
+      <Controlled />
+    </section>
+    <section data-popover-demo="disabled">
+      <h3 class="text-base font-medium mb-4">禁用</h3>
+      <Disabled />
+    </section>
+    <section data-popover-demo="style">
+      <h3 class="text-base font-medium mb-4">自定义样式</h3>
+      <Style />
+    </section>
+    <section data-popover-demo="container">
+      <h3 class="text-base font-medium mb-4">局部主题与 getContainer</h3>
+      <Container />
+    </section>
+    <section data-popover-demo="placement">
+      <h3 class="text-base font-medium mb-4">十二种位置</h3>
+      <Placement />
+    </section>
+  </div>
 }
-
-export default PopoverPage

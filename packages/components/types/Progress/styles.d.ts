@@ -4,7 +4,7 @@ declare const progressTrackVariants: (props?: ({
     shape?: "round" | "square" | null | undefined;
 } & import('class-variance-authority/types').ClassProp) | undefined) => string;
 declare const progressIndicatorVariants: (props?: ({
-    status?: "active" | "success" | "normal" | "exception" | null | undefined;
+    status?: "success" | "active" | "normal" | "exception" | null | undefined;
     shape?: "round" | "square" | null | undefined;
 } & import('class-variance-authority/types').ClassProp) | undefined) => string;
 declare const progressSuccessVariants: (props?: ({} & import('class-variance-authority/types').ClassProp) | undefined) => string;

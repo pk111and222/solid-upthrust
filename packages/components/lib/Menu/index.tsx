@@ -1,5 +1,6 @@
+import { ConfigPortal as Portal } from '../ConfigProvider/Portal'
 import { Component, For, Show, merge, createMemo, createContext, useContext } from 'solid-js'
-import { Portal, type JSX } from '@solidjs/web'
+import { type JSX } from '@solidjs/web'
 import { createMenu, createTrigger, type MenuItem, type MenuMode } from 'upthrust-competence'
 import {
   menuContainerClass, menuItemClass, menuSubTitleClass, menuGroupTitleClass,
@@ -10,6 +11,8 @@ import { twMerge } from 'tailwind-merge'
 export type { MenuItem } from 'upthrust-competence'
 
 export interface MenuProps {
+  /** Render a label as JSX, for example a native navigation link. */
+  renderLabel?: (item: MenuItem) => JSX.Element
   items?: MenuItem[]
   mode?: MenuMode
   selectedKeys?: string[]
@@ -24,6 +27,7 @@ export interface MenuProps {
 }
 
 type MenuContextValue = {
+  renderLabel?: (item: MenuItem) => JSX.Element
   mode: MenuMode
   isSelected: (key: string) => boolean
   isOpen: (key: string) => boolean
@@ -52,7 +56,7 @@ const MenuItemRender: Component<{ item: MenuItem; level?: number }> = (props) =>
     <Show when={props.item.type !== 'divider'} fallback={<div class={menuDividerClass({})} />}>
       <Show when={props.item.type !== 'group'} fallback={
         <div class="min-w-0">
-          <div class={menuGroupTitleClass({})}>{props.item.label}</div>
+          <div class={menuGroupTitleClass({})}>{ctx.renderLabel ? ctx.renderLabel(props.item) : props.item.label}</div>
           <For each={props.item.children}>
             {(child) => <MenuItemRender item={child} level={(props.level ?? 0) + 1} />}
           </For>
@@ -74,7 +78,7 @@ const MenuItemRender: Component<{ item: MenuItem; level?: number }> = (props) =>
                     <Show when={props.item.icon}>
                       <span class={props.item.icon} />
                     </Show>
-                    {props.item.label}
+                    {ctx.renderLabel ? ctx.renderLabel(props.item) : props.item.label}
                   </span>
                   <span class={`i-mdi-chevron-down text-base transition-transform duration-200 ${ctx.isOpen(props.item.key) ? 'rotate-180' : ''}`} />
                 </div>
@@ -95,7 +99,7 @@ const MenuItemRender: Component<{ item: MenuItem; level?: number }> = (props) =>
                   <Show when={props.item.icon}>
                     <span class={props.item.icon} />
                   </Show>
-                  {props.item.label}
+                  {ctx.renderLabel ? ctx.renderLabel(props.item) : props.item.label}
                 </span>
                 <span class={`i-mdi-chevron-down text-base transition-transform duration-200 ${ctx.isOpen(props.item.key) ? 'rotate-180' : ''}`} />
               </div>
@@ -130,7 +134,7 @@ const MenuItemRender: Component<{ item: MenuItem; level?: number }> = (props) =>
             <Show when={props.item.icon}>
               <span class={props.item.icon} />
             </Show>
-            {props.item.label}
+            {ctx.renderLabel ? ctx.renderLabel(props.item) : props.item.label}
           </div>
         </Show>
       </Show>
@@ -157,6 +161,7 @@ const Menu: Component<MenuProps> = (rawProps) => {
   })
 
   const ctxValue: MenuContextValue = {
+    get renderLabel() { return props.renderLabel },
     get mode() { return props.mode! },
     isSelected: menu.isSelected,
     isOpen: menu.isOpen,

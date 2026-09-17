@@ -1,3 +1,4 @@
+import { Theme } from '@unocss/preset-wind4';
 import { PresetThemeOptions } from 'unocss-preset-theme';
 import { MaterialColorOptions } from './colors/material';
 import { GapTheme } from './gap';
@@ -13,13 +14,17 @@ export type ThemeOption = {
     sizeTokens?: Partial<SizeTokens>;
     styleTokens?: Partial<StyleTokens>;
 };
-declare const createTheme: (option?: ThemeOption) => readonly [import('@unocss/core').Preset<{
-    colors: import('solid-material-color').SimpleDynamicScheme | null;
+declare const createTheme: (option?: ThemeOption, defaultTheme?: string, colors?: Theme["colors"]) => readonly [import('@unocss/core').Preset<{
+    colors: {
+        [x: string]: any;
+    };
 } | {
-    colors: import('solid-material-color').SimpleDynamicScheme | null;
+    colors: {
+        [x: string]: any;
+    };
 }>, {
-    dark: import('solid-material-color').SimpleDynamicScheme | null;
-    light: import('solid-material-color').SimpleDynamicScheme | null;
+    readonly dark: Record<string, any>;
+    readonly light: Record<string, any>;
 }, GapTheme | undefined, SizeTokens, StyleTokens];
 export default createTheme;
 export type { SizeTokens } from './size';

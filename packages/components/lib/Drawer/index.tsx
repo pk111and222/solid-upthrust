@@ -1,5 +1,7 @@
+import { ConfigPortal as Portal } from '../ConfigProvider/Portal'
+import { useComponentProps } from '../ConfigProvider/context'
 import { Component, createEffect, createMemo, createSignal, merge, onCleanup, Show } from 'solid-js'
-import { Portal, type JSX } from '@solidjs/web'
+import { type JSX } from '@solidjs/web'
 import { createDialog, type DialogIns } from 'upthrust-competence'
 import {
   drawerMaskClass, drawerWrapperClass, drawerPanelClass, drawerHeaderClass,
@@ -60,7 +62,8 @@ export interface DrawerProps {
   ref?: (val: DialogIns) => void
 }
 
-const Drawer: Component<DrawerProps> = (rawProps) => {
+const Drawer: Component<DrawerProps> = (providedProps) => {
+  const rawProps = useComponentProps('Drawer', providedProps)
   const props = merge(
     {
       placement: 'right' as DrawerPlacement,

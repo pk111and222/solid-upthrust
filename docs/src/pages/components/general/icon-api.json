@@ -1,0 +1,50 @@
+[
+  {
+    "name": "name",
+    "type": "string",
+    "default": "必填",
+    "description": "collection:name；省略集合时默认 mdi"
+  },
+  {
+    "name": "size",
+    "type": "small | middle | large | number | string",
+    "default": "middle",
+    "description": "命名尺寸 14/16/20px；数字为 px，其他字符串为 CSS 长度"
+  },
+  {
+    "name": "color",
+    "type": "primary | secondary | success | warning | danger | inherit",
+    "default": "inherit",
+    "description": "语义颜色类"
+  },
+  {
+    "name": "spin",
+    "type": "boolean",
+    "default": "false",
+    "description": "持续旋转动画"
+  },
+  {
+    "name": "rotate",
+    "type": "number",
+    "default": "—",
+    "description": "非零角度覆盖 style.transform；0 保留自定义 transform"
+  },
+  {
+    "name": "class",
+    "type": "string",
+    "default": "—",
+    "description": "追加类名"
+  },
+  {
+    "name": "style",
+    "type": "JSX.CSSProperties",
+    "default": "—",
+    "description": "数值/CSS size 优先于 font-size；可覆盖颜色"
+  },
+  {
+    "name": "onClick",
+    "type": "(event: MouseEvent) => void",
+    "default": "—",
+    "description": "鼠标点击回调；不自动提供键盘交互"
+  }
+]

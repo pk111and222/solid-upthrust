@@ -242,7 +242,7 @@ export const computeArrow = (
 export const createTrigger = (config: TriggerConfig = {}) => {
   const onOwnerCleanup = createOwnerCleanup()
   const [_open, _setOpen] = createSignal(config.defaultOpen ?? false, { ownedWrite: true })
-  // Position in viewport coordinates; recomputed on open + scroll + resize.
+  // Position in the absolute containing block; recomputed on open + scroll + resize.
   // Seed with the CONFIGURED placement (not a hard-coded default): the layer
   // renders one frame at (0,0) before the first measurement, and the seed's
   // translate pairing must match the target placement — otherwise the
@@ -250,7 +250,7 @@ export const createTrigger = (config: TriggerConfig = {}) => {
   // captured by the layer's CSS transition and the layer visibly glides in
   // from off-screen (e.g. rightBottom: seed 'bottomLeft' → no translate,
   // measured 'rightBottom' → translateY(-100%) → the layer slides upward).
-  const [_pos, _setPos] = createSignal<TriggerPosition>({ top: 0, left: 0, placement: config.placement ?? 'bottomLeft' })
+  const [_pos, _setPos] = createSignal<TriggerPosition>({ top: 0, left: 0, placement: config.placement ?? 'bottomLeft' }, { ownedWrite: true })
   // False until the first measurement lands. The layer starts at the default
   // position (0,0); without this flag, a CSS transition on top/left would
   // animate the layer flying in from the top-left corner on first open. While
@@ -261,14 +261,14 @@ export const createTrigger = (config: TriggerConfig = {}) => {
   // teardown; reopening cancels it and reuses the live DOM (refs intact, no
   // remount flicker).
   const lazyMount = () => config.lazyMount ?? true
-  const [_mounted, _setMounted] = createSignal(!lazyMount() || config.defaultOpen === true || config.open === true, { ownedWrite: true })
+  const [_mounted, _setMounted] = createSignal(!lazyMount() || (config.open ?? config.defaultOpen ?? false), { ownedWrite: true })
   let _destroyTimer: ReturnType<typeof setTimeout> | undefined
 
   const open = createMemo(() => config.open !== undefined ? config.open : _open())
   // Mounted signal exposed to the UI layer. For a lazy trigger this starts
   // false (nothing rendered); `defaultOpen: true` mounts on creation. For a
   // non-lazy trigger it stays true forever.
-  const mounted = createMemo(() => _mounted())
+  const mounted = createMemo(() => !lazyMount() || open() || _mounted())
 
   let _triggerEl: HTMLElement | undefined
   let _layerEl: HTMLElement | undefined
@@ -281,50 +281,8 @@ export const createTrigger = (config: TriggerConfig = {}) => {
   const setOpen = (v: boolean) => {
     if (config.disabled) return
     if (v === open()) return
-    _setOpen(v)
+    if (config.open === undefined) _setOpen(v)
     config.onOpenChange?.(v)
-    if (v) {
-      // Lazy layers: cancel any pending destroy and ensure the DOM exists
-      // BEFORE measuring — the UI renders the layer inside
-      // <Show when={trigger.mounted()}> so the ref (and real dimensions)
-      // only appear after this flip.
-      if (_destroyTimer) { clearTimeout(_destroyTimer); _destroyTimer = undefined }
-      if (lazyMount()) _setMounted(true)
-      // Measure synchronously and reveal immediately: the layer is already
-      // rendered (opacity-0), so it usually has real dimensions here. A
-      // rAF-gated reveal stalls in environments where requestAnimationFrame
-      // never fires (headless renderers after repeated navigation) — the
-      // popup would stay visibility:hidden forever.
-      remeasure()
-      if (_layerEl && _layerEl.getBoundingClientRect().height > 0) {
-        _setReady(true)
-      } else {
-        // The layer was still mounting (zero size) at call time — retry on a
-        // macrotask, which unlike rAF is guaranteed to run even when the
-        // renderer's frame pipeline is stalled.
-        setTimeout(() => {
-          if (!open() || _ready()) return
-          remeasure()
-          if (_layerEl && _layerEl.getBoundingClientRect().height > 0) {
-            _setReady(true)
-          }
-        }, 0)
-      }
-    } else if (lazyMount()) {
-      // Schedule teardown AFTER the leave animation (duration-fast/mid ≈
-      // 200ms; allow generous headroom for slow devices) plus the caller's
-      // grace period. Reopening cancels the timer, so a quick hover-in/out
-      // cycle never pays the remount cost.
-      const delay = (config.destroyDelay ?? 1000) + 300
-      if (_destroyTimer) clearTimeout(_destroyTimer)
-      _destroyTimer = setTimeout(() => {
-        _destroyTimer = undefined
-        if (open()) return
-        _setMounted(false)
-        _setReady(false)
-        _layerEl = undefined
-      }, delay)
-    }
   }
 
   const toggle = () => setOpen(!open())
@@ -396,14 +354,21 @@ export const createTrigger = (config: TriggerConfig = {}) => {
     if (config.arrow) {
       next = { ...next, arrow: computeArrow(_triggerEl, _layerEl, next) }
     }
-    // Portal container is document.body by default → viewport coords are
-    // container coords. With a custom container, translate.
-    const container = config.getContainer?.() ?? document.body
-    if (container !== document.body) {
-      const cRect = container.getBoundingClientRect()
-      _setPos({ ...next, top: next.top - cRect.top, left: next.left - cRect.left })
+    // Measurements use viewport coordinates, but an absolute layer is relative
+    // to its actual containing block. ConfigPortal can mount inside a positioned
+    // theme scope without passing getContainer, so use the DOM offsetParent.
+    const container = _layerEl.offsetParent as HTMLElement | null
+    const rootContainer = !container || container === document.documentElement ||
+      (container === document.body && getComputedStyle(container).position === 'static')
+    if (rootContainer) {
+      _setPos({ ...next, top: next.top + window.scrollY, left: next.left + window.scrollX })
     } else {
-      _setPos(next)
+      const rect = container.getBoundingClientRect()
+      _setPos({
+        ...next,
+        top: next.top - rect.top - container.clientTop + container.scrollTop,
+        left: next.left - rect.left - container.clientLeft + container.scrollLeft,
+      })
     }
   }
 
@@ -414,79 +379,79 @@ export const createTrigger = (config: TriggerConfig = {}) => {
 
   // ---- trigger events ----------------------------------------------------
 
+  let detachTrigger: (() => void) | undefined
+  let detachLayer: (() => void) | undefined
+  const cancelHover = () => {
+    clearTimeout(_hoverTimeout)
+    _hoverTimeout = undefined
+  }
+  const hoverLeave = () => {
+    if (action() !== 'hover' || config.disabled) return
+    cancelHover()
+    _hoverTimeout = setTimeout(() => {
+      if (action() === 'hover') setOpen(false)
+    }, config.hoverDelay ?? 100)
+  }
   const triggerRef = (el: HTMLElement) => {
+    detachTrigger?.()
+    cancelHover()
     _triggerEl = el
-
-    if (action() === 'click') {
-      const handleClick = (e: MouseEvent) => {
+    const listeners: Record<string, EventListener> = {
+      click: e => {
+        if (action() !== 'click' || config.disabled) return
         e.stopPropagation()
         toggle()
-      }
-      el.addEventListener('click', handleClick)
-      onOwnerCleanup(() => el.removeEventListener('click', handleClick))
-    } else if (action() === 'hover') {
-      const handleEnter = () => {
-        if (_hoverTimeout) clearTimeout(_hoverTimeout)
-        // Optional open delay (Tooltip semantics): schedule the open so a
-        // fast pointer swipe over the trigger doesn't flash the layer.
-        const openDelay = config.hoverOpenDelay ?? 0
-        if (openDelay > 0) {
-          _hoverTimeout = setTimeout(() => setOpen(true), openDelay)
-        } else {
-          setOpen(true)
-        }
-      }
-      const handleLeave = () => {
-        if (_hoverTimeout) clearTimeout(_hoverTimeout)
-        _hoverTimeout = setTimeout(() => setOpen(false), config.hoverDelay ?? 100)
-      }
-      el.addEventListener('mouseenter', handleEnter)
-      el.addEventListener('mouseleave', handleLeave)
-      onOwnerCleanup(() => {
-        el.removeEventListener('mouseenter', handleEnter)
-        el.removeEventListener('mouseleave', handleLeave)
-        if (_hoverTimeout) clearTimeout(_hoverTimeout)
-      })
-    } else if (action() === 'contextMenu') {
-      const handleContext = (e: MouseEvent) => {
+      },
+      mouseenter: () => {
+        if (action() !== 'hover' || config.disabled) return
+        cancelHover()
+        const delay = config.hoverOpenDelay ?? 0
+        if (delay > 0) {
+          _hoverTimeout = setTimeout(() => {
+            if (action() === 'hover') setOpen(true)
+          }, delay)
+        } else setOpen(true)
+      },
+      mouseleave: hoverLeave,
+      contextmenu: e => {
+        if (action() !== 'contextMenu' || config.disabled) return
         e.preventDefault()
         setOpen(true)
-      }
-      el.addEventListener('contextmenu', handleContext)
-      onOwnerCleanup(() => el.removeEventListener('contextmenu', handleContext))
-    } else if (action() === 'focus') {
-      const handleFocus = () => setOpen(true)
-      const handleBlur = () => setOpen(false)
-      el.addEventListener('focusin', handleFocus)
-      el.addEventListener('focusout', handleBlur)
-      onOwnerCleanup(() => {
-        el.removeEventListener('focusin', handleFocus)
-        el.removeEventListener('focusout', handleBlur)
-      })
+      },
+      focusin: () => { if (action() === 'focus') setOpen(true) },
+      focusout: () => { if (action() === 'focus') setOpen(false) },
+    }
+    for (const [name, handler] of Object.entries(listeners)) el.addEventListener(name, handler)
+    detachTrigger = () => {
+      for (const [name, handler] of Object.entries(listeners)) el.removeEventListener(name, handler)
     }
   }
 
   const layerRef = (el: HTMLElement) => {
+    detachLayer?.()
+    detachLayer = undefined
     _layerEl = el
   }
 
-  // Hover layers stay open while the pointer is over the layer itself.
+  // Capture the bound node: a later ref must not redirect its cleanup.
   const bindLayerHover = () => {
-    if (action() !== 'hover' || !_layerEl) return
-    const handleEnter = () => { if (_hoverTimeout) clearTimeout(_hoverTimeout) }
-    const handleLeave = () => {
-      if (_hoverTimeout) clearTimeout(_hoverTimeout)
-      _hoverTimeout = setTimeout(() => setOpen(false), config.hoverDelay ?? 100)
+    detachLayer?.()
+    const el = _layerEl
+    if (!el) return
+    const enter = () => { if (action() === 'hover') cancelHover() }
+    el.addEventListener('mouseenter', enter)
+    el.addEventListener('mouseleave', hoverLeave)
+    detachLayer = () => {
+      el.removeEventListener('mouseenter', enter)
+      el.removeEventListener('mouseleave', hoverLeave)
     }
-    _layerEl.addEventListener('mouseenter', handleEnter)
-    _layerEl.addEventListener('mouseleave', handleLeave)
-    onOwnerCleanup(() => {
-      if (!_layerEl) return
-      _layerEl.removeEventListener('mouseenter', handleEnter)
-      _layerEl.removeEventListener('mouseleave', handleLeave)
-      if (_hoverTimeout) clearTimeout(_hoverTimeout)
-    })
   }
+  createEffect(() => [action(), config.disabled] as const, cancelHover)
+  onOwnerCleanup(() => {
+    detachTrigger?.()
+    detachLayer?.()
+    cancelHover()
+  })
 
   // ---- dismiss -----------------------------------------------------------
 
@@ -505,35 +470,62 @@ export const createTrigger = (config: TriggerConfig = {}) => {
     setOpen(false)
   }
 
-  document.addEventListener('pointerdown', handleOutsidePointer)
-  document.addEventListener('keydown', handleKeyDown)
-  window.addEventListener('scroll', handleScrollOrResize, { passive: true, capture: true })
-  window.addEventListener('resize', handleScrollOrResize)
-  onOwnerCleanup(() => {
-    document.removeEventListener('pointerdown', handleOutsidePointer)
-    document.removeEventListener('keydown', handleKeyDown)
-    window.removeEventListener('scroll', handleScrollOrResize, true)
-    window.removeEventListener('resize', handleScrollOrResize)
-    if (_hoverTimeout) clearTimeout(_hoverTimeout)
-    if (_destroyTimer) clearTimeout(_destroyTimer)
-  })
+  // SSR has no document or viewport listeners.
+  if (typeof document !== 'undefined' && typeof window !== 'undefined') {
+    document.addEventListener('pointerdown', handleOutsidePointer)
+    document.addEventListener('keydown', handleKeyDown)
+    window.addEventListener('scroll', handleScrollOrResize, { passive: true, capture: true })
+    window.addEventListener('resize', handleScrollOrResize)
+    onOwnerCleanup(() => {
+      document.removeEventListener('pointerdown', handleOutsidePointer)
+      document.removeEventListener('keydown', handleKeyDown)
+      window.removeEventListener('scroll', handleScrollOrResize, true)
+      window.removeEventListener('resize', handleScrollOrResize)
+      if (_hoverTimeout) clearTimeout(_hoverTimeout)
+      if (_destroyTimer) clearTimeout(_destroyTimer)
+    })
+  }
 
-  // Re-measure on open (layer must be visible to have dimensions).
+  // Mounting follows the accepted state, including external controlled updates.
+  // A rejected request must neither mount a hidden layer nor start destruction.
+  let measureTimer: ReturnType<typeof setTimeout> | undefined
+  let measureFrame: number | undefined
+  const cancelMeasure = () => {
+    clearTimeout(measureTimer)
+    if (measureFrame !== undefined) cancelAnimationFrame(measureFrame)
+    measureTimer = undefined
+    measureFrame = undefined
+  }
   createEffect(
-    () => open(),
-    (isOpen) => {
+    () => ({ isOpen: open(), lazy: lazyMount(), delay: config.destroyDelay ?? 1000 }),
+    ({ isOpen, lazy, delay }) => {
+      cancelMeasure()
+      clearTimeout(_destroyTimer)
       if (isOpen) {
-        // Fallback for the case setOpen() could not measure synchronously
-        // (layer still mounting → zero size). rAF is only a fallback because
-        // it never fires in some headless renderers after repeated
-        // navigation, which would leave the layer hidden forever.
-        requestAnimationFrame(() => {
+        _setMounted(true)
+        const reveal = () => {
+          if (!open() || !_layerEl) return
           remeasure()
           _setReady(true)
-        })
+        }
+        // Refs settle after the state change; support both normal frame delivery
+        // and background pages whose animation frames are paused.
+        reveal()
+        measureTimer = setTimeout(reveal, 0)
+        measureFrame = requestAnimationFrame(reveal)
+      } else if (lazy && _mounted()) {
+        _destroyTimer = setTimeout(() => {
+          if (open()) return
+          detachLayer?.()
+          detachLayer = undefined
+          _setMounted(false)
+          _setReady(false)
+          _layerEl = undefined
+        }, delay + 300)
       }
     }
   )
+  onOwnerCleanup(cancelMeasure)
 
   const layerStyle = createMemo((): Record<string, string> => {
     const p = _pos()

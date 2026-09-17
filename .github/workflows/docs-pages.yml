@@ -1,0 +1,54 @@
+name: Documentation / GitHub Pages
+
+# Opt-in deployment only. No remote settings or automatic release on push.
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: docs-pages
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 11.16.0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm run typecheck:docs
+      - run: pnpm test
+      - run: pnpm --dir packages/testing exec playwright install --with-deps chromium
+      - run: pnpm run test:docs:browser
+      - name: Read Pages deployment base
+        id: pages
+        uses: actions/configure-pages@v5
+      - name: Build final Pages artifact
+        run: pnpm run build:docs
+        env:
+          DOCS_BASE: ${{ steps.pages.outputs.base_path }}/
+          DOCS_SITE_URL: ${{ steps.pages.outputs.origin }}
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: docs/dist
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy documentation
+        id: deployment
+        uses: actions/deploy-pages@v4

@@ -1,5 +1,7 @@
+import { ConfigPortal as Portal } from '../ConfigProvider/Portal'
+import { useComponentProps } from '../ConfigProvider/context'
 import { Component, createMemo, merge, Show } from 'solid-js'
-import { Portal, type JSX } from '@solidjs/web'
+import { type JSX } from '@solidjs/web'
 import { createTrigger, type TriggerPlacement, type TriggerAction } from 'upthrust-competence'
 import { popoverOverlayClass, popoverTitleClass, popoverInnerClass, popoverArrowClass } from './styles'
 import { twMerge } from 'tailwind-merge'
@@ -28,7 +30,8 @@ export interface PopoverProps {
   style?: JSX.CSSProperties
 }
 
-const Popover: Component<PopoverProps> = (rawProps) => {
+const Popover: Component<PopoverProps> = (providedProps) => {
+  const rawProps = useComponentProps('Popover', providedProps)
   const props = merge(
     { trigger: 'hover' as PopoverTrigger, placement: 'top' as PopoverPlacement },
     rawProps
@@ -38,10 +41,14 @@ const Popover: Component<PopoverProps> = (rawProps) => {
   // shared createTrigger floating-layer mechanics (the rc-trigger subset),
   // exactly like Dropdown but rendering free-form title/content instead of a
   // menu.
+  const hasTitle = createMemo(() => props.title !== undefined && props.title !== null && props.title !== '' && props.title !== false)
+  const hasContent = createMemo(() => props.content !== undefined && props.content !== null && props.content !== '' && props.content !== false)
+  const hasAnyContent = createMemo(() => hasTitle() || hasContent())
+
   const trigger = createTrigger({
     get open() { return props.open },
     get defaultOpen() { return props.defaultOpen },
-    get disabled() { return props.disabled },
+    get disabled() { return props.disabled || !hasAnyContent() },
     get action() { return props.trigger },
     get placement() { return props.placement },
     get onOpenChange() { return props.onOpenChange },
@@ -49,24 +56,25 @@ const Popover: Component<PopoverProps> = (rawProps) => {
     arrow: true,
   })
 
-  const hasTitle = createMemo(() => props.title !== undefined && props.title !== null && props.title !== '')
-  const hasContent = createMemo(() => props.content !== undefined && props.content !== null && props.content !== '')
+  const visible = createMemo(() => trigger.open() && hasAnyContent())
 
   return (
     <div class={twMerge("relative inline-block", props.class)} style={props.style}>
       <div ref={trigger.triggerRef}>
         {props.children}
       </div>
-      <Portal>
+      <Portal mount={props.getContainer?.()}>
         <Show when={trigger.mounted()}>
           <div
             ref={(el) => { trigger.layerRef(el); trigger.bindLayerHover() }}
             class={twMerge(
-              popoverOverlayClass({ visible: trigger.open(), placement: trigger.actualPlacement() }),
+              popoverOverlayClass({ visible: visible(), placement: trigger.actualPlacement() }),
               props.overlayClass
             )}
             style={{ ...trigger.layerStyle(), ...props.overlayStyle }}
             role="dialog"
+            aria-hidden={!visible() ? 'true' : undefined}
+            inert={!visible()}
           >
             <Show when={hasTitle()}>
               <div class={popoverTitleClass({})}>{props.title}</div>

@@ -28,7 +28,7 @@ export type ThemeOption = {
   styleTokens?: Partial<StyleTokens>
 }
 
-const createTheme = (option?: ThemeOption) => {
+const createTheme = (option?: ThemeOption, defaultTheme = 'light', colors?: Theme['colors']) => {
   const colorOption = isString(option?.colors) ? {color: option.colors} : option?.colors
 
   const palette = getMaterialColor({color: DEFAULT_PRIMIRY, ...colorOption})
@@ -43,15 +43,15 @@ const createTheme = (option?: ThemeOption) => {
   return [presetTheme({
     theme: {
       dark: {
-        colors: toKebabKeys(palette.dark)
+        colors: { ...toKebabKeys(palette.dark), ...colors }
       },
       light: {
-        colors: toKebabKeys(palette.light)
+        colors: { ...toKebabKeys(palette.light), ...colors }
       },
       ...option?.theme
     },
     prefix: option?.prefix || DEFAULT_PREFIX,
-    selectors: option?.selectors
+    selectors: { light: '.light', dark: '.dark', [defaultTheme]: ':root', ...option?.selectors }
   }), { dark: toKebabKeys(palette.dark), light: toKebabKeys(palette.light) }, gap, sizeTokens, styleTokens] as const
 }
 

@@ -1,0 +1,74 @@
+[
+  {
+    "name": "menu",
+    "type": "DropdownMenuProps",
+    "default": "—（必填）",
+    "description": "菜单配置，包含必填 items 与可选 onClick；不是 Menu 组件的全部 API"
+  },
+  {
+    "name": "children",
+    "type": "JSX.Element",
+    "default": "—（必填）",
+    "description": "触发区域内容，建议使用可聚焦的 Button"
+  },
+  {
+    "name": "trigger",
+    "type": "'hover' | 'click' | 'contextMenu'",
+    "default": "'hover'",
+    "description": "单一触发方式；右键菜单仍以触发元素为定位锚点，不跟随鼠标坐标"
+  },
+  {
+    "name": "open",
+    "type": "boolean",
+    "default": "—（非受控）",
+    "description": "受控展开状态；传入后由父层决定实际开关，优先于 defaultOpen，disabled 不覆盖该值"
+  },
+  {
+    "name": "defaultOpen",
+    "type": "boolean",
+    "default": "false",
+    "description": "非受控实例首次挂载时的展开状态，后续变化使用 open 控制"
+  },
+  {
+    "name": "onOpenChange",
+    "type": "(open: boolean) => void",
+    "default": "—",
+    "description": "用户开关请求的回调，只提供布尔值；受控时需自行更新 open；父层直接赋值本身不产生该回调"
+  },
+  {
+    "name": "disabled",
+    "type": "boolean",
+    "default": "false",
+    "description": "阻止用户开关请求，不强制覆盖父层受控 open；不是对 children 内所有控件设置 disabled"
+  },
+  {
+    "name": "placement",
+    "type": "TriggerPlacement（12 个位置，见下方说明）",
+    "default": "'bottomLeft'",
+    "description": "首选弹出位置；空间不足时可翻转或偏移，实际位置以视口内可见区域为准"
+  },
+  {
+    "name": "class",
+    "type": "string",
+    "default": "—",
+    "description": "触发区域根容器的 UnoCSS 类，不作用于 Portal 菜单"
+  },
+  {
+    "name": "style",
+    "type": "JSX.CSSProperties",
+    "default": "—",
+    "description": "触发区域根容器的内联样式"
+  },
+  {
+    "name": "overlayClass",
+    "type": "string",
+    "default": "—",
+    "description": "菜单浮层的类，与内置类合并；UnoCSS 工具类需可静态扫描"
+  },
+  {
+    "name": "overlayStyle",
+    "type": "JSX.CSSProperties",
+    "default": "—",
+    "description": "菜单浮层内联样式，合并在定位样式之后；避免覆盖 position、top、left 等定位字段"
+  }
+]

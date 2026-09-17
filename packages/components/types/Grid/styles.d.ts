@@ -1,7 +1,7 @@
 import { VariantProps } from 'class-variance-authority';
 declare const rowVariants: (props?: ({
-    justify?: "start" | "end" | "space-around" | "space-between" | "space-evenly" | "center" | null | undefined;
-    align?: "middle" | "stretch" | "bottom" | "top" | null | undefined;
+    justify?: "start" | "end" | "center" | "space-around" | "space-between" | "space-evenly" | null | undefined;
+    align?: "middle" | "bottom" | "top" | "stretch" | null | undefined;
     wrap?: boolean | null | undefined;
 } & import('class-variance-authority/types').ClassProp) | undefined) => string;
 declare const colVariants: (props?: ({} & import('class-variance-authority/types').ClassProp) | undefined) => string;

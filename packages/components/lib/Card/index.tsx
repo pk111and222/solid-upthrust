@@ -1,3 +1,4 @@
+import { useComponentProps } from '../ConfigProvider/context'
 import { Component, For, Show, createMemo, createSignal, merge } from 'solid-js'
 import type { JSX } from '@solidjs/web'
 import Skeleton from '../Skeleton'
@@ -53,7 +54,8 @@ export interface CardProps {
   style?: JSX.CSSProperties
 }
 
-const Card: Component<CardProps> = (rawProps) => {
+const Card: Component<CardProps> = (providedProps) => {
+  const rawProps = useComponentProps('Card', providedProps)
   const props = merge(
     { variant: 'outlined', size: 'middle', hoverable: false, loading: false } as Partial<CardProps>,
     rawProps,

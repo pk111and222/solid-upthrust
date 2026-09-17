@@ -1,6 +1,6 @@
 import { VariantProps } from 'class-variance-authority';
 declare const alertContainerVariants: (props?: ({
-    type?: "success" | "info" | "warning" | "error" | null | undefined;
+    type?: "error" | "warning" | "success" | "info" | null | undefined;
     hasDescription?: boolean | null | undefined;
     banner?: boolean | null | undefined;
     closing?: boolean | null | undefined;
@@ -10,7 +10,7 @@ declare const alertContentVariants: (props?: ({
     hasDescription?: boolean | null | undefined;
 } & import('class-variance-authority/types').ClassProp) | undefined) => string;
 declare const alertIconVariants: (props?: ({
-    type?: "success" | "info" | "warning" | "error" | null | undefined;
+    type?: "error" | "warning" | "success" | "info" | null | undefined;
     hasDescription?: boolean | null | undefined;
 } & import('class-variance-authority/types').ClassProp) | undefined) => string;
 declare const alertMessageVariants: (props?: ({

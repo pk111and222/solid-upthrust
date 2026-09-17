@@ -10,6 +10,9 @@ const MenuPage: Component = () => {
       <h2 class="text-2xl font-bold mb-4">Menu 导航菜单</h2>
       <p class="text-on-surface-variant mb-6">为页面和功能提供导航的菜单列表。</p>
 
+      <h3 class="text-lg font-semibold mb-3">原生链接标签</h3>
+      <Menu items={[{key:'Icon',label:'Icon 图标'},{key:'ConfigProvider',label:'ConfigProvider 全局配置'}]}
+        renderLabel={item => <a href={`/${item.key}`}>{item.label}</a>} />
       <h3 class="text-lg font-semibold mb-3">垂直菜单</h3>
       <div class="w-60 rounded-lg border border-outline-variant p-2">
         <Menu

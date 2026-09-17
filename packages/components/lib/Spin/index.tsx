@@ -1,3 +1,4 @@
+import { useComponentProps } from '../ConfigProvider/context'
 import { Component, Show, createEffect, createMemo, createSignal, merge, onCleanup } from 'solid-js'
 import type { JSX } from '@solidjs/web'
 import { spinIndicatorClass, spinNestedClass, spinWrapperClass, spinBackdropClass, spinTipClass, spinContainerClass } from './styles'
@@ -29,7 +30,8 @@ export interface SpinProps {
  *  - the initial appearance is debounced too when spinning starts on
  *    mount with a delay configured
  */
-const Spin: Component<SpinProps> = (rawProps) => {
+const Spin: Component<SpinProps> = (providedProps) => {
+  const rawProps = useComponentProps('Spin', providedProps)
   const props = merge({ size: 'middle' as const, spinning: true }, rawProps)
 
   const sourceSpinning = createMemo(() => props.spinning ?? true)

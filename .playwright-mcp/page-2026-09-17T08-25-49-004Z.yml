@@ -1,0 +1,329 @@
+- generic [active] [ref=e1]:
+  - link "跳至正文" [ref=e2] [cursor=pointer]:
+    - /url: "#main-content"
+  - generic [ref=e3]:
+    - generic [ref=e4]:
+      - link "↗ Solid Upthrust" [ref=e5] [cursor=pointer]:
+        - /url: /
+        - generic [ref=e6]: ↗
+        - generic [ref=e7]: Solid Upthrust
+      - navigation "主导航" [ref=e8]:
+        - link "开发指南" [ref=e9] [cursor=pointer]:
+          - /url: /guide/
+        - link "组件" [ref=e10] [cursor=pointer]:
+          - /url: /components/
+        - generic [ref=e11]: Solid 2 RC
+    - generic [ref=e12]:
+      - complementary [ref=e13]:
+        - navigation "文档目录" [ref=e14]:
+          - menu [ref=e15]:
+            - generic [ref=e16]:
+              - generic [ref=e17]: 开始使用
+              - menuitem [ref=e18] [cursor=pointer]:
+                - link "Solid Upthrust" [ref=e19]:
+                  - /url: /
+              - menuitem [ref=e20] [cursor=pointer]:
+                - link "工程入门" [ref=e21]:
+                  - /url: /guide/
+              - menuitem [ref=e22] [cursor=pointer]:
+                - link "文档与示例渲染" [ref=e23]:
+                  - /url: /guide/rendering/
+            - generic [ref=e24]:
+              - generic [ref=e25]: 研发指南
+              - menuitem [ref=e26] [cursor=pointer]:
+                - link "架构与目录" [ref=e27]:
+                  - /url: /guide/architecture/
+              - menuitem [ref=e28] [cursor=pointer]:
+                - link "四层测试" [ref=e29]:
+                  - /url: /guide/testing/
+              - menuitem [ref=e30] [cursor=pointer]:
+                - link "功能交付清单" [ref=e31]:
+                  - /url: /guide/contributing/
+            - generic [ref=e32]:
+              - generic [ref=e33]: 组件
+              - menuitem [ref=e34] [cursor=pointer]:
+                - link "组件总览" [ref=e35]:
+                  - /url: /components/
+              - menuitem [ref=e36] [cursor=pointer]:
+                - link "Button 按钮" [ref=e37]:
+                  - /url: /components/general/button/
+              - menuitem [ref=e38] [cursor=pointer]:
+                - link "ConfigProvider 全局配置" [ref=e39]:
+                  - /url: /components/general/config-provider/
+              - menuitem [ref=e40] [cursor=pointer]:
+                - link "Icon 图标" [ref=e41]:
+                  - /url: /components/general/icon/
+              - menuitem [ref=e42] [cursor=pointer]:
+                - link "Dropdown 下拉菜单" [ref=e43]:
+                  - /url: /components/navigation/dropdown/
+              - menuitem [ref=e44] [cursor=pointer]:
+                - link "Skeleton 骨架屏" [ref=e45]:
+                  - /url: /components/feedback/skeleton/
+              - menuitem [ref=e46] [cursor=pointer]:
+                - link "Tooltip 文字提示" [ref=e47]:
+                  - /url: /components/data-display/tooltip/
+              - menuitem [ref=e48] [cursor=pointer]:
+                - link "Popover 气泡卡片" [ref=e49]:
+                  - /url: /components/data-display/popover/
+        - generic [ref=e50]: 面向 SolidJS 的企业级组件库
+      - main [ref=e51]:
+        - article [ref=e53]:
+          - generic [ref=e54]:
+            - generic [ref=e55]: 文档
+            - generic [ref=e56]: /
+            - generic [ref=e57]: Popover 气泡卡片
+          - heading "Popover 气泡卡片" [level=1] [ref=e58]
+          - paragraph [ref=e59]: 点击/悬停浮出的卡片容器，可承载标题与任意内容。
+          - region [ref=e60]:
+            - heading "使用方式" [level=2] [ref=e61]
+            - generic [ref=e62]:
+              - paragraph [ref=e63]: Popover 用于在触发元素旁展示一张可以承载任意内容（包括按钮等交互控件）的卡片；这一点和 Tooltip 不同——Tooltip 只适合纯文本提示，不应嵌套交互元素。title、content 都是可选的，children 是必填的触发区域。
+              - code [ref=e65]: "import { Popover } from 'upthrust-ui'"
+              - paragraph [ref=e66]: 浮层通过共享 createTrigger 定位，并根据实际 Portal 定位祖先转换坐标；页面或容器滚动时重新测量，视口空间不足时自动翻转到另一侧。默认使用 hover 触发、top 定位。
+              - paragraph [ref=e67]: title 和 content 都为 undefined、null、空字符串或 false 时视为空内容：不会打开浮层。这与 Tooltip 对空 title 的处理一致，避免弹出一张完全空白的卡片。
+          - region [ref=e68]:
+            - heading "代码演示" [level=2] [ref=e69]
+            - generic [ref=e70]:
+              - generic [ref=e71]:
+                - region "基本使用" [ref=e72]:
+                  - generic [ref=e74]:
+                    - button "悬停查看卡片" [ref=e78] [cursor=pointer]
+                    - button "无标题" [ref=e83] [cursor=pointer]
+                    - button "title/content 都为空，不会打开" [ref=e88] [cursor=pointer]
+                  - generic [ref=e90]:
+                    - heading "基本使用" [level=3] [ref=e91]
+                    - paragraph [ref=e92]: 标题+内容、仅内容、title/content 都为空三种情形。
+                  - group [ref=e93]:
+                    - generic "TSX 〈/〉 展开代码" [ref=e94] [cursor=pointer]:
+                      - generic [ref=e95]: TSX
+                      - generic [ref=e96]: 〈/〉 展开代码
+                - region "触发方式" [ref=e97]:
+                  - generic [ref=e99]:
+                    - button "hover" [ref=e103] [cursor=pointer]
+                    - button "click" [ref=e108] [cursor=pointer]
+                    - button "focus（可用 Tab 聚焦）" [ref=e113] [cursor=pointer]
+                    - button "右键 contextMenu" [ref=e118] [cursor=pointer]
+                  - generic [ref=e120]:
+                    - heading "触发方式" [level=3] [ref=e121]
+                    - paragraph [ref=e122]: hover / click / focus / contextMenu 四种触发方式，一次只接受一种。
+                  - group [ref=e123]:
+                    - generic "TSX 〈/〉 展开代码" [ref=e124] [cursor=pointer]:
+                      - generic [ref=e125]: TSX
+                      - generic [ref=e126]: 〈/〉 展开代码
+                - region "受控与 defaultOpen" [ref=e127]:
+                  - generic [ref=e129]:
+                    - button "打开卡片" [ref=e131] [cursor=pointer]
+                    - button "受控触发器" [ref=e136] [cursor=pointer]
+                    - button "defaultOpen" [ref=e141] [cursor=pointer]
+                  - generic [ref=e143]:
+                    - heading "受控与 defaultOpen" [level=3] [ref=e144]
+                    - paragraph [ref=e145]: 外部按钮直接修改 open；defaultOpen 只影响非受控实例的首次挂载状态。
+                  - group [ref=e146]:
+                    - generic "TSX 〈/〉 展开代码" [ref=e147] [cursor=pointer]:
+                      - generic [ref=e148]: TSX
+                      - generic [ref=e149]: 〈/〉 展开代码
+                - region "禁用" [ref=e150]:
+                  - generic [ref=e152]:
+                    - button "启用触发器" [ref=e154] [cursor=pointer]
+                    - button "动态 disabled" [ref=e159] [cursor=pointer]
+                  - generic [ref=e161]:
+                    - heading "禁用" [level=3] [ref=e162]
+                    - paragraph [ref=e163]: 动态切换 disabled；disabled 为 true 时悬停/点击都不会打开。
+                  - group [ref=e164]:
+                    - generic "TSX 〈/〉 展开代码" [ref=e165] [cursor=pointer]:
+                      - generic [ref=e166]: TSX
+                      - generic [ref=e167]: 〈/〉 展开代码
+                - region "自定义样式" [ref=e168]:
+                  - generic [ref=e170]:
+                    - button "root class/style" [ref=e174] [cursor=pointer]
+                    - button "overlayClass/overlayStyle" [ref=e179] [cursor=pointer]
+                    - button "JSX content" [ref=e184] [cursor=pointer]
+                  - generic [ref=e186]:
+                    - heading "自定义样式" [level=3] [ref=e187]
+                    - paragraph [ref=e188]: class/style 作用于根容器；overlayClass/overlayStyle 单独控制浮层；content 支持任意 JSX，包括交互按钮。
+                  - group [ref=e189]:
+                    - generic "TSX 〈/〉 展开代码" [ref=e190] [cursor=pointer]:
+                      - generic [ref=e191]: TSX
+                      - generic [ref=e192]: 〈/〉 展开代码
+                - region "局部主题与 getContainer" [ref=e193]:
+                  - generic [ref=e196]:
+                    - button "局部主题卡片" [ref=e200] [cursor=pointer]
+                    - button "getContainer=body" [ref=e205] [cursor=pointer]
+                    - button "切换主题" [ref=e208] [cursor=pointer]
+                  - generic [ref=e210]:
+                    - heading "局部主题与 getContainer" [level=3] [ref=e211]
+                    - paragraph [ref=e212]: ConfigPortal 使浮层继续使用局部主题变量；getContainer 可以让浮层脱离局部主题挂到 body。
+                  - group [ref=e213]:
+                    - generic "TSX 〈/〉 展开代码" [ref=e214] [cursor=pointer]:
+                      - generic [ref=e215]: TSX
+                      - generic [ref=e216]: 〈/〉 展开代码
+              - region "十二种位置" [ref=e217]:
+                - generic [ref=e219]:
+                  - generic [ref=e220]:
+                    - button "topLeft" [ref=e223] [cursor=pointer]
+                    - button "top" [ref=e227] [cursor=pointer]
+                    - button "topRight" [ref=e231] [cursor=pointer]
+                  - generic [ref=e233]:
+                    - button "leftTop" [ref=e236] [cursor=pointer]
+                    - button "left" [ref=e240] [cursor=pointer]
+                    - button "leftBottom" [ref=e244] [cursor=pointer]
+                  - generic [ref=e246]:
+                    - button "rightTop" [ref=e249] [cursor=pointer]
+                    - button "right" [ref=e253] [cursor=pointer]
+                    - button "rightBottom" [ref=e257] [cursor=pointer]
+                  - generic [ref=e259]:
+                    - button "bottomLeft" [ref=e262] [cursor=pointer]
+                    - button "bottom" [ref=e266] [cursor=pointer]
+                    - button "bottomRight" [ref=e270] [cursor=pointer]
+                - generic [ref=e272]:
+                  - heading "十二种位置" [level=3] [ref=e273]
+                  - paragraph [ref=e274]: 按钮名称与卡片标题对应 placement；空间不足时会调整实际位置。
+                - group [ref=e275]:
+                  - generic "TSX 〈/〉 展开代码" [ref=e276] [cursor=pointer]:
+                    - generic [ref=e277]: TSX
+                    - generic [ref=e278]: 〈/〉 展开代码
+          - region [ref=e279]:
+            - heading "PopoverProps API" [level=2] [ref=e280]
+            - table "API 属性表格" [ref=e285]:
+              - rowgroup [ref=e291]:
+                - row [ref=e292]:
+                  - columnheader "属性" [ref=e293]
+                  - columnheader "说明" [ref=e296]
+                  - columnheader "类型" [ref=e299]
+                  - columnheader "默认值" [ref=e302]
+              - rowgroup [ref=e305]:
+                - row [ref=e306]:
+                  - cell [ref=e307]:
+                    - code [ref=e310]: title
+                  - cell "卡片标题；与 content 都为空时视为空内容，不会打开浮层" [ref=e311]
+                  - cell [ref=e314]:
+                    - code [ref=e317]: JSX.Element
+                  - cell [ref=e318]:
+                    - code [ref=e321]: —
+                - row [ref=e322]:
+                  - cell [ref=e323]:
+                    - code [ref=e326]: content
+                  - cell "卡片内容，可承载任意元素（包括按钮等交互控件）；与 title 都为空时视为空内容" [ref=e327]
+                  - cell [ref=e330]:
+                    - code [ref=e333]: JSX.Element
+                  - cell [ref=e334]:
+                    - code [ref=e337]: —
+                - row [ref=e338]:
+                  - cell [ref=e339]:
+                    - code [ref=e342]: children
+                  - cell "触发区域内容" [ref=e343]
+                  - cell [ref=e346]:
+                    - code [ref=e349]: JSX.Element
+                  - cell [ref=e350]:
+                    - code [ref=e353]: —（必填）
+                - row [ref=e354]:
+                  - cell [ref=e355]:
+                    - code [ref=e358]: trigger
+                  - cell "单一触发方式；右键菜单仍以触发元素为定位锚点，不跟随鼠标坐标" [ref=e359]
+                  - cell [ref=e362]:
+                    - code [ref=e365]: "'hover' | 'click' | 'contextMenu' | 'focus'"
+                  - cell [ref=e366]:
+                    - code [ref=e369]: "'hover'"
+                - row [ref=e370]:
+                  - cell [ref=e371]:
+                    - code [ref=e374]: placement
+                  - cell "首选弹出位置；空间不足时可翻转或偏移，实际位置以视口内可见区域为准" [ref=e375]
+                  - cell [ref=e378]:
+                    - code [ref=e381]: PopoverPlacement（12 个位置，见下方说明）
+                  - cell [ref=e382]:
+                    - code [ref=e385]: "'top'"
+                - row [ref=e386]:
+                  - cell [ref=e387]:
+                    - code [ref=e390]: open
+                  - cell "受控展开状态；传入后由父层决定实际开关，优先于 defaultOpen，disabled 不覆盖该值" [ref=e391]
+                  - cell [ref=e394]:
+                    - code [ref=e397]: boolean
+                  - cell [ref=e398]:
+                    - code [ref=e401]: —（非受控）
+                - row [ref=e402]:
+                  - cell [ref=e403]:
+                    - code [ref=e406]: defaultOpen
+                  - cell "非受控实例首次挂载时的展开状态，后续变化使用 open 控制" [ref=e407]
+                  - cell [ref=e410]:
+                    - code [ref=e413]: boolean
+                  - cell [ref=e414]:
+                    - code [ref=e417]: "false"
+                - row [ref=e418]:
+                  - cell [ref=e419]:
+                    - code [ref=e422]: onOpenChange
+                  - cell "用户开关请求的回调，只提供布尔值；受控时需自行更新 open" [ref=e423]
+                  - cell [ref=e426]:
+                    - code [ref=e429]: "(open: boolean) => void"
+                  - cell [ref=e430]:
+                    - code [ref=e433]: —
+                - row [ref=e434]:
+                  - cell [ref=e435]:
+                    - code [ref=e438]: disabled
+                  - cell "阻止用户开关请求；title 与 content 都为空时内部也会等效禁用。已经打开的浮层不会被强制关闭，但会立即隐藏（不留空卡片），内容恢复后无需重新触发即可重新可见" [ref=e439]
+                  - cell [ref=e442]:
+                    - code [ref=e445]: boolean
+                  - cell [ref=e446]:
+                    - code [ref=e449]: "false"
+                - row [ref=e450]:
+                  - cell [ref=e451]:
+                    - code [ref=e454]: getContainer
+                  - cell "浮层实际挂载的 Portal 容器；不传时使用最近的局部主题作用域" [ref=e455]
+                  - cell [ref=e458]:
+                    - code [ref=e461]: () => HTMLElement
+                  - cell [ref=e462]:
+                    - code [ref=e465]: —（最近 ConfigProvider 主题作用域，否则 document.body）
+                - row [ref=e466]:
+                  - cell [ref=e467]:
+                    - code [ref=e470]: class
+                  - cell "触发区域根容器的 UnoCSS 类，不作用于 Portal 浮层" [ref=e471]
+                  - cell [ref=e474]:
+                    - code [ref=e477]: string
+                  - cell [ref=e478]:
+                    - code [ref=e481]: —
+                - row [ref=e482]:
+                  - cell [ref=e483]:
+                    - code [ref=e486]: style
+                  - cell "触发区域根容器的内联样式" [ref=e487]
+                  - cell [ref=e490]:
+                    - code [ref=e493]: JSX.CSSProperties
+                  - cell [ref=e494]:
+                    - code [ref=e497]: —
+                - row [ref=e498]:
+                  - cell [ref=e499]:
+                    - code [ref=e502]: overlayClass
+                  - cell "浮层的类，与内置类合并；UnoCSS 工具类需可静态扫描" [ref=e503]
+                  - cell [ref=e506]:
+                    - code [ref=e509]: string
+                  - cell [ref=e510]:
+                    - code [ref=e513]: —
+                - row [ref=e514]:
+                  - cell [ref=e515]:
+                    - code [ref=e518]: overlayStyle
+                  - cell "浮层内联样式，合并在内部定位样式之后；可用于覆盖 z-index 等字段，但避免破坏 position/top/left 定位" [ref=e519]
+                  - cell [ref=e522]:
+                    - code [ref=e525]: JSX.CSSProperties
+                  - cell [ref=e526]:
+                    - code [ref=e529]: —
+          - region [ref=e530]:
+            - heading "位置与样式" [level=2] [ref=e531]
+            - generic [ref=e532]:
+              - paragraph [ref=e533]: PopoverPlacement 使用 TriggerPlacement 的十二种位置：topLeft、top、topRight、bottomLeft、bottom、bottomRight、leftTop、left、leftBottom、rightTop、right、rightBottom。默认 top；这是首选位置，视口空间不足时可能翻转或偏移，翻转后浮层箭头会跟随实际朝向重新计算。
+              - paragraph [ref=e534]: class/style 只影响触发区域根容器。浮层通过 Portal 渲染，使用 overlayClass/overlayStyle 定制；overlayStyle 合并在内部定位样式之后，可用于追加或覆盖 z-index 等字段，但不要覆盖 position、top、left、transform，否则需要自行负责定位。
+              - paragraph [ref=e535]: 局部 ConfigProvider 的主题 CSS 变量可通过内部 ConfigPortal 延续到浮层，surface 控制背景，onSurface 控制文字。传入 getContainer 可以让浮层脱离最近主题作用域，挂载到指定容器（例如 document.body）。
+              - paragraph [ref=e536]:
+                - text: Popover 会读取 ConfigProvider 的
+                - code [ref=e537]: components.Popover
+                - text: 默认值，但仅限 trigger、placement 两项；显式 props 始终优先于该默认值。size、disabled 等全局默认不会注入到 Popover。
+          - region [ref=e538]:
+            - heading "键盘与无障碍" [level=2] [ref=e539]
+            - generic [ref=e540]:
+              - paragraph [ref=e541]: 浮层带 role="dialog"（区别于 Tooltip 的 role="tooltip"），因为卡片内容可以承载按钮等交互元素，ARIA tooltip 语义不允许这样做。trigger="focus" 可配合 Tab 键让键盘用户不依赖鼠标打开卡片。
+              - paragraph [ref=e542]: Popover 不会自动把焦点移入卡片或管理卡片内部的键盘导航——内容是任意的，交由使用者自行决定内部控件的 Tab 顺序；这与 Dropdown 的固定菜单列表（需要方向键在候选项间循环）不同。Escape 关闭、点击外部关闭由共享 Trigger 统一处理。
+          - region [ref=e543]:
+            - heading "状态与支持边界" [level=2] [ref=e544]
+            - generic [ref=e545]:
+              - paragraph [ref=e546]: 不传 open 时为非受控模式，defaultOpen 仅决定初次挂载状态；传入 open 后为受控模式，onOpenChange 只报告布尔开关请求，父层需更新 open 才会改变显示。
+              - paragraph [ref=e547]: disabled 默认 false，阻止用户发起开关请求；title 与 content 都为空时等效禁用。若浮层已经处于打开状态后 disabled 才变为 true（包括内容变空的情形），浮层不会被强制关闭（继承共享 Trigger 语义），但会立即隐藏，不会残留一张空卡片；条件解除后无需用户重新触发即可恢复可见。
+              - paragraph [ref=e548]: 浮层按需挂载，关闭后延迟销毁；短时间内重新打开可复用浮层 DOM，卸载 Popover 则结束该实例。延迟时间属于内部实现，不是可配置的 Popover 属性。
+              - paragraph [ref=e549]: Popover 没有 mouseEnterDelay/mouseLeaveDelay 这类延迟配置——hover 打开是即时的（0ms），关闭沿用共享 Trigger 的 100ms 默认防抖；这与 Tooltip 显式对齐 antd 的 100ms 打开延迟不同，是两者的既有差异，不代表缺陷。没有 ref 实例、静态子组件或异步确认协议；不承诺与其他组件库完全一致。
+          - generic [ref=e550]: Solid Upthrust · 基于 Solid 2 构建

@@ -6,15 +6,15 @@
  *    overrides into a list of widths; here the derivation is pure.
  */
 export type SkeletonBlock = {
-    /** 'title' | 'paragraph' rows have different heights. */
+    /** Distinguishes title spacing from paragraph spacing. */
     kind: 'title' | 'paragraph';
-    /** Width in px; undefined = full width. Last paragraph row is ~60%. */
+    /** Numbers are pixels, strings are CSS lengths; undefined fills the column. */
     width?: number | string;
 };
 export type SkeletonConfig = {
     loading?: boolean;
     active?: boolean;
-    /** Round line ends (avatar stays round regardless). */
+    /** Round title and paragraph line ends; avatar uses its own shape. */
     round?: boolean;
     title?: boolean | {
         width?: number | string;

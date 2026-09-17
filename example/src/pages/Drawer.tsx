@@ -27,7 +27,6 @@ const DrawerPage: Component = () => {
         onClose={() => { setBasicOpen(false); setLastAction('onClose 关闭') }}
         okText="确定"
         cancelText="取消"
-        onOk={() => { setBasicOpen(false); setLastAction('onOk 关闭') }}
       >
         <p class="mb-sm">这是一个右侧滑入的抽屉（默认 placement="right"，宽度 378px）。</p>
         <p class="text-on-surface-variant">内容区可滚动；点击遮罩或按 ESC 触发 onClose。</p>
@@ -48,7 +47,6 @@ const DrawerPage: Component = () => {
         placement={placement()}
         onClose={() => { setPlacementOpen(false); setLastAction(`${placement()} 抽屉关闭`) }}
         okText="知道了"
-        onOk={() => setPlacementOpen(false)}
       >
         <p>水平方向（left/right）由 width 控制宽度；垂直方向（top/bottom）由 height 控制高度。</p>
       </Drawer>
@@ -63,9 +61,8 @@ const DrawerPage: Component = () => {
         open={sizeOpen()}
         title="large 尺寸"
         size="large"
-        onClose={() => setSizeOpen(false)}
+        onClose={() => { setSizeOpen(false) }}
         okText="确定"
-        onOk={() => setSizeOpen(false)}
       >
         <p>size="large" 宽 736px；也可用 width={600} 或 width="50vw" 直接指定。</p>
       </Drawer>
@@ -92,7 +89,6 @@ const DrawerPage: Component = () => {
         zIndex={1010}
         onClose={() => { setNestedOpen(false); setLastAction('第二层关闭') }}
         okText="知道了"
-        onOk={() => setNestedOpen(false)}
       >
         <p>第二层抽屉贴右边缘滑入盖住右侧；第一层同时被<b>向屏幕内推开 180px</b>（向左让位、保持可见）。关闭本层后第一层滑回原位。</p>
       </Drawer>

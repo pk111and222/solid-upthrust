@@ -1,5 +1,7 @@
+import { ConfigPortal as Portal } from '../ConfigProvider/Portal'
+import { useComponentProps } from '../ConfigProvider/context'
 import { Component, createEffect, createMemo, createSignal, merge, onCleanup, Show } from 'solid-js'
-import { Portal, type JSX } from '@solidjs/web'
+import { type JSX } from '@solidjs/web'
 import { createDialog, type DialogIns } from 'upthrust-competence'
 import {
   modalMaskClass, modalWrapperClass, modalPanelClass, modalHeaderClass,
@@ -8,6 +10,8 @@ import {
 import Button, { type ButtonProps } from '../Button'
 import { registerDialog, unregisterDialog } from '../_dialogStack'
 import { twMerge } from 'tailwind-merge'
+import { createModalMethods } from './static'
+export type { ModalStaticConfig, ModalStaticResult } from './static'
 
 export interface ModalProps {
   open?: boolean
@@ -27,8 +31,8 @@ export interface ModalProps {
   /** Loading state of the OK button while an async onOk is pending. */
   confirmLoading?: boolean
   /** Fires on every closing intent BEFORE the close (veto with false). */
-  onOk?: (e: MouseEvent) => void | Promise<unknown>
-  onCancel?: (e: MouseEvent | KeyboardEvent) => void | Promise<unknown>
+  onOk?: (e: MouseEvent) => void | boolean | Promise<unknown>
+  onCancel?: (e: MouseEvent | KeyboardEvent) => void | boolean | Promise<unknown>
   afterClose?: () => void
   afterOpenChange?: (open: boolean) => void
   /** Close on mask click. Default true. */
@@ -54,7 +58,8 @@ export interface ModalProps {
   ref?: (val: DialogIns) => void
 }
 
-const Modal: Component<ModalProps> = (rawProps) => {
+const ModalComponent: Component<ModalProps> = (providedProps) => {
+  const rawProps = useComponentProps('Modal', providedProps)
   const props = merge(
     {
       maskClosable: true,
@@ -67,41 +72,33 @@ const Modal: Component<ModalProps> = (rawProps) => {
     rawProps,
   )
 
-  // ---- shared dialog state machine (identical to Drawer) ------------------
+  let closeEvent: MouseEvent | KeyboardEvent | undefined
+  // A rejected callback or explicit false keeps the modal open for retry.
   const dialog = createDialog({
     get open() { return props.open },
     get defaultOpen() { return props.defaultOpen },
     get destroyOnHidden() { return props.destroyOnHidden },
-    // antd onCancel/onOk semantics: the handler MAY return a promise; while
-    // it is pending the modal stays open (confirmLoading) and closes after
-    // it resolves. Rejections also close — surfacing errors is the app's job.
     get shouldClose() {
       return (intent: 'mask' | 'keyboard' | 'close' | 'ok' | 'cancel') => {
-        if (intent === 'ok') {
-          const r = props.onOk?.(undefined as unknown as MouseEvent)
-          if (r && typeof (r as Promise<unknown>).then === 'function') {
-            return (r as Promise<unknown>).then(() => true, () => true)
-          }
-          return true
+        try {
+          const result = intent === 'ok'
+            ? props.onOk?.(closeEvent as MouseEvent)
+            : props.onCancel?.(closeEvent as MouseEvent | KeyboardEvent)
+          return result instanceof Promise || (result && typeof result === 'object' && 'then' in result)
+            ? Promise.resolve(result).then(value => value !== false, () => false)
+            : result !== false
+        } catch {
+          return false
         }
-        if (intent === 'cancel') {
-          const r = props.onCancel?.(undefined as unknown as MouseEvent)
-          if (r && typeof (r as Promise<unknown>).then === 'function') {
-            return (r as Promise<unknown>).then(() => true, () => true)
-          }
-          return true
-        }
-        // mask / keyboard / close intents also route through onCancel (antd).
-        const r = props.onCancel?.(undefined as unknown as MouseEvent)
-        if (r && typeof (r as Promise<unknown>).then === 'function') {
-          return (r as Promise<unknown>).then(() => true, () => true)
-        }
-        return true
       }
     },
     get afterClose() { return props.afterClose },
     get afterOpenChange() { return props.afterOpenChange },
   })
+  const requestClose = (intent: 'mask' | 'keyboard' | 'close' | 'ok' | 'cancel', event?: MouseEvent | KeyboardEvent) => {
+    closeEvent = event
+    dialog.requestClose(intent)
+  }
 
   props.ref?.(dialog)
 
@@ -142,7 +139,7 @@ const Modal: Component<ModalProps> = (rawProps) => {
     () => dialog.animatedOpen(),
     (animated) => {
       if (animated) {
-        registerDialog({ id: stackId, zIndex: effectiveZIndex(), onEscape: () => { if (props.keyboard !== false) dialog.requestClose('keyboard') } })
+        registerDialog({ id: stackId, zIndex: effectiveZIndex(), onEscape: () => { if (props.keyboard !== false) requestClose('keyboard', new KeyboardEvent('keydown', { key: 'Escape' })) } })
       } else {
         unregisterDialog(stackId)
       }
@@ -209,7 +206,7 @@ const Modal: Component<ModalProps> = (rawProps) => {
     // Only direct clicks on the mask region itself (not bubbled from panel).
     if (e.target !== e.currentTarget) return
     if (!props.maskClosable) return
-    dialog.requestClose('mask')
+    requestClose('mask', e)
   }
 
   const ariaId = `ut-modal-${Math.random().toString(36).slice(2, 9)}`
@@ -251,7 +248,7 @@ const Modal: Component<ModalProps> = (rawProps) => {
                   type="button"
                   class={modalCloseClass({})}
                   aria-label="close"
-                  onClick={() => dialog.requestClose('close')}
+                  onClick={e => requestClose('close', e)}
                 >
                   <span class={MODAL_CLOSE_ICON} />
                 </button>
@@ -262,10 +259,10 @@ const Modal: Component<ModalProps> = (rawProps) => {
               <Show when={showFooter()}>
                 <Show when={props.footer === undefined} fallback={<div class={modalFooterClass({})}>{props.footer}</div>}>
                   <div class={modalFooterClass({})}>
-                    <Button variant="outlined" {...props.cancelButtonProps} onClick={() => dialog.requestClose('cancel')}>
+                    <Button variant="outlined" {...props.cancelButtonProps} onClick={e => requestClose('cancel', e)}>
                       {props.cancelText ?? '取消'}
                     </Button>
-                    <Button variant={props.okVariant ?? 'solid'} color="primary" loading={okLoading()} {...props.okButtonProps} onClick={() => dialog.requestClose('ok')}>
+                    <Button variant={props.okVariant ?? 'solid'} color="primary" loading={okLoading()} {...props.okButtonProps} onClick={e => requestClose('ok', e)}>
                       {props.okText ?? '确定'}
                     </Button>
                   </div>
@@ -279,4 +276,5 @@ const Modal: Component<ModalProps> = (rawProps) => {
   )
 }
 
+const Modal = /* @__PURE__ */ Object.assign(ModalComponent, createModalMethods(ModalComponent))
 export default Modal

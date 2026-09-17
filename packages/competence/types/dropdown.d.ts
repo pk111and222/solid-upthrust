@@ -13,6 +13,7 @@ export type DropdownIns = {
     setOpen: (v: boolean) => void;
     toggle: () => void;
 };
+/** @deprecated Compatibility API for inline overlays; new floating layers use createTrigger. */
 export declare const createDropdown: (config?: DropdownConfig) => {
     open: import('solid-js').SourceAccessor<boolean>;
     setOpen: (v: boolean) => void;

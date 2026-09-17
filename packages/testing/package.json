@@ -1,0 +1,37 @@
+{
+  "name": "upthrust-testing",
+  "version": "0.0.0",
+  "private": true,
+  "description": "Centralized four-layer tests for Solid Upthrust",
+  "type": "module",
+  "scripts": {
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:headless": "vitest run headless",
+    "test:competence": "vitest run headless --exclude 'headless/preset/**' --exclude 'headless/docs/**'",
+    "test:preset": "vitest run headless/preset",
+    "test:smoke": "vitest run smoke",
+    "test:render": "vitest run render",
+    "typecheck": "tsc --noEmit -p tsconfig.json",
+    "test:docs": "vitest run headless/docs render/docs",
+    "test:docs:browser": "node browser/docs/run.mjs",
+    "typecheck:browser": "tsc --noEmit -p tsconfig.browser.json"
+  },
+  "devDependencies": {
+    "@solidjs/web": "2.0.0-rc.0",
+    "@types/node": "22.20.1",
+    "@unocss/core": "66.7.5",
+    "@unocss/preset-wind4": "66.7.5",
+    "dayjs": "1.11.23",
+    "happy-dom": "20.11.2",
+    "solid-js": "2.0.0-rc.0",
+    "typescript": "7.0.2",
+    "upthrust-competence": "workspace:*",
+    "upthrust-ui": "workspace:*",
+    "upthrust-unocss-preset": "workspace:*",
+    "vite": "8.2.1",
+    "vite-plugin-solid": "3.0.0-next.27",
+    "vitest": "4.1.10",
+    "@playwright/test": "1.63.0"
+  }
+}

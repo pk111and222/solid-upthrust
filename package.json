@@ -6,13 +6,24 @@
   "main": "index.js",
   "scripts": {
     "typecheck": "tsc --noEmit",
-    "test": "vitest run",
+    "test": "pnpm --dir packages/testing run test",
     "check": "pnpm run typecheck && pnpm run test && pnpm run build",
     "dev::preset": "pnpm --dir packages/preset run watch",
     "dev::competence": "pnpm --dir packages/competence run watch",
     "dev::component": "pnpm --dir packages/components run watch",
     "dev::example": "pnpm --dir example run dev",
-    "build": "pnpm --dir packages/preset run build && pnpm --dir packages/competence run build && pnpm --dir packages/components run build && pnpm --dir example run build"
+    "build": "pnpm --dir packages/preset run build && pnpm --dir packages/competence run build && pnpm --dir packages/components run build && pnpm --dir example run build",
+    "test:headless": "pnpm --dir packages/testing run test:headless",
+    "test:smoke": "pnpm --dir packages/testing run test:smoke",
+    "test:render": "pnpm --dir packages/testing run test:render",
+    "test:watch": "pnpm --dir packages/testing run test:watch",
+    "dev:docs": "pnpm --dir docs run dev",
+    "build:docs": "pnpm --dir docs run build",
+    "preview:docs": "pnpm --dir docs run preview",
+    "typecheck:docs": "pnpm --dir docs run typecheck",
+    "check:docs": "pnpm run typecheck:docs && pnpm run build:docs",
+    "test:docs": "pnpm --dir packages/testing run test:docs",
+    "test:docs:browser": "pnpm --dir packages/testing run test:docs:browser"
   },
   "repository": {
     "type": "git",

@@ -1,13 +1,13 @@
 import { VariantProps } from 'class-variance-authority';
 declare const messageViewportVariants: (props?: ({
-    placement?: "center" | "bottom" | "top" | null | undefined;
+    placement?: "bottom" | "top" | "center" | null | undefined;
 } & import('class-variance-authority/types').ClassProp) | undefined) => string;
 declare const messageNoticeVariants: (props?: ({
-    type?: "loading" | "success" | "info" | "warning" | "error" | null | undefined;
-    state?: "closing" | "visible" | "enter" | null | undefined;
+    type?: "error" | "warning" | "success" | "loading" | "info" | null | undefined;
+    state?: "visible" | "enter" | "closing" | null | undefined;
 } & import('class-variance-authority/types').ClassProp) | undefined) => string;
 declare const messageIconVariants: (props?: ({
-    type?: "loading" | "success" | "info" | "warning" | "error" | null | undefined;
+    type?: "error" | "warning" | "success" | "loading" | "info" | null | undefined;
 } & import('class-variance-authority/types').ClassProp) | undefined) => string;
 declare const messageContentVariants: (props?: ({} & import('class-variance-authority/types').ClassProp) | undefined) => string;
 export declare const messageViewportClass: (variants: VariantProps<typeof messageViewportVariants>) => string;

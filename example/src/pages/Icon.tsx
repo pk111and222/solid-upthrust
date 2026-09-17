@@ -1,8 +1,16 @@
-import { Component } from "solid-js";
-import { Icon } from 'upthrust-ui';
+import { Component, createSignal } from "solid-js";
+import Icon from 'upthrust-ui/source/Icon';
 
 const IconPage: Component = () => {
+  const [spin, setSpin] = createSignal(false)
+  const [count, setCount] = createSignal(0)
   return <>
+    <h3>动态组合与点击</h3>
+    <button type="button" onClick={() => setSpin(!spin())}>切换旋转</button>
+    <button type="button" aria-label="收藏" onClick={() => setCount(count() + 1)}><Icon name="star" spin={spin()} size="2rem" rotate={45} class="mx-2" style={{ opacity: 0.8 }} /></button>
+    <output>收藏次数：{count()}</output>
+    <p>按钮负责键盘和可访问名称；Icon 的 onClick 仅提供鼠标事件，不会自动变成按钮。</p>
+    <Icon name="mdi:home" onClick={() => setCount(count() + 1)} />
     <h3>基本用法</h3>
     <p class="text-on-surface-variant text-sm mb-xs">使用 "collection:icon-name" 格式，与 icones.js 一致</p>
     <div class="flex items-center gap-4">

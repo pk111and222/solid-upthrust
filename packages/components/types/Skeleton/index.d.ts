@@ -1,6 +1,8 @@
 import { Component } from 'solid-js';
 import { JSX } from '@solidjs/web';
 import { SkeletonIns } from 'upthrust-competence';
+export * from './parts';
+export type { SkeletonIns } from 'upthrust-competence';
 export interface SkeletonProps {
     loading?: boolean;
     /** Show the wave animation. */
@@ -18,11 +20,16 @@ export interface SkeletonProps {
         size?: number | string;
         shape?: 'circle' | 'square';
     };
-    /** Real content; shown when loading is false (antd parity). */
+    /** Real content; shown when loading is false. */
     children?: JSX.Element;
     class?: string;
     style?: JSX.CSSProperties;
     ref?: (val: SkeletonIns) => void;
 }
-declare const Skeleton: Component<SkeletonProps>;
+declare const Skeleton: Component<SkeletonProps> & {
+    Button: Component<import('./parts').SkeletonButtonProps>;
+    Avatar: Component<import('./parts').SkeletonAvatarProps>;
+    Input: Component<import('./parts').SkeletonInputProps>;
+    Node: Component<import('./parts').SkeletonNodeProps>;
+};
 export default Skeleton;

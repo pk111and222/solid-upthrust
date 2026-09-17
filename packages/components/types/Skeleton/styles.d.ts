@@ -1,6 +1,6 @@
 import { VariantProps } from 'class-variance-authority';
 declare const skeletonElementVariants: (props?: ({
-    shape?: "circle" | "square" | "line" | null | undefined;
+    shape?: "circle" | "line" | "square" | null | undefined;
     active?: boolean | null | undefined;
     round?: boolean | null | undefined;
 } & import('class-variance-authority/types').ClassProp) | undefined) => string;

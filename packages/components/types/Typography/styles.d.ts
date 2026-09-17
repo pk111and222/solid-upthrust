@@ -1,11 +1,11 @@
 import { VariantProps } from 'class-variance-authority';
 export declare const typographyVariants: (props?: ({
-    type?: "danger" | "success" | "warning" | "secondary" | null | undefined;
+    type?: "warning" | "success" | "danger" | "secondary" | null | undefined;
     disabled?: boolean | null | undefined;
     ellipsis?: boolean | null | undefined;
 } & import('class-variance-authority/types').ClassProp) | undefined) => string;
 export declare const titleVariants: (props?: ({
-    level?: 1 | 2 | 3 | 4 | 5 | null | undefined;
+    level?: 1 | 2 | 4 | 3 | 5 | null | undefined;
 } & import('class-variance-authority/types').ClassProp) | undefined) => string;
 export declare const linkVariants: (props?: ({
     disabled?: boolean | null | undefined;

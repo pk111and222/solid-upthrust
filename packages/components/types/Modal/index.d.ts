@@ -2,6 +2,7 @@ import { Component } from 'solid-js';
 import { JSX } from '@solidjs/web';
 import { DialogIns } from 'upthrust-competence';
 import { ButtonProps } from '../Button';
+export type { ModalStaticConfig, ModalStaticResult } from './static';
 export interface ModalProps {
     open?: boolean;
     /** Uncontrolled initial open. */
@@ -20,8 +21,8 @@ export interface ModalProps {
     /** Loading state of the OK button while an async onOk is pending. */
     confirmLoading?: boolean;
     /** Fires on every closing intent BEFORE the close (veto with false). */
-    onOk?: (e: MouseEvent) => void | Promise<unknown>;
-    onCancel?: (e: MouseEvent | KeyboardEvent) => void | Promise<unknown>;
+    onOk?: (e: MouseEvent) => void | boolean | Promise<unknown>;
+    onCancel?: (e: MouseEvent | KeyboardEvent) => void | boolean | Promise<unknown>;
     afterClose?: () => void;
     afterOpenChange?: (open: boolean) => void;
     /** Close on mask click. Default true. */
@@ -46,5 +47,12 @@ export interface ModalProps {
     style?: JSX.CSSProperties;
     ref?: (val: DialogIns) => void;
 }
-declare const Modal: Component<ModalProps>;
+declare const Modal: Component<ModalProps> & {
+    confirm: (config: import('./static').ModalStaticConfig) => import('./static').ModalStaticResult;
+    info: (config: import('./static').ModalStaticConfig) => import('./static').ModalStaticResult;
+    success: (config: import('./static').ModalStaticConfig) => import('./static').ModalStaticResult;
+    warning: (config: import('./static').ModalStaticConfig) => import('./static').ModalStaticResult;
+    error: (config: import('./static').ModalStaticConfig) => import('./static').ModalStaticResult;
+    destroyAll: () => void;
+};
 export default Modal;
