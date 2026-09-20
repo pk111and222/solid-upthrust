@@ -1,0 +1,206 @@
+[
+  {
+    "name": "treeData",
+    "type": "TreeNode[]",
+    "default": "[]",
+    "description": "节点数据，value 必须全树唯一；以新数组更新结构"
+  },
+  {
+    "name": "expandedKeys",
+    "type": "(string | number)[]",
+    "default": "—",
+    "description": "受控展开键"
+  },
+  {
+    "name": "defaultExpandedKeys",
+    "type": "(string | number)[]",
+    "default": "[]",
+    "description": "初始展开键"
+  },
+  {
+    "name": "defaultExpandAll",
+    "type": "boolean",
+    "default": "false",
+    "description": "仅创建时展开已有分支"
+  },
+  {
+    "name": "selectedKeys",
+    "type": "(string | number)[]",
+    "default": "—",
+    "description": "受控行选中键"
+  },
+  {
+    "name": "defaultSelectedKeys",
+    "type": "(string | number)[]",
+    "default": "[]",
+    "description": "初始行选中键"
+  },
+  {
+    "name": "checkedKeys",
+    "type": "(string | number)[]",
+    "default": "—",
+    "description": "受控复选键"
+  },
+  {
+    "name": "defaultCheckedKeys",
+    "type": "(string | number)[]",
+    "default": "[]",
+    "description": "初始复选键"
+  },
+  {
+    "name": "checkable",
+    "type": "boolean",
+    "default": "见说明",
+    "description": "传 checkedKeys/defaultCheckedKeys 时自动开启，否则关闭；显式 false 优先"
+  },
+  {
+    "name": "selectable",
+    "type": "boolean",
+    "default": "true",
+    "description": "是否允许选中行"
+  },
+  {
+    "name": "multiple",
+    "type": "boolean",
+    "default": "false",
+    "description": "行选择允许多选，点击切换，不需要 Ctrl"
+  },
+  {
+    "name": "checkStrictly",
+    "type": "boolean",
+    "default": "false",
+    "description": "父子复选独立，不计算半选"
+  },
+  {
+    "name": "disabled",
+    "type": "boolean",
+    "default": "false",
+    "description": "整体禁用，仍显示已有展开与选择"
+  },
+  {
+    "name": "onExpand",
+    "type": "(keys, { node, expanded }) => void",
+    "default": "—",
+    "description": "展开/收起请求"
+  },
+  {
+    "name": "onSelect",
+    "type": "(keys, { node, selected }) => void",
+    "default": "—",
+    "description": "行选择请求"
+  },
+  {
+    "name": "onCheck",
+    "type": "(keys, { node, checked }) => void",
+    "default": "—",
+    "description": "复选请求；keys 为联动计算后的全部键"
+  },
+  {
+    "name": "draggable",
+    "type": "boolean | ((node: TreeNode) => boolean)",
+    "default": "false",
+    "description": "启用原生 HTML5 拖拽；禁用节点不能拖动"
+  },
+  {
+    "name": "allowDrop",
+    "type": "({ dragNode, dropNode, dropPosition }) => boolean",
+    "default": "—",
+    "description": "返回 false 拒绝目标；不会绕过禁用和防环规则"
+  },
+  {
+    "name": "onDragStart / onDragEnter / onDragOver / onDragLeave / onDragEnd",
+    "type": "(info: TreeDragInfo) => void",
+    "default": "—",
+    "description": "拖拽生命周期；结束后清除悬停与计时器"
+  },
+  {
+    "name": "onDrop",
+    "type": "(info: TreeDropInfo) => void",
+    "default": "—",
+    "description": "报告拖放，不自动修改数据"
+  },
+  {
+    "name": "showLine",
+    "type": "boolean",
+    "default": "false",
+    "description": "非虚拟树显示父子连接线"
+  },
+  {
+    "name": "showIcon",
+    "type": "boolean",
+    "default": "false",
+    "description": "显示默认或自定义图标"
+  },
+  {
+    "name": "indent",
+    "type": "number",
+    "default": "24",
+    "description": "每层缩进，px"
+  },
+  {
+    "name": "showSearch",
+    "type": "boolean",
+    "default": "false",
+    "description": "显示搜索输入框"
+  },
+  {
+    "name": "searchValue",
+    "type": "string",
+    "default": "—",
+    "description": "受控搜索内容；即使不展示输入框也能过滤"
+  },
+  {
+    "name": "onSearch",
+    "type": "(value: string) => void",
+    "default": "—",
+    "description": "输入搜索请求"
+  },
+  {
+    "name": "searchPlaceholder",
+    "type": "string",
+    "default": "搜索节点",
+    "description": "搜索框提示"
+  },
+  {
+    "name": "titleRender",
+    "type": "(node: TreeNode) => JSX.Element",
+    "default": "—",
+    "description": "自定义节点内容；ARIA 名称仍使用 label"
+  },
+  {
+    "name": "icon",
+    "type": "(node: TreeNode, expanded: boolean) => JSX.Element",
+    "default": "—",
+    "description": "showIcon 开启时的自定义图标"
+  },
+  {
+    "name": "notFoundContent",
+    "type": "JSX.Element",
+    "default": "暂无数据",
+    "description": "无节点或无匹配时展示"
+  },
+  {
+    "name": "aria-label",
+    "type": "string",
+    "default": "树形控件",
+    "description": "树容器可访问名称"
+  },
+  {
+    "name": "class",
+    "type": "string",
+    "default": "—",
+    "description": "外层容器类"
+  },
+  {
+    "name": "style",
+    "type": "JSX.CSSProperties",
+    "default": "—",
+    "description": "外层容器样式"
+  },
+  {
+    "name": "ref",
+    "type": "(el: HTMLDivElement) => void",
+    "default": "—",
+    "description": "外层 div，不是 TreeIns"
+  }
+]

@@ -1,0 +1,98 @@
+[
+  {
+    "name": "total",
+    "type": "number",
+    "default": "必填",
+    "description": "数据总数"
+  },
+  {
+    "name": "current",
+    "type": "number",
+    "default": "—",
+    "description": "受控请求页码"
+  },
+  {
+    "name": "defaultCurrent",
+    "type": "number",
+    "default": "1",
+    "description": "非受控初始页码"
+  },
+  {
+    "name": "pageSize",
+    "type": "number",
+    "default": "—",
+    "description": "受控页容量"
+  },
+  {
+    "name": "defaultPageSize",
+    "type": "number",
+    "default": "10",
+    "description": "非受控初始容量"
+  },
+  {
+    "name": "pageSizeOptions",
+    "type": "number[]",
+    "default": "—",
+    "description": "非空有效选项开启容量选择器"
+  },
+  {
+    "name": "showQuickJumper",
+    "type": "boolean",
+    "default": "false",
+    "description": "显示 Enter 跳页输入"
+  },
+  {
+    "name": "showTotal",
+    "type": "(total: number, range: [number, number]) => JSX.Element",
+    "default": "—",
+    "description": "渲染总数；total 参数为调用方原值，range 为有效展示区间"
+  },
+  {
+    "name": "onChange",
+    "type": "(page: number, pageSize: number) => void",
+    "default": "—",
+    "description": "页码或容量改变请求"
+  },
+  {
+    "name": "onShowSizeChange",
+    "type": "(current: number, size: number) => void",
+    "default": "—",
+    "description": "容量改变时先触发"
+  },
+  {
+    "name": "disabled",
+    "type": "boolean",
+    "default": "false",
+    "description": "禁用全部分页控件，保留容量选择器"
+  },
+  {
+    "name": "hideOnSinglePage",
+    "type": "boolean",
+    "default": "false",
+    "description": "总页数不大于 1 时隐藏"
+  },
+  {
+    "name": "size",
+    "type": "'default' | 'small'",
+    "default": "default",
+    "description": "页码高度 32 / 24 px"
+  },
+  {
+    "name": "align",
+    "type": "'start' | 'center' | 'end'",
+    "default": "start",
+    "description": "容器主轴对齐"
+  },
+  {
+    "name": "class",
+    "type": "string",
+    "default": "—",
+    "description": "导航容器自定义类"
+  },
+  {
+    "name": "style",
+    "type": "JSX.CSSProperties",
+    "default": "—",
+    "description": "导航容器内联样式"
+  }
+]

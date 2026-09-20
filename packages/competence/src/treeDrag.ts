@@ -46,6 +46,7 @@ export function createTreeDrag(config: TreeDragConfig, tree: {
   }
   const startDrag = (key: string | number, event?: DragEvent) => {
     if (!isDraggable(key)) return false
+    if (source !== undefined) endDrag(event)
     source = key; setDraggingKey(key); config.onDragStart?.({ node: tree.getNode(key)!, event }); return true
   }
   const endDrag = (event?: DragEvent) => {

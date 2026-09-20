@@ -1,5 +1,6 @@
+import { createInput } from 'upthrust-competence'
 import { useComponentProps } from '../ConfigProvider/context'
-import { Component, Show, createMemo, createSignal, merge } from 'solid-js'
+import { Component, Show, createEffect, createMemo, merge } from 'solid-js'
 import { type JSX } from '@solidjs/web'
 import { twMerge } from 'tailwind-merge'
 import type { SizeType } from '../../common/type'
@@ -71,29 +72,18 @@ const Input: Component<InputProps> = providedProps => {
     get status() { return props.status },
   })
 
-  // Uncontrolled fallback when neither props.value nor the Item provides one.
-  const [innerValue, setInnerValue] = createSignal(props.defaultValue ?? '')
-  const isControlled = () => props.value !== undefined || form.value() !== undefined
-  const currentValue = () => (props.value !== undefined ? props.value : (form.value() ?? (isControlled() ? '' : innerValue())) as string)
-
-  // IME composition guard: while composing (Chinese/Japanese/...), keep the
-  // internal buffer out of onChange — antd/rc-input semantics. The value is
-  // reported once, on compositionEnd.
-  const [composing, setComposing] = createSignal(false)
-
-  const handleChange = (e: Event) => {
-    const target = e.target as HTMLInputElement
-    if (!isControlled()) setInnerValue(target.value)
-    if (!composing()) form.onChange(target.value, e)
-  }
-
-  const handleCompositionEnd = (e: CompositionEvent) => {
-    setComposing(false)
-    // rc-input triggers the change ONCE at composition end (skipping the
-    // input event that fired during composition).
-    const target = e.currentTarget as HTMLInputElement
-    if (!isControlled()) setInnerValue(target.value)
-    form.onChange(target.value, e)
+  const state = createInput({
+    get value() { const v = form.value(); return v === undefined ? undefined : String(v ?? '') },
+    get defaultValue() { return props.defaultValue },
+    get disabled() { return form.disabled() },
+    get readonly() { return props.readonly },
+    onChange: (value, event) => form.onChange(value, event),
+  })
+  const currentValue = state.value
+  const handleChange = (e: Event) => state.input((e.currentTarget as HTMLInputElement).value, e)
+  const handleCompositionEnd = (e: CompositionEvent & { currentTarget: HTMLInputElement; target: Element }) => {
+    state.compositionEnd(e.currentTarget.value, e)
+    props.onCompositionEnd?.(e)
   }
 
   const showClear = createMemo(
@@ -139,13 +129,17 @@ const Input: Component<InputProps> = providedProps => {
 
   // antd clear behaviour: reset value, then REFERENCE the input so typing
   // continues without a manual click (rc-input handleReset → focus()).
-  const handleClear = (e: MouseEvent) => {
+  const handleClear = (e: MouseEvent | KeyboardEvent) => {
+    if (!showClear()) return
     e.preventDefault() // keep focus off the clear button itself
     e.stopPropagation()
-    if (!isControlled()) setInnerValue('')
-    form.onChange('', e)
+    state.clear(e)
     inputRef.current?.focus()
   }
+
+  createEffect(() => ({ value: currentValue(), revision: state.revision() }), ({ value }) => {
+    if (inputRef.current && inputRef.current.value !== value) inputRef.current.value = value
+  })
 
   const resolvedDisabled = () => form.disabled()
 
@@ -166,6 +160,7 @@ const Input: Component<InputProps> = providedProps => {
         ref={setInputRef}
         id={form.id()}
         name={props.name}
+        aria-invalid={resolvedStatus() === 'error' ? 'true' : undefined}
         type={props.type}
         value={currentValue()}
         placeholder={props.placeholder}
@@ -179,16 +174,16 @@ const Input: Component<InputProps> = providedProps => {
             : inputClass({ size: resolvedSize(), status: resolvedStatus(), disabled: !!resolvedDisabled(), inWrapper: false }),
         )}
         onInput={handleChange}
-        onFocus={props.onFocus}
-        onBlur={props.onBlur}
-        onCompositionStart={e => { setComposing(true); props.onCompositionStart?.(e) }}
+        onFocus={e => props.onFocus?.(e)}
+        onBlur={e => props.onBlur?.(e)}
+        onCompositionStart={e => { state.compositionStart(); props.onCompositionStart?.(e) }}
         onCompositionEnd={handleCompositionEnd}
-        onKeyUp={e => { if (e.key === 'Enter') props.onPressEnter?.(e) }}
+        onKeyDown={e => { if (e.key === 'Enter' && state.canEnter(e)) props.onPressEnter?.(e) }}
       />
       <Show when={hasSuffixRow()}>
         <span class={affixClass({ side: 'suffix', size: resolvedSize(), clickable: false })}>
           <Show
-            when={typeof props.allowClear === 'object' ? props.allowClear.clearIcon : showClear()}
+            when={showClear()}
             fallback={
               // keep the slot present but invisible (no reflow); antd toggles visibility only
               <span class={clearIconClass({ visible: false })} aria-hidden="true">
@@ -201,7 +196,9 @@ const Input: Component<InputProps> = providedProps => {
               onClick={handleClear}
               role="button"
               aria-label="clear"
-              tabindex={-1}
+              tabindex={0}
+              onMouseDown={e => e.preventDefault()}
+              onKeyDown={e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); handleClear(e) } }}
             >
               {typeof props.allowClear === 'object' && props.allowClear.clearIcon
                 ? props.allowClear.clearIcon
@@ -217,3 +214,11 @@ const Input: Component<InputProps> = providedProps => {
 }
 
 export default Input
+
+// Keep source/Input usable for the same named family exports as the root entry.
+export { default as InputPassword } from './Password'
+export type { PasswordProps } from './Password'
+export { default as InputTextArea } from './TextArea'
+export type { TextAreaProps } from './TextArea'
+export { default as InputSearch } from './Search'
+export type { SearchProps } from './Search'

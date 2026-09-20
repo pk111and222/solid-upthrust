@@ -1,6 +1,9 @@
 import { createRoot, createSignal, flush } from 'solid-js'
-import { describe, expect, it, vi } from 'vitest'
+import { afterEach, describe, expect, it, vi } from 'vitest'
 import { createTree, createTreeSelect, flattenTree, buildTreeIndex, branchKeysOf } from '../../../competence/src/tree'
+
+const disposers: (() => void)[] = []
+afterEach(() => { disposers.splice(0).forEach(dispose => dispose()); flush() })
 
 const step = (fn: () => void) => { fn(); flush() }
 
@@ -26,6 +29,7 @@ const tree = [
 ]
 
 describe('tree pure helpers', () => {
+  // 验证树的状态、节点边界及事件契约（具体场景见用例标题）。
   it('flattenTree carries parent + path + level', () => {
     const flat = flattenTree(tree)
     expect(flat).toHaveLength(9)
@@ -35,28 +39,34 @@ describe('tree pure helpers', () => {
     expect(xh.parent?.value).toBe('hz')
   })
 
+  // 验证树的状态、节点边界及事件契约（具体场景见用例标题）。
   it('buildTreeIndex maps every value', () => {
     const idx = buildTreeIndex(tree)
     expect(idx.size).toBe(9)
     expect(idx.get('nb')?.node.label).toBe('宁波')
   })
 
+  // 验证树的状态、节点边界及事件契约（具体场景见用例标题）。
   it('branchKeysOf lists expandable keys', () => {
     expect(branchKeysOf(tree).sort()).toEqual(['hz', 'js', 'sz', 'zj'])
   })
 })
 
 describe('createTree — expand', () => {
+  // 验证树的状态、节点边界及事件契约（具体场景见用例标题）。
   it('starts from defaultExpandedKeys / defaultExpandAll', () => {
-    createRoot(() => {
+    createRoot(dispose => {
+    disposers.push(dispose)
       expect(createTree({ treeData: tree, defaultExpandedKeys: ['zj'] }).expandedKeys()).toEqual(['zj'])
       const all = createTree({ treeData: tree, defaultExpandAll: true })
       expect(all.expandedKeys().sort()).toEqual(['hz', 'js', 'sz', 'zj'])
     })
   })
 
+  // 验证树的状态、节点边界及事件契约（具体场景见用例标题）。
   it('toggleExpand fires onExpand with the info', () => {
-    createRoot(() => {
+    createRoot(dispose => {
+    disposers.push(dispose)
       const onExpand = vi.fn()
       const ins = createTree({ treeData: tree, onExpand })
       step(() => ins.toggleExpand('zj'))
@@ -68,8 +78,10 @@ describe('createTree — expand', () => {
     })
   })
 
+  // 验证树的状态、节点边界及事件契约（具体场景见用例标题）。
   it('controlled expandedKeys wins', () => {
-    createRoot(() => {
+    createRoot(dispose => {
+    disposers.push(dispose)
       const ins = createTree({ treeData: tree, expandedKeys: ['js'] })
       step(() => ins.toggleExpand('zj'))
       // Controlled prop holds ['js']; the mirror effect restores it.
@@ -77,8 +89,10 @@ describe('createTree — expand', () => {
     })
   })
 
+  // 验证树的状态、节点边界及事件契约（具体场景见用例标题）。
   it('toggling a leaf is a no-op', () => {
-    createRoot(() => {
+    createRoot(dispose => {
+    disposers.push(dispose)
       const ins = createTree({ treeData: tree })
       step(() => ins.toggleExpand('xh'))
       expect(ins.expandedKeys()).toEqual([])
@@ -87,8 +101,10 @@ describe('createTree — expand', () => {
 })
 
 describe('createTree — select', () => {
+  // 验证树的状态、节点边界及事件契约（具体场景见用例标题）。
   it('select toggles the row highlight', () => {
-    createRoot(() => {
+    createRoot(dispose => {
+    disposers.push(dispose)
       const onSelect = vi.fn()
       const ins = createTree({ treeData: tree, onSelect })
       step(() => ins.select('xh'))
@@ -99,8 +115,10 @@ describe('createTree — select', () => {
     })
   })
 
+  // 验证树的状态、节点边界及事件契约（具体场景见用例标题）。
   it('selectable:false and disabled rows are inert', () => {
-    createRoot(() => {
+    createRoot(dispose => {
+    disposers.push(dispose)
       const data = [
         { value: 'a', label: 'A', selectable: false },
         { value: 'b', label: 'B', disabled: true },
@@ -112,8 +130,10 @@ describe('createTree — select', () => {
     })
   })
 
+  // 验证树的状态、节点边界及事件契约（具体场景见用例标题）。
   it('a disabled ancestor disables the branch', () => {
-    createRoot(() => {
+    createRoot(dispose => {
+    disposers.push(dispose)
       const data = [
         { value: 'p', label: 'P', disabled: true, children: [{ value: 'c', label: 'C' }] },
       ]
@@ -126,8 +146,10 @@ describe('createTree — select', () => {
 })
 
 describe('createTree — check linkage', () => {
+  // 验证树的状态、节点边界及事件契约（具体场景见用例标题）。
   it('checking a parent checks every descendant', () => {
-    createRoot(() => {
+    createRoot(dispose => {
+    disposers.push(dispose)
       const onCheck = vi.fn()
       const ins = createTree({ treeData: tree, onCheck })
       step(() => ins.toggleCheck('zj'))
@@ -137,16 +159,20 @@ describe('createTree — check linkage', () => {
     })
   })
 
+  // 验证树的状态、节点边界及事件契约（具体场景见用例标题）。
   it('unchecking a parent removes the whole subtree', () => {
-    createRoot(() => {
+    createRoot(dispose => {
+    disposers.push(dispose)
       const ins = createTree({ treeData: tree, defaultCheckedKeys: ['zj'] })
       step(() => ins.toggleCheck('zj'))
       expect(ins.checkedKeys()).toEqual([])
     })
   })
 
+  // 验证树的状态、节点边界及事件契约（具体场景见用例标题）。
   it('half-checked derives from partial children', () => {
-    createRoot(() => {
+    createRoot(dispose => {
+    disposers.push(dispose)
       const ins = createTree({ treeData: tree })
       step(() => ins.toggleCheck('hz')) // 西湖 + 滨江 (both under 杭州)
       expect(ins.halfCheckedKeys().sort()).toEqual(['zj'])
@@ -155,8 +181,10 @@ describe('createTree — check linkage', () => {
     })
   })
 
+  // 验证树的状态、节点边界及事件契约（具体场景见用例标题）。
   it('a half-checked parent checks like an unchecked one', () => {
-    createRoot(() => {
+    createRoot(dispose => {
+    disposers.push(dispose)
       const ins = createTree({ treeData: tree })
       step(() => ins.toggleCheck('xh')) // one leaf under 浙江
       expect(ins.checkState('zj')).toBe('indeterminate')
@@ -166,8 +194,10 @@ describe('createTree — check linkage', () => {
     })
   })
 
+  // 验证树的状态、节点边界及事件契约（具体场景见用例标题）。
   it('disabled descendants keep their prior state', () => {
-    createRoot(() => {
+    createRoot(dispose => {
+    disposers.push(dispose)
       const ins = createTree({ treeData: tree })
       step(() => ins.toggleCheck('yq')) // disabled leaf — inert
       expect(ins.checkedKeys()).toEqual([])
@@ -180,8 +210,10 @@ describe('createTree — check linkage', () => {
     })
   })
 
+  // 验证树的状态、节点边界及事件契约（具体场景见用例标题）。
   it('checkable:false subtree is skipped by parent checks', () => {
-    createRoot(() => {
+    createRoot(dispose => {
+    disposers.push(dispose)
       const data = [
         { value: 'p', label: 'P', children: [
           { value: 'c', label: 'C', checkable: false },
@@ -195,8 +227,10 @@ describe('createTree — check linkage', () => {
     })
   })
 
+  // 验证树的状态、节点边界及事件契约（具体场景见用例标题）。
   it('controlled checkedKeys wins', () => {
-    createRoot(() => {
+    createRoot(dispose => {
+    disposers.push(dispose)
       const ins = createTree({ treeData: tree, checkedKeys: ['xh'] })
       step(() => ins.toggleCheck('zj'))
       expect(ins.checkedKeys()).toEqual(['xh'])
@@ -205,8 +239,10 @@ describe('createTree — check linkage', () => {
 })
 
 describe('createTree — search', () => {
+  // 验证树的状态、节点边界及事件契约（具体场景见用例标题）。
   it('displayTree prunes to matching paths and force-expands', () => {
-    createRoot(() => {
+    createRoot(dispose => {
+    disposers.push(dispose)
       const ins = createTree({ treeData: tree })
       step(() => ins.setSearchValue('西湖'))
       const shown = ins.displayTree()
@@ -218,8 +254,10 @@ describe('createTree — search', () => {
     })
   })
 
+  // 验证树的状态、节点边界及事件契约（具体场景见用例标题）。
   it('clearing search restores the full tree', () => {
-    createRoot(() => {
+    createRoot(dispose => {
+    disposers.push(dispose)
       const ins = createTree({ treeData: tree })
       step(() => ins.setSearchValue('西湖'))
       step(() => ins.clear())
@@ -228,8 +266,10 @@ describe('createTree — search', () => {
     })
   })
 
+  // 验证树的状态、节点边界及事件契约（具体场景见用例标题）。
   it('no match shows an empty tree', () => {
-    createRoot(() => {
+    createRoot(dispose => {
+    disposers.push(dispose)
       const ins = createTree({ treeData: tree })
       step(() => ins.setSearchValue('不存在'))
       expect(ins.displayTree()).toEqual([])
@@ -238,8 +278,10 @@ describe('createTree — search', () => {
 })
 
 describe('createTreeSelect — single', () => {
+  // 验证树的状态、节点边界及事件契约（具体场景见用例标题）。
   it('pickNode commits the key + node', () => {
-    createRoot(() => {
+    createRoot(dispose => {
+    disposers.push(dispose)
       const onChange = vi.fn()
       const ins = createTreeSelect({ treeData: tree, onChange })
       step(() => ins.pickNode('xh'))
@@ -248,8 +290,10 @@ describe('createTreeSelect — single', () => {
     })
   })
 
+  // 验证树的状态、节点边界及事件契约（具体场景见用例标题）。
   it('clear empties (undefined)', () => {
-    createRoot(() => {
+    createRoot(dispose => {
+    disposers.push(dispose)
       const onChange = vi.fn()
       const ins = createTreeSelect({ treeData: tree, defaultValue: 'xh', onChange })
       step(() => ins.clear())
@@ -258,8 +302,10 @@ describe('createTreeSelect — single', () => {
     })
   })
 
+  // 验证树的状态、节点边界及事件契约（具体场景见用例标题）。
   it('controlled value wins', () => {
-    createRoot(() => {
+    createRoot(dispose => {
+    disposers.push(dispose)
       const ins = createTreeSelect({ treeData: tree, value: 'nb' })
       step(() => ins.pickNode('xh'))
       expect(ins.singleValue()).toBe('nb')
@@ -268,8 +314,10 @@ describe('createTreeSelect — single', () => {
 })
 
 describe('createTreeSelect — multiple + SHOW_PARENT', () => {
+  // 验证树的状态、节点边界及事件契约（具体场景见用例标题）。
   it('checking a parent reports just the parent key', () => {
-    createRoot(() => {
+    createRoot(dispose => {
+    disposers.push(dispose)
       const onChange = vi.fn()
       const ins = createTreeSelect({ treeData: tree, mode: 'multiple', onChange })
       step(() => ins.toggleCheck('zj'))
@@ -278,8 +326,10 @@ describe('createTreeSelect — multiple + SHOW_PARENT', () => {
     })
   })
 
+  // 验证树的状态、节点边界及事件契约（具体场景见用例标题）。
   it('partial checks report the leaf keys', () => {
-    createRoot(() => {
+    createRoot(dispose => {
+    disposers.push(dispose)
       const ins = createTreeSelect({ treeData: tree, mode: 'multiple' })
       step(() => ins.toggleCheck('xh'))
       expect(ins.value()).toEqual(['xh'])
@@ -288,40 +338,50 @@ describe('createTreeSelect — multiple + SHOW_PARENT', () => {
     })
   })
 
+  // 验证树的状态、节点边界及事件契约（具体场景见用例标题）。
   it('a controlled parent value expands to the raw subtree', () => {
-    createRoot(() => {
+    createRoot(dispose => {
+    disposers.push(dispose)
       const ins = createTreeSelect({ treeData: tree, mode: 'multiple', value: ['zj'] })
       expect(ins.rawChecked().sort()).toEqual(['bj', 'hz', 'nb', 'xh', 'zj'])
       expect(ins.value()).toEqual(['zj'])
     })
   })
 
+  // 验证树的状态、节点边界及事件契约（具体场景见用例标题）。
   it('removeKey (tag ×) unchecks the subtree it represents', () => {
-    createRoot(() => {
+    createRoot(dispose => {
+    disposers.push(dispose)
       const ins = createTreeSelect({ treeData: tree, mode: 'multiple', defaultValue: ['zj'] })
       step(() => ins.removeKey('zj'))
       expect(ins.value()).toEqual([])
     })
   })
 
+  // 验证树的状态、节点边界及事件契约（具体场景见用例标题）。
   it('show all leaves via SHOW_ALL', () => {
-    createRoot(() => {
+    createRoot(dispose => {
+    disposers.push(dispose)
       const ins = createTreeSelect({ treeData: tree, mode: 'multiple', treeCheckStrategy: 'SHOW_ALL' })
       step(() => ins.toggleCheck('zj'))
       expect(ins.value().sort()).toEqual(['bj', 'hz', 'nb', 'xh', 'zj'])
     })
   })
 
+  // 验证树的状态、节点边界及事件契约（具体场景见用例标题）。
   it('SHOW_CHILD reports only leaf keys', () => {
-    createRoot(() => {
+    createRoot(dispose => {
+    disposers.push(dispose)
       const ins = createTreeSelect({ treeData: tree, mode: 'multiple', treeCheckStrategy: 'SHOW_CHILD' })
       step(() => ins.toggleCheck('zj'))
       expect(ins.value().sort()).toEqual(['bj', 'nb', 'xh'])
     })
   })
 
+  // 验证树的状态、节点边界及事件契约（具体场景见用例标题）。
   it('disabled subtree nodes are exempt and the parent stays indeterminate', () => {
-    createRoot(() => {
+    createRoot(dispose => {
+    disposers.push(dispose)
       const ins = createTreeSelect({ treeData: tree, mode: 'multiple' })
       step(() => ins.toggleCheck('sz')) // 园区 disabled — only 苏州 stored
       expect(ins.value()).toEqual(['sz'])
@@ -337,8 +397,10 @@ describe('createTreeSelect — multiple + SHOW_PARENT', () => {
 })
 
 describe('createTreeSelect — checkStrictly', () => {
+  // 验证树的状态、节点边界及事件契约（具体场景见用例标题）。
   it('no linkage: keys are independent', () => {
-    createRoot(() => {
+    createRoot(dispose => {
+    disposers.push(dispose)
       const onChange = vi.fn()
       const ins = createTreeSelect({ treeData: tree, mode: 'multiple', treeCheckStrictly: true, onChange })
       step(() => ins.toggleCheck('zj'))
@@ -353,8 +415,10 @@ describe('createTreeSelect — checkStrictly', () => {
 })
 
 describe('createTreeSelect — search & open', () => {
+  // 验证树的状态、节点边界及事件契约（具体场景见用例标题）。
   it('setSearchValue delegates and reports onSearch', () => {
-    createRoot(() => {
+    createRoot(dispose => {
+    disposers.push(dispose)
       const onSearch = vi.fn()
       const ins = createTreeSelect({ treeData: tree, onSearch })
       step(() => ins.setSearchValue('杭州'))
@@ -364,8 +428,10 @@ describe('createTreeSelect — search & open', () => {
     })
   })
 
+  // 验证树的状态、节点边界及事件契约（具体场景见用例标题）。
   it('open resets the search', () => {
-    createRoot(() => {
+    createRoot(dispose => {
+    disposers.push(dispose)
       const ins = createTreeSelect({ treeData: tree })
       step(() => ins.setSearchValue('西湖'))
       step(() => ins.setOpen(true))
@@ -373,8 +439,10 @@ describe('createTreeSelect — search & open', () => {
     })
   })
 
+  // 验证树的状态、节点边界及事件契约（具体场景见用例标题）。
   it('disabled gates everything', () => {
-    createRoot(() => {
+    createRoot(dispose => {
+    disposers.push(dispose)
       const ins = createTreeSelect({ treeData: tree, disabled: true })
       step(() => ins.setOpen(true))
       expect(ins.isOpen()).toBe(false)
@@ -386,7 +454,9 @@ describe('createTreeSelect — search & open', () => {
 })
 
 describe('Tree completion regressions', () => {
-  it('promotes parents after checking all children and clears stale parents when unchecking a child', () => createRoot(() => {
+  // 验证树的状态、节点边界及事件契约（具体场景见用例标题）。
+  it('promotes parents after checking all children and clears stale parents when unchecking a child', () => createRoot(dispose => {
+    disposers.push(dispose)
     const ins = createTree({ treeData: tree })
     step(() => ins.toggleCheck('xh')); step(() => ins.toggleCheck('bj'))
     expect(ins.isChecked('hz')).toBe(true)
@@ -397,12 +467,16 @@ describe('Tree completion regressions', () => {
     expect(ins.checkState('hz')).toBe('indeterminate')
     expect(ins.isChecked('bj')).toBe(true)
   }))
-  it('never checks grandchildren below a disabled branch', () => createRoot(() => {
+  // 验证树的状态、节点边界及事件契约（具体场景见用例标题）。
+  it('never checks grandchildren below a disabled branch', () => createRoot(dispose => {
+    disposers.push(dispose)
     const ins = createTree({ treeData: [{ value: 0, label: 'Root', children: [{ value: 1, label: 'Disabled', disabled: true, children: [{ value: 2, label: 'Child' }] }, { value: 3, label: 'Enabled' }] }] })
     step(() => ins.toggleCheck(0))
     expect(ins.checkedKeys()).toEqual([0, 3]); expect(ins.checkState(0)).toBe('checked')
   }))
-  it('does not visually commit a controlled selection or check when the parent rejects it', () => createRoot(() => {
+  // 验证树的状态、节点边界及事件契约（具体场景见用例标题）。
+  it('does not visually commit a controlled selection or check when the parent rejects it', () => createRoot(dispose => {
+    disposers.push(dispose)
     const onCheck = vi.fn(), onSelect = vi.fn()
     const ins = createTree({ treeData: tree, checkedKeys: [], selectedKeys: [], onCheck, onSelect })
     flush()
@@ -410,7 +484,9 @@ describe('Tree completion regressions', () => {
     expect(ins.selectedKeys()).toEqual([]); expect(ins.checkedKeys()).toEqual([])
     expect(onSelect).toHaveBeenCalled(); expect(onCheck).toHaveBeenCalled()
   }))
-  it('supports multiple row selection and independent checkboxes', () => createRoot(() => {
+  // 验证树的状态、节点边界及事件契约（具体场景见用例标题）。
+  it('supports multiple row selection and independent checkboxes', () => createRoot(dispose => {
+    disposers.push(dispose)
     const ins = createTree({ treeData: tree, multiple: true, checkStrictly: true })
     step(() => ins.select('xh')); step(() => ins.select('nj'))
     expect(ins.selectedKeys()).toEqual(['xh', 'nj'])
@@ -418,7 +494,9 @@ describe('Tree completion regressions', () => {
     step(() => ins.toggleCheck('zj')); expect(ins.checkedKeys()).toEqual(['zj'])
     expect(ins.halfCheckedKeys()).toEqual([])
   }))
-  it('navigates only visible enabled nodes and activates with Enter/Space', () => createRoot(() => {
+  // 验证树的状态、节点边界及事件契约（具体场景见用例标题）。
+  it('navigates only visible enabled nodes and activates with Enter/Space', () => createRoot(dispose => {
+    disposers.push(dispose)
     const ins = createTree({ treeData: tree })
     expect(ins.activeKey()).toBe('zj')
     step(() => ins.navigate('ArrowRight')); expect(ins.isExpanded('zj')).toBe(true)
@@ -430,7 +508,9 @@ describe('Tree completion regressions', () => {
     step(() => ins.navigate('End')); expect(ins.activeKey()).toBe('js')
     step(() => ins.navigate('Home')); expect(ins.activeKey()).toBe('zj')
   }))
-  it('search treats whitespace as empty and restores normal expansion after clearing', () => createRoot(() => {
+  // 验证树的状态、节点边界及事件契约（具体场景见用例标题）。
+  it('search treats whitespace as empty and restores normal expansion after clearing', () => createRoot(dispose => {
+    disposers.push(dispose)
     const ins = createTree({ treeData: tree })
     step(() => ins.setSearchValue('西湖'))
     expect(ins.visibleKeys()).toEqual(['zj', 'hz', 'xh'])
@@ -441,7 +521,9 @@ describe('Tree completion regressions', () => {
 })
 
 describe('Tree disabled presentation', () => {
-  it('retains linked defaults when the widget is disabled', () => createRoot(() => {
+  // 验证树的状态、节点边界及事件契约（具体场景见用例标题）。
+  it('retains linked defaults when the widget is disabled', () => createRoot(dispose => {
+    disposers.push(dispose)
     const ins = createTree({ treeData: tree, disabled: true, defaultCheckedKeys: ['zj'] })
     expect(ins.isChecked('xh')).toBe(true)
     expect(ins.isChecked('zj')).toBe(true)
@@ -452,7 +534,9 @@ describe('Tree disabled presentation', () => {
 
 
 describe('Tree reactive updates', () => {
-  it('accepts controlled selection and expansion updates after mount', () => createRoot(() => {
+  // 验证树的状态、节点边界及事件契约（具体场景见用例标题）。
+  it('accepts controlled selection and expansion updates after mount', () => createRoot(dispose => {
+    disposers.push(dispose)
     const [selected, setSelected] = createSignal<Array<string | number>>([], { ownedWrite: true })
     const [expanded, setExpanded] = createSignal<Array<string | number>>([], { ownedWrite: true })
     const ins = createTree({ treeData: tree, get selectedKeys() { return selected() }, get expandedKeys() { return expanded() }, onSelect: setSelected, onExpand: setExpanded })
@@ -461,7 +545,9 @@ describe('Tree reactive updates', () => {
     step(() => { setSelected(['nj']); setExpanded(['js']) })
     expect(ins.selectedKeys()).toEqual(['nj']); expect(ins.visibleKeys()).toEqual(['zj', 'js', 'nj', 'sz'])
   }))
-  it('refreshes search matches when treeData changes', () => createRoot(() => {
+  // 验证树的状态、节点边界及事件契约（具体场景见用例标题）。
+  it('refreshes search matches when treeData changes', () => createRoot(dispose => {
+    disposers.push(dispose)
     const [nodes, setNodes] = createSignal([{ value: 0, label: 'Old' }], { ownedWrite: true })
     const ins = createTree({ get treeData() { return nodes() } })
     step(() => ins.setSearchValue('New')); expect(ins.displayTree()).toEqual([])

@@ -1,0 +1,44 @@
+[
+  {
+    "name": "value",
+    "type": "string | number",
+    "default": "必填",
+    "description": "全树唯一键，0 是合法值"
+  },
+  {
+    "name": "label",
+    "type": "string",
+    "default": "必填",
+    "description": "文本名称和搜索源"
+  },
+  {
+    "name": "children",
+    "type": "TreeNode[]",
+    "default": "—",
+    "description": "子节点；空数组为叶子"
+  },
+  {
+    "name": "disabled",
+    "type": "boolean",
+    "default": "false",
+    "description": "禁止本节点及后代选择、复选、拖拽；局部禁用分支仍可用鼠标展开查看"
+  },
+  {
+    "name": "selectable",
+    "type": "boolean",
+    "default": "true",
+    "description": "该节点可否被行选择"
+  },
+  {
+    "name": "checkable",
+    "type": "boolean",
+    "default": "true",
+    "description": "该节点可否复选；false 节点不显示框但仍可传导到后代"
+  },
+  {
+    "name": "[key: string]",
+    "type": "unknown",
+    "default": "—",
+    "description": "业务扩展字段；保留 __forceExpanded 供搜索内部使用"
+  }
+]

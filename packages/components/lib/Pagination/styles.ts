@@ -22,7 +22,7 @@ const paginationContainerVariants = cva(
 const paginationItemVariants = cva(
   [
     "flex", "items-center", "justify-center", "rounded", "cursor-pointer",
-    "transition-upthrust-fast", "select-none", "outline-none",
+    "transition-upthrust-fast", "select-none", "outline-none", "focus-visible:ring-2", "focus-visible:ring-primary",
     "border", "border-outline", "bg-surface",
   ],
   {
@@ -96,7 +96,7 @@ const paginationSizeChangerVariants = cva(
   [
     "inline-flex", "items-center", "justify-center", "gap-[4px]",
     "rounded", "border", "border-outline", "bg-surface", "text-on-surface",
-    "cursor-pointer", "transition-upthrust-fast", "outline-none",
+    "cursor-pointer", "transition-upthrust-fast", "outline-none", "focus-visible:ring-2", "focus-visible:ring-primary",
     "hover:border-primary", "hover:text-primary", "select-none",
   ],
   {

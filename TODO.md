@@ -26,7 +26,8 @@
 - Tooltip 收尾验证（2026-09-17）：46 文件（新增用例）、116 文件全量、1286 条 L1–L3 通过；类型与构建通过；Tooltip 专项 Playwright 47 条（docs+example 两项目）通过，重复两次稳定；docs 双 base 各 13 条通过。
 - Popover 收尾验证（2026-09-17）：5 文件（新增用例）、121 文件全量、1311 条 L1–L3 通过；类型与构建通过；Popover 专项 Playwright 43 条（docs+example 两项目）通过，重复两次稳定；docs 双 base 各 13 条通过；另有 Playwright MCP 交互验证。
 - Tabs 收尾验证（2026-09-17）：8 文件（新增用例）、127 文件全量、1337 条 L1–L3 通过；类型与构建通过；Tabs 专项 Playwright 15 条（docs+example 两项目）通过，重复两次稳定；docs 双 base 各 13 条通过（新增导航页触发路由/菜单套件）；另有 Playwright MCP 交互验证。C02 批次全部完成。
-- 默认下一物料：**C03 Input**（Pagination 依赖 Dropdown，Tree 依赖虚拟列表，见批次排序）。用户可另行分配无依赖冲突的物料。
+- Input 收尾验证（2026-09-20）：5 文件、35 条 Input 用例通过；全量 133 文件、1373 条通过；专项浏览器 17 条、文档双 base 各 13 条通过；类型与构建通过，见 [input.md](docs/contributing/regressions/input.md)。
+- 默认下一物料：**C04 Checkbox**（见批次排序）。用户可另行分配无依赖冲突的物料。
 
 ### 状态规则
 
@@ -90,6 +91,10 @@
 | C02 Popover | 当前会话：Popover 组件回归 | 当前工作区（main） | Popover UI 修复（空 title/content 仍打开、getContainer 未接线、aria-hidden 缺失）、example/docs 新建、四层测试与回归记录、专项 Playwright 配置；未改 trigger.ts、未改 barrel | 已验收 | 依赖 B04 Trigger 的现有局部证据；同一 STRICT_READ_UNTRACKED 噪音沿用 Tooltip 记录的待查结论 | [执行记录](docs/contributing/regressions/popover.md) |
 | C02 Tabs | 当前会话：Tabs 组件回归 | 当前工作区（main） | Tabs UI 修复（方向键切换后焦点不跟随、tablist 容器多余 tabindex=0、缺失 ref/TabsIns 接线）、example/docs 新建（导航分类）、四层测试与回归记录、专项 Playwright 配置；未改 competence/src/tabs.ts，仅补 UI 层集成 | 已验收 | 不依赖 B04（Tabs 无浮层）；STRICT_READ_UNTRACKED 噪音记为 B01 完整回归待查项，来源与 Trigger 无关（Tabs 自身 createEffect） | [执行记录](docs/contributing/regressions/tabs.md) |
 
+| C03 Input | 当前会话：Input 回归 | 当前工作区 | Input/Password/TextArea/Search、必要共享输入逻辑、示例/API、四层测试 | 已验收 | Button 已验收；仅验证 Form 注入协议，不扩展完整 Form | [执行记录](docs/contributing/regressions/input.md) |
+| C03 Pagination | 当前会话：Pagination 回归 | 当前工作区 | Pagination UI/headless、示例/API、四层测试；不改共享逻辑和锁文件 | 已验收 | Dropdown 已有验收证据；本轮集成通过 | [执行记录](docs/contributing/regressions/pagination.md) |
+| C03 Tree | 当前会话：Tree 回归 | 当前工作区 | Tree/headless/拖拽、示例/API、四层测试；必要 TreeSelect 渲染集成 | 已验收 | 勾选/半选图标补验通过；沿用 C01 与 TreeSelect 集成证据 | [执行记录](docs/contributing/regressions/tree.md) |
+
 ## 3. 第一阶段：全部组件回归 C（用户指定优先）
 
 编号沿用原计划，方便追踪。按实际引用验证前置能力；C01 历史已完成但不因此把 B08 全部勾选。
@@ -127,9 +132,9 @@
 
 ### C03
 
-- [ ] Input
-- [ ] Pagination
-- [ ] Tree
+- [x] Input — 含 InputPassword / InputTextArea / InputSearch，见 [本轮验收记录](docs/contributing/regressions/input.md)
+- [x] Pagination — 页码边界、表单安全、禁用容量菜单、四层回归及文档，见 [本轮验收记录](docs/contributing/regressions/pagination.md)
+- [x] Tree — 含复选语义、受控搜索、内嵌控件焦点、拖拽生命周期与真实焦点绘制，见 [本轮验收记录](docs/contributing/regressions/tree.md)
 
 ### C04
 
@@ -240,7 +245,8 @@ ConfigProvider 读取 `Input/context`、`Form/context`，不等于依赖完整 I
 
 ### 子组件与复杂模块清单（跟随所属物料验收）
 
-- [ ] Input.Password / TextArea / Search；Checkbox.Group；Radio.Group / Radio.Button。
+- [x] Input 家族：InputPassword / InputTextArea / InputSearch（当前为独立命名导出，无静态属性）。
+- [ ] Checkbox.Group；Radio.Group / Radio.Button。
 - [ ] DatePicker.RangePicker、TimePicker.RangePicker及独立命名导出。
 - [ ] Form.Item / Form.List、实例方法、字段依赖、异步校验、重置、动态增删。
 - [ ] Grid.Row / Col、Layout 各区域、Space.Compact、Splitter.Panel。

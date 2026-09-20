@@ -29,8 +29,6 @@ export interface PaginationProps {
   style?: JSX.CSSProperties
 }
 
-const DEFAULT_PAGE_SIZE_OPTIONS = [10, 20, 50, 100]
-
 const Pagination: Component<PaginationProps> = (providedProps) => {
   const rawProps = useComponentProps('Pagination', providedProps)
   const props = merge(
@@ -53,19 +51,16 @@ const Pagination: Component<PaginationProps> = (providedProps) => {
 
   const shouldHide = createMemo(() => props.hideOnSinglePage && pagination.totalPages() <= 1)
 
-  // Size changer shows when pageSizeOptions is provided OR total is large
-  // (enabled by default above 50 total — keep it explicit here:
-  // shown when pageSizeOptions is a non-empty array).
-  const sizeOptions = createMemo(() => {
-    if (props.disabled) return []
-    return props.pageSizeOptions?.length ? props.pageSizeOptions : []
-  })
+  const sizeOptions = createMemo(() => [...new Set(props.pageSizeOptions?.filter(size => Number.isSafeInteger(size) && size > 0) ?? [])])
   const showSizeChanger = createMemo(() => sizeOptions().length > 0)
 
   const handleJumper = (e: KeyboardEvent) => {
     if (e.key === 'Enter') {
-      const page = parseInt(jumperValue())
-      if (!isNaN(page)) {
+      e.preventDefault()
+      if (e.isComposing || props.disabled) return
+      const value = jumperValue().trim()
+      const page = Number(value)
+      if (/^\d+$/.test(value) && Number.isSafeInteger(page) && page > 0) {
         pagination.goTo(page)
         setJumperValue('')
       }
@@ -77,7 +72,7 @@ const Pagination: Component<PaginationProps> = (providedProps) => {
 
   return (
     <Show when={!shouldHide()}>
-      <nav class={twMerge(paginationContainerClass({ align: props.align }), props.class)} style={props.style}>
+      <nav aria-label="分页" class={twMerge(paginationContainerClass({ align: props.align }), props.class)} style={props.style}>
         <Show when={props.showTotal}>
           <span class={paginationTotalClass({})}>
             {props.showTotal!(props.total, pagination.itemRange())}
@@ -85,6 +80,7 @@ const Pagination: Component<PaginationProps> = (providedProps) => {
         </Show>
 
         <button
+          type="button"
           class={paginationItemClass({ state: navState(pagination.hasPrev() && !props.disabled), size: props.size })}
           onClick={() => pagination.prev()}
           disabled={!pagination.hasPrev() || props.disabled}
@@ -98,10 +94,11 @@ const Pagination: Component<PaginationProps> = (providedProps) => {
             <Show
               when={typeof item === 'number'}
               fallback={
-                <span class={paginationEllipsisClass({ size: props.size })} />
+                <span aria-hidden="true" class={paginationEllipsisClass({ size: props.size })} />
               }
             >
               <button
+                type="button"
                 class={paginationItemClass({
                   state: item === pagination.current()
                     ? (props.disabled ? 'active-disabled' : 'active')
@@ -119,6 +116,7 @@ const Pagination: Component<PaginationProps> = (providedProps) => {
         </For>
 
         <button
+          type="button"
           class={paginationItemClass({ state: navState(pagination.hasNext() && !props.disabled), size: props.size })}
           onClick={() => pagination.next()}
           disabled={!pagination.hasNext() || props.disabled}
@@ -128,22 +126,29 @@ const Pagination: Component<PaginationProps> = (providedProps) => {
         </button>
 
         <Show when={showSizeChanger()}>
-          <Dropdown
-            trigger="click"
-            placement="topRight"
-            menu={{
-              items: sizeOptions().map((size) => ({
-                key: String(size),
-                label: `${size} 条/页`,
-              })),
-              onClick: (key: string) => pagination.changePageSize(parseInt(key)),
-            }}
-          >
-            <button class={paginationSizeChangerClass({ size: props.size, disabled: props.disabled })}>
+          <Show when={!props.disabled} fallback={
+            <button type="button" disabled class={paginationSizeChangerClass({ size: props.size, disabled: true })}>
               {pagination.pageSize()} 条/页
               <span class="i-mdi-chevron-down text-sm opacity-60" />
             </button>
-          </Dropdown>
+          }>
+            <Dropdown
+              trigger="click"
+              placement="topRight"
+              menu={{
+                items: sizeOptions().map((size) => ({
+                  key: String(size),
+                  label: `${size} 条/页`,
+                })),
+                onClick: (key: string) => pagination.changePageSize(parseInt(key)),
+              }}
+            >
+              <button type="button" disabled={props.disabled} class={paginationSizeChangerClass({ size: props.size, disabled: props.disabled })}>
+                {pagination.pageSize()} 条/页
+                <span class="i-mdi-chevron-down text-sm opacity-60" />
+              </button>
+            </Dropdown>
+          </Show>
         </Show>
 
         <Show when={props.showQuickJumper}>
@@ -151,6 +156,8 @@ const Pagination: Component<PaginationProps> = (providedProps) => {
             跳至
             <input
               type="text"
+              inputmode="numeric"
+              aria-label="跳转页码"
               class={paginationJumperClass({ size: props.size, disabled: props.disabled })}
               style={{ display: 'inline-block', margin: '0 8px' }}
               value={jumperValue()}

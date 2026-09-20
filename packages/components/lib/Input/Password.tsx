@@ -1,5 +1,6 @@
+import { createPassword } from 'upthrust-competence'
 import { useComponentProps } from '../ConfigProvider/context'
-import { Component, Show, createMemo, createSignal, merge } from 'solid-js'
+import { Component, Show, merge } from 'solid-js'
 import { type JSX } from '@solidjs/web'
 import { twMerge } from 'tailwind-merge'
 import type { SizeType } from '../../common/type'
@@ -38,45 +39,22 @@ const Password: Component<PasswordProps> = providedProps => {
     rawProps,
   )
 
-  const [innerVisible, setInnerVisible] = createSignal(false)
-  const visible = createMemo(() => props.visible ?? innerVisible())
-
-  // For hover action: remember the state before the hover started so
-  // mouseleave can restore it (quick sweeps never get stuck visible).
-  let preHoverVisible: boolean | null = null
-
-  const setVisible = (next: boolean) => {
-    setInnerVisible(next)
-    props.onVisibleChange?.(next)
-  }
-
-  const toggle = () => {
-    if (props.disabled) return
-    setVisible(!visible())
-  }
-
-  const handleMouseOver = () => {
-    if (props.action !== 'hover' || props.disabled) return
-    if (preHoverVisible === null) preHoverVisible = visible()
-    setVisible(true)
-  }
-
-  const handleMouseLeave = () => {
-    if (props.action !== 'hover' || preHoverVisible === null) return
-    const restore = preHoverVisible
-    preHoverVisible = null
-    if (visible() !== restore) setVisible(restore)
-  }
-
-  const form = useFormItem({
-    get disabled() { return props.disabled },
+  const form = useFormItem({ get disabled() { return props.disabled } })
+  const visibility = createPassword({
+    get visible() { return props.visible },
+    get disabled() { return form.disabled() },
+    get action() { return props.action },
+    onVisibleChange: next => props.onVisibleChange?.(next),
   })
+  const visible = visibility.visible
+  const toggle = visibility.toggle
 
   const eye = (
     <Show when={props.visibilityToggle}>
       <span
         role="button"
-        tabindex={props.disabled ? -1 : 0}
+        tabindex={form.disabled() ? -1 : 0}
+        aria-disabled={form.disabled() ? "true" : undefined}
         aria-label={visible() ? '隐藏密码' : '显示密码'}
         aria-pressed={visible() ? 'true' : 'false'}
         class={twMerge(
@@ -94,8 +72,8 @@ const Password: Component<PasswordProps> = providedProps => {
           }
         }}
         onClick={() => { if (props.action === 'click') toggle() }}
-        onMouseOver={handleMouseOver}
-        onMouseLeave={handleMouseLeave}
+        onMouseEnter={visibility.enter}
+        onMouseLeave={visibility.leave}
       >
         <span class={visible() ? 'i-mdi-eye-outline text-[14px]' : 'i-mdi-eye-off-outline text-[14px]'} />
       </span>

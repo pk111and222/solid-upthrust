@@ -28,9 +28,12 @@ export const createPagination = (config: PaginationConfig) => {
   const [_current, _setCurrent] = createSignal(config.defaultCurrent ?? 1, { ownedWrite: true })
   const [_pageSize, _setPageSize] = createSignal(config.defaultPageSize ?? 10, { ownedWrite: true })
 
-  const current = createMemo(() => config.current !== undefined ? config.current : _current())
-  const pageSize = createMemo(() => config.pageSize !== undefined ? config.pageSize : _pageSize())
-  const totalPages = createMemo(() => Math.max(1, Math.ceil(config.total / pageSize())))
+  const positiveInteger = (value: number, fallback: number) => Number.isSafeInteger(value) && value > 0 ? value : fallback
+  const total = createMemo(() => Number.isFinite(config.total) ? Math.max(0, Math.floor(config.total)) : 0)
+  const pageSize = createMemo(() => positiveInteger(config.pageSize ?? _pageSize(), 10))
+  const totalPages = createMemo(() => Math.max(1, Math.ceil(total() / pageSize())))
+  // Keep the requested state; expose only the effective page for the current data.
+  const current = createMemo(() => Math.min(positiveInteger(config.current ?? _current(), 1), totalPages()))
 
   const hasPrev = createMemo(() => current() > 1)
   const hasNext = createMemo(() => current() < totalPages())
@@ -94,8 +97,8 @@ export const createPagination = (config: PaginationConfig) => {
 
   /** [start, end) half-open range of source-array indices on this page. */
   const rangeFor = createMemo((): [number, number] => {
-    const start = Math.min(offset(), Math.max(0, config.total))
-    const end = Math.min(start + pageSize(), Math.max(0, config.total))
+    const start = Math.min(offset(), total())
+    const end = Math.min(start + pageSize(), total())
     return [start, end]
   })
 
@@ -107,13 +110,13 @@ export const createPagination = (config: PaginationConfig) => {
 
   /** [firstItem, lastItem] 1-based display range — feeds showTotal. */
   const itemRange = createMemo((): [number, number] => {
-    if (config.total <= 0) return [0, 0]
+    if (total() <= 0) return [0, 0]
     const [start, end] = rangeFor()
     return [start + 1, end]
   })
 
   const goTo = (page: number) => {
-    if (config.disabled) return
+    if (config.disabled || !Number.isSafeInteger(page)) return
     const clamped = Math.max(1, Math.min(page, totalPages()))
     if (clamped === current()) return
     _setCurrent(clamped)
@@ -124,13 +127,13 @@ export const createPagination = (config: PaginationConfig) => {
   const next = () => { if (hasNext()) goTo(current() + 1) }
 
   const changePageSize = (size: number) => {
-    if (config.disabled || size === pageSize()) return
-    const maxPage = Math.max(1, Math.ceil(config.total / size))
+    if (config.disabled || !Number.isSafeInteger(size) || size <= 0 || size === pageSize()) return
+    const maxPage = Math.max(1, Math.ceil(total() / size))
     const newCur = Math.min(current(), maxPage)
     _setPageSize(size)
     _setCurrent(newCur)
     config.onShowSizeChange?.(newCur, size)
-    // fires onChange too when size change moves the page.
+    // Every accepted size change also emits onChange, even if the page stays.
     config.onChange?.(newCur, size)
   }
 

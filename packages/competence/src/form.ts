@@ -744,6 +744,9 @@ export function createForm(config: FormConfig = {}) {
     updateValue,
   }
 
+  // Fields can consume valuesTracked without ever calling an imperative getter.
+  // Seed defaults before those reactive consumers render.
+  untrack(readConfig)
   return instance
 }
 

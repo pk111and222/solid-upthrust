@@ -1,9 +1,10 @@
 import { useComponentProps } from '../ConfigProvider/context'
-import { Component, Show, createMemo, createSignal } from 'solid-js'
+import { Component, Show, createMemo } from 'solid-js'
 import { type JSX } from '@solidjs/web'
 import { twMerge } from 'tailwind-merge'
 import Button from '../Button'
 import Input, { type InputProps } from './index'
+import { useFormItem } from './context'
 
 export interface SearchProps extends Omit<InputProps, 'onPressEnter'> {
   /** Callback on search (Enter key, clear button, or search button). */
@@ -29,30 +30,23 @@ const Search: Component<SearchProps> = providedProps => {
   const rawProps = useComponentProps('Search', providedProps)
   const props = rawProps
 
-  const [innerValue, setInnerValue] = createSignal(props.defaultValue ?? '')
-  const value = () => (props.value !== undefined ? props.value : innerValue())
-
-  const [composing, setComposing] = createSignal(false)
-
-  const handleChange = (v: string, e?: Event) => {
-    setInnerValue(v)
-    if (props.onChange) {
-      props.onChange(v, e)
-      return
-    }
-    // Clear-initiated change: report as a search (antd source: 'clear').
-    if (e && e.type === 'click' && v === '') {
-      props.onSearch?.(v, e as MouseEvent, { source: 'clear' })
+  const form = useFormItem({
+    get value() { return props.value },
+    get onChange() { return props.onChange },
+    get disabled() { return props.disabled },
+    get size() { return props.size },
+  })
+  let inputEl: HTMLInputElement | undefined
+  const blocked = () => !!form.disabled() || !!props.loading
+  const handleChange = (value: string, event?: Event) => {
+    form.onChange(value, event)
+    if (!blocked() && value === '' && (event?.type === 'click' || event?.type === 'keydown')) {
+      props.onSearch?.('', event as MouseEvent | KeyboardEvent, { source: 'clear' })
     }
   }
-
-  const triggerSearch = (e: MouseEvent | KeyboardEvent) => {
-    props.onSearch?.(value(), e, { source: 'input' })
-  }
-
-  const handlePressEnter = (e: KeyboardEvent) => {
-    if (composing()) return
-    triggerSearch(e)
+  const triggerSearch = (event: MouseEvent | KeyboardEvent) => {
+    if (blocked() || (event instanceof KeyboardEvent && (event.isComposing || event.keyCode === 229))) return
+    props.onSearch?.(inputEl?.value ?? String(form.value() ?? ''), event, { source: 'input' })
   }
 
   const enterButton = createMemo(() => props.enterButton)
@@ -61,14 +55,18 @@ const Search: Component<SearchProps> = providedProps => {
     <Show
       when={enterButton()}
       fallback={
-        <span
+        <button
+          type="button"
+          aria-label="搜索"
+          disabled={blocked()}
           class={twMerge(
+            'border-0 bg-transparent p-0 disabled:cursor-not-allowed',
             'flex', 'items-center', 'justify-center', 'h-full',
             'px-[7px]',
             'cursor-pointer', 'select-none',
             'text-on-surface/45', 'transition-upthrust-fast', 'hover:text-primary',
           )}
-          onClick={e => { if (!props.disabled && !props.loading) triggerSearch(e) }}
+          onClick={triggerSearch}
         >
           <Show
             when={!props.loading}
@@ -76,20 +74,20 @@ const Search: Component<SearchProps> = providedProps => {
           >
             <span class="i-mdi-magnify text-[14px]" />
           </Show>
-        </span>
+        </button>
       }
     >
       <Button
         variant="solid"
         color="primary"
-        size={props.size}
-        disabled={props.disabled}
+        aria-label="搜索"
+        size={props.size ?? form.size()}
+        disabled={form.disabled()}
         loading={props.loading}
+        icon={enterButton() === true ? <span class="i-mdi-magnify text-[14px]" /> : undefined}
         onClick={e => triggerSearch(e)}
       >
-        <Show when={enterButton() === true} fallback={enterButton() as JSX.Element}>
-          <span class="i-mdi-magnify text-[14px]" />
-        </Show>
+        {enterButton() === true ? undefined : enterButton() as JSX.Element}
       </Button>
     </Show>
   )
@@ -98,11 +96,9 @@ const Search: Component<SearchProps> = providedProps => {
     <span class="inline-flex items-stretch w-full">
       <Input
         {...props}
-        value={value()}
+        ref={el => { inputEl = el; props.ref?.(el) }}
         onChange={handleChange}
-        onPressEnter={handlePressEnter}
-        onCompositionStart={() => setComposing(true)}
-        onCompositionEnd={() => setComposing(false)}
+        onPressEnter={triggerSearch}
         class={enterButton()
           ? twMerge(
               // Grouped with a trailing button: square the frame's right
@@ -111,13 +107,13 @@ const Search: Component<SearchProps> = providedProps => {
               // affix mode (border on the root span), the [&>input] variant
               // covers bare mode (border on the input itself). The z hooks
               // keep the focus ring above the button.
-              '!rounded-r-none',
+              props.class, '!rounded-r-none',
               '[&>input]:!rounded-r-none',
               'focus-within:z-[1]',
               '[&>input]:focus:z-[1]',
             )
-          : undefined}
-        suffix={enterButton() ? undefined : searchBtn}
+          : props.class}
+        suffix={enterButton() ? props.suffix : <>{props.suffix}{searchBtn}</>}
       />
       <Show when={enterButton()}>
         <span class="inline-flex shrink-0 -ml-px items-center [&>button]:!rounded-l-none">

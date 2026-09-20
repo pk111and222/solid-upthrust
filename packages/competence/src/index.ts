@@ -64,3 +64,5 @@ export * from './typography'
 export * from './virtualList'
 export * from './datePickerAdvanced'
 export * from './treeDrag'
+
+export * from './input'

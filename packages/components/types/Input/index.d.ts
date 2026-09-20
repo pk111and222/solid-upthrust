@@ -59,3 +59,9 @@ export interface InputProps {
  */
 declare const Input: Component<InputProps>;
 export default Input;
+export { default as InputPassword } from './Password';
+export type { PasswordProps } from './Password';
+export { default as InputTextArea } from './TextArea';
+export type { TextAreaProps } from './TextArea';
+export { default as InputSearch } from './Search';
+export type { SearchProps } from './Search';

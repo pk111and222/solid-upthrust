@@ -155,7 +155,7 @@ export const treeCheckboxWrapClass = (variants: VariantProps<typeof treeCheckbox
 
 /** The check mark / dash inside the box. */
 const treeCheckboxMarkVariants = cva(
-  ["text-[10px]", "leading-none", "pointer-events-none"],
+  ["inline-flex", "items-center", "justify-center", "text-[10px]", "leading-none", "pointer-events-none"],
   {
     variants: {
       state: {

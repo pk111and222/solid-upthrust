@@ -49,6 +49,7 @@ const TreeView: Component<TreeViewProps> = props => {
   const m = () => props.machine
   const rows = new Map<string | number, HTMLDivElement>()
   const onKeyDown = (event: KeyboardEvent) => {
+    if (event.target !== event.currentTarget || event.defaultPrevented || event.isComposing) return
     if (!['ArrowDown', 'ArrowUp', 'ArrowLeft', 'ArrowRight', 'Home', 'End', 'Enter', ' '].includes(event.key)) return
     event.preventDefault()
     event.stopPropagation()
@@ -90,7 +91,7 @@ const TreeView: Component<TreeViewProps> = props => {
     }
     return <div ref={el => { rowElement = el; rows.set(p.node.value, el) }} tabindex={!disabled() && m().activeKey() === p.node.value ? 0 : -1}
       onFocus={event => { if (event.target === event.currentTarget) m().setActiveKey(p.node.value) }} onKeyDown={onKeyDown}
-      class="outline-none focus-visible:[&>div:first-child]:outline-2 focus-visible:[&>div:first-child]:outline-primary" role="treeitem" aria-label={p.node.label} aria-level={p.level + 1} aria-posinset={p.position} aria-setsize={p.count}
+      class="outline-none [&:focus-visible>div:first-child]:outline-offset-[-2px] [&:focus-visible>div:first-child]:outline-solid [&:focus-visible>div:first-child]:outline-2 [&:focus-visible>div:first-child]:outline-primary" role="treeitem" aria-label={p.node.label} aria-level={p.level + 1} aria-posinset={p.position} aria-setsize={p.count}
       aria-expanded={hasChildren() ? expanded() ? 'true' : 'false' : undefined} aria-selected={m().isSelectable(p.node.value) ? selected() ? 'true' : 'false' : undefined}
       aria-checked={m().isCheckableNode(p.node.value) ? state() === 'indeterminate' ? 'mixed' : state() === 'checked' ? 'true' : 'false' : undefined}
       aria-disabled={disabled() ? 'true' : 'false'} style={p.flat ? { 'padding-left': `${p.level * (props.indent ?? 24)}px` } : undefined}>
@@ -101,8 +102,9 @@ const TreeView: Component<TreeViewProps> = props => {
         onDragLeave={e => { if (!e.currentTarget.contains(e.relatedTarget as Node | null)) m().dragLeave(p.node.value, e) }}
         onDrop={e => { e.preventDefault(); e.stopPropagation(); m().drop(p.node.value, dropPosition(e), e) }}
         onDragEnd={e => { e.stopPropagation(); m().endDrag(e) }}
-        onClick={() => {
-          if (disabled()) return
+        onClick={event => {
+          if (disabled() || event.defaultPrevented) return
+          if (event.target instanceof Element && event.target.closest('input, button, a, select, textarea, [contenteditable="true"], [role="button"]')) return
           m().setActiveKey(p.node.value)
           rows.get(p.node.value)?.focus()
           if (props.onPick) props.onPick(p.node.value)
@@ -114,7 +116,7 @@ const TreeView: Component<TreeViewProps> = props => {
         </span>
         <Show when={m().isCheckableNode(p.node.value)}>
           <span class={treeCheckboxWrapClass({ state: state(), disabled: disabled() })} aria-hidden="true"
-            onClick={event => { event.stopPropagation(); m().setActiveKey(p.node.value); rows.get(p.node.value)?.focus(); m().toggleCheck(p.node.value) }}>
+            onClick={event => { event.stopPropagation(); if (disabled()) return; m().setActiveKey(p.node.value); rows.get(p.node.value)?.focus(); m().toggleCheck(p.node.value) }}>
             <span class={treeCheckboxMarkWrapClass({ state: state(), disabled: disabled() })}>
               <Show when={state() !== 'unchecked'}><span class={state() === 'checked' ? 'i-mdi-check' : 'i-mdi-minus'} /></Show>
             </span>
@@ -140,18 +142,21 @@ const TreeView: Component<TreeViewProps> = props => {
     </div>
   }
   return <div role="tree" aria-label={props.label ?? '树形控件'} aria-multiselectable={props.multiple ? 'true' : 'false'} aria-disabled={m().isWidgetDisabled() ? 'true' : 'false'}>
-    <Show when={props.virtual} fallback={<>    <For each={m().displayTree()} fallback={<div class="py-4 text-center text-[14px] text-on-surface-variant">{props.notFoundContent ?? '暂无数据'}</div>}>
+    <Show when={m().displayTree().length} fallback={<div class="py-4 text-center text-[14px] text-on-surface-variant">{props.notFoundContent ?? '暂无数据'}</div>}>
+    <Show when={props.virtual} fallback={<For each={m().displayTree()}>
       {(node, index) => <Node node={node} level={0} position={index() + 1} count={m().displayTree().length} />}
-    </For></>}>
+    </For>}>
       <VirtualList items={flatRows()} virtual height={props.height} itemHeight={props.itemHeight} activeIndex={flatRows().findIndex(row => row.node.value === m().activeKey())}>
         {row => <Node {...row} flat />}
       </VirtualList>
+    </Show>
     </Show>
   </div>
 }
 
 const Tree: Component<TreeProps> = providedProps => {
   const props = useComponentProps('Tree', providedProps)
+  const checkable = () => props.checkable ?? (props.checkedKeys !== undefined || props.defaultCheckedKeys !== undefined)
   const machine = createTree({
     get treeData() { return props.treeData },
     get expandedKeys() { return props.expandedKeys },
@@ -161,7 +166,7 @@ const Tree: Component<TreeProps> = providedProps => {
     get defaultSelectedKeys() { return props.defaultSelectedKeys },
     get checkedKeys() { return props.checkedKeys },
     get defaultCheckedKeys() { return props.defaultCheckedKeys },
-    get checkable() { return props.checkable ?? (props.checkedKeys !== undefined || props.defaultCheckedKeys !== undefined) },
+    get checkable() { return checkable() },
     get checkStrictly() { return props.checkStrictly },
     get multiple() { return props.multiple },
     get selectable() { return props.selectable },
@@ -183,9 +188,9 @@ const Tree: Component<TreeProps> = providedProps => {
     <Show when={props.showSearch}>
       <input type="search" class="w-full box-border h-[32px] mb-3 px-2 border border-solid border-outline-variant rounded bg-transparent text-on-surface text-[14px] focus:outline-primary"
         aria-label="搜索树节点" placeholder={props.searchPlaceholder ?? '搜索节点'} disabled={props.disabled} value={machine.searchValue()}
-        onInput={event => { const value = event.currentTarget.value; if (props.searchValue === undefined) machine.setSearchValue(value); props.onSearch?.(value) }} />
+        onInput={event => { const value = event.currentTarget.value; if (props.searchValue === undefined) machine.setSearchValue(value); props.onSearch?.(value); if (props.searchValue !== undefined) event.currentTarget.value = props.searchValue }} />
     </Show>
-    <TreeView machine={machine} indent={props.indent} showLine={props.showLine} showIcon={props.showIcon} multiple={props.multiple || props.checkable}
+    <TreeView machine={machine} indent={props.indent} showLine={props.showLine} showIcon={props.showIcon} multiple={props.multiple || checkable()}
       titleRender={props.titleRender} icon={props.icon} notFoundContent={props.notFoundContent} label={props['aria-label']} />
   </div>
 }
