@@ -1,0 +1,62 @@
+[
+  {
+    "name": "value",
+    "type": "string | number",
+    "default": "—",
+    "description": "受控标量；未传时使用字段值或内部状态。"
+  },
+  {
+    "name": "defaultValue",
+    "type": "string | number",
+    "default": "—",
+    "description": "非受控初始选择，仅初始化一次。"
+  },
+  {
+    "name": "options",
+    "type": "RadioOption[]",
+    "default": "[]",
+    "description": "自动生成选项，可与 children 同时渲染。"
+  },
+  {
+    "name": "name",
+    "type": "string",
+    "default": "自动生成唯一名称",
+    "description": "同组原生输入共享名称以支持键盘导航。"
+  },
+  {
+    "name": "optionType",
+    "type": "'default' | 'button'",
+    "default": "'default'",
+    "description": "自动选项的普通或按钮外观。"
+  },
+  {
+    "name": "onChange",
+    "type": "(value: string | number) => void",
+    "default": "—",
+    "description": "有效变更报告新值，父层不更新时保持原选项。"
+  },
+  {
+    "name": "disabled",
+    "type": "boolean",
+    "default": "false",
+    "description": "禁用；独立使用遵循显式 props > Form > 组件默认 > 全局默认。"
+  },
+  {
+    "name": "class",
+    "type": "string",
+    "default": "—",
+    "description": "外层容器类名。"
+  },
+  {
+    "name": "style",
+    "type": "JSX.CSSProperties",
+    "default": "—",
+    "description": "外层容器样式。"
+  },
+  {
+    "name": "children",
+    "type": "JSX.Element",
+    "default": "—",
+    "description": "标签或自定义子项。"
+  }
+]

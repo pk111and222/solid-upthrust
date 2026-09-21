@@ -1,4 +1,4 @@
-import { createRoot, flush } from 'solid-js'
+import { createRoot, createSignal, flush } from 'solid-js'
 import { describe, expect, it, vi } from 'vitest'
 import { createSegmented } from '../../../competence/src/segmented'
 
@@ -163,6 +163,23 @@ describe('createSegmented — keyboard traversal', () => {
       step(() => ins.select('tue'))
       expect(ins.focusValue()).toBeUndefined()
       expect(ins.value()).toBe('tue')
+    })
+  })
+
+  // 初始未受控但随后切换为受控时，父层值仍应清掉过期的键盘候选。
+  it('drops a stale focus candidate after late controlled adoption', () => {
+    createRoot(() => {
+      const [value, setValue] = createSignal<string | number | undefined>(undefined, { ownedWrite: true })
+      const ins = createSegmented({
+        options: days,
+        get value() { return value() },
+      })
+      step(() => ins.setFocusValue('tue'))
+      expect(ins.focusValue()).toBe('tue')
+      setValue('tue')
+      flush()
+      expect(ins.focusValue()).toBeUndefined()
+      expect(ins.thumbValue()).toBe('tue')
     })
   })
 })

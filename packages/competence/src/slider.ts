@@ -1,23 +1,7 @@
 import { createMemo, createSignal, untrack } from "solid-js";
 
-/**
- * Headless logic for Slider — the rc-slider state core, riding on the
- * shared createNumericValue machine (the same one under InputNumber and
- * Rate): min/max/step/precision/clamp/controlled-or-uncontrolled all come
- * from there. This file adds ONLY what a track adds:
- *
- *  - POSITION ⇄ VALUE: percent/point conversions between pixel space and
- *    value space (vertical & reverse aware) — the thumb's geometry.
- *  - RANGE: [start, end] pairs (two thumbs); a single value is the
- *    start-only degenerate case, exactly rc-slider's model.
- *  - DRAG: beginDrag(point) + dragging state; the renderer feeds pointer
- *    moves (it owns the listeners), this layer converts & commits.
- *  - STEPPING: keyboard arrows ride the shared stepBy; Home/End snap.
- *  - MARKS: sorted mark values + isMarkAt for tick rendering; marks also
- *    constrain the value when `step === null` (rc-slider: mark-only mode
- *    snaps to mark values).
- */
-import { createNumericValue, toFixedWithPrecision, type NumericValueIns } from "./selection";
+/** Slider adds range, snapping and interaction boundaries to the numeric core. */
+import { createNumericValue, type NumericValueIns } from "./selection";
 import type { FormFieldRule } from "./formField";
 
 export type SliderMark = {
@@ -34,7 +18,7 @@ export type SliderConfig = {
   defaultRangeValue?: [number, number]
   min?: number
   max?: number
-  /** Step between values. Default 1; null = any value (mark-only snapping). */
+  /** Step between values. Default 1; null = free values. marksOnly enables mark snapping. */
   step?: number | null
   /** Explicit decimals to round to; default derives from step. */
   precision?: number
@@ -75,14 +59,18 @@ export type SliderIns = {
   /** Which thumb a track position is closest to (0 = start, 1 = end). */
   nearestHandle: (percent: number) => 0 | 1
   /** Begin a drag at a percent; returns the handle being dragged. */
-  beginDrag: (percent: number) => 0 | 1
-  /** Pointer moved to a new percent (writes through, unrounded). */
+  beginDrag: (percent: number, handle?: 0 | 1) => 0 | 1
+  /** Pointer moved to a new percent (snaps before notifying). */
   dragTo: (percent: number) => void
-  /** Drag ended: snap to step/mark and fire onAfterChange. */
+  /** Drag ended: fire onAfterChange with the accepted value. */
   endDrag: () => void
+  /** Cancel without a completion callback (unmount/pointer cancellation). */
+  cancelDrag: () => void
+  /** Complete a keyboard interaction using the accepted value. */
+  finishInteraction: () => void
   isDragging: () => boolean
   draggingHandle: () => 0 | 1 | null
-  /** Keyboard: arrows step (shift ×10 like rc-slider), Home/End snap. */
+  /** Keyboard: step count, including accelerated steps; Home/End snap. */
   stepHandle: (handle: 0 | 1, steps: number) => void
   snapToMin: (handle: 0 | 1) => void
   snapToMax: (handle: 0 | 1) => void
@@ -96,270 +84,121 @@ export type SliderIns = {
   core: () => NumericValueIns
 }
 
+const decimals = (value: number) => {
+  const [base, exponent = '0'] = String(value).toLowerCase().split('e')
+  return Math.max(0, (base.split('.')[1]?.length ?? 0) - Number(exponent))
+}
+
 export const createSlider = (config: SliderConfig = {}): SliderIns => {
   const rangeMode = () => config.rangeValue !== undefined || config.defaultRangeValue !== undefined
-
   const min = () => config.min ?? 0
-  const max = () => config.max ?? 100
-  const stepOrOne = () => config.step === null ? 1 : (config.step ?? 1)
-  const isFree = () => config.step === null || config.marksOnly === true
-  const isDisabled = () => !!config.disabled
-
-  // The shared numeric machine. Range mode drives TWO of them? No — cleaner:
-  // ONE machine holds the START value and the pair lives beside it; rc-slider
-  // itself treats each handle as its own value context. We keep a second
-  // signal for the end value and clamp both against each other.
-  const startCore = createNumericValue({
-    // Controlled: the START of the pair in range mode, the single value
-    // otherwise. undefined flows through UNCONTROLLED — coercing to null
-    // would freeze the widget in "controlled" mode.
-    value: () => (config.rangeValue !== undefined ? config.rangeValue[0] : config.value),
-    defaultValue:
-      config.defaultRangeValue !== undefined ? config.defaultRangeValue[0]
-      : config.defaultValue,
-    min: () => min(),
-    max: () => max(),
-    step: () => stepOrOne(),
-    precision: config.precision,
-    disabled: () => isDisabled(),
-    readonly: config.readonly ?? false,
-    onChange: v => {
-      if (v === null) return
-      emitChange(v, _end())
-    },
-  })
-
-  // ownedWrite: drags write from DOM move events — imperative entry points.
-  // The end signal only matters in range mode; in single mode the start
-  // core's value IS the thumb (the end mirrors it via rangeValue's memo).
-  const [_end, _setEnd] = createSignal<number>(
-    config.defaultRangeValue !== undefined ? config.defaultRangeValue[1] : (config.defaultValue ?? min()),
-    { ownedWrite: true },
-  )
-  const [_draggingHandle, _setDraggingHandle] = createSignal<0 | 1 | null>(null, { ownedWrite: true })
-
-  const controlledEnd = () => config.rangeValue?.[1]
-
-  /** Effective [start, end] — controlled props win; range invariant holds:
-   *  start ≤ end (writes clamp against each other). In single mode the
-   *  start IS the value and the end just mirrors it (drag math is uniform). */
-  const rangeValue = createMemo<[number, number]>(() => {
-    if (!rangeMode()) {
-      const v = startCore.value() ?? min()
-      return [v, v]
+  const max = () => Math.max(min(), config.max ?? 100)
+  const stepOrOne = () => typeof config.step === 'number' && Number.isFinite(config.step) && config.step > 0 ? config.step : 1
+  const blocked = () => !!config.disabled || !!config.readonly
+  const clamp = (value: number) => Math.min(max(), Math.max(min(), Number.isFinite(value) ? value : min()))
+  const marks = createMemo(() => {
+    const unique = new Map<number, SliderMark>()
+    for (const mark of config.marks ?? []) {
+      if (Number.isFinite(mark.value) && mark.value >= min() && mark.value <= max() && !unique.has(mark.value)) unique.set(mark.value, mark)
     }
-    const start = startCore.value() ?? min()
-    const end = controlledEnd() !== undefined ? (controlledEnd() as number) : _end()
-    return start <= end ? [start, end] : [end, start]
+    return [...unique.values()].sort((a,b) => a.value - b.value)
   })
-
-  const value = createMemo(() => rangeValue()[0])
-
-  const emitChange = (start: number, end: number) => {
-    const [s, e] = start <= end ? [start, end] : [end, start]
-    if (rangeMode()) {
-      config.onRangeChange?.([s, e])
-    } else {
-      config.onChange?.(s)
-    }
-  }
-
-  /** Snap a raw value to the pickable lattice: step multiples, or mark
-   *  values in marks-only mode (rc-slider: closest mark wins). */
   const snap = (raw: number): number => {
-    const lo = min(), hi = max()
-    const clamped = Math.min(hi, Math.max(lo, raw))
-    if (isFree()) {
-      if (config.marksOnly === true && config.marks?.length) {
-        // Closest mark value.
-        let best = config.marks[0].value
-        let bestDist = Infinity
-        for (const m of config.marks) {
-          const d = Math.abs(m.value - clamped)
-          if (d < bestDist) { bestDist = d; best = m.value }
-        }
-        return best
-      }
-      return clamped
+    const value = clamp(raw)
+    if (config.marksOnly && marks().length) {
+      return marks().reduce((best, mark) => Math.abs(mark.value-value) < Math.abs(best.value-value) ? mark : best).value
     }
-    const s = stepOrOne()
-    const steps = Math.round((clamped - lo) / s)
-    return toFixedWithPrecision(lo + steps * s, config.precision ?? 100)
+    if (config.step === null || config.marksOnly) return value
+    if (value === min() || value === max()) return value
+    const step = stepOrOne()
+    const precision = config.precision ?? Math.max(decimals(step), decimals(min()))
+    const digits = Number.isFinite(precision) ? Math.min(100, Math.max(0, Math.trunc(precision))) : 0
+    const index = (value-min())/step
+    const roundedIndex = Math.round(index + Number.EPSILON*Math.abs(index)*2)
+    return clamp(Number((min()+roundedIndex*step).toFixed(digits)))
   }
-
-  /** Reverse-aware percent: 0 at the visual start, 100 at the visual end. */
-  const percentOf = (v: number) => {
-    const lo = min(), hi = max()
-    const span = hi - lo
-    if (span === 0) return 0
-    const pct = ((v - lo) / span) * 100
-    return config.reverse ? 100 - pct : pct
+  const initial = untrack(() => {
+    const pair = config.defaultRangeValue ?? [config.defaultValue ?? min(), config.defaultValue ?? min()]
+    return [snap(Math.min(...pair)), snap(Math.max(...pair))] as [number,number]
+  })
+  const [end, setEnd] = createSignal(initial[1], { ownedWrite:true })
+  let writing = false
+  const startCore = createNumericValue({
+    value: () => rangeMode() ? (config.rangeValue ? Math.min(...config.rangeValue) : undefined) : config.value,
+    defaultValue: initial[0], min, max, step:stepOrOne,
+    get precision() { return config.precision },
+    disabled: () => !!config.disabled,
+    get readonly() { return config.readonly },
+    onChange: next => { if (!writing && next !== null) emit(next, end()) },
+  })
+  const rangeValue = createMemo<[number,number]>(() => {
+    const start = snap(startCore.value() ?? min())
+    if (!rangeMode()) return [start,start]
+    const finish = snap(config.rangeValue ? Math.max(...config.rangeValue) : end())
+    return start <= finish ? [start,finish] : [finish,start]
+  })
+  const value = () => rangeValue()[0]
+  const emit = (start: number, finish: number) => {
+    if (rangeMode()) config.onRangeChange?.([Math.min(start,finish),Math.max(start,finish)])
+    else config.onChange?.(start)
   }
-
-  /** Percent → value (snap-aware; drag passes `free` for 1:1 tracking). */
-  const valueAt = (percent: number) => {
-    const lo = min(), hi = max()
-    let pct = percent
-    if (config.reverse) pct = 100 - pct
-    const raw = lo + (pct / 100) * (hi - lo)
-    return snap(raw)
+  const write = (start: number, finish: number) => {
+    if (blocked()) return
+    const before = rangeValue()
+    if (!rangeMode()) finish = start
+    if (start === before[0] && finish === before[1]) return
+    writing = true
+    try { startCore.setValue(start) } finally { writing = false }
+    if (config.rangeValue === undefined) setEnd(finish)
+    emit(start,finish)
   }
-
-  const nearestHandle = (percent: number): 0 | 1 => {
-    const [s, e] = rangeValue()
-    const ds = Math.abs(percentOf(s) - percent)
-    const de = Math.abs(percentOf(e) - percent)
-    if (!rangeMode()) return 0
-    return ds <= de ? 0 : 1
+  const writeHandle = (handle: 0 | 1, raw: number) => {
+    const [start,finish] = rangeValue(), next = snap(raw)
+    if (!rangeMode()) { write(next,next); return }
+    if (handle === 0) write(Math.min(next,finish),finish)
+    else write(start,Math.max(next,start))
   }
-
-  const beginDrag = (percent: number): 0 | 1 => {
-    if (isDisabled()) return nearestHandle(percent)
-    const h = nearestHandle(percent)
-    _setDraggingHandle(h)
-    // NOTE: not dragTo(percent) — the _draggingHandle guard inside dragTo
-    // would read the UNCOMMITTED signal in this same batch (Solid 2 rc
-    // batches writes) and bail. Inline the first move with the handle we
-    // just picked.
-    applyHandleDrag(h, percent)
-    return h
+  const percentOf = (raw: number) => {
+    if (max() === min()) return 0
+    const percent = (clamp(raw)-min())/(max()-min())*100
+    return config.reverse ? 100-percent : percent
   }
-
-  /** Shared drag math — called with the handle EXPLICITLY (batch-safe). */
-  const applyHandleDrag = (h: 0 | 1, percent: number) => {
-    const v = valueAt(percent)
-    const [s, e] = rangeValue()
-    if (h === 0) {
-      if (rangeMode()) {
-        // Keep the invariant start ≤ end.
-        const clamped = Math.min(v, e)
-        if (controlledEnd() === undefined) _setEnd(e)
-        startCore.setValue(clamped)
-        emitChange(clamped, e)
-      } else {
-        // Single mode: no end to clamp against — the value IS the thumb.
-        startCore.setValue(v)
-        emitChange(v, v)
-      }
-    } else {
-      const clamped = Math.max(v, s)
-      if (controlledEnd() === undefined) _setEnd(clamped)
-      emitChange(s, clamped)
-    }
+  const valueAt = (percent: number) => snap(min() + (config.reverse ? 100-percent : percent)/100*(max()-min()))
+  const nearestHandle = (percent:number):0|1 => !rangeMode() || Math.abs(percentOf(rangeValue()[0])-percent) <= Math.abs(percentOf(rangeValue()[1])-percent) ? 0 : 1
+  const [draggingHandle, setDraggingHandle] = createSignal<0|1|null>(null,{ownedWrite:true})
+  let active: 0|1|null = null
+  const cancelDrag = () => { active=null;setDraggingHandle(null) }
+  const finishInteraction = () => { if (!blocked()) config.onAfterChange?.(rangeMode() ? rangeValue() : value()) }
+  const beginDrag = (percent:number, handle?:0|1):0|1 => {
+    const chosen = handle ?? nearestHandle(percent)
+    if (blocked()) return chosen
+    active = chosen;setDraggingHandle(chosen);writeHandle(chosen,valueAt(percent));return chosen
   }
-
-  const dragTo = (percent: number) => {
-    if (isDisabled()) return
-    const h = _draggingHandle()
-    if (h === null) return
-    applyHandleDrag(h, percent)
+  const dragTo = (percent:number) => { if (active !== null && !blocked()) writeHandle(active,valueAt(percent)) }
+  const endDrag = () => { if (active === null) return;cancelDrag();finishInteraction() }
+  const stepHandle = (handle:0|1, steps:number) => {
+    if (blocked() || steps === 0) return
+    const current = rangeValue()[handle]
+    if (config.marksOnly && marks().length) {
+      const candidates = marks().filter(mark => steps > 0 ? mark.value > current : mark.value < current)
+      if (steps < 0) candidates.reverse()
+      if (candidates.length) writeHandle(handle,candidates[Math.min(candidates.length-1,Math.max(0,Math.abs(Math.trunc(steps))-1))].value)
+    } else writeHandle(handle,current+steps*stepOrOne())
   }
-
-  const endDrag = () => {
-    const h = _draggingHandle()
-    if (h === null) return
-    _setDraggingHandle(null)
-    // Snap in place (marks/step), then report.
-    const [s, e] = rangeValue()
-    const snappedS = snap(s)
-    const snappedE = snap(e)
-    startCore.setValue(snappedS)
-    if (controlledEnd() === undefined) _setEnd(snappedE)
-    emitChange(snappedS, snappedE)
-    config.onAfterChange?.(rangeMode() ? [snappedS, snappedE] : snappedS)
-  }
-
-  const stepHandle = (handle: 0 | 1, steps: number) => {
-    if (isDisabled()) return
-    const [s, e] = rangeValue()
-    if (handle === 0) {
-      const target = Math.min(s + steps * stepOrOne(), rangeMode() ? e : max())
-      const snapped = snap(target)
-      startCore.setValue(snapped)
-      emitChange(snapped, e)
-    } else {
-      const target = Math.max(e + steps * stepOrOne(), s)
-      const snapped = snap(target)
-      if (controlledEnd() === undefined) _setEnd(snapped)
-      emitChange(s, snapped)
-    }
-  }
-
-  const snapToMin = (handle: 0 | 1) => {
-    if (isDisabled()) return
-    if (handle === 0) {
-      startCore.setValue(min())
-      emitChange(min(), _end())
-    } else {
-      if (controlledEnd() === undefined) _setEnd(min())
-      emitChange(startCore.value() ?? min(), min())
-    }
-  }
-
-  const snapToMax = (handle: 0 | 1) => {
-    if (isDisabled()) return
-    if (handle === 0) {
-      startCore.setValue(max())
-      emitChange(max(), _end())
-    } else {
-      if (controlledEnd() === undefined) _setEnd(max())
-      emitChange(startCore.value() ?? min(), max())
-    }
-  }
-
-  const setValue = (v: number) => {
-    if (isDisabled()) return
-    const snapped = snap(v)
-    startCore.setValue(snapped)
-    emitChange(snapped, snapped)
-  }
-
-  const setRangeValue = (pair: [number, number]) => {
-    if (isDisabled()) return
-    const [s, e] = pair[0] <= pair[1] ? pair : [pair[1], pair[0]]
-    const snappedS = snap(s)
-    const snappedE = snap(e)
-    startCore.setValue(snappedS)
-    if (controlledEnd() === undefined) _setEnd(snappedE)
-    emitChange(snappedS, snappedE)
-  }
-
-  const marks = createMemo(() =>
-    [...(config.marks ?? [])].sort((a, b) => a.value - b.value),
-  )
-
-  const isMarkAt = (v: number) =>
-    config.marks?.some(m => m.value === v) ?? false
-
   return {
-    value,
-    rangeValue,
-    isRange: rangeMode,
-    min,
-    max,
-    step: stepOrOne,
-    isDisabled,
-    percentOf,
-    valueAt,
-    nearestHandle,
-    beginDrag,
-    dragTo,
-    endDrag,
-    isDragging: () => _draggingHandle() !== null,
-    draggingHandle: () => _draggingHandle(),
-    stepHandle,
-    snapToMin,
-    snapToMax,
-    setValue,
-    setRangeValue,
-    marks,
-    isMarkAt,
-    core: () => startCore,
+    value, rangeValue, isRange:rangeMode, min, max, step:stepOrOne,
+    isDisabled: () => !!config.disabled,
+    percentOf,valueAt,nearestHandle,beginDrag,dragTo,endDrag,cancelDrag,finishInteraction,
+    isDragging: () => draggingHandle() !== null, draggingHandle,
+    stepHandle, snapToMin: handle => writeHandle(handle,min()), snapToMax: handle => writeHandle(handle,max()),
+    setValue: next => writeHandle(0,next),
+    setRangeValue: pair => write(snap(Math.min(...pair)),snap(Math.max(...pair))),
+    marks, isMarkAt: next => marks().some(mark => mark.value === next), core: () => startCore,
   }
 }
 
 export const sliderSplits: (keyof SliderConfig)[] = [
   'value', 'defaultValue', 'rangeValue', 'defaultRangeValue',
   'min', 'max', 'step', 'precision', 'disabled', 'reverse', 'vertical',
-  'marks', 'marksOnly',
+  'marks', 'marksOnly', 'readonly',
 ]

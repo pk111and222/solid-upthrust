@@ -1,0 +1,32 @@
+[
+  {
+    "name": "label",
+    "type": "string",
+    "default": "—",
+    "description": "必填，选项显示文本。"
+  },
+  {
+    "name": "value",
+    "type": "string | number",
+    "default": "—",
+    "description": "必填且唯一的键；数字和字符串严格区分。"
+  },
+  {
+    "name": "disabled",
+    "type": "boolean",
+    "default": "—",
+    "description": "默认 false，禁止指针选取和键盘候选。"
+  },
+  {
+    "name": "icon",
+    "type": "unknown（UI 中传 JSX.Element）",
+    "default": "—",
+    "description": "可选前置图标内容。"
+  },
+  {
+    "name": "payload",
+    "type": "unknown",
+    "default": "—",
+    "description": "可选业务数据，不影响渲染，onChange 仍只返回 value。"
+  }
+]

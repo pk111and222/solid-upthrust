@@ -42,7 +42,7 @@ export type CheckboxGroupIns = {
     toggleValue: (value: string | number) => void;
     /** Check every ENABLED option (individual disabled options untouched). */
     checkAll: () => void;
-    /** Uncheck everything. */
+    /** Uncheck enabled values; disabled selections remain unchanged. */
     clearAll: () => void;
     isChecked: (value: string | number) => boolean;
     isDisabled: (value: string | number) => boolean;

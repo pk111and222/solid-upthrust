@@ -1,5 +1,5 @@
 import { useComponentProps } from '../ConfigProvider/context'
-import { Component, For, Show, createMemo, merge } from 'solid-js'
+import { Component, For, Show, createEffect, merge, untrack } from 'solid-js'
 import { type JSX } from '@solidjs/web'
 import { twMerge } from 'tailwind-merge'
 import {
@@ -74,33 +74,46 @@ const Checkbox: Component<CheckboxProps> = providedProps => {
   const isGroupDisabled = () => group?.isDisabled(props.value as string | number) ?? false
   const groupChecked = () => group?.isChecked(props.value as string | number) ?? false
 
-  const machine = createMemo(() => createCheckbox({
+  const machine = createCheckbox({
     get checked() { return inGroup() ? groupChecked() : (form.value() as boolean | undefined) },
     get defaultChecked() { return props.defaultChecked },
     get indeterminate() { return props.indeterminate },
-    get disabled() { return providedProps.disabled ?? (inGroup() ? isGroupDisabled() : undefined) ?? props.disabled },
-  }))
+    get disabled() { return inGroup() ? isGroupDisabled() || !!props.disabled : !!form.disabled() },
+    onChange: (next, event) => form.onChange(next, event),
+  })
 
-  const checked = () => machine().checked()
-  const disabled = () => machine().isDisabled()
-  const indeterminate = () => machine().indeterminate()
+  const checked = () => machine.checked()
+  const disabled = () => machine.isDisabled()
+  const indeterminate = () => machine.indeterminate()
 
   const inputRef: { current?: HTMLInputElement } = {}
   const setRef = (el: HTMLInputElement) => {
     inputRef.current = el
-    props.ref?.(el)
+    untrack(() => props.ref?.(el))
   }
 
+  createEffect(indeterminate, mixed => {
+    if (inputRef.current) inputRef.current.indeterminate = mixed
+  })
+
   const handleChange = (e: Event) => {
-    const next = (e.target as HTMLInputElement).checked
-    if (inGroup()) {
-      group?.toggleValue(props.value as string | number)
-      return
+    const input = e.currentTarget as HTMLInputElement
+    const next = input.checked
+    try {
+      if (!disabled() && next !== checked()) {
+        if (inGroup()) {
+          group?.toggleValue(props.value as string | number)
+          props.onChange?.(next, e)
+        } else {
+          machine.setChecked(next, e)
+        }
+      }
+    } finally {
+      // Native activation changes these properties even when a controlled
+      // parent rejects the proposed update (or when mixed remains true).
+      input.checked = checked()
+      input.indeterminate = indeterminate()
     }
-    machine().setChecked(next, e)
-    // form.onChange routes through the Item (store write + validation);
-    // falls back to props.onChange for standalone usage.
-    form.onChange(next, e)
   }
 
   return (
@@ -111,7 +124,20 @@ const Checkbox: Component<CheckboxProps> = providedProps => {
       )}
       style={props.style}
     >
+      <input
+        ref={setRef}
+        type="checkbox"
+        class={checkboxInputClass()}
+        id={inGroup() ? props.id : form.id()}
+        name={props.name ?? (inGroup() ? group?.name?.() : undefined)}
+        value={props.value}
+        checked={checked()}
+        disabled={disabled()}
+        aria-checked={indeterminate() ? 'mixed' : checked() ? 'true' : 'false'}
+        onChange={handleChange}
+      />
       <span
+        aria-hidden="true"
         class={checkboxBoxClass({
           checked: checked() && !indeterminate(),
           indeterminate: indeterminate(),
@@ -123,21 +149,10 @@ const Checkbox: Component<CheckboxProps> = providedProps => {
           <span class={checkboxDashWrapClass({ visible: true, disabled: disabled() })} />
         </Show>
         <Show when={!indeterminate()}>
-          <span class={checkboxCheckWrapClass({ visible: checked() })} />
+          <span class={checkboxCheckWrapClass({ visible: checked(), disabled: disabled() })} />
         </Show>
       </span>
-      <input
-        ref={setRef}
-        type="checkbox"
-        class={checkboxInputClass()}
-        id={form.id()}
-        name={props.name}
-        value={props.value}
-        checked={checked()}
-        disabled={disabled()}
-        aria-checked={indeterminate() ? 'mixed' : checked() ? 'true' : 'false'}
-        onChange={handleChange}
-      />
+
       <Show when={props.children !== undefined}>
         <span class={checkboxLabelWrapClass({ disabled: disabled() })}>
           {props.children}
@@ -162,8 +177,8 @@ export interface CheckboxGroupProps {
 
 /**
  * CheckboxGroup — renders a checkbox per option and manages the value
- * array. Standalone usage only (a Form.Item wraps this component and
- * receives the array value through the standard context contract).
+ * array. A surrounding Form.Item supplies the array value and change
+ * handler through the shared field context.
  */
 export const CheckboxGroup: Component<CheckboxGroupProps> = providedProps => {
   const rawProps = useComponentProps('CheckboxGroup', providedProps)
@@ -178,18 +193,19 @@ export const CheckboxGroup: Component<CheckboxGroupProps> = providedProps => {
     get status() { return undefined },
   })
 
-  const machine = createMemo(() => createCheckboxGroup({
+  const machine = createCheckboxGroup({
     get value() { return form.value() as Array<string | number> | undefined },
     get defaultValue() { return props.defaultValue },
     get options() { return props.options },
-    get disabled() { return props.disabled },
-    get onChange() { return form.onChange },
-  }))
+    get disabled() { return form.disabled() },
+    onChange: next => props.onChange ? props.onChange(next) : form.onChange(next),
+  })
 
   const ctx: CheckboxGroupContextValue = {
-    isChecked: v => machine().isChecked(v),
-    isDisabled: v => machine().isDisabled(v),
-    toggleValue: v => machine().toggleValue(v),
+    name: () => props.name,
+    isChecked: v => machine.isChecked(v),
+    isDisabled: v => machine.isDisabled(v),
+    toggleValue: v => machine.toggleValue(v),
   }
 
   return (
@@ -198,8 +214,9 @@ export const CheckboxGroup: Component<CheckboxGroupProps> = providedProps => {
         class={checkboxGroupClass(props.class)}
         style={props.style}
         role="group"
+        id={form.id()}
       >
-        <For each={machine().options()}>
+        <For each={machine.options()}>
           {option => (
             <Checkbox
               value={option.value}
@@ -223,6 +240,7 @@ export const CheckboxGroup: Component<CheckboxGroupProps> = providedProps => {
 import { createContext, useContext } from 'solid-js'
 
 export type CheckboxGroupContextValue = {
+  name?: () => string | undefined
   isChecked: (value: string | number) => boolean
   isDisabled: (value: string | number) => boolean
   toggleValue: (value: string | number) => void

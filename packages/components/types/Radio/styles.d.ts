@@ -26,7 +26,7 @@ export declare const radioLabelWrapClass: (variants: Parameters<typeof radioLabe
 export declare const radioGroupClass: (class_?: string) => string;
 export declare const radioButtonVariants: (props?: ({
     checked?: boolean | null | undefined;
-    position?: "middle" | "first" | "last" | null | undefined;
+    position?: "middle" | "first" | "last" | "single" | null | undefined;
     disabled?: boolean | null | undefined;
 } & import('class-variance-authority/types').ClassProp) | undefined) => string;
 export declare const radioButtonClass: (variants: Parameters<typeof radioButtonVariants>[0]) => string;

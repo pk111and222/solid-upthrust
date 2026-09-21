@@ -27,7 +27,7 @@
 - Popover 收尾验证（2026-09-17）：5 文件（新增用例）、121 文件全量、1311 条 L1–L3 通过；类型与构建通过；Popover 专项 Playwright 43 条（docs+example 两项目）通过，重复两次稳定；docs 双 base 各 13 条通过；另有 Playwright MCP 交互验证。
 - Tabs 收尾验证（2026-09-17）：8 文件（新增用例）、127 文件全量、1337 条 L1–L3 通过；类型与构建通过；Tabs 专项 Playwright 15 条（docs+example 两项目）通过，重复两次稳定；docs 双 base 各 13 条通过（新增导航页触发路由/菜单套件）；另有 Playwright MCP 交互验证。C02 批次全部完成。
 - Input 收尾验证（2026-09-20）：5 文件、35 条 Input 用例通过；全量 133 文件、1373 条通过；专项浏览器 17 条、文档双 base 各 13 条通过；类型与构建通过，见 [input.md](docs/contributing/regressions/input.md)。
-- 默认下一物料：**C04 Checkbox**（见批次排序）。用户可另行分配无依赖冲突的物料。
+- 默认下一物料：**C05 Select**（见批次排序）。用户可另行分配无依赖冲突的物料。
 
 ### 状态规则
 
@@ -95,6 +95,20 @@
 | C03 Pagination | 当前会话：Pagination 回归 | 当前工作区 | Pagination UI/headless、示例/API、四层测试；不改共享逻辑和锁文件 | 已验收 | Dropdown 已有验收证据；本轮集成通过 | [执行记录](docs/contributing/regressions/pagination.md) |
 | C03 Tree | 当前会话：Tree 回归 | 当前工作区 | Tree/headless/拖拽、示例/API、四层测试；必要 TreeSelect 渲染集成 | 已验收 | 勾选/半选图标补验通过；沿用 C01 与 TreeSelect 集成证据 | [执行记录](docs/contributing/regressions/tree.md) |
 
+| C04 Checkbox | 当前会话：Checkbox 回归 | 当前工作区 | Checkbox/CheckboxGroup、B02 注入路径、示例/API、四层测试及证据 | 已验收 | B02 使用路径及用户反馈的确认/聚焦示例补验通过；完整 Form 留待 C07 | [执行记录](docs/contributing/regressions/checkbox.md) |
+
+| C04 Radio | 当前会话：Radio 回归 | 当前工作区 | Radio/RadioGroup/RadioButton、必要 Selection 与 B02 路径、示例/API、四层测试及证据；保留 Checkbox 改动 | 已验收 | Selection 受控路径及 Select/Cascader/Segmented 局部集成通过；完整 B02/B06 留待后续 | [执行记录](docs/contributing/regressions/radio.md) |
+
+| C04 Switch | 当前会话：Switch 回归 | 当前工作区 | Switch UI/headless、B02 接入、示例/API、四层测试；保留前序修改 | 已验收 | 字段布尔值与显式优先级通过；完整 B02 留待后续 | [执行记录](docs/contributing/regressions/switch.md) |
+
+| C04 InputNumber | 当前会话：InputNumber 回归 | 当前工作区 | 数字输入状态/步进、B02 接入、示例/API、四层测试；保留前序修改 | 已验收 | 受控草稿/重置、精度与字段数字/null 通过；完整 B02 留待后续 | [执行记录](docs/contributing/regressions/input-number.md) |
+
+| C04 Slider | 当前会话：Slider 回归 | 当前工作区 | Slider 单值/区间、拖拽/键盘、B02 字段、示例/API、四层测试；保留前序修改 | 已验收 | 2 workers 全量通过；默认并行的 Select 虚拟列表超时留 B09/D06，详见记录 | [执行记录](docs/contributing/regressions/slider.md) |
+| C04 Rate | 当前会话：Rate 回归 | 当前工作区（main） | Rate/headless、半星与 hover/clear、B02 路径、示例/API、四层测试及证据；不改锁文件 | 已验收 | 依赖前序 C04 表单控件与共享数值/Selection 局部证据；完整 B02 留待后续 | [执行记录](docs/contributing/regressions/rate.md) |
+| C04 Segmented | 当前会话：Segmented 回归 | 当前工作区（main） | Segmented/headless、Selection 集成、滑动 thumb/键盘、B02 路径、示例/API、四层测试及证据；不改锁文件 | 已验收 | 依赖前序 C04 表单控件与共享 Selection 局部证据；完整 B02/B06 留待后续 | [执行记录](docs/contributing/regressions/segmented.md) |
+
+| C04 Rate / Segmented 二次修复 | 当前任务：二次修复与补验 | 当前工作区（main） | Rate/Segmented 实现、定向回归、docs/example、几何与清理验收 | 已验收 | 4 项缺陷关闭；定向 57、全量 1508、浏览器 22 条通过；类型/构建通过 | [Rate](docs/contributing/regressions/rate.md)、[Segmented](docs/contributing/regressions/segmented.md) |
+
 ## 3. 第一阶段：全部组件回归 C（用户指定优先）
 
 编号沿用原计划，方便追踪。按实际引用验证前置能力；C01 历史已完成但不因此把 B08 全部勾选。
@@ -138,13 +152,13 @@
 
 ### C04
 
-- [ ] Checkbox
-- [ ] Radio
-- [ ] Switch
-- [ ] InputNumber
-- [ ] Slider
-- [ ] Rate
-- [ ] Segmented
+- [x] Checkbox — 含 CheckboxGroup、确认与聚焦示例补验，见 [本轮验收记录](docs/contributing/regressions/checkbox.md)
+- [x] Radio — 含 RadioGroup / RadioButton，见 [本轮验收记录](docs/contributing/regressions/radio.md)
+- [x] Switch — 见 [本轮验收记录](docs/contributing/regressions/switch.md)
+- [x] InputNumber — 见 [本轮验收记录](docs/contributing/regressions/input-number.md)
+- [x] Slider — 见 [本轮验收记录](docs/contributing/regressions/slider.md)；默认并行虚拟列表超时另行跟踪，2 workers 全量通过
+- [x] Rate — 二次缺陷修复与补验完成，含 slider 半星语义、默认值稳定、hover 清零、动态模式与 Form，见 [执行记录](docs/contributing/regressions/rate.md)
+- [x] Segmented — 二次修复与补验完成，含候选失效、测量清理、真实几何/等宽/resize、docs/example Form 与完整基础文档，见 [执行记录](docs/contributing/regressions/segmented.md)
 
 ### C05
 
@@ -246,7 +260,8 @@ ConfigProvider 读取 `Input/context`、`Form/context`，不等于依赖完整 I
 ### 子组件与复杂模块清单（跟随所属物料验收）
 
 - [x] Input 家族：InputPassword / InputTextArea / InputSearch（当前为独立命名导出，无静态属性）。
-- [ ] Checkbox.Group；Radio.Group / Radio.Button。
+- [x] CheckboxGroup（独立命名导出，当前不提供 Checkbox.Group 静态属性）。
+- [x] RadioGroup / RadioButton（独立命名导出，当前不提供 Radio.Group / Radio.Button 静态属性）。
 - [ ] DatePicker.RangePicker、TimePicker.RangePicker及独立命名导出。
 - [ ] Form.Item / Form.List、实例方法、字段依赖、异步校验、重置、动态增删。
 - [ ] Grid.Row / Col、Layout 各区域、Space.Compact、Splitter.Panel。
@@ -309,7 +324,7 @@ C 阶段可按需提前执行相关项，最终仍须完整验收本阶段。尤
 - [ ] **B06 Selection / Drag**：选中、禁用项、键盘切换、拖拽开始/取消/结束、事件与监听清理。
 - [ ] **B07 虚拟列表与断点**：可见范围、索引/key、数据更新、滚动定位、尺寸变化、响应式边界。
 - [ ] **B08 基础工具**：颜色解析、日期计算、字段路径/校验、样式合并；分别放对应物料或 shared 测试目录。
-- [ ] **B09 测试执行基础**：组件专用浏览器页/运行入口、统一 mount/cleanup、可控时钟/网络、截图环境、失败 trace。
+- [ ] **B09 测试执行基础**：组件专用浏览器页/运行入口、统一 mount/cleanup、可控时钟/网络、截图环境、失败 trace。Slider 轮次发现默认并行下 `virtual-list.selector.2` 两次超时，单独与 2 workers 全量通过；跟踪并发稳定性及性能根因，见 [记录](docs/contributing/regressions/slider.md)。
 
 已有 C01、Button、Skeleton 覆盖了部分 B 项；引用其证据并补缺口，不能盲目重做，也不能把局部通过当成整项验收。
 

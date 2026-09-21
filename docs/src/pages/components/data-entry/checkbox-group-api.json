@@ -1,0 +1,56 @@
+[
+  {
+    "name": "value",
+    "type": "Array<string | number>",
+    "default": "—",
+    "description": "受控数组；未传时读取 Form.Item。"
+  },
+  {
+    "name": "defaultValue",
+    "type": "Array<string | number>",
+    "default": "[]",
+    "description": "非受控初始值，仅初始化一次。"
+  },
+  {
+    "name": "options",
+    "type": "CheckboxOption[]",
+    "default": "[]",
+    "description": "选项列表，可与 children 同时使用。"
+  },
+  {
+    "name": "onChange",
+    "type": "(value: Array<string | number>) => void",
+    "default": "—",
+    "description": "选择变化后的完整值数组。"
+  },
+  {
+    "name": "disabled",
+    "type": "boolean",
+    "default": "false",
+    "description": "禁用切换；独立使用时继承 Form/ConfigProvider。"
+  },
+  {
+    "name": "name",
+    "type": "string",
+    "default": "—",
+    "description": "原生表单字段名。"
+  },
+  {
+    "name": "class",
+    "type": "string",
+    "default": "—",
+    "description": "外层容器类名。"
+  },
+  {
+    "name": "style",
+    "type": "JSX.CSSProperties",
+    "default": "—",
+    "description": "外层容器样式。"
+  },
+  {
+    "name": "children",
+    "type": "JSX.Element",
+    "default": "—",
+    "description": "自定义 Checkbox 子项。"
+  }
+]

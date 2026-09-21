@@ -85,7 +85,7 @@ export const createSegmented = (config: SegmentedConfig = {}): SegmentedIns => {
   // The VALUE machine: maxSelect 1, clicking the selected item keeps it.
   const store = createSelection({
     value: () => (config.value !== undefined ? [config.value] : undefined),
-    defaultValue: config.defaultValue !== undefined ? [config.defaultValue] : undefined,
+    defaultValue: untrack(() => config.defaultValue !== undefined ? [config.defaultValue] : undefined),
     get options() { return config.options as SelectionOption[] },
     get disabled() { return config.disabled },
     maxSelect: 1,
@@ -165,20 +165,38 @@ export const createSegmented = (config: SegmentedConfig = {}): SegmentedIns => {
   // Leaving the widget / committing clears focus back onto the value.
   const select = (key: string | number) => {
     _setFocusValue(undefined)
+    if (!(config.options ?? []).some(option => option.value === key)) return
     store.select(key)
   }
 
+  // Options and group state can invalidate a pending keyboard/hover candidate.
+  createEffect(
+    () => (config.options ?? []).map(option => ({ value: option.value, disabled: store.isDisabled(option.value) })),
+    options => {
+      const keys = new Set(options.map(option => option.value))
+      const focused = untrack(_focusValue)
+      if (focused !== undefined && (!keys.has(focused) || options.some(option => option.value === focused && option.disabled))) {
+        _setFocusValue(undefined)
+      }
+      let removed = false
+      for (const key of rects.keys()) {
+        if (!keys.has(key)) { rects.delete(key); removed = true }
+      }
+      if (removed) _setRectsRev(rev => rev + 1)
+    },
+  )
+
   // A controlled value change arrives from outside — the thumb follows it,
-  // and any stale focus (pointing at a key no longer valid) drops.
-  if (config.value !== undefined) {
-    createEffect(
-      () => config.value,
-      (v) => {
-        if (v === undefined) return
-        if (untrack(_focusValue) === v) _setFocusValue(undefined)
-      },
-    )
-  }
+  // and any stale focus (pointing at a key no longer valid) drops. Keep this
+  // effect even when the first controlled value is undefined: a parent may
+  // switch from uncontrolled to controlled after an interaction.
+  createEffect(
+    () => config.value,
+    (v) => {
+      if (v === undefined) return
+      if (untrack(_focusValue) === v) _setFocusValue(undefined)
+    },
+  )
 
   return {
     value,

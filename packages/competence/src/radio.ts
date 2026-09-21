@@ -1,4 +1,4 @@
-import { createMemo, createSignal } from "solid-js";
+import { createMemo, createSignal, untrack } from "solid-js";
 
 /**
  * Headless logic for Radio — the rc-radio state core.
@@ -13,7 +13,7 @@ import { createMemo, createSignal } from "solid-js";
  *    unlimited cardinality, and the one a future Select reuses for both
  *    modes. This keeps single-pick bookkeeping in ONE place.
  */
-import { createSelection, type SelectionConfig, type SelectionIns, type SelectionOption } from "./selection";
+import { createSelection, type SelectionIns, type SelectionOption } from "./selection";
 import type { FormFieldRule } from "./formField";
 
 export type RadioConfig = {
@@ -40,7 +40,7 @@ export const createRadio = (config: RadioConfig = {}): RadioIns => {
   // ownedWrite: check fires from DOM click events — imperative entry
   // points outside any reactive owner.
   const [_checked, _setChecked] = createSignal(
-    config.defaultChecked ?? false,
+    untrack(() => config.defaultChecked ?? false),
     { ownedWrite: true },
   )
 
@@ -108,7 +108,7 @@ export const createRadioGroup = (config: RadioGroupConfig = {}): RadioGroupIns =
   // (antd's single-key API) map onto the store's array shape.
   const store = createSelection({
     value: () => (config.value !== undefined ? [config.value] : undefined),
-    defaultValue: config.defaultValue !== undefined ? [config.defaultValue] : undefined,
+    defaultValue: untrack(() => config.defaultValue !== undefined ? [config.defaultValue] : undefined),
     get options() { return config.options },
     get disabled() { return config.disabled },
     maxSelect: 1,
@@ -128,7 +128,7 @@ export const createRadioGroup = (config: RadioGroupConfig = {}): RadioGroupIns =
     isSelected: store.isSelected,
     isDisabled: store.isDisabled,
     select: v => { store.select(v) },
-    clear: () => { store.clear() },
+    clear: () => { if (!config.disabled) store.clear() },
     options: store.options,
     store: () => store,
   }

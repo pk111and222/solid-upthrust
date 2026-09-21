@@ -1,5 +1,5 @@
 import { useComponentProps } from '../ConfigProvider/context'
-import { Component, For, Show, createMemo, merge } from 'solid-js'
+import { Component, For, createEffect, merge, untrack } from 'solid-js'
 import { type JSX } from '@solidjs/web'
 import { twMerge } from 'tailwind-merge'
 import { createRate } from 'upthrust-competence'
@@ -25,12 +25,19 @@ export interface RateProps {
   disabled?: boolean
   /** Custom character (defaults to a star icon). */
   character?: JSX.Element
-  /** Character size in px. Default 20 (rateStarSize). */
+  /** Auto-focus the character container after mounting. */
+  autoFocus?: boolean
+  /** Accessible name for the rating group. */
+  'aria-label'?: string
+  /** Visible label element ID for the rating group. */
+  'aria-labelledby'?: string
   id?: string
   class?: string
   style?: JSX.CSSProperties
   onChange?: (value: number) => void
   onHoverChange?: (value: number) => void
+  onFocus?: () => void
+  onBlur?: () => void
   ref?: (el: HTMLUListElement) => void
 }
 
@@ -56,16 +63,18 @@ const Rate: Component<RateProps> = providedProps => {
     get status() { return undefined },
   })
 
-  const machine = createMemo(() => createRate({
+  const machine = createRate({
     get value() { return form.value() as number | undefined },
     get defaultValue() { return props.defaultValue },
     get count() { return props.count },
     get allowHalf() { return props.allowHalf },
     get allowClear() { return props.allowClear },
     get disabled() { return form.disabled() },
-    get onChange() { return props.onChange },
+    get onChange() { return form.onChange },
     get onHoverChange() { return props.onHoverChange },
-  }))
+    get onFocus() { return props.onFocus },
+    get onBlur() { return props.onBlur },
+  })
 
   const star = (filled: boolean) => (
     <span class={filled ? 'i-mdi-star' : 'i-mdi-star-outline'} />
@@ -73,7 +82,7 @@ const Rate: Component<RateProps> = providedProps => {
 
   /** Clip width (percent) of the filled overlay for character n (1-based). */
   const fillPercent = (n: number): number => {
-    const v = machine().displayValue()
+    const v = machine.displayValue()
     if (v >= n) return 0 // fully — no clip
     if (v <= n - 1) return 100 // empty — fully clipped (hidden)
     // Partial: clip the RIGHT side so only the filled fraction shows.
@@ -85,18 +94,18 @@ const Rate: Component<RateProps> = providedProps => {
     const rect = e.currentTarget.getBoundingClientRect()
     const inRightHalf = e.clientX - rect.left > rect.width / 2
     const position = props.allowHalf && !inRightHalf ? n - 0.5 : n
-    machine().hoverAt(position)
+    machine.hoverAt(position)
   }
 
   const handleClick = (e: MouseEvent & { currentTarget: HTMLElement }, n: number) => {
     const rect = e.currentTarget.getBoundingClientRect()
     const inRightHalf = e.clientX - rect.left > rect.width / 2
     const position = props.allowHalf && !inRightHalf ? n - 0.5 : n
-    machine().clickAt(position)
+    machine.clickAt(position)
   }
 
   const handleKeyDown = (e: KeyboardEvent) => {
-    const m = machine()
+    const m = machine
     if (m.isDisabled()) return
     switch (e.key) {
       case 'ArrowUp':
@@ -109,9 +118,15 @@ const Rate: Component<RateProps> = providedProps => {
         e.preventDefault()
         m.stepBy(-1)
         break
+      case 'Home':
       case '0':
         e.preventDefault()
         m.reset()
+        break
+      case 'End':
+        e.preventDefault()
+        m.core().setValue(m.count())
+        m.leaveHover()
         break
     }
   }
@@ -119,39 +134,53 @@ const Rate: Component<RateProps> = providedProps => {
   const listRef: { current?: HTMLUListElement } = {}
   const setListRef = (el: HTMLUListElement) => {
     listRef.current = el
-    props.ref?.(el)
+    untrack(() => props.ref?.(el))
   }
+
+  createEffect(() => props.autoFocus, autoFocus => {
+    // Keep the auto-focus prop reactive for callers that enable it after mount.
+    if (autoFocus && document.activeElement !== listRef.current) listRef.current?.focus()
+  })
 
   return (
     <ul
       ref={setListRef}
       class={twMerge(
-        rateWrapperClass({ disabled: machine().isDisabled() }),
+        rateListClass(),
+        rateWrapperClass({ disabled: machine.isDisabled() }),
         props.class,
       )}
       style={props.style}
-      role="radiogroup"
-      aria-disabled={machine().isDisabled() ? 'true' : 'false'}
-      onMouseLeave={() => machine().leaveHover()}
+      id={form.id()}
+      role="slider"
+      aria-valuemin={0}
+      aria-valuemax={machine.count()}
+      aria-valuenow={machine.value()}
+      aria-valuetext={`${machine.value()} / ${machine.count()} 星`}
+      aria-label={props['aria-label']}
+      aria-labelledby={props['aria-labelledby']}
+      aria-disabled={machine.isDisabled() ? 'true' : 'false'}
+      onMouseLeave={() => machine.leaveHover()}
+      onFocus={() => machine.notifyFocus()}
+      onBlur={() => machine.notifyBlur()}
       onKeyDown={handleKeyDown}
-      tabindex={machine().isDisabled() ? -1 : 0}
+      tabindex={machine.isDisabled() ? -1 : 0}
     >
-      <For each={Array.from({ length: machine().count() }, (_, i) => i + 1)}>
+      <For each={Array.from({ length: machine.count() }, (_, i) => i + 1)}>
         {n => (
           <li
-            class={rateCharacterWrapClass({ disabled: machine().isDisabled() })}
-            role="radio"
-            aria-checked={machine().value() >= n ? 'true' : 'false'}
-            aria-label={`${n} 星`}
+            class={rateCharacterWrapClass({ disabled: machine.isDisabled() })}
+            role="presentation"
+            aria-hidden="true"
             onMouseMove={e => handleMove(e, n)}
-            onMouseLeave={() => machine().leaveHover()}
+            onMouseLeave={() => machine.leaveHover()}
             onClick={e => handleClick(e, n)}
           >
-            <span class={rateIconBaseWrapClass({ disabled: machine().isDisabled() })}>
+            <span class={rateIconBaseWrapClass({ disabled: machine.isDisabled() })}>
               {props.character ?? star(false)}
             </span>
             <span
-              class={rateIconFilledWrapClass({ disabled: machine().isDisabled() })}
+              class={rateIconFilledWrapClass({ disabled: machine.isDisabled() })}
               style={{
                 'clip-path': `inset(0 ${fillPercent(n)}% 0 0)`,
                 '-webkit-clip-path': `inset(0 ${fillPercent(n)}% 0 0)`,

@@ -48,11 +48,12 @@ export interface CheckboxGroupProps {
 }
 /**
  * CheckboxGroup — renders a checkbox per option and manages the value
- * array. Standalone usage only (a Form.Item wraps this component and
- * receives the array value through the standard context contract).
+ * array. A surrounding Form.Item supplies the array value and change
+ * handler through the shared field context.
  */
 export declare const CheckboxGroup: Component<CheckboxGroupProps>;
 export type CheckboxGroupContextValue = {
+    name?: () => string | undefined;
     isChecked: (value: string | number) => boolean;
     isDisabled: (value: string | number) => boolean;
     toggleValue: (value: string | number) => void;

@@ -1,0 +1,80 @@
+[
+  {
+    "name": "checked",
+    "type": "boolean",
+    "default": "—",
+    "description": "受控勾选状态；未传时读取字段或内部状态。"
+  },
+  {
+    "name": "defaultChecked",
+    "type": "boolean",
+    "default": "false",
+    "description": "初始勾选状态，仅初始化一次。"
+  },
+  {
+    "name": "indeterminate",
+    "type": "boolean",
+    "default": "false",
+    "description": "半选展示与原生 mixed 语义，不参与 checked 运算。"
+  },
+  {
+    "name": "skipGroup",
+    "type": "boolean",
+    "default": "false",
+    "description": "退出组选择，独立工作。"
+  },
+  {
+    "name": "id",
+    "type": "string",
+    "default": "—",
+    "description": "原生 input ID，独立控件可从 Form.Item 注入。"
+  },
+  {
+    "name": "value",
+    "type": "string | number",
+    "default": "—",
+    "description": "组选择值与原生提交值，0 有效。"
+  },
+  {
+    "name": "onChange",
+    "type": "(checked: boolean, event?: Event) => void",
+    "default": "—",
+    "description": "有效切换报告下一状态；受控父层不更新时保持原状态。"
+  },
+  {
+    "name": "ref",
+    "type": "(el: HTMLInputElement) => void",
+    "default": "—",
+    "description": "原生输入引用，可 focus/blur。"
+  },
+  {
+    "name": "disabled",
+    "type": "boolean",
+    "default": "false",
+    "description": "禁用切换；独立使用时继承 Form/ConfigProvider。"
+  },
+  {
+    "name": "name",
+    "type": "string",
+    "default": "—",
+    "description": "原生表单字段名。"
+  },
+  {
+    "name": "class",
+    "type": "string",
+    "default": "—",
+    "description": "外层容器类名。"
+  },
+  {
+    "name": "style",
+    "type": "JSX.CSSProperties",
+    "default": "—",
+    "description": "外层容器样式。"
+  },
+  {
+    "name": "children",
+    "type": "JSX.Element",
+    "default": "—",
+    "description": "标签内容。"
+  }
+]

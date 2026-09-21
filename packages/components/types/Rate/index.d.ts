@@ -13,12 +13,19 @@ export interface RateProps {
     disabled?: boolean;
     /** Custom character (defaults to a star icon). */
     character?: JSX.Element;
-    /** Character size in px. Default 20 (rateStarSize). */
+    /** Auto-focus the character container after mounting. */
+    autoFocus?: boolean;
+    /** Accessible name for the rating group. */
+    'aria-label'?: string;
+    /** Visible label element ID for the rating group. */
+    'aria-labelledby'?: string;
     id?: string;
     class?: string;
     style?: JSX.CSSProperties;
     onChange?: (value: number) => void;
     onHoverChange?: (value: number) => void;
+    onFocus?: () => void;
+    onBlur?: () => void;
     ref?: (el: HTMLUListElement) => void;
 }
 /**

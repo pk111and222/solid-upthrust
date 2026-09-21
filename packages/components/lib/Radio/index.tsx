@@ -1,5 +1,5 @@
 import { useComponentProps } from '../ConfigProvider/context'
-import { Component, For, Show, createMemo, merge } from 'solid-js'
+import { Component, For, Show, createUniqueId, merge, onCleanup, untrack } from 'solid-js'
 import { type JSX } from '@solidjs/web'
 import { twMerge } from 'tailwind-merge'
 import {
@@ -45,8 +45,7 @@ export interface RadioProps {
  *
  * The headless createRadio owns the checked machine (controlled or not,
  * disabled gate, never-uncheck-itself). Inside a RadioGroup the value
- * flows through the group's shared selection store (maxSelect: 1 — the
- * same machine Checkbox.Group uses with unlimited cardinality); standalone
+ * flows through the group's shared selection store (maxSelect: 1); standalone
  * usage rides the per-radio machine directly.
  */
 const Radio: Component<RadioProps> = providedProps => {
@@ -69,30 +68,38 @@ const Radio: Component<RadioProps> = providedProps => {
   const isGroupDisabled = () => group?.isDisabled(props.value as string | number) ?? false
   const groupChecked = () => group?.isSelected(props.value as string | number) ?? false
 
-  const machine = createMemo(() => createRadio({
+  const machine = createRadio({
     get checked() { return inGroup() ? groupChecked() : (form.value() as boolean | undefined) },
     get defaultChecked() { return props.defaultChecked },
-    get disabled() { return providedProps.disabled ?? (inGroup() ? isGroupDisabled() : undefined) ?? props.disabled },
-  }))
+    get disabled() { return inGroup() ? isGroupDisabled() || !!props.disabled : !!form.disabled() },
+    onChange: (next, event) => form.onChange(next, event),
+  })
 
-  const checked = () => machine().checked()
-  const disabled = () => machine().isDisabled()
+  const checked = () => machine.checked()
+  const disabled = () => machine.isDisabled()
 
   const inputRef: { current?: HTMLInputElement } = {}
+  let unregisterInput: (() => void) | undefined
+  onCleanup(() => unregisterInput?.())
   const setRef = (el: HTMLInputElement) => {
     inputRef.current = el
-    props.ref?.(el)
+    untrack(() => props.ref?.(el))
+    unregisterInput = group?.registerInput?.(el, () => inGroup() ? checked() : undefined)
   }
 
   const handleChange = (e: Event) => {
-    // Radio inputs only fire change when turning ON — the never-uncheck
-    // semantics live in the browser already.
-    if (inGroup()) {
-      group?.select(props.value as string | number)
-      return
+    const input = e.currentTarget as HTMLInputElement
+    try {
+      if (input.checked && !disabled() && !checked()) {
+        if (inGroup()) {
+          group?.select(props.value as string | number)
+          props.onChange?.(true, e)
+        } else machine.check(e)
+      }
+    } finally {
+      input.checked = checked()
+      if (inGroup()) group?.syncInputs?.()
     }
-    machine().check(e)
-    form.onChange(true, e)
   }
 
   return (
@@ -103,7 +110,20 @@ const Radio: Component<RadioProps> = providedProps => {
       )}
       style={props.style}
     >
+      <input
+        ref={setRef}
+        type="radio"
+        class={radioInputClass()}
+        id={inGroup() ? props.id : form.id()}
+        name={props.name ?? (inGroup() ? group?.name : undefined)}
+        value={props.value}
+        checked={checked()}
+        disabled={disabled()}
+        aria-checked={checked() ? 'true' : 'false'}
+        onChange={handleChange}
+      />
       <span
+        aria-hidden="true"
         class={radioDotClass({
           checked: checked(),
           disabled: disabled(),
@@ -111,18 +131,6 @@ const Radio: Component<RadioProps> = providedProps => {
       >
         <span class={radioInnerDotWrapClass({ visible: checked(), disabled: disabled() })} />
       </span>
-      <input
-        ref={setRef}
-        type="radio"
-        class={radioInputClass()}
-        id={form.id()}
-        name={props.name ?? group?.name}
-        value={props.value}
-        checked={checked()}
-        disabled={disabled()}
-        aria-checked={checked() ? 'true' : 'false'}
-        onChange={handleChange}
-      />
       <Show when={props.children !== undefined}>
         <span class={radioLabelWrapClass({ disabled: disabled() })}>
           {props.children}
@@ -150,8 +158,7 @@ export interface RadioGroupProps {
 /**
  * RadioGroup — renders a radio per option and owns the single pick.
  * The headless createRadioGroup rides the SHARED selection store
- * (maxSelect: 1) — the same engine Checkbox.Group and a future Select
- * compose, so pick-one bookkeeping lives in exactly one place.
+ * (maxSelect: 1). Native inputs share a name for browser keyboard navigation.
  */
 export const RadioGroup: Component<RadioGroupProps> = providedProps => {
   const rawProps = useComponentProps('RadioGroup', providedProps)
@@ -166,23 +173,37 @@ export const RadioGroup: Component<RadioGroupProps> = providedProps => {
     get status() { return undefined },
   })
 
-  const machine = createMemo(() => createRadioGroup({
+  const machine = createRadioGroup({
     get value() { return form.value() as string | number | undefined },
     get defaultValue() { return props.defaultValue },
     get options() { return props.options },
-    get disabled() { return props.disabled },
-    get onChange() { return props.onChange },
-  }))
+    get disabled() { return form.disabled() },
+    onChange: next => props.onChange ? props.onChange(next) : form.onChange(next),
+  })
 
+  const generatedName = `radio-${createUniqueId()}`
+  const inputs = new Map<HTMLInputElement, () => boolean | undefined>()
+  onCleanup(() => inputs.clear())
   const ctx: RadioGroupContextValue = {
-    isSelected: v => machine().isSelected(v),
-    isDisabled: v => machine().isDisabled(v),
-    select: v => machine().select(v),
-    name: props.name,
+    isSelected: v => machine.isSelected(v),
+    isDisabled: v => machine.isDisabled(v),
+    select: v => machine.select(v),
+    get name() { return props.name ?? generatedName },
+    registerInput: (input, checked) => {
+      inputs.set(input, checked)
+      return () => inputs.delete(input)
+    },
+    syncInputs: () => {
+      const states = [...inputs].map(([input, checked]) => ({ input, checked: checked() }))
+      // Native activation unchecks the previous sibling without firing its
+      // change event. Restore the entire owned group after a rejected intent.
+      for (const state of states) if (state.checked !== undefined) state.input.checked = false
+      for (const state of states) if (state.checked) state.input.checked = true
+    },
   }
 
-  const buttonPosition = (index: number, total: number): 'first' | 'middle' | 'last' => {
-    if (index === 0 && total === 1) return 'first'
+  const buttonPosition = (index: number, total: number): 'first' | 'middle' | 'last' | 'single' => {
+    if (index === 0 && total === 1) return 'single'
     if (index === 0) return 'first'
     if (index === total - 1) return 'last'
     return 'middle'
@@ -193,8 +214,8 @@ export const RadioGroup: Component<RadioGroupProps> = providedProps => {
       <Show
         when={props.optionType === 'button'}
         fallback={
-          <div class={radioGroupClass(props.class)} style={props.style} role="radiogroup">
-            <For each={machine().options()}>
+          <div class={radioGroupClass(props.class)} style={props.style} role="radiogroup" id={form.id()}>
+            <For each={machine.options()}>
               {option => (
                 <Radio value={option.value} disabled={option.disabled}>
                   {option.label}
@@ -205,18 +226,19 @@ export const RadioGroup: Component<RadioGroupProps> = providedProps => {
           </div>
         }
       >
-        <div class={radioButtonGroupClass(props.class)} style={props.style} role="radiogroup">
-          <For each={machine().options()}>
+        <div class={radioButtonGroupClass(props.class)} style={props.style} role="radiogroup" id={form.id()}>
+          <For each={machine.options()}>
             {(option, i) => (
               <RadioButton
                 value={option.value}
                 disabled={option.disabled}
-                position={buttonPosition(i(), machine().options().length)}
+                position={buttonPosition(i(), machine.options().length)}
               >
                 {option.label}
               </RadioButton>
             )}
           </For>
+          {props.children}
         </div>
       </Show>
     </RadioGroupContext>
@@ -232,34 +254,43 @@ export interface RadioButtonProps {
   value: string | number
   disabled?: boolean
   /** Corner rounding position in the strip (computed by the group). */
-  position?: 'first' | 'middle' | 'last'
+  position?: 'first' | 'middle' | 'last' | 'single'
   class?: string
   style?: JSX.CSSProperties
   children?: JSX.Element
   onChange?: (checked: boolean, event?: Event) => void
 }
 
-const RadioButton: Component<RadioButtonProps> = providedProps => {
+export const RadioButton: Component<RadioButtonProps> = providedProps => {
   const rawProps = useComponentProps('RadioButton', providedProps)
   const props = merge({ position: 'middle' as const }, rawProps)
   const group = useRadioGroupContext()
 
-  const form = useFormItem({
-    get value() { return undefined },
-    get onChange() { return props.onChange },
-    get disabled() { return props.disabled },
-    get id() { return undefined },
-    get size() { return undefined },
-    get status() { return undefined },
+  const machine = createRadio({
+    get checked() { return group?.isSelected(props.value) },
+    get disabled() { return !!props.disabled || (group?.isDisabled(props.value) ?? false) },
+    onChange: (next, event) => props.onChange?.(next, event),
   })
-
-  const checked = () => group?.isSelected(props.value) ?? false
-  const disabled = () =>
-    providedProps.disabled ?? group?.isDisabled(props.value) ?? props.disabled ?? false
-
+  const checked = machine.checked
+  const disabled = machine.isDisabled
+  let unregisterInput: (() => void) | undefined
+  onCleanup(() => unregisterInput?.())
+  const setRef = (input: HTMLInputElement) => {
+    unregisterInput = group?.registerInput?.(input, checked)
+  }
   const handleChange = (e: Event) => {
-    group?.select(props.value)
-    form.onChange(true, e)
+    const input = e.currentTarget as HTMLInputElement
+    try {
+      if (input.checked && !disabled() && !checked()) {
+        if (group) {
+          group.select(props.value)
+          props.onChange?.(true, e)
+        } else machine.check(e)
+      }
+    } finally {
+      input.checked = checked()
+      group?.syncInputs?.()
+    }
   }
 
   return (
@@ -275,12 +306,14 @@ const RadioButton: Component<RadioButtonProps> = providedProps => {
       style={props.style}
     >
       <input
+        ref={setRef}
         type="radio"
         class={radioButtonInputClass()}
         name={group?.name}
         value={props.value}
         checked={checked()}
         disabled={disabled()}
+        aria-checked={checked() ? 'true' : 'false'}
         onChange={handleChange}
       />
       <span class="relative z-[0]">{props.children}</span>
@@ -301,6 +334,8 @@ export type RadioGroupContextValue = {
   select: (value: string | number) => void
   /** Shared native input name so browser arrow-key radio nav works. */
   name?: string
+  registerInput?: (input: HTMLInputElement, checked: () => boolean | undefined) => () => void
+  syncInputs?: () => void
 }
 
 export const RadioGroupContext = createContext<RadioGroupContextValue | null>(null)

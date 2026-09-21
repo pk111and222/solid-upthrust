@@ -1,4 +1,4 @@
-import { createMemo, createSignal, untrack } from "solid-js";
+import { createEffect, createMemo, createSignal, untrack } from "solid-js";
 
 /**
  * Headless logic for Rate — the rc-rate state core, riding on the shared
@@ -71,7 +71,7 @@ export const createRate = (config: RateConfig = {}): RateIns => {
   // would turn "uncontrolled" into "controlled null" and freeze the widget.
   const core = createNumericValue({
     value: () => config.value,
-    defaultValue: config.defaultValue,
+    defaultValue: untrack(() => config.defaultValue),
     min: 0,
     max: () => count(),
     step: () => lattice(),
@@ -85,7 +85,7 @@ export const createRate = (config: RateConfig = {}): RateIns => {
   const [_hoverValue, _setHoverValue] = createSignal<number | null>(null, { ownedWrite: true })
   const [_focused, _setFocused] = createSignal(false, { ownedWrite: true })
 
-  const value = createMemo(() => core.value() ?? 0)
+  const value = createMemo(() => Math.min(count(), Math.max(0, core.value() ?? 0)))
 
   /** Snap a raw pointer position onto the half/whole lattice. */
   const snapToLattice = (position: number): number => {
@@ -110,6 +110,14 @@ export const createRate = (config: RateConfig = {}): RateIns => {
     config.onHoverChange?.(value())
   }
 
+  // Geometry/mode changes invalidate the old pointer preview.
+  const previewMode = () => `${count()}:${lattice()}:${isDisabled()}`
+  let previousMode = untrack(previewMode)
+  createEffect(previewMode, mode => {
+    if (mode !== previousMode) untrack(leaveHover)
+    previousMode = mode
+  })
+
   const isHovering = () => _hoverValue() !== null
 
   const displayValue = createMemo(() => {
@@ -123,7 +131,7 @@ export const createRate = (config: RateConfig = {}): RateIns => {
     // Clearable: clicking the current value resets (antd rc-rate).
     if (config.allowClear && snapped !== 0 && snapped === value()) {
       core.setValue(0)
-      config.onChange?.(0)
+      leaveHover()
       return
     }
     if (snapped === value()) return
@@ -132,7 +140,8 @@ export const createRate = (config: RateConfig = {}): RateIns => {
 
   const stepBy = (steps: number) => {
     if (isDisabled()) return
-    core.stepBy(steps)
+    if (steps === 0) return
+    core.setValue(snapToLattice(value() + steps * lattice()))
     // The preview follows the keyboard too (antd: focus shows the value).
     _setHoverValue(null)
   }
@@ -140,6 +149,7 @@ export const createRate = (config: RateConfig = {}): RateIns => {
   const reset = () => {
     if (isDisabled()) return
     core.setValue(0)
+    leaveHover()
   }
 
   const notifyFocus = () => {

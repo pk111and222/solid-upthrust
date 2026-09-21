@@ -7,7 +7,6 @@ import {
   createSegmented,
   type SegmentedIns,
   type SegmentedOption,
-  type SegmentedRect,
 } from 'upthrust-competence'
 import { useFormItem } from '../Input/context'
 import type { SizeType } from '../../common/type'
@@ -32,6 +31,8 @@ export interface SegmentedProps {
   id?: string
   class?: string
   style?: JSX.CSSProperties
+  'aria-label'?: string
+  'aria-labelledby'?: string
   onChange?: (value: string | number) => void
   /** Escape hatch: the raw machine (imperative focus/measure control). */
   ref?: (machine: SegmentedIns) => void
@@ -74,26 +75,31 @@ const Segmented: Component<SegmentedProps> = (providedProps) => {
 
   const resolvedDisabled = () => form.disabled()
   const resolvedSize = () => form.size() ?? 'middle'
+  const block = createMemo(() => props.block === true)
 
   const options = createMemo<SegmentedOption[]>(() => normalize(props.options ?? []))
 
   const machine = createSegmented({
-    get value() { return props.value as string | number | undefined },
+    get value() { return form.value() as string | number | undefined },
     get defaultValue() { return props.defaultValue },
     get options() { return options() },
     get disabled() { return resolvedDisabled() },
-    get block() { return props.block === true },
-    get onChange() { return props.onChange },
+    get block() { return block() },
+    get onChange() { return form.onChange },
   })
   const m = () => machine
-  props.ref?.(machine)
+  untrack(() => props.ref?.(machine))
 
   // ---- geometry -----------------------------------------------------------
 
   const itemRefs = new Map<string | number, HTMLElement>()
   const onOwnerCleanup = createOwnerCleanup()
 
+  let alive = true
+  onOwnerCleanup(() => { alive = false; itemRefs.clear(); machine.clearItemRects() })
+
   const measureItem = (key: string | number) => {
+    if (!alive) return
     const el = itemRefs.get(key)
     const parent = el?.offsetParent as HTMLElement | null
     if (!el || !parent) return
@@ -104,7 +110,10 @@ const Segmented: Component<SegmentedProps> = (providedProps) => {
   }
 
   const measureAll = () => {
-    for (const o of options()) measureItem(o.value)
+    if (!alive) return
+    const keys = new Set(options().map(o => o.value))
+    for (const key of itemRefs.keys()) if (!keys.has(key)) itemRefs.delete(key)
+    for (const key of keys) measureItem(key)
   }
 
   const setItemRef = (key: string | number) => (el: HTMLElement) => {
@@ -116,15 +125,13 @@ const Segmented: Component<SegmentedProps> = (providedProps) => {
 
   // Re-measure whenever the selection/focus/options/geometry inputs change.
   createEffect(
-    () => [options(), props.block, props.size],
+    () => [options(), block(), resolvedSize()],
     () => queueMicrotask(measureAll),
   )
 
   // Keep aligned through container resize (block mode especially).
   const resizeObserverSupported = typeof ResizeObserver !== 'undefined'
-  let groupEl: HTMLElement | undefined
   const setGroupRef = (el: HTMLElement) => {
-    groupEl = el
     if (!resizeObserverSupported) return
     const ro = new ResizeObserver(() => measureAll())
     ro.observe(el)
@@ -188,13 +195,18 @@ const Segmented: Component<SegmentedProps> = (providedProps) => {
       class={twMerge(
         segmentedGroupClass({
           size: resolvedSize(),
-          block: props.block === true,
+          block: block(),
           disabled: !!resolvedDisabled(),
+          status: form.status() ?? 'default',
         }),
         props.class,
       )}
       style={props.style}
+      id={form.id()}
       role="radiogroup"
+      aria-label={props['aria-label']}
+      aria-labelledby={props['aria-labelledby']}
+      aria-invalid={form.status() === 'error' ? 'true' : undefined}
       tabindex={resolvedDisabled() ? -1 : 0}
       onKeyDown={handleKeyDown}
       onBlur={handleBlur}
@@ -215,7 +227,7 @@ const Segmented: Component<SegmentedProps> = (providedProps) => {
                 selected: !!selected(),
                 disabled: !!disabled(),
                 focused: !!focused(),
-                block: props.block === true,
+                block: block(),
               })}
               role="radio"
               aria-checked={selected() ? 'true' : 'false'}

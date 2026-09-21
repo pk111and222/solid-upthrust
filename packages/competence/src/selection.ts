@@ -1,4 +1,4 @@
-import { createEffect, createMemo, createSignal } from "solid-js";
+import { createEffect, createMemo, createSignal, untrack } from "solid-js";
 
 /**
  * SHARED NUMERIC CORE — the value machine under InputNumber / Slider / Rate.
@@ -297,33 +297,18 @@ const controlledValue = (config: SelectionConfig): Array<string | number> | unde
 }
 
 export const createSelection = (config: SelectionConfig = {}): SelectionIns => {
-  // CONTROLLED MIRROR: instead of reading the controlled getter inside the
-  // value memo (a chain of UI-layer proxies whose tracking proved fragile
-  // in the browser — a controlled parent flipping to undefined did not
-  // re-run the memo and the store served a stale value), the controlled
-  // value is mirrored into the internal signal: synchronously at creation
-  // (so the very first read is correct) and through an effect on every
-  // change. value() reads ONLY the internal signal; emit writes it and
-  // calls onChange — the same storeRef-sync-mirror pattern the form
-  // engine uses.
-  const initialControlled = controlledValue(config)
+  // Controlled values remain authoritative even when the parent rejects
+  // an intent. Mirror accepted props only to retain the last accepted value
+  // when a caller releases control by passing undefined.
   const [_value, _setValue] = createSignal<Array<string | number>>(
-    initialControlled ?? config.defaultValue ?? [],
+    untrack(() => controlledValue(config) ?? config.defaultValue ?? []),
     { ownedWrite: true },
   )
-
-  if (typeof config.value === 'function') {
-    createEffect(
-      () => (config.value as () => Array<string | number> | undefined)(),
-      (controlled) => {
-        if (controlled !== undefined) {
-          _setValue(controlled)
-        }
-      },
-    )
-  }
-
-  const value = createMemo<Array<string | number>>(() => _value())
+  createEffect(
+    () => controlledValue(config),
+    controlled => { if (controlled !== undefined) _setValue(controlled) },
+  )
+  const value = createMemo<Array<string | number>>(() => controlledValue(config) ?? _value())
 
   const options = () => config.options ?? []
   const maxSelect = () => config.maxSelect ?? Infinity
@@ -337,11 +322,7 @@ export const createSelection = (config: SelectionConfig = {}): SelectionIns => {
   const isSelected = (v: string | number) => value().includes(v)
 
   const emit = (next: Array<string | number>) => {
-    // Mirror pattern: the internal signal IS the value; write it always so
-    // the UI reflects the intent immediately (a controlled parent that
-    // ignores the change gets overwritten by the mirror effect when its
-    // value updates).
-    _setValue(next)
+    if (controlledValue(config) === undefined) _setValue(next)
     config.onChange?.(next)
     return next
   }

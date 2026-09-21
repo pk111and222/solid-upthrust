@@ -1,0 +1,16 @@
+[
+  {"name":"value","type":"string | number","default":"—","description":"受控选中值；未提供时读取 Form.Item 字段或内部状态。"},
+  {"name":"defaultValue","type":"string | number","default":"—","description":"非受控初始值，仅初始化一次。"},
+  {"name":"options","type":"SegmentedItem[]","default":"[]","description":"选项数组；支持 string、number 或 { label, value, disabled?, icon? }。"},
+  {"name":"disabled","type":"boolean","default":"false","description":"禁用整组交互；可从 Form 与 ConfigProvider 继承。"},
+  {"name":"block","type":"boolean","default":"false","description":"是否撑满父容器，并让选项等宽分配。"},
+  {"name":"size","type":"'small' | 'middle' | 'large'","default":"'middle'","description":"控制项尺寸。"},
+  {"name":"status","type":"'error' | 'warning'","default":"—","description":"状态外观；error 同时设置 aria-invalid。"},
+  {"name":"id","type":"string","default":"—","description":"radiogroup 的 ID；未显式指定时可由 Form.Item 注入。"},
+  {"name":"aria-label","type":"string","default":"—","description":"分段组的可访问名称；没有可见标签时应提供。"},
+  {"name":"aria-labelledby","type":"string","default":"—","description":"引用可见标签元素的 ID。"},
+  {"name":"class","type":"string","default":"—","description":"分段组附加类名。"},
+  {"name":"style","type":"JSX.CSSProperties","default":"—","description":"分段组内联样式。"},
+  {"name":"onChange","type":"(value: string | number) => void","default":"—","description":"有效选中变化通知；再次点击当前项、点击禁用项不通知。显式回调优先于 Form 字段回调。"},
+  {"name":"ref","type":"(machine: SegmentedIns) => void","default":"—","description":"返回 headless 机器，可读取 value、控制 select、设置测量盒和移动键盘候选。"}
+]

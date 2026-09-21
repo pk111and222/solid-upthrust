@@ -1,0 +1,74 @@
+[
+  {
+    "name": "checked",
+    "type": "boolean",
+    "default": "—",
+    "description": "独立控件受控选中值；未提供时读取 Form.Item 或内部状态。"
+  },
+  {
+    "name": "defaultChecked",
+    "type": "boolean",
+    "default": "false",
+    "description": "非受控初值，仅初始化一次。"
+  },
+  {
+    "name": "skipGroup",
+    "type": "boolean",
+    "default": "false",
+    "description": "脱离组选择与组 name。"
+  },
+  {
+    "name": "id",
+    "type": "string",
+    "default": "—",
+    "description": "原生输入 ID；独立控件可从字段注入。"
+  },
+  {
+    "name": "name",
+    "type": "string",
+    "default": "—",
+    "description": "原生字段名；组内默认继承组名。"
+  },
+  {
+    "name": "value",
+    "type": "string | number",
+    "default": "—",
+    "description": "组内选项值及原生提交值。"
+  },
+  {
+    "name": "onChange",
+    "type": "(checked: boolean, event?: Event) => void",
+    "default": "—",
+    "description": "有效选中时报告 true；禁用、重复或取消选中不通知。"
+  },
+  {
+    "name": "ref",
+    "type": "(el: HTMLInputElement) => void",
+    "default": "—",
+    "description": "原生输入引用，支持 focus/blur。"
+  },
+  {
+    "name": "disabled",
+    "type": "boolean",
+    "default": "false",
+    "description": "禁用；独立使用遵循显式 props > Form > 组件默认 > 全局默认。"
+  },
+  {
+    "name": "class",
+    "type": "string",
+    "default": "—",
+    "description": "外层容器类名。"
+  },
+  {
+    "name": "style",
+    "type": "JSX.CSSProperties",
+    "default": "—",
+    "description": "外层容器样式。"
+  },
+  {
+    "name": "children",
+    "type": "JSX.Element",
+    "default": "—",
+    "description": "标签或自定义子项。"
+  }
+]

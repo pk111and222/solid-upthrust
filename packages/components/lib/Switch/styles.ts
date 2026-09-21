@@ -31,7 +31,7 @@ const switchVariants = cva(
     "hover:bg-on-surface/45",
     "focus-visible:outline-hidden",
     "focus-visible:ring-2",
-    "focus-visible:ring-primary/10",
+    "focus-visible:ring-primary",
   ],
   {
     variants: {
@@ -54,6 +54,11 @@ const switchVariants = cva(
         false: [],
       },
     },
+    compoundVariants: [
+      { checked: true, disabled: true, class: "hover:bg-primary" },
+      { checked: true, loading: true, class: "hover:bg-primary" },
+      { checked: false, loading: true, class: "hover:bg-on-surface/25" },
+    ],
     defaultVariants: { checked: false, size: "middle", disabled: false, loading: false },
   },
 );
@@ -123,10 +128,14 @@ const switchInnerVariants = cva(
       checked: {
         // antd inner padding: checked leaves room for the handle on the
         // right, unchecked mirrors the padding on the left.
-        true: ["pl-[8px]", "pr-[22px]", "justify-start"],
-        false: ["pl-[22px]", "pr-[8px]", "justify-end"],
+        true: ["ps-[8px]", "pe-[22px]", "justify-start"],
+        false: ["ps-[22px]", "pe-[8px]", "justify-end"],
       },
     },
+    compoundVariants: [
+      { size: "small", checked: true, class: "ps-[6px] pe-[18px]" },
+      { size: "small", checked: false, class: "ps-[18px] pe-[6px]" },
+    ],
     defaultVariants: { size: "middle", checked: false },
   },
 );

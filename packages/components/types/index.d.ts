@@ -16,7 +16,7 @@ export { default as Switch } from './Switch';
 export type { SwitchProps } from './Switch';
 export { default as Checkbox, CheckboxGroup } from './Checkbox';
 export type { CheckboxProps, CheckboxGroupProps, CheckboxOption } from './Checkbox';
-export { default as Radio, RadioGroup } from './Radio';
+export { default as Radio, RadioGroup, RadioButton } from './Radio';
 export type { RadioProps, RadioGroupProps, RadioOption, RadioButtonProps } from './Radio';
 export { default as Select } from './Select';
 export type { SelectProps, SelectOption, SelectLabelInValue } from './Select';

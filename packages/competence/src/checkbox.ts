@@ -1,4 +1,4 @@
-import { createMemo, createSignal } from "solid-js";
+import { createMemo, createSignal, untrack } from "solid-js";
 
 /**
  * Headless logic for Checkbox — the rc-checkbox state core:
@@ -9,8 +9,7 @@ import { createMemo, createSignal } from "solid-js";
  *  - TOGGLE GATE: disabled blocks toggling.
  *  - GROUP: createCheckboxGroup manages a value array (all/none/partial
  *    selection) with controlled-or-uncontrolled state. Options may be
- *    disabled individually; registerMap lets the group consult live
- *    disabled states of registered checkboxes (skipGroup children opt out).
+ *    disabled individually; custom children gate their own activation.
  */
 import type { FormFieldRule } from "./formField";
 
@@ -41,7 +40,7 @@ export const createCheckbox = (config: CheckboxConfig = {}): CheckboxIns => {
   // ownedWrite: toggle fires from DOM click events — imperative entry
   // points outside any reactive owner.
   const [_checked, _setChecked] = createSignal(
-    config.defaultChecked ?? false,
+    untrack(() => config.defaultChecked ?? false),
     { ownedWrite: true },
   )
 
@@ -96,7 +95,7 @@ export type CheckboxGroupIns = {
   toggleValue: (value: string | number) => void
   /** Check every ENABLED option (individual disabled options untouched). */
   checkAll: () => void
-  /** Uncheck everything. */
+  /** Uncheck enabled values; disabled selections remain unchanged. */
   clearAll: () => void
   isChecked: (value: string | number) => boolean
   isDisabled: (value: string | number) => boolean
@@ -108,7 +107,7 @@ export type CheckboxGroupIns = {
 
 export const createCheckboxGroup = (config: CheckboxGroupConfig = {}): CheckboxGroupIns => {
   const [_value, _setValue] = createSignal<Array<string | number>>(
-    config.defaultValue ?? [],
+    untrack(() => config.defaultValue ?? []),
     { ownedWrite: true },
   )
 
@@ -141,12 +140,14 @@ export const createCheckboxGroup = (config: CheckboxGroupConfig = {}): CheckboxG
   const enabledValues = () => options().filter(o => !o.disabled).map(o => o.value)
 
   const checkAll = () => {
+    if (config.disabled) return
     // Keep individually disabled options' current membership untouched.
     const disabledChecked = value().filter(v => isOptionDisabled(v))
     emit([...disabledChecked, ...enabledValues()])
   }
 
   const clearAll = () => {
+    if (config.disabled) return
     const disabledChecked = value().filter(v => isOptionDisabled(v))
     emit(disabledChecked)
   }

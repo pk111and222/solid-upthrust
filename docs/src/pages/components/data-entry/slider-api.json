@@ -1,0 +1,134 @@
+[
+  {
+    "name": "value",
+    "type": "number",
+    "default": "—",
+    "description": "单值受控值；rangeValue/范围模式优先。显示值按当前边界、步长或刻度归一，props 更新不主动发事件。"
+  },
+  {
+    "name": "defaultValue",
+    "type": "number",
+    "default": "min",
+    "description": "单值非受控初值，只初始化一次。"
+  },
+  {
+    "name": "rangeValue",
+    "type": "[number, number]",
+    "default": "—",
+    "description": "受控范围，启用双滑块；按升序和边界归一。"
+  },
+  {
+    "name": "defaultRangeValue",
+    "type": "[number, number]",
+    "default": "—",
+    "description": "非受控范围初值并启用双滑块，只初始化一次。"
+  },
+  {
+    "name": "min",
+    "type": "number",
+    "default": "0",
+    "description": "有限数值下限，也是步长网格原点。"
+  },
+  {
+    "name": "max",
+    "type": "number",
+    "default": "100",
+    "description": "有限数值上限；小于 min 时按 min 处理，零跨度为固定值。"
+  },
+  {
+    "name": "step",
+    "type": "number | null",
+    "default": "1",
+    "description": "正有限步长，非法步长回退 1；null 表示连续取值，不自动启用仅刻度模式。"
+  },
+  {
+    "name": "precision",
+    "type": "number",
+    "default": "从 min 和 step 推导",
+    "description": "步长吸附时保留的小数位，限制为 0–100 的整数；连续/仅刻度模式不舍入刻度。"
+  },
+  {
+    "name": "disabled",
+    "type": "boolean",
+    "default": "false",
+    "description": "阻止指针与键盘，移出 Tab 顺序；动态禁用取消拖拽。可从 Form/ConfigProvider 继承。"
+  },
+  {
+    "name": "reverse",
+    "type": "boolean",
+    "default": "false",
+    "description": "翻转轨道位置和方向键增减；Home/End 仍对应数值上下限。"
+  },
+  {
+    "name": "vertical",
+    "type": "boolean",
+    "default": "false",
+    "description": "纵向轨道，默认高度 200px，从下向上增大；style 可改高度。"
+  },
+  {
+    "name": "marks",
+    "type": "SliderMark[]",
+    "default": "[]",
+    "description": "{ value: number; label?: string }；过滤非有限/越界值并排序去重，重复值保留第一个。未给 label 显示数值，包括 0。"
+  },
+  {
+    "name": "marksOnly",
+    "type": "boolean",
+    "default": "false",
+    "description": "仅吸附到有效刻度；相等距离取较低刻度。方向键跳相邻刻度，Shift 跳十项。无有效刻度时退为连续取值。"
+  },
+  {
+    "name": "id",
+    "type": "string",
+    "default": "—",
+    "description": "外框 ID，未显式指定时从 FormItem 注入；div 不能仅靠 label for 提供名称。"
+  },
+  {
+    "name": "aria-label",
+    "type": "string",
+    "default": "滑块 / 范围",
+    "description": "滑块可访问名称；范围模式追加“起点”“终点”。"
+  },
+  {
+    "name": "aria-labelledby",
+    "type": "string",
+    "default": "—",
+    "description": "引用可见文本元素 ID，优先于 aria-label；范围时应用到两个滑块，需独立名称可使用 aria-label。"
+  },
+  {
+    "name": "class",
+    "type": "string",
+    "default": "—",
+    "description": "外框附加类。"
+  },
+  {
+    "name": "style",
+    "type": "JSX.CSSProperties",
+    "default": "—",
+    "description": "外框样式，控制宽/高等几何属性。"
+  },
+  {
+    "name": "onChange",
+    "type": "(value: number) => void",
+    "default": "—",
+    "description": "单值有效变更意图，每次位置变化一次；同值不通知。显式回调覆盖单值字段回调。"
+  },
+  {
+    "name": "onRangeChange",
+    "type": "(value: [number, number]) => void",
+    "default": "—",
+    "description": "范围有效变更意图；显式回调覆盖范围字段回调。"
+  },
+  {
+    "name": "onAfterChange",
+    "type": "(value: number | [number, number]) => void",
+    "default": "—",
+    "description": "主指针正常抬起或键盘抬键/失焦后报告实际接受值；受控父层拒绝时报告原值。取消、禁用、卸载不报告。"
+  },
+  {
+    "name": "ref",
+    "type": "(element: HTMLDivElement) => void",
+    "default": "—",
+    "description": "外框引用；可 querySelector 找到 role=slider 的滑块并 focus。"
+  }
+]

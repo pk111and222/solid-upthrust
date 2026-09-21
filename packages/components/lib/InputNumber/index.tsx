@@ -1,5 +1,5 @@
 import { useComponentProps } from '../ConfigProvider/context'
-import { Component, For, Show, createMemo, merge } from 'solid-js'
+import { Component, Show, merge, untrack } from 'solid-js'
 import { type JSX } from '@solidjs/web'
 import { twMerge } from 'tailwind-merge'
 import {
@@ -30,7 +30,7 @@ export interface InputNumberProps {
   step?: number | number[]
   /** Multiplier when stepping with Shift. Default 10. */
   shiftMultiplier?: number
-  /** Decimals to round to; default derives from step. */
+  /** Explicit decimals; otherwise preserves value and step precision. */
   precision?: number
   /** Strips non-numeric text BEFORE parsing (e.g. remove '$'). */
   parser?: InputNumberParser
@@ -85,7 +85,7 @@ const InputNumber: Component<InputNumberProps> = providedProps => {
   const resolvedStatus = () => form.status()
   const resolvedDisabled = () => form.disabled()
 
-  const machine = createMemo(() => createInputNumber({
+  const machine = createInputNumber({
     get value() { return form.value() as number | null },
     get defaultValue() { return props.defaultValue },
     get min() { return props.min },
@@ -99,16 +99,18 @@ const InputNumber: Component<InputNumberProps> = providedProps => {
     get readonly() { return props.readonly },
     get onChange() { return form.onChange },
     get onStep() { return props.onStep },
-  }))
+  })
 
   const inputRef: { current?: HTMLInputElement } = {}
+  let composing = false
   const setInputRef = (el: HTMLInputElement) => {
     inputRef.current = el
-    props.ref?.(el)
+    untrack(() => props.ref?.(el))
   }
 
   const handleKeyDown = (e: KeyboardEvent) => {
-    const m = machine()
+    if (composing || e.isComposing) return
+    const m = machine
     if (e.key === 'ArrowUp') {
       e.preventDefault()
       m.up(e.shiftKey)
@@ -121,24 +123,26 @@ const InputNumber: Component<InputNumberProps> = providedProps => {
   }
 
   const handleFocus = (e: FocusEvent) => {
-    machine().notifyFocus()
+    machine.notifyFocus()
     props.onFocus?.(e)
   }
 
   const handleBlur = (e: FocusEvent) => {
-    machine().commit()
+    composing = false
+    machine.commit()
     props.onBlur?.(e)
   }
 
   const handleChange = (e: Event) => {
-    machine().setInputText((e.target as HTMLInputElement).value)
+    if (composing) return
+    machine.setInputText((e.target as HTMLInputElement).value)
   }
 
   // untrack-free: these fire inside event handlers (already untracked).
-  const stepUp = (e: MouseEvent) => { e.preventDefault(); e.stopPropagation(); machine().up(e.shiftKey) }
-  const stepDown = (e: MouseEvent) => { e.preventDefault(); e.stopPropagation(); machine().down(e.shiftKey) }
+  const stepUp = (e: MouseEvent) => { e.preventDefault(); e.stopPropagation(); inputRef.current?.focus(); machine.up(e.shiftKey) }
+  const stepDown = (e: MouseEvent) => { e.preventDefault(); e.stopPropagation(); inputRef.current?.focus(); machine.down(e.shiftKey) }
 
-  const showControls = () => (props.controls !== false) && !machine().isDisabled() && !machine().isReadonly()
+  const showControls = () => (props.controls !== false) && !machine.isDisabled() && !machine.isReadonly()
 
   return (
     <span
@@ -168,20 +172,23 @@ const InputNumber: Component<InputNumberProps> = providedProps => {
         type="text"
         inputmode="decimal"
         role="spinbutton"
-        aria-valuenow={machine().value() ?? undefined}
+        aria-invalid={resolvedStatus() === 'error' || machine.outOfRange() ? 'true' : undefined}
+        aria-valuenow={machine.value() ?? undefined}
         aria-valuemin={props.min}
         aria-valuemax={props.max}
-        value={machine().displayValue()}
+        value={machine.displayValue()}
         placeholder={props.placeholder}
         disabled={resolvedDisabled()}
         readonly={props.readonly || undefined}
         autocomplete="off"
         class={inputNumberInputWrapClass({
           size: resolvedSize(),
-          outOfRange: machine().outOfRange(),
+          outOfRange: machine.outOfRange(),
           disabled: !!resolvedDisabled(),
         })}
         onInput={handleChange}
+        onCompositionStart={() => { composing = true }}
+        onCompositionEnd={e => { composing = false; handleChange(e) }}
         onKeyDown={handleKeyDown}
         onFocus={handleFocus}
         onBlur={handleBlur}
@@ -193,24 +200,32 @@ const InputNumber: Component<InputNumberProps> = providedProps => {
       </Show>
       <Show when={showControls()}>
         <span class={inputNumberActionsWrapClass({ hidden: false })}>
-          <span
-            class={inputNumberActionWrapClass({ direction: 'up', disabled: !machine().canUp() })}
+          <button
+            type="button"
+            onMouseDown={e => e.preventDefault()}
+            class={inputNumberActionWrapClass({ direction: 'up', disabled: !machine.canUp() })}
             role="button"
             aria-label="increase"
+            disabled={!machine.canUp()}
+            aria-disabled={!machine.canUp() ? 'true' : 'false'}
             tabindex={-1}
             onClick={stepUp}
           >
-            <span class="i-mdi-chevron-up" aria-hidden="true" />
-          </span>
-          <span
-            class={inputNumberActionWrapClass({ direction: 'down', disabled: !machine().canDown() })}
+            <span class="block i-mdi-chevron-up" aria-hidden="true" />
+          </button>
+          <button
+            type="button"
+            onMouseDown={e => e.preventDefault()}
+            class={inputNumberActionWrapClass({ direction: 'down', disabled: !machine.canDown() })}
             role="button"
             aria-label="decrease"
+            disabled={!machine.canDown()}
+            aria-disabled={!machine.canDown() ? 'true' : 'false'}
             tabindex={-1}
             onClick={stepDown}
           >
-            <span class="i-mdi-chevron-down" aria-hidden="true" />
-          </span>
+            <span class="block i-mdi-chevron-down" aria-hidden="true" />
+          </button>
         </span>
       </Show>
     </span>
@@ -222,4 +237,3 @@ export default InputNumber
 // Keep the splits export referenced so bundlers don't drop the headless
 // contract (also re-exported for splitProps consumers).
 export { inputNumberSplits }
-void (For)

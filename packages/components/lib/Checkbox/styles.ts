@@ -55,16 +55,14 @@ const checkboxBoxVariants = cva(
     "flex",
     "items-center",
     "justify-center",
-    "peer-checked:bg-primary",
-    "peer-checked:border-primary",
     "peer-focus-visible:ring-2",
-    "peer-focus-visible:ring-primary/10",
+    "peer-focus-visible:ring-primary",
   ],
   {
     variants: {
       checked: {
         true: ["!bg-primary", "!border-primary"],
-        false: ["hover:border-primary"],
+        false: ["peer-hover:border-primary"],
       },
       indeterminate: {
         true: ["!bg-surface"],
@@ -100,6 +98,7 @@ export const checkboxBoxClass = (variants: Parameters<typeof checkboxBoxVariants
 /** The checkmark — white, rotated 45°, scale-in (antd ::after). */
 export const checkboxCheckClass = cva(
   [
+    "block",
     "text-white",
     "leading-none",
     "pointer-events-none",
@@ -108,6 +107,7 @@ export const checkboxCheckClass = cva(
   ],
   {
     variants: {
+      disabled: { true: ["!text-on-surface/25"], false: [] },
       size: {
         middle: ["text-[10px]"],
         small: ["text-[9px]"],
@@ -158,7 +158,10 @@ export const checkboxDashWrapClass = (variants: Parameters<typeof checkboxDashCl
 export const checkboxInputClass = () =>
   twMerge([
     "absolute",
-    "inset-[-1px]",
+    "inset-0",
+    "w-full",
+    "h-full",
+    "disabled:cursor-not-allowed",
     "z-[1]",
     "cursor-pointer",
     "opacity-0",

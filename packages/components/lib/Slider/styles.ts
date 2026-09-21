@@ -95,6 +95,11 @@ export const sliderHandleClass = cva(
     "duration-100",
     "z-[1]",
     "hover:scale-[1.2]",
+    "focus-visible:outline-none",
+    "focus-visible:ring-2",
+    "focus-visible:ring-primary",
+    "focus-visible:ring-offset-2",
+    "focus-visible:ring-offset-surface",
   ],
   {
     variants: {
@@ -115,7 +120,7 @@ export const sliderHandleWrapClass = (variants: Parameters<typeof sliderHandleCl
 
 /** A mark dot on the rail. */
 export const sliderMarkDotClass = cva(
-  ["absolute", "rounded-full", "bg-surface", "border", "border-solid", "border-on-surface/25"],
+  ["absolute", "w-[4px]", "h-[4px]", "rounded-full", "bg-surface", "border", "border-solid", "border-on-surface/25"],
   {
     variants: {
       passed: {

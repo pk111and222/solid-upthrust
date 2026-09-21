@@ -13,7 +13,7 @@ export interface InputNumberProps {
     step?: number | number[];
     /** Multiplier when stepping with Shift. Default 10. */
     shiftMultiplier?: number;
-    /** Decimals to round to; default derives from step. */
+    /** Explicit decimals; otherwise preserves value and step precision. */
     precision?: number;
     /** Strips non-numeric text BEFORE parsing (e.g. remove '$'). */
     parser?: InputNumberParser;

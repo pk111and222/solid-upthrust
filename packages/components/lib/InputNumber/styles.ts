@@ -137,7 +137,7 @@ export const inputNumberAffixClass = cva(
   ],
   {
     variants: {
-      side: { prefix: ["pl-[11px]", "pr-[4px]"], suffix: ["pl-[4px]"] },
+      side: { prefix: ["ps-[11px]", "pe-[4px]"], suffix: ["ps-[4px]", "pe-[4px]"] },
       size: {
         small: ["text-[12px]"],
         middle: ["text-[14px]"],
@@ -167,7 +167,7 @@ export const inputNumberActionsClass = cva(
     "w-[22px]",
     "opacity-0",
     "transition-upthrust",
-    "border-l",
+    "border-s",
     "border-solid",
     "border-outline",
     "bg-surface",
@@ -194,6 +194,10 @@ export const inputNumberActionClass = cva(
   [
     "flex",
     "flex-1",
+    "p-0",
+    "border-0",
+    "bg-transparent",
+    "font-inherit",
     "items-center",
     "justify-center",
     "select-none",

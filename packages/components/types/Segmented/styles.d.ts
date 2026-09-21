@@ -13,6 +13,7 @@ declare const segmentedGroupVariants: (props?: ({
     size?: "small" | "middle" | "large" | null | undefined;
     block?: boolean | null | undefined;
     disabled?: boolean | null | undefined;
+    status?: "error" | "warning" | "default" | null | undefined;
 } & import('class-variance-authority/types').ClassProp) | undefined) => string;
 export declare const segmentedGroupClass: (v: VariantProps<typeof segmentedGroupVariants>) => string;
 export declare const segmentedThumbClass: () => string;

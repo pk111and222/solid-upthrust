@@ -1,0 +1,44 @@
+[
+  {
+    "name": "value",
+    "type": "string | number",
+    "default": "必填",
+    "description": "选项值。"
+  },
+  {
+    "name": "position",
+    "type": "'first' | 'middle' | 'last' | 'single'",
+    "default": "'middle'",
+    "description": "自定义按钮条的圆角位置；options 生成时自动计算。"
+  },
+  {
+    "name": "onChange",
+    "type": "(checked: boolean, event?: Event) => void",
+    "default": "—",
+    "description": "有效选择后报告 true 和原始事件。"
+  },
+  {
+    "name": "disabled",
+    "type": "boolean",
+    "default": "false",
+    "description": "禁用；独立使用遵循显式 props > Form > 组件默认 > 全局默认。"
+  },
+  {
+    "name": "class",
+    "type": "string",
+    "default": "—",
+    "description": "外层容器类名。"
+  },
+  {
+    "name": "style",
+    "type": "JSX.CSSProperties",
+    "default": "—",
+    "description": "外层容器样式。"
+  },
+  {
+    "name": "children",
+    "type": "JSX.Element",
+    "default": "—",
+    "description": "标签或自定义子项。"
+  }
+]

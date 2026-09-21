@@ -12,6 +12,7 @@ declare const checkboxBoxVariants: (props?: ({
 export declare const checkboxBoxClass: (variants: Parameters<typeof checkboxBoxVariants>[0]) => string;
 /** The checkmark — white, rotated 45°, scale-in (antd ::after). */
 export declare const checkboxCheckClass: (props?: ({
+    disabled?: boolean | null | undefined;
     size?: "small" | "middle" | null | undefined;
     visible?: boolean | null | undefined;
 } & import('class-variance-authority/types').ClassProp) | undefined) => string;

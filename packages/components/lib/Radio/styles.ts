@@ -57,13 +57,13 @@ const radioDotVariants = cva(
     "items-center",
     "justify-center",
     "peer-focus-visible:ring-2",
-    "peer-focus-visible:ring-primary/10",
+    "peer-focus-visible:ring-primary",
   ],
   {
     variants: {
       checked: {
         true: ["!border-primary"],
-        false: ["hover:border-primary"],
+        false: ["peer-hover:border-primary"],
       },
       size: {
         middle: ["h-[16px]", "w-[16px]"],
@@ -121,7 +121,10 @@ export const radioInnerDotWrapClass = (variants: Parameters<typeof radioInnerDot
 export const radioInputClass = () =>
   twMerge([
     "absolute",
-    "inset-[-1px]",
+    "inset-0",
+    "w-full",
+    "h-full",
+    "disabled:cursor-not-allowed",
     "z-[1]",
     "cursor-pointer",
     "opacity-0",
@@ -181,8 +184,8 @@ export const radioButtonVariants = cva(
     "text-on-surface",
     "transition-upthrust",
     "hover:text-primary",
-    "peer-focus-visible:ring-2",
-    "peer-focus-visible:ring-primary/10",
+    "has-[:focus-visible]:ring-2",
+    "has-[:focus-visible]:ring-primary",
     "px-[15px]",
     "text-[14px]",
     "h-control",
@@ -196,6 +199,7 @@ export const radioButtonVariants = cva(
       },
       position: {
         first: ["rounded-l", "!ml-0"],
+        single: ["rounded", "!ml-0"],
         middle: [],
         last: ["rounded-r"],
       },
@@ -210,6 +214,9 @@ export const radioButtonVariants = cva(
         false: [],
       },
     },
+    compoundVariants: [
+      { checked: true, disabled: true, class: "!bg-on-surface/15" },
+    ],
     defaultVariants: { checked: false, position: "middle", disabled: false },
   },
 );
@@ -222,6 +229,9 @@ export const radioButtonInputClass = () =>
   twMerge([
     "absolute",
     "inset-0",
+    "w-full",
+    "h-full",
+    "disabled:cursor-not-allowed",
     "z-[1]",
     "cursor-pointer",
     "opacity-0",

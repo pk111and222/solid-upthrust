@@ -11,7 +11,7 @@ export type InputNumberConfig = {
     step?: number | number[];
     /** Multiplier when stepping with Shift held. Default 10. */
     shiftMultiplier?: number;
-    /** Explicit decimals to round to; default derives from step's precision. */
+    /** Explicit decimals; otherwise preserve value and step precision. */
     precision?: number;
     /** Runs on raw input text BEFORE numeric parsing. */
     parser?: InputNumberParser;

@@ -1,0 +1,164 @@
+[
+  {
+    "name": "value",
+    "type": "number | null",
+    "default": "—",
+    "description": "受控值；null 清空，undefined 使用字段值或内部状态。受控步进须由父层接受，手动编辑草稿在失焦时归一。"
+  },
+  {
+    "name": "defaultValue",
+    "type": "number | null",
+    "default": "null",
+    "description": "非受控初值，只初始化一次。"
+  },
+  {
+    "name": "min",
+    "type": "number",
+    "default": "—",
+    "description": "有限数值下限；与 max 同时设置时 min ≤ max。输入时可暂时越界，失焦或步进时限制。"
+  },
+  {
+    "name": "max",
+    "type": "number",
+    "default": "—",
+    "description": "有限数值上限。受控 props 本身不自动裁剪，不因 props 更新主动触发事件。"
+  },
+  {
+    "name": "step",
+    "type": "number | number[]",
+    "default": "1",
+    "description": "正有限数值步长；兼容旧数组类型但数组当前按步长 1，不代表可选值列表。非正或非有限步长不步进。"
+  },
+  {
+    "name": "shiftMultiplier",
+    "type": "number",
+    "default": "10",
+    "description": "按住 Shift 时的步长乘数，应为正有限数。"
+  },
+  {
+    "name": "precision",
+    "type": "number",
+    "default": "—",
+    "description": "显式舍入小数位，步进及失焦时生效。按 0–100 整数处理。未指定时失焦不截断，步进保留当前值与步长精度。"
+  },
+  {
+    "name": "parser",
+    "type": "(text: string) => string",
+    "default": "—",
+    "description": "数字解析前转换文本；之后保留数字、小数点、指数和正负号，使用 Number 解析。须配合自定义 formatter 提供可逆转换。"
+  },
+  {
+    "name": "formatter",
+    "type": "(value: number) => string",
+    "default": "String(value)",
+    "description": "数值显示函数；输入过程中保留用户文本，失焦后格式化。不接收空值。"
+  },
+  {
+    "name": "prefix",
+    "type": "JSX.Element",
+    "default": "—",
+    "description": "输入前装饰，不参与值或事件。"
+  },
+  {
+    "name": "suffix",
+    "type": "JSX.Element",
+    "default": "—",
+    "description": "输入后装饰，不参与值或事件。"
+  },
+  {
+    "name": "placeholder",
+    "type": "string",
+    "default": "—",
+    "description": "空值提示，不替代可访问名称。"
+  },
+  {
+    "name": "disabled",
+    "type": "boolean",
+    "default": "false",
+    "description": "原生禁用，隐藏步进按钮，禁止编辑/步进/失焦改值；可从 Form 或 ConfigProvider 继承。"
+  },
+  {
+    "name": "readonly",
+    "type": "boolean",
+    "default": "false",
+    "description": "只读但可聚焦，隐藏步进按钮，禁止编辑/步进/失焦改值。"
+  },
+  {
+    "name": "id",
+    "type": "string",
+    "default": "—",
+    "description": "内部 input ID；未提供时可从 FormItem 注入。通过 label 建立名称。"
+  },
+  {
+    "name": "name",
+    "type": "string",
+    "default": "—",
+    "description": "原生 input 字段名；FormData 得到显示文本，数值提交请使用 Form。"
+  },
+  {
+    "name": "size",
+    "type": "'small' | 'middle' | 'large'",
+    "default": "middle",
+    "description": "优先显式值，其次字段/全局配置；默认高度 24 / 32 / 40px。"
+  },
+  {
+    "name": "status",
+    "type": "'error' | 'warning'",
+    "default": "—",
+    "description": "显式校验外观优先于 FormItem；error 标记 aria-invalid。越界编辑也标记 aria-invalid。"
+  },
+  {
+    "name": "controls",
+    "type": "boolean",
+    "default": "true",
+    "description": "显示悬停/聚焦时出现的增减按钮；false 仍允许方向键步进。禁用或只读始终隐藏。"
+  },
+  {
+    "name": "class",
+    "type": "string",
+    "default": "—",
+    "description": "外框附加类。"
+  },
+  {
+    "name": "style",
+    "type": "JSX.CSSProperties",
+    "default": "—",
+    "description": "外框内联样式，默认宽度 90px；长内容建议显式加宽。"
+  },
+  {
+    "name": "onChange",
+    "type": "(value: number | null) => void",
+    "default": "—",
+    "description": "有效数值变化、清空、步进或失焦归一时通知；同值不通知。显式回调覆盖字段回调。"
+  },
+  {
+    "name": "onStep",
+    "type": "(value: number, info: { offset: number; type: 'up' | 'down' }) => void",
+    "default": "—",
+    "description": "有效步进时在 onChange 后通知；offset 为目标值减操作前值，空值按 0。边界无变化不通知。"
+  },
+  {
+    "name": "onPressEnter",
+    "type": "(event: KeyboardEvent) => void",
+    "default": "—",
+    "description": "非输入法组合期间按 Enter 通知；不主动阻止原生表单提交，也不代替失焦归一。"
+  },
+  {
+    "name": "onFocus",
+    "type": "(event: FocusEvent) => void",
+    "default": "—",
+    "description": "原生输入获得焦点后通知。"
+  },
+  {
+    "name": "onBlur",
+    "type": "(event: FocusEvent) => void",
+    "default": "—",
+    "description": "数值归一并通知 onChange 后，传入原生失焦事件。"
+  },
+  {
+    "name": "ref",
+    "type": "(input: HTMLInputElement) => void",
+    "default": "—",
+    "description": "原生 input 引用，可调用 focus / select。"
+  }
+]

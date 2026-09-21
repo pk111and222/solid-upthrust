@@ -20,6 +20,9 @@ const segmentedGroupVariants = cva(
     "p-[2px]",
     "rounded",
     "bg-surface-variant",
+    "border",
+    "border-solid",
+    "border-transparent",
     "box-border",
   ],
   {
@@ -37,8 +40,13 @@ const segmentedGroupVariants = cva(
         true: ["opacity-60"],
         false: [],
       },
+      status: {
+        default: [],
+        error: ["!border-error"],
+        warning: ["!border-[#faad14]"],
+      },
     },
-    defaultVariants: { size: "middle", block: false, disabled: false },
+    defaultVariants: { size: "middle", block: false, disabled: false, status: "default" },
   },
 )
 

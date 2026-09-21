@@ -1,0 +1,80 @@
+[
+  {
+    "name": "value",
+    "type": "() => string | number | undefined",
+    "default": "—",
+    "description": "读取已提交值。"
+  },
+  {
+    "name": "options",
+    "type": "() => SegmentedOption[]",
+    "default": "—",
+    "description": "读取当前选项。"
+  },
+  {
+    "name": "isSelected / isDisabled",
+    "type": "(key: string | number) => boolean",
+    "default": "—",
+    "description": "读取选中或禁用状态。"
+  },
+  {
+    "name": "isDisabledAll",
+    "type": "() => boolean",
+    "default": "—",
+    "description": "读取整组禁用状态。"
+  },
+  {
+    "name": "select",
+    "type": "(key: string | number) => void",
+    "default": "—",
+    "description": "提交有效选项；受控时仅提出 onChange 请求。"
+  },
+  {
+    "name": "thumbValue / focusValue",
+    "type": "() => string | number | undefined",
+    "default": "—",
+    "description": "读取当前滑块目标或尚未提交的候选。"
+  },
+  {
+    "name": "setFocusValue",
+    "type": "(key: string | number | undefined) => void",
+    "default": "—",
+    "description": "设置候选；传 undefined 取消，不移动 DOM 焦点。"
+  },
+  {
+    "name": "moveFocus",
+    "type": "(delta: number) => void",
+    "default": "—",
+    "description": "按整数步长遍历可用候选，不提交值。"
+  },
+  {
+    "name": "focusEdge",
+    "type": "(edge: 'first' | 'last') => void",
+    "default": "—",
+    "description": "定位首尾可用候选。"
+  },
+  {
+    "name": "thumbRect",
+    "type": "() => SegmentedRect | undefined",
+    "default": "—",
+    "description": "读取 { left: number, width: number }，单位 px。"
+  },
+  {
+    "name": "setItemRect",
+    "type": "(key: string | number, rect: SegmentedRect) => void",
+    "default": "—",
+    "description": "上报测量盒；UI 已自动管理，通常不用调用。"
+  },
+  {
+    "name": "clearItemRects",
+    "type": "() => void",
+    "default": "—",
+    "description": "清空测量盒；之后需要重新测量。"
+  },
+  {
+    "name": "store",
+    "type": "() => SelectionIns",
+    "default": "—",
+    "description": "高级组合的共享选择实例，常规使用不应绕过 select 的选项校验。"
+  }
+]

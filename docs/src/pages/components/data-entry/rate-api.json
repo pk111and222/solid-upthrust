@@ -1,0 +1,110 @@
+[
+  {
+    "name": "value",
+    "type": "number",
+    "default": "—",
+    "description": "受控评分；undefined 时使用字段值或内部状态，范围限制在 0 到 count。"
+  },
+  {
+    "name": "defaultValue",
+    "type": "number",
+    "default": "0",
+    "description": "非受控初始评分，只初始化一次。"
+  },
+  {
+    "name": "count",
+    "type": "number",
+    "default": "5",
+    "description": "字符数量；评分按 0 到 count 的星数表示。"
+  },
+  {
+    "name": "allowHalf",
+    "type": "boolean",
+    "default": "false",
+    "description": "允许半星；指针位于字符左半侧时选择半星，键盘按半星步进。"
+  },
+  {
+    "name": "allowClear",
+    "type": "boolean",
+    "default": "false",
+    "description": "重复点击当前非零评分时清零；关闭时重复点击不产生事件。"
+  },
+  {
+    "name": "disabled",
+    "type": "boolean",
+    "default": "false",
+    "description": "阻止指针与键盘交互并移出 Tab 顺序；可从 Form 或 ConfigProvider 继承。"
+  },
+  {
+    "name": "character",
+    "type": "JSX.Element",
+    "default": "星形图标",
+    "description": "替换每个字符的 JSX 内容；半星仍通过覆盖层裁剪。"
+  },
+  {
+    "name": "autoFocus",
+    "type": "boolean",
+    "default": "false",
+    "description": "挂载或启用后聚焦评分容器。"
+  },
+  {
+    "name": "aria-label",
+    "type": "string",
+    "default": "—",
+    "description": "评分组的可访问名称；没有可见 label 时应提供。"
+  },
+  {
+    "name": "aria-labelledby",
+    "type": "string",
+    "default": "—",
+    "description": "引用可见标签元素的 ID，作为评分组名称。"
+  },
+  {
+    "name": "id",
+    "type": "string",
+    "default": "—",
+    "description": "评分 ul 的 ID；未指定时可从 FormItem 注入。"
+  },
+  {
+    "name": "class",
+    "type": "string",
+    "default": "—",
+    "description": "评分容器附加类。"
+  },
+  {
+    "name": "style",
+    "type": "JSX.CSSProperties",
+    "default": "—",
+    "description": "评分容器内联样式。"
+  },
+  {
+    "name": "onChange",
+    "type": "(value: number) => void",
+    "default": "—",
+    "description": "有效评分提交时通知；hover 不触发。重复点击仅在 allowClear 开启并清零时通知；显式回调优先于 Form 字段回调。"
+  },
+  {
+    "name": "onHoverChange",
+    "type": "(value: number) => void",
+    "default": "—",
+    "description": "hover 预览或离开恢复时通知，不改变提交值。"
+  },
+  {
+    "name": "onFocus",
+    "type": "() => void",
+    "default": "—",
+    "description": "评分容器获得焦点时通知。"
+  },
+  {
+    "name": "onBlur",
+    "type": "() => void",
+    "default": "—",
+    "description": "评分容器失去焦点时通知，并清除 hover 预览。"
+  },
+  {
+    "name": "ref",
+    "type": "(element: HTMLUListElement) => void",
+    "default": "—",
+    "description": "评分 ul 引用，可调用 focus 或读取字符节点。"
+  }
+]

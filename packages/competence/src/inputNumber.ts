@@ -1,22 +1,21 @@
-import { createMemo, createSignal } from "solid-js";
+import { createEffect, createMemo, createSignal, untrack } from "solid-js";
 
 /**
- * Headless logic for InputNumber — the rc-input-number core subset:
+ * Headless numeric editing and stepping for InputNumber:
  *
- *  - VALUE STATE: controlled-or-uncontrolled numeric value. The internal
- *    buffer is the RAW INPUT TEXT (string | null), so typing "1." or "-"
- *    half-typed numbers doesn't commit garbage; `value` only reports a
- *    parsed number when the buffer is a complete valid number.
+ *  - VALUE STATE: committed number/null and lexical draft are separate.
+ *    Valid text commits live; incomplete unparseable text stays draft-only
+ *    until blur. A trailing decimal point parses but remains visible.
  *  - PARSING: `parser` (string → string) runs BEFORE numeric parsing
- *    (antd: strips currency symbols etc.); `formatter` (number → string)
+ *    (e.g. strips currency symbols); `formatter` (number → string)
  *    renders the display text. Both optional.
  *  - STEPPING: step (default 1) with shiftMultiplier (default 10, Shift+Up
  *    multiplies); up()/down() clamp into [min, max] and round to `precision`
- *    (explicit precision wins; otherwise derived from step's decimals).
+ *    (explicit precision wins; otherwise preserves value/step decimals).
  *  - KEYBOARD: the renderer forwards ArrowUp/ArrowDown to up()/down(); this
  *    layer owns no DOM listeners.
- *  - COMMIT: onBlur the buffer re-parses and snaps into range (antd: an
- *    out-of-range input clamps on blur); the out-of-range flag colors the
+ *  - COMMIT: onBlur the buffer re-parses and snaps into range;
+ *    the out-of-range flag colors the
  *    text red while typing.
  */
 import type { FormFieldRule } from "./formField";
@@ -34,7 +33,7 @@ export type InputNumberConfig = {
   step?: number | number[]
   /** Multiplier when stepping with Shift held. Default 10. */
   shiftMultiplier?: number
-  /** Explicit decimals to round to; default derives from step's precision. */
+  /** Explicit decimals; otherwise preserve value and step precision. */
   precision?: number
   /** Runs on raw input text BEFORE numeric parsing. */
   parser?: InputNumberParser
@@ -75,217 +74,107 @@ export type InputNumberIns = {
   canDown: () => boolean
 }
 
-const isEmptyBuffer = (text: string) => text === '' || text === '-'
-
-/**
- * Number of decimals implied by a step value (antd getPrecision): 0.1 → 1,
- * 0.01 → 2, 1 → 0.
- */
-const stepPrecision = (step: number): number => {
-  const str = String(step)
-  const dot = str.indexOf('.')
-  if (dot === -1) return 0
-  // Exponent form (1e-7) — count the negative exponent instead.
-  const exp = str.indexOf('e')
-  if (exp !== -1) {
-    const expNum = Number(str.slice(exp + 1))
-    if (expNum < 0) return -expNum
-    return 0
-  }
-  return str.length - dot - 1
+/** Count fractional digits, including scientific notation such as 1.5e-7. */
+const decimalPlaces = (value: number): number => {
+  const [coefficient, exponent = '0'] = String(value).toLowerCase().split('e')
+  return Math.max(0, (coefficient.split('.')[1]?.length ?? 0) - Number(exponent))
 }
+const round = (value: number, precision: number): number =>
+  Number(value.toFixed(Number.isFinite(precision) ? Math.max(0, Math.min(100, Math.trunc(precision))) : 0))
 
-const toFixedWithPrecision = (value: number, precision: number): number =>
-  Number(value.toFixed(Math.min(precision, 100)))
+type Draft = { text: string; anchor: number | null; parsed: number | null }
 
 export const createInputNumber = (config: InputNumberConfig = {}): InputNumberIns => {
-  // ownedWrite: typing/stepping/blur fire from DOM events — imperative
-  // entry points outside any reactive owner.
-  const [_buffer, _setBuffer] = createSignal<string | null>(
-    config.defaultValue === null || config.defaultValue === undefined
-      ? null
-      : String(config.defaultValue),
-    { ownedWrite: true },
+  // DOM handlers are imperative entry points outside a reactive owner.
+  const [internal, setInternal] = createSignal<number | null>(
+    untrack(() => config.defaultValue ?? null), { ownedWrite: true },
   )
-  const [_focused, _setFocused] = createSignal(false, { ownedWrite: true })
-
-  const parseBuffer = (raw: string): number | null => {
+  const [draft, setDraft] = createSignal<Draft | null>(null, { ownedWrite: true })
+  const [focused, setFocused] = createSignal(false, { ownedWrite: true })
+  const value = createMemo(() => config.value !== undefined ? config.value : internal())
+  createEffect(() => config.value, current => untrack(() => {
+    const edit = draft()
+    if (!edit) return
+    if (current === edit.parsed) setDraft({ ...edit, anchor: current })
+    else if (current !== edit.anchor) setDraft(null)
+  }))
+  const blocked = () => !!config.disabled || !!config.readonly
+  const parse = (raw: string): number | null => {
     const prepared = config.parser ? config.parser(raw) : raw
     const cleaned = prepared.replace(/[^\d.eE+-]/g, '')
-    if (cleaned === '' || isEmptyBuffer(cleaned)) return null
-    const num = Number(cleaned)
-    return Number.isFinite(num) ? num : null
+    if (!cleaned.trim() || cleaned === '-') return null
+    const number = Number(cleaned)
+    return Number.isFinite(number) ? number : null
   }
-
-  const value = createMemo<number | null>(() => {
-    if (config.value !== undefined) return config.value
-    const raw = _buffer()
-    if (raw === null || isEmptyBuffer(raw)) return null
-    return parseBuffer(raw)
-  })
-
-  const effectivePrecision = createMemo(() => {
-    if (config.precision !== undefined) return config.precision
-    const step = Array.isArray(config.step) ? 1 : (config.step ?? 1)
-    return stepPrecision(step)
-  })
-
-  const clamp = (num: number): number => {
-    let out = num
-    if (config.min !== undefined) out = Math.max(config.min, out)
-    if (config.max !== undefined) out = Math.min(config.max, out)
-    return out
+  const format = (number: number | null) => number === null ? '' : config.formatter ? config.formatter(number) : String(number)
+  // A new controlled value supersedes a stale draft, while accepting the
+  // parsed value keeps incomplete lexical forms (e.g. "1.") editable.
+  const activeDraft = () => {
+    const edit = draft()
+    return edit && (config.value === undefined || value() === edit.anchor || value() === edit.parsed) ? edit : null
   }
-
-  const stepBase = (): number => {
-    if (Array.isArray(config.step)) return 1
-    return config.step ?? 1
-  }
-
-  const emitChange = (next: number | null) => {
-    if (config.value === undefined) {
-      _setBuffer(next === null ? null : String(next))
-    }
-    config.onChange?.(next)
-  }
-
+  const displayValue = createMemo(() => focused() && activeDraft() ? activeDraft()!.text : format(value()))
   const outOfRange = createMemo(() => {
-    const v = value()
-    if (v === null) return false
-    if (config.min !== undefined && v < config.min) return true
-    if (config.max !== undefined && v > config.max) return true
-    return false
+    const number = activeDraft()?.parsed ?? value()
+    return number !== null && ((config.min !== undefined && number < config.min) || (config.max !== undefined && number > config.max))
   })
-
-  /** Display text: while focused show what the user typed; else the
-   *  formatted committed value (empty when null). */
-  const displayValue = createMemo(() => {
-    if (_focused()) {
-      // Controlled mode: the buffer holds only what the USER typed. Stepping
-      // in controlled mode never writes the buffer (the parent owns state),
-      // so a stale/null buffer would blank the field mid-interaction — fall
-      // back to the formatted controlled value when the buffer is empty.
-      const raw = _buffer()
-      if (raw !== null && !isEmptyBuffer(raw)) return raw
-      const v = value()
-      if (v === null) return ''
-      return config.formatter ? config.formatter(v) : String(v)
-    }
-    const v = value()
-    if (v === null) return ''
-    return config.formatter ? config.formatter(v) : String(v)
-  })
-
-  const currentOrDefault = (): number => {
-    const v = value()
-    if (v !== null) return v
-    // Empty field stepping starts from min (or 0) — antd semantics.
-    if (config.min !== undefined) return config.min
-    return 0
+  const clamp = (number: number) => Math.min(config.max ?? Infinity, Math.max(config.min ?? -Infinity, number))
+  const emitChange = (next: number | null) => {
+    const previous = value()
+    if (config.value === undefined) setInternal(next)
+    if (next !== previous) config.onChange?.(next)
   }
-
+  const canUp = () => !blocked() && (config.max === undefined || value() === null || value()! < config.max)
+  const canDown = () => !blocked() && (config.min === undefined || value() === null || value()! > config.min)
   const stepBy = (direction: 1 | -1, multiplied: boolean) => {
-    if (config.disabled || config.readonly) return
-    const base = stepBase()
-    const stepValue = multiplied
-      ? base * (config.shiftMultiplier ?? 10)
-      : base
-    const raw = currentOrDefault() + direction * stepValue
-    const clamped = clamp(raw)
-    const rounded = toFixedWithPrecision(clamped, effectivePrecision())
-    if (rounded === value()) return
-    // Always mirror the stepped value into the buffer — in controlled mode
-    // this is display-only (the parent owns truth); uncontrolled mode it IS
-    // the value. Without this, a focused controlled field freezes visually
-    // while stepping (the parent's value moves but the buffer never does).
-    _setBuffer(String(rounded))
-    config.onChange?.(rounded)
-    config.onStep?.(rounded, { offset: rounded - (value() ?? 0), type: direction === 1 ? 'up' : 'down' })
+    if (direction === 1 ? !canUp() : !canDown()) return
+    // Legacy array input is retained as a unit step; it is not a stop list.
+    const base = Array.isArray(config.step) ? 1 : (config.step ?? 1)
+    const amount = base * (multiplied ? (config.shiftMultiplier ?? 10) : 1)
+    if (!Number.isFinite(amount) || amount <= 0) return
+    const previous = value()
+    const start = previous ?? config.min ?? 0
+    const precision = config.precision ?? Math.max(decimalPlaces(start), decimalPlaces(amount))
+    const next = clamp(round(start + direction * amount, precision))
+    setDraft(null)
+    if (next === previous) return
+    emitChange(next)
+    config.onStep?.(next, { offset: next - (previous ?? 0), type: direction === 1 ? 'up' : 'down' })
   }
-
-  const up = (multiplied = false) => stepBy(1, multiplied)
-  const down = (multiplied = false) => stepBy(-1, multiplied)
-
   const setInputText = (text: string) => {
-    if (config.disabled || config.readonly) return
-    _setBuffer(text)
-    // antd commits on every parseable keystroke (controlled parents see
-    // live values); half-typed ("1.", "-") stays buffer-only.
-    if (isEmptyBuffer(text)) {
-      if (value() !== null) config.onChange?.(null)
-      return
-    }
-    const parsed = parseBuffer(text)
-    if (parsed !== null) config.onChange?.(parsed)
+    if (blocked()) return
+    const parsed = parse(text)
+    setDraft({ text, parsed, anchor: value() })
+    if (text.trim() === '' || text === '-') emitChange(null)
+    else if (parsed !== null) emitChange(parsed)
   }
-
   const commit = () => {
-    const raw = _buffer()
-    if (raw === null || isEmptyBuffer(raw)) {
-      if (value() !== null) emitChange(null)
-      return
+    const edit = activeDraft()
+    setFocused(false)
+    if (!blocked()) {
+      const parsed = edit ? parse(edit.text) : value()
+      const next = parsed === null ? null : clamp(config.precision === undefined ? parsed : round(parsed, config.precision))
+      emitChange(next)
     }
-    const parsed = parseBuffer(raw)
-    if (parsed === null) {
-      emitChange(null)
-      return
-    }
-    const clamped = clamp(parsed)
-    const rounded = toFixedWithPrecision(clamped, effectivePrecision())
-    const formatted = config.formatter ? config.formatter(rounded) : String(rounded)
-    _setBuffer(formatted)
-    if (rounded !== value()) emitChange(rounded)
-  }
-
-  const notifyFocus = () => {
-    _setFocused(true)
-    // Controlled mode: seed the buffer with the current committed value so
-    // the focused field keeps showing it (typing then replaces the buffer).
-    if (config.value !== undefined) {
-      const v = value()
-      _setBuffer(v === null ? null : (config.formatter ? config.formatter(v) : String(v)))
-    }
-    config.onFocus?.()
-  }
-
-  const commitBlur = () => {
-    _setFocused(false)
-    commit()
+    setDraft(null)
     config.onBlur?.()
   }
-
-  const setValue = (next: number | null) => {
-    if (config.value === undefined) {
-      _setBuffer(next === null ? null : String(next))
-    }
-    config.onChange?.(next)
+  const notifyFocus = () => {
+    setDraft(null)
+    setFocused(true)
+    config.onFocus?.()
   }
-
-  const atMax = createMemo(() => {
-    const v = value()
-    return config.max !== undefined && v !== null && v >= config.max
-  })
-  const atMin = createMemo(() => {
-    const v = value()
-    return config.min !== undefined && v !== null && v <= config.min
-  })
-
+  const setValue = (next: number | null) => { setDraft(null); emitChange(next) }
   return {
-    value,
-    textValue: () => _buffer() ?? '',
-    displayValue,
-    outOfRange,
-    isFocused: () => _focused(),
-    setInputText,
-    up,
-    down,
-    commit: commitBlur,
-    notifyFocus,
-    setValue,
+    value, displayValue, outOfRange,
+    textValue: () => activeDraft()?.text ?? format(value()),
+    isFocused: focused, setInputText,
+    up: (multiplied = false) => stepBy(1, multiplied),
+    down: (multiplied = false) => stepBy(-1, multiplied),
+    commit, notifyFocus, setValue,
     isDisabled: () => !!config.disabled,
     isReadonly: () => !!config.readonly,
-    canUp: () => !config.disabled && !config.readonly && !atMax(),
-    canDown: () => !config.disabled && !config.readonly && !atMin(),
+    canUp, canDown,
   }
 }
 

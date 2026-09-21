@@ -1,0 +1,104 @@
+[
+  {
+    "name": "checked",
+    "type": "boolean",
+    "default": "—",
+    "description": "受控状态，优先于 value。"
+  },
+  {
+    "name": "value",
+    "type": "boolean",
+    "default": "—",
+    "description": "checked 的别名。"
+  },
+  {
+    "name": "defaultChecked",
+    "type": "boolean",
+    "default": "false",
+    "description": "非受控初值，优先于 defaultValue，仅初始化一次。"
+  },
+  {
+    "name": "defaultValue",
+    "type": "boolean",
+    "default": "false",
+    "description": "defaultChecked 的别名。"
+  },
+  {
+    "name": "checkedChildren",
+    "type": "JSX.Element",
+    "default": "—",
+    "description": "开启内容，数字 0 也显示。"
+  },
+  {
+    "name": "unCheckedChildren",
+    "type": "JSX.Element",
+    "default": "—",
+    "description": "关闭内容。"
+  },
+  {
+    "name": "disabled",
+    "type": "boolean",
+    "default": "false",
+    "description": "原生禁用；显式值优先于 Form 与配置默认。"
+  },
+  {
+    "name": "loading",
+    "type": "boolean",
+    "default": "false",
+    "description": "阻止切换，显示旋转图标及 aria-busy；保留点击尝试回调。"
+  },
+  {
+    "name": "size",
+    "type": "'small' | 'middle' | 'large'",
+    "default": "'middle'",
+    "description": "small 为小号，large 当前映射 middle。"
+  },
+  {
+    "name": "id",
+    "type": "string",
+    "default": "—",
+    "description": "按钮 ID，可关联 label，默认由 Form.Item 注入。"
+  },
+  {
+    "name": "name",
+    "type": "string",
+    "default": "—",
+    "description": "原生按钮字段名，不自动提交布尔值。"
+  },
+  {
+    "name": "autofocus",
+    "type": "boolean",
+    "default": "false",
+    "description": "原生自动聚焦属性。"
+  },
+  {
+    "name": "class",
+    "type": "string",
+    "default": "—",
+    "description": "按钮类名。"
+  },
+  {
+    "name": "style",
+    "type": "JSX.CSSProperties",
+    "default": "—",
+    "description": "按钮样式，可覆盖内部默认。"
+  },
+  {
+    "name": "onChange",
+    "type": "(checked: boolean, event?: Event) => void",
+    "default": "—",
+    "description": "有效切换报告下一状态；显式回调优先于 Form 字段回调。"
+  },
+  {
+    "name": "onClick",
+    "type": "(checked: boolean, event: Event) => void",
+    "default": "—",
+    "description": "报告尝试切换的下一状态；在 onChange 前触发，loading 时仍触发。"
+  },
+  {
+    "name": "ref",
+    "type": "(el: HTMLButtonElement) => void",
+    "default": "—",
+    "description": "原生按钮引用，可 focus/blur。"
+  }
+]

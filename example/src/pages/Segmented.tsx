@@ -1,5 +1,5 @@
 import { type Component, createSignal, Show } from 'solid-js'
-import { Segmented, Divider, Typography } from 'upthrust-ui'
+import { Segmented, Divider, Typography, Form, FormItem, Button } from 'upthrust-ui'
 import type { SegmentedItem } from 'upthrust-ui'
 
 const { Text, Title } = Typography
@@ -7,9 +7,13 @@ const { Text, Title } = Typography
 const SegmentedPage: Component = () => {
   const [day, setDay] = createSignal<string | number>('mon')
   const [bare, setBare] = createSignal<string | number | undefined>(undefined)
-  const [dows, setDows] = createSignal<string | number>('daily')
-  const [sized, setSized] = createSignal<string | number>('list')
-  const [blocked, setBlocked] = createSignal<string | number>('map')
+  const [dows, setDows] = createSignal<string | number>('list')
+  const [sized, setSized] = createSignal<string | number>('列表')
+  const [blocked, setBlocked] = createSignal<string | number>('地图')
+
+  let segmented: import('upthrust-competence').SegmentedIns | undefined
+  const [result, setResult] = createSignal('尚未提交')
+  let form: import('upthrust-competence').FormInstance | undefined
 
   const days: SegmentedItem[] = [
     { label: '周一', value: 'mon' },
@@ -29,16 +33,17 @@ const SegmentedPage: Component = () => {
       </p>
 
       <h3 class="text-lg font-semibold mb-3">基础（受控）</h3>
-      <div class="flex flex-col gap-3 mb-2">
-        <Segmented options={days} value={day()} onChange={setDay} />
+      <div class="flex flex-col gap-3 mb-2" data-segmented-demo="basic">
+        <Segmented aria-label="视图模式" ref={instance => { segmented = instance }} options={days} value={day()} onChange={setDay} />
         <Text type="secondary">当前值：{String(day())}</Text>
+        <Button onClick={() => segmented?.select('thu')}>通过 ref 选择周四</Button>
       </div>
 
       <Divider />
 
       <h3 class="text-lg font-semibold mb-3">裸值数组</h3>
-      <div class="flex flex-col gap-3 mb-2">
-        <Segmented options={['每日', '每周', '每月']} value={bare()} onChange={setBare} />
+      <div class="flex flex-col gap-3 mb-2" data-segmented-demo="bare">
+        <Segmented aria-label="周期" options={['每日', '每周', '每月']} value={bare()} onChange={setBare} />
         <Text type="secondary">
           当前值：<Show when={bare()} fallback="（空）">{String(bare())}</Show>
         </Text>
@@ -47,8 +52,8 @@ const SegmentedPage: Component = () => {
       <Divider />
 
       <h3 class="text-lg font-semibold mb-3">带图标</h3>
-      <div class="mb-2">
-        <Segmented
+      <div class="mb-2" data-segmented-demo="icons">
+        <Segmented aria-label="展示方式"
           options={[
             { label: '列表', value: 'list', icon: <span class="i-mdi-format-list-bulleted" /> },
             { label: '卡片', value: 'card', icon: <span class="i-mdi-card-outline" /> },
@@ -62,17 +67,17 @@ const SegmentedPage: Component = () => {
       <Divider />
 
       <h3 class="text-lg font-semibold mb-3">三种尺寸</h3>
-      <div class="flex flex-col gap-3 mb-2">
-        <Segmented options={['列表', '卡片']} size="small" value={sized()} onChange={setSized} />
-        <Segmented options={['列表', '卡片']} value={sized()} onChange={setSized} />
-        <Segmented options={['列表', '卡片']} size="large" value={sized()} onChange={setSized} />
+      <div class="flex flex-col gap-3 mb-2" data-segmented-demo="sizes">
+        <Segmented aria-label="小尺寸" options={['列表', '卡片']} size="small" value={sized()} onChange={setSized} />
+        <Segmented aria-label="中尺寸" options={['列表', '卡片']} value={sized()} onChange={setSized} />
+        <Segmented aria-label="大尺寸" options={['列表', '卡片']} size="large" value={sized()} onChange={setSized} />
       </div>
 
       <Divider />
 
       <h3 class="text-lg font-semibold mb-3">block 通栏</h3>
-      <div class="mb-2 max-w-md">
-        <Segmented
+      <div class="mb-2 max-w-md" data-segmented-demo="block">
+          <Segmented aria-label="布局方式"
           block
           options={['地图', '转置', '平铺']}
           value={blocked()}
@@ -84,12 +89,25 @@ const SegmentedPage: Component = () => {
       <Divider />
 
       <h3 class="text-lg font-semibold mb-3">整组禁用</h3>
-      <div class="mb-2">
-        <Segmented options={['列表', '卡片']} disabled defaultValue="列表" />
+      <div class="mb-2" data-segmented-demo="disabled">
+        <Segmented aria-label="禁用模式" options={['列表', '卡片']} disabled defaultValue="列表" />
       </div>
 
       <Divider />
 
+      <h3 class="text-lg font-semibold mb-3">Form 与状态</h3>
+      <div data-segmented-demo="context">
+        <Form initialValues={{ mode: 'a' }} ref={instance => { form = instance }} onFinish={values => setResult(JSON.stringify(values))}>
+          <FormItem name="mode" label="模式"><Segmented aria-label="表单模式" options={[{ label: '模式 A', value: 'a' }, { label: '模式 B', value: 'b' }]} /></FormItem>
+          <Button htmlType="submit">提交分段值</Button>
+          <Button onClick={() => { form?.resetFields(); setResult('尚未提交') }}>重置分段值</Button>
+        </Form>
+        <output>{result()}</output>
+      </div>
+      <div class="flex gap-3 my-4" data-segmented-demo="status">
+        <Segmented aria-label="错误状态" status="error" options={['个人', '团队']} defaultValue="个人" />
+        <Segmented aria-label="警告状态" status="warning" options={['个人', '团队']} defaultValue="团队" />
+      </div>
       <Title level={5}>API 要点</Title>
       <ul class="list-disc pl-6 text-on-surface-variant text-sm leading-6">
         <li><Text code>options</Text>：{'{ label, value, disabled?, icon? }'} 或裸 string/number</li>

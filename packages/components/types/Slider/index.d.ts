@@ -23,6 +23,9 @@ export interface SliderProps {
     marks?: SliderMark[];
     marksOnly?: boolean;
     id?: string;
+    /** Accessible name; range handles append 起点/终点. */
+    'aria-label'?: string;
+    'aria-labelledby'?: string;
     class?: string;
     style?: JSX.CSSProperties;
     onChange?: (value: number) => void;
@@ -33,8 +36,8 @@ export interface SliderProps {
 /**
  * Slider — the antd-style track picker.
  *
- * The headless createSlider (riding the SHARED createNumericValue machine —
- * the same engine under InputNumber and Rate) owns value/clamp/snap/drag.
+ * The headless createSlider owns value/clamp/snap/drag, using the shared
+ * numeric core for start-value storage.
  * This layer renders the track and feeds pointer events in: percent ←
  * clientX against the rail's bounding rect; the keyboard rides stepHandle.
  */

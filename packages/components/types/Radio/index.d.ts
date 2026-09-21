@@ -24,8 +24,7 @@ export interface RadioProps {
  *
  * The headless createRadio owns the checked machine (controlled or not,
  * disabled gate, never-uncheck-itself). Inside a RadioGroup the value
- * flows through the group's shared selection store (maxSelect: 1 — the
- * same machine Checkbox.Group uses with unlimited cardinality); standalone
+ * flows through the group's shared selection store (maxSelect: 1); standalone
  * usage rides the per-radio machine directly.
  */
 declare const Radio: Component<RadioProps>;
@@ -46,26 +45,28 @@ export interface RadioGroupProps {
 /**
  * RadioGroup — renders a radio per option and owns the single pick.
  * The headless createRadioGroup rides the SHARED selection store
- * (maxSelect: 1) — the same engine Checkbox.Group and a future Select
- * compose, so pick-one bookkeeping lives in exactly one place.
+ * (maxSelect: 1). Native inputs share a name for browser keyboard navigation.
  */
 export declare const RadioGroup: Component<RadioGroupProps>;
 export interface RadioButtonProps {
     value: string | number;
     disabled?: boolean;
     /** Corner rounding position in the strip (computed by the group). */
-    position?: 'first' | 'middle' | 'last';
+    position?: 'first' | 'middle' | 'last' | 'single';
     class?: string;
     style?: JSX.CSSProperties;
     children?: JSX.Element;
     onChange?: (checked: boolean, event?: Event) => void;
 }
+export declare const RadioButton: Component<RadioButtonProps>;
 export type RadioGroupContextValue = {
     isSelected: (value: string | number) => boolean;
     isDisabled: (value: string | number) => boolean;
     select: (value: string | number) => void;
     /** Shared native input name so browser arrow-key radio nav works. */
     name?: string;
+    registerInput?: (input: HTMLInputElement, checked: () => boolean | undefined) => () => void;
+    syncInputs?: () => void;
 };
 export declare const RadioGroupContext: import('solid-js').Context<RadioGroupContextValue | null>;
 export declare const useRadioGroupContext: () => RadioGroupContextValue | null;

@@ -13,7 +13,7 @@ export type SliderConfig = {
     defaultRangeValue?: [number, number];
     min?: number;
     max?: number;
-    /** Step between values. Default 1; null = any value (mark-only snapping). */
+    /** Step between values. Default 1; null = free values. marksOnly enables mark snapping. */
     step?: number | null;
     /** Explicit decimals to round to; default derives from step. */
     precision?: number;
@@ -53,14 +53,18 @@ export type SliderIns = {
     /** Which thumb a track position is closest to (0 = start, 1 = end). */
     nearestHandle: (percent: number) => 0 | 1;
     /** Begin a drag at a percent; returns the handle being dragged. */
-    beginDrag: (percent: number) => 0 | 1;
-    /** Pointer moved to a new percent (writes through, unrounded). */
+    beginDrag: (percent: number, handle?: 0 | 1) => 0 | 1;
+    /** Pointer moved to a new percent (snaps before notifying). */
     dragTo: (percent: number) => void;
-    /** Drag ended: snap to step/mark and fire onAfterChange. */
+    /** Drag ended: fire onAfterChange with the accepted value. */
     endDrag: () => void;
+    /** Cancel without a completion callback (unmount/pointer cancellation). */
+    cancelDrag: () => void;
+    /** Complete a keyboard interaction using the accepted value. */
+    finishInteraction: () => void;
     isDragging: () => boolean;
     draggingHandle: () => 0 | 1 | null;
-    /** Keyboard: arrows step (shift ×10 like rc-slider), Home/End snap. */
+    /** Keyboard: step count, including accelerated steps; Home/End snap. */
     stepHandle: (handle: 0 | 1, steps: number) => void;
     snapToMin: (handle: 0 | 1) => void;
     snapToMax: (handle: 0 | 1) => void;

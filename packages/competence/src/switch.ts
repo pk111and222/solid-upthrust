@@ -1,4 +1,4 @@
-import { createMemo, createSignal } from "solid-js";
+import { createMemo, createSignal, untrack } from "solid-js";
 
 /**
  * Headless logic for Switch — the rc-switch state core:
@@ -45,7 +45,7 @@ export const createSwitch = (config: SwitchConfig = {}): SwitchIns => {
   // ownedWrite: toggle fires from DOM click events — imperative entry
   // points outside any reactive owner.
   const [_checked, _setChecked] = createSignal(
-    config.defaultValue ?? config.defaultChecked ?? false,
+    untrack(() => config.defaultChecked ?? config.defaultValue ?? false),
     { ownedWrite: true },
   )
 

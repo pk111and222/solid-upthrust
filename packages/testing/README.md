@@ -143,3 +143,9 @@ disabled、getContainer、样式分离、十二种位置与 docs/example 产物�
 Tabs 专项浏览器配置为 `playwright.tabs.config.ts`，覆盖键盘焦点跟随、单一 Tab 停靠点、
 禁用跳过、受控切换、滑动指示条几何、可编辑新增/关闭/键盘排序、ref 命令式接口与 docs/example
 产物。见 [Tabs 回归记录](../../docs/contributing/regressions/tabs.md)。
+
+Rate 专项浏览器配置为 `playwright.rate.config.ts`，覆盖受控/非受控、半星 hover 与提交、
+清空、键盘、禁用、Form.Item、生产绘制与 SSR，并同时验证 docs/example 产物。见 [Rate 回归记录](../../docs/contributing/regressions/rate.md)。
+
+Segmented 专项浏览器配置为 `playwright.segmented.config.ts`，覆盖选择与禁用、键盘遍历、
+thumb 几何、block、Form.Item、生产开发挂载与 SSR，并同时验证 docs/example 产物。见 [Segmented 回归记录](../../docs/contributing/regressions/segmented.md)。

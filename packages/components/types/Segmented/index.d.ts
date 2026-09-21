@@ -19,6 +19,8 @@ export interface SegmentedProps {
     id?: string;
     class?: string;
     style?: JSX.CSSProperties;
+    'aria-label'?: string;
+    'aria-labelledby'?: string;
     onChange?: (value: string | number) => void;
     /** Escape hatch: the raw machine (imperative focus/measure control). */
     ref?: (machine: SegmentedIns) => void;
