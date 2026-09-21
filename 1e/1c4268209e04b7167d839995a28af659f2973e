@@ -1,0 +1,350 @@
+packages/testing/render/Checkbox/contracts.test.tsx
+  s_0bbf9cbbdd4351::t_dbb1c0726c8cb8 1-56,58-67
+  s_0bbf9cbbdd4351::t_a7e3b8c8ee40f8 68-80
+  s_0bbf9cbbdd4351::t_adad1974fbaab1 57
+docs/src/examples/checkbox/context.tsx
+  s_0bbf9cbbdd4351::t_de7e0ce86f0208 1-18
+docs/src/examples/checkbox/group.tsx
+  s_0bbf9cbbdd4351::t_de7e0ce86f0208 1-17
+packages/components/lib/Checkbox/index.tsx
+  s_0bbf9cbbdd4351::t_de7e0ce86f0208 152
+  s_0bbf9cbbdd4351::t_103773fe9fd5a0 95-96
+  s_0bbf9cbbdd4351::t_9449412fbe9f48 77,81-83,85-87,97-98,100-115,127-131,133-138,140,155,180-181,196,200-202,205-208,217,219
+  s_0bbf9cbbdd4351::t_ec394d7d6a9531 2,92,132,243
+docs/src/examples/checkbox/controlled.tsx
+  s_0bbf9cbbdd4351::t_de7e0ce86f0208 1-13
+  s_0bbf9cbbdd4351::t_ae9a262b89c299 14-15
+TODO.md
+  s_0bbf9cbbdd4351::t_622d1c0c818aad 30,98
+  s_0bbf9cbbdd4351::t_7beb486c4982b8 99
+  s_0bbf9cbbdd4351::t_a9a8207445f603 100-102
+docs/src/pages/components/data-entry/checkbox-group-api.json
+  s_0bbf9cbbdd4351::t_de7e0ce86f0208 1-56
+docs/contributing/regressions/checkbox.md
+  s_0bbf9cbbdd4351::t_622d1c0c818aad 1-56
+  s_0bbf9cbbdd4351::t_3dd8019c3ca9d3 57-59
+  s_0bbf9cbbdd4351::t_8d6d06ee50d974 60-67
+packages/testing/smoke/Checkbox/exports.test.tsx
+  s_0bbf9cbbdd4351::t_de7e0ce86f0208 1-16
+packages/components/types/Checkbox/index.d.ts
+  s_0bbf9cbbdd4351::t_586f2027dfb2b4 51-52,56
+docs/src/pages/components/data-entry/checkbox-api.json
+  s_0bbf9cbbdd4351::t_de7e0ce86f0208 1-80
+docs/src/examples/checkbox/children.tsx
+  s_0bbf9cbbdd4351::t_de7e0ce86f0208 1-8
+packages/testing/headless/Checkbox/checkbox.test.ts
+  s_0bbf9cbbdd4351::t_622d1c0c818aad 12,20,28,39,50,61,71,84,92,101,112,127,137,161,172,181,191
+  s_0bbf9cbbdd4351::t_dbb1c0726c8cb8 2,5-8,14,22,30,41,52,63,73,86,94,103,114,129,139,163,174,183,193,200-206,212,219,223,229,233,238
+  s_0bbf9cbbdd4351::t_8e702df3bba1c8 1,207-211,213-218,220-222,224-228,230-232,234-237,239
+example/src/pages/Checkbox.tsx
+  s_0bbf9cbbdd4351::t_de7e0ce86f0208 1-16
+packages/competence/src/checkbox.ts
+  s_0bbf9cbbdd4351::t_9449412fbe9f48 1,12,43,98,110,143,150
+docs/src/examples/checkbox/basic.tsx
+  s_0bbf9cbbdd4351::t_de7e0ce86f0208 1-8
+docs/src/pages/components/data-entry/checkbox.tsx
+  s_0bbf9cbbdd4351::t_de7e0ce86f0208 1-19
+  s_0bbf9cbbdd4351::t_b41ff2701d6845 20
+packages/components/lib/Checkbox/styles.ts
+  s_0bbf9cbbdd4351::t_de7e0ce86f0208 59,65,101,110,161-164
+packages/testing/playwright.checkbox.config.ts
+  s_0bbf9cbbdd4351::t_f7e4d6dc50d3e7 1-13
+docs/contributing/regressions/input-number.md
+  s_0bbf9cbbdd4351::t_a9151d0dc037e5 1-63
+docs/contributing/regressions/radio.md
+  s_0bbf9cbbdd4351::t_30b07d917a546b 1-60
+docs/contributing/regressions/slider.md
+  s_0bbf9cbbdd4351::t_ffb6abc1530cb8 1-69
+docs/contributing/regressions/switch.md
+  s_0bbf9cbbdd4351::t_fa8026f4c466c1 1-56
+docs/src/examples/checkbox/confirmation.tsx
+  s_0bbf9cbbdd4351::t_c7ade263ca9a86 1-22
+docs/src/examples/input-number/basic.tsx
+  s_0bbf9cbbdd4351::t_f7823fd00198a6 1-8
+docs/src/examples/input-number/context.tsx
+  s_0bbf9cbbdd4351::t_bc508912250212 1-21
+docs/src/examples/input-number/controlled.tsx
+  s_0bbf9cbbdd4351::t_fb909ac9bcb92c 1-15
+docs/src/examples/input-number/format.tsx
+  s_0bbf9cbbdd4351::t_8c35539992b837 1-9
+docs/src/examples/input-number/native.tsx
+  s_0bbf9cbbdd4351::t_d3d16b55007505 1-14
+docs/src/examples/input-number/precision.tsx
+  s_0bbf9cbbdd4351::t_5d3226c29eb840 1-12
+docs/src/examples/input-number/states.tsx
+  s_0bbf9cbbdd4351::t_ab4c788298c902 1-17
+docs/src/examples/radio/basic.tsx
+  s_0bbf9cbbdd4351::t_527e4f871b725c 1-13
+docs/src/examples/radio/buttons.tsx
+  s_0bbf9cbbdd4351::t_80b75b7361dd63 1-8
+docs/src/examples/radio/context.tsx
+  s_0bbf9cbbdd4351::t_760d667513762d 1-18
+docs/src/examples/radio/controlled.tsx
+  s_0bbf9cbbdd4351::t_f868bc921bd401 1-14
+docs/src/examples/radio/custom-buttons.tsx
+  s_0bbf9cbbdd4351::t_b323a38047683f 1-15
+docs/src/examples/radio/dynamic.tsx
+  s_0bbf9cbbdd4351::t_82901d47c8b935 1-15
+docs/src/examples/radio/group.tsx
+  s_0bbf9cbbdd4351::t_17b310ba01982b 1-10
+docs/src/examples/rate/basic.tsx
+  s_06b5f8ba688430::t_cfcdab8418bd22 1-6
+docs/src/examples/rate/context.tsx
+  s_06b5f8ba688430::t_bba284406189ed 1-10
+docs/src/examples/rate/controlled.tsx
+  s_06b5f8ba688430::t_fd1223fd5e614e 1-7
+docs/src/examples/rate/focus.tsx
+  s_4823ba265205e0::t_b6f39dc132e0cf 1-19
+docs/src/examples/rate/half.tsx
+  s_06b5f8ba688430::t_7bb7637bebcd88 1-6
+docs/src/examples/rate/states.tsx
+  s_06b5f8ba688430::t_cdca2dc68d0698 1-4
+docs/src/examples/segmented/basic.tsx
+  s_06b5f8ba688430::t_6fa62d975cfd5a 1-6
+docs/src/examples/segmented/context.tsx
+  s_4823ba265205e0::t_26b82a4bef26fa 1-10
+docs/src/examples/segmented/controlled.tsx
+  s_06b5f8ba688430::t_dff96eb02286b0 1-7
+docs/src/examples/segmented/dynamic.tsx
+  s_4823ba265205e0::t_00dc473c1d0531 1-23
+docs/src/examples/segmented/icons.tsx
+  s_4823ba265205e0::t_261e8198776364 1-7
+docs/src/examples/segmented/keyboard.tsx
+  s_06b5f8ba688430::t_b3ce1197b15010 1-6
+docs/src/examples/segmented/sizes.tsx
+  s_4823ba265205e0::t_2b2880761cd463 1-8
+docs/src/examples/segmented/states.tsx
+  s_06b5f8ba688430::t_0c9d4ef37a8396 1-4
+docs/src/examples/segmented/status.tsx
+  s_4823ba265205e0::t_b277d5a42d69ee 1-7
+docs/src/examples/slider/basic.tsx
+  s_0bbf9cbbdd4351::t_5afd6d0199dd8b 1-11
+docs/src/examples/slider/context.tsx
+  s_0bbf9cbbdd4351::t_bbf6eeb02eb58a 1-19
+docs/src/examples/slider/controlled.tsx
+  s_0bbf9cbbdd4351::t_eaecd8e7be8db8 1-12
+docs/src/examples/slider/directions.tsx
+  s_0bbf9cbbdd4351::t_37c7ff6a8e4b54 1-11
+docs/src/examples/slider/marks.tsx
+  s_0bbf9cbbdd4351::t_10ddd3ef3087d8 1-10
+docs/src/examples/slider/native.tsx
+  s_0bbf9cbbdd4351::t_a825e8b27a2cc8 1-13
+docs/src/examples/slider/range.tsx
+  s_0bbf9cbbdd4351::t_85890386e60f7d 1-11
+docs/src/examples/switch/aliases-ref.tsx
+  s_0bbf9cbbdd4351::t_c7f83e9381cc3b 1-16
+docs/src/examples/switch/basic.tsx
+  s_0bbf9cbbdd4351::t_d457cf1bd7c271 1-9
+docs/src/examples/switch/context.tsx
+  s_0bbf9cbbdd4351::t_aec3674bdd9bd4 1-17
+docs/src/examples/switch/controlled.tsx
+  s_0bbf9cbbdd4351::t_f3f277ee3aaec4 1-11
+docs/src/examples/switch/sizes.tsx
+  s_0bbf9cbbdd4351::t_6c19d83bede847 1-9
+docs/src/examples/switch/states.tsx
+  s_0bbf9cbbdd4351::t_561bd266284d65 1-14
+docs/src/pages/components/data-entry/input-number-api.json
+  s_0bbf9cbbdd4351::t_2197a103af16b6 1-164
+docs/src/pages/components/data-entry/input-number.tsx
+  s_0bbf9cbbdd4351::t_aa2a08e61a0121 1-24
+docs/src/pages/components/data-entry/radio-api.json
+  s_0bbf9cbbdd4351::t_8ef24f99e08c65 1-74
+docs/src/pages/components/data-entry/radio-button-api.json
+  s_0bbf9cbbdd4351::t_d167b67f083628 1-44
+docs/src/pages/components/data-entry/radio-group-api.json
+  s_0bbf9cbbdd4351::t_b920f3eb97f106 1-62
+docs/src/pages/components/data-entry/radio.tsx
+  s_0bbf9cbbdd4351::t_dbbe25e4303838 1-24
+docs/src/pages/components/data-entry/rate-api.json
+  s_4823ba265205e0::t_4995bc70265724 1-110
+docs/src/pages/components/data-entry/rate.tsx
+  s_4823ba265205e0::t_608ea46b85df59 1-34
+docs/src/pages/components/data-entry/segmented-api.json
+  s_06b5f8ba688430::t_b07048ed170f53 1-16
+docs/src/pages/components/data-entry/segmented-instance-api.json
+  s_4823ba265205e0::t_617a018680ed01 1-80
+docs/src/pages/components/data-entry/segmented-option-api.json
+  s_4823ba265205e0::t_37ce2aed8e5094 1-32
+docs/src/pages/components/data-entry/segmented.tsx
+  s_4823ba265205e0::t_0bc7094e3a9042 1-42
+docs/src/pages/components/data-entry/slider-api.json
+  s_0bbf9cbbdd4351::t_2c1490e2a5ea32 1-134
+docs/src/pages/components/data-entry/slider.tsx
+  s_0bbf9cbbdd4351::t_fe145460c53bf8 1-24
+docs/src/pages/components/data-entry/switch-api.json
+  s_0bbf9cbbdd4351::t_d3037dc1084ec4 1-104
+docs/src/pages/components/data-entry/switch.tsx
+  s_0bbf9cbbdd4351::t_b75e8cc7ba6053 1-20
+example/src/pages/InputNumber.tsx
+  s_0bbf9cbbdd4351::t_9db56981eaf88f 1-16
+example/src/pages/Radio.tsx
+  s_0bbf9cbbdd4351::t_4d16cadad34494 1-18
+example/src/pages/Rate.tsx
+  s_4823ba265205e0::t_c5e180c02abcaa 2-3,10,13-17,28-30,36-38,44,46,49-51,56-61,64-79
+example/src/pages/Segmented.tsx
+  s_4823ba265205e0::t_4c209d3346a21a 2,10-16,36-37,39,45-46,55-56,70-73,79-80,92-93,98-110
+example/src/pages/Slider.tsx
+  s_0bbf9cbbdd4351::t_25e46bd8d4898f 1-16
+example/src/pages/Switch.tsx
+  s_0bbf9cbbdd4351::t_1da46b6aad8e60 1-12
+packages/competence/src/inputNumber.ts
+  s_0bbf9cbbdd4351::t_26d0a2c71ce43f 1,4,6-8,10,14,17-18,36,77-80,82-83,85,88-90,92-102,105-107,109-114,116,118-119,121-125,127-128,130-142,145-149,152-157,159-160,163-164,167,169-174,177
+packages/competence/src/radio.ts
+  s_0bbf9cbbdd4351::t_d87ba20356695d 1,16,43,111,131
+packages/competence/src/rate.ts
+  s_4823ba265205e0::t_50d82c914c87e2 1,74,88,113-120,134,143-144,152
+packages/competence/src/segmented.ts
+  s_4823ba265205e0::t_3c0ed651606882 88,168,172-188,190-199
+packages/competence/src/selection.ts
+  s_0bbf9cbbdd4351::t_e4a6ce28061fa4 1,300-302,304,307-311,325
+packages/competence/src/slider.ts
+  s_0bbf9cbbdd4351::t_015911c73b833a 3-4,21,62-63,65,67-70,73,87-91,95-102,104,107-109,111-118,120-143,145-153,155-159,161-164,166-175,177-186,189-196,203
+packages/competence/src/switch.ts
+  s_0bbf9cbbdd4351::t_eb88a341ee3e34 1,48
+packages/competence/types/checkbox.d.ts
+  s_4823ba265205e0::t_1c8079f980a91e 45
+packages/competence/types/inputNumber.d.ts
+  s_4823ba265205e0::t_3418988b715613 14
+packages/competence/types/slider.d.ts
+  s_4823ba265205e0::t_99942af4448da0 16,56-57,59,61-64,67
+packages/components/lib/InputNumber/index.tsx
+  s_0bbf9cbbdd4351::t_cd6c2851ae5c78 2,33,88,102,105,108,112-113,126,131-132,137-138,142-143,145,175-176,179,186,190-191,203-206,209-210,214-219,222-223,227-228
+packages/components/lib/InputNumber/styles.ts
+  s_0bbf9cbbdd4351::t_6c78a46c3e5ee8 140,170,197-200
+packages/components/lib/Radio/index.tsx
+  s_0bbf9cbbdd4351::t_893eff9c24adbb 2,48,71,74-76,78-79,82-83,86-87,91-101,117-118,125-133,161,176,180-182,184-186,188-202,205-206,217-218,229-230,235,241,257,264,269-272,274-280,282-293,309,316,337-338
+packages/components/lib/Radio/styles.ts
+  s_0bbf9cbbdd4351::t_3c7f763876f81e 60,66,124-127,187-188,202,217-219,232-234
+packages/components/lib/Rate/index.tsx
+  s_4823ba265205e0::t_46899386aa0274 2,28-33,39-40,66,73,75-77,85,97,104,108,121,126-130,137,140-144,149-150,154-165,167,169,172-174,176,179,183
+packages/components/lib/Segmented/index.tsx
+  s_4823ba265205e0::t_83429c621db110 34-35,78,83,87-88,91,98-100,102,113-116,128,198,200,205,207-209,230
+packages/components/lib/Segmented/styles.ts
+  s_06b5f8ba688430::t_f0bb16c07ae95b 23-25,43-47,49
+packages/components/lib/Slider/index.tsx
+  s_0bbf9cbbdd4351::t_36646bd8b70ee5 2,39-41,53-54,63-64,71-73,75,88-89,93,103,112,121-130,132-171,181-183,195,204,212,220-221,227,229,234,239,247,253,259-264,266-270,272-273,275,277-282,284-288,290-291
+packages/components/lib/Slider/styles.ts
+  s_0bbf9cbbdd4351::t_1922d028cbbb44 98-102,123
+packages/components/lib/Switch/index.tsx
+  s_0bbf9cbbdd4351::t_37e8096ce0d3a0 2,45-46,56,62-63,68,72,78-79,88-90,97,104,108,111-112,117,122
+packages/components/lib/Switch/styles.ts
+  s_0bbf9cbbdd4351::t_465b4cb7c6e454 34,57-61,131-132,135-138
+packages/components/lib/index.ts
+  s_0bbf9cbbdd4351::t_7552cbff27ddb0 21
+packages/testing/README.md
+  s_06b5f8ba688430::t_7cde2d968d4f6c 146-151
+packages/testing/browser/Checkbox/interactions.spec.ts
+  s_0bbf9cbbdd4351::t_2f0db208c04a48 1-81
+packages/testing/browser/InputNumber/interactions.spec.ts
+  s_0bbf9cbbdd4351::t_8868bac12ab087 1-76
+packages/testing/browser/Radio/interactions.spec.ts
+  s_0bbf9cbbdd4351::t_e8480833bc8434 1-81
+packages/testing/browser/Rate/interactions.spec.ts
+  s_4823ba265205e0::t_a12162d9ddcdd8 1-91
+packages/testing/browser/Segmented/interactions.spec.ts
+  s_4823ba265205e0::t_fb053469776ed3 1-127
+packages/testing/browser/Slider/interactions.spec.ts
+  s_0bbf9cbbdd4351::t_b2fc34ad862a03 1-74
+packages/testing/browser/Switch/interactions.spec.ts
+  s_0bbf9cbbdd4351::t_ef4deff7b6b043 1-54
+packages/testing/headless/InputNumber/editing.test.ts
+  s_0bbf9cbbdd4351::t_d6339405b96ef5 1-75
+packages/testing/headless/InputNumber/inputNumber.test.ts
+  s_0bbf9cbbdd4351::t_c3e4b67d761a70 2,5-8,12,14,21,23,30,32,40,42,53,55,68,70,77,79,90,92,101,103,110,112,119,121,132,134,145,147,156,158,169,171,179,181,191,193,206,208,218,220,231,233
+packages/testing/headless/Radio/radio.test.ts
+  s_0bbf9cbbdd4351::t_556d98b6bb112c 1-2,5-8,12,14,20,22,28,30,41,43,50,52,61,63,78,80,86,88,96,98,108,110,119,121,134,136,144,146,155,157,164,166,174-202
+packages/testing/headless/Rate/rate.test.ts
+  s_06b5f8ba688430::t_d570f1b5e0b72a 1,8,17,25,34,44,55,66,73,78,89,100,110,121,133,147,160,169,180,193,202,216-228
+packages/testing/headless/Segmented/dynamic.test.ts
+  s_4823ba265205e0::t_d896b5535f1f46 1-22
+packages/testing/headless/Segmented/segmented.test.ts
+  s_06b5f8ba688430::t_d658fb127ff7a9 1,168-184
+packages/testing/headless/Slider/interactions.test.ts
+  s_0bbf9cbbdd4351::t_8247c57fe9d75c 1-60
+packages/testing/headless/Slider/slider.test.ts
+  s_0bbf9cbbdd4351::t_13aa6b0959c26b 2,5-7,11,13,19,21,27,29,36,38,49,51,59,61,67,69,76,78,85,87,93,95,110,112,122,124,135,137,147,149,156,158,175,177,185,187,196,198,208,210,221,223,232,234,245,247,255,257
+packages/testing/headless/Switch/switch.test.ts
+  s_0bbf9cbbdd4351::t_564f8779d5a89c 1-2,5-7,11,13,19,21,27,29,35,37,46,48,60,62,72,74,83,85,93,95,103,105,112-130
+packages/testing/headless/shared/Selection/consumers.test.ts
+  s_0bbf9cbbdd4351::t_e226f84e04c957 1-31
+packages/testing/headless/shared/Selection/controlled.test.ts
+  s_0bbf9cbbdd4351::t_2b929051f395f3 1-20
+packages/testing/playwright.input-number.config.ts
+  s_0bbf9cbbdd4351::t_1cd56198a6d90b 1-13
+packages/testing/playwright.radio.config.ts
+  s_0bbf9cbbdd4351::t_7888437b067c2f 1-13
+packages/testing/playwright.rate.config.ts
+  s_06b5f8ba688430::t_c4b694460ff40e 1-20
+packages/testing/playwright.segmented.config.ts
+  s_06b5f8ba688430::t_4e6528eb9ad88c 1-20
+packages/testing/playwright.slider.config.ts
+  s_0bbf9cbbdd4351::t_96108a8bdb655d 1-13
+packages/testing/playwright.switch.config.ts
+  s_0bbf9cbbdd4351::t_8e30087b96affd 1-13
+packages/testing/render/Cascader/selection-integration.test.tsx
+  s_0bbf9cbbdd4351::t_7f11834da66c81 1-17
+packages/testing/render/InputNumber/contracts.test.tsx
+  s_0bbf9cbbdd4351::t_41de149dd48416 1-61
+packages/testing/render/Radio/button.test.tsx
+  s_0bbf9cbbdd4351::t_2a43b6a6604869 1-26
+packages/testing/render/Radio/contracts.test.tsx
+  s_0bbf9cbbdd4351::t_6159584b2c5390 1-79
+packages/testing/render/Rate/contracts.test.tsx
+  s_4823ba265205e0::t_786be8fa513480 1-146
+packages/testing/render/Rate/dynamic.test.tsx
+  s_4823ba265205e0::t_f51e0dcb857d21 1-75
+packages/testing/render/Segmented/contracts.test.tsx
+  s_4823ba265205e0::t_96d836df8a8c02 1-131
+packages/testing/render/Segmented/dynamic.test.tsx
+  s_4823ba265205e0::t_ffee4e06f2d0df 1-60
+packages/testing/render/Select/selection-integration.test.tsx
+  s_0bbf9cbbdd4351::t_8652e0e6994ddd 1-17
+packages/testing/render/Slider/contracts.test.tsx
+  s_0bbf9cbbdd4351::t_81efab12d26baf 1-67
+packages/testing/render/Switch/contracts.test.tsx
+  s_0bbf9cbbdd4351::t_e7c315ddc6195a 1-56
+packages/testing/smoke/InputNumber/exports.test.tsx
+  s_0bbf9cbbdd4351::t_7d09d4b1d0e3b0 1-18
+packages/testing/smoke/Radio/exports.test.tsx
+  s_0bbf9cbbdd4351::t_e1f3c9df9564e4 1-16
+packages/testing/smoke/Rate/exports.test.tsx
+  s_4823ba265205e0::t_be0e9404fcba6e 1-22
+packages/testing/smoke/Segmented/exports.test.tsx
+  s_06b5f8ba688430::t_25d14d157bad1d 1-27
+packages/testing/smoke/Slider/exports.test.tsx
+  s_0bbf9cbbdd4351::t_8dccb4830d0507 1-16
+packages/testing/smoke/Switch/exports.test.tsx
+  s_0bbf9cbbdd4351::t_ce936440eff283 1-15
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.4",
+  "base_commit_sha": "1e1c4268209e04b7167d839995a28af659f2973e",
+  "prompts": {},
+  "sessions": {
+    "s_06b5f8ba688430": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a0c2ec-7ea9-79b3-ab69-04b449d7af21",
+        "model": "unknown"
+      },
+      "human_author": "pk111and222 <pk111and222@sina.cn>"
+    },
+    "s_0bbf9cbbdd4351": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a0bd58-fb19-79d3-93c8-0af584023081",
+        "model": "gpt-6-astra"
+      },
+      "human_author": "pk111and222 <pk111and222@sina.cn>"
+    },
+    "s_4823ba265205e0": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a0c352-705d-7833-ad6d-b5d38f4f82af",
+        "model": "unknown"
+      },
+      "human_author": "pk111and222 <pk111and222@sina.cn>"
+    }
+  }
+}
