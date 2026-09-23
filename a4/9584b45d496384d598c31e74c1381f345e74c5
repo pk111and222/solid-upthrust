@@ -1,0 +1,578 @@
+packages/components/lib/Form/Item.tsx
+  s_9f5d0a9464ff08::t_06cb2bb4043000 184
+packages/testing/playwright.cascader.config.ts
+  s_628560b2129aa4::t_126c0d4c9a924a 1-20
+packages/components/lib/Select/index.tsx
+  s_9a4a0cdc18cb8c::t_1f6f5a8a42eb60 593-597
+  s_9a4a0cdc18cb8c::t_54a05d6aa75327 4,13-14,18-19,36,45,56,74-75,104-105,119,133-138,145-148,171-181,196-198,201-207,210,220,222,224-225,233,237,242,248,252,264,301-302,318,326,344-347,351-383,391-394,398,428-433,435-437,440-442,444-445,449,459-461,474-475,478-479,481,530,538,540-543,545,548-554,561-562,570-573,575,578-583,602
+  s_9a4a0cdc18cb8c::t_dcaacf38ca6581 592
+  s_9a4a0cdc18cb8c::t_2202831681c641 584
+  s_9a4a0cdc18cb8c::t_28e6c92b94886d 598
+  s_9a4a0cdc18cb8c::t_5ae1140e3887b4 603
+  s_f119b73608f4ee::t_ea1de6445273cb 600
+docs/src/examples/cascader/variants.tsx
+  s_628560b2129aa4::t_dee2c88f8f4ff8 1-2
+  s_9a4a0cdc18cb8c::t_e588828fba37e2 3
+packages/components/types/Cascader/index.d.ts
+  s_628560b2129aa4::t_f6086fdd818648 38-39
+  s_f119b73608f4ee::t_b38147a151d2a2 17-18
+packages/components/types/index.d.ts
+  s_9f5d0a9464ff08::t_afd39787570829 22
+packages/components/types/Select/styles.d.ts
+  s_9f5d0a9464ff08::t_afd39787570829 18,28
+packages/components/lib/TreeSelect/index.tsx
+  s_9a4a0cdc18cb8c::t_bf50e4d45a565e 48-49,62-63,66-67,70-75,215-216,239-241,246,249-263,269,272-280,283-289,291,320-323,325-329,353-354,391-392,403,412-415,417,420,434-435,444
+  s_9a4a0cdc18cb8c::t_1f6f5a8a42eb60 470-473
+  s_9a4a0cdc18cb8c::t_60329d011539bc 64-65,68-69
+  s_9a4a0cdc18cb8c::t_682716ecc3c970 3,178-179,182-189,191-192
+  s_9a4a0cdc18cb8c::t_de194c14d55162 451,480
+  s_9a4a0cdc18cb8c::t_54a05d6aa75327 454,456-459
+  s_9a4a0cdc18cb8c::t_84dc6806786470 445-447
+  s_9a4a0cdc18cb8c::t_a355ea0c49ef8d 455
+  s_9a4a0cdc18cb8c::t_ab67f9c91be227 474
+  s_f119b73608f4ee::t_1376f0b5936aa8 13,15,109-110,132-135,150-151,161,170-171,212,448-449,483
+docs/src/examples/cascader/checkable.tsx
+  s_628560b2129aa4::t_dee2c88f8f4ff8 1-3
+docs/src/pages/components/data-entry/cascader-option-api.json
+  s_628560b2129aa4::t_dee2c88f8f4ff8 1-7
+packages/components/lib/TreeSelect/styles.ts
+  s_9a4a0cdc18cb8c::t_54a05d6aa75327 147-151,165
+packages/components/types/Select/index.d.ts
+  s_9f5d0a9464ff08::t_afd39787570829 3,5,13,24,42-43
+docs/src/pages/components/data-entry/cascader-api.json
+  s_9a4a0cdc18cb8c::t_b343d941780a7e 8
+  s_628560b2129aa4::t_dee2c88f8f4ff8 1-7,9-22
+packages/components/types/Tree/index.d.ts
+  s_9a4a0cdc18cb8c::t_9d41c94c00815f 35-38
+  s_f119b73608f4ee::t_021d5b11216389 28-29
+packages/components/lib/_VirtualList/index.tsx
+  s_9a4a0cdc18cb8c::t_0ef89a21603e67 26
+docs/src/examples/cascader/search.tsx
+  s_628560b2129aa4::t_dee2c88f8f4ff8 1-2
+packages/testing/render/Cascader/contracts.test.tsx
+  s_628560b2129aa4::t_fb81a4bed3f36e 1-21,25-40,43-46,48-50,88
+  s_9a4a0cdc18cb8c::t_b343d941780a7e 80-87
+  s_9a4a0cdc18cb8c::t_e588828fba37e2 47,52-79
+  s_628560b2129aa4::t_52d080b2071176 22-24,41-42,51
+  s_9a4a0cdc18cb8c::t_1f6f5a8a42eb60 89-103
+  s_9a4a0cdc18cb8c::t_e140a4fb05230f 104
+packages/components/lib/AutoComplete/index.tsx
+  s_9f5d0a9464ff08::t_de7bdebe866ba9 3,8,40-41,67,105-107,115-117,123,125-130,132-133,139-143,148,152,167,179-180,182-186,188,192,205-209,213,233-240,247,249-252,260,268
+  s_9f5d0a9464ff08::t_6d2eb364f2ce29 86,89
+  s_9f5d0a9464ff08::t_fededbb5abc66a 118-120,124,187,231
+  s_9f5d0a9464ff08::t_8754d88bd16e4f 144-147
+  s_9f5d0a9464ff08::t_5225f957f7447e 210
+  s_9f5d0a9464ff08::t_edd24245d70f59 134-138
+  s_9f5d0a9464ff08::t_2d82f624f7be26 214
+  s_9f5d0a9464ff08::t_aa8de34014a715 87-88
+  s_9f5d0a9464ff08::t_b2cbe7ba6dcd8b 211-212
+  s_d46bc6e5c5daf0::t_c459e7c1e7e027 272
+docs/contributing/regressions/tree-select.md
+  s_9a4a0cdc18cb8c::t_dcaacf38ca6581 3,10-12,21,23,31-33
+  s_9a4a0cdc18cb8c::t_fdb2b1cfcc69c8 1-2,4-9,13-20,22,24-30
+  s_9a4a0cdc18cb8c::t_d86d30eb574749 34-36
+  s_f119b73608f4ee::t_f9061176d5e619 37-40
+packages/components/lib/Cascader/styles.ts
+  s_9a4a0cdc18cb8c::t_54a05d6aa75327 120,124-126,137,154-155
+packages/competence/types/select.d.ts
+  s_9f5d0a9464ff08::t_ba1142bf202568 5,8-13,24,49,53-54
+docs/src/examples/tree-select/basic.tsx
+  s_9a4a0cdc18cb8c::t_9344dc5bdfc830 12
+  s_9a4a0cdc18cb8c::t_ec4a45c32a020a 1-11,13-16
+packages/competence/src/trigger.ts
+  s_9f5d0a9464ff08::t_3e5cd3eed2118e 376-381
+  s_9f5d0a9464ff08::t_43c5bda480e705 382
+  s_d46bc6e5c5daf0::t_42b6308145e10e 21
+docs/src/examples/cascader/basic.tsx
+  s_628560b2129aa4::t_dee2c88f8f4ff8 1-8
+docs/src/examples/cascader/multiple.tsx
+  s_628560b2129aa4::t_dee2c88f8f4ff8 1-3
+packages/components/lib/AutoComplete/styles.ts
+  s_9f5d0a9464ff08::t_de7bdebe866ba9 14
+docs/src/pages/components/data-entry/auto-complete.tsx
+  s_9f5d0a9464ff08::t_de7bdebe866ba9 1-34
+docs/contributing/regressions/cascader.md
+  s_9a4a0cdc18cb8c::t_dcaacf38ca6581 5
+  s_628560b2129aa4::t_14b869fac97c0e 1-4,6-19
+  s_628560b2129aa4::t_218df89dde7d2b 20-22
+  s_f119b73608f4ee::t_75c62530c76f81 23-25
+TODO.md
+  s_628560b2129aa4::t_14b869fac97c0e 115,173
+  s_9a4a0cdc18cb8c::t_dcaacf38ca6581 117,175
+  s_628560b2129aa4::t_33095455d1cad5 112-114
+  s_9a4a0cdc18cb8c::t_5282eba900964b 118
+  s_9a4a0cdc18cb8c::t_5b26d1b48eff8e 176-178
+  s_f119b73608f4ee::t_69db1d93df7e3e 30,111,116,174
+packages/testing/smoke/Cascader/exports.test.tsx
+  s_628560b2129aa4::t_fb81a4bed3f36e 1-18
+example/src/pages/TreeSelect.tsx
+  s_9a4a0cdc18cb8c::t_60329d011539bc 65
+  s_9a4a0cdc18cb8c::t_da20d4cb777d51 2-3
+  s_9a4a0cdc18cb8c::t_9d41c94c00815f 66
+  s_9a4a0cdc18cb8c::t_0914d48ed88ed9 4
+  s_9a4a0cdc18cb8c::t_9344dc5bdfc830 53,63-64,67-69
+  s_9a4a0cdc18cb8c::t_d6f8cbe839c7a8 36-37,49,52,70-73,75,93,109,118,124,126,133-148,150
+packages/competence/types/selection.d.ts
+  s_9f5d0a9464ff08::t_ba1142bf202568 65,67
+docs/src/examples/tree-select/appearance.tsx
+  s_9a4a0cdc18cb8c::t_9344dc5bdfc830 1-11,13-18
+  s_9a4a0cdc18cb8c::t_60329d011539bc 12
+example/src/pages/Cascader.tsx
+  s_628560b2129aa4::t_fe19e9af7f8a44 122
+docs/src/pages/components/data-entry/tree-select-api.json
+  s_9a4a0cdc18cb8c::t_9344dc5bdfc830 8,13-15
+  s_9a4a0cdc18cb8c::t_60329d011539bc 11-12
+  s_9a4a0cdc18cb8c::t_f80d7b58ca5dfa 1-7,9-10,16-27
+packages/testing/browser/AutoComplete/interaction.spec.ts
+  s_9f5d0a9464ff08::t_32bc3b0edfc37c 79-81
+  s_9f5d0a9464ff08::t_de7bdebe866ba9 14-18,111-112
+  s_9f5d0a9464ff08::t_d70a77b15efeba 11-13
+  s_9f5d0a9464ff08::t_0ae94a0c4cd574 19-21,76-78
+  s_9f5d0a9464ff08::t_49311a15ebd357 82-84,108-110
+  s_9f5d0a9464ff08::t_c0382b2e6e12e2 113-115
+  s_d46bc6e5c5daf0::t_2a089eb353be18 1-10,22-75,85-107,116-124
+docs/src/pages/components/data-entry/tree-select.tsx
+  s_9a4a0cdc18cb8c::t_9344dc5bdfc830 13-37
+  s_9a4a0cdc18cb8c::t_ac3c34f5cfc36c 1-12,38-40
+packages/components/types/AutoComplete/index.d.ts
+  s_9f5d0a9464ff08::t_afd39787570829 24-25
+docs/src/pages/components/data-entry/cascader.tsx
+  s_9a4a0cdc18cb8c::t_e588828fba37e2 15
+  s_628560b2129aa4::t_dee2c88f8f4ff8 1-14,16-31
+docs/contributing/regressions/select.md
+  s_9a4a0cdc18cb8c::t_dcaacf38ca6581 1-66
+  s_9a4a0cdc18cb8c::t_c9f003abb5348c 67-69
+  s_f119b73608f4ee::t_4df00b20d8f278 70-71
+packages/testing/render/TreeSelect/contracts.test.tsx
+  s_9a4a0cdc18cb8c::t_60329d011539bc 193
+  s_9a4a0cdc18cb8c::t_e475daed8078be 158
+  s_9a4a0cdc18cb8c::t_de194c14d55162 73,88-101,106,111,115,129,131-150,191-192,194-196
+  s_9a4a0cdc18cb8c::t_37634213578b3f 172,185
+  s_9a4a0cdc18cb8c::t_fa8064a5d018bc 197-198
+  s_9a4a0cdc18cb8c::t_e588828fba37e2 108,123,151-157,159-169,176-177,206
+  s_9a4a0cdc18cb8c::t_b343d941780a7e 170-171,173-175
+  s_9a4a0cdc18cb8c::t_1f6f5a8a42eb60 23,31,41,61,74,86,116,178-184,186-190,199,220
+  s_9a4a0cdc18cb8c::t_c06f534d5f13ba 122
+  s_9a4a0cdc18cb8c::t_a456913f23fd1e 20-22
+  s_9a4a0cdc18cb8c::t_378c67b75ed5f3 24-26,28-30
+  s_9a4a0cdc18cb8c::t_6abc831f727f2c 32-34,38-40
+  s_9a4a0cdc18cb8c::t_0fa181daff309d 42-44,58-60
+  s_9a4a0cdc18cb8c::t_1e006384ab0901 62-64,70-72
+  s_9a4a0cdc18cb8c::t_a19750426c70e2 75-77,83-85
+  s_9a4a0cdc18cb8c::t_2b7b3a05230d4e 87
+  s_9a4a0cdc18cb8c::t_9adfb69b229900 102-105
+  s_9a4a0cdc18cb8c::t_501ec27f06d480 107
+  s_9a4a0cdc18cb8c::t_d275cf5ef30731 109-110
+  s_9a4a0cdc18cb8c::t_83eb5774a945e8 112-114
+  s_9a4a0cdc18cb8c::t_80d3a2382c0963 117-121
+  s_9a4a0cdc18cb8c::t_ec59aaa710a03a 124-128
+  s_9a4a0cdc18cb8c::t_79151b55063dfb 130
+  s_9a4a0cdc18cb8c::t_2df7266479eeda 200-205
+  s_9a4a0cdc18cb8c::t_c76754673bb66f 207-209,217-219
+  s_9a4a0cdc18cb8c::t_8c7e4412090b32 221-222
+  s_f119b73608f4ee::t_b3e592539c3ba6 1-19,27,35-37,45-57,65-69,78-82,210-216
+packages/testing/headless/Cascader/cascader.test.ts
+  s_628560b2129aa4::t_fb81a4bed3f36e 315-328
+packages/testing/browser/Cascader/interactions.spec.ts
+  s_628560b2129aa4::t_78275045c8f1de 30,37-38
+  s_628560b2129aa4::t_fe19e9af7f8a44 39
+  s_628560b2129aa4::t_049edf35fdd317 7,13,20,26
+  s_628560b2129aa4::t_835868dd061975 31
+  s_628560b2129aa4::t_126c0d4c9a924a 1-6,8-12,14-19,21-25,27-29,32-36,40-43
+  s_628560b2129aa4::t_1d976271289aa4 44-46
+  s_f119b73608f4ee::t_e95c6cf0b03d85 47-57
+packages/components/lib/Cascader/index.tsx
+  s_9a4a0cdc18cb8c::t_54a05d6aa75327 52-53,165,170-172,175,201-202,233-241,423-425,432-437
+  s_628560b2129aa4::t_c43f7e2423de04 73-74,337
+  s_9a4a0cdc18cb8c::t_e475daed8078be 166,169,173-174,184
+  s_9a4a0cdc18cb8c::t_0ef89a21603e67 426
+  s_628560b2129aa4::t_0add61bc60814a 283-288
+  s_9a4a0cdc18cb8c::t_1f6f5a8a42eb60 448-451
+  s_9a4a0cdc18cb8c::t_e57d32dd6a45f2 242
+  s_628560b2129aa4::t_dc22273549c967 289
+  s_628560b2129aa4::t_6a163a0fb61060 338
+  s_9a4a0cdc18cb8c::t_2abcce8f09660d 427
+  s_9a4a0cdc18cb8c::t_22939d25d19d92 452
+  s_f119b73608f4ee::t_292e57d6941e2c 15,429,496-497,536-537
+packages/components/lib/Tree/index.tsx
+  s_9a4a0cdc18cb8c::t_bf50e4d45a565e 219
+  s_9a4a0cdc18cb8c::t_54a05d6aa75327 220
+  s_9a4a0cdc18cb8c::t_3e0fa9f65a517f 33,76-77,79-87,103-121,128,135-136,140,165
+packages/testing/render/Select/contracts.test.tsx
+  s_9a4a0cdc18cb8c::t_b343d941780a7e 84-89
+  s_9a4a0cdc18cb8c::t_1f6f5a8a42eb60 92-104
+  s_9a4a0cdc18cb8c::t_e588828fba37e2 1-83,90-91,105-190
+  s_9a4a0cdc18cb8c::t_8ef2a3531538a6 191
+packages/testing/browser/TreeSelect/interactions.spec.ts
+  s_9a4a0cdc18cb8c::t_c7c7cafbd2a838 44,46
+  s_9a4a0cdc18cb8c::t_5060be75b0d45e 19,21,23,61,78,103
+  s_9a4a0cdc18cb8c::t_72d55d185e01f4 38-42,45,47-53,56-60,64-65,99
+  s_9a4a0cdc18cb8c::t_682716ecc3c970 12-14,24,29-30,36,69-70,80,85,87,94,100,110,112-117,119-124,128-129,140,159,170,177,180
+  s_9a4a0cdc18cb8c::t_0c7fac6ae6a3b2 118
+  s_9a4a0cdc18cb8c::t_3bec0742cfe337 43
+  s_9a4a0cdc18cb8c::t_9d41c94c00815f 15,22,35,54,62-63,101,179
+  s_9a4a0cdc18cb8c::t_1f217247156163 55
+  s_9a4a0cdc18cb8c::t_40bfb2dec3b8c5 9-11
+  s_9a4a0cdc18cb8c::t_1b3d28ceaac24b 16-18
+  s_9a4a0cdc18cb8c::t_75b52adb9b9d76 20
+  s_9a4a0cdc18cb8c::t_0b74bcf4dde671 25-28
+  s_9a4a0cdc18cb8c::t_8fef89b01559ce 31-34
+  s_9a4a0cdc18cb8c::t_52fd05ef6d574f 37
+  s_9a4a0cdc18cb8c::t_5570f651715876 66-68
+  s_9a4a0cdc18cb8c::t_feb3caf76c05c6 71-73,75-77
+  s_9a4a0cdc18cb8c::t_98c3fd51d67dc2 79
+  s_9a4a0cdc18cb8c::t_69795a12066159 81-84
+  s_9a4a0cdc18cb8c::t_09359c6b43b865 86
+  s_9a4a0cdc18cb8c::t_e029f6871a36b5 88-93
+  s_9a4a0cdc18cb8c::t_22d07c6d70fe3f 95-98
+  s_9a4a0cdc18cb8c::t_b5c27f55ad4de9 102
+  s_9a4a0cdc18cb8c::t_3ff2154e763a50 104-109
+  s_9a4a0cdc18cb8c::t_d003305e7bc047 111
+  s_9a4a0cdc18cb8c::t_d171aef6366991 125-127
+  s_9a4a0cdc18cb8c::t_5bc582efb8cfaa 130-132,137-139
+  s_9a4a0cdc18cb8c::t_61eaab8fe6d372 141-143,156-158
+  s_9a4a0cdc18cb8c::t_6878c81a674487 160-162,167-169
+  s_9a4a0cdc18cb8c::t_4e6d4f29453b44 171-176
+  s_9a4a0cdc18cb8c::t_d6e4a818e23693 178
+  s_f119b73608f4ee::t_7377b43950e024 1-8,74,133-136,144-155,163-166
+.playwright-cli/console-2026-09-23T10-57-44-522Z.log
+  s_f119b73608f4ee::t_23a0a5cd6b171d 1-99
+.playwright-cli/console-2026-09-23T11-00-08-997Z.log
+  s_f119b73608f4ee::t_59a93dab919731 1-288
+.playwright-cli/console-2026-09-23T11-02-09-584Z.log
+  s_f119b73608f4ee::t_0960988842ce03 1-159
+.playwright-cli/console-2026-09-23T11-31-33-647Z.log
+  s_f119b73608f4ee::t_a3c00982b0324d 1-6
+.playwright-cli/page-2026-09-23T10-57-44-692Z.yml
+  s_f119b73608f4ee::t_6ec3cc0f0f892c 1-394
+.playwright-cli/page-2026-09-23T10-58-03-590Z.yml
+  s_f119b73608f4ee::t_cf17722a15f847 1-419
+.playwright-cli/page-2026-09-23T10-58-19-905Z.yml
+  s_f119b73608f4ee::t_d4fb0b11d419a9 1-423
+.playwright-cli/page-2026-09-23T10-59-01-604Z.yml
+  s_f119b73608f4ee::t_96a556fd37185e 1-429
+.playwright-cli/page-2026-09-23T11-00-09-183Z.yml
+  s_f119b73608f4ee::t_17891fe2252dd2 1-470
+.playwright-cli/page-2026-09-23T11-00-25-503Z.yml
+  s_f119b73608f4ee::t_fb611ad1e2f3dc 1-532
+.playwright-cli/page-2026-09-23T11-02-09-683Z.yml
+  s_f119b73608f4ee::t_d333fd2d657cd1 1-394
+.playwright-cli/page-2026-09-23T11-02-23-433Z.yml
+  s_f119b73608f4ee::t_d39dc3d05b712a 1-419
+.playwright-cli/page-2026-09-23T11-02-30-265Z.yml
+  s_f119b73608f4ee::t_0d1faa14c152cc 1-429
+.playwright-cli/page-2026-09-23T11-31-33-797Z.yml
+  s_f119b73608f4ee::t_4c5095bd59f0c6 1-388
+.playwright-cli/page-2026-09-23T11-32-31-267Z.yml
+  s_f119b73608f4ee::t_a90c2c424bd091 1-388
+.playwright-cli/page-2026-09-23T11-34-24-057Z.yml
+  s_f119b73608f4ee::t_d56eb08bada95b 1-388
+docs/contributing/regressions/auto-complete.md
+  s_d46bc6e5c5daf0::t_4eaf0ce5c9f616 1-79
+docs/contributing/regressions/mentions.md
+  s_d46bc6e5c5daf0::t_a0df860e88e8e2 1-30
+docs/contributing/regressions/transfer.md
+  s_f119b73608f4ee::t_7c3b841c925a8d 1-46
+docs/src/examples/auto-complete/basic.tsx
+  s_fdb5200002dfee::t_f90db080a07435 1-13
+docs/src/examples/auto-complete/context.tsx
+  s_fdb5200002dfee::t_d05b1413315121 1-17
+docs/src/examples/auto-complete/filter.tsx
+  s_fdb5200002dfee::t_607b4c31430675 1-9
+docs/src/examples/auto-complete/keyboard.tsx
+  s_fdb5200002dfee::t_05ab1b70c0d267 1-17
+docs/src/examples/auto-complete/remote.tsx
+  s_fdb5200002dfee::t_85552e7423c98e 1-26
+docs/src/examples/auto-complete/variants.tsx
+  s_fdb5200002dfee::t_d087be8f705ce6 1-12
+docs/src/examples/mentions/basic.tsx
+  s_d46bc6e5c5daf0::t_b755f1308aac83 1-18
+docs/src/examples/mentions/form.tsx
+  s_d46bc6e5c5daf0::t_b20f872a7e4eb8 1-21
+docs/src/examples/mentions/prefix.tsx
+  s_d46bc6e5c5daf0::t_287881c6921737 1-11
+docs/src/examples/mentions/remote.tsx
+  s_d46bc6e5c5daf0::t_443bd61b5df976 1-24
+docs/src/examples/select/advanced.tsx
+  s_5ee9bd0dd8c51b::t_1e504906634243 1-16
+docs/src/examples/select/dependent.tsx
+  s_5ee9bd0dd8c51b::t_faef8e4e1c51bf 1-18
+docs/src/examples/select/grouped.tsx
+  s_5ee9bd0dd8c51b::t_006f71815143b8 1-14
+docs/src/examples/select/label-value.tsx
+  s_5ee9bd0dd8c51b::t_69f2d2aed724f2 1-12
+docs/src/examples/select/variants.tsx
+  s_5ee9bd0dd8c51b::t_2b94004a473b15 1-16
+docs/src/examples/transfer/basic.tsx
+  s_f119b73608f4ee::t_197f2ab18b628c 1-24
+docs/src/examples/transfer/dynamic.tsx
+  s_f119b73608f4ee::t_b2d542da1359d2 1-17
+docs/src/examples/transfer/form.tsx
+  s_f119b73608f4ee::t_9f02e2461c50a9 1-19
+docs/src/examples/transfer/one-way.tsx
+  s_f119b73608f4ee::t_a17bbe399c9977 1-20
+docs/src/examples/transfer/search.tsx
+  s_f119b73608f4ee::t_b720f99a026160 1-19
+docs/src/examples/transfer/variants.tsx
+  s_f119b73608f4ee::t_9401bec693fa70 1-11
+docs/src/examples/tree-select/controlled.tsx
+  s_d46bc6e5c5daf0::t_36a75239429ba5 1-20
+docs/src/examples/tree-select/form.tsx
+  s_d46bc6e5c5daf0::t_f8da812b84e937 1-16
+docs/src/examples/tree-select/multiple.tsx
+  s_d46bc6e5c5daf0::t_86d789bb7ab13a 1-16
+docs/src/examples/tree-select/search.tsx
+  s_d46bc6e5c5daf0::t_cf652d4369bccc 1-17
+docs/src/examples/tree-select/strict.tsx
+  s_d46bc6e5c5daf0::t_e83b838c0ca57a 1-19
+docs/src/examples/tree-select/variants.tsx
+  s_d46bc6e5c5daf0::t_8d1d92873c5617 1-13
+docs/src/examples/tree-select/virtual.tsx
+  s_d46bc6e5c5daf0::t_b5bfab1b738c06 1-13
+docs/src/pages/components/data-entry/auto-complete-api.json
+  s_fdb5200002dfee::t_4a2bcaa56e2db1 1-140
+docs/src/pages/components/data-entry/auto-complete-option-api.json
+  s_fdb5200002dfee::t_1b1670fa08e144 1-26
+docs/src/pages/components/data-entry/mentions-api.json
+  s_d46bc6e5c5daf0::t_f6e3ca5d1f0e2d 1-18
+docs/src/pages/components/data-entry/mentions-option-api.json
+  s_d46bc6e5c5daf0::t_0e6939147ef64f 1-5
+docs/src/pages/components/data-entry/mentions.tsx
+  s_d46bc6e5c5daf0::t_400b697510aedb 1-28
+docs/src/pages/components/data-entry/select-api.json
+  s_5ee9bd0dd8c51b::t_6d0ccdd001ac19 1-35
+docs/src/pages/components/data-entry/select-option-api.json
+  s_5ee9bd0dd8c51b::t_0b777a6192d8c8 1-6
+docs/src/pages/components/data-entry/select.tsx
+  s_5ee9bd0dd8c51b::t_cb2d90471daafc 1-53
+docs/src/pages/components/data-entry/transfer-api.json
+  s_f119b73608f4ee::t_122563ad8fc298 1-21
+docs/src/pages/components/data-entry/transfer-item-api.json
+  s_f119b73608f4ee::t_b1e2bf6b969104 1-6
+docs/src/pages/components/data-entry/transfer.tsx
+  s_f119b73608f4ee::t_0793121501ed4b 1-37
+docs/src/pages/components/data-entry/tree-select-node-api.json
+  s_d46bc6e5c5daf0::t_26b2b03a3f5140 1-8
+example/src/pages/AutoComplete.tsx
+  s_fdb5200002dfee::t_e521d18a534fa3 1-14
+example/src/pages/Mentions.tsx
+  s_d46bc6e5c5daf0::t_ddb17928a8badb 3,10-11,18-19,25-27,37-39,45,47,57,60
+example/src/pages/Select.tsx
+  s_5ee9bd0dd8c51b::t_644cda28c037e4 2-3,15-19,39,41,54,56,70,72,75,85-94,96,98,112,118,121-130,147,149-170
+example/src/pages/Transfer.tsx
+  s_f119b73608f4ee::t_d41b3b36ce408a 12,18,26,29,34,37,39-45,48,56
+example/src/pages/auto-complete-demos/basic.tsx
+  s_fdb5200002dfee::t_d63a73aa346b50 1-13
+example/src/pages/auto-complete-demos/context.tsx
+  s_fdb5200002dfee::t_fd59f0b80ea361 1-17
+example/src/pages/auto-complete-demos/filter.tsx
+  s_fdb5200002dfee::t_7093396ba2100b 1-9
+example/src/pages/auto-complete-demos/keyboard.tsx
+  s_fdb5200002dfee::t_d82b03f7676ab1 1-17
+example/src/pages/auto-complete-demos/remote.tsx
+  s_fdb5200002dfee::t_56209c9ca926a8 1-26
+example/src/pages/auto-complete-demos/variants.tsx
+  s_fdb5200002dfee::t_f3012baf6285f5 1-12
+output/playwright/auto-complete/cli/console-2026-09-22T06-07-16-229Z.log
+  s_30e15d446765d1::t_e7a578862d6d5c 1-53
+output/playwright/auto-complete/cli/page-2026-09-22T06-07-17-390Z.yml
+  s_fdb5200002dfee::t_db3cd2b2eb8cb9 1-409
+output/playwright/auto-complete/cli/page-2026-09-22T06-08-18-136Z.yml
+  s_fdb5200002dfee::t_7627135bd5781f 1-438
+output/playwright/auto-complete/logs/baseline.log
+  s_fdb5200002dfee::t_a9a0d52b5680a2 1-10
+output/playwright/auto-complete/logs/browser-final.log
+  s_fdb5200002dfee::t_7b2612725daca9 1-89
+output/playwright/auto-complete/logs/browser-recheck-2026-09-23.log
+  s_d46bc6e5c5daf0::t_041b07e25147cf 1-89
+output/playwright/auto-complete/logs/browser-types-final.log
+  s_fdb5200002dfee::t_e5a6e8db0f7510 1
+output/playwright/auto-complete/logs/browser-types.log
+  s_fdb5200002dfee::t_24f445ff4a929f 1
+output/playwright/auto-complete/logs/browser.log
+  s_fdb5200002dfee::t_07d40982b6210b 1-119
+output/playwright/auto-complete/logs/build.log
+  s_fdb5200002dfee::t_511cbaaa666a72 1-463
+output/playwright/auto-complete/logs/cli-close.log
+  s_fdb5200002dfee::t_f8d00418ff6b2a 1-9
+output/playwright/auto-complete/logs/docs-build.log
+  s_fdb5200002dfee::t_44877eeb53eca4 1-226
+output/playwright/auto-complete/logs/docs-recheck-2026-09-23.log
+  s_d46bc6e5c5daf0::t_2fb01cee4ced5b 1-238
+output/playwright/auto-complete/logs/full-recheck-2026-09-23.log
+  s_d46bc6e5c5daf0::t_633fdde0c8ded5 1-11
+output/playwright/auto-complete/logs/full.log
+  s_fdb5200002dfee::t_d6d1111ffbca8e 1-11
+output/playwright/auto-complete/logs/mentions-browser-recheck-2026-09-23.log
+  s_d46bc6e5c5daf0::t_760bbc03521748 1-135
+output/playwright/auto-complete/logs/red.log
+  s_fdb5200002dfee::t_56f2b30803fb7e 1-270
+output/playwright/auto-complete/logs/target.log
+  s_fdb5200002dfee::t_56da64afdba28c 1-10
+output/playwright/auto-complete/logs/typecheck-final.log
+  s_fdb5200002dfee::t_cd566becaa9515 1
+output/playwright/auto-complete/logs/typecheck.log
+  s_fdb5200002dfee::t_189ee32300c6f3 1
+output/playwright/auto-complete/logs/visual-server.log
+  s_fdb5200002dfee::t_826cb89e006d24 1-56
+packages/competence/src/autoComplete.ts
+  s_fdb5200002dfee::t_58c313b47b5cc7 96,98,107,110-111,116-117,127,135,139,148,177,180,184,188-197,207,221,223,245
+packages/competence/src/mentions.ts
+  s_d46bc6e5c5daf0::t_4c9abb04c75278 94,100-103,118-119,136,138,142,145,147,162,168,170,187,201,203,206-213,222,224-225,229,231,244,260,267,269-270,276-281,287,324-326,332,337,341,344,370
+packages/competence/src/select.ts
+  s_5ee9bd0dd8c51b::t_6310df87b7d62b 36,40-43,56,81,86-87,89,163-175,182,184,187,206,260,321,326,344,346-348
+packages/competence/src/selection.ts
+  s_5ee9bd0dd8c51b::t_0a745126633729 262,264,314-315
+packages/competence/src/transfer.ts
+  s_f119b73608f4ee::t_f188a595473272 1,27-28,68-72
+packages/competence/src/tree.ts
+  s_d46bc6e5c5daf0::t_83580c71b1437e 2,412,506-515,519,521,528,532,541-543,553,555,564-570,594,626,653,661,666,669,673,686-693,695-696,708-711
+packages/competence/types/mentions.d.ts
+  s_f119b73608f4ee::t_dedc872a3d8ac0 67,73-76
+packages/competence/types/trigger.d.ts
+  s_f119b73608f4ee::t_bf3d34a8f7bba3 12
+packages/components/lib/Mentions/index.tsx
+  s_d46bc6e5c5daf0::t_6e16a9f3d18c58 3,8,46-47,96-99,111-113,115,117-122,128,131-134,138-141,144-150,153-165,169-173,177-179,183,185,189-197,201,218-223,229,238-242,255-263,269,271-273,275,282,284-286,294,296
+packages/components/lib/Transfer/styles.ts
+  s_f119b73608f4ee::t_6f41f7abdd5ef4 4
+packages/components/lib/index.ts
+  s_5ee9bd0dd8c51b::t_fb1d649cc64162 24
+packages/components/types/Mentions/index.d.ts
+  s_f119b73608f4ee::t_4cba5d1ecf7faf 28-29
+packages/components/types/TreeSelect/index.d.ts
+  s_f119b73608f4ee::t_b728f2172f6848 22-23,36-49
+packages/components/types/TreeSelect/styles.d.ts
+  s_f119b73608f4ee::t_2d2398bdcfc51b 27-29
+packages/components/types/utils/clearableArrow.d.ts
+  s_f119b73608f4ee::t_5b4661780f8770 1-2
+packages/components/utils/clearableArrow.ts
+  s_f119b73608f4ee::t_75b23269e36437 1-25
+packages/testing/README.md
+  s_f119b73608f4ee::t_1702f1bcc659a0 152-161
+packages/testing/browser/Mentions/interactions.spec.ts
+  s_d46bc6e5c5daf0::t_b93ffdb8c20998 1-106
+packages/testing/browser/Select/interactions.spec.ts
+  s_5ee9bd0dd8c51b::t_1b5e5697493c39 1-327
+packages/testing/browser/Transfer/interactions.spec.ts
+  s_f119b73608f4ee::t_9c6349b28e0947 1-139
+packages/testing/headless/AutoComplete/autoComplete.test.ts
+  s_fdb5200002dfee::t_d1f9ade5501fa0 2,5-8,19,21,27,29,40,42,53,55,64,66,73,75,82,84,96,98,115,117,129,131,138,140,153,155,167,169,178,180,187,189
+packages/testing/headless/AutoComplete/dynamic.test.ts
+  s_fdb5200002dfee::t_5e6269a1b3f32e 1-49
+packages/testing/headless/Mentions/dynamic.test.ts
+  s_d46bc6e5c5daf0::t_4cd9c50356e0a2 1-99
+packages/testing/headless/Mentions/mentions.test.ts
+  s_d46bc6e5c5daf0::t_5b458aa774d3cb 6-9,18,26,32,39,45,53,60,69,74,82,84,93,95,104,106,115,117,125,127,138,140,151,153,160,162,170,172,179-180,182,186,188,195,197,209,211,224,226
+packages/testing/headless/Select/dynamic.test.ts
+  s_5ee9bd0dd8c51b::t_8455f3c6341006 1-79
+packages/testing/headless/Select/select.test.ts
+  s_5ee9bd0dd8c51b::t_acfef6f31a5b8e 14,28,39,49,60,71,82,94,108,121,130,148,161,172,183,200,210,219,231,244,253,262,277,288,299,313,324,335,348
+packages/testing/headless/Transfer/selection.test.ts
+  s_f119b73608f4ee::t_dc9412529c20dc 1-27
+packages/testing/headless/Transfer/transfer.test.ts
+  s_f119b73608f4ee::t_c8d3156330e489 6-9,12-13,25-26,33-34,41-42,53-54,63-64,70-71,79-80
+packages/testing/headless/TreeSelect/selection.test.ts
+  s_d46bc6e5c5daf0::t_376074cb639ea7 1-64
+packages/testing/playwright.auto-complete.config.ts
+  s_fdb5200002dfee::t_9214d9e4d8463f 1-20
+packages/testing/playwright.mentions.config.ts
+  s_d46bc6e5c5daf0::t_a6cf9d1c3011cb 1-20
+packages/testing/playwright.select.config.ts
+  s_5ee9bd0dd8c51b::t_7f3409c8046cb2 1-20
+packages/testing/playwright.transfer.config.ts
+  s_f119b73608f4ee::t_5016c54e2f0264 1-20
+packages/testing/playwright.tree-select.config.ts
+  s_d46bc6e5c5daf0::t_7ac2dd9924631b 1-20
+packages/testing/render/AutoComplete/contracts.test.tsx
+  s_fdb5200002dfee::t_3172f3fb301224 1-76
+packages/testing/render/AutoComplete/presentation.test.tsx
+  s_fdb5200002dfee::t_e87b3817e88c9e 1-63
+packages/testing/render/Mentions/contracts.test.tsx
+  s_d46bc6e5c5daf0::t_38d9819e7547e5 1-157
+packages/testing/render/Select/groups.test.tsx
+  s_5ee9bd0dd8c51b::t_a44ecef8b2be08 1-24
+packages/testing/render/Transfer/contracts.test.tsx
+  s_f119b73608f4ee::t_165f746682201c 1-121
+packages/testing/render/Transfer/form.test.tsx
+  s_f119b73608f4ee::t_92a30bda1664bc 1-44
+packages/testing/smoke/AutoComplete/mount.test.tsx
+  s_fdb5200002dfee::t_55e2cfe5499cb9 1-17
+packages/testing/smoke/Mentions/exports.test.tsx
+  s_d46bc6e5c5daf0::t_9b164db7ed9396 1-18
+packages/testing/smoke/Transfer/exports.test.tsx
+  s_f119b73608f4ee::t_2bf6ecbc9cdb96 1-34
+packages/testing/smoke/TreeSelect/exports.test.tsx
+  s_d46bc6e5c5daf0::t_546071f211c201 1-33
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.4",
+  "base_commit_sha": "a49584b45d496384d598c31e74c1381f345e74c5",
+  "prompts": {},
+  "sessions": {
+    "s_30e15d446765d1": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a0c7b8-e880-7263-bd88-e32abf6731cb",
+        "model": "unknown"
+      },
+      "human_author": "pk111and222 <pk111and222@sina.cn>"
+    },
+    "s_5ee9bd0dd8c51b": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a0c40f-4077-7963-bf96-a901f89a7564",
+        "model": "unknown"
+      },
+      "human_author": "pk111and222 <pk111and222@sina.cn>"
+    },
+    "s_628560b2129aa4": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a0c908-4202-7631-a0ca-c4896f92ebb9",
+        "model": "gpt-6-astra"
+      },
+      "human_author": "pk111and222 <pk111and222@sina.cn>"
+    },
+    "s_9a4a0cdc18cb8c": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a0cd58-ea3f-79c3-942e-874c5d7b4ce8",
+        "model": "gpt-6-sol"
+      },
+      "human_author": "pk111and222 <pk111and222@sina.cn>"
+    },
+    "s_9f5d0a9464ff08": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a0c812-d879-7521-be66-cee80d2aac29",
+        "model": "gpt-6-astra"
+      },
+      "human_author": "pk111and222 <pk111and222@sina.cn>"
+    },
+    "s_d46bc6e5c5daf0": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a0ccb4-15b8-7a01-ac7d-086acbfe8ea6",
+        "model": "unknown"
+      },
+      "human_author": "pk111and222 <pk111and222@sina.cn>"
+    },
+    "s_f119b73608f4ee": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a0cde3-3b10-7371-8e19-9b049d587e97",
+        "model": "unknown"
+      },
+      "human_author": "pk111and222 <pk111and222@sina.cn>"
+    },
+    "s_fdb5200002dfee": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a0c7ad-ef0e-7a80-a262-440d74378f4b",
+        "model": "unknown"
+      },
+      "human_author": "pk111and222 <pk111and222@sina.cn>"
+    }
+  }
+}
