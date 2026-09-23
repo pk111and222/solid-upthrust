@@ -1,0 +1,8 @@
+[
+  {"name":"value","type":"string | number","default":"必填","description":"节点键；整棵树中唯一。"},
+  {"name":"label","type":"string","default":"必填","description":"显示与默认搜索文本。"},
+  {"name":"children","type":"TreeSelectNode[]","default":"[]","description":"子节点数组。"},
+  {"name":"disabled","type":"boolean","default":"false","description":"禁用节点及其后代的选择和复选。"},
+  {"name":"selectable","type":"boolean","default":"true","description":"能否通过树行点选；不影响展开。"},
+  {"name":"checkable","type":"boolean","default":"true","description":"复选模式下该节点是否显示复选框；子节点仍可参与复选。"}
+]

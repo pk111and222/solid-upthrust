@@ -119,7 +119,7 @@ const CascaderPage: Component = () => {
       <h3 class="text-lg font-semibold mb-3">changeOnSelect / 禁用 / hover 展开</h3>
       <Space direction="vertical" size="middle" class="w-72">
         <Cascader options={options} changeOnSelect placeholder="选任意层级即提交" />
-        <Cascader options={options} disabled defaultValue={['zj', 'wz']} placeholder="禁用" />
+        <span data-cascader-demo="disabled"><Cascader options={options} disabled defaultValue={['zj', 'wz']} placeholder="禁用" /></span>
         <Cascader options={options} expandTrigger="hover" placeholder="hover 展开子级" />
       </Space>
       <Divider />

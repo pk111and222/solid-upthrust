@@ -9,11 +9,13 @@ export default function TransferPage() {
   const [disabled, setDisabled] = createSignal(false)
   const [log, setLog] = createSignal('')
   const [result, setResult] = createSignal('')
+  const [dynamicData, setDynamicData] = createSignal(data.slice(0, 3))
   let form: FormInstance | undefined
   return <div class="p-6 max-w-4xl">
     <h2 class="text-2xl font-bold mb-4">Transfer 穿梭框</h2>
     <p class="text-on-surface-variant mb-6">选择待分配的成员后移入右侧。列表勾选与最终分配结果独立管理。</p>
     <h3 class="text-lg font-semibold mb-3">受控选择、搜索与禁用</h3>
+    <div data-transfer-demo="basic">
     <div class="flex items-center gap-2 mb-3 text-sm"><Switch checked={disabled()} onChange={setDisabled} />禁用整个组件</div>
     <Transfer dataSource={data} targetKeys={keys()} selectedKeys={selected()} disabled={disabled()} showSearch
       titles={['可分配成员', '项目成员']} operations={['添加', '移除']}
@@ -21,17 +23,29 @@ export default function TransferPage() {
       onChange={(next, direction, moved) => { setKeys(next); setLog(`${direction === 'right' ? '添加' : '移除'} ${moved.length} 位成员`) }}
       onSearch={(direction, query) => setLog(`搜索${direction === 'left' ? '左侧' : '右侧'}：${query}`)} />
     <p class="text-sm text-on-surface-variant">目标 keys：{JSON.stringify(keys())}；{log()}</p>
+    </div>
     <Divider />
     <h3 class="text-lg font-semibold mb-3">单向穿梭、自定义内容与底部</h3>
+    <div data-transfer-demo="one-way">
     <Transfer dataSource={data} defaultTargetKeys={[0, 3]} defaultSelectedKeys={[2]} oneWay showSearch
       searchPlaceholder="按姓名或团队搜索" filterOption={(query, item) => `${item.title} ${item.description}`.includes(query)}
       render={item => <span>{item.title}<span class="ml-2 text-[12px] text-on-surface-variant">{item.description}</span></span>}
       footer={direction => direction === 'left' ? '成员 4 已锁定，不参与移动' : '点击 × 移除成员'} listStyle={{ width: '250px', height: '280px' }} />
+    </div>
     <Divider />
     <h3 class="text-lg font-semibold mb-3">空列表与隐藏全选</h3>
+    <div data-transfer-demo="variants">
     <Transfer dataSource={[]} showSelectAll={false} notFoundContent="暂无可分配资源" listStyle={{ height: '150px' }} status="warning" />
+    </div>
+    <Divider />
+    <h3 class="text-lg font-semibold mb-3">动态数据源</h3>
+    <div data-transfer-demo="dynamic">
+    <Transfer dataSource={dynamicData()} defaultTargetKeys={[0]} listStyle={{ height: '180px' }} />
+    <button type="button" onClick={() => setDynamicData(current => current.length === 3 ? data.slice(0, 6) : data.slice(0, 3))}>切换候选数据</button>
+    </div>
     <Divider />
     <h3 class="text-lg font-semibold mb-3">表单校验</h3>
+    <div data-transfer-demo="form">
     <Form ref={value => { form = value }} initialValues={{ members: [] }} onFinish={values => setResult(JSON.stringify(values))}>
       <FormItem name="members" label="项目成员" rules={[{ type: 'array', required: true, min: 1, message: '请至少添加一位成员' }]}>
         <Transfer dataSource={data} />
@@ -39,5 +53,6 @@ export default function TransferPage() {
       <Button variant="solid" onClick={() => { void form?.submit().catch(() => {}) }}>提交</Button>
     </Form>
     <p class="text-sm text-on-surface-variant" role="status">{result()}</p>
+    </div>
   </div>
 }

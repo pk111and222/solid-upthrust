@@ -1,6 +1,6 @@
 import { ConfigPortal as Portal } from '../ConfigProvider/Portal'
 import { useComponentProps } from '../ConfigProvider/context'
-import { Component, For, Show, createEffect, merge } from 'solid-js'
+import { Component, For, Show, createEffect, createSignal, createUniqueId, merge, untrack, useContext } from 'solid-js'
 import { type JSX } from '@solidjs/web'
 import { twMerge } from 'tailwind-merge'
 import {
@@ -10,8 +10,9 @@ import {
   type TreeSelectNode,
 } from 'upthrust-competence'
 import type { SizeType } from '../../common/type'
-import { useFormItem } from '../Input/context'
+import { FormItemContext, useFormItem } from '../Input/context'
 import { TreeInPanel } from '../Tree'
+import { createDelayedArrow } from '../../utils/clearableArrow'
 import {
   treeSelectArrowWrapClass,
   treeSelectClearWrapClass,
@@ -44,6 +45,8 @@ export interface TreeSelectProps {
   treeCheckStrictly?: boolean
   /** Which nodes the value reports: SHOW_PARENT (default) | SHOW_CHILD | SHOW_ALL. */
   treeCheckStrategy?: 'SHOW_PARENT' | 'SHOW_CHILD' | 'SHOW_ALL'
+  /** Show the clear button while a value is selected. */
+  allowClear?: boolean
   disabled?: boolean
   showSearch?: boolean
   placeholder?: string
@@ -56,6 +59,20 @@ export interface TreeSelectProps {
   defaultOpen?: boolean
   /** Expand every branch in the dropdown tree on first open. Default false. */
   defaultExpandAll?: boolean
+  /** Render connector lines in the dropdown tree. */
+  showLine?: boolean
+  /** Ant Design-compatible alias for showLine. */
+  treeLine?: boolean
+  /** Render default or custom node icons in the dropdown tree. */
+  showIcon?: boolean
+  /** Ant Design-compatible alias for showIcon. */
+  treeIcon?: boolean
+  /** Custom node icon renderer, called with the node and its expanded state. */
+  icon?: (node: TreeSelectNode, expanded: boolean) => JSX.Element
+  /** Custom node title renderer. */
+  titleRender?: (node: TreeSelectNode) => JSX.Element
+  /** Indentation between tree levels, in pixels. */
+  indent?: number
   /** Controlled expanded keys of the dropdown tree. */
   expandedKeys?: Array<string | number>
   onExpand?: (expandedKeys: Array<string | number>, info: { node: TreeSelectNode; expanded: boolean }) => void
@@ -89,6 +106,8 @@ export interface TreeSelectProps {
 const TreeSelect: Component<TreeSelectProps> = providedProps => {
   const rawProps = useComponentProps('TreeSelect', providedProps)
   const props = merge({}, rawProps)
+  const fieldContext = useContext(FormItemContext)
+  const hasExplicitValue = Object.prototype.hasOwnProperty.call(providedProps, 'value')
 
   const form = useFormItem({
     get value() { return props.value },
@@ -110,7 +129,10 @@ const TreeSelect: Component<TreeSelectProps> = providedProps => {
 
   // Created ONCE (the createMemo-wraps-machine pitfall — see Select).
   const machine = createTreeSelect({
-    get value() { return form.value() as TreeSelectProps['value'] },
+    get value() {
+      const value = form.value() as TreeSelectProps['value']
+      return value === undefined && (hasExplicitValue || fieldContext?.id() !== undefined) ? [] : value
+    },
     get defaultValue() { return props.defaultValue },
     get treeData() { return props.treeData },
     get mode() { return props.mode },
@@ -125,8 +147,8 @@ const TreeSelect: Component<TreeSelectProps> = providedProps => {
     get onExpand() { return props.onExpand },
     get onOpenChange() { return props.onOpenChange },
     onChange: (value, nodes) => {
-      form.onChange(value)
-      props.onChange?.(value, nodes)
+      if (props.onChange) props.onChange(value, nodes)
+      else form.onChange(value)
     },
     get onSelect() { return props.onSelect },
     get onDeselect() { return props.onDeselect },
@@ -136,6 +158,7 @@ const TreeSelect: Component<TreeSelectProps> = providedProps => {
 
   const trigger = createTrigger({
     get open() { return props.open },
+    get defaultOpen() { return props.defaultOpen },
     get disabled() { return resolvedDisabled() },
     action: 'click',
     placement: 'bottomLeft',
@@ -144,17 +167,29 @@ const TreeSelect: Component<TreeSelectProps> = providedProps => {
   })
 
   const m = () => machine
-  const open = () => trigger.open()
+  const open = () => !resolvedDisabled() && trigger.open()
+  const treeId = `tree-select-tree-${createUniqueId()}`
 
   createEffect(() => open(), (isOpen) => {
     machine.setOpen(isOpen)
   })
 
   const selectorRef: { current?: HTMLDivElement } = {}
+  const [selectorWidth, setSelectorWidth] = createSignal(0, { ownedWrite: true })
+  let sizeObserver: ResizeObserver | undefined
   const setSelectorRef = (el: HTMLDivElement) => {
     selectorRef.current = el
-    props.ref?.(el)
+    const measure = () => setSelectorWidth(el.getBoundingClientRect().width)
+    measure()
+    if (typeof ResizeObserver !== 'undefined') {
+      sizeObserver?.disconnect()
+      sizeObserver = new ResizeObserver(measure)
+      sizeObserver.observe(el)
+    }
+    untrack(() => props.ref?.(el))
   }
+  const onOwnerCleanup = createOwnerCleanup()
+  onOwnerCleanup(() => sizeObserver?.disconnect())
   const inputRef: { current?: HTMLInputElement } = {}
   const setInputRef = (el: HTMLInputElement) => {
     inputRef.current = el
@@ -164,7 +199,6 @@ const TreeSelect: Component<TreeSelectProps> = providedProps => {
   // The effect's dual-function form runs its CLEANUP callback outside the
   // effect's owner context in this Solid 2 rc — plain onCleanup there warns
   // [NO_OWNER_CLEANUP] and never runs. Bind to the component owner instead.
-  const onOwnerCleanup = createOwnerCleanup()
   createEffect(() => open(), (isOpen) => {
     if (!isOpen) return
     const t = setTimeout(() => {
@@ -175,9 +209,11 @@ const TreeSelect: Component<TreeSelectProps> = providedProps => {
   })
 
   const searching = () => m().searchValue() !== ''
+  const hasTree = () => m().tree().displayTree().length > 0
 
   const showClear = () =>
-    m().value().length > 0 && !resolvedDisabled() && !searching()
+    !!props.allowClear && m().value().length > 0 && !resolvedDisabled() && !searching()
+  const showArrow = createDelayedArrow(showClear)
 
   // ---- display ---------------------------------------------------------------
 
@@ -200,34 +236,59 @@ const TreeSelect: Component<TreeSelectProps> = providedProps => {
 
   // ---- interactions -----------------------------------------------------------
 
-  // The trigger's NATIVE click on the selector stops propagation — the ×
-  // and tag-close buttons must use pointerdown (the Select pitfall).
+  // The trigger listens for native clicks on the selector. Inner buttons
+  // handle clicks directly and stop them before they reach the trigger.
+  const stopInnerPointerDown = (e: PointerEvent) => {
+    e.preventDefault()
+    e.stopPropagation()
+  }
+
   const handleClearPointerDown = (e: PointerEvent) => {
     e.preventDefault()
     e.stopPropagation()
-    m().clear()
   }
 
-  const handleTagClosePointerDown = (e: PointerEvent, key: string | number) => {
-    e.preventDefault()
+  const bindNativeClick = (el: HTMLElement, handler: (e: MouseEvent) => void) => {
+    el.addEventListener('click', handler)
+    onOwnerCleanup(() => el.removeEventListener('click', handler))
+  }
+
+  const handleClearClick = (e: MouseEvent) => {
     e.stopPropagation()
+    if (!resolvedDisabled()) m().clear()
+  }
+
+  const handleTagCloseClick = (e: MouseEvent, key: string | number) => {
+    e.stopPropagation()
+    if (resolvedDisabled()) return
     m().removeKey(key)
   }
 
   const handleSearchKeyDown = (e: KeyboardEvent) => {
     if (resolvedDisabled()) return
+    if (!open()) return
     switch (e.key) {
       case 'Escape':
-        if (open()) {
-          e.preventDefault()
-          trigger.setOpen(false)
-        }
+        e.preventDefault(); e.stopPropagation(); trigger.setOpen(false)
+        return
+      case 'ArrowDown':
+      case 'ArrowUp':
+      case 'ArrowLeft':
+      case 'ArrowRight':
+      case 'Home':
+      case 'End':
+        e.preventDefault(); e.stopPropagation(); m().tree().navigate(e.key)
         return
       case 'Enter':
-        if (open()) {
-          e.preventDefault()
-          trigger.setOpen(false)
+        e.preventDefault(); e.stopPropagation()
+        const active = m().tree().activeKey()
+        if (active === undefined) return
+        if (m().isCheckable()) m().toggleCheck(active)
+        else {
+          m().pickNode(active)
+          if (!m().isMultiple()) m().tree().clear()
         }
+        if (!m().isMultiple()) { trigger.setOpen(false); selectorRef.current?.focus() }
         return
     }
   }
@@ -256,10 +317,16 @@ const TreeSelect: Component<TreeSelectProps> = providedProps => {
   /** A row picked in the panel tree: single commits + closes; multiple
    *  toggles through the tree's own check/select. */
   const handlePick = (value: string | number) => {
-    if (m().isMultiple()) return
+    if (m().isCheckable()) {
+      m().toggleCheck(value)
+      return
+    }
     m().pickNode(value)
-    trigger.setOpen(false)
-    selectorRef.current?.focus()
+    if (!m().isMultiple()) {
+      m().tree().clear()
+      trigger.setOpen(false)
+      selectorRef.current?.focus()
+    }
   }
 
   return (
@@ -283,6 +350,8 @@ const TreeSelect: Component<TreeSelectProps> = providedProps => {
         aria-expanded={open() ? 'true' : 'false'}
         aria-haspopup="tree"
         aria-disabled={resolvedDisabled() ? 'true' : 'false'}
+        aria-controls={open() && hasTree() ? treeId : undefined}
+        aria-invalid={resolvedStatus() === 'error' ? 'true' : undefined}
       >
         <Show
           when={m().isMultiple()}
@@ -319,6 +388,8 @@ const TreeSelect: Component<TreeSelectProps> = providedProps => {
                 ref={setInputRef}
                 class={twMerge(treeSelectSearchInputClass(), 'absolute', 'opacity-0', 'w-full', 'h-full', 'left-0', 'cursor-auto')}
                 value={m().searchValue()}
+                aria-label="搜索树节点"
+                aria-controls={open() && hasTree() ? treeId : undefined}
                 disabled={resolvedDisabled()}
                 autocomplete="off"
                 onInput={e => m().setSearchValue((e.target as HTMLInputElement).value)}
@@ -329,7 +400,7 @@ const TreeSelect: Component<TreeSelectProps> = providedProps => {
         >
           <div class="flex flex-wrap items-center flex-1 min-w-0">
             <Show when={m().value().length === 0 && !searching()}>
-              <span class={treeSelectItemClass({ state: 'placeholder', size: resolvedSize() })}>
+              <span class={twMerge(treeSelectItemClass({ state: 'placeholder', size: resolvedSize() }), 'ml-[7px]')}>
                 {props.placeholder ?? '请选择'}
               </span>
             </Show>
@@ -338,15 +409,15 @@ const TreeSelect: Component<TreeSelectProps> = providedProps => {
                 <span class={treeSelectTagWrapClass({ disabled: resolvedDisabled() })}>
                   <span class="truncate max-w-[160px]">{tag.label}</span>
                   <Show when={!resolvedDisabled()}>
-                    <span
-                      class={treeSelectTagCloseWrapClass()}
-                      role="button"
+                    <button
+                      type="button"
+                      ref={el => bindNativeClick(el, e => handleTagCloseClick(e, tag.key))}
+                      class={twMerge(treeSelectTagCloseWrapClass(), 'border-none bg-transparent p-0')}
                       aria-label={`移除 ${tag.label}`}
-                      tabindex={-1}
-                      onPointerDown={e => handleTagClosePointerDown(e, tag.key)}
+                      onPointerDown={stopInnerPointerDown}
                     >
                       <span class="i-mdi-close" />
-                    </span>
+                    </button>
                   </Show>
                 </span>
               )}
@@ -360,6 +431,8 @@ const TreeSelect: Component<TreeSelectProps> = providedProps => {
                 class={treeSelectSearchInputClass()}
                 style={{ width: m().searchValue() ? 'auto' : '2px', 'min-width': '2px' }}
                 value={m().searchValue()}
+                aria-label="搜索树节点"
+                aria-controls={open() && hasTree() ? treeId : undefined}
                 disabled={resolvedDisabled()}
                 autocomplete="off"
                 onInput={e => m().setSearchValue((e.target as HTMLInputElement).value)}
@@ -368,21 +441,24 @@ const TreeSelect: Component<TreeSelectProps> = providedProps => {
             </Show>
           </div>
         </Show>
-        <span class={treeSelectSuffixWrapClass()}>
-          <Show when={m().value().length > 0}>
-            <span
-              class={treeSelectClearWrapClass({ visible: showClear() })}
-              role="button"
+        <span class={treeSelectSuffixWrapClass({ size: resolvedSize() })}>
+          <Show when={props.allowClear}>
+            <button
+              type="button"
+              ref={el => bindNativeClick(el, handleClearClick)}
+              class={twMerge(treeSelectClearWrapClass({ visible: showClear() }), 'border-none bg-transparent p-0')}
               aria-label="清空"
-              tabindex={-1}
+              tabindex={showClear() ? 0 : -1}
               onPointerDown={handleClearPointerDown}
             >
-              <span class="i-mdi-close-circle-outline" />
+              <span class="i-mdi-close" />
+            </button>
+          </Show>
+          <Show when={!showClear() && showArrow()}>
+            <span class={treeSelectArrowWrapClass({ open: open() })}>
+              <span class="i-mdi-chevron-down" />
             </span>
           </Show>
-          <span class={treeSelectArrowWrapClass({ open: open() })}>
-            <span class="i-mdi-chevron-down" />
-          </span>
         </span>
       </div>
 
@@ -391,16 +467,20 @@ const TreeSelect: Component<TreeSelectProps> = providedProps => {
           <div
             ref={(el) => { trigger.layerRef(el) }}
             class={treeSelectDropdownWrapClass({ visible: open(), placement: trigger.actualPlacement() })}
-            style={trigger.layerStyle()}
+            style={{
+              ...trigger.layerStyle(),
+              width: props.style?.width !== undefined ? `${selectorWidth()}px` : 'max-content',
+              'min-width': props.style?.width === undefined && selectorWidth() > 0 ? `${selectorWidth()}px` : undefined,
+            }}
             aria-hidden={open() ? undefined : 'true'}
             inert={!open()}
             tabindex={-1}
           >
             <Show
-              when={m().tree().displayTree().length > 0}
+              when={hasTree()}
               fallback={<div class={treeSelectEmptyClass()}>{props.notFoundContent ?? '无数据'}</div>}
             >
-              <TreeInPanel machine={m().tree()} onPick={handlePick} virtual={props.virtual} listHeight={props.listHeight} listItemHeight={props.listItemHeight} />
+              <TreeInPanel machine={m().tree()} treeId={treeId} multiple={m().isMultiple()} onPick={handlePick} virtual={props.virtual} listHeight={props.listHeight} listItemHeight={props.listItemHeight} showLine={props.treeLine ?? props.showLine} showIcon={props.treeIcon ?? props.showIcon} icon={props.icon} titleRender={props.titleRender} indent={props.indent} />
             </Show>
           </div>
         </Show>

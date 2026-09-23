@@ -62,9 +62,9 @@ export type SelectionConfig = {
      * Max simultaneously selectable keys. 1 = radio semantics (a new pick
      * REPLACES the old one); Infinity = checkbox semantics.
      */
-    maxSelect?: number;
+    maxSelect?: number | (() => number);
     /** Whether an already-selected key can be deselected. Radio = false. */
-    allowDeselect?: boolean;
+    allowDeselect?: boolean | (() => boolean);
     onChange?: (value: Array<string | number>) => void;
     /** Form integration: rules for the enclosing Item. */
     rules?: FormFieldRule[];

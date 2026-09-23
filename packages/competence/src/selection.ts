@@ -259,9 +259,9 @@ export type SelectionConfig = {
    * Max simultaneously selectable keys. 1 = radio semantics (a new pick
    * REPLACES the old one); Infinity = checkbox semantics.
    */
-  maxSelect?: number
+  maxSelect?: number | (() => number)
   /** Whether an already-selected key can be deselected. Radio = false. */
-  allowDeselect?: boolean
+  allowDeselect?: boolean | (() => boolean)
   onChange?: (value: Array<string | number>) => void
   /** Form integration: rules for the enclosing Item. */
   rules?: FormFieldRule[]
@@ -311,8 +311,8 @@ export const createSelection = (config: SelectionConfig = {}): SelectionIns => {
   const value = createMemo<Array<string | number>>(() => controlledValue(config) ?? _value())
 
   const options = () => config.options ?? []
-  const maxSelect = () => config.maxSelect ?? Infinity
-  const allowDeselect = () => config.allowDeselect ?? true
+  const maxSelect = () => typeof config.maxSelect === 'function' ? config.maxSelect() : config.maxSelect ?? Infinity
+  const allowDeselect = () => typeof config.allowDeselect === 'function' ? config.allowDeselect() : config.allowDeselect ?? true
 
   const isDisabled = (v: string | number) => {
     if (config.disabled) return true

@@ -2,9 +2,15 @@ import { SelectionIns, SelectionOption } from './selection';
 import { FormFieldRule } from './formField';
 /** A Select option — a SelectionOption plus rc-select extras. */
 export type SelectOption = SelectionOption & {
-    /** Optional grouping header (antd group label) — presentational. */
+    /** Optional group label for flat option arrays. */
     group?: string;
 };
+/** Nested option group, in addition to the flat SelectOption.group form. */
+export type SelectOptionGroup = {
+    label: string;
+    options: SelectOption[];
+};
+export type SelectOptionEntry = SelectOption | SelectOptionGroup;
 export type SelectMode = 'single' | 'multiple' | 'tags';
 export type SelectLabelInValue = {
     value: string | number;
@@ -15,7 +21,7 @@ export type SelectConfig = {
     /** Controlled selected key(s). Single: one key; multiple/tags: array. */
     value?: string | number | Array<string | number>;
     defaultValue?: string | number | Array<string | number>;
-    options?: SelectOption[];
+    options?: SelectOptionEntry[];
     /** 'single' (default), 'multiple', or 'multiple' + free entry. */
     mode?: SelectMode;
     disabled?: boolean;
@@ -40,14 +46,12 @@ export type SelectConfig = {
     onClear?: () => void;
     onSelect?: (value: string | number, option: SelectOption) => void;
     onDeselect?: (value: string | number, option: SelectOption) => void;
-    onChange?: (value: SelectConfig['labelInValue'] extends true ? never : never) => void;
+    onChange?: (value: SelectChangeValue) => void;
     /** Form integration: rules for the enclosing Item. */
     rules?: FormFieldRule[];
 };
-export type SelectChangeValue = string | number | Array<string | number> | SelectLabelInValue | Array<SelectLabelInValue>;
-export type SelectConfigFull = Omit<SelectConfig, 'onChange'> & {
-    onChange?: (value: SelectChangeValue) => void;
-};
+export type SelectChangeValue = string | number | Array<string | number> | SelectLabelInValue | Array<SelectLabelInValue> | undefined;
+export type SelectConfigFull = SelectConfig;
 export type SelectIns = {
     /** The effective selected keys (array form internally). */
     value: () => Array<string | number>;

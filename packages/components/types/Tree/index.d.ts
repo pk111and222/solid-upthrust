@@ -25,10 +25,16 @@ export interface TreeProps extends TreeConfig {
 declare const Tree: Component<TreeProps>;
 export declare const TreeInPanel: Component<{
     machine: TreeIns;
+    treeId?: string;
+    multiple?: boolean;
     indent?: number;
     virtual?: boolean;
     listHeight?: number;
     listItemHeight?: number;
     onPick?: (key: string | number) => void;
+    showLine?: boolean;
+    showIcon?: boolean;
+    icon?: TreeProps['icon'];
+    titleRender?: TreeProps['titleRender'];
 }>;
 export default Tree;

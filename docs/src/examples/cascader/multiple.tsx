@@ -1,0 +1,3 @@
+import { createSignal } from 'solid-js'
+import Cascader from 'upthrust-ui/source/Cascader'
+export default function Multiple() { const [value, setValue] = createSignal<Array<Array<string>>>([]); return <div class="flex flex-col gap-3 max-w-sm"><Cascader aria-label="多个地区" mode="multiple" options={[{ value: 'east', label: '华东', children: [{ value: 'sh', label: '上海' }, { value: 'hz', label: '杭州' }] }, { value: 'north', label: '华北', children: [{ value: 'bj', label: '北京' }] }]} value={value()} onChange={v => setValue((v as Array<Array<string>>) ?? [])} /><output>{JSON.stringify(value())}</output></div> }

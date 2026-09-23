@@ -1,0 +1,140 @@
+[
+  {
+    "name": "value",
+    "type": "string",
+    "default": "—",
+    "description": "受控文本，优先于表单注入值。"
+  },
+  {
+    "name": "defaultValue",
+    "type": "string",
+    "default": "''",
+    "description": "非受控初始文本。"
+  },
+  {
+    "name": "options",
+    "type": "AutoCompleteOption[]",
+    "default": "[]",
+    "description": "候选池；支持动态更新。"
+  },
+  {
+    "name": "filterOption",
+    "type": "((input, option) => boolean) | false",
+    "default": "忽略大小写子串匹配",
+    "description": "false 保留全部候选；匹配 value 与 label。"
+  },
+  {
+    "name": "disabled",
+    "type": "boolean",
+    "default": "false",
+    "description": "禁用输入和选择，并隐藏浮层。"
+  },
+  {
+    "name": "placeholder",
+    "type": "string",
+    "default": "—",
+    "description": "原生输入占位符。"
+  },
+  {
+    "name": "size",
+    "type": "'small' | 'middle' | 'large'",
+    "default": "'middle'",
+    "description": "输入尺寸，可由 Form.Item 注入。"
+  },
+  {
+    "name": "status",
+    "type": "'error' | 'warning'",
+    "default": "—",
+    "description": "校验外观，错误时设置 aria-invalid。"
+  },
+  {
+    "name": "open",
+    "type": "boolean",
+    "default": "—",
+    "description": "受控浮层状态，禁用时隐藏。"
+  },
+  {
+    "name": "defaultOpen",
+    "type": "boolean",
+    "default": "false",
+    "description": "初始浮层状态。"
+  },
+  {
+    "name": "onOpenChange",
+    "type": "(open: boolean) => void",
+    "default": "—",
+    "description": "请求展开或关闭。"
+  },
+  {
+    "name": "onChange",
+    "type": "(value: string) => void",
+    "default": "—",
+    "description": "输入、选中建议时报告文本。"
+  },
+  {
+    "name": "onSearch",
+    "type": "(value: string) => void",
+    "default": "—",
+    "description": "输入提交时报告文本，IME 结束后一次。"
+  },
+  {
+    "name": "onSelect",
+    "type": "(value: string, option: AutoCompleteOption) => void",
+    "default": "—",
+    "description": "选中建议时报告原始键和对象。"
+  },
+  {
+    "name": "onFocus",
+    "type": "(event: FocusEvent) => void",
+    "default": "—",
+    "description": "原生焦点事件，仅调用一次。"
+  },
+  {
+    "name": "onBlur",
+    "type": "(event: FocusEvent) => void",
+    "default": "—",
+    "description": "原生焦点事件，仅调用一次。"
+  },
+  {
+    "name": "ref",
+    "type": "(input: HTMLInputElement) => void",
+    "default": "—",
+    "description": "获取输入节点。"
+  },
+  {
+    "name": "id",
+    "type": "string",
+    "default": "—",
+    "description": "输入节点 ID；可由 Form.Item 注入。"
+  },
+  {
+    "name": "name",
+    "type": "string",
+    "default": "—",
+    "description": "原生表单字段名。"
+  },
+  {
+    "name": "aria-label",
+    "type": "string",
+    "default": "—",
+    "description": "输入的无障碍名称。"
+  },
+  {
+    "name": "aria-labelledby",
+    "type": "string",
+    "default": "—",
+    "description": "输入标签节点 ID。"
+  },
+  {
+    "name": "class",
+    "type": "string",
+    "default": "—",
+    "description": "外层容器类名。"
+  },
+  {
+    "name": "style",
+    "type": "JSX.CSSProperties",
+    "default": "—",
+    "description": "外层容器样式，可设置宽度。"
+  }
+]

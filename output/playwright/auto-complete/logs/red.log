@@ -1,0 +1,270 @@
+$ vitest run headless/AutoComplete render/AutoComplete
+
+ RUN  v4.1.10 /Users/zhangchen327/code/github/pk111and222/solid-upthrust/packages/testing
+
+ ❯ headless/AutoComplete/dynamic.test.ts (4 tests | 4 failed) 8ms
+   × [autocomplete.dynamic.suggestions] tracks all external inputs 5ms
+   × [autocomplete.controlled.filter] rejected edits do not drift suggestions 1ms
+   × [autocomplete.dynamic.active] stale active cannot be committed 1ms
+   × [autocomplete.disabled.commands] blocks editing and composition 1ms
+stderr | render/AutoComplete/contracts.test.tsx > [autocomplete.events.focus] focus and blur fire once with real events
+[STRICT_READ_UNTRACKED] Reactive value read directly in <[solid-refresh]AutoComplete> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+[STRICT_READ_UNTRACKED] Reactive value read directly in <[solid-refresh]AutoComplete> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+[STRICT_READ_UNTRACKED] Reactive value read directly in <[solid-refresh]AutoComplete> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+[STRICT_READ_UNTRACKED] Reactive value read directly in <[solid-refresh]AutoComplete> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+[STRICT_READ_UNTRACKED] Reactive value read directly in <[solid-refresh]AutoComplete> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+[STRICT_READ_UNTRACKED] Reactive value read directly in <[solid-refresh]AutoComplete> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+[STRICT_READ_UNTRACKED] Reactive value read directly in an effect callback will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+
+stderr | render/AutoComplete/contracts.test.tsx > [autocomplete.keyboard.commit] enter selects and closes
+[STRICT_READ_UNTRACKED] Reactive value read directly in <[solid-refresh]AutoComplete> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+[STRICT_READ_UNTRACKED] Reactive value read directly in <[solid-refresh]AutoComplete> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+[STRICT_READ_UNTRACKED] Reactive value read directly in <[solid-refresh]AutoComplete> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+[STRICT_READ_UNTRACKED] Reactive value read directly in an effect callback will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+
+stderr | render/AutoComplete/contracts.test.tsx > [autocomplete.form.field] typing, selection and reset update form
+[STRICT_READ_UNTRACKED] Reactive value read directly in <[solid-refresh]AutoComplete> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+[STRICT_READ_UNTRACKED] Reactive value read directly in <[solid-refresh]AutoComplete> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+[STRICT_READ_UNTRACKED] Reactive value read directly in <[solid-refresh]AutoComplete> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+[STRICT_READ_UNTRACKED] Reactive value read directly in <[solid-refresh]AutoComplete> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+[STRICT_READ_UNTRACKED] Reactive value read directly in <[solid-refresh]AutoComplete> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+[STRICT_READ_UNTRACKED] Reactive value read directly in <[solid-refresh]AutoComplete> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+[STRICT_READ_UNTRACKED] Reactive value read directly in <[solid-refresh]AutoComplete> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+[STRICT_READ_UNTRACKED] Reactive value read directly in <[solid-refresh]AutoComplete> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+[STRICT_READ_UNTRACKED] Reactive value read directly in <[solid-refresh]AutoComplete> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+[STRICT_READ_UNTRACKED] Reactive value read directly in <[solid-refresh]AutoComplete> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+[STRICT_READ_UNTRACKED] Reactive value read directly in <[solid-refresh]AutoComplete> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+[STRICT_READ_UNTRACKED] Reactive value read directly in <[solid-refresh]AutoComplete> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+[STRICT_READ_UNTRACKED] Reactive value read directly in an effect callback will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+[STRICT_READ_UNTRACKED] Reactive value read directly in an effect callback will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+
+stderr | render/AutoComplete/contracts.test.tsx > [autocomplete.ime.events] composition commits once without selecting
+[STRICT_READ_UNTRACKED] Reactive value read directly in <[solid-refresh]AutoComplete> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+[STRICT_READ_UNTRACKED] Reactive value read directly in <[solid-refresh]AutoComplete> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+[STRICT_READ_UNTRACKED] Reactive value read directly in <[solid-refresh]AutoComplete> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+[STRICT_READ_UNTRACKED] Reactive value read directly in an effect callback will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+
+stderr | render/AutoComplete/contracts.test.tsx > [autocomplete.open.controlled] external open and disable are reflected
+[STRICT_READ_UNTRACKED] Reactive value read directly in <[solid-refresh]AutoComplete> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+[STRICT_READ_UNTRACKED] Reactive value read directly in <[solid-refresh]AutoComplete> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+[STRICT_READ_UNTRACKED] Reactive value read directly in <[solid-refresh]AutoComplete> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+[STRICT_READ_UNTRACKED] Reactive value read directly in <[solid-refresh]AutoComplete> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+[STRICT_READ_UNTRACKED] Reactive value read directly in <[solid-refresh]AutoComplete> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+[STRICT_READ_UNTRACKED] Reactive value read directly in an effect callback will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+
+stderr | render/AutoComplete/contracts.test.tsx
+You appear to have multiple instances of Solid. This can lead to unexpected behavior.
+
+ ❯ render/AutoComplete/contracts.test.tsx (5 tests | 5 failed) 33ms
+   × [autocomplete.events.focus] focus and blur fire once with real events 13ms
+   × [autocomplete.keyboard.commit] enter selects and closes 7ms
+   × [autocomplete.form.field] typing, selection and reset update form 7ms
+   × [autocomplete.ime.events] composition commits once without selecting 4ms
+   × [autocomplete.open.controlled] external open and disable are reflected 1ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 9 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  headless/AutoComplete/dynamic.test.ts > [autocomplete.dynamic.suggestions] tracks all external inputs
+AssertionError: expected [ 'a' ] to deeply equal [ 'a2' ]
+
+- Expected
++ Received
+
+  [
+-   "a2",
++   "a",
+  ]
+
+ ❯ headless/AutoComplete/dynamic.test.ts:15:45
+     13|   const m = createAutoComplete({ get options() { return options() }, g…
+     14|   setOptions([{ value: 'a2' }, { value: 'b' }]); flush()
+     15|   expect(m.suggestions().map(o => o.value)).toEqual(['a2'])
+       |                                             ^
+     16|   setValue('b'); flush()
+     17|   expect(m.suggestions().map(o => o.value)).toEqual(['b'])
+ ❯ headless/AutoComplete/dynamic.test.ts:6:66
+ ❯ ../../node_modules/.pnpm/@solidjs+signals@2.0.0-rc.0/node_modules/@solidjs/signals/dist/dev.js:1621:36
+ ❯ runWithOwner ../../node_modules/.pnpm/@solidjs+signals@2.0.0-rc.0/node_modules/@solidjs/signals/dist/dev.js:3265:12
+ ❯ createRoot ../../node_modules/.pnpm/@solidjs+signals@2.0.0-rc.0/node_modules/@solidjs/signals/dist/dev.js:1621:10
+ ❯ root headless/AutoComplete/dynamic.test.ts:6:35
+ ❯ headless/AutoComplete/dynamic.test.ts:9:75
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/9]⎯
+
+ FAIL  headless/AutoComplete/dynamic.test.ts > [autocomplete.controlled.filter] rejected edits do not drift suggestions
+AssertionError: expected [ 'b' ] to deeply equal [ 'a' ]
+
+- Expected
++ Received
+
+  [
+-   "a",
++   "b",
+  ]
+
+ ❯ headless/AutoComplete/dynamic.test.ts:27:45
+     25|   m.setInputText('b'); flush()
+     26|   expect(m.value()).toBe('a')
+     27|   expect(m.suggestions().map(o => o.value)).toEqual(['a'])
+       |                                             ^
+     28| }))
+     29|
+ ❯ headless/AutoComplete/dynamic.test.ts:6:66
+ ❯ ../../node_modules/.pnpm/@solidjs+signals@2.0.0-rc.0/node_modules/@solidjs/signals/dist/dev.js:1621:36
+ ❯ runWithOwner ../../node_modules/.pnpm/@solidjs+signals@2.0.0-rc.0/node_modules/@solidjs/signals/dist/dev.js:3265:12
+ ❯ createRoot ../../node_modules/.pnpm/@solidjs+signals@2.0.0-rc.0/node_modules/@solidjs/signals/dist/dev.js:1621:10
+ ❯ root headless/AutoComplete/dynamic.test.ts:6:35
+ ❯ headless/AutoComplete/dynamic.test.ts:23:86
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/9]⎯
+
+ FAIL  headless/AutoComplete/dynamic.test.ts > [autocomplete.dynamic.active] stale active cannot be committed
+AssertionError: expected undefined to be 'a' // Object.is equality
+
+- Expected:
+"a"
+
++ Received:
+undefined
+
+ ❯ headless/AutoComplete/dynamic.test.ts:35:36
+     33|   const selected = vi.fn()
+     34|   const m = createAutoComplete({ defaultOpen: true, get options() { re…
+     35|   flush(); expect(m.activeValue()).toBe('a')
+       |                                    ^
+     36|   m.setActiveValue('b'); flush()
+     37|   setOptions([{ value: 'a', disabled: true }]); flush()
+ ❯ headless/AutoComplete/dynamic.test.ts:6:66
+ ❯ ../../node_modules/.pnpm/@solidjs+signals@2.0.0-rc.0/node_modules/@solidjs/signals/dist/dev.js:1621:36
+ ❯ runWithOwner ../../node_modules/.pnpm/@solidjs+signals@2.0.0-rc.0/node_modules/@solidjs/signals/dist/dev.js:3265:12
+ ❯ createRoot ../../node_modules/.pnpm/@solidjs+signals@2.0.0-rc.0/node_modules/@solidjs/signals/dist/dev.js:1621:10
+ ❯ root headless/AutoComplete/dynamic.test.ts:6:35
+ ❯ headless/AutoComplete/dynamic.test.ts:31:76
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/9]⎯
+
+ FAIL  headless/AutoComplete/dynamic.test.ts > [autocomplete.disabled.commands] blocks editing and composition
+AssertionError: expected 'a' to be '' // Object.is equality
+
+- Expected
++ Received
+
++ a
+
+ ❯ headless/AutoComplete/dynamic.test.ts:47:21
+     45|   const m = createAutoComplete({ disabled: true, options: [{ value: 'a…
+     46|   m.setInputText('a'); m.notifyCompositionStart(); m.moveActive(1); fl…
+     47|   expect(m.value()).toBe(''); expect(m.isComposing()).toBe(false)
+       |                     ^
+     48|   expect(m.activeValue()).toBeUndefined(); expect(changed).not.toHaveB…
+     49| }))
+ ❯ headless/AutoComplete/dynamic.test.ts:6:66
+ ❯ ../../node_modules/.pnpm/@solidjs+signals@2.0.0-rc.0/node_modules/@solidjs/signals/dist/dev.js:1621:36
+ ❯ runWithOwner ../../node_modules/.pnpm/@solidjs+signals@2.0.0-rc.0/node_modules/@solidjs/signals/dist/dev.js:3265:12
+ ❯ createRoot ../../node_modules/.pnpm/@solidjs+signals@2.0.0-rc.0/node_modules/@solidjs/signals/dist/dev.js:1621:10
+ ❯ root headless/AutoComplete/dynamic.test.ts:6:35
+ ❯ headless/AutoComplete/dynamic.test.ts:43:77
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[4/9]⎯
+
+ FAIL  render/AutoComplete/contracts.test.tsx > [autocomplete.events.focus] focus and blur fire once with real events
+AssertionError: expected "vi.fn()" to be called once, but got 2 times
+ ❯ render/AutoComplete/contracts.test.tsx:19:17
+     17|   const el = v.host.querySelector('input')!
+     18|   el.dispatchEvent(new FocusEvent('focus')); el.dispatchEvent(new Focu…
+     19|   expect(focus).toHaveBeenCalledOnce(); expect(blur).toHaveBeenCalledO…
+       |                 ^
+     20|   expect(focus.mock.calls[0][0]).toBeInstanceOf(FocusEvent)
+     21|   expect(blur.mock.calls[0][0]).toBeInstanceOf(FocusEvent)
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[5/9]⎯
+
+ FAIL  render/AutoComplete/contracts.test.tsx > [autocomplete.keyboard.commit] enter selects and closes
+AssertionError: expected null to be 'combobox' // Object.is equality
+
+- Expected:
+"combobox"
+
++ Received:
+null
+
+ ❯ render/AutoComplete/contracts.test.tsx:29:35
+     27|   const v = mount(() => <AutoComplete options={options} defaultOpen on…
+     28|   const el = v.host.querySelector('input')!
+     29|   expect(el.getAttribute('role')).toBe('combobox')
+       |                                   ^
+     30|   expect(el.getAttribute('aria-controls')).toBe(document.querySelector…
+     31|   key(el, 'ArrowDown'); key(el, 'Enter')
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[6/9]⎯
+
+ FAIL  render/AutoComplete/contracts.test.tsx > [autocomplete.form.field] typing, selection and reset update form
+AssertionError: expected 'Alpha' to be 'Be' // Object.is equality
+
+Expected: "Be"
+Received: "Alpha"
+
+ ❯ render/AutoComplete/contracts.test.tsx:45:56
+     43|   </Form>); dispose = v.dispose
+     44|   const el = v.host.querySelector('input')!
+     45|   input(el, 'Be'); expect(form?.getFieldValue('city')).toBe('Be')
+       |                                                        ^
+     46|   document.querySelector<HTMLElement>('[role="option"]')!.click(); flu…
+     47|   expect(form?.getFieldValue('city')).toBe('Beta')
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[7/9]⎯
+
+ FAIL  render/AutoComplete/contracts.test.tsx > [autocomplete.ime.events] composition commits once without selecting
+AssertionError: expected "vi.fn()" to not be called at all, but actually been called 1 times
+
+Received:
+
+  1st vi.fn() call:
+
+    Array [
+      "a",
+      Object {
+        "label": "Alpha",
+        "value": "a",
+      },
+    ]
+
+
+Number of calls: 1
+
+ ❯ render/AutoComplete/contracts.test.tsx:58:24
+     56|   el.dispatchEvent(new CompositionEvent('compositionstart')); flush()
+     57|   input(el, '中'); key(el, 'ArrowDown'); key(el, 'Enter')
+     58|   expect(selected).not.toHaveBeenCalled(); expect(changed).not.toHaveB…
+       |                        ^
+     59|   el.dispatchEvent(new CompositionEvent('compositionend', { data: '中' …
+     60|   input(el, '中')
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[8/9]⎯
+
+ FAIL  render/AutoComplete/contracts.test.tsx > [autocomplete.open.controlled] external open and disable are reflected
+AssertionError: expected null to be 'false' // Object.is equality
+
+- Expected:
+"false"
+
++ Received:
+null
+
+ ❯ render/AutoComplete/contracts.test.tsx:72:44
+     70|   const el = v.host.querySelector('input')!
+     71|   key(el, 'ArrowDown'); expect(changed).toHaveBeenCalledExactlyOnceWit…
+     72|   expect(el.getAttribute('aria-expanded')).toBe('false')
+       |                                            ^
+     73|   setOpen(true); flush(); expect(el.getAttribute('aria-activedescendan…
+     74|   setDisabled(true); flush(); expect(el.getAttribute('aria-expanded'))…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[9/9]⎯
+
+
+ Test Files  2 failed | 1 passed (3)
+      Tests  9 failed | 15 passed (24)
+   Start at  13:57:47
+   Duration  1.02s (transform 544ms, setup 0ms, import 726ms, tests 48ms, environment 866ms)
+
+[ELIFECYCLE] Test failed. See above for more details.

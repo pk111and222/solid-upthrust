@@ -27,7 +27,7 @@
 - Popover 收尾验证（2026-09-17）：5 文件（新增用例）、121 文件全量、1311 条 L1–L3 通过；类型与构建通过；Popover 专项 Playwright 43 条（docs+example 两项目）通过，重复两次稳定；docs 双 base 各 13 条通过；另有 Playwright MCP 交互验证。
 - Tabs 收尾验证（2026-09-17）：8 文件（新增用例）、127 文件全量、1337 条 L1–L3 通过；类型与构建通过；Tabs 专项 Playwright 15 条（docs+example 两项目）通过，重复两次稳定；docs 双 base 各 13 条通过（新增导航页触发路由/菜单套件）；另有 Playwright MCP 交互验证。C02 批次全部完成。
 - Input 收尾验证（2026-09-20）：5 文件、35 条 Input 用例通过；全量 133 文件、1373 条通过；专项浏览器 17 条、文档双 base 各 13 条通过；类型与构建通过，见 [input.md](docs/contributing/regressions/input.md)。
-- 默认下一物料：**C05 Select**（见批次排序）。用户可另行分配无依赖冲突的物料。
+- 默认下一事项：C05 已完成；按顺序处理 C06 TimePicker。
 
 ### 状态规则
 
@@ -108,6 +108,14 @@
 | C04 Segmented | 当前会话：Segmented 回归 | 当前工作区（main） | Segmented/headless、Selection 集成、滑动 thumb/键盘、B02 路径、示例/API、四层测试及证据；不改锁文件 | 已验收 | 依赖前序 C04 表单控件与共享 Selection 局部证据；完整 B02/B06 留待后续 | [执行记录](docs/contributing/regressions/segmented.md) |
 
 | C04 Rate / Segmented 二次修复 | 当前任务：二次修复与补验 | 当前工作区（main） | Rate/Segmented 实现、定向回归、docs/example、几何与清理验收 | 已验收 | 4 项缺陷关闭；定向 57、全量 1508、浏览器 22 条通过；类型/构建通过 | [Rate](docs/contributing/regressions/rate.md)、[Segmented](docs/contributing/regressions/segmented.md) |
+| C05 Select | 当前会话：Select 回归 | 当前工作区（main） | Select UI/headless、虚拟列表与表单使用路径、example/docs、分层测试与回归记录 | 已验收 | 清空后箭头延迟补验：浏览器 39 条通过、3 条原有跳过；依赖 C01 _VirtualList、C03 Input 与 B02/B06 使用路径，完整共享回归仍在后续批次 | [执行记录](docs/contributing/regressions/select.md) |
+
+| C05 AutoComplete | 当前会话：AutoComplete 回归 | 当前工作区（main） | AutoComplete UI/headless、Form 注入、示例/API、四层测试及证据；保留 Select 修改 | 已验收 | 三项 L3 失败已修复；全量 1561、专项浏览器 14 条通过，见二次修复记录 | [执行记录](docs/contributing/regressions/auto-complete.md) |
+| C05 AutoComplete 三项修复 | 当前会话：AutoComplete 三项失败修复与 Mentions 关联核查 | 当前工作区（main） | AutoComplete UI、必要 Form/Trigger 使用路径、三项 L3 失败、专项浏览器、全量复验与证据；保留其他未提交修改 | 已验收 | ARIA 两项、Form 即时写回一项；浏览器另修滚动时鼠标悬停覆盖键盘高亮；与 Mentions 无共同运行时根因 | [执行记录](docs/contributing/regressions/auto-complete.md) |
+| C05 Cascader | 当前会话：Cascader 回归 | 当前工作区（main） | Cascader UI/headless、树路径/搜索/多选联动、示例/docs、四层测试与回归记录；不改锁文件 | 已验收 | 多选勾号绘制与箭头延迟补验：浏览器 8 条通过；完整共享回归留后续 | [执行记录](docs/contributing/regressions/cascader.md) |
+| C05 Mentions | 当前会话：Mentions 回归 | 当前工作区（main） | Mentions UI/headless、输入与候选交互、example/docs、分层测试与回归记录；不改锁文件 | 已验收 | 选中后光标位置二次修复；专项 38、浏览器 12、全量 1561、构建/类型/双 base 通过 | [执行记录](docs/contributing/regressions/mentions.md) |
+| C05 TreeSelect | 当前会话：TreeSelect 回归 | 当前工作区（main） | TreeSelect UI/headless、Tree/Trigger/Form/虚拟面板必要使用路径、example/docs；追加 Select/Cascader/TreeSelect 清除与弹层宽度统一；保护其他未提交修改 | 已验收 | 宽度策略和图标切换浏览器补验 22 条通过；全量 L1–L3 1585 条通过，类型与构建通过 | [执行记录](docs/contributing/regressions/tree-select.md) |
+| C05 Transfer | 当前任务：Transfer 完整回归 | 当前工作区（main） | Transfer UI/headless、Form 使用路径、example/docs、四层测试与回归记录；保护其他物料未提交改动 | 已验收 | 全量 1595、专项浏览器 16、docs 双 base 各 13 条通过；完整 B02/B06 后续单独验收 | [执行记录](docs/contributing/regressions/transfer.md) |
 
 ## 3. 第一阶段：全部组件回归 C（用户指定优先）
 
@@ -162,12 +170,12 @@
 
 ### C05
 
-- [ ] Select
-- [ ] AutoComplete
-- [ ] Cascader
-- [ ] Mentions
-- [ ] TreeSelect
-- [ ] Transfer
+- [x] Select — 含下拉、加载与清除右侧图标尺寸及清空后箭头延迟补验，见 [执行记录](docs/contributing/regressions/select.md)
+- [x] AutoComplete — 三项 L3 缺陷与长列表鼠标悬停干扰已修复，专项浏览器 14 条、全量 1561 条通过，见 [执行记录](docs/contributing/regressions/auto-complete.md)
+- [x] Cascader — 树路径、搜索、多选 checkable、勾号真实绘制与清空后箭头延迟，见 [执行记录](docs/contributing/regressions/cascader.md)
+- [x] Mentions — 选中后光标位置、目标专项与浏览器验证通过，AutoComplete 修复后全量 1561 条通过，见 [执行记录](docs/contributing/regressions/mentions.md)
+- [x] TreeSelect — 三组件清除按钮与宽度策略统一、虚拟列表单滚动；后续浏览器 22 条、全量 L1–L3 1585 条通过，详见 [执行记录](docs/contributing/regressions/tree-select.md)
+- [x] Transfer — 全量 L1–L3 1595 条、专项浏览器 16 条、docs 双 base 各 13 条通过，见 [执行记录](docs/contributing/regressions/transfer.md)
 
 ### C06
 

@@ -1,0 +1,89 @@
+[WebServer] (node:57227) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:57242) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:57249) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:57333) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:57353) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 14 tests using 2 workers
+
+(node:57361) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:57362) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓   2 [docs] › browser/AutoComplete/interaction.spec.ts:26:1 › [autocomplete.browser.keyboard] skips disabled and closes with Escape (517ms)
+  ✓   1 [docs] › browser/AutoComplete/interaction.spec.ts:9:1 › [autocomplete.browser.pointer] selection retains focus and typing reopens (664ms)
+  ✓   3 [docs] › browser/AutoComplete/interaction.spec.ts:37:1 › [autocomplete.browser.remote] async results refresh in place (366ms)
+  ✓   4 [docs] › browser/AutoComplete/interaction.spec.ts:47:1 › [autocomplete.browser.scroll] active option remains visible (380ms)
+  ✓   5 [docs] › browser/AutoComplete/interaction.spec.ts:65:1 › [autocomplete.browser.form] form submit and reset (256ms)
+  ✓   6 [docs] › browser/AutoComplete/interaction.spec.ts:76:1 › [autocomplete.browser.variants] production sizes and paint (160ms)
+  ✓   8 [docs] › browser/AutoComplete/interaction.spec.ts:104:1 › [autocomplete.browser.ssr] API and demo source are prerendered (9ms)
+(node:57384) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓   9 [example] › browser/AutoComplete/interaction.spec.ts:9:1 › [autocomplete.browser.pointer] selection retains focus and typing reopens (378ms)
+[WebServer] 2:08:57 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in <AutoComplete> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+[WebServer] 2:08:57 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in <AutoComplete> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+[WebServer] 2:08:57 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in <AutoComplete> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+[WebServer] 2:08:57 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in <AutoComplete> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+[WebServer] 2:08:57 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in <AutoComplete> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+[WebServer] 2:08:57 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in <AutoComplete> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+[WebServer] 2:08:57 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in <AutoComplete> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+[WebServer] 2:08:57 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in <AutoComplete> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+[WebServer] 2:08:57 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in <AutoComplete> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+[WebServer] 2:08:57 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in <AutoComplete> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+[WebServer] 2:08:57 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in <AutoComplete> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+[WebServer] 2:08:57 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in <AutoComplete> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+[WebServer] 2:08:57 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in <AutoComplete> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+[WebServer] 2:08:57 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in <AutoComplete> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+[WebServer] 2:08:57 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in <AutoComplete> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+[WebServer] 2:08:57 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in <AutoComplete> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+[WebServer] 2:08:57 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in <AutoComplete> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+[WebServer] 2:08:57 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in <AutoComplete> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+[WebServer] 2:08:57 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in an effect callback will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+[WebServer] 2:08:57 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in an effect callback will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+[WebServer] 2:08:57 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in an effect callback will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+[WebServer] 2:08:57 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in an effect callback will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+[WebServer] 2:08:57 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in an effect callback will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+[WebServer] 2:08:57 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in an effect callback will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+[WebServer] 2:08:57 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in <AutoComplete> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+[WebServer] 2:08:57 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in <AutoComplete> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+[WebServer] 2:08:57 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in <AutoComplete> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+[WebServer] 2:08:57 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in <AutoComplete> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+[WebServer] 2:08:57 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in <AutoComplete> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+[WebServer] 2:08:57 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in <AutoComplete> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+[WebServer] 2:08:57 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in an effect callback will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+[WebServer] 2:08:57 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in an effect callback will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+[WebServer] 2:08:57 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in <AutoComplete> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+[WebServer] 2:08:57 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in <AutoComplete> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+[WebServer] 2:08:57 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in an effect callback will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+[WebServer] 2:08:57 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in <AutoComplete> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+[WebServer] 2:08:57 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in <AutoComplete> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+[WebServer] 2:08:57 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in <AutoComplete> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+[WebServer] 2:08:57 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in <AutoComplete> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+[WebServer] 2:08:57 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in <AutoComplete> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+[WebServer] 2:08:57 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in <AutoComplete> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+[WebServer] 2:08:57 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in an effect callback will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+[WebServer] 2:08:57 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in an effect callback will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+[WebServer] 2:08:57 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in <AutoComplete> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+[WebServer] 2:08:57 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in <AutoComplete> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+[WebServer] 2:08:57 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in <AutoComplete> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+[WebServer] 2:08:57 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in an effect callback will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+[WebServer] 2:08:57 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in <AutoComplete> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+[WebServer] 2:08:57 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in <AutoComplete> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+[WebServer] 2:08:57 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in <AutoComplete> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+[WebServer] 2:08:57 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in an effect callback will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+[WebServer] 2:08:57 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in an effect callback will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+  ✓  10 [example] › browser/AutoComplete/interaction.spec.ts:26:1 › [autocomplete.browser.keyboard] skips disabled and closes with Escape (247ms)
+  ✓   7 [docs] › browser/AutoComplete/interaction.spec.ts:91:1 › [autocomplete.browser.dev] development paint and placement (1.2s)
+(node:57392) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  11 [example] › browser/AutoComplete/interaction.spec.ts:37:1 › [autocomplete.browser.remote] async results refresh in place (379ms)
+  ✓  12 [example] › browser/AutoComplete/interaction.spec.ts:65:1 › [autocomplete.browser.form] form submit and reset (225ms)
+  ✓  14 [example] › browser/AutoComplete/interaction.spec.ts:76:1 › [autocomplete.browser.variants] production sizes and paint (174ms)
+  ✓  13 [example] › browser/AutoComplete/interaction.spec.ts:47:1 › [autocomplete.browser.scroll] active option remains visible (363ms)
+
+  14 passed (8.9s)

@@ -1,0 +1,6 @@
+[
+  {"name":"value","type":"string | number","default":"必填","description":"选项键；应保持唯一。"},
+  {"name":"label","type":"string","default":"必填","description":"显示文字与默认搜索字段。"},
+  {"name":"disabled","type":"boolean","default":"false","description":"禁用点击和键盘提交。"},
+  {"name":"group","type":"string","default":"—","description":"平铺选项的分组名；相邻同名选项共用一个标题。"}
+]

@@ -14,6 +14,8 @@ export interface CascaderProps {
     /** 'multiple' enables multi-path selection. */
     mode?: 'multiple';
     disabled?: boolean;
+    /** Show a clear button when a value is selected. Default: false. */
+    allowClear?: boolean;
     /** Commit on every level click, not just leaves. */
     changeOnSelect?: boolean;
     /** Enable the search box. Default: false. */
@@ -33,6 +35,8 @@ export interface CascaderProps {
     expandTrigger?: 'click' | 'hover';
     notFoundContent?: string;
     id?: string;
+    'aria-label'?: string;
+    'aria-labelledby'?: string;
     class?: string;
     style?: JSX.CSSProperties;
     onChange?: (value: Array<string | number> | Array<Array<string | number>> | undefined, nodes: CascaderOption[]) => void;

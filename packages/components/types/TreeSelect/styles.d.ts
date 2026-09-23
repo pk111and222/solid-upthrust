@@ -24,7 +24,9 @@ export declare const treeSelectTagCloseWrapClass: () => string;
 /** The "+N …" collapsed counter (maxTagCount). */
 export declare const treeSelectTagRestClass: () => string;
 /** The suffix slot (clear × + down-chevron). */
-export declare const treeSelectSuffixWrapClass: () => string;
+export declare const treeSelectSuffixWrapClass: (variants: {
+    size?: "small" | "middle" | "large";
+}) => string;
 /** The clear × button. */
 export declare const treeSelectClearWrapClass: (variants: {
     visible?: boolean;

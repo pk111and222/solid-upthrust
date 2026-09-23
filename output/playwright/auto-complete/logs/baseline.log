@@ -1,0 +1,10 @@
+$ vitest run headless/AutoComplete
+
+ RUN  v4.1.10 /Users/zhangchen327/code/github/pk111and222/solid-upthrust/packages/testing
+
+
+ Test Files  1 passed (1)
+      Tests  15 passed (15)
+   Start at  13:56:00
+   Duration  370ms (transform 36ms, setup 0ms, import 49ms, tests 7ms, environment 230ms)
+

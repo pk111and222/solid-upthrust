@@ -18,7 +18,7 @@ export type TriggerPlacement =
   | 'leftTop' | 'leftBottom' | 'left'
   | 'rightTop' | 'rightBottom' | 'right'
 
-export type TriggerAction = 'click' | 'hover' | 'contextMenu' | 'focus'
+export type TriggerAction = 'click' | 'hover' | 'contextMenu' | 'focus' | 'manual'
 
 export type TriggerConfig = {
   open?: boolean
@@ -373,7 +373,13 @@ export const createTrigger = (config: TriggerConfig = {}) => {
   }
 
   // Keep the layer glued to the trigger while open.
-  const handleScrollOrResize = () => {
+  const handleScrollOrResize = (event?: Event) => {
+    // Scrolling inside the floating layer changes its contents, not its
+    // anchor position. Re-measuring here can cause a render while a keyboard
+    // navigation update is in flight (for example when an autocomplete row
+    // is brought into view), which can reset the active option. Only document
+    // or ancestor scrolling needs to reposition the layer.
+    if (event?.type === 'scroll' && _layerEl && event.target && _layerEl.contains(event.target as Node)) return
     if (open()) remeasure()
   }
 

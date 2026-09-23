@@ -21,6 +21,8 @@ export interface AutoCompleteProps {
     onOpenChange?: (open: boolean) => void;
     id?: string;
     name?: string;
+    'aria-label'?: string;
+    'aria-labelledby'?: string;
     class?: string;
     style?: JSX.CSSProperties;
     onChange?: (value: string) => void;

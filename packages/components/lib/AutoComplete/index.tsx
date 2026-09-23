@@ -1,10 +1,11 @@
 import { ConfigPortal as Portal } from '../ConfigProvider/Portal'
 import { useComponentProps } from '../ConfigProvider/context'
-import { Component, For, Show, createEffect, merge } from 'solid-js'
+import { Component, For, Show, createEffect, createSignal, createUniqueId, merge, untrack } from 'solid-js'
 import { type JSX } from '@solidjs/web'
 import { twMerge } from 'tailwind-merge'
 import {
   createAutoComplete,
+  createOwnerCleanup,
   createTrigger,
   type AutoCompleteOption,
 } from 'upthrust-competence'
@@ -36,6 +37,8 @@ export interface AutoCompleteProps {
   onOpenChange?: (open: boolean) => void
   id?: string
   name?: string
+  'aria-label'?: string
+  'aria-labelledby'?: string
   class?: string
   style?: JSX.CSSProperties
   onChange?: (value: string) => void
@@ -61,7 +64,7 @@ const AutoComplete: Component<AutoCompleteProps> = providedProps => {
 
   const form = useFormItem({
     get value() { return props.value },
-    get onChange() { return props.onChange },
+    get onChange() { return props.onChange ? (value: string) => props.onChange?.(value) : undefined },
     get disabled() { return props.disabled },
     get id() { return props.id },
     get size() { return props.size },
@@ -71,7 +74,6 @@ const AutoComplete: Component<AutoCompleteProps> = providedProps => {
   const resolvedSize = () => props.size ?? form.size() ?? 'middle'
   const resolvedStatus = () => form.status()
   const resolvedDisabled = () => form.disabled()
-
   // Created ONCE (the createMemo-wraps-machine pitfall — see Select).
   const machine = createAutoComplete({
     get value() { return form.value() as string | undefined },
@@ -81,11 +83,12 @@ const AutoComplete: Component<AutoCompleteProps> = providedProps => {
     get filterOption() { return props.filterOption },
     get open() { return props.open },
     get defaultOpen() { return props.defaultOpen },
-    get onChange() { return props.onChange },
+    onChange: value => {
+      if (props.onChange) props.onChange(value)
+      else form.onChange(value)
+    },
     get onSelect() { return props.onSelect },
     get onSearch() { return props.onSearch },
-    get onBlur() { return props.onBlur ? () => props.onBlur?.(undefined as unknown as FocusEvent) : undefined },
-    get onFocus() { return props.onFocus ? () => props.onFocus?.(undefined as unknown as FocusEvent) : undefined },
   })
 
   const trigger = createTrigger({
@@ -99,7 +102,9 @@ const AutoComplete: Component<AutoCompleteProps> = providedProps => {
   })
 
   const m = () => machine
-  const open = () => trigger.open()
+  const open = () => !resolvedDisabled() && trigger.open()
+  const listId = `autocomplete-list-${createUniqueId()}`
+  const activeIndex = () => machine.suggestions().findIndex(option => option.value === machine.activeValue())
 
   // trigger.open mirrors into the machine (open re-anchors active).
   createEffect(() => open(), (isOpen) => {
@@ -107,14 +112,44 @@ const AutoComplete: Component<AutoCompleteProps> = providedProps => {
   })
 
   const inputRef: { current?: HTMLInputElement } = {}
+  const [inputWidth, setInputWidth] = createSignal(0, { ownedWrite: true })
+  const onOwnerCleanup = createOwnerCleanup()
+  let sizeObserver: ResizeObserver | undefined
+  const measureInputWidth = (el: HTMLInputElement = inputRef.current!) => {
+    if (el) setInputWidth(el.getBoundingClientRect().width)
+  }
   const setInputRef = (el: HTMLInputElement) => {
     inputRef.current = el
-    props.ref?.(el)
+    sizeObserver?.disconnect()
+    const measure = () => measureInputWidth(el)
+    measure()
+    if (typeof ResizeObserver !== 'undefined') {
+      sizeObserver = new ResizeObserver(measure)
+      sizeObserver.observe(el)
+    }
+    untrack(() => props.ref?.(el))
   }
+  onOwnerCleanup(() => sizeObserver?.disconnect())
+
+  createEffect(() => m().value(), value => {
+    const next = value ?? ''
+    if (inputRef.current && inputRef.current.value !== next) inputRef.current.value = next
+  })
+
+  createEffect(() => [open(), activeIndex()] as const, ([visible, index]) => {
+    if (!visible || index < 0) return
+    const row = document.getElementById(`${listId}-option-${index}`)
+    const list = row?.parentElement
+    if (!row || !list) return
+    if (row.offsetTop < list.scrollTop) list.scrollTop = row.offsetTop
+    else if (row.offsetTop + row.offsetHeight > list.scrollTop + list.clientHeight) {
+      list.scrollTop = row.offsetTop + row.offsetHeight - list.clientHeight
+    }
+  })
 
   const handleKeyDown = (e: KeyboardEvent) => {
     const mm = m()
-    if (resolvedDisabled()) return
+    if (resolvedDisabled() || e.isComposing || e.keyCode === 229 || mm.isComposing()) return
     switch (e.key) {
       case 'ArrowDown':
         e.preventDefault()
@@ -129,6 +164,7 @@ const AutoComplete: Component<AutoCompleteProps> = providedProps => {
         if (open() && mm.activeValue() !== undefined) {
           e.preventDefault()
           mm.commitActive()
+          trigger.setOpen(false)
         }
         return
       case 'Escape':
@@ -140,12 +176,20 @@ const AutoComplete: Component<AutoCompleteProps> = providedProps => {
     }
   }
 
+  // Browsers may emit a final input after compositionend with the same text.
+  let composedText: string | undefined
   const handleInput = (e: Event) => {
-    m().setInputText((e.target as HTMLInputElement).value)
+    if (resolvedDisabled()) return
+    const text = (e.target as HTMLInputElement).value
+    if (composedText === text) { composedText = undefined; return }
+    composedText = undefined
+    m().setInputText(text)
+    measureInputWidth()
+    trigger.setOpen(true)
   }
 
   const handleSelect = (option: AutoCompleteOption) => {
-    if (option.disabled) return
+    if (resolvedDisabled() || option.disabled) return
     m().selectOption(option)
     trigger.setOpen(false)
     inputRef.current?.focus()
@@ -158,6 +202,16 @@ const AutoComplete: Component<AutoCompleteProps> = providedProps => {
         id={form.id()}
         name={props.name}
         type="text"
+        role="combobox"
+        aria-label={props['aria-label']}
+        aria-labelledby={props['aria-labelledby']}
+        aria-autocomplete="list"
+        aria-haspopup="listbox"
+        aria-expanded={open() ? 'true' : 'false'}
+        aria-controls={open() ? listId : undefined}
+        aria-activedescendant={open() && activeIndex() >= 0 ? `${listId}-option-${activeIndex()}` : undefined}
+        aria-invalid={resolvedStatus() === 'error' ? 'true' : undefined}
+        value={m().value()}
         autocomplete="off"
         class={twMerge(
           'w-full min-w-0 bg-surface rounded border border-solid border-outline transition-upthrust',
@@ -170,23 +224,32 @@ const AutoComplete: Component<AutoCompleteProps> = providedProps => {
           resolvedStatus() === 'warning' ? '!border-[#faad14] hover:!border-[#faad14] focus:!border-[#faad14] focus:!ring-[#faad14]/10' : '',
           resolvedDisabled() ? '!bg-on-surface/4 !text-on-surface/25 !border-on-surface/15 cursor-not-allowed hover:!border-on-surface/15 focus:!ring-transparent' : '',
         )}
-        value={m().value()}
         placeholder={props.placeholder}
         disabled={resolvedDisabled()}
         onInput={handleInput}
         onKeyDown={handleKeyDown}
-        onFocus={e => { m().notifyFocus(); props.onFocus?.(e) }}
+        onFocus={e => { measureInputWidth(); m().notifyFocus(); props.onFocus?.(e) }}
         onBlur={e => { m().notifyBlur(); props.onBlur?.(e) }}
-        onCompositionStart={() => m().notifyCompositionStart()}
-        onCompositionEnd={() => m().notifyCompositionEnd()}
+        onCompositionStart={() => { composedText = undefined; m().notifyCompositionStart() }}
+        onCompositionEnd={e => {
+          if (!m().isComposing()) return
+          composedText = e.currentTarget.value
+          m().setInputText(composedText)
+          m().notifyCompositionEnd()
+          trigger.setOpen(true)
+        }}
       />
       <Portal>
         <Show when={trigger.mounted()}>
           <div
             ref={(el) => { trigger.layerRef(el) }}
             class={autoCompleteDropdownClass({ visible: open(), placement: trigger.actualPlacement() })}
-            style={trigger.layerStyle()}
+            style={{ ...trigger.layerStyle(), width: inputWidth() > 0 ? `${inputWidth()}px` : undefined }}
             role="listbox"
+            id={listId}
+            aria-label={props['aria-label'] ?? props.placeholder ?? '建议'}
+            aria-hidden={!open() ? 'true' : undefined}
+            onMouseDown={e => e.preventDefault()}
             tabindex={-1}
           >
             <Show
@@ -194,7 +257,7 @@ const AutoComplete: Component<AutoCompleteProps> = providedProps => {
               fallback={<div class={autoCompleteEmptyClass()}>无匹配结果</div>}
             >
               <For each={m().suggestions()}>
-                {option => (
+                {(option, index) => (
                   <div
                     class={autoCompleteOptionWrapClass({
                       active: m().activeValue() === option.value,
@@ -202,10 +265,11 @@ const AutoComplete: Component<AutoCompleteProps> = providedProps => {
                       disabled: option.disabled,
                     })}
                     role="option"
+                    id={`${listId}-option-${index()}`}
                     aria-selected={m().activeValue() === option.value ? 'true' : 'false'}
                     aria-disabled={option.disabled ? 'true' : 'false'}
                     onClick={() => handleSelect(option)}
-                    onMouseEnter={() => m().setActiveValue(option.value)}
+                    onMouseMove={() => m().setActiveValue(option.value)}
                   >
                     <span class="truncate">{option.label ?? option.value}</span>
                   </div>

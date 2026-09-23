@@ -19,6 +19,8 @@ export interface TreeSelectProps {
     treeCheckStrictly?: boolean;
     /** Which nodes the value reports: SHOW_PARENT (default) | SHOW_CHILD | SHOW_ALL. */
     treeCheckStrategy?: 'SHOW_PARENT' | 'SHOW_CHILD' | 'SHOW_ALL';
+    /** Show the clear button while a value is selected. */
+    allowClear?: boolean;
     disabled?: boolean;
     showSearch?: boolean;
     placeholder?: string;
@@ -31,6 +33,20 @@ export interface TreeSelectProps {
     defaultOpen?: boolean;
     /** Expand every branch in the dropdown tree on first open. Default false. */
     defaultExpandAll?: boolean;
+    /** Render connector lines in the dropdown tree. */
+    showLine?: boolean;
+    /** Ant Design-compatible alias for showLine. */
+    treeLine?: boolean;
+    /** Render default or custom node icons in the dropdown tree. */
+    showIcon?: boolean;
+    /** Ant Design-compatible alias for showIcon. */
+    treeIcon?: boolean;
+    /** Custom node icon renderer, called with the node and its expanded state. */
+    icon?: (node: TreeSelectNode, expanded: boolean) => JSX.Element;
+    /** Custom node title renderer. */
+    titleRender?: (node: TreeSelectNode) => JSX.Element;
+    /** Indentation between tree levels, in pixels. */
+    indent?: number;
     /** Controlled expanded keys of the dropdown tree. */
     expandedKeys?: Array<string | number>;
     onExpand?: (expandedKeys: Array<string | number>, info: {

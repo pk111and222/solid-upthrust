@@ -1,4 +1,4 @@
-import { createMemo, createSignal } from 'solid-js'
+import { createMemo, createSignal, untrack } from 'solid-js'
 
 export type TransferKey = string | number
 export type TransferDirection = 'left' | 'right'
@@ -24,8 +24,8 @@ export interface TransferConfig<T extends TransferItem = TransferItem> {
 
 /** Target membership and temporary selection are separate controlled stores. */
 export const createTransfer = <T extends TransferItem = TransferItem>(config: TransferConfig<T> = {}) => {
-  const [target, setTarget] = createSignal<TransferKey[]>(config.defaultTargetKeys ?? [], { ownedWrite: true })
-  const [selected, setSelected] = createSignal<TransferKey[]>(config.defaultSelectedKeys ?? [], { ownedWrite: true })
+  const [target, setTarget] = createSignal<TransferKey[]>(untrack(() => config.defaultTargetKeys ?? []), { ownedWrite: true })
+  const [selected, setSelected] = createSignal<TransferKey[]>(untrack(() => config.defaultSelectedKeys ?? []), { ownedWrite: true })
   const [searches, setSearches] = createSignal({ left: '', right: '' }, { ownedWrite: true })
   const targetKeys = () => config.targetKeys ?? target()
   const selectedKeys = () => config.selectedKeys ?? selected()
@@ -65,7 +65,11 @@ export const createTransfer = <T extends TransferItem = TransferItem>(config: Tr
   const selectAll = (direction: TransferDirection, checked: boolean) => {
     if (config.disabled) return
     const keys = new Set(selectableItems(direction).map(item => item.key))
-    emitSelection(checked ? [...selectedKeys(), ...keys] : selectedKeys().filter(key => !keys.has(key)))
+    if (keys.size === 0) return
+    const current = selectedKeys()
+    const next = [...new Set(checked ? [...current, ...keys] : current.filter(key => !keys.has(key)))]
+    if (next.length === current.length && next.every((key, index) => key === current[index])) return
+    emitSelection(next)
   }
   const movableKeys = (direction: TransferDirection) => selectedIn(direction === 'right' ? 'left' : 'right').filter(key => !isDisabled(key))
   const commitMove = (direction: TransferDirection, requested: TransferKey[]) => {

@@ -30,6 +30,7 @@ export interface TreeProps extends TreeConfig {
 
 interface TreeViewProps {
   machine: TreeIns
+  treeId?: string
   virtual?: boolean
   height?: number
   itemHeight?: number
@@ -72,8 +73,18 @@ const TreeView: Component<TreeViewProps> = props => {
   })
   const Node: Component<{ flat?: boolean; node: TreeSelectNode; level: number; position: number; count: number }> = p => {
     const nodeKey = p.node.value
+    // TreeInPanel lives in a Portal. Bind click handlers to the actual row
+    // elements so Form.Item wrappers cannot intercept delegated clicks.
     let rowElement: HTMLDivElement | undefined
-    onCleanup(() => { if (rows.get(nodeKey) === rowElement) rows.delete(nodeKey) })
+    let clickElement: HTMLDivElement | undefined
+    let switcherElement: HTMLSpanElement | undefined
+    let checkboxElement: HTMLSpanElement | undefined
+    onCleanup(() => {
+      if (rows.get(nodeKey) === rowElement) rows.delete(nodeKey)
+      clickElement?.removeEventListener('click', onRowClick)
+      switcherElement?.removeEventListener('click', onSwitcherClick)
+      checkboxElement?.removeEventListener('click', onCheckboxClick)
+    })
     const disabled = () => m().isDisabled(p.node.value)
     const expanded = () => p.node.__forceExpanded === true || m().isExpanded(p.node.value)
     const hasChildren = () => !!p.node.children?.length
@@ -89,34 +100,44 @@ const TreeView: Component<TreeViewProps> = props => {
       if (target?.key !== p.node.value) return ''
       return target.position === -1 ? 'border-t-2 border-solid border-primary' : target.position === 1 ? 'border-b-2 border-solid border-primary' : 'bg-primary/10 outline outline-1 outline-primary'
     }
+    const onRowClick = (event: MouseEvent) => {
+      if (disabled() || event.defaultPrevented) return
+      if (event.target instanceof Element && event.target.closest('input, button, a, select, textarea, [contenteditable="true"], [role="button"]')) return
+      m().setActiveKey(p.node.value)
+      rows.get(p.node.value)?.focus()
+      if (props.onPick) props.onPick(p.node.value)
+      else m().select(p.node.value)
+    }
+    const onSwitcherClick = (event: MouseEvent) => {
+      event.stopPropagation()
+      m().toggleExpand(p.node.value)
+    }
+    const onCheckboxClick = (event: MouseEvent) => {
+      event.stopPropagation()
+      if (disabled()) return
+      m().setActiveKey(p.node.value)
+      rows.get(p.node.value)?.focus()
+      m().toggleCheck(p.node.value)
+    }
     return <div ref={el => { rowElement = el; rows.set(p.node.value, el) }} tabindex={!disabled() && m().activeKey() === p.node.value ? 0 : -1}
       onFocus={event => { if (event.target === event.currentTarget) m().setActiveKey(p.node.value) }} onKeyDown={onKeyDown}
       class="outline-none [&:focus-visible>div:first-child]:outline-offset-[-2px] [&:focus-visible>div:first-child]:outline-solid [&:focus-visible>div:first-child]:outline-2 [&:focus-visible>div:first-child]:outline-primary" role="treeitem" aria-label={p.node.label} aria-level={p.level + 1} aria-posinset={p.position} aria-setsize={p.count}
       aria-expanded={hasChildren() ? expanded() ? 'true' : 'false' : undefined} aria-selected={m().isSelectable(p.node.value) ? selected() ? 'true' : 'false' : undefined}
       aria-checked={m().isCheckableNode(p.node.value) ? state() === 'indeterminate' ? 'mixed' : state() === 'checked' ? 'true' : 'false' : undefined}
       aria-disabled={disabled() ? 'true' : 'false'} style={p.flat ? { 'padding-left': `${p.level * (props.indent ?? 24)}px` } : undefined}>
-      <div class={twMerge(treeNodeWrapClass({ selected: selected(), disabled: disabled() }), dropClass(), 'focus-visible:outline-2 focus-visible:outline-primary focus-visible:outline-offset-[-2px]')}
+      <div ref={el => { clickElement = el; el.addEventListener('click', onRowClick) }} class={twMerge(treeNodeWrapClass({ selected: selected(), disabled: disabled() }), dropClass(), 'focus-visible:outline-2 focus-visible:outline-primary focus-visible:outline-offset-[-2px]')}
         draggable={m().isDraggable(p.node.value) ? 'true' : 'false'}
         onDragStart={e => { e.stopPropagation(); if (!m().startDrag(p.node.value, e)) { e.preventDefault(); return }; e.dataTransfer?.setData('text/plain', String(p.node.value)); if (e.dataTransfer) e.dataTransfer.effectAllowed = 'move' }}
         onDragOver={e => { e.stopPropagation(); if (m().dragOver(p.node.value, dropPosition(e), e)) { e.preventDefault(); if (e.dataTransfer) e.dataTransfer.dropEffect = 'move' } }}
         onDragLeave={e => { if (!e.currentTarget.contains(e.relatedTarget as Node | null)) m().dragLeave(p.node.value, e) }}
         onDrop={e => { e.preventDefault(); e.stopPropagation(); m().drop(p.node.value, dropPosition(e), e) }}
         onDragEnd={e => { e.stopPropagation(); m().endDrag(e) }}
-        onClick={event => {
-          if (disabled() || event.defaultPrevented) return
-          if (event.target instanceof Element && event.target.closest('input, button, a, select, textarea, [contenteditable="true"], [role="button"]')) return
-          m().setActiveKey(p.node.value)
-          rows.get(p.node.value)?.focus()
-          if (props.onPick) props.onPick(p.node.value)
-          else m().select(p.node.value)
-        }}>
-        <span class={treeSwitcherWrapClass({ leaf: !hasChildren(), expanded: expanded() })} aria-hidden="true"
-          onClick={event => { event.stopPropagation(); m().toggleExpand(p.node.value) }}>
+        >
+        <span ref={el => { switcherElement = el; el.addEventListener('click', onSwitcherClick) }} class={treeSwitcherWrapClass({ leaf: !hasChildren(), expanded: expanded() })} aria-hidden="true">
           <span class={TREE_SWITCHER_ICON} />
         </span>
         <Show when={m().isCheckableNode(p.node.value)}>
-          <span class={treeCheckboxWrapClass({ state: state(), disabled: disabled() })} aria-hidden="true"
-            onClick={event => { event.stopPropagation(); if (disabled()) return; m().setActiveKey(p.node.value); rows.get(p.node.value)?.focus(); m().toggleCheck(p.node.value) }}>
+          <span ref={el => { checkboxElement = el; el.addEventListener('click', onCheckboxClick) }} class={treeCheckboxWrapClass({ state: state(), disabled: disabled() })} aria-hidden="true">
             <span class={treeCheckboxMarkWrapClass({ state: state(), disabled: disabled() })}>
               <Show when={state() !== 'unchecked'}><span class={state() === 'checked' ? 'i-mdi-check' : 'i-mdi-minus'} /></Show>
             </span>
@@ -141,7 +162,7 @@ const TreeView: Component<TreeViewProps> = props => {
       </Show>
     </div>
   }
-  return <div role="tree" aria-label={props.label ?? '树形控件'} aria-multiselectable={props.multiple ? 'true' : 'false'} aria-disabled={m().isWidgetDisabled() ? 'true' : 'false'}>
+  return <div role="tree" id={props.treeId} aria-label={props.label ?? '树形控件'} aria-multiselectable={props.multiple ? 'true' : 'false'} aria-disabled={m().isWidgetDisabled() ? 'true' : 'false'}>
     <Show when={m().displayTree().length} fallback={<div class="py-4 text-center text-[14px] text-on-surface-variant">{props.notFoundContent ?? '暂无数据'}</div>}>
     <Show when={props.virtual} fallback={<For each={m().displayTree()}>
       {(node, index) => <Node node={node} level={0} position={index() + 1} count={m().displayTree().length} />}
@@ -195,7 +216,7 @@ const Tree: Component<TreeProps> = providedProps => {
   </div>
 }
 
-export const TreeInPanel: Component<{ machine: TreeIns; indent?: number; virtual?: boolean; listHeight?: number; listItemHeight?: number; onPick?: (key: string | number) => void }> = props =>
-  <div class="overflow-y-auto py-1" style={{ 'max-height': `${props.listHeight ?? 256}px` }}><TreeView machine={props.machine} indent={props.indent} onPick={props.onPick} virtual={props.virtual !== false} height={props.listHeight} itemHeight={props.listItemHeight} /></div>
+export const TreeInPanel: Component<{ machine: TreeIns; treeId?: string; multiple?: boolean; indent?: number; virtual?: boolean; listHeight?: number; listItemHeight?: number; onPick?: (key: string | number) => void; showLine?: boolean; showIcon?: boolean; icon?: TreeProps['icon']; titleRender?: TreeProps['titleRender'] }> = props =>
+  <div class={props.virtual === false ? 'overflow-y-auto py-1' : 'py-1'} style={props.virtual === false ? { 'max-height': `${props.listHeight ?? 256}px` } : undefined}><TreeView machine={props.machine} treeId={props.treeId} multiple={props.multiple} indent={props.indent} onPick={props.onPick} virtual={props.virtual !== false} height={props.listHeight} itemHeight={props.listItemHeight} showLine={props.showLine} showIcon={props.showIcon} icon={props.icon} titleRender={props.titleRender} /></div>
 
 export default Tree

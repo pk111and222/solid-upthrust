@@ -117,13 +117,13 @@ export const cascaderItemWrapClass = (variants: VariantProps<typeof cascaderItem
 
 /** Suffix area: clear × + the chevron (arrow points right when open). */
 export const cascaderSuffixClass = cva(
-  ["flex", "items-center", "shrink-0", "gap-[4px]", "ml-[4px]", "text-on-surface/45", "transition-upthrust-fast"],
+  ["flex", "items-center", "justify-center", "shrink-0", "ml-[4px]", "text-on-surface/45", "transition-upthrust-fast"],
   {
     variants: {
       size: {
-        small: ["text-[10px]"],
-        middle: ["text-[12px]"],
-        large: ["text-[14px]"],
+        small: ["w-[20px]", "h-[20px]", "text-[14px]"],
+        middle: ["w-[24px]", "h-[24px]", "text-[16px]"],
+        large: ["w-[28px]", "h-[28px]", "text-[18px]"],
       },
     },
     defaultVariants: { size: "middle" },
@@ -134,7 +134,7 @@ export const cascaderSuffixWrapClass = (variants: VariantProps<typeof cascaderSu
   twMerge(cascaderSuffixClass(variants));
 
 export const cascaderArrowClass = cva(
-  ["transition-transform", "duration-200", "ease-upthrust", "flex", "items-center", "cursor-pointer"],
+  ["transition-transform", "duration-200", "ease-upthrust", "flex", "items-center", "justify-center", "w-full", "h-full", "cursor-pointer"],
   {
     variants: {
       open: {
@@ -151,7 +151,8 @@ export const cascaderArrowWrapClass = (variants: VariantProps<typeof cascaderArr
 
 export const cascaderClearClass = cva(
   [
-    "flex", "items-center", "justify-center", "cursor-pointer",
+    "flex", "items-center", "justify-center", "shrink-0", "w-full", "h-full", "cursor-pointer",
+    "border-none", "bg-transparent", "p-0",
     "text-on-surface/25", "hover:text-on-surface/45", "active:text-on-surface",
     "transition-upthrust-fast",
   ],

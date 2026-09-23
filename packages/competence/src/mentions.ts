@@ -91,16 +91,16 @@ export type MentionsIns = {
   /** IME composition gating. */
   isComposing: () => boolean
   notifyCompositionStart: () => void
-  notifyCompositionEnd: () => void
+  notifyCompositionEnd: (caret?: number) => void
   /** Active (keyboard-highlighted) suggestion value. */
   activeValue: () => string | undefined
   moveActive: (delta: number) => void
   setActiveValue: (value: string) => void
   resetActive: () => void
-  /** Commit the active suggestion (Enter). */
-  commitActive: () => void
-  /** Select an option: replaces the active token + trailing space. */
-  selectOption: (option: MentionOption) => void
+  /** Commit the active suggestion (Enter); returns the target caret on success. */
+  commitActive: () => number | undefined
+  /** Select an option and return the target caret on success. */
+  selectOption: (option: MentionOption) => number | undefined
   /** Open state (the UI trigger owns the DOM). */
   isOpen: () => boolean
   setOpen: (open: boolean) => void
@@ -115,8 +115,8 @@ const defaultFilter = (query: string, option: MentionOption): boolean => {
   return haystack.includes(q)
 }
 
-const displayOf = (option: MentionOption): string =>
-  option.label ?? option.value
+const isBoundary = (char: string | undefined, split: string) =>
+  char === undefined || /\s/.test(char) || split.includes(char)
 
 /**
  * Parse the mention token under `caret` in `text` (pure — testable).
@@ -133,19 +133,18 @@ export const parseTrigger = (
   if (!prefix) return inactive
   // Walk back from the caret to find the nearest unescaped prefix within
   // the current line/segment.
-  const searchStart = Math.max(0, caret - 64)
-  for (let i = Math.min(caret, text.length); i >= searchStart; i--) {
+  for (let i = Math.min(caret, text.length); i >= 0; i--) {
     const idx = text.lastIndexOf(prefix, i)
-    if (idx < searchStart) break
+    if (idx < 0) break
     i = idx
     // The prefix must start the text or follow a whitespace/split char.
     const before = idx > 0 ? text[idx - 1] : undefined
-    if (before !== undefined && !split.includes(before) && before !== '\n') continue
+    if (!isBoundary(before, split)) continue
     // Token extends to the next whitespace/split char.
     let end = idx + prefix.length
-    while (end < text.length && !split.includes(text[end]) && text[end] !== '\n') end++
+    while (end < text.length && !isBoundary(text[end], split)) end++
     // Caret must sit inside [idx, end] (typing at the end counts).
-    if (caret >= idx && caret <= end) {
+    if (caret >= idx + prefix.length && caret <= end) {
       return {
         active: true,
         query: text.slice(idx + prefix.length, caret),
@@ -160,14 +159,15 @@ export const parseTrigger = (
 /** Extract every mention token in the text (pure — antd getMentions). */
 export const extractMentions = (text: string, prefix = '@', split = ' '): string[] => {
   const out: string[] = []
+  if (!prefix) return out
   let i = 0
   while (i <= text.length - prefix.length) {
     const idx = text.indexOf(prefix, i)
     if (idx === -1) break
     const before = idx > 0 ? text[idx - 1] : undefined
-    const boundaryOk = before === undefined || split.includes(before) || before === '\n'
+    const boundaryOk = isBoundary(before, split)
     let end = idx + prefix.length
-    while (end < text.length && !split.includes(text[end]) && text[end] !== '\n') end++
+    while (end < text.length && !isBoundary(text[end], split)) end++
     if (boundaryOk && end > idx + prefix.length) {
       out.push(text.slice(idx + prefix.length, end))
       i = end
@@ -184,7 +184,7 @@ export const createMentions = (config: MentionsConfig = {}): MentionsIns => {
 
   // ownedWrite: typing/caret updates arrive from DOM events.
   const [_text, _setText] = createSignal(config.defaultValue ?? '', { ownedWrite: true })
-  const [_caret, _setCaret] = createSignal((config.defaultValue ?? '').length, { ownedWrite: true })
+  const [_caret, _setCaret] = createSignal((config.value ?? config.defaultValue ?? '').length, { ownedWrite: true })
   const [_active, _setActive] = createSignal<string | undefined>(undefined, { ownedWrite: true })
   const [_open, _setOpen] = createSignal(config.defaultOpen ?? false, { ownedWrite: true })
   const [_composing, _setComposing] = createSignal(false, { ownedWrite: true })
@@ -198,27 +198,20 @@ export const createMentions = (config: MentionsConfig = {}): MentionsIns => {
     parseTrigger(value(), _caret(), prefix(), split()),
   )
 
-  /** Suggestions for the ACTIVE query (empty while inactive). Batch-safe:
-   *  eagerly recomputed on setText/setCaret. `notify` fires onSearch when
-   *  called from user edits (not from open/select re-derivations). */
-  const [_suggestionList, _setSuggestionList] = createSignal<MentionOption[]>([], { ownedWrite: true })
-  const recomputeSuggestions = (text: string, caretIndex: number, notify = false) => {
+  const suggestionsFor = (text: string, caretIndex: number) => {
     const state = parseTrigger(text, caretIndex, prefix(), split())
-    if (!state.active) {
-      _setSuggestionList([])
-      if (notify) config.onSearch?.('', state.prefix)
-      return [] as MentionOption[]
-    }
+    if (!state.active) return [] as MentionOption[]
     const pool = config.options ?? []
     const filter = config.filterOption === false ? null : (config.filterOption ?? defaultFilter)
-    const list = filter === null ? pool : pool.filter(o => filter(state.query, o))
-    _setSuggestionList(list)
-    if (notify) config.onSearch?.(state.query, state.prefix)
-    return list
+    return filter === null ? pool : pool.filter(o => filter(state.query, o))
   }
-  untrack(() => recomputeSuggestions(config.value ?? config.defaultValue ?? '', (config.defaultValue ?? '').length))
-
-  const suggestions = createMemo(() => _suggestionList())
+  // Derive from accepted text and live options: async/server results and
+  // controlled parent updates must appear without another key stroke.
+  const suggestions = createMemo(() => suggestionsFor(value(), _caret()))
+  const notifySearch = (text: string, caretIndex: number) => {
+    const state = parseTrigger(text, caretIndex, prefix(), split())
+    config.onSearch?.(state.active ? state.query : '', state.prefix)
+  }
 
   const setText = (text: string) => {
     if (_composing()) {
@@ -226,16 +219,16 @@ export const createMentions = (config: MentionsConfig = {}): MentionsIns => {
       return
     }
     _setText(text)
+    _setCaret(text.length)
     config.onChange?.(text)
-    // Keep the caret at the END for programmatic text (the UI layer moves
-    // it precisely when it knows the DOM selection; this is the fallback).
-    untrack(() => recomputeSuggestions(text, _caret(), true))
-    untrack(() => resetActiveWith(text, _caret()))
+    untrack(() => notifySearch(text, text.length))
+    untrack(() => resetActiveWith(text, text.length))
   }
 
   const setCaret = (index: number) => {
+    if (index === _caret()) return
     _setCaret(index)
-    untrack(() => recomputeSuggestions(value(), index, true))
+    untrack(() => notifySearch(value(), index))
     untrack(() => resetActiveWith(value(), index))
   }
 
@@ -248,7 +241,7 @@ export const createMentions = (config: MentionsConfig = {}): MentionsIns => {
     _setText(text)
     _setCaret(caretIndex)
     config.onChange?.(text)
-    untrack(() => recomputeSuggestions(text, caretIndex, true))
+    untrack(() => notifySearch(text, caretIndex))
     untrack(() => resetActiveWith(text, caretIndex))
   }
 
@@ -264,34 +257,34 @@ export const createMentions = (config: MentionsConfig = {}): MentionsIns => {
     _setComposing(true)
   }
 
-  const notifyCompositionEnd = () => {
+  const notifyCompositionEnd = (caretIndex?: number) => {
     if (!_composing()) return
     _setComposing(false)
     if (_pendingComposition !== undefined) {
       const text = _pendingComposition
       _pendingComposition = undefined
       _setText(text)
+      _setCaret(caretIndex ?? text.length)
       config.onChange?.(text)
-      untrack(() => recomputeSuggestions(text, _caret()))
-      untrack(() => resetActiveWith(text, _caret()))
+      untrack(() => notifySearch(text, caretIndex ?? text.length))
+      untrack(() => resetActiveWith(text, caretIndex ?? text.length))
     }
   }
 
   // ---- active suggestion ------------------------------------------------------
 
-  const enabledSuggestionsFor = (text: string, caretIndex: number) => {
-    const state = parseTrigger(text, caretIndex, prefix(), split())
-    if (!state.active) return [] as MentionOption[]
-    const pool = config.options ?? []
-    const filter = config.filterOption === false ? null : (config.filterOption ?? defaultFilter)
-    const list = filter === null ? pool : pool.filter(o => filter(state.query, o))
-    return list.filter(o => !o.disabled)
+  const enabledSuggestionsFor = (text: string, caretIndex: number) =>
+    suggestionsFor(text, caretIndex).filter(o => !o.disabled)
+  const activeValue = () => {
+    const list = suggestions().filter(o => !o.disabled)
+    const selected = _active()
+    return list.find(o => o.value === selected)?.value ?? list[0]?.value
   }
 
   const moveActive = (delta: number) => {
     const list = enabledSuggestionsFor(value(), _caret())
     if (!list.length) return
-    const cur = _active()
+    const cur = activeValue()
     const idx = list.findIndex(o => o.value === cur)
     const next = idx === -1
       ? (delta > 0 ? 0 : list.length - 1)
@@ -328,25 +321,27 @@ export const createMentions = (config: MentionsConfig = {}): MentionsIns => {
     const state = trigger()
     if (!state.active) return
     const text = value()
-    const insertion = `${state.prefix}${option.value} `
+    const suffix = text.slice(state.range[1])
+    const separator = isBoundary(suffix[0], split()) && suffix.length > 0 ? '' : (split() || ' ')
+    const insertion = `${state.prefix}${option.value}${separator}`
     const next = text.slice(0, state.range[0]) + insertion + text.slice(state.range[1])
     _setText(next)
     config.onChange?.(next)
     config.onSelect?.(option, state.prefix)
     // Caret lands right after the inserted mention + its trailing space.
-    const nextCaret = state.range[0] + insertion.length
+    const nextCaret = state.range[0] + insertion.length + (separator === '' && suffix.length > 0 ? 1 : 0)
     _setCaret(nextCaret)
     untrack(() => {
-      recomputeSuggestions(next, nextCaret)
       resetActiveWith(next, nextCaret)
     })
+    return nextCaret
   }
 
   const commitActive = () => {
-    const cur = _active()
+    const cur = activeValue()
     if (cur === undefined) return
     const option = (config.options ?? []).find(o => o.value === cur)
-    if (option) selectOption(option)
+    return option ? selectOption(option) : undefined
   }
 
   // ---- focus ---------------------------------------------------------------------
@@ -372,7 +367,7 @@ export const createMentions = (config: MentionsConfig = {}): MentionsIns => {
     isComposing,
     notifyCompositionStart,
     notifyCompositionEnd,
-    activeValue: () => _active(),
+    activeValue,
     moveActive,
     setActiveValue,
     resetActive,

@@ -23,7 +23,7 @@ export default function VirtualList<T>(props: VirtualListProps<T>) {
     if (viewport) viewport.scrollTop = top
   })
   return <div ref={viewport} data-virtual-list={props.virtual !== false ? 'true' : 'false'} role={props.role}
-    class={props.class} style={{ 'overflow-y': 'auto', 'max-height': `${list.height()}px`, 'overflow-anchor': 'none' }}
+    class={props.class} style={{ 'overflow-y': props.virtual === false ? 'visible' : 'auto', 'max-height': `${list.height()}px`, 'overflow-anchor': 'none' }}
     onScroll={e => list.setScrollTop(e.currentTarget.scrollTop)}>
     <div style={props.virtual === false ? undefined : { height: `${list.totalHeight()}px`, position: 'relative' }}>
       <div style={props.virtual === false ? undefined : { transform: `translateY(${list.offsetTop()}px)`, position: 'absolute', top: '0', width: '100%' }}>

@@ -1,0 +1,463 @@
+$ pnpm --dir packages/preset run build && pnpm --dir packages/competence run build && pnpm --dir packages/components run build && pnpm --dir example run build
+$ vite build
+vite v8.2.1 building client environment for production...
+[2Ktransforming...✓ 35 modules transformed.
+rendering chunks...
+
+[unplugin:dts] Start generate declaration files...
+[unplugin:dts] Declaration files built in 543ms.
+
+computing gzip size...
+dist/upthrust-ui-preset.js  298.26 kB │ gzip: 75.72 kB │ map: 822.73 kB
+
+[2Ktransforming...✓ 35 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/upthrust-ui-preset.umd.cjs  246.86 kB │ gzip: 69.16 kB │ map: 823.41 kB
+
+[2Ktransforming...✓ 35 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/upthrust-ui-preset.cjs  246.67 kB │ gzip: 69.09 kB │ map: 823.41 kB
+
+✓ built in 659ms
+$ vite build && vite build --mode preserve
+vite v8.2.1 building client environment for production...
+[2Ktransforming...✓ 95 modules transformed.
+rendering chunks...
+
+[unplugin:dts] Start generate declaration files...
+[unplugin:dts] Declaration files built in 1262ms.
+
+computing gzip size...
+dist/upthrust-competence.js  227.00 kB │ gzip: 64.07 kB │ map: 881.31 kB
+
+[2Ktransforming...✓ 95 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/upthrust-competence.umd.cjs  176.75 kB │ gzip: 57.28 kB │ map: 886.72 kB
+
+[33m[MISSING_GLOBAL_NAME] [0mNo name was provided for external module "async-validator" in "output.globals" – guessing "async_validator".
+
+[33m[MISSING_GLOBAL_NAME] [0mNo name was provided for external module "dayjs" in "output.globals" – guessing "dayjs".
+
+[2Ktransforming...✓ 95 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/upthrust-competence.cjs  177.76 kB │ gzip: 57.37 kB │ map: 886.71 kB
+
+✓ built in 1.52s
+vite v8.2.1 building client environment for preserve...
+[2Ktransforming...✓ 91 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/es/breakpoint.js                                                             0.41 kB │ gzip: 0.29 kB │ map:  0.64 kB
+dist/es/node_modules/.pnpm/lodash@4.18.1/node_modules/lodash/_Symbol.js           0.43 kB │ gzip: 0.26 kB │ map:  0.36 kB
+dist/es/node_modules/.pnpm/lodash@4.18.1/node_modules/lodash/_freeGlobal.js       0.46 kB │ gzip: 0.28 kB │ map:  0.44 kB
+dist/es/node_modules/.pnpm/lodash@4.18.1/node_modules/lodash/_root.js             0.62 kB │ gzip: 0.36 kB │ map:  0.63 kB
+dist/es/utils.js                                                                  0.65 kB │ gzip: 0.40 kB │ map:  0.85 kB
+dist/es/table/utils.js                                                            0.80 kB │ gzip: 0.45 kB │ map:  1.61 kB
+dist/es/table/index.js                                                            0.80 kB │ gzip: 0.25 kB
+dist/es/node_modules/.pnpm/lodash@4.18.1/node_modules/lodash/_objectToString.js   0.88 kB │ gzip: 0.47 kB │ map:  0.92 kB
+dist/es/tag.js                                                                    0.95 kB │ gzip: 0.46 kB │ map:  1.84 kB
+dist/es/node_modules/.pnpm/lodash@4.18.1/node_modules/lodash/isObjectLike.js      0.99 kB │ gzip: 0.51 kB │ map:  0.96 kB
+dist/es/node_modules/.pnpm/lodash@4.18.1/node_modules/lodash/isObject.js          1.09 kB │ gzip: 0.60 kB │ map:  1.10 kB
+dist/es/tooltip.js                                                                1.13 kB │ gzip: 0.45 kB │ map:  3.06 kB
+dist/es/switch.js                                                                 1.13 kB │ gzip: 0.48 kB │ map:  3.63 kB
+dist/es/node_modules/.pnpm/lodash@4.18.1/node_modules/lodash/isBoolean.js         1.14 kB │ gzip: 0.57 kB │ map:  1.10 kB
+dist/es/_virtual/_rolldown/runtime.js                                             1.17 kB │ gzip: 0.57 kB
+dist/es/alert.js                                                                  1.28 kB │ gzip: 0.56 kB │ map:  2.28 kB
+dist/es/node_modules/.pnpm/lodash@4.18.1/node_modules/lodash/isFunction.js        1.30 kB │ gzip: 0.61 kB │ map:  1.52 kB
+dist/es/node_modules/.pnpm/lodash@4.18.1/node_modules/lodash/_baseGetTag.js       1.30 kB │ gzip: 0.59 kB │ map:  1.33 kB
+dist/es/skeleton.js                                                               1.34 kB │ gzip: 0.59 kB │ map:  3.39 kB
+dist/es/table/cells.js                                                            1.47 kB │ gzip: 0.69 kB │ map:  2.99 kB
+dist/es/node_modules/.pnpm/lodash@4.18.1/node_modules/lodash/_getRawTag.js        1.51 kB │ gzip: 0.72 kB │ map:  1.81 kB
+dist/es/virtualList.js                                                            1.59 kB │ gzip: 0.63 kB │ map:  2.99 kB
+dist/es/sider.js                                                                  1.61 kB │ gzip: 0.69 kB │ map:  3.54 kB
+dist/es/popconfirm.js                                                             1.61 kB │ gzip: 0.61 kB │ map:  4.44 kB
+dist/es/table/filtering.js                                                        1.68 kB │ gzip: 0.75 kB │ map:  3.24 kB
+dist/es/imageGroup.js                                                             1.81 kB │ gzip: 0.71 kB │ map:  6.57 kB
+dist/es/table/sorting.js                                                          1.91 kB │ gzip: 0.82 kB │ map:  3.79 kB
+dist/es/progress.js                                                               2.04 kB │ gzip: 0.91 kB │ map:  5.30 kB
+dist/es/menu.js                                                                   2.21 kB │ gzip: 0.70 kB │ map:  4.83 kB
+dist/es/typography.js                                                             2.35 kB │ gzip: 0.83 kB │ map:  4.75 kB
+dist/es/watermark.js                                                              2.47 kB │ gzip: 1.18 kB │ map:  5.84 kB
+dist/es/radio.js                                                                  2.53 kB │ gzip: 1.05 kB │ map:  6.39 kB
+dist/es/input.js                                                                  2.55 kB │ gzip: 0.85 kB │ map:  4.82 kB
+dist/es/masonry.js                                                                2.59 kB │ gzip: 1.06 kB │ map:  5.95 kB
+dist/es/checkbox.js                                                               2.63 kB │ gzip: 0.83 kB │ map:  7.73 kB
+dist/es/carousel.js                                                               2.64 kB │ gzip: 1.01 kB │ map:  8.01 kB
+dist/es/steps.js                                                                  2.71 kB │ gzip: 1.00 kB │ map:  6.14 kB
+dist/es/table/rows.js                                                             2.71 kB │ gzip: 1.05 kB │ map:  5.07 kB
+dist/es/badge.js                                                                  2.78 kB │ gzip: 1.16 kB │ map:  6.93 kB
+dist/es/button.js                                                                 2.86 kB │ gzip: 1.01 kB │ map:  5.20 kB
+dist/es/formList.js                                                               2.88 kB │ gzip: 1.04 kB │ map:  7.76 kB
+dist/es/table/grouping.js                                                         2.98 kB │ gzip: 1.18 kB │ map:  5.67 kB
+dist/es/image.js                                                                  3.04 kB │ gzip: 0.96 kB │ map:  9.89 kB
+dist/es/message.js                                                                3.16 kB │ gzip: 1.14 kB │ map: 10.65 kB
+dist/es/colorPicker/index.js                                                      3.17 kB │ gzip: 1.05 kB │ map:  6.09 kB
+dist/es/tour/position.js                                                          3.28 kB │ gzip: 1.21 kB │ map:  5.78 kB
+dist/es/floatButton.js                                                            3.45 kB │ gzip: 1.09 kB │ map: 10.02 kB
+dist/es/segmented.js                                                              3.57 kB │ gzip: 1.23 kB │ map: 11.51 kB
+dist/es/dialog.js                                                                 3.60 kB │ gzip: 1.07 kB │ map: 10.64 kB
+dist/es/rate.js                                                                   3.61 kB │ gzip: 1.39 kB │ map:  8.06 kB
+dist/es/table/editing.js                                                          3.68 kB │ gzip: 1.29 kB │ map:  7.26 kB
+dist/es/pagination.js                                                             3.78 kB │ gzip: 1.39 kB │ map:  8.00 kB
+dist/es/tabs.js                                                                   3.90 kB │ gzip: 1.29 kB │ map:  8.02 kB
+dist/es/dropdown.js                                                               3.93 kB │ gzip: 1.20 kB │ map:  7.47 kB
+dist/es/table/virtual.js                                                          4.08 kB │ gzip: 1.42 kB │ map:  7.83 kB
+dist/es/affix.js                                                                  4.22 kB │ gzip: 1.39 kB │ map:  7.82 kB
+dist/es/tour/index.js                                                             4.22 kB │ gzip: 1.36 kB │ map:  8.53 kB
+dist/es/treeDrag.js                                                               4.27 kB │ gzip: 1.33 kB │ map:  9.27 kB
+dist/es/calendar.js                                                               4.30 kB │ gzip: 1.36 kB │ map: 11.34 kB
+dist/es/colorPicker/color.js                                                      4.32 kB │ gzip: 1.67 kB │ map:  8.92 kB
+dist/es/transfer.js                                                               4.34 kB │ gzip: 1.38 kB │ map:  8.91 kB
+dist/es/anchor.js                                                                 4.61 kB │ gzip: 1.62 kB │ map:  9.88 kB
+dist/es/formUtils.js                                                              4.61 kB │ gzip: 1.86 kB │ map:  9.47 kB
+dist/es/inputNumber.js                                                            4.67 kB │ gzip: 1.65 kB │ map: 11.91 kB
+dist/es/autoComplete.js                                                           4.83 kB │ gzip: 1.44 kB │ map: 13.02 kB
+dist/es/table/columns.js                                                          4.86 kB │ gzip: 1.85 kB │ map:  9.42 kB
+dist/es/table/state.js                                                            4.91 kB │ gzip: 1.49 kB │ map:  9.16 kB
+dist/es/calendarDate.js                                                           5.81 kB │ gzip: 2.11 kB │ map: 10.31 kB
+dist/es/notification.js                                                           5.85 kB │ gzip: 1.97 kB │ map: 16.32 kB
+dist/es/formField.js                                                              5.89 kB │ gzip: 1.78 kB │ map: 16.43 kB
+dist/es/table/selection.js                                                        6.20 kB │ gzip: 1.72 kB │ map: 12.23 kB
+dist/es/splitter.js                                                               6.45 kB │ gzip: 2.22 kB │ map: 14.12 kB
+dist/es/slider.js                                                                 6.48 kB │ gzip: 2.14 kB │ map: 15.07 kB
+dist/es/listDrag.js                                                               6.66 kB │ gzip: 2.15 kB │ map: 17.43 kB
+dist/es/drag.js                                                                   6.68 kB │ gzip: 2.19 kB │ map: 18.73 kB
+dist/es/selection.js                                                              6.92 kB │ gzip: 2.27 kB │ map: 19.82 kB
+dist/es/mentions.js                                                               7.94 kB │ gzip: 2.35 kB │ map: 19.71 kB
+dist/es/upload.js                                                                 7.95 kB │ gzip: 2.89 kB │ map: 23.66 kB
+dist/es/formValidate.js                                                           8.41 kB │ gzip: 2.95 kB │ map: 16.19 kB
+dist/es/timePicker.js                                                             8.61 kB │ gzip: 2.76 kB │ map: 23.50 kB
+dist/es/list.js                                                                   8.74 kB │ gzip: 2.73 kB │ map: 27.35 kB
+dist/es/select.js                                                                 8.88 kB │ gzip: 3.03 kB │ map: 21.95 kB
+dist/es/index.js                                                                  9.29 kB │ gzip: 2.20 kB
+dist/es/cascader.js                                                               9.57 kB │ gzip: 3.28 kB │ map: 24.11 kB
+dist/es/datePickerAdvanced.js                                                    10.54 kB │ gzip: 2.70 kB │ map: 20.15 kB
+dist/es/trigger.js                                                               13.56 kB │ gzip: 3.87 kB │ map: 34.07 kB
+dist/es/table/createTable.js                                                     14.88 kB │ gzip: 3.94 kB │ map: 26.03 kB
+dist/es/tree.js                                                                  17.68 kB │ gzip: 4.70 kB │ map: 43.94 kB
+dist/es/form.js                                                                  19.48 kB │ gzip: 5.19 kB │ map: 43.46 kB
+dist/es/datePicker.js                                                            23.16 kB │ gzip: 5.58 kB │ map: 59.30 kB
+
+✓ built in 66ms
+$ vite build && vite build --mode preserve
+vite v8.2.1 building client environment for production...
+[2Ktransforming...✓ 167 modules transformed.
+rendering chunks...
+
+[unplugin:dts] Start generate declaration files...
+[unplugin:dts] Declaration files built in 3119ms.
+
+computing gzip size...
+dist/upthrust.css  129.58 kB │ gzip:  20.04 kB
+dist/upthrust.js   694.48 kB │ gzip: 151.89 kB │ map: 2,686.51 kB
+
+[2Ktransforming...✓ 167 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/upthrust.css      129.58 kB │ gzip:  20.04 kB
+dist/upthrust.umd.cjs  574.11 kB │ gzip: 132.19 kB │ map: 2,745.88 kB
+
+[33m[MISSING_GLOBAL_NAME] [0mNo name was provided for external module "upthrust-competence" in "output.globals" – guessing "upthrust_competence".
+
+[33m[MISSING_GLOBAL_NAME] [0mNo name was provided for external module "dayjs" in "output.globals" – guessing "dayjs".
+
+[2Ktransforming...✓ 167 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/upthrust.css  129.58 kB │ gzip:  20.04 kB
+dist/upthrust.cjs  574.26 kB │ gzip: 131.86 kB │ map: 2,745.88 kB
+
+✓ built in 4.69s
+[33m[PLUGIN_TIMINGS] [0mYour build spent 94% of 4.7s inside plugin hooks (4.4s).
+Measured inside the callback, so queue time is excluded and time the callback itself awaited is not:
+  - unplugin-dts buildStart (62%, 2.9s, 3 calls)
+See https://rolldown.rs/reference/InputOptions.checks#plugintimings for more details.
+
+vite v8.2.1 building client environment for preserve...
+[2Ktransforming...✓ 161 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/es/Form/context.js             0.40 kB │ gzip: 0.19 kB │ map:   2.13 kB
+dist/es/common/calendar.js          0.48 kB │ gzip: 0.31 kB │ map:   0.71 kB
+dist/es/FloatButton/BackTop.js      0.48 kB │ gzip: 0.29 kB │ map:   1.09 kB
+dist/es/Watermark/styles.js         0.64 kB │ gzip: 0.30 kB │ map:   1.30 kB
+dist/es/Masonry/styles.js           0.70 kB │ gzip: 0.31 kB │ map:   1.48 kB
+dist/es/ConfigProvider/Portal.js    0.71 kB │ gzip: 0.37 kB │ map:   1.17 kB
+dist/es/Icon/styles.js              0.79 kB │ gzip: 0.43 kB │ map:   1.53 kB
+dist/es/Empty/styles.js             0.84 kB │ gzip: 0.35 kB │ map:   1.55 kB
+dist/es/Grid/styles.js              0.95 kB │ gzip: 0.42 kB │ map:   1.94 kB
+dist/es/Tour/styles.js              1.05 kB │ gzip: 0.53 kB │ map:   1.25 kB
+dist/es/Input/context.js            1.06 kB │ gzip: 0.48 kB │ map:   3.38 kB
+dist/es/Flex/styles.js              1.08 kB │ gzip: 0.44 kB │ map:   2.21 kB
+dist/es/_dialogStack.js             1.13 kB │ gzip: 0.57 kB │ map:   2.90 kB
+dist/es/Breadcrumb/styles.js        1.35 kB │ gzip: 0.46 kB │ map:   2.35 kB
+dist/es/Transfer/styles.js          1.36 kB │ gzip: 0.58 kB │ map:   1.66 kB
+dist/es/Table/styles.js             1.40 kB │ gzip: 0.62 kB │ map:   1.76 kB
+dist/es/Divider/styles.js           1.49 kB │ gzip: 0.57 kB │ map:   2.76 kB
+dist/es/Flex/index.js               1.50 kB │ gzip: 0.65 kB │ map:   3.29 kB
+dist/es/Tooltip/styles.js           1.51 kB │ gzip: 0.62 kB │ map:   3.37 kB
+dist/es/Icon/index.js               1.55 kB │ gzip: 0.76 kB │ map:   3.14 kB
+dist/es/Tag/styles.js               1.57 kB │ gzip: 0.65 kB │ map:   2.02 kB
+dist/es/ConfigProvider/context.js   1.62 kB │ gzip: 0.69 kB │ map:   2.92 kB
+dist/es/Anchor/styles.js            1.66 kB │ gzip: 0.64 kB │ map:   3.23 kB
+dist/es/Form/List.js                1.71 kB │ gzip: 0.80 kB │ map:   3.52 kB
+dist/es/Avatar/styles.js            1.77 kB │ gzip: 0.57 kB │ map:   3.83 kB
+dist/es/Statistic/styles.js         1.78 kB │ gzip: 0.57 kB │ map:   3.14 kB
+dist/es/Typography/styles.js        1.80 kB │ gzip: 0.67 kB │ map:   3.29 kB
+dist/es/Affix/index.js              1.86 kB │ gzip: 0.80 kB │ map:   4.15 kB
+dist/es/Watermark/index.js          1.89 kB │ gzip: 0.77 kB │ map:   4.87 kB
+dist/es/Skeleton/styles.js          1.94 kB │ gzip: 0.65 kB │ map:   4.60 kB
+dist/es/List/styles.js              1.94 kB │ gzip: 0.61 kB │ map:   4.93 kB
+dist/es/Popover/styles.js           2.02 kB │ gzip: 0.74 kB │ map:   4.43 kB
+dist/es/QRCode/styles.js            2.05 kB │ gzip: 0.65 kB │ map:   3.71 kB
+dist/es/Space/styles.js             2.12 kB │ gzip: 0.75 kB │ map:   3.81 kB
+dist/es/Message/styles.js           2.18 kB │ gzip: 0.87 kB │ map:   5.45 kB
+dist/es/Dropdown/styles.js          2.19 kB │ gzip: 0.77 kB │ map:   4.37 kB
+dist/es/Result/styles.js            2.24 kB │ gzip: 0.64 kB │ map:   4.73 kB
+dist/es/Spin/styles.js              2.34 kB │ gzip: 0.69 kB │ map:   5.47 kB
+dist/es/ColorPicker/styles.js       2.37 kB │ gzip: 0.85 kB │ map:   2.68 kB
+dist/es/Layout/styles.js            2.41 kB │ gzip: 0.71 kB │ map:   4.42 kB
+dist/es/AutoComplete/styles.js      2.46 kB │ gzip: 0.95 kB │ map:   3.94 kB
+dist/es/_VirtualList/index.js       2.49 kB │ gzip: 1.04 kB │ map:   4.97 kB
+dist/es/Masonry/index.js            2.50 kB │ gzip: 0.97 kB │ map:   5.26 kB
+dist/es/Skeleton/parts.js           2.56 kB │ gzip: 0.78 kB │ map:   4.81 kB
+dist/es/ConfigProvider/index.js     2.57 kB │ gzip: 1.09 kB │ map:   4.69 kB
+dist/es/FloatButton/styles.js       2.58 kB │ gzip: 1.04 kB │ map:   5.53 kB
+dist/es/Popconfirm/styles.js        2.60 kB │ gzip: 0.84 kB │ map:   5.21 kB
+dist/es/Mentions/styles.js          2.81 kB │ gzip: 1.07 kB │ map:   4.34 kB
+dist/es/Segmented/styles.js         2.82 kB │ gzip: 1.08 kB │ map:   5.54 kB
+dist/es/TimePicker/rangeStyles.js   2.85 kB │ gzip: 1.08 kB │ map:   4.21 kB
+dist/es/Divider/index.js            2.86 kB │ gzip: 0.94 kB │ map:   5.39 kB
+dist/es/Grid/index.js               2.86 kB │ gzip: 1.08 kB │ map:   6.15 kB
+dist/es/Rate/styles.js              2.88 kB │ gzip: 1.05 kB │ map:   4.52 kB
+dist/es/Form/index.js               2.90 kB │ gzip: 1.18 kB │ map:   7.29 kB
+dist/es/Splitter/styles.js          2.98 kB │ gzip: 0.82 kB │ map:   5.41 kB
+dist/es/Modal/styles.js             3.07 kB │ gzip: 0.91 kB │ map:   6.66 kB
+dist/es/FloatButton/Group.js        3.26 kB │ gzip: 1.29 kB │ map:   8.86 kB
+dist/es/Progress/styles.js          3.35 kB │ gzip: 0.90 kB │ map:   6.87 kB
+dist/es/Space/index.js              3.38 kB │ gzip: 1.18 kB │ map:   6.72 kB
+dist/es/Collapse/styles.js          3.40 kB │ gzip: 0.98 kB │ map:   8.68 kB
+dist/es/Tag/index.js                3.44 kB │ gzip: 1.25 kB │ map:   6.73 kB
+dist/es/TimePicker/styles.js        3.53 kB │ gzip: 1.24 kB │ map:   5.52 kB
+dist/es/Alert/styles.js             3.62 kB │ gzip: 1.06 kB │ map:   8.64 kB
+dist/es/Input/Password.js           3.77 kB │ gzip: 1.60 kB │ map:   8.42 kB
+dist/es/Drawer/styles.js            3.79 kB │ gzip: 1.09 kB │ map:   8.03 kB
+dist/es/Pagination/styles.js        3.82 kB │ gzip: 0.94 kB │ map:   6.93 kB
+dist/es/Tooltip/index.js            3.84 kB │ gzip: 1.32 kB │ map:  13.03 kB
+dist/es/Tabs/styles.js              3.91 kB │ gzip: 1.13 kB │ map:   9.55 kB
+dist/es/Carousel/styles.js          3.91 kB │ gzip: 1.04 kB │ map:   8.45 kB
+dist/es/Slider/styles.js            3.94 kB │ gzip: 1.36 kB │ map:   6.38 kB
+dist/es/Switch/styles.js            3.95 kB │ gzip: 1.55 kB │ map:   6.20 kB
+dist/es/Menu/styles.js              4.11 kB │ gzip: 1.09 kB │ map:   7.53 kB
+dist/es/Anchor/index.js             4.17 kB │ gzip: 1.41 kB │ map:   9.89 kB
+dist/es/Result/index.js             4.19 kB │ gzip: 1.27 kB │ map:   8.34 kB
+dist/es/FloatButton/index.js        4.32 kB │ gzip: 1.66 kB │ map:  10.44 kB
+dist/es/Breadcrumb/index.js         4.34 kB │ gzip: 1.39 kB │ map:   9.70 kB
+dist/es/Spin/index.js               4.37 kB │ gzip: 1.49 kB │ map:   9.34 kB
+dist/es/Skeleton/index.js           4.37 kB │ gzip: 1.35 kB │ map:  15.75 kB
+dist/es/Checkbox/styles.js          4.51 kB │ gzip: 1.49 kB │ map:   7.59 kB
+dist/es/Modal/static.js             4.55 kB │ gzip: 1.68 kB │ map:  11.39 kB
+dist/es/Empty/index.js              4.67 kB │ gzip: 1.78 kB │ map:  10.10 kB
+dist/es/Steps/styles.js             4.70 kB │ gzip: 1.12 kB │ map:  10.18 kB
+dist/es/Popover/index.js            4.72 kB │ gzip: 1.44 kB │ map:  14.35 kB
+dist/es/Input/Search.js             4.75 kB │ gzip: 1.85 kB │ map:  13.91 kB
+dist/es/Alert/index.js              4.75 kB │ gzip: 1.36 kB │ map:  12.92 kB
+dist/es/Tree/styles.js              4.81 kB │ gzip: 1.52 kB │ map:   8.17 kB
+dist/es/Notification/styles.js      4.87 kB │ gzip: 1.33 kB │ map:  10.52 kB
+dist/es/DatePicker/rangeStyles.js   4.90 kB │ gzip: 1.59 kB │ map:   7.54 kB
+dist/es/Switch/index.js             4.95 kB │ gzip: 1.76 kB │ map:  10.56 kB
+dist/es/Layout/index.js             5.29 kB │ gzip: 1.51 kB │ map:  12.47 kB
+dist/es/Radio/styles.js             5.30 kB │ gzip: 1.62 kB │ map:   9.12 kB
+dist/es/InputNumber/styles.js       5.42 kB │ gzip: 1.72 kB │ map:   8.80 kB
+dist/es/Collapse/index.js           5.45 kB │ gzip: 1.78 kB │ map:  19.62 kB
+dist/es/Image/styles.js             5.47 kB │ gzip: 1.27 kB │ map:  10.84 kB
+dist/es/Button/index.js             5.54 kB │ gzip: 1.69 kB │ map:  10.95 kB
+dist/es/DatePicker/styles.js        5.68 kB │ gzip: 1.49 kB │ map:   8.51 kB
+dist/es/index.js                    5.70 kB │ gzip: 1.50 kB
+dist/es/Message/index.js            5.74 kB │ gzip: 2.15 kB │ map:  14.50 kB
+dist/es/TreeSelect/styles.js        5.77 kB │ gzip: 1.69 kB │ map:   9.46 kB
+dist/es/Popconfirm/index.js         5.87 kB │ gzip: 1.74 kB │ map:  23.34 kB
+dist/es/Timeline/styles.js          5.91 kB │ gzip: 1.32 kB │ map:   9.37 kB
+dist/es/Badge/styles.js             5.92 kB │ gzip: 1.36 kB │ map:  13.11 kB
+dist/es/Descriptions/styles.js      6.16 kB │ gzip: 1.10 kB │ map:  12.96 kB
+dist/es/Rate/index.js               6.38 kB │ gzip: 2.20 kB │ map:  14.00 kB
+dist/es/Splitter/index.js           6.62 kB │ gzip: 2.22 kB │ map:  13.38 kB
+dist/es/Carousel/index.js           6.62 kB │ gzip: 1.83 kB │ map:  18.55 kB
+dist/es/Button/styles.js            6.64 kB │ gzip: 1.33 kB │ map:   9.49 kB
+dist/es/Form/styles.js              6.71 kB │ gzip: 2.30 kB │ map:  10.02 kB
+dist/es/Card/styles.js              6.94 kB │ gzip: 1.63 kB │ map:  17.03 kB
+dist/es/Table/Filter.js             6.96 kB │ gzip: 2.44 kB │ map:  17.03 kB
+dist/es/QRCode/index.js             7.11 kB │ gzip: 2.17 kB │ map:  16.66 kB
+dist/es/Timeline/index.js           7.46 kB │ gzip: 1.96 kB │ map:  23.99 kB
+dist/es/Badge/index.js              7.52 kB │ gzip: 2.11 kB │ map:  22.09 kB
+dist/es/Checkbox/index.js           7.66 kB │ gzip: 2.34 kB │ map:  17.78 kB
+dist/es/Segmented/index.js          7.76 kB │ gzip: 2.69 kB │ map:  19.64 kB
+dist/es/List/index.js               7.85 kB │ gzip: 2.41 kB │ map:  21.85 kB
+dist/es/InputNumber/index.js        7.88 kB │ gzip: 2.38 kB │ map:  20.13 kB
+dist/es/Avatar/index.js             8.00 kB │ gzip: 2.42 kB │ map:  20.06 kB
+dist/es/Pagination/index.js         8.06 kB │ gzip: 2.39 kB │ map:  26.97 kB
+dist/es/Image/PreviewGroup.js       8.08 kB │ gzip: 2.16 kB │ map:  26.34 kB
+dist/es/Statistic/index.js          8.10 kB │ gzip: 2.32 kB │ map:  21.54 kB
+dist/es/Input/index.js              8.38 kB │ gzip: 2.73 kB │ map:  22.68 kB
+dist/es/Mentions/index.js           8.48 kB │ gzip: 2.63 kB │ map:  24.54 kB
+dist/es/Progress/index.js           8.60 kB │ gzip: 2.27 kB │ map:  25.91 kB
+dist/es/Input/styles.js             8.63 kB │ gzip: 2.44 kB │ map:  13.86 kB
+dist/es/Select/styles.js            8.83 kB │ gzip: 2.36 kB │ map:  15.13 kB
+dist/es/Calendar/styles.js          8.88 kB │ gzip: 1.71 kB │ map:  18.53 kB
+dist/es/Upload/styles.js            8.88 kB │ gzip: 1.98 kB │ map:  17.16 kB
+dist/es/Image/index.js              8.90 kB │ gzip: 2.55 kB │ map:  27.42 kB
+dist/es/Steps/index.js              8.92 kB │ gzip: 2.11 kB │ map:  25.54 kB
+dist/es/Dropdown/index.js           9.35 kB │ gzip: 2.79 kB │ map:  27.38 kB
+dist/es/Upload/Dragger.js           9.47 kB │ gzip: 3.09 kB │ map:  24.86 kB
+dist/es/Input/TextArea.js           9.56 kB │ gzip: 3.34 kB │ map:  19.70 kB
+dist/es/Tabs/index.js               9.78 kB │ gzip: 3.01 kB │ map:  32.51 kB
+dist/es/Modal/index.js              9.80 kB │ gzip: 2.93 kB │ map:  31.67 kB
+dist/es/Card/index.js               9.92 kB │ gzip: 2.44 kB │ map:  26.43 kB
+dist/es/Drawer/index.js             9.98 kB │ gzip: 3.03 kB │ map:  34.01 kB
+dist/es/Typography/index.js        10.35 kB │ gzip: 2.90 kB │ map:  19.42 kB
+dist/es/Menu/index.js              10.45 kB │ gzip: 2.43 kB │ map:  34.60 kB
+dist/es/AutoComplete/index.js      10.46 kB │ gzip: 3.29 kB │ map:  30.00 kB
+dist/es/Radio/index.js             10.63 kB │ gzip: 2.79 kB │ map:  25.01 kB
+dist/es/Notification/index.js      10.76 kB │ gzip: 3.35 kB │ map:  25.83 kB
+dist/es/Transfer/index.js          10.77 kB │ gzip: 3.05 kB │ map:  27.53 kB
+dist/es/Cascader/styles.js         10.79 kB │ gzip: 2.52 kB │ map:  18.01 kB
+dist/es/TimePicker/index.js        10.99 kB │ gzip: 3.51 kB │ map:  34.07 kB
+dist/es/Form/Item.js               11.01 kB │ gzip: 2.84 kB │ map:  28.36 kB
+dist/es/Descriptions/index.js      11.07 kB │ gzip: 2.95 kB │ map:  31.23 kB
+dist/es/Tour/index.js              12.41 kB │ gzip: 3.60 kB │ map:  33.25 kB
+dist/es/Slider/index.js            12.63 kB │ gzip: 3.65 kB │ map:  30.10 kB
+dist/es/TimePicker/RangePicker.js  13.50 kB │ gzip: 3.90 kB │ map:  42.89 kB
+dist/es/TreeSelect/index.js        15.29 kB │ gzip: 4.02 kB │ map:  51.58 kB
+dist/es/Calendar/index.js          16.23 kB │ gzip: 3.97 kB │ map:  43.13 kB
+dist/es/Tree/index.js              16.70 kB │ gzip: 4.66 kB │ map:  41.73 kB
+dist/es/ColorPicker/index.js       17.42 kB │ gzip: 4.97 kB │ map:  39.33 kB
+dist/es/DatePicker/RangePicker.js  17.47 kB │ gzip: 4.81 kB │ map:  56.50 kB
+dist/es/DatePicker/index.js        20.73 kB │ gzip: 5.21 kB │ map:  97.94 kB
+dist/es/Cascader/index.js          23.66 kB │ gzip: 5.61 kB │ map: 114.96 kB
+dist/es/Upload/index.js            24.34 kB │ gzip: 5.95 kB │ map:  65.01 kB
+dist/es/Select/index.js            24.82 kB │ gzip: 6.02 kB │ map:  74.89 kB
+dist/es/Table/index.js             41.85 kB │ gzip: 9.82 kB │ map: 125.37 kB
+
+✓ built in 222ms
+$ vite build
+vite v8.2.1 building client environment for production...
+[2Ktransforming...✓ 418 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/index.html                             1.84 kB │ gzip:   0.57 kB
+dist/assets/index-DbBjnruc.css            194.68 kB │ gzip:  32.98 kB
+dist/assets/Portal-BYL9f-R9.js              0.29 kB │ gzip:   0.20 kB
+dist/assets/switch-C6LsXAyC.js              0.45 kB │ gzip:   0.31 kB
+dist/assets/skeleton-ClLUm34E.js            0.53 kB │ gzip:   0.33 kB
+dist/assets/tooltip-Bds39gaI.js             0.56 kB │ gzip:   0.30 kB
+dist/assets/rolldown-runtime-CbXtAM7H.js    0.58 kB │ gzip:   0.36 kB
+dist/assets/virtualList-Us-frtTD.js         0.72 kB │ gzip:   0.40 kB
+dist/assets/input-Dqz7_GkC.js               0.96 kB │ gzip:   0.52 kB
+dist/assets/_VirtualList-eN5shn_E.js        1.01 kB │ gzip:   0.70 kB
+dist/assets/Icon-lc5fX3KF.js                1.24 kB │ gzip:   0.70 kB
+dist/assets/ConfigProvider-vSXzs4Px.js      1.30 kB │ gzip:   0.72 kB
+dist/assets/Home-DPmRQoFJ.js                1.34 kB │ gzip:   0.55 kB
+dist/assets/_VirtualList-ltW7g5UO.js        1.40 kB │ gzip:   0.75 kB
+dist/assets/pagination-CC-nXhNY.js          1.40 kB │ gzip:   0.72 kB
+dist/assets/Divider-COtv5hM6.js             1.67 kB │ gzip:   0.72 kB
+dist/assets/Breadcrumb-dHy_qgeX.js          1.80 kB │ gzip:   0.87 kB
+dist/assets/tabs-CiciiRne.js                1.82 kB │ gzip:   0.88 kB
+dist/assets/Empty-B3CBo9Ax.js               2.14 kB │ gzip:   1.09 kB
+dist/assets/Mentions-D6Z8VHvP.js            2.17 kB │ gzip:   1.23 kB
+dist/assets/selection-DpfMY6jV.js           2.48 kB │ gzip:   1.10 kB
+dist/assets/Space-DXIqkdVW.js               2.60 kB │ gzip:   1.03 kB
+dist/assets/color-BKjaAcKI.js               2.63 kB │ gzip:   1.25 kB
+dist/assets/Tag-Dp-l_3tx.js                 2.74 kB │ gzip:   1.28 kB
+dist/assets/Tooltip-cNsGXN_O.js             2.85 kB │ gzip:   1.30 kB
+dist/assets/Result-B_0ZCVxd.js              2.91 kB │ gzip:   1.25 kB
+dist/assets/Transfer-DMP--I4_.js            2.92 kB │ gzip:   1.61 kB
+dist/assets/Watermark-CWCC3iV0.js           2.94 kB │ gzip:   1.34 kB
+dist/assets/Spin-CmgtIbvI.js                3.01 kB │ gzip:   1.39 kB
+dist/assets/Progress-CTYiUv_-.js            3.12 kB │ gzip:   1.15 kB
+dist/assets/Statistic-BsEQvu6e.js           3.15 kB │ gzip:   1.35 kB
+dist/assets/Flex-CHBVPQ2i.js                3.28 kB │ gzip:   0.99 kB
+dist/assets/Popover-CXG2HWAJ.js             3.32 kB │ gzip:   1.43 kB
+dist/assets/Icon-C0nwEyty.js                3.36 kB │ gzip:   1.16 kB
+dist/assets/Carousel-DB__5qyS.js            3.37 kB │ gzip:   1.64 kB
+dist/assets/TimePicker-DMzvS24S.js          3.39 kB │ gzip:   1.48 kB
+dist/assets/Avatar-CbDbsu6E.js              3.44 kB │ gzip:   1.31 kB
+dist/assets/FloatButton-CgWVbyGA.js         3.48 kB │ gzip:   1.65 kB
+dist/assets/Masonry-COfgSLdp.js             3.51 kB │ gzip:   1.23 kB
+dist/assets/Menu-WDhGv2Cf.js                3.61 kB │ gzip:   1.48 kB
+dist/assets/Anchor-DeOL7cTz.js              3.63 kB │ gzip:   1.47 kB
+dist/assets/Rate-BFGbAC7T.js                3.71 kB │ gzip:   1.63 kB
+dist/assets/QRCode-AOx3DTJH.js              3.75 kB │ gzip:   1.23 kB
+dist/assets/Alert-DtWvFZvN.js               3.78 kB │ gzip:   1.56 kB
+dist/assets/TreeSelect-C16G-P8d.js          3.79 kB │ gzip:   1.64 kB
+dist/assets/Steps-CPWy3bFT.js               3.80 kB │ gzip:   1.47 kB
+dist/assets/Cascader-B6UaDI78.js            3.87 kB │ gzip:   1.65 kB
+dist/assets/Timeline-DhrJ4VpQ.js            3.88 kB │ gzip:   1.32 kB
+dist/assets/Typography-DR0WIP4b.js          3.94 kB │ gzip:   1.28 kB
+dist/assets/Switch-_VPP3dp2.js              4.09 kB │ gzip:   1.69 kB
+dist/assets/Collapse-w4tKfHUZ.js            4.11 kB │ gzip:   1.69 kB
+dist/assets/Drawer-ojcEfsNo.js              4.17 kB │ gzip:   1.86 kB
+dist/assets/select-BSt31x67.js              4.34 kB │ gzip:   1.76 kB
+dist/assets/Modal-CVFSF-1C.js               4.35 kB │ gzip:   2.04 kB
+dist/assets/Affix-BR4U0Qw8.js               4.39 kB │ gzip:   1.99 kB
+dist/assets/Grid-BGggEYLC.js                4.40 kB │ gzip:   0.91 kB
+dist/assets/Image-cWK576k4.js               4.72 kB │ gzip:   1.85 kB
+dist/assets/ColorPicker-Bdt1lzmm.js         4.77 kB │ gzip:   2.06 kB
+dist/assets/AutoComplete-DkX0y5Pb.js        4.89 kB │ gzip:   2.02 kB
+dist/assets/Popconfirm-C9IncgRa.js          4.99 kB │ gzip:   1.69 kB
+dist/assets/Space-D6fqNMwh.js               5.12 kB │ gzip:   1.47 kB
+dist/assets/DatePicker-DnLGwohI.js          5.22 kB │ gzip:   2.14 kB
+dist/assets/Segmented-BpBJrrKS.js           5.38 kB │ gzip:   2.28 kB
+dist/assets/Message-C1jARv-f.js             5.55 kB │ gzip:   2.21 kB
+dist/assets/Popover-DNFVqOsj.js             5.58 kB │ gzip:   1.98 kB
+dist/assets/Notification-CX6aZx1K.js        5.62 kB │ gzip:   2.25 kB
+dist/assets/Tooltip-ClCKAJMf.js             5.81 kB │ gzip:   2.04 kB
+dist/assets/Tour-CweyfBcN.js                5.83 kB │ gzip:   2.82 kB
+dist/assets/Dropdown-CptULq21.js            5.89 kB │ gzip:   2.43 kB
+dist/assets/Layout-BKbwLO82.js              5.90 kB │ gzip:   1.58 kB
+dist/assets/trigger-kvfWg1uZ.js             5.95 kB │ gzip:   2.28 kB
+dist/assets/Badge-DbqE1quw.js               5.98 kB │ gzip:   1.69 kB
+dist/assets/Switch-BRwl5lL8.js              6.08 kB │ gzip:   2.13 kB
+dist/assets/Button-D5-LiaB1.js              6.21 kB │ gzip:   1.97 kB
+dist/assets/Upload-DPdQZtyZ.js              6.68 kB │ gzip:   2.99 kB
+dist/assets/Splitter-CXY2lwcS.js            6.70 kB │ gzip:   1.80 kB
+dist/assets/Card-DFNl3pQQ.js                6.77 kB │ gzip:   2.73 kB
+dist/assets/Descriptions-CNpv6hTv.js        7.02 kB │ gzip:   2.37 kB
+dist/assets/Select-D901d4wJ.js              7.08 kB │ gzip:   2.62 kB
+dist/assets/Calendar-DOi20Mbv.js            7.18 kB │ gzip:   2.70 kB
+dist/assets/Input-CvvOEVOS.js               7.36 kB │ gzip:   2.55 kB
+dist/assets/List-BzkG5oJe.js                7.43 kB │ gzip:   3.43 kB
+dist/assets/Form-SFLEogaD.js                8.18 kB │ gzip:   2.97 kB
+dist/assets/Button-B32pkUFV.js              8.84 kB │ gzip:   2.70 kB
+dist/assets/tree-DwgoJHiC.js                9.37 kB │ gzip:   3.64 kB
+dist/assets/Skeleton-CqyqD3lz.js            9.58 kB │ gzip:   3.02 kB
+dist/assets/Pagination-CKiSKOv1.js          9.81 kB │ gzip:   3.38 kB
+dist/assets/Checkbox-DS1_KSqD.js           11.10 kB │ gzip:   4.24 kB
+dist/assets/Table-D3HYym9m.js              11.57 kB │ gzip:   4.62 kB
+dist/assets/Form-Dmcg6W70.js               11.76 kB │ gzip:   4.55 kB
+dist/assets/Dropdown-C1Ie1yFG.js           11.94 kB │ gzip:   3.50 kB
+dist/assets/serverForms-OoqWqXF6.js        14.06 kB │ gzip:   5.56 kB
+dist/assets/Radio-BYfkMRT0.js              14.09 kB │ gzip:   5.03 kB
+dist/assets/Tabs-BmKr0nYy.js               15.99 kB │ gzip:   5.05 kB
+dist/assets/Tree-LYGpOIeL.js               16.10 kB │ gzip:   5.66 kB
+dist/assets/Input-CMtPbbur.js              16.30 kB │ gzip:   5.17 kB
+dist/assets/InputNumber-4HlvXUp8.js        16.72 kB │ gzip:   5.81 kB
+dist/assets/routing-DKFZOzI9.js            16.97 kB │ gzip:   7.18 kB
+dist/assets/Slider-_Pm9FNPu.js             17.49 kB │ gzip:   6.63 kB
+dist/assets/decode-3X5v8ClT.js             19.92 kB │ gzip:   5.87 kB
+dist/assets/index-D0mDA0Dp.js              22.59 kB │ gzip:   7.27 kB
+dist/assets/bundle-mjs-Cd58qMxT.js         27.82 kB │ gzip:   8.93 kB
+dist/assets/ConfigProvider-C_VgZq-g.js     31.54 kB │ gzip:  10.25 kB
+dist/assets/web-BRq0hcpC.js                43.47 kB │ gzip:  16.93 kB
+dist/assets/src-BkBkozAy.js                50.62 kB │ gzip:  17.32 kB
+dist/assets/upthrust-BluP1RWa.js          558.54 kB │ gzip: 149.20 kB
+
+✓ built in 1.04s
+[plugin builtin:vite-reporter] 
+(!) Some chunks are larger than 500 kB after minification. Consider:
+- Using dynamic import() to code-split the application
+- Use build.rolldownOptions.output.codeSplitting to improve chunking: https://rolldown.rs/reference/OutputOptions.codeSplitting
+- Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.

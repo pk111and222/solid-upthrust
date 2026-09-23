@@ -69,8 +69,8 @@ const selectorVariants = cva(
         warning: ["!border-[#faad14]", "hover:!border-[#faad14]", "focus-within:!border-[#faad14]", "focus-within:!ring-[#faad14]/10"],
       },
       multiple: {
-        // multiple: height grows with tags — min the control height, pad 2px
-        true: ["h-auto", "min-h-control", "py-[2px]", "px-[4px]"],
+        // Multiple grows with tags; horizontal padding follows the size variant.
+        true: ["h-auto", "min-h-control", "py-[2px]"],
         false: [],
       },
     },
@@ -132,13 +132,13 @@ export const selectionItemClass = cva(
 export const selectionItemWrapClass = (variants: VariantProps<typeof selectionItemClass>) =>
   twMerge(selectionItemClass(variants));
 
-/** The suffix area: clear × and/or the down chevron. */
+/** One stable slot for clear, loading and the down chevron. */
 export const selectorSuffixClass = cva(
   [
     "flex",
     "items-center",
+    "justify-center",
     "shrink-0",
-    "gap-[4px]",
     "ml-[4px]",
     "text-on-surface/45",
     "transition-upthrust-fast",
@@ -146,9 +146,9 @@ export const selectorSuffixClass = cva(
   {
     variants: {
       size: {
-        small: ["text-[10px]"],
-        middle: ["text-[12px]"],
-        large: ["text-[14px]"],
+        small: ["w-[20px]", "h-[20px]", "text-[14px]"],
+        middle: ["w-[24px]", "h-[24px]", "text-[16px]"],
+        large: ["w-[28px]", "h-[28px]", "text-[18px]"],
       },
     },
     defaultVariants: { size: "middle" },
@@ -160,7 +160,7 @@ export const selectorSuffixWrapClass = (variants: VariantProps<typeof selectorSu
 
 /** The down-chevron arrow — rotates 180° while open (antd). */
 export const selectorArrowClass = cva(
-  ["transition-transform", "duration-200", "ease-upthrust", "flex", "items-center", "cursor-pointer"],
+  ["transition-transform", "duration-200", "ease-upthrust", "flex", "items-center", "justify-center", "w-full", "h-full", "cursor-pointer"],
   {
     variants: {
       open: {
@@ -175,15 +175,18 @@ export const selectorArrowClass = cva(
 export const selectorArrowWrapClass = (variants: VariantProps<typeof selectorArrowClass>) =>
   twMerge(selectorArrowClass(variants));
 
-/** The clear × (appears on hover when allowClear and non-empty). */
+/** The clear × replaces the arrow when allowClear and non-empty. */
 export const selectorClearClass = cva(
   [
     "flex",
     "items-center",
     "justify-center",
+    "shrink-0",
+    "w-full",
+    "h-full",
     "cursor-pointer",
-    "text-on-surface/25",
-    "hover:text-on-surface/45",
+    "text-on-surface/45",
+    "hover:text-on-surface",
     "active:text-on-surface",
     "transition-upthrust-fast",
   ],
@@ -191,7 +194,7 @@ export const selectorClearClass = cva(
     variants: {
       visible: {
         true: [],
-        false: ["invisible", "pointer-events-none"],
+        false: ["hidden"],
       },
     },
     defaultVariants: { visible: false },
@@ -292,7 +295,6 @@ export const selectDropdownClass = cva(
     "rounded-lg",
     "shadow",
     "py-[4px]",
-    "min-w-[120px]",
     "transition-overlay",
     "duration-fast",
     "ease-upthrust",

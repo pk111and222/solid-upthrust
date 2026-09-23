@@ -1,10 +1,11 @@
 import { ConfigPortal as Portal } from '../ConfigProvider/Portal'
 import { useComponentProps } from '../ConfigProvider/context'
-import { Component, For, Show, createEffect, createMemo, merge } from 'solid-js'
+import { Component, For, Show, createEffect, createMemo, createSignal, createUniqueId, merge } from 'solid-js'
 import { type JSX } from '@solidjs/web'
 import { twMerge } from 'tailwind-merge'
 import {
   createMentions,
+  createOwnerCleanup,
   createTrigger,
   type MentionOption,
 } from 'upthrust-competence'
@@ -42,6 +43,8 @@ export interface MentionsProps {
   onOpenChange?: (open: boolean) => void
   id?: string
   name?: string
+  'aria-label'?: string
+  'aria-labelledby'?: string
   class?: string
   style?: JSX.CSSProperties
   onChange?: (value: string) => void
@@ -90,11 +93,12 @@ const Mentions: Component<MentionsProps> = providedProps => {
     get filterOption() { return props.filterOption },
     get open() { return props.open },
     get defaultOpen() { return props.defaultOpen },
-    get onChange() { return props.onChange },
+    onChange: value => {
+      if (props.onChange) props.onChange(value)
+      else form.onChange(value)
+    },
     get onSelect() { return props.onSelect },
     get onSearch() { return props.onSearch },
-    get onBlur() { return props.onBlur ? () => props.onBlur?.(undefined as unknown as FocusEvent) : undefined },
-    get onFocus() { return props.onFocus ? () => props.onFocus?.(undefined as unknown as FocusEvent) : undefined },
   })
 
   const m = () => machine
@@ -104,41 +108,97 @@ const Mentions: Component<MentionsProps> = providedProps => {
   // focus/click action listeners (a 'focus' action would re-open the
   // panel on every focus, fighting this effect); the trigger here is a
   // positioning + dismiss (outside click/Escape) engine only.
+  const [focused, setFocused] = createSignal(props.defaultOpen ?? false, { ownedWrite: true })
+  const [dismissed, setDismissed] = createSignal(false, { ownedWrite: true })
+  const listId = `mentions-list-${createUniqueId()}`
   const shouldShowMenu = createMemo(() =>
-    m().trigger().active && m().suggestions().length > 0,
+    focused() && !dismissed() && m().trigger().active && m().suggestions().length > 0,
   )
-  const open = () => (props.open !== undefined ? props.open : shouldShowMenu())
+  const open = () => !resolvedDisabled() && (props.open !== undefined ? props.open : shouldShowMenu())
+  let observedOpen = open()
+  createEffect(() => open(), next => {
+    if (props.open === undefined && next !== observedOpen) props.onOpenChange?.(next)
+    observedOpen = next
+  })
 
   const trigger = createTrigger({
     get open() { return open() },
     get defaultOpen() { return props.defaultOpen },
     get disabled() { return resolvedDisabled() },
+    action: 'manual',
     placement: 'bottomLeft',
     offset: 4,
-    get onOpenChange() { return props.onOpenChange },
+    onOpenChange: next => {
+      if (!next) setDismissed(true)
+      if (props.open !== undefined) props.onOpenChange?.(next)
+    },
   })
 
   const textareaRef: { current?: HTMLTextAreaElement } = {}
+  let suppressSelection = false
+  const [textareaWidth, setTextareaWidth] = createSignal(0, { ownedWrite: true })
+  const onOwnerCleanup = createOwnerCleanup()
+  let sizeObserver: ResizeObserver | undefined
   const setTextareaRef = (el: HTMLTextAreaElement) => {
     textareaRef.current = el
+    const measure = () => setTextareaWidth(el.getBoundingClientRect().width)
+    measure()
+    if (typeof ResizeObserver !== 'undefined') {
+      sizeObserver?.disconnect()
+      sizeObserver = new ResizeObserver(measure)
+      sizeObserver.observe(el)
+    }
     props.ref?.(el)
   }
+  onOwnerCleanup(() => sizeObserver?.disconnect())
+
+  const activeIndex = () => m().suggestions().findIndex(option => option.value === m().activeValue())
+  createEffect(() => [open(), activeIndex()] as const, ([visible, index]) => {
+    if (!visible || index < 0) return
+    const row = document.getElementById(`${listId}-option-${index}`)
+    const list = row?.parentElement
+    if (!row || !list) return
+    if (row.offsetTop < list.scrollTop) list.scrollTop = row.offsetTop
+    else if (row.offsetTop + row.offsetHeight > list.scrollTop + list.clientHeight) {
+      list.scrollTop = row.offsetTop + row.offsetHeight - list.clientHeight
+    }
+  })
 
   const handleInput = (e: Event) => {
     const el = e.target as HTMLTextAreaElement
+    suppressSelection = false
+    if (skipCompositionInput === el.value) { skipCompositionInput = undefined; return }
+    skipCompositionInput = undefined
+    setFocused(true)
+    setDismissed(false)
     // Combined edit — separate setText/setCaret calls read a stale value()
     // inside the same Solid 2 batch and the trigger detection fails.
     m().setTextAndCaret(el.value, el.selectionStart ?? el.value.length)
+    // A controlled parent may reject the proposed text. Native textarea
+    // editing already changed the DOM, so restore the accepted prop now.
+    if (props.value !== undefined && el.value !== props.value) el.value = props.value
   }
 
   const handleSelectChange = (e: Event) => {
+    if (suppressSelection) return
     const el = e.target as HTMLTextAreaElement
+    setDismissed(false)
     m().setCaret(el.selectionStart ?? 0)
+  }
+
+  let skipCompositionInput: string | undefined
+  const restoreCaret = (caret: number) => {
+    const el = textareaRef.current
+    if (!el) return
+    suppressSelection = true
+    el.focus()
+    queueMicrotask(() => { if (el.isConnected) el.setSelectionRange(caret, caret) })
   }
 
   const handleKeyDown = (e: KeyboardEvent) => {
     const mm = m()
     if (resolvedDisabled()) return
+    if (mm.isComposing()) return
     switch (e.key) {
       case 'ArrowDown':
         if (open() && mm.trigger().active) {
@@ -155,19 +215,18 @@ const Mentions: Component<MentionsProps> = providedProps => {
       case 'Enter':
         if (open() && mm.trigger().active && mm.activeValue() !== undefined) {
           e.preventDefault()
-          mm.commitActive()
-          // after insertion put the DOM caret where the machine wants it
-          const el = textareaRef.current
-          if (el) {
-            el.focus()
-            const caret = mm.caret()
-            el.setSelectionRange(caret, caret)
-          }
+          const caret = mm.commitActive()
+          if (caret === undefined) return
+          setDismissed(true)
+          // Use the returned target: a signal read in this event batch can
+          // still expose the caret from before the insertion.
+          restoreCaret(caret)
         }
         return
       case 'Escape':
         if (open()) {
           e.preventDefault()
+          e.stopPropagation()
           trigger.setOpen(false)
         }
         return
@@ -176,14 +235,11 @@ const Mentions: Component<MentionsProps> = providedProps => {
 
   const handleSelect = (option: MentionOption) => {
     if (option.disabled) return
-    m().selectOption(option)
-    // after insertion put the DOM caret where the machine wants it
-    const el = textareaRef.current
-    if (el) {
-      el.focus()
-      const caret = m().caret()
-      el.setSelectionRange(caret, caret)
-    }
+    const caret = m().selectOption(option)
+    if (caret === undefined) return
+    setDismissed(true)
+    // Restore after DOM text reconciliation, using the target from this edit.
+    restoreCaret(caret)
   }
 
   return (
@@ -196,26 +252,38 @@ const Mentions: Component<MentionsProps> = providedProps => {
         value={m().value()}
         placeholder={props.placeholder}
         disabled={resolvedDisabled()}
+        role="combobox"
+        aria-label={props['aria-label']}
+        aria-labelledby={props['aria-labelledby']}
+        aria-autocomplete="list"
+        aria-haspopup="listbox"
+        aria-expanded={open() ? 'true' : 'false'}
+        aria-controls={open() ? listId : undefined}
+        aria-activedescendant={open() && activeIndex() >= 0 ? `${listId}-option-${activeIndex()}` : undefined}
+        aria-invalid={resolvedStatus() === 'error' ? 'true' : undefined}
         class={twMerge(
           textAreaClass({ status: resolvedStatus(), disabled: !!resolvedDisabled() }),
         )}
-        style={props.style}
         onInput={handleInput}
         onSelect={handleSelectChange}
-        onClick={handleSelectChange}
+        onClick={e => { suppressSelection = false; handleSelectChange(e) }}
         onKeyDown={handleKeyDown}
-        onFocus={e => { m().notifyFocus(); props.onFocus?.(e) }}
-        onBlur={e => { m().notifyBlur(); props.onBlur?.(e) }}
+        onKeyUp={e => { if (['ArrowLeft', 'ArrowRight', 'Home', 'End'].includes(e.key)) { suppressSelection = false; handleSelectChange(e) } }}
+        onFocus={e => { setFocused(true); setDismissed(false); m().notifyFocus(); props.onFocus?.(e) }}
+        onBlur={e => { setFocused(false); m().notifyBlur(); props.onBlur?.(e) }}
         onCompositionStart={() => m().notifyCompositionStart()}
-        onCompositionEnd={() => m().notifyCompositionEnd()}
+        onCompositionEnd={e => { const el = e.target as HTMLTextAreaElement; m().notifyCompositionEnd(el.selectionStart ?? el.value.length); skipCompositionInput = el.value }}
       />
       <Portal>
         <Show when={trigger.mounted()}>
           <div
             ref={(el) => { trigger.layerRef(el) }}
             class={mentionsDropdownClass({ visible: open(), placement: trigger.actualPlacement() })}
-            style={trigger.layerStyle()}
+            style={{ ...trigger.layerStyle(), width: textareaWidth() > 0 ? `${textareaWidth()}px` : undefined }}
             role="listbox"
+            id={listId}
+            aria-hidden={open() ? 'false' : 'true'}
+            inert={!open()}
             tabindex={-1}
           >
             <Show
@@ -223,8 +291,9 @@ const Mentions: Component<MentionsProps> = providedProps => {
               fallback={<div class={mentionsEmptyClass()}>无匹配结果</div>}
             >
               <For each={m().suggestions()}>
-                {option => (
+                {(option, index) => (
                   <div
+                    id={`${listId}-option-${index()}`}
                     class={mentionsOptionWrapClass({
                       active: m().activeValue() === option.value,
                       disabled: option.disabled,

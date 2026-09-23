@@ -19,7 +19,7 @@ export type { CheckboxProps, CheckboxGroupProps, CheckboxOption } from './Checkb
 export { default as Radio, RadioGroup, RadioButton } from './Radio';
 export type { RadioProps, RadioGroupProps, RadioOption, RadioButtonProps } from './Radio';
 export { default as Select } from './Select';
-export type { SelectProps, SelectOption, SelectLabelInValue } from './Select';
+export type { SelectProps, SelectOption, SelectOptionEntry, SelectOptionGroup, SelectLabelInValue, SelectChangeValue } from './Select';
 export { default as Cascader } from './Cascader';
 export type { CascaderProps, CascaderOption } from './Cascader';
 export { default as AutoComplete } from './AutoComplete';

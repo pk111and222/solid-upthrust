@@ -1,65 +1,14 @@
-import { type Component, createSignal, Show } from 'solid-js'
-import { AutoComplete, Space, Divider, Typography, type AutoCompleteOption } from 'upthrust-ui'
-
-const { Text } = Typography
-
-const AutoCompletePage: Component = () => {
-  const [basic, setBasic] = createSignal('')
-  const [picked, setPicked] = createSignal('')
-
-  const options: AutoCompleteOption[] = [
-    { value: 'burns', label: 'Burns Bay Bridge' },
-    { value: 'sam', label: 'Sam Street' },
-    { value: 'shanghai', label: 'Shanghai Tower' },
-    { value: 'tokyo', label: 'Tokyo Tower' },
-  ]
-
-  return (
-    <div class="p-6 max-w-3xl">
-      <h2 class="text-2xl font-bold mb-4">AutoComplete 自动补全</h2>
-      <p class="text-on-surface-variant mb-6">
-        headless createAutoComplete —— 文本 buffer（IME 门控）+ 建议过滤 + active
-        键盘导航；浮层复用 createTrigger（focus 触发）。与 Select 同一套导航契约，
-        但值是自由文本（无 selection store）。
-      </p>
-
-      <h3 class="text-lg font-semibold mb-3">基础（受控）</h3>
-      <div class="max-w-xs flex flex-col gap-3">
-        <AutoComplete
-          options={options}
-          value={basic()}
-          onChange={setBasic}
-          onSelect={(v, option) => setPicked(`${v}（${option.label}）`)}
-          placeholder="输入试试（如 tokyo）"
-        />
-        <Text type="secondary">当前文本：{basic() || '（空）'}</Text>
-        <Show when={picked()}>
-          <Text type="secondary">最近选中：{picked()}</Text>
-        </Show>
-      </div>
-
-      <Divider />
-
-      <h3 class="text-lg font-semibold mb-3">默认值 / 自定义过滤 / 禁用</h3>
-      <Space direction="vertical" size="middle" class="w-72">
-        <AutoComplete options={options} defaultValue="sam" placeholder="默认值" />
-        <AutoComplete
-          options={options}
-          filterOption={(input, option) => (option.value ?? '').startsWith(input)}
-          placeholder="仅前缀匹配（输入 s 试试）"
-        />
-        <AutoComplete options={options} disabled placeholder="禁用" />
-      </Space>
-
-      <Divider />
-
-      <h3 class="text-lg font-semibold mb-3">键盘操作</h3>
-      <div class="max-w-xs flex flex-col gap-2">
-        <Text type="secondary">聚焦后：↓/↑ 移动高亮，Enter 选中，Esc 关闭。</Text>
-        <AutoComplete options={options} placeholder="聚焦后按 ↓" />
-      </div>
-    </div>
-  )
-}
-
-export default AutoCompletePage
+import Basic from './auto-complete-demos/basic'
+import Filter from './auto-complete-demos/filter'
+import Remote from './auto-complete-demos/remote'
+import Variants from './auto-complete-demos/variants'
+import Context from './auto-complete-demos/context'
+import Keyboard from './auto-complete-demos/keyboard'
+export default function AutoCompletePage() { return <div class="p-6 max-w-4xl"><h2 class="text-2xl font-bold mb-4">AutoComplete 自动补全</h2><p>支持自由文本、异步建议、表单与键盘补全。</p>
+<section data-ac-demo="basic" class="my-6"><h3 class="text-lg font-semibold mb-3">自由文本与受控选值</h3><Basic /></section>
+<section data-ac-demo="filter" class="my-6"><h3 class="text-lg font-semibold mb-3">默认值与自定义过滤</h3><Filter /></section>
+<section data-ac-demo="remote" class="my-6"><h3 class="text-lg font-semibold mb-3">异步候选</h3><Remote /></section>
+<section data-ac-demo="variants" class="my-6"><h3 class="text-lg font-semibold mb-3">尺寸、状态与禁用</h3><Variants /></section>
+<section data-ac-demo="context" class="my-6"><h3 class="text-lg font-semibold mb-3">表单提交与重置</h3><Context /></section>
+<section data-ac-demo="keyboard" class="my-6"><h3 class="text-lg font-semibold mb-3">受控浮层与键盘导航</h3><Keyboard /></section>
+</div> }

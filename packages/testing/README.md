@@ -149,3 +149,13 @@ Rate 专项浏览器配置为 `playwright.rate.config.ts`，覆盖受控/非受�
 
 Segmented 专项浏览器配置为 `playwright.segmented.config.ts`，覆盖选择与禁用、键盘遍历、
 thumb 几何、block、Form.Item、生产开发挂载与 SSR，并同时验证 docs/example 产物。见 [Segmented 回归记录](../../docs/contributing/regressions/segmented.md)。
+
+Select 专项浏览器配置为 `playwright.select.config.ts`，覆盖单选/多选、搜索与标签输入、
+清空按钮、受控浮层、虚拟滚动、Form.Item、开发绘制与静态 SSR，并同时验证 docs/example 产物。
+见 [Select 回归记录](../../docs/contributing/regressions/select.md)。
+
+AutoComplete 专项配置为 `playwright.auto-complete.config.ts`，验证 docs/example 生产交互、开发绘制、键盘滚动及静态 API。见 [回归记录](../../docs/contributing/regressions/auto-complete.md)。
+
+Mentions 专项配置为 `playwright.mentions.config.ts`，验证 docs/example 的键盘与鼠标提交、候选关闭与定位、异步候选、Form.Item、开发绘制及静态 API。见 [回归记录](../../docs/contributing/regressions/mentions.md)。
+
+Transfer 专项配置为 `playwright.transfer.config.ts`，验证 docs/example 的双向移动、搜索全选、单向移除、动态数据、窄屏键盘、Form.Item、静态页面与开发绘制。见 [回归记录](../../docs/contributing/regressions/transfer.md)。

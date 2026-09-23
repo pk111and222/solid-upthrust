@@ -1,0 +1,26 @@
+[
+  {
+    "name": "value",
+    "type": "string",
+    "default": "必填",
+    "description": "唯一候选键，onSelect 返回此值。"
+  },
+  {
+    "name": "label",
+    "type": "string",
+    "default": "value",
+    "description": "显示和回填文字；支持空字符串。"
+  },
+  {
+    "name": "disabled",
+    "type": "boolean",
+    "default": "false",
+    "description": "禁止选择与高亮。"
+  },
+  {
+    "name": "[key: string]",
+    "type": "unknown",
+    "default": "—",
+    "description": "允许附加业务数据，通过 onSelect 原样返回。"
+  }
+]

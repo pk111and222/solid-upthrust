@@ -1,0 +1,7 @@
+[
+  {"name":"value","type":"string | number","default":"必填","description":"节点键；整棵树中应保持唯一。"},
+  {"name":"label","type":"string","default":"必填","description":"菜单、标签与搜索中显示的文字。"},
+  {"name":"children","type":"CascaderOption[]","default":"—","description":"下一级节点。"},
+  {"name":"disabled","type":"boolean","default":"false","description":"禁用本节点及其后代。"},
+  {"name":"loading","type":"boolean","default":"false","description":"显示加载图标，适合异步子节点占位。"}
+]

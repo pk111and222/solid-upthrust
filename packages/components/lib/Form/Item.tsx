@@ -181,6 +181,7 @@ const FormItem: Component<FormItemProps> = rawProps => {
     size: () => formCtx?.size(),
   }
 
+
   const renderChildren = (): JSX.Element => {
     if (typeof props.children === 'function') {
       return (props.children as (value: any, form: unknown) => JSX.Element)(field.value(), formCtx.form())

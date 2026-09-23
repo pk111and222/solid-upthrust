@@ -1,0 +1,18 @@
+[
+  {"name":"value","type":"string","default":"—","description":"受控文本；需要在 onChange 中写回。"},
+  {"name":"defaultValue","type":"string","default":"''","description":"非受控初始文本。"},
+  {"name":"options","type":"MentionOption[]","default":"[]","description":"当前候选；可动态更新。"},
+  {"name":"prefix","type":"string","default":"'@'","description":"触发与插入的前缀。"},
+  {"name":"split","type":"string","default":"' '","description":"提及分隔字符集合；选中后作为尾随文本插入。"},
+  {"name":"filterOption","type":"((input, option) => boolean) | false","default":"值或标签包含查询","description":"客户端过滤；false 表示展示所有当前候选。"},
+  {"name":"rows","type":"number","default":"3","description":"文本框固定行数。"},
+  {"name":"placeholder / disabled / status","type":"string / boolean / 'error' | 'warning'","default":"— / false / —","description":"占位文本、禁用和校验外观。"},
+  {"name":"open / defaultOpen","type":"boolean","default":"— / false","description":"受控开态或初始开态；自然开态要求焦点位于有候选的提及词中。"},
+  {"name":"onChange","type":"(value: string) => void","default":"—","description":"文本编辑或选择候选后回调。"},
+  {"name":"onSelect","type":"(option: MentionOption, prefix: string) => void","default":"—","description":"提交候选后回调。"},
+  {"name":"onSearch","type":"(query: string, prefix: string) => void","default":"—","description":"输入或移动光标后回调；离开提及词时 query 为空。"},
+  {"name":"onOpenChange","type":"(open: boolean) => void","default":"—","description":"请求或发生浮层开态变化时回调。"},
+  {"name":"onFocus / onBlur","type":"(event: FocusEvent) => void","default":"—","description":"原生焦点事件。"},
+  {"name":"id / name / aria-label / aria-labelledby / ref","type":"原生文本框属性","default":"—","description":"标识、无障碍名称与 textarea 引用。"},
+  {"name":"class / style","type":"string / JSX.CSSProperties","default":"—","description":"外层容器样式。"}
+]

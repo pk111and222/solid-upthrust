@@ -1,8 +1,8 @@
 import { Component } from 'solid-js';
 import { JSX } from '@solidjs/web';
-import { SelectChangeValue, SelectOption, SelectLabelInValue } from 'upthrust-competence';
+import { SelectChangeValue, SelectOption, SelectOptionEntry, SelectOptionGroup, SelectLabelInValue } from 'upthrust-competence';
 import { SizeType } from '../../common/type';
-export type { SelectOption, SelectLabelInValue };
+export type { SelectOption, SelectOptionEntry, SelectOptionGroup, SelectLabelInValue, SelectChangeValue };
 export interface SelectProps {
     virtual?: boolean;
     listHeight?: number;
@@ -10,7 +10,7 @@ export interface SelectProps {
     /** Controlled selected value: single key or (multiple) array of keys. */
     value?: string | number | Array<string | number>;
     defaultValue?: string | number | Array<string | number>;
-    options?: SelectOption[];
+    options?: SelectOptionEntry[];
     /** 'multiple' adds tags; 'tags' also allows free entry via search. */
     mode?: 'multiple' | 'tags';
     disabled?: boolean;
@@ -21,7 +21,7 @@ export interface SelectProps {
     /** Enable the search input. Default: on for tags mode, off otherwise. */
     showSearch?: boolean;
     /** (input, option) => boolean; false disables client filtering. */
-    filterOption?: (input: string, option: SelectOption) => boolean;
+    filterOption?: ((input: string, option: SelectOption) => boolean) | false;
     placeholder?: string;
     size?: SizeType;
     status?: 'error' | 'warning';
@@ -39,6 +39,8 @@ export interface SelectProps {
     /** Empty-state text. Default "无数据". */
     notFoundContent?: string;
     id?: string;
+    'aria-label'?: string;
+    'aria-labelledby'?: string;
     name?: string;
     class?: string;
     style?: JSX.CSSProperties;

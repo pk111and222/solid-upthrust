@@ -11,6 +11,7 @@ const fruits = [
 ]
 
 describe('createSelect — single mode (default)', () => {
+  // 单选从空值开始，新选择覆盖旧值并通知原始键。
   it('starts empty; picking replaces; onChange reports the raw key', () => {
     createRoot(() => {
       const onChange = vi.fn()
@@ -24,6 +25,7 @@ describe('createSelect — single mode (default)', () => {
     })
   })
 
+  // 单选提交后关闭 headless 弹层状态。
   it('picking closes the dropdown in single mode', () => {
     createRoot(() => {
       const ins = createSelect({ options: fruits })
@@ -34,6 +36,7 @@ describe('createSelect — single mode (default)', () => {
     })
   })
 
+  // 禁用选项不能成为选择值。
   it('disabled options are unselectable', () => {
     createRoot(() => {
       const ins = createSelect({ options: fruits })
@@ -43,6 +46,7 @@ describe('createSelect — single mode (default)', () => {
     })
   })
 
+  // 重复点击单选当前项保持原值且不发变更。
   it('re-clicking the selected option keeps it (radio semantics)', () => {
     createRoot(() => {
       const onChange = vi.fn()
@@ -53,6 +57,7 @@ describe('createSelect — single mode (default)', () => {
     })
   })
 
+  // 受控值由父层决定，用户操作只通过回调提出新值。
   it('controlled value wins; picks still report through onChange', () => {
     createRoot(() => {
       const onChange = vi.fn()
@@ -63,6 +68,7 @@ describe('createSelect — single mode (default)', () => {
     })
   })
 
+  // labelInValue 单选回调包含选项标签和值。
   it('labelInValue reports { value, label } objects', () => {
     createRoot(() => {
       const onChange = vi.fn()
@@ -73,6 +79,7 @@ describe('createSelect — single mode (default)', () => {
     })
   })
 
+  // 选中事件收到键和完整选项对象。
   it('onSelect fires with the full option', () => {
     createRoot(() => {
       const onSelect = vi.fn()
@@ -84,6 +91,7 @@ describe('createSelect — single mode (default)', () => {
 })
 
 describe('createSelect — multiple mode', () => {
+  // 多选按成员切换并返回键数组。
   it('toggles membership and reports arrays', () => {
     createRoot(() => {
       const onChange = vi.fn()
@@ -97,6 +105,7 @@ describe('createSelect — multiple mode', () => {
     })
   })
 
+  // 多选提交保持弹层，取消选中发出 onDeselect。
   it('stays open after picking; onDeselect fires on toggle-off', () => {
     createRoot(() => {
       const onDeselect = vi.fn()
@@ -109,6 +118,7 @@ describe('createSelect — multiple mode', () => {
     })
   })
 
+  // 标签移除只删除指定成员。
   it('deselectOption removes one key (tag ×)', () => {
     createRoot(() => {
       const ins = createSelect({ options: fruits, mode: 'multiple', defaultValue: ['apple', 'banana'] })
@@ -117,6 +127,7 @@ describe('createSelect — multiple mode', () => {
     })
   })
 
+  // labelInValue 多选回调返回对象数组。
   it('labelInValue multiple reports object arrays', () => {
     createRoot(() => {
       const onChange = vi.fn()
@@ -134,6 +145,7 @@ describe('createSelect — multiple mode', () => {
 })
 
 describe('createSelect — tags mode', () => {
+  // 自由输入标签会加入选项并选中。
   it('commitSearchAsTag creates the option and picks it', () => {
     createRoot(() => {
       const onChange = vi.fn()
@@ -146,6 +158,7 @@ describe('createSelect — tags mode', () => {
     })
   })
 
+  // 输入已有标签名称应复用已有选项。
   it('committing an existing label picks it instead of duplicating', () => {
     createRoot(() => {
       const ins = createSelect({ options: fruits, mode: 'tags' })
@@ -156,6 +169,7 @@ describe('createSelect — tags mode', () => {
     })
   })
 
+  // 空搜索文本不会创建标签。
   it('empty search commits nothing', () => {
     createRoot(() => {
       const ins = createSelect({ options: fruits, mode: 'tags' })
@@ -166,6 +180,7 @@ describe('createSelect — tags mode', () => {
 })
 
 describe('createSelect — search & filtering', () => {
+  // 默认搜索忽略大小写并按标签包含匹配。
   it('search filters options by label (case-insensitive substring)', () => {
     createRoot(() => {
       const ins = createSelect({
@@ -182,6 +197,7 @@ describe('createSelect — search & filtering', () => {
     })
   })
 
+  // 搜索输入变化会发出 onSearch。
   it('onSearch fires on every keystroke', () => {
     createRoot(() => {
       const onSearch = vi.fn()
@@ -191,6 +207,7 @@ describe('createSelect — search & filtering', () => {
     })
   })
 
+  // filterOption=false 时保留全部候选给远端过滤使用。
   it('filterOption: false disables client filtering', () => {
     createRoot(() => {
       const ins = createSelect({ options: fruits, filterOption: false })
@@ -199,6 +216,7 @@ describe('createSelect — search & filtering', () => {
     })
   })
 
+  // 自定义过滤函数决定可见选项。
   it('custom filterOption predicate is honored', () => {
     createRoot(() => {
       const ins = createSelect({
@@ -210,6 +228,7 @@ describe('createSelect — search & filtering', () => {
     })
   })
 
+  // 关闭弹层时清空搜索缓冲。
   it('closing resets the search buffer', () => {
     createRoot(() => {
       const ins = createSelect({ options: fruits })
@@ -222,6 +241,7 @@ describe('createSelect — search & filtering', () => {
 })
 
 describe('createSelect — active option (keyboard)', () => {
+  // 打开时高亮第一个可用选项。
   it('resetActive anchors to the first enabled filtered option', () => {
     createRoot(() => {
       const ins = createSelect({ options: fruits })
@@ -230,6 +250,7 @@ describe('createSelect — active option (keyboard)', () => {
     })
   })
 
+  // 当前选项可见时优先作为键盘候选。
   it('prefers the selected option when visible', () => {
     createRoot(() => {
       const ins = createSelect({ options: fruits, defaultValue: 'banana' })
@@ -238,6 +259,7 @@ describe('createSelect — active option (keyboard)', () => {
     })
   })
 
+  // 方向键跳过禁用项并在边界循环。
   it('moveActive skips disabled options and wraps', () => {
     createRoot(() => {
       // enabled: apple, banana (cherry disabled)
@@ -252,6 +274,7 @@ describe('createSelect — active option (keyboard)', () => {
     })
   })
 
+  // Enter 提交当前高亮候选。
   it('commitActive picks the highlighted option (Enter)', () => {
     createRoot(() => {
       const ins = createSelect({ options: fruits })
@@ -262,6 +285,7 @@ describe('createSelect — active option (keyboard)', () => {
     })
   })
 
+  // 过滤结果变化会重新定位高亮候选。
   it('searching re-anchors the active option', () => {
     createRoot(() => {
       const ins = createSelect({ options: fruits })
@@ -272,6 +296,7 @@ describe('createSelect — active option (keyboard)', () => {
     })
   })
 
+  // 无匹配结果时清空候选，提交不产生选择。
   it('no filtered options → active is undefined', () => {
     createRoot(() => {
       const ins = createSelect({ options: fruits })
@@ -285,6 +310,7 @@ describe('createSelect — active option (keyboard)', () => {
 })
 
 describe('createSelect — open state & clear', () => {
+  // 受控 open 拒绝变更时仍保持父层状态。
   it('controlled open wins over internal state', () => {
     createRoot(() => {
       const onOpenChange = vi.fn()
@@ -295,6 +321,7 @@ describe('createSelect — open state & clear', () => {
     })
   })
 
+  // 清空选择并触发 onClear。
   it('clear empties the selection and fires onClear', () => {
     createRoot(() => {
       const onClear = vi.fn()
@@ -305,6 +332,7 @@ describe('createSelect — open state & clear', () => {
     })
   })
 
+  // 清空保留禁用选项的既有成员关系。
   it('clear keeps disabled options\' membership (selection-store semantics)', () => {
     createRoot(() => {
       const ins = createSelect({
@@ -317,6 +345,7 @@ describe('createSelect — open state & clear', () => {
     })
   })
 
+  // 整体禁用时开关和选择动作均无效。
   it('disabled gates every action', () => {
     createRoot(() => {
       const ins = createSelect({ options: fruits, disabled: true })

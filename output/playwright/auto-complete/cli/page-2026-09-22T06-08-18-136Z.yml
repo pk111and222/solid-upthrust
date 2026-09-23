@@ -1,0 +1,438 @@
+- generic [ref=e1]:
+  - link "跳至正文" [ref=e2] [cursor=pointer]:
+    - /url: "#main-content"
+  - generic [ref=e3]:
+    - generic [ref=e4]:
+      - link "↗ Solid Upthrust" [ref=e5] [cursor=pointer]:
+        - /url: /
+        - generic [ref=e6]: ↗
+        - generic [ref=e7]: Solid Upthrust
+      - navigation "主导航" [ref=e8]:
+        - link "开发指南" [ref=e9] [cursor=pointer]:
+          - /url: /guide/
+        - link "组件" [ref=e10] [cursor=pointer]:
+          - /url: /components/
+        - generic [ref=e11]: Solid 2 RC
+    - generic [ref=e12]:
+      - complementary [ref=e13]:
+        - navigation "文档目录" [ref=e14]:
+          - menu [ref=e15]:
+            - generic [ref=e16]:
+              - generic [ref=e17]: 开始使用
+              - menuitem [ref=e18] [cursor=pointer]:
+                - link "Solid Upthrust" [ref=e19]:
+                  - /url: /
+              - menuitem [ref=e20] [cursor=pointer]:
+                - link "工程入门" [ref=e21]:
+                  - /url: /guide/
+              - menuitem [ref=e22] [cursor=pointer]:
+                - link "文档与示例渲染" [ref=e23]:
+                  - /url: /guide/rendering/
+            - generic [ref=e24]:
+              - generic [ref=e25]: 研发指南
+              - menuitem [ref=e26] [cursor=pointer]:
+                - link "架构与目录" [ref=e27]:
+                  - /url: /guide/architecture/
+              - menuitem [ref=e28] [cursor=pointer]:
+                - link "四层测试" [ref=e29]:
+                  - /url: /guide/testing/
+              - menuitem [ref=e30] [cursor=pointer]:
+                - link "功能交付清单" [ref=e31]:
+                  - /url: /guide/contributing/
+            - generic [ref=e32]:
+              - generic [ref=e33]: 组件
+              - menuitem [ref=e34] [cursor=pointer]:
+                - link "组件总览" [ref=e35]:
+                  - /url: /components/
+              - menuitem [ref=e36] [cursor=pointer]:
+                - link "Button 按钮" [ref=e37]:
+                  - /url: /components/general/button/
+              - menuitem [ref=e38] [cursor=pointer]:
+                - link "ConfigProvider 全局配置" [ref=e39]:
+                  - /url: /components/general/config-provider/
+              - menuitem [ref=e40] [cursor=pointer]:
+                - link "Icon 图标" [ref=e41]:
+                  - /url: /components/general/icon/
+              - menuitem [ref=e42] [cursor=pointer]:
+                - link "Dropdown 下拉菜单" [ref=e43]:
+                  - /url: /components/navigation/dropdown/
+              - menuitem [ref=e44] [cursor=pointer]:
+                - link "Tabs 标签页" [ref=e45]:
+                  - /url: /components/navigation/tabs/
+              - menuitem [ref=e46] [cursor=pointer]:
+                - link "Pagination 分页" [ref=e47]:
+                  - /url: /components/navigation/pagination/
+              - menuitem [ref=e48] [cursor=pointer]:
+                - link "Tree 树形控件" [ref=e49]:
+                  - /url: /components/data-entry/tree/
+              - menuitem [ref=e50] [cursor=pointer]:
+                - link "Skeleton 骨架屏" [ref=e51]:
+                  - /url: /components/feedback/skeleton/
+              - menuitem [ref=e52] [cursor=pointer]:
+                - link "Input 输入框" [ref=e53]:
+                  - /url: /components/data-entry/input/
+              - menuitem [ref=e54] [cursor=pointer]:
+                - link "Tooltip 文字提示" [ref=e55]:
+                  - /url: /components/data-display/tooltip/
+              - menuitem [ref=e56] [cursor=pointer]:
+                - link "Checkbox 多选框" [ref=e57]:
+                  - /url: /components/data-entry/checkbox/
+              - menuitem [ref=e58] [cursor=pointer]:
+                - link "Popover 气泡卡片" [ref=e59]:
+                  - /url: /components/data-display/popover/
+              - menuitem [ref=e60] [cursor=pointer]:
+                - link "Radio 单选框" [ref=e61]:
+                  - /url: /components/data-entry/radio/
+              - menuitem [ref=e62] [cursor=pointer]:
+                - link "Switch 开关" [ref=e63]:
+                  - /url: /components/data-entry/switch/
+              - menuitem [ref=e64] [cursor=pointer]:
+                - link "InputNumber 数字输入框" [ref=e65]:
+                  - /url: /components/data-entry/input-number/
+              - menuitem [ref=e66] [cursor=pointer]:
+                - link "Slider 滑动输入条" [ref=e67]:
+                  - /url: /components/data-entry/slider/
+              - menuitem [ref=e68] [cursor=pointer]:
+                - link "Rate 评分" [ref=e69]:
+                  - /url: /components/data-entry/rate/
+              - menuitem [ref=e70] [cursor=pointer]:
+                - link "Segmented 分段控制器" [ref=e71]:
+                  - /url: /components/data-entry/segmented/
+              - menuitem [ref=e72] [cursor=pointer]:
+                - link "Select 选择器" [ref=e73]:
+                  - /url: /components/data-entry/select/
+              - menuitem [ref=e74] [cursor=pointer]:
+                - link "AutoComplete 自动补全" [ref=e75]:
+                  - /url: /components/data-entry/auto-complete/
+        - generic [ref=e76]: 面向 SolidJS 的企业级组件库
+      - main [ref=e77]:
+        - article [ref=e79]:
+          - generic [ref=e80]:
+            - generic [ref=e81]: 文档
+            - generic [ref=e82]: /
+            - generic [ref=e83]: AutoComplete 自动补全
+          - heading "AutoComplete 自动补全" [level=1] [ref=e84]
+          - paragraph [ref=e85]: 自由文本输入、候选建议与键盘补全。
+          - region [ref=e86]:
+            - heading "使用方式" [level=2] [ref=e87]
+            - generic [ref=e88]:
+              - paragraph [ref=e89]: 从 upthrust-ui 导入 AutoComplete、AutoCompleteProps 与 AutoCompleteOption。值始终是自由文本，不要求来自候选项。默认忽略大小写，在 value 和 label 中做子串匹配；选中后将 label（缺省时为 value）回填到输入框，onSelect 返回选项键和原始对象。
+              - paragraph [ref=e90]: 聚焦或输入时展开候选，方向键循环跳过禁用项，Enter 选中并关闭，Escape 关闭，Tab 正常移出焦点。组合输入期间不搜索或选择，结束后提交一次。ref 返回原生 HTMLInputElement，可调用 focus() / blur()。
+          - region [ref=e91]:
+            - heading "示例" [level=2] [ref=e92]
+            - generic [ref=e94]:
+              - region "自由文本与受控选值" [ref=e95]:
+                - generic [ref=e643]:
+                  - combobox "城市" [expanded] [active] [ref=e645]
+                  - status [ref=e646]: 文本：空；选项键：未选择
+                - heading "自由文本与受控选值" [level=3] [ref=e99]
+                - group [ref=e100]:
+                  - generic "TSX 〈/〉 展开代码" [ref=e101] [cursor=pointer]:
+                    - generic [ref=e102]: TSX
+                    - generic [ref=e103]: 〈/〉 展开代码
+              - region "默认值与自定义过滤" [ref=e104]:
+                - generic [ref=e647]:
+                  - combobox "前缀搜索" [ref=e649]: s
+                  - combobox "全部建议" [ref=e651]
+                - heading "默认值与自定义过滤" [level=3] [ref=e108]
+                - group [ref=e109]:
+                  - generic "TSX 〈/〉 展开代码" [ref=e110] [cursor=pointer]:
+                    - generic [ref=e111]: TSX
+                    - generic [ref=e112]: 〈/〉 展开代码
+              - region "异步候选" [ref=e113]:
+                - generic [ref=e652]:
+                  - combobox "邮箱建议" [ref=e654]
+                  - status [ref=e655]: 模拟异步返回，旧请求不会覆盖新候选
+                - heading "异步候选" [level=3] [ref=e117]
+                - group [ref=e118]:
+                  - generic "TSX 〈/〉 展开代码" [ref=e119] [cursor=pointer]:
+                    - generic [ref=e120]: TSX
+                    - generic [ref=e121]: 〈/〉 展开代码
+              - region "尺寸、状态与禁用" [ref=e122]:
+                - generic [ref=e656]:
+                  - combobox "小尺寸" [ref=e658]
+                  - combobox "中尺寸" [ref=e660]
+                  - combobox "大尺寸" [ref=e662]
+                  - combobox "错误状态" [invalid] [ref=e664]
+                  - combobox "警告状态" [ref=e666]
+                  - combobox "禁用状态" [disabled] [ref=e668]: 不可编辑
+                - heading "尺寸、状态与禁用" [level=3] [ref=e126]
+                - group [ref=e127]:
+                  - generic "TSX 〈/〉 展开代码" [ref=e128] [cursor=pointer]:
+                    - generic [ref=e129]: TSX
+                    - generic [ref=e130]: 〈/〉 展开代码
+              - region "表单提交与重置" [ref=e131]:
+                - generic [ref=e669]:
+                  - generic [ref=e670]:
+                    - generic [ref=e671]:
+                      - generic [ref=e673]:
+                        - text: 目的地
+                        - generic [ref=e674]: ":"
+                      - combobox "目的地 :" [ref=e679]: 北京
+                    - generic [ref=e680]:
+                      - button "提交目的地" [ref=e681] [cursor=pointer]
+                      - button "重置目的地" [ref=e683] [cursor=pointer]
+                  - status [ref=e685]: 尚未提交
+                - heading "表单提交与重置" [level=3] [ref=e135]
+                - group [ref=e136]:
+                  - generic "TSX 〈/〉 展开代码" [ref=e137] [cursor=pointer]:
+                    - generic [ref=e138]: TSX
+                    - generic [ref=e139]: 〈/〉 展开代码
+              - region "受控浮层与键盘导航" [ref=e140]:
+                - generic [ref=e686]:
+                  - combobox "键盘建议" [ref=e688]
+                  - button "聚焦建议" [ref=e689] [cursor=pointer]
+                  - status [ref=e691]: 尚未聚焦；已关闭
+                - heading "受控浮层与键盘导航" [level=3] [ref=e144]
+                - group [ref=e145]:
+                  - generic "TSX 〈/〉 展开代码" [ref=e146] [cursor=pointer]:
+                    - generic [ref=e147]: TSX
+                    - generic [ref=e148]: 〈/〉 展开代码
+          - region [ref=e149]:
+            - heading "AutoCompleteProps API" [level=2] [ref=e150]
+            - table "API 属性表格" [ref=e155]:
+              - rowgroup [ref=e161]:
+                - row [ref=e162]:
+                  - columnheader "属性" [ref=e163]
+                  - columnheader "说明" [ref=e166]
+                  - columnheader "类型" [ref=e169]
+                  - columnheader "默认值" [ref=e172]
+              - rowgroup [ref=e175]:
+                - row [ref=e176]:
+                  - cell [ref=e177]:
+                    - code [ref=e180]: value
+                  - cell "受控文本，优先于表单注入值。" [ref=e181]
+                  - cell [ref=e184]:
+                    - code [ref=e187]: string
+                  - cell [ref=e188]:
+                    - code [ref=e191]: —
+                - row [ref=e192]:
+                  - cell [ref=e193]:
+                    - code [ref=e196]: defaultValue
+                  - cell "非受控初始文本。" [ref=e197]
+                  - cell [ref=e200]:
+                    - code [ref=e203]: string
+                  - cell [ref=e204]:
+                    - code [ref=e207]: "''"
+                - row [ref=e208]:
+                  - cell [ref=e209]:
+                    - code [ref=e212]: options
+                  - cell "候选池；支持动态更新。" [ref=e213]
+                  - cell [ref=e216]:
+                    - code [ref=e219]: AutoCompleteOption[]
+                  - cell [ref=e220]:
+                    - code [ref=e223]: "[]"
+                - row [ref=e224]:
+                  - cell [ref=e225]:
+                    - code [ref=e228]: filterOption
+                  - cell "false 保留全部候选；匹配 value 与 label。" [ref=e229]
+                  - cell [ref=e232]:
+                    - code [ref=e235]: ((input, option) => boolean) | false
+                  - cell [ref=e236]:
+                    - code [ref=e239]: 忽略大小写子串匹配
+                - row [ref=e240]:
+                  - cell [ref=e241]:
+                    - code [ref=e244]: disabled
+                  - cell "禁用输入和选择，并隐藏浮层。" [ref=e245]
+                  - cell [ref=e248]:
+                    - code [ref=e251]: boolean
+                  - cell [ref=e252]:
+                    - code [ref=e255]: "false"
+                - row [ref=e256]:
+                  - cell [ref=e257]:
+                    - code [ref=e260]: placeholder
+                  - cell "原生输入占位符。" [ref=e261]
+                  - cell [ref=e264]:
+                    - code [ref=e267]: string
+                  - cell [ref=e268]:
+                    - code [ref=e271]: —
+                - row [ref=e272]:
+                  - cell [ref=e273]:
+                    - code [ref=e276]: size
+                  - cell "输入尺寸，可由 Form.Item 注入。" [ref=e277]
+                  - cell [ref=e280]:
+                    - code [ref=e283]: "'small' | 'middle' | 'large'"
+                  - cell [ref=e284]:
+                    - code [ref=e287]: "'middle'"
+                - row [ref=e288]:
+                  - cell [ref=e289]:
+                    - code [ref=e292]: status
+                  - cell "校验外观，错误时设置 aria-invalid。" [ref=e293]
+                  - cell [ref=e296]:
+                    - code [ref=e299]: "'error' | 'warning'"
+                  - cell [ref=e300]:
+                    - code [ref=e303]: —
+                - row [ref=e304]:
+                  - cell [ref=e305]:
+                    - code [ref=e308]: open
+                  - cell "受控浮层状态，禁用时隐藏。" [ref=e309]
+                  - cell [ref=e312]:
+                    - code [ref=e315]: boolean
+                  - cell [ref=e316]:
+                    - code [ref=e319]: —
+                - row [ref=e320]:
+                  - cell [ref=e321]:
+                    - code [ref=e324]: defaultOpen
+                  - cell "初始浮层状态。" [ref=e325]
+                  - cell [ref=e328]:
+                    - code [ref=e331]: boolean
+                  - cell [ref=e332]:
+                    - code [ref=e335]: "false"
+                - row [ref=e336]:
+                  - cell [ref=e337]:
+                    - code [ref=e340]: onOpenChange
+                  - cell "请求展开或关闭。" [ref=e341]
+                  - cell [ref=e344]:
+                    - code [ref=e347]: "(open: boolean) => void"
+                  - cell [ref=e348]:
+                    - code [ref=e351]: —
+                - row [ref=e352]:
+                  - cell [ref=e353]:
+                    - code [ref=e356]: onChange
+                  - cell "输入、选中建议时报告文本。" [ref=e357]
+                  - cell [ref=e360]:
+                    - code [ref=e363]: "(value: string) => void"
+                  - cell [ref=e364]:
+                    - code [ref=e367]: —
+                - row [ref=e368]:
+                  - cell [ref=e369]:
+                    - code [ref=e372]: onSearch
+                  - cell "输入提交时报告文本，IME 结束后一次。" [ref=e373]
+                  - cell [ref=e376]:
+                    - code [ref=e379]: "(value: string) => void"
+                  - cell [ref=e380]:
+                    - code [ref=e383]: —
+                - row [ref=e384]:
+                  - cell [ref=e385]:
+                    - code [ref=e388]: onSelect
+                  - cell "选中建议时报告原始键和对象。" [ref=e389]
+                  - cell [ref=e392]:
+                    - code [ref=e395]: "(value: string, option: AutoCompleteOption) => void"
+                  - cell [ref=e396]:
+                    - code [ref=e399]: —
+                - row [ref=e400]:
+                  - cell [ref=e401]:
+                    - code [ref=e404]: onFocus
+                  - cell "原生焦点事件，仅调用一次。" [ref=e405]
+                  - cell [ref=e408]:
+                    - code [ref=e411]: "(event: FocusEvent) => void"
+                  - cell [ref=e412]:
+                    - code [ref=e415]: —
+                - row [ref=e416]:
+                  - cell [ref=e417]:
+                    - code [ref=e420]: onBlur
+                  - cell "原生焦点事件，仅调用一次。" [ref=e421]
+                  - cell [ref=e424]:
+                    - code [ref=e427]: "(event: FocusEvent) => void"
+                  - cell [ref=e428]:
+                    - code [ref=e431]: —
+                - row [ref=e432]:
+                  - cell [ref=e433]:
+                    - code [ref=e436]: ref
+                  - cell "获取输入节点。" [ref=e437]
+                  - cell [ref=e440]:
+                    - code [ref=e443]: "(input: HTMLInputElement) => void"
+                  - cell [ref=e444]:
+                    - code [ref=e447]: —
+                - row [ref=e448]:
+                  - cell [ref=e449]:
+                    - code [ref=e452]: id
+                  - cell "输入节点 ID；可由 Form.Item 注入。" [ref=e453]
+                  - cell [ref=e456]:
+                    - code [ref=e459]: string
+                  - cell [ref=e460]:
+                    - code [ref=e463]: —
+                - row [ref=e464]:
+                  - cell [ref=e465]:
+                    - code [ref=e468]: name
+                  - cell "原生表单字段名。" [ref=e469]
+                  - cell [ref=e472]:
+                    - code [ref=e475]: string
+                  - cell [ref=e476]:
+                    - code [ref=e479]: —
+                - row [ref=e480]:
+                  - cell [ref=e481]:
+                    - code [ref=e484]: aria-label
+                  - cell "输入的无障碍名称。" [ref=e485]
+                  - cell [ref=e488]:
+                    - code [ref=e491]: string
+                  - cell [ref=e492]:
+                    - code [ref=e495]: —
+                - row [ref=e496]:
+                  - cell [ref=e497]:
+                    - code [ref=e500]: aria-labelledby
+                  - cell "输入标签节点 ID。" [ref=e501]
+                  - cell [ref=e504]:
+                    - code [ref=e507]: string
+                  - cell [ref=e508]:
+                    - code [ref=e511]: —
+                - row [ref=e512]:
+                  - cell [ref=e513]:
+                    - code [ref=e516]: class
+                  - cell "外层容器类名。" [ref=e517]
+                  - cell [ref=e520]:
+                    - code [ref=e523]: string
+                  - cell [ref=e524]:
+                    - code [ref=e527]: —
+                - row [ref=e528]:
+                  - cell [ref=e529]:
+                    - code [ref=e532]: style
+                  - cell "外层容器样式，可设置宽度。" [ref=e533]
+                  - cell [ref=e536]:
+                    - code [ref=e539]: JSX.CSSProperties
+                  - cell [ref=e540]:
+                    - code [ref=e543]: —
+          - region [ref=e544]:
+            - heading "AutoCompleteOption API" [level=2] [ref=e545]
+            - table "API 属性表格" [ref=e550]:
+              - rowgroup [ref=e556]:
+                - row [ref=e557]:
+                  - columnheader "属性" [ref=e558]
+                  - columnheader "说明" [ref=e561]
+                  - columnheader "类型" [ref=e564]
+                  - columnheader "默认值" [ref=e567]
+              - rowgroup [ref=e570]:
+                - row [ref=e571]:
+                  - cell [ref=e572]:
+                    - code [ref=e575]: value
+                  - cell "唯一候选键，onSelect 返回此值。" [ref=e576]
+                  - cell [ref=e579]:
+                    - code [ref=e582]: string
+                  - cell [ref=e583]:
+                    - code [ref=e586]: 必填
+                - row [ref=e587]:
+                  - cell [ref=e588]:
+                    - code [ref=e591]: label
+                  - cell "显示和回填文字；支持空字符串。" [ref=e592]
+                  - cell [ref=e595]:
+                    - code [ref=e598]: string
+                  - cell [ref=e599]:
+                    - code [ref=e602]: value
+                - row [ref=e603]:
+                  - cell [ref=e604]:
+                    - code [ref=e607]: disabled
+                  - cell "禁止选择与高亮。" [ref=e608]
+                  - cell [ref=e611]:
+                    - code [ref=e614]: boolean
+                  - cell [ref=e615]:
+                    - code [ref=e618]: "false"
+                - row [ref=e619]:
+                  - cell [ref=e620]:
+                    - code [ref=e623]: "[key: string]"
+                  - cell "允许附加业务数据，通过 onSelect 原样返回。" [ref=e624]
+                  - cell [ref=e627]:
+                    - code [ref=e630]: unknown
+                  - cell [ref=e631]:
+                    - code [ref=e634]: —
+          - region [ref=e635]:
+            - heading "约定与边界" [level=2] [ref=e636]
+            - generic [ref=e637]:
+              - paragraph [ref=e638]: value/open 为受控属性，父层需写回回调值。defaultValue/defaultOpen 仅初始化使用。选项 value 必须唯一；label 支持字符串（包含空字符串），不支持 JSX、分组或虚拟列表。空候选显示“无匹配结果”。没有公开子组件。
+              - paragraph [ref=e639]: onChange 在输入与选中时触发；onSearch 只由输入触发，选中不会发起搜索。异步请求由调用方管理，通过 options 写入结果；远程过滤应设置 filterOption=false，并处理过期请求和卸载。动态更新 options、value 或过滤器会重新计算候选。
+              - paragraph [ref=e640]: Form.Item 可注入值、变更回调、id、禁用、尺寸与校验状态，显式 props 优先。显式 onChange 会接管字段变更，需要调用方自行同步表单。ConfigProvider 支持组件默认属性及主题作用域。name 用于原生表单文本提交，禁用输入不参加提交。
+              - paragraph [ref=e641]: 本组件没有 allowClear、loading、自定义输入节点或浮层容器属性。当前真实浏览器证据为 Chromium，其他浏览器、打包消费者与共享弹层完整验收留待工程回归。
+          - generic [ref=e642]: Solid Upthrust · 基于 Solid 2 构建
+  - listbox "城市" [ref=e692]:
+    - option "北京" [selected] [ref=e693] [cursor=pointer]
+    - option "停用城市" [disabled]
+    - option "上海" [ref=e695] [cursor=pointer]

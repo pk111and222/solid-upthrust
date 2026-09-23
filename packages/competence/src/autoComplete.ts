@@ -93,9 +93,9 @@ const displayOf = (option: AutoCompleteOption): string =>
 export const createAutoComplete = (config: AutoCompleteConfig = {}): AutoCompleteIns => {
   // ownedWrite: typing/keyboard arrive from DOM events — imperative entry
   // points outside any reactive owner.
-  const [_text, _setText] = createSignal(config.defaultValue ?? '', { ownedWrite: true })
+  const [_text, _setText] = createSignal(untrack(() => config.defaultValue ?? ''), { ownedWrite: true })
   const [_active, _setActive] = createSignal<string | undefined>(undefined, { ownedWrite: true })
-  const [_open, _setOpen] = createSignal(config.defaultOpen ?? false, { ownedWrite: true })
+  const [_open, _setOpen] = createSignal(untrack(() => config.defaultOpen ?? false), { ownedWrite: true })
   const [_composing, _setComposing] = createSignal(false, { ownedWrite: true })
   // The text typed during an IME composition — committed on compositionEnd.
   let _pendingComposition: string | undefined
@@ -104,24 +104,17 @@ export const createAutoComplete = (config: AutoCompleteConfig = {}): AutoComplet
     config.value !== undefined ? config.value : _text(),
   )
 
-  /** Suggestions after filterOption — eager-recomputed on typing (Solid 2
-   *  batching: a memo read in the same tick returns the old input). */
-  const [_suggestionList, _setSuggestionList] = createSignal<AutoCompleteOption[]>([], { ownedWrite: true })
-  const recomputeSuggestions = (input: string) => {
+  const suggestions = createMemo(() => {
     const pool = config.options ?? []
     const filter = config.filterOption === false ? null : (config.filterOption ?? defaultFilter)
-    const list = filter === null ? pool : pool.filter(o => filter(input, o))
-    _setSuggestionList(list)
-    return list
-  }
-  // Seed once so a default-open panel shows the unfiltered pool.
-  untrack(() => recomputeSuggestions(config.value ?? config.defaultValue ?? ''))
-
-  const suggestions = createMemo(() => _suggestionList())
+    return filter === null ? pool : pool.filter(option => filter(value(), option))
+  })
 
   const isComposing = () => _composing()
 
   const notifyCompositionStart = () => {
+    if (config.disabled) return
+    _pendingComposition = undefined
     _setComposing(true)
   }
 
@@ -131,7 +124,7 @@ export const createAutoComplete = (config: AutoCompleteConfig = {}): AutoComplet
     if (_pendingComposition !== undefined) {
       const text = _pendingComposition
       _pendingComposition = undefined
-      untrack(() => commitText(text))
+      if (!config.disabled) untrack(() => commitText(text))
     }
   }
 
@@ -139,11 +132,11 @@ export const createAutoComplete = (config: AutoCompleteConfig = {}): AutoComplet
     _setText(text)
     config.onChange?.(text)
     config.onSearch?.(text)
-    untrack(() => recomputeSuggestions(text))
-    untrack(() => resetActiveWith(text))
+    untrack(() => resetActiveWith(config.value ?? text))
   }
 
   const setInputText = (text: string) => {
+    if (config.disabled) return
     if (_composing()) {
       // antd: composition keystrokes buffer only — no commit mid-IME.
       _pendingComposition = text
@@ -152,7 +145,7 @@ export const createAutoComplete = (config: AutoCompleteConfig = {}): AutoComplet
     commitText(text)
   }
 
-  const isOpen = () => (config.open !== undefined ? config.open : _open())
+  const isOpen = () => !config.disabled && (config.open !== undefined ? config.open : _open())
 
   // setOpen runs from the UI layer's dual-function createEffect, whose effect
   // callback executes with strictRead="an effect callback" set — reading the
@@ -165,7 +158,6 @@ export const createAutoComplete = (config: AutoCompleteConfig = {}): AutoComplet
     config.onOpenChange?.(open)
     if (open) {
       untrack(() => {
-        recomputeSuggestions(value())
         resetActiveWith(value())
       })
     }
@@ -182,18 +174,27 @@ export const createAutoComplete = (config: AutoCompleteConfig = {}): AutoComplet
   }
 
   const moveActive = (delta: number) => {
+    if (config.disabled) return
     const list = enabledSuggestions(value())
     if (!list.length) return
-    const cur = _active()
+    const cur = activeValue()
     const idx = list.findIndex(o => o.value === cur)
     const next = idx === -1
       ? (delta > 0 ? 0 : list.length - 1)
-      : (idx + delta + list.length) % list.length
+      : ((idx + delta) % list.length + list.length) % list.length
     _setActive(list[next].value)
   }
 
-  const setActiveValue = (value: string) => {
-    _setActive(value)
+  const activeValue = createMemo(() => {
+    if (config.disabled) return undefined
+    const list = suggestions().filter(option => !option.disabled)
+    const active = _active()
+    return list.find(option => option.value === active)?.value
+      ?? (isOpen() || active !== undefined ? list[0]?.value : undefined)
+  })
+
+  const setActiveValue = (next: string) => {
+    if (!config.disabled && suggestions().some(option => option.value === next && !option.disabled)) _setActive(next)
   }
 
   /** Anchor to the first enabled suggestion (against an explicit input —
@@ -203,7 +204,7 @@ export const createAutoComplete = (config: AutoCompleteConfig = {}): AutoComplet
     _setActive(list.length ? list[0].value : undefined)
   }
 
-  const resetActive = () => resetActiveWith(value())
+  const resetActive = () => { if (!config.disabled) resetActiveWith(value()) }
 
   // ---- selection -----------------------------------------------------------
 
@@ -213,14 +214,13 @@ export const createAutoComplete = (config: AutoCompleteConfig = {}): AutoComplet
     _setText(text)
     config.onChange?.(text)
     config.onSelect?.(option.value, option)
-    untrack(() => recomputeSuggestions(text))
     _setActive(undefined)
   }
 
   const commitActive = () => {
-    const cur = _active()
+    const cur = activeValue()
     if (cur === undefined) return
-    const option = (config.options ?? []).find(o => o.value === cur)
+    const option = suggestions().find(o => o.value === cur)
     if (option) selectOption(option)
   }
 
@@ -242,7 +242,7 @@ export const createAutoComplete = (config: AutoCompleteConfig = {}): AutoComplet
     isComposing,
     notifyCompositionStart,
     notifyCompositionEnd,
-    activeValue: () => _active(),
+    activeValue,
     moveActive,
     setActiveValue,
     resetActive,

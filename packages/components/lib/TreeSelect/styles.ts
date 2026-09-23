@@ -144,14 +144,16 @@ export const treeSelectTagRestClass = () =>
   ])
 
 /** The suffix slot (clear × + down-chevron). */
-export const treeSelectSuffixWrapClass = () =>
-  twMerge(["flex", "items-center", "shrink-0", "gap-[4px]", "ml-[4px]", "text-on-surface/45"])
+export const treeSelectSuffixWrapClass = (variants: { size?: 'small' | 'middle' | 'large' }) =>
+  twMerge([
+    "flex", "items-center", "justify-center", "shrink-0", "ml-auto", "text-on-surface/45",
+    variants.size === 'small' ? 'w-[20px] h-[20px] text-[14px]' : variants.size === 'large' ? 'w-[28px] h-[28px] text-[18px]' : 'w-[24px] h-[24px] text-[16px]',
+  ])
 
 /** The clear × button. */
 export const treeSelectClearWrapClass = (variants: { visible?: boolean }) =>
   twMerge([
     "flex", "items-center", "justify-center", "cursor-pointer",
-    "text-[12px]",
     "text-on-surface/25", "hover:text-on-surface/45", "active:text-on-surface",
     "transition-upthrust-fast",
     variants.visible ? '' : 'invisible pointer-events-none',
@@ -160,7 +162,7 @@ export const treeSelectClearWrapClass = (variants: { visible?: boolean }) =>
 /** The down-chevron arrow — rotates 180° while open (antd). */
 export const treeSelectArrowWrapClass = (variants: { open?: boolean }) =>
   twMerge([
-    "transition-transform", "duration-200", "ease-upthrust", "flex", "items-center", "cursor-pointer",
+    "transition-transform", "duration-200", "ease-upthrust", "flex", "items-center", "justify-center", "w-full", "h-full", "cursor-pointer",
     variants.open ? 'rotate-180' : '',
   ])
 
@@ -174,7 +176,6 @@ const treeSelectDropdownVariants = cva(
     "rounded-lg",
     "shadow",
     "py-[4px]",
-    "min-w-[160px]",
     "transition-overlay",
     "duration-fast",
     "ease-upthrust",

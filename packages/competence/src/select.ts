@@ -33,9 +33,13 @@ import type { FormFieldRule } from "./formField";
 
 /** A Select option — a SelectionOption plus rc-select extras. */
 export type SelectOption = SelectionOption & {
-  /** Optional grouping header (antd group label) — presentational. */
+  /** Optional group label for flat option arrays. */
   group?: string
 }
+
+/** Nested option group, in addition to the flat SelectOption.group form. */
+export type SelectOptionGroup = { label: string; options: SelectOption[] }
+export type SelectOptionEntry = SelectOption | SelectOptionGroup
 
 export type SelectMode = 'single' | 'multiple' | 'tags'
 
@@ -49,7 +53,7 @@ export type SelectConfig = {
   /** Controlled selected key(s). Single: one key; multiple/tags: array. */
   value?: string | number | Array<string | number>
   defaultValue?: string | number | Array<string | number>
-  options?: SelectOption[]
+  options?: SelectOptionEntry[]
   /** 'single' (default), 'multiple', or 'multiple' + free entry. */
   mode?: SelectMode
   disabled?: boolean
@@ -74,20 +78,15 @@ export type SelectConfig = {
   onClear?: () => void
   onSelect?: (value: string | number, option: SelectOption) => void
   onDeselect?: (value: string | number, option: SelectOption) => void
-  onChange?: (
-    value: SelectConfig['labelInValue'] extends true ? never : never,
-  ) => void
+  onChange?: (value: SelectChangeValue) => void
   /** Form integration: rules for the enclosing Item. */
   rules?: FormFieldRule[]
 }
 
-// The onChange signature is mode-dependent; modelled as an overridable
-// generic-free union to keep the headless simple. The UI layer refines it.
-export type SelectChangeValue = string | number | Array<string | number> | SelectLabelInValue | Array<SelectLabelInValue>
+// The onChange signature is mode-dependent; use a union for the headless API.
+export type SelectChangeValue = string | number | Array<string | number> | SelectLabelInValue | Array<SelectLabelInValue> | undefined
 
-export type SelectConfigFull = Omit<SelectConfig, 'onChange'> & {
-  onChange?: (value: SelectChangeValue) => void
-}
+export type SelectConfigFull = SelectConfig
 
 export type SelectIns = {
   /** The effective selected keys (array form internally). */
@@ -161,18 +160,31 @@ export const createSelect = (config: SelectConfigFull = {}): SelectIns => {
     return [v as string | number]
   }
 
+  // Flatten nested groups for the selection machine; keep the group label
+  // on each option so the UI can render headers after filtering.
+  const [_tagOptions, _setTagOptions] = createSignal<SelectOption[]>([], { ownedWrite: true })
+  const options = createMemo<SelectOption[]>(() => {
+    const base = (config.options ?? []).flatMap(entry =>
+      'options' in entry
+        ? entry.options.map(option => ({ ...option, group: entry.label }))
+        : [entry],
+    )
+    const tags = _tagOptions()
+    return tags.length ? [...base, ...tags] : base
+  })
+
   // The shared selection store — the SAME machine under Radio.Group and
   // Checkbox.Group. Single mode = maxSelect 1 (radio semantics: replace);
   // multiple/tags = unlimited (checkbox semantics: toggle).
   const store = createSelection({
     value: () => controlledValue(),
     defaultValue: toArray(config.defaultValue),
-    get options() { return config.options as SelectionOption[] | undefined },
+    get options() { return options() as SelectionOption[] },
     get disabled() { return config.disabled },
-    maxSelect: isMultiple() ? Infinity : 1,
+    maxSelect: () => isMultiple() ? Infinity : 1,
     // antd single Select: clicking the selected option keeps it (the
     // dropdown just closes); multiple mode toggles via select().
-    allowDeselect: isMultiple(),
+    allowDeselect: isMultiple,
     onChange: next => {
       // Re-emit in the API shape.
       const opts = options()
@@ -191,15 +203,7 @@ export const createSelect = (config: SelectConfigFull = {}): SelectIns => {
   const [_activeKey, _setActiveKey] = createSignal<string | number | undefined>(undefined, { ownedWrite: true })
   const [_open, _setOpen] = createSignal(config.defaultOpen ?? false, { ownedWrite: true })
 
-  // Tag options the user created at runtime (tags mode) — appended after
-  // config.options so they render at the end and survive filtering.
-  const [_tagOptions, _setTagOptions] = createSignal<SelectOption[]>([], { ownedWrite: true })
-
-  const options = createMemo<SelectOption[]>(() => {
-    const base = (config.options ?? []) as SelectOption[]
-    const tags = _tagOptions()
-    return tags.length ? [...base, ...tags] : base
-  })
+  // Tag options created at runtime are appended after normalized options.
 
   const isOpen = () => (config.open !== undefined ? config.open : _open())
 
@@ -253,7 +257,7 @@ export const createSelect = (config: SelectConfigFull = {}): SelectIns => {
   /** Move by delta over the ENABLED, FILTERED options; wraps around. */
   const moveActive = (delta: number) => {
     const list = filteredOptions().filter(o => !o.disabled && !store.isDisabled(o.value))
-    if (!list.length) return
+    if (!list.length) { _setActiveKey(undefined); return }
     const cur = _activeKey()
     const idx = list.findIndex(o => o.value === cur)
     const next = idx === -1
@@ -314,11 +318,12 @@ export const createSelect = (config: SelectConfigFull = {}): SelectIns => {
   const commitActive = () => {
     const key = _activeKey()
     if (key === undefined) return
+    if (!filteredOptions().some(option => option.value === key && !store.isDisabled(key))) return
     selectOption(key)
   }
 
   const deselectOption = (key: string | number) => {
-    if (config.disabled) return
+    if (config.disabled || !store.isSelected(key) || store.isDisabled(key)) return
     const opt = options().find(o => o.value === key)
     store.deselect(key)
     if (opt) config.onDeselect?.(key, opt)
@@ -336,10 +341,11 @@ export const createSelect = (config: SelectConfigFull = {}): SelectIns => {
     if (config.disabled || !isTags()) return
     const text = _search().trim()
     if (!text) return
-    const existing = options().find(o => o.label === text)
+    const existing = options().find(o => o.label === text || o.value === text)
     if (existing) {
-      // Already an option (maybe created earlier) — just pick it.
-      selectOption(existing.value)
+      // Enter adds an existing option; it never toggles an already selected tag off.
+      if (!store.isSelected(existing.value)) selectOption(existing.value)
+      else _setSearch('')
       return
     }
     const tag: SelectOption = { label: text, value: text }

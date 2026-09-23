@@ -1,0 +1,135 @@
+[WebServer] (node:7078) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:7080) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:7082) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:7106) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:7107) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 12 tests using 2 workers
+
+(node:7128) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:7129) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓   2 [docs] › browser/Mentions/interactions.spec.ts:10:1 › [mentions.browser.keyboard] selects an enabled option (309ms)
+  ✓   1 [docs] › browser/Mentions/interactions.spec.ts:23:1 › [mentions.browser.dismiss] closes and reopens with stable placement (314ms)
+  ✓   3 [docs] › browser/Mentions/interactions.spec.ts:41:1 › [mentions.browser.pointer] inserts in the middle and dismisses outside (252ms)
+  ✓   4 [docs] › browser/Mentions/interactions.spec.ts:57:1 › [mentions.browser.prefix-caret] leaves the caret after the inserted mention (305ms)
+  ✓   6 [docs] › browser/Mentions/interactions.spec.ts:76:1 › [mentions.browser.form] submits and resets the field (193ms)
+  ✓   5 [docs] › browser/Mentions/interactions.spec.ts:66:1 › [mentions.browser.remote] refreshes server options in place (355ms)
+  ✓   8 [docs] › browser/Mentions/interactions.spec.ts:98:1 › [mentions.browser.ssr] prerenders API and source (9ms)
+(node:7146) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓   9 [example] › browser/Mentions/interactions.spec.ts:10:1 › [mentions.browser.keyboard] selects an enabled option (225ms)
+[WebServer] 2:28:31 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in <Mentions> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+[WebServer] 2:28:31 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in <Mentions> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+[WebServer] 2:28:31 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in <Mentions> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+[WebServer] 2:28:31 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in <Mentions> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+[WebServer] 2:28:31 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in <Mentions> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+[WebServer] 2:28:31 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in <Mentions> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+[WebServer] 2:28:31 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in <Mentions> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+[WebServer] 2:28:31 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in <Mentions> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+[WebServer] 2:28:31 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in <Mentions> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+[WebServer] 2:28:31 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in <Mentions> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+[WebServer] 2:28:31 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in <Mentions> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+[WebServer] 2:28:31 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in <Mentions> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+[WebServer] 2:28:31 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in <Mentions> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+[WebServer] 2:28:31 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in <Mentions> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+[WebServer] 2:28:31 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in <Mentions> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+[WebServer] 2:28:31 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in <Mentions> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+[WebServer] 2:28:31 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in <Mentions> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+[WebServer] 2:28:31 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in <Mentions> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+[WebServer] 2:28:31 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in <Mentions> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+[WebServer] 2:28:31 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in <Mentions> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+[WebServer] 2:28:31 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in <Mentions> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+[WebServer] 2:28:31 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in <Mentions> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+[WebServer] 2:28:31 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in <Mentions> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+[WebServer] 2:28:31 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in <Mentions> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+[WebServer] 2:28:31 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in an effect callback will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+[WebServer] 2:28:31 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in an effect callback will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+[WebServer] 2:28:31 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in an effect callback will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+[WebServer] 2:28:31 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in an effect callback will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+[WebServer] 2:28:31 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in <Mentions> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+[WebServer] 2:28:31 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in <Mentions> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+[WebServer] 2:28:31 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in <Mentions> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+[WebServer] 2:28:31 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in <Mentions> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+[WebServer] 2:28:31 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in <Mentions> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+[WebServer] 2:28:31 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in <Mentions> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+[WebServer] 2:28:31 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in <Mentions> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+[WebServer] 2:28:31 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in <Mentions> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+[WebServer] 2:28:31 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in <Mentions> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+[WebServer] 2:28:31 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in <Mentions> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+[WebServer] 2:28:31 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in <Mentions> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+[WebServer] 2:28:31 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in <Mentions> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+[WebServer] 2:28:31 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in <Mentions> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+[WebServer] 2:28:31 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in <Mentions> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+[WebServer] 2:28:31 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in <Mentions> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+[WebServer] 2:28:31 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in <Mentions> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+[WebServer] 2:28:31 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in <Mentions> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+[WebServer] 2:28:31 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in <Mentions> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+[WebServer] 2:28:31 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in <Mentions> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+[WebServer] 2:28:31 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in <Mentions> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+[WebServer] 2:28:31 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in <Mentions> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+[WebServer] 2:28:31 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in <Mentions> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+[WebServer] 2:28:31 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in <Mentions> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+[WebServer] 2:28:31 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in <Mentions> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+[WebServer] 2:28:31 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in <Mentions> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+[WebServer] 2:28:31 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in <Mentions> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+[WebServer] 2:28:31 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in <Mentions> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+[WebServer] 2:28:31 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in <Mentions> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+[WebServer] 2:28:31 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in <Mentions> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+[WebServer] 2:28:31 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in <Mentions> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+[WebServer] 2:28:31 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in <Mentions> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+[WebServer] 2:28:31 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in <Mentions> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+[WebServer] 2:28:31 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in <Mentions> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+[WebServer] 2:28:31 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in an effect callback will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+[WebServer] 2:28:31 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in an effect callback will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+[WebServer] 2:28:31 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in an effect callback will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+[WebServer] 2:28:31 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in an effect callback will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+[WebServer] 2:28:31 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in an effect callback will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+[WebServer] 2:28:31 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in an effect callback will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+[WebServer] 2:28:31 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in <Mentions> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+[WebServer] 2:28:31 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in <Mentions> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+[WebServer] 2:28:31 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in <Mentions> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+[WebServer] 2:28:31 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in <Mentions> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+[WebServer] 2:28:31 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in <Mentions> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+[WebServer] 2:28:31 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in <Mentions> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+[WebServer] 2:28:31 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in <Mentions> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+[WebServer] 2:28:31 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in <Mentions> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+[WebServer] 2:28:31 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in <Mentions> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+[WebServer] 2:28:31 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in <Mentions> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+[WebServer] 2:28:31 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in <Mentions> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+[WebServer] 2:28:31 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in <Mentions> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+[WebServer] 2:28:31 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in <Mentions> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+[WebServer] 2:28:31 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in an effect callback will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+[WebServer] 2:28:31 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in an effect callback will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+[WebServer] 2:28:31 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in <Mentions> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+[WebServer] 2:28:31 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in <Mentions> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+[WebServer] 2:28:31 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in <Mentions> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+[WebServer] 2:28:31 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in <Mentions> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+[WebServer] 2:28:31 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in <Mentions> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+[WebServer] 2:28:31 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in <Mentions> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+[WebServer] 2:28:31 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in <Mentions> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+[WebServer] 2:28:31 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in <Mentions> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+[WebServer] 2:28:31 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in <Mentions> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+[WebServer] 2:28:31 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in <Mentions> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+[WebServer] 2:28:31 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in <Mentions> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+[WebServer] 2:28:31 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in <Mentions> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+[WebServer] 2:28:31 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in <Mentions> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+[WebServer] 2:28:31 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in an effect callback will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+[WebServer] 2:28:31 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in an effect callback will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+  ✓  10 [example] › browser/Mentions/interactions.spec.ts:23:1 › [mentions.browser.dismiss] closes and reopens with stable placement (206ms)
+[WebServer] 2:28:31 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in an effect callback will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+[WebServer] 2:28:31 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in an effect callback will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+[WebServer] 2:28:31 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in an effect callback will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+  ✓   7 [docs] › browser/Mentions/interactions.spec.ts:89:1 › [mentions.browser.dev] paints the textarea and dropdown (969ms)
+(node:7157) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  11 [example] › browser/Mentions/interactions.spec.ts:41:1 › [mentions.browser.pointer] inserts in the middle and dismisses outside (260ms)
+  ✓  12 [example] › browser/Mentions/interactions.spec.ts:57:1 › [mentions.browser.prefix-caret] leaves the caret after the inserted mention (347ms)
+
+  12 passed (8.2s)

@@ -312,3 +312,17 @@ describe('createCascader — clear & disabled', () => {
     })
   })
 })
+
+// 每次点击路径都应先通知 onSelect，再按 changeOnSelect 决定是否提交。
+it('[cascader.events.select] reports intermediate and leaf paths', () => {
+  createRoot(() => {
+    const onSelect = vi.fn()
+    const ins = createCascader({ options: tree, onSelect })
+    step(() => ins.activate(['zj'], 'click'))
+    step(() => ins.activate(['zj', 'hz', 'xh'], 'click'))
+    expect(onSelect).toHaveBeenNthCalledWith(1, ['zj'], [expect.objectContaining({ value: 'zj' })])
+    expect(onSelect).toHaveBeenNthCalledWith(2, ['zj', 'hz', 'xh'], [
+      expect.objectContaining({ value: 'zj' }), expect.objectContaining({ value: 'hz' }), expect.objectContaining({ value: 'xh' }),
+    ])
+  })
+})

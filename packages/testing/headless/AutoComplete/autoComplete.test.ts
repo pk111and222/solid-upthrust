@@ -1,6 +1,10 @@
 import { createRoot, createSignal, flush } from 'solid-js'
-import { describe, expect, it, vi } from 'vitest'
+import { afterEach, describe, expect, it, vi } from 'vitest'
 import { createAutoComplete } from '../../../competence/src/autoComplete'
+
+let dispose = () => {}
+afterEach(() => { dispose(); flush() })
+const root = (run: () => void) => createRoot(d => { dispose = d; run() })
 
 const step = (fn: () => void) => { fn(); flush() }
 
@@ -12,15 +16,17 @@ const pool = [
 ]
 
 describe('createAutoComplete — text state', () => {
+  // 验证当前用例描述的文本、过滤或键盘公开契约。
   it('starts empty (or from defaultValue)', () => {
-    createRoot(() => {
+    root(() => {
       expect(createAutoComplete().value()).toBe('')
       expect(createAutoComplete({ defaultValue: 'abc' }).value()).toBe('abc')
     })
   })
 
+  // 验证当前用例描述的文本、过滤或键盘公开契约。
   it('typing fires onChange + onSearch and updates the value', () => {
-    createRoot(() => {
+    root(() => {
       const onChange = vi.fn()
       const onSearch = vi.fn()
       const ins = createAutoComplete({ onChange, onSearch })
@@ -31,8 +37,9 @@ describe('createAutoComplete — text state', () => {
     })
   })
 
+  // 验证当前用例描述的文本、过滤或键盘公开契约。
   it('controlled value wins; typing still reports', () => {
-    createRoot(() => {
+    root(() => {
       const onChange = vi.fn()
       const ins = createAutoComplete({ value: 'x', onChange })
       step(() => ins.setInputText('y'))
@@ -43,8 +50,9 @@ describe('createAutoComplete — text state', () => {
 })
 
 describe('createAutoComplete — suggestions & filtering', () => {
+  // 验证当前用例描述的文本、过滤或键盘公开契约。
   it('default filter matches value or label (case-insensitive substring)', () => {
-    createRoot(() => {
+    root(() => {
       const ins = createAutoComplete({ options: pool })
       step(() => ins.setInputText('sam'))
       expect(ins.suggestions().map(o => o.value)).toEqual(['sam'])
@@ -53,24 +61,27 @@ describe('createAutoComplete — suggestions & filtering', () => {
     })
   })
 
+  // 验证当前用例描述的文本、过滤或键盘公开契约。
   it('empty input shows the whole pool', () => {
-    createRoot(() => {
+    root(() => {
       const ins = createAutoComplete({ options: pool })
       step(() => ins.setInputText(''))
       expect(ins.suggestions()).toHaveLength(4) // disabled included until picked
     })
   })
 
+  // 验证当前用例描述的文本、过滤或键盘公开契约。
   it('filterOption: false disables client filtering', () => {
-    createRoot(() => {
+    root(() => {
       const ins = createAutoComplete({ options: pool, filterOption: false })
       step(() => ins.setInputText('zzz-no-match'))
       expect(ins.suggestions()).toHaveLength(4)
     })
   })
 
+  // 验证当前用例描述的文本、过滤或键盘公开契约。
   it('custom filterOption predicate is honored', () => {
-    createRoot(() => {
+    root(() => {
       const ins = createAutoComplete({
         options: pool,
         filterOption: (input, option) => option.value === input,
@@ -82,8 +93,9 @@ describe('createAutoComplete — suggestions & filtering', () => {
 })
 
 describe('createAutoComplete — IME composition', () => {
+  // 验证当前用例描述的文本、过滤或键盘公开契约。
   it('composition keystrokes buffer only; compositionEnd commits once', () => {
-    createRoot(() => {
+    root(() => {
       const onChange = vi.fn()
       const ins = createAutoComplete({ onChange })
       step(() => ins.notifyCompositionStart())
@@ -100,8 +112,9 @@ describe('createAutoComplete — IME composition', () => {
 })
 
 describe('createAutoComplete — selection', () => {
+  // 验证当前用例描述的文本、过滤或键盘公开契约。
   it('selectOption replaces the text with the label and fires onSelect', () => {
-    createRoot(() => {
+    root(() => {
       const onChange = vi.fn()
       const onSelect = vi.fn()
       const ins = createAutoComplete({ options: pool, onChange, onSelect })
@@ -113,16 +126,18 @@ describe('createAutoComplete — selection', () => {
     })
   })
 
+  // 验证当前用例描述的文本、过滤或键盘公开契约。
   it('a disabled option cannot be selected', () => {
-    createRoot(() => {
+    root(() => {
       const ins = createAutoComplete({ options: pool })
       step(() => ins.selectOption(pool[3]))
       expect(ins.value()).toBe('')
     })
   })
 
+  // 验证当前用例描述的文本、过滤或键盘公开契约。
   it('commitActive picks the keyboard-highlighted row (Enter)', () => {
-    createRoot(() => {
+    root(() => {
       const ins = createAutoComplete({ options: pool })
       step(() => ins.setInputText('s'))
       // filtered+enabled order: burn ('Burns'), sam, sha — the active
@@ -135,8 +150,9 @@ describe('createAutoComplete — selection', () => {
     })
   })
 
+  // 验证当前用例描述的文本、过滤或键盘公开契约。
   it('moveActive wraps and skips disabled', () => {
-    createRoot(() => {
+    root(() => {
       const ins = createAutoComplete({ options: pool })
       step(() => ins.setInputText('')) // all 4 suggestions
       step(() => ins.moveActive(-1)) // wraps to last enabled = sha
@@ -148,8 +164,9 @@ describe('createAutoComplete — selection', () => {
 })
 
 describe('createAutoComplete — open state', () => {
+  // 验证当前用例描述的文本、过滤或键盘公开契约。
   it('controlled open wins; setOpen still reports through onOpenChange', () => {
-    createRoot(() => {
+    root(() => {
       const onOpenChange = vi.fn()
       const ins = createAutoComplete({ open: false, onOpenChange })
       step(() => ins.setOpen(true))
@@ -158,16 +175,18 @@ describe('createAutoComplete — open state', () => {
     })
   })
 
+  // 验证当前用例描述的文本、过滤或键盘公开契约。
   it('open re-anchors the active suggestion against the current value', () => {
-    createRoot(() => {
+    root(() => {
       const ins = createAutoComplete({ options: pool, value: 'sam' })
       step(() => ins.setOpen(true))
       expect(ins.activeValue()).toBe('sam')
     })
   })
 
+  // 验证当前用例描述的文本、过滤或键盘公开契约。
   it('disabled blocks setOpen and selectOption', () => {
-    createRoot(() => {
+    root(() => {
       const ins = createAutoComplete({ options: pool, disabled: true })
       step(() => ins.setOpen(true))
       expect(ins.isOpen()).toBe(false)

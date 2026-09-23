@@ -1,0 +1,56 @@
+
+  VITE v8.2.1  ready in 625 ms
+
+  ➜  Local:   http://127.0.0.1:5660/
+2:07:17 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in <AutoComplete> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+2:07:17 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in <AutoComplete> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+2:07:17 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in <AutoComplete> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+2:07:17 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in <AutoComplete> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+2:07:17 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in <AutoComplete> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+2:07:17 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in <AutoComplete> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+2:07:17 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in <AutoComplete> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+2:07:17 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in <AutoComplete> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+2:07:17 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in <AutoComplete> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+2:07:17 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in <AutoComplete> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+2:07:17 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in <AutoComplete> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+2:07:17 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in <AutoComplete> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+2:07:17 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in <AutoComplete> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+2:07:17 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in <AutoComplete> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+2:07:17 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in <AutoComplete> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+2:07:17 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in <AutoComplete> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+2:07:17 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in <AutoComplete> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+2:07:17 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in <AutoComplete> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+2:07:17 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in an effect callback will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+2:07:17 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in an effect callback will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+2:07:17 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in an effect callback will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+2:07:17 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in an effect callback will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+2:07:17 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in an effect callback will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+2:07:17 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in an effect callback will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+2:07:17 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in <AutoComplete> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+2:07:17 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in <AutoComplete> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+2:07:17 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in <AutoComplete> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+2:07:17 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in an effect callback will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+2:07:17 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in <AutoComplete> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+2:07:17 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in <AutoComplete> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+2:07:17 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in <AutoComplete> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+2:07:17 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in <AutoComplete> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+2:07:17 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in <AutoComplete> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+2:07:17 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in <AutoComplete> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+2:07:17 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in an effect callback will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+2:07:17 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in an effect callback will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+2:07:17 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in <AutoComplete> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+2:07:17 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in <AutoComplete> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+2:07:17 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in <AutoComplete> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+2:07:17 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in <AutoComplete> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+2:07:17 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in <AutoComplete> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+2:07:17 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in <AutoComplete> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+2:07:17 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in an effect callback will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+2:07:17 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in an effect callback will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+2:07:17 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in <AutoComplete> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+2:07:17 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in <AutoComplete> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+2:07:17 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in an effect callback will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+2:07:17 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in <AutoComplete> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+2:07:17 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in <AutoComplete> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+2:07:17 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in <AutoComplete> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+2:07:17 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in an effect callback will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+2:08:17 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in an effect callback will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).

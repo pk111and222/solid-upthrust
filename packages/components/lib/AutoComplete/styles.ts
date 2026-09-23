@@ -11,7 +11,7 @@ import { cva, type VariantProps } from "class-variance-authority";
 const autoCompleteDropdownVariants = cva(
   [
     "bg-surface", "rounded-lg", "shadow", "py-[4px]",
-    "min-w-[120px]", "max-h-[264px]", "overflow-y-auto",
+    "max-h-[264px]", "overflow-y-auto",
     "transition-overlay", "duration-fast", "ease-upthrust", "origin-top",
     "outline-none",
   ],

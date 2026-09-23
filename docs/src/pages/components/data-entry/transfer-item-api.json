@@ -1,0 +1,6 @@
+[
+  {"name":"key","type":"string | number","default":"必填","description":"全局唯一键；数字 0 和字符串 '0' 是不同的键。"},
+  {"name":"title","type":"string","default":"必填","description":"默认显示文本，也是行勾选与移除按钮的可访问名称。"},
+  {"name":"description","type":"string","default":"—","description":"默认搜索文本的一部分；普通行还会作为悬停提示。"},
+  {"name":"disabled","type":"boolean","default":"false","description":"禁用该行的勾选、全选参与和移动。"}
+]

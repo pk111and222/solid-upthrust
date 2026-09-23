@@ -1,7 +1,7 @@
 // @unocss-include
 import { cva } from 'class-variance-authority'
 
-export const transferPanelClass = cva('flex flex-col w-[220px] min-w-0 h-[300px] border border-solid rounded bg-surface text-on-surface', {
+export const transferPanelClass = cva('flex flex-col w-[220px] shrink-0 h-[300px] border border-solid rounded bg-surface text-on-surface', {
   variants: { status: { default: 'border-outline-variant', error: 'border-error', warning: 'border-[#faad14]' } },
   defaultVariants: { status: 'default' },
 })

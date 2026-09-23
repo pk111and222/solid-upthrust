@@ -1,5 +1,5 @@
 import { createTreeDrag, type TreeDragConfig, type TreeDragIns } from './treeDrag'
-import { createEffect, createMemo, createSignal, untrack } from "solid-js";
+import { createMemo, createSignal, untrack } from "solid-js";
 
 /** Shared tree indexing, controlled state, check conduction and keyboard navigation.
  * Disabled branches form boundaries; non-checkable nodes allow conduction
@@ -409,6 +409,7 @@ export const createTreeSelect = (config: TreeSelectConfig = {}): TreeSelectIns =
   const isCheckable = () => isMultiple() && (config.treeCheckable ?? true)
   const isStrict = () => isMultiple() && (config.treeCheckStrictly ?? false)
   const strategy = () => config.treeCheckStrategy ?? 'SHOW_PARENT'
+  let hasControlledValue = untrack(() => config.value !== undefined)
 
   const toArray = (v: string | number | Array<string | number> | undefined): Array<string | number> | undefined => {
     if (v === undefined) return undefined
@@ -502,40 +503,33 @@ export const createTreeSelect = (config: TreeSelectConfig = {}): TreeSelectIns =
 
   // The strategy-applied raw value, mirrored as the tree's checkedKeys via
   // the controlled prop (one engine for linkage + derivation).
-  const [_checked, _setChecked] = createSignal<Array<string | number>>(initialChecked(), { ownedWrite: true })
-
-  const controlledRaw = (): Array<string | number> | undefined => {
-    const v = toArray(config.value as string | number | Array<string | number> | undefined)
-    if (v === undefined) return undefined
-    return expandStrategy(v)
+  const [_checked, _setChecked] = createSignal<Array<string | number>>(untrack(initialChecked), { ownedWrite: true })
+  const controlledValue = (): Array<string | number> | undefined => {
+    const value = config.value
+    if (value !== undefined) hasControlledValue = true
+    return hasControlledValue ? toArray(value) ?? [] : undefined
+  }
+  const isValueControlled = () => controlledValue() !== undefined
+  const checkedSource = () => {
+    const value = controlledValue()
+    return value === undefined ? _checked() : expandStrategy(value)
   }
 
   const [_singleSel, _setSingleSel] = createSignal<Array<string | number>>(
-    initialSingleSel(), { ownedWrite: true },
+    untrack(initialSingleSel), { ownedWrite: true },
   )
-
-  if (config.value !== undefined) {
-    createEffect(
-      () => config.value,
-      (v) => {
-        const raw = toArray(v as string | number | Array<string | number> | undefined)
-        if (raw !== undefined) {
-          _setChecked(expandStrategy(raw))
-          if (!isMultiple()) _setSingleSel(raw)
-        }
-      },
-    )
-  }
+  const selectedSource = () => controlledValue() ?? _singleSel()
 
   /** Fire onChange with the strategy-collapsed value + nodes. */
   const emitChange = (keys: Array<string | number>) => {
     const collapsed = collapseStrategy(keys)
     const nodes = collapsed.map(k => getNode(k)).filter(Boolean) as TreeSelectNode[]
     if (isMultiple()) {
+      if (!isCheckable() && !untrack(isValueControlled)) _setSingleSel(keys)
       config.onChange?.(collapsed, nodes)
     } else {
       // Single mode: the selection signal IS the value mirror.
-      _setSingleSel(keys)
+      if (!untrack(isValueControlled)) _setSingleSel(keys)
       config.onChange?.(collapsed[0], nodes[0])
     }
   }
@@ -544,8 +538,9 @@ export const createTreeSelect = (config: TreeSelectConfig = {}): TreeSelectIns =
     get treeData() { return config.treeData },
     get checkable() { return isCheckable() },
     get checkStrictly() { return isStrict() },
-    get selectedKeys() { return _singleSel() },
-    get selectable() { return !isMultiple() },
+    get selectedKeys() { return selectedSource() },
+    get selectable() { return !isCheckable() },
+    get multiple() { return isMultiple() && !isCheckable() },
     get disabled() { return config.disabled },
     get defaultExpandAll() { return config.defaultExpandAll },
     get expandedKeys() { return config.expandedKeys },
@@ -555,9 +550,9 @@ export const createTreeSelect = (config: TreeSelectConfig = {}): TreeSelectIns =
     // signal directly — every write flows through onCheck below where
     // the picker commits BOTH its signal and the change event (otherwise
     // the controlled-mirror effect would bounce the write back and forth).
-    get checkedKeys() { return _checked() },
+    get checkedKeys() { return checkedSource() },
     onCheck: (keys, info) => {
-      _setChecked(keys)
+      if (!untrack(isValueControlled)) _setChecked(keys)
       emitChange(keys)
       if (info.node && info.checked) {
         config.onSelect?.(info.node.value, info.node)
@@ -566,8 +561,13 @@ export const createTreeSelect = (config: TreeSelectConfig = {}): TreeSelectIns =
       }
     },
     onSelect: (keys, info) => {
-      // Single mode row click.
-      if (isMultiple()) return
+      if (isMultiple() && isCheckable()) return
+      if (isMultiple()) {
+        if (info.selected) config.onSelect?.(info.node.value, info.node)
+        else config.onDeselect?.(info.node.value, info.node)
+        emitChange(keys)
+        return
+      }
       if (info.selected) {
         config.onSelect?.(info.node.value, info.node)
         emitChange([info.node.value])
@@ -591,7 +591,7 @@ export const createTreeSelect = (config: TreeSelectConfig = {}): TreeSelectIns =
    */
 
   const value = createMemo<Array<string | number>>(() =>
-    isMultiple() ? collapseStrategy(rawChecked()) : _singleSel(),
+    isCheckable() ? collapseStrategy(rawChecked()) : selectedSource(),
   )
 
   const singleValue = () => {
@@ -623,6 +623,7 @@ export const createTreeSelect = (config: TreeSelectConfig = {}): TreeSelectIns =
 
   const setOpen = (open: boolean) => {
     if (untrack(() => !!config.disabled)) return
+    if (open === untrack(isOpen)) return
     // `config.open` is a UI-layer getter proxy (props.open). Reading its
     // VALUE inside this imperative path outside a tracking scope trips
     // STRICT_READ_UNTRACKED (the Form antd6 lesson) — the presence check
@@ -649,6 +650,7 @@ export const createTreeSelect = (config: TreeSelectConfig = {}): TreeSelectIns =
 
   const searchValue = () => tree.searchValue()
   const setSearchValue = (text: string) => {
+    if (config.disabled) return
     tree.setSearchValue(text)
     config.onSearch?.(text)
   }
@@ -656,19 +658,19 @@ export const createTreeSelect = (config: TreeSelectConfig = {}): TreeSelectIns =
   // ---- picking -----------------------------------------------------------------
 
   const pickNode = (value: string | number) => {
-    if (isMultiple()) return
+    if (isCheckable()) return
     tree.select(value)
   }
 
   const toggleCheck = (value: string | number) => {
-    if (!isCheckable()) return
+    if (config.disabled || !isCheckable() || tree.isDisabled(value) || !tree.isCheckableNode(value)) return
     if (isStrict()) {
       // No linkage: the strict toggle writes the single key.
-      const cur = new Set(_checked())
+      const cur = new Set(rawChecked())
       if (cur.has(value)) cur.delete(value)
       else cur.add(value)
       const keys = Array.from(cur)
-      _setChecked(keys)
+      if (!untrack(isValueControlled)) _setChecked(keys)
       emitChange(keys)
       const node = getNode(value)
       if (node) {
@@ -681,9 +683,17 @@ export const createTreeSelect = (config: TreeSelectConfig = {}): TreeSelectIns =
   }
 
   const removeKey = (value: string | number) => {
+    if (config.disabled) return
+    if (isMultiple() && !isCheckable()) {
+      const keys = selectedSource().filter(k => k !== value)
+      emitChange(keys)
+      const node = getNode(value)
+      if (node) config.onDeselect?.(value, node)
+      return
+    }
     if (isStrict()) {
-      const keys = _checked().filter(k => k !== value)
-      _setChecked(keys)
+      const keys = rawChecked().filter(k => k !== value)
+      if (!untrack(isValueControlled)) _setChecked(keys)
       emitChange(keys)
       return
     }
@@ -695,7 +705,10 @@ export const createTreeSelect = (config: TreeSelectConfig = {}): TreeSelectIns =
 
   const clear = () => {
     if (config.disabled) return
-    _setChecked([])
+    if (!untrack(isValueControlled)) {
+      _setChecked([])
+      _setSingleSel([])
+    }
     emitChange([])
     config.onClear?.()
     tree.setSearchValue('')

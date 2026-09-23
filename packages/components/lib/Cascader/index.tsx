@@ -12,6 +12,7 @@ import {
 } from 'upthrust-competence'
 import type { SizeType } from '../../common/type'
 import { useFormItem } from '../Input/context'
+import { createDelayedArrow } from '../../utils/clearableArrow'
 import {
   cascaderArrowWrapClass,
   cascaderCheckboxMarkWrapClass,
@@ -48,6 +49,8 @@ export interface CascaderProps {
   /** 'multiple' enables multi-path selection. */
   mode?: 'multiple'
   disabled?: boolean
+  /** Show a clear button when a value is selected. Default: false. */
+  allowClear?: boolean
   /** Commit on every level click, not just leaves. */
   changeOnSelect?: boolean
   /** Enable the search box. Default: false. */
@@ -67,6 +70,8 @@ export interface CascaderProps {
   expandTrigger?: 'click' | 'hover'
   notFoundContent?: string
   id?: string
+  'aria-label'?: string
+  'aria-labelledby'?: string
   class?: string
   style?: JSX.CSSProperties
   onChange?: (value: Array<string | number> | Array<Array<string | number>> | undefined, nodes: CascaderOption[]) => void
@@ -157,8 +162,17 @@ const Cascader: Component<CascaderProps> = providedProps => {
     searchInputRef.current = el
   }
   const selectorRef: { current?: HTMLDivElement } = {}
+  const [selectorWidth, setSelectorWidth] = createSignal(0, { ownedWrite: true })
+  let sizeObserver: ResizeObserver | undefined
   const setSelectorRef = (el: HTMLDivElement) => {
     selectorRef.current = el
+    sizeObserver?.disconnect()
+    const measure = () => setSelectorWidth(el.getBoundingClientRect().width)
+    measure()
+    if (typeof ResizeObserver !== 'undefined') {
+      sizeObserver = new ResizeObserver(measure)
+      sizeObserver.observe(el)
+    }
     props.ref?.(el)
   }
 
@@ -167,6 +181,7 @@ const Cascader: Component<CascaderProps> = providedProps => {
   // effect's owner context in this Solid 2 rc — plain onCleanup there warns
   // [NO_OWNER_CLEANUP] and never runs. Bind to the component owner instead.
   const onOwnerCleanup = createOwnerCleanup()
+  onOwnerCleanup(() => sizeObserver?.disconnect())
   createEffect(() => open(), (isOpen) => {
     if (!isOpen) return
     const t = setTimeout(() => {
@@ -183,7 +198,8 @@ const Cascader: Component<CascaderProps> = providedProps => {
   const searching = () => machine.searchValue() !== ''
 
   const showClear = () =>
-    m().value().length > 0 && !resolvedDisabled() && !searching()
+    !!props.allowClear && m().value().length > 0 && !resolvedDisabled() && !searching()
+  const showArrow = createDelayedArrow(showClear)
 
   // ---- display -------------------------------------------------------------
 
@@ -214,7 +230,16 @@ const Cascader: Component<CascaderProps> = providedProps => {
   const handleClearPointerDown = (e: PointerEvent) => {
     e.preventDefault()
     e.stopPropagation()
-    m().clear()
+  }
+
+  const bindNativeClick = (el: HTMLElement, handler: (e: MouseEvent) => void) => {
+    el.addEventListener('click', handler)
+    onOwnerCleanup(() => el.removeEventListener('click', handler))
+  }
+
+  const handleClearClick = (e: MouseEvent) => {
+    e.stopPropagation()
+    if (!resolvedDisabled()) m().clear()
   }
 
   const handleTagClosePointerDown = (e: PointerEvent, trail: Array<string | number>) => {
@@ -255,7 +280,13 @@ const Cascader: Component<CascaderProps> = providedProps => {
   /** A row in the columns menu. */
   const handleOptionPointer = (value: string | number, parentTrail: Array<string | number>) => ({
     onClick: () => {
-      m().activate([...parentTrail, value], 'click')
+      const trail = [...parentTrail, value]
+      m().activate(trail, 'click')
+      // A committed single path closes the picker. Intermediate selections
+      // stay open unless changeOnSelect explicitly makes them commits.
+      if (!m().isMultiple() && (m().isLeaf(trail) || props.changeOnSelect === true)) {
+        trigger.setOpen(false)
+      }
     },
     onMouseEnter: () => {
       if (props.expandTrigger === 'hover') {
@@ -303,6 +334,8 @@ const Cascader: Component<CascaderProps> = providedProps => {
         aria-expanded={open() ? 'true' : 'false'}
         aria-haspopup="listbox"
         aria-disabled={resolvedDisabled() ? 'true' : 'false'}
+        aria-label={props['aria-label']}
+        aria-labelledby={props['aria-labelledby']}
       >
         <Show
           when={m().isMultiple()}
@@ -387,20 +420,23 @@ const Cascader: Component<CascaderProps> = providedProps => {
           </div>
         </Show>
         <span class={cascaderSuffixWrapClass({ size: resolvedSize() })}>
-          <Show when={m().value().length > 0}>
-            <span
-              class={cascaderClearWrapClass({ visible: showClear() })}
-              role="button"
+          <Show when={props.allowClear}>
+            <button
+              type="button"
+              ref={el => bindNativeClick(el, handleClearClick)}
+              class={twMerge(cascaderClearWrapClass({ visible: showClear() }), 'border-none bg-transparent p-0')}
               aria-label="清空"
-              tabindex={-1}
+              tabindex={showClear() ? 0 : -1}
               onPointerDown={handleClearPointerDown}
             >
-              <span class="i-mdi-close-circle-outline" />
+              <span class="i-mdi-close" />
+            </button>
+          </Show>
+          <Show when={!showClear() && showArrow()}>
+            <span class={cascaderArrowWrapClass({ open: open() })}>
+              <span class="i-mdi-chevron-down" />
             </span>
           </Show>
-          <span class={cascaderArrowWrapClass({ open: open() })}>
-            <span class="i-mdi-chevron-down" />
-          </span>
         </span>
       </div>
 
@@ -409,7 +445,11 @@ const Cascader: Component<CascaderProps> = providedProps => {
           <div
             ref={(el) => { trigger.layerRef(el) }}
             class={cascaderDropdownWrapClass({ visible: open(), placement: trigger.actualPlacement() })}
-            style={trigger.layerStyle()}
+            style={{
+              ...trigger.layerStyle(),
+              width: props.style?.width !== undefined ? `${selectorWidth()}px` : 'max-content',
+              'min-width': props.style?.width === undefined && selectorWidth() > 0 ? `${selectorWidth()}px` : undefined,
+            }}
             role="listbox"
             tabindex={-1}
           >
@@ -453,8 +493,8 @@ const Cascader: Component<CascaderProps> = providedProps => {
                           <Show when={m().isCheckable()}>
                             <span class={cascaderCheckboxWrapClass({ state: m().parentState(match.path) })}>
                               <span class={cascaderCheckboxMarkWrapClass({ state: m().parentState(match.path) })}>
-                                <Show when={m().parentState(match.path) === 'checked'} fallback={<span class="i-mdi-minus" />}>
-                                  <span class="i-mdi-check" />
+                                <Show when={m().parentState(match.path) === 'checked'} fallback={<span class="i-mdi-minus !inline-block" />}>
+                                  <span class="i-mdi-check !inline-block" />
                                 </Show>
                               </span>
                             </span>
@@ -493,8 +533,8 @@ const Cascader: Component<CascaderProps> = providedProps => {
                                   onPointerDown={e => handleCheckboxPointerDown(e, trail())}
                                 >
                                   <span class={cascaderCheckboxMarkWrapClass({ state: state() ?? 'unchecked' })}>
-                                    <Show when={state() === 'checked'} fallback={<span class="i-mdi-minus" />}>
-                                      <span class="i-mdi-check" />
+                                    <Show when={state() === 'checked'} fallback={<span class="i-mdi-minus !inline-block" />}>
+                                      <span class="i-mdi-check !inline-block" />
                                     </Show>
                                   </span>
                                 </span>

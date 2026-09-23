@@ -15,7 +15,7 @@ export declare const selectionItemClass: (props?: ({
     size?: "small" | "middle" | "large" | null | undefined;
 } & import('class-variance-authority/types').ClassProp) | undefined) => string;
 export declare const selectionItemWrapClass: (variants: VariantProps<typeof selectionItemClass>) => string;
-/** The suffix area: clear × and/or the down chevron. */
+/** One stable slot for clear, loading and the down chevron. */
 export declare const selectorSuffixClass: (props?: ({
     size?: "small" | "middle" | "large" | null | undefined;
 } & import('class-variance-authority/types').ClassProp) | undefined) => string;
@@ -25,7 +25,7 @@ export declare const selectorArrowClass: (props?: ({
     open?: boolean | null | undefined;
 } & import('class-variance-authority/types').ClassProp) | undefined) => string;
 export declare const selectorArrowWrapClass: (variants: VariantProps<typeof selectorArrowClass>) => string;
-/** The clear × (appears on hover when allowClear and non-empty). */
+/** The clear × replaces the arrow when allowClear and non-empty. */
 export declare const selectorClearClass: (props?: ({
     visible?: boolean | null | undefined;
 } & import('class-variance-authority/types').ClassProp) | undefined) => string;

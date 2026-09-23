@@ -1,0 +1,21 @@
+[
+  {"name":"dataSource","type":"T[] (T extends TransferItem)","default":"[]","description":"可分配数据；key 应唯一。原有目标键暂时不在数据中时保留在状态里，但不显示对应行。"},
+  {"name":"targetKeys / defaultTargetKeys","type":"TransferKey[]","default":"— / []","description":"右侧目标键的受控值或非受控初始值；保留传入顺序，移动到右侧时追加新键。"},
+  {"name":"selectedKeys / defaultSelectedKeys","type":"TransferKey[]","default":"— / []","description":"两侧临时勾选键的受控值或非受控初始值，与最终目标键分别管理。"},
+  {"name":"disabled","type":"boolean","default":"false","description":"禁用搜索、勾选、全选和移动；也可从 Form.Item 注入。"},
+  {"name":"oneWay","type":"boolean","default":"false","description":"隐藏向左批量移动按钮；右侧每行改为独立移除按钮。"},
+  {"name":"titles","type":"[string, string]","default":"['待选项', '已选项']","description":"左右列表标题，也用于面板和搜索框的可访问名称。"},
+  {"name":"operations","type":"[JSX.Element, JSX.Element]","default":"—","description":"向右、向左按钮的额外内容；按钮仍保留方向图标与可访问名称。"},
+  {"name":"showSearch / searchPlaceholder","type":"boolean / string","default":"false / '请输入搜索内容'","description":"显示两侧独立搜索框，并设置占位文本。"},
+  {"name":"filterOption","type":"(input: string, item: T) => boolean","default":"标题和描述忽略大小写包含搜索词","description":"自定义每侧可见项过滤；全选只作用于当前过滤结果中的可选项。"},
+  {"name":"showSelectAll","type":"boolean","default":"true","description":"显示列表头全选框；单向模式右侧始终不显示全选框。"},
+  {"name":"notFoundContent","type":"JSX.Element","default":"'暂无数据'","description":"空列表或搜索无结果时展示的内容。"},
+  {"name":"render","type":"(item: T) => JSX.Element","default":"item.title","description":"自定义行内容；勾选框仍以 item.title 作为可访问名称。"},
+  {"name":"footer","type":"(direction: 'left' | 'right') => JSX.Element","default":"—","description":"分别渲染左右列表底部内容。"},
+  {"name":"listStyle","type":"JSX.CSSProperties","default":"—","description":"应用到两个列表面板的尺寸等行内样式。"},
+  {"name":"status","type":"'error' | 'warning'","default":"—","description":"边框校验状态；显式值优先于 Form.Item 注入值。"},
+  {"name":"onChange","type":"(targetKeys, direction, moveKeys) => void","default":"—","description":"实际移动后触发；direction 是目标方向，moveKeys 只含本次移动且未禁用的键。"},
+  {"name":"onSelectChange","type":"(sourceSelectedKeys, targetSelectedKeys) => void","default":"—","description":"临时勾选变化后分别报告左侧和右侧键；移动后已移动项会取消勾选。"},
+  {"name":"onSearch","type":"(direction, value) => void","default":"—","description":"左侧或右侧搜索输入变化时触发，无内置请求或防抖。"},
+  {"name":"id / class / style","type":"string / string / JSX.CSSProperties","default":"—","description":"外层 group 的标识、类名与样式。"}
+]

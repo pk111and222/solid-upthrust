@@ -64,16 +64,16 @@ export type MentionsIns = {
     /** IME composition gating. */
     isComposing: () => boolean;
     notifyCompositionStart: () => void;
-    notifyCompositionEnd: () => void;
+    notifyCompositionEnd: (caret?: number) => void;
     /** Active (keyboard-highlighted) suggestion value. */
     activeValue: () => string | undefined;
     moveActive: (delta: number) => void;
     setActiveValue: (value: string) => void;
     resetActive: () => void;
-    /** Commit the active suggestion (Enter). */
-    commitActive: () => void;
-    /** Select an option: replaces the active token + trailing space. */
-    selectOption: (option: MentionOption) => void;
+    /** Commit the active suggestion (Enter); returns the target caret on success. */
+    commitActive: () => number | undefined;
+    /** Select an option and return the target caret on success. */
+    selectOption: (option: MentionOption) => number | undefined;
     /** Open state (the UI trigger owns the DOM). */
     isOpen: () => boolean;
     setOpen: (open: boolean) => void;

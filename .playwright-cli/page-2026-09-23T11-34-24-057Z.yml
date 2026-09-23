@@ -1,0 +1,388 @@
+- generic [active] [ref=f4e1]:
+  - link "跳至正文" [ref=f4e2] [cursor=pointer]:
+    - /url: "#main-content"
+  - generic [ref=f4e3]:
+    - generic [ref=f4e4]:
+      - link "↗ Solid Upthrust" [ref=f4e5] [cursor=pointer]:
+        - /url: /
+        - generic [ref=f4e6]: ↗
+        - generic [ref=f4e7]: Solid Upthrust
+      - navigation "主导航" [ref=f4e8]:
+        - link "开发指南" [ref=f4e9] [cursor=pointer]:
+          - /url: /guide/
+        - link "组件" [ref=f4e10] [cursor=pointer]:
+          - /url: /components/
+        - generic [ref=f4e11]: Solid 2 RC
+    - generic [ref=f4e12]:
+      - complementary [ref=f4e13]:
+        - navigation "文档目录" [ref=f4e14]:
+          - menu [ref=f4e15]:
+            - generic [ref=f4e16]:
+              - generic [ref=f4e17]: 开始使用
+              - menuitem [ref=f4e18] [cursor=pointer]:
+                - link "Solid Upthrust" [ref=f4e19]:
+                  - /url: /
+              - menuitem [ref=f4e20] [cursor=pointer]:
+                - link "工程入门" [ref=f4e21]:
+                  - /url: /guide/
+              - menuitem [ref=f4e22] [cursor=pointer]:
+                - link "文档与示例渲染" [ref=f4e23]:
+                  - /url: /guide/rendering/
+            - generic [ref=f4e24]:
+              - generic [ref=f4e25]: 研发指南
+              - menuitem [ref=f4e26] [cursor=pointer]:
+                - link "架构与目录" [ref=f4e27]:
+                  - /url: /guide/architecture/
+              - menuitem [ref=f4e28] [cursor=pointer]:
+                - link "四层测试" [ref=f4e29]:
+                  - /url: /guide/testing/
+              - menuitem [ref=f4e30] [cursor=pointer]:
+                - link "功能交付清单" [ref=f4e31]:
+                  - /url: /guide/contributing/
+            - generic [ref=f4e32]:
+              - generic [ref=f4e33]: 组件
+              - menuitem [ref=f4e34] [cursor=pointer]:
+                - link "组件总览" [ref=f4e35]:
+                  - /url: /components/
+              - menuitem [ref=f4e36] [cursor=pointer]:
+                - link "Button 按钮" [ref=f4e37]:
+                  - /url: /components/general/button/
+              - menuitem [ref=f4e38] [cursor=pointer]:
+                - link "ConfigProvider 全局配置" [ref=f4e39]:
+                  - /url: /components/general/config-provider/
+              - menuitem [ref=f4e40] [cursor=pointer]:
+                - link "Icon 图标" [ref=f4e41]:
+                  - /url: /components/general/icon/
+              - menuitem [ref=f4e42] [cursor=pointer]:
+                - link "Dropdown 下拉菜单" [ref=f4e43]:
+                  - /url: /components/navigation/dropdown/
+              - menuitem [ref=f4e44] [cursor=pointer]:
+                - link "Tabs 标签页" [ref=f4e45]:
+                  - /url: /components/navigation/tabs/
+              - menuitem [ref=f4e46] [cursor=pointer]:
+                - link "Pagination 分页" [ref=f4e47]:
+                  - /url: /components/navigation/pagination/
+              - menuitem [ref=f4e48] [cursor=pointer]:
+                - link "Tree 树形控件" [ref=f4e49]:
+                  - /url: /components/data-entry/tree/
+              - menuitem [ref=f4e50] [cursor=pointer]:
+                - link "Skeleton 骨架屏" [ref=f4e51]:
+                  - /url: /components/feedback/skeleton/
+              - menuitem [ref=f4e52] [cursor=pointer]:
+                - link "Input 输入框" [ref=f4e53]:
+                  - /url: /components/data-entry/input/
+              - menuitem [ref=f4e54] [cursor=pointer]:
+                - link "Tooltip 文字提示" [ref=f4e55]:
+                  - /url: /components/data-display/tooltip/
+              - menuitem [ref=f4e56] [cursor=pointer]:
+                - link "Checkbox 多选框" [ref=f4e57]:
+                  - /url: /components/data-entry/checkbox/
+              - menuitem [ref=f4e58] [cursor=pointer]:
+                - link "Popover 气泡卡片" [ref=f4e59]:
+                  - /url: /components/data-display/popover/
+              - menuitem [ref=f4e60] [cursor=pointer]:
+                - link "Radio 单选框" [ref=f4e61]:
+                  - /url: /components/data-entry/radio/
+              - menuitem [ref=f4e62] [cursor=pointer]:
+                - link "Switch 开关" [ref=f4e63]:
+                  - /url: /components/data-entry/switch/
+              - menuitem [ref=f4e64] [cursor=pointer]:
+                - link "InputNumber 数字输入框" [ref=f4e65]:
+                  - /url: /components/data-entry/input-number/
+              - menuitem [ref=f4e66] [cursor=pointer]:
+                - link "Slider 滑动输入条" [ref=f4e67]:
+                  - /url: /components/data-entry/slider/
+              - menuitem [ref=f4e68] [cursor=pointer]:
+                - link "Rate 评分" [ref=f4e69]:
+                  - /url: /components/data-entry/rate/
+              - menuitem [ref=f4e70] [cursor=pointer]:
+                - link "Segmented 分段控制器" [ref=f4e71]:
+                  - /url: /components/data-entry/segmented/
+              - menuitem [ref=f4e72] [cursor=pointer]:
+                - link "Select 选择器" [ref=f4e73]:
+                  - /url: /components/data-entry/select/
+              - menuitem [ref=f4e74] [cursor=pointer]:
+                - link "AutoComplete 自动补全" [ref=f4e75]:
+                  - /url: /components/data-entry/auto-complete/
+              - menuitem [ref=f4e76] [cursor=pointer]:
+                - link "Cascader 级联选择" [ref=f4e77]:
+                  - /url: /components/data-entry/cascader/
+              - menuitem [ref=f4e78] [cursor=pointer]:
+                - link "Mentions 提及" [ref=f4e79]:
+                  - /url: /components/data-entry/mentions/
+              - menuitem [ref=f4e80] [cursor=pointer]:
+                - link "TreeSelect 树选择" [ref=f4e81]:
+                  - /url: /components/data-entry/tree-select/
+              - menuitem [ref=f4e82] [cursor=pointer]:
+                - link "Transfer 穿梭框" [ref=f4e83]:
+                  - /url: /components/data-entry/transfer/
+        - generic [ref=f4e84]: 面向 SolidJS 的企业级组件库
+      - main [ref=f4e85]:
+        - article [ref=f4e87]:
+          - generic [ref=f4e88]:
+            - generic [ref=f4e89]: 文档
+            - generic [ref=f4e90]: /
+            - generic [ref=f4e91]: Transfer 穿梭框
+          - heading "Transfer 穿梭框" [level=1] [ref=f4e92]
+          - paragraph [ref=f4e93]: 在左右列表间分配项目，并分别管理临时勾选与最终目标键。
+          - region [ref=f4e94]:
+            - heading "使用方式" [level=2] [ref=f4e95]
+            - generic [ref=f4e96]:
+              - paragraph [ref=f4e97]: Transfer 将 dataSource 按 targetKeys 分成左右两侧。勾选仅改变临时 selectedKeys；点击中间按钮才改变最终 targetKeys。两个值都可受控，受控时应在 onSelectChange 与 onChange 中分别写回。
+              - paragraph [ref=f4e98]: 列表头全选只操作当前搜索结果中的可选项，其他已勾选项保留。禁用行不能勾选或移动。单向模式隐藏批量移回按钮，右侧通过逐行移除返回左侧。
+          - region [ref=f4e99]:
+            - heading "示例" [level=2] [ref=f4e100]
+            - generic [ref=f4e102]:
+              - region "受控双向分配" [ref=f4e103]:
+                - status [ref=f4e105]: 示例加载中…
+                - heading "受控双向分配" [level=3] [ref=f4e107]
+                - group [ref=f4e108]:
+                  - generic "TSX 〈/〉 展开代码" [ref=f4e109] [cursor=pointer]:
+                    - generic [ref=f4e110]: TSX
+                    - generic [ref=f4e111]: 〈/〉 展开代码
+              - region "搜索、过滤与全选" [ref=f4e112]:
+                - status [ref=f4e114]: 示例加载中…
+                - heading "搜索、过滤与全选" [level=3] [ref=f4e116]
+                - group [ref=f4e117]:
+                  - generic "TSX 〈/〉 展开代码" [ref=f4e118] [cursor=pointer]:
+                    - generic [ref=f4e119]: TSX
+                    - generic [ref=f4e120]: 〈/〉 展开代码
+              - region "单向分配与自定义内容" [ref=f4e121]:
+                - status [ref=f4e123]: 示例加载中…
+                - heading "单向分配与自定义内容" [level=3] [ref=f4e125]
+                - group [ref=f4e126]:
+                  - generic "TSX 〈/〉 展开代码" [ref=f4e127] [cursor=pointer]:
+                    - generic [ref=f4e128]: TSX
+                    - generic [ref=f4e129]: 〈/〉 展开代码
+              - region "动态数据与数字键" [ref=f4e130]:
+                - status [ref=f4e132]: 示例加载中…
+                - heading "动态数据与数字键" [level=3] [ref=f4e134]
+                - group [ref=f4e135]:
+                  - generic "TSX 〈/〉 展开代码" [ref=f4e136] [cursor=pointer]:
+                    - generic [ref=f4e137]: TSX
+                    - generic [ref=f4e138]: 〈/〉 展开代码
+              - region "Form.Item 字段" [ref=f4e139]:
+                - status [ref=f4e141]: 示例加载中…
+                - heading "Form.Item 字段" [level=3] [ref=f4e143]
+                - group [ref=f4e144]:
+                  - generic "TSX 〈/〉 展开代码" [ref=f4e145] [cursor=pointer]:
+                    - generic [ref=f4e146]: TSX
+                    - generic [ref=f4e147]: 〈/〉 展开代码
+              - region "空态、状态与禁用" [ref=f4e148]:
+                - status [ref=f4e150]: 示例加载中…
+                - heading "空态、状态与禁用" [level=3] [ref=f4e152]
+                - group [ref=f4e153]:
+                  - generic "TSX 〈/〉 展开代码" [ref=f4e154] [cursor=pointer]:
+                    - generic [ref=f4e155]: TSX
+                    - generic [ref=f4e156]: 〈/〉 展开代码
+          - region [ref=f4e157]:
+            - heading "TransferProps API" [level=2] [ref=f4e158]
+            - table "API 属性表格" [ref=f4e163]:
+              - rowgroup [ref=f4e169]:
+                - row [ref=f4e170]:
+                  - columnheader "属性" [ref=f4e171]
+                  - columnheader "说明" [ref=f4e174]
+                  - columnheader "类型" [ref=f4e177]
+                  - columnheader "默认值" [ref=f4e180]
+              - rowgroup [ref=f4e183]:
+                - row [ref=f4e184]:
+                  - cell [ref=f4e185]:
+                    - code [ref=f4e188]: dataSource
+                  - cell "可分配数据；key 应唯一。原有目标键暂时不在数据中时保留在状态里，但不显示对应行。" [ref=f4e189]
+                  - cell [ref=f4e192]:
+                    - code [ref=f4e195]: T[] (T extends TransferItem)
+                  - cell [ref=f4e196]:
+                    - code [ref=f4e199]: "[]"
+                - row [ref=f4e200]:
+                  - cell [ref=f4e201]:
+                    - code [ref=f4e204]: targetKeys / defaultTargetKeys
+                  - cell "右侧目标键的受控值或非受控初始值；保留传入顺序，移动到右侧时追加新键。" [ref=f4e205]
+                  - cell [ref=f4e208]:
+                    - code [ref=f4e211]: TransferKey[]
+                  - cell [ref=f4e212]:
+                    - code [ref=f4e215]: — / []
+                - row [ref=f4e216]:
+                  - cell [ref=f4e217]:
+                    - code [ref=f4e220]: selectedKeys / defaultSelectedKeys
+                  - cell "两侧临时勾选键的受控值或非受控初始值，与最终目标键分别管理。" [ref=f4e221]
+                  - cell [ref=f4e224]:
+                    - code [ref=f4e227]: TransferKey[]
+                  - cell [ref=f4e228]:
+                    - code [ref=f4e231]: — / []
+                - row [ref=f4e232]:
+                  - cell [ref=f4e233]:
+                    - code [ref=f4e236]: disabled
+                  - cell "禁用搜索、勾选、全选和移动；也可从 Form.Item 注入。" [ref=f4e237]
+                  - cell [ref=f4e240]:
+                    - code [ref=f4e243]: boolean
+                  - cell [ref=f4e244]:
+                    - code [ref=f4e247]: "false"
+                - row [ref=f4e248]:
+                  - cell [ref=f4e249]:
+                    - code [ref=f4e252]: oneWay
+                  - cell "隐藏向左批量移动按钮；右侧每行改为独立移除按钮。" [ref=f4e253]
+                  - cell [ref=f4e256]:
+                    - code [ref=f4e259]: boolean
+                  - cell [ref=f4e260]:
+                    - code [ref=f4e263]: "false"
+                - row [ref=f4e264]:
+                  - cell [ref=f4e265]:
+                    - code [ref=f4e268]: titles
+                  - cell "左右列表标题，也用于面板和搜索框的可访问名称。" [ref=f4e269]
+                  - cell [ref=f4e272]:
+                    - code [ref=f4e275]: "[string, string]"
+                  - cell [ref=f4e276]:
+                    - code [ref=f4e279]: "['待选项', '已选项']"
+                - row [ref=f4e280]:
+                  - cell [ref=f4e281]:
+                    - code [ref=f4e284]: operations
+                  - cell "向右、向左按钮的额外内容；按钮仍保留方向图标与可访问名称。" [ref=f4e285]
+                  - cell [ref=f4e288]:
+                    - code [ref=f4e291]: "[JSX.Element, JSX.Element]"
+                  - cell [ref=f4e292]:
+                    - code [ref=f4e295]: —
+                - row [ref=f4e296]:
+                  - cell [ref=f4e297]:
+                    - code [ref=f4e300]: showSearch / searchPlaceholder
+                  - cell "显示两侧独立搜索框，并设置占位文本。" [ref=f4e301]
+                  - cell [ref=f4e304]:
+                    - code [ref=f4e307]: boolean / string
+                  - cell [ref=f4e308]:
+                    - code [ref=f4e311]: false / '请输入搜索内容'
+                - row [ref=f4e312]:
+                  - cell [ref=f4e313]:
+                    - code [ref=f4e316]: filterOption
+                  - cell "自定义每侧可见项过滤；全选只作用于当前过滤结果中的可选项。" [ref=f4e317]
+                  - cell [ref=f4e320]:
+                    - code [ref=f4e323]: "(input: string, item: T) => boolean"
+                  - cell [ref=f4e324]:
+                    - code [ref=f4e327]: 标题和描述忽略大小写包含搜索词
+                - row [ref=f4e328]:
+                  - cell [ref=f4e329]:
+                    - code [ref=f4e332]: showSelectAll
+                  - cell "显示列表头全选框；单向模式右侧始终不显示全选框。" [ref=f4e333]
+                  - cell [ref=f4e336]:
+                    - code [ref=f4e339]: boolean
+                  - cell [ref=f4e340]:
+                    - code [ref=f4e343]: "true"
+                - row [ref=f4e344]:
+                  - cell [ref=f4e345]:
+                    - code [ref=f4e348]: notFoundContent
+                  - cell "空列表或搜索无结果时展示的内容。" [ref=f4e349]
+                  - cell [ref=f4e352]:
+                    - code [ref=f4e355]: JSX.Element
+                  - cell [ref=f4e356]:
+                    - code [ref=f4e359]: "'暂无数据'"
+                - row [ref=f4e360]:
+                  - cell [ref=f4e361]:
+                    - code [ref=f4e364]: render
+                  - cell "自定义行内容；勾选框仍以 item.title 作为可访问名称。" [ref=f4e365]
+                  - cell [ref=f4e368]:
+                    - code [ref=f4e371]: "(item: T) => JSX.Element"
+                  - cell [ref=f4e372]:
+                    - code [ref=f4e375]: item.title
+                - row [ref=f4e376]:
+                  - cell [ref=f4e377]:
+                    - code [ref=f4e380]: footer
+                  - cell "分别渲染左右列表底部内容。" [ref=f4e381]
+                  - cell [ref=f4e384]:
+                    - code [ref=f4e387]: "(direction: 'left' | 'right') => JSX.Element"
+                  - cell [ref=f4e388]:
+                    - code [ref=f4e391]: —
+                - row [ref=f4e392]:
+                  - cell [ref=f4e393]:
+                    - code [ref=f4e396]: listStyle
+                  - cell "应用到两个列表面板的尺寸等行内样式。" [ref=f4e397]
+                  - cell [ref=f4e400]:
+                    - code [ref=f4e403]: JSX.CSSProperties
+                  - cell [ref=f4e404]:
+                    - code [ref=f4e407]: —
+                - row [ref=f4e408]:
+                  - cell [ref=f4e409]:
+                    - code [ref=f4e412]: status
+                  - cell "边框校验状态；显式值优先于 Form.Item 注入值。" [ref=f4e413]
+                  - cell [ref=f4e416]:
+                    - code [ref=f4e419]: "'error' | 'warning'"
+                  - cell [ref=f4e420]:
+                    - code [ref=f4e423]: —
+                - row [ref=f4e424]:
+                  - cell [ref=f4e425]:
+                    - code [ref=f4e428]: onChange
+                  - cell "实际移动后触发；direction 是目标方向，moveKeys 只含本次移动且未禁用的键。" [ref=f4e429]
+                  - cell [ref=f4e432]:
+                    - code [ref=f4e435]: (targetKeys, direction, moveKeys) => void
+                  - cell [ref=f4e436]:
+                    - code [ref=f4e439]: —
+                - row [ref=f4e440]:
+                  - cell [ref=f4e441]:
+                    - code [ref=f4e444]: onSelectChange
+                  - cell "临时勾选变化后分别报告左侧和右侧键；移动后已移动项会取消勾选。" [ref=f4e445]
+                  - cell [ref=f4e448]:
+                    - code [ref=f4e451]: (sourceSelectedKeys, targetSelectedKeys) => void
+                  - cell [ref=f4e452]:
+                    - code [ref=f4e455]: —
+                - row [ref=f4e456]:
+                  - cell [ref=f4e457]:
+                    - code [ref=f4e460]: onSearch
+                  - cell "左侧或右侧搜索输入变化时触发，无内置请求或防抖。" [ref=f4e461]
+                  - cell [ref=f4e464]:
+                    - code [ref=f4e467]: (direction, value) => void
+                  - cell [ref=f4e468]:
+                    - code [ref=f4e471]: —
+                - row [ref=f4e472]:
+                  - cell [ref=f4e473]:
+                    - code [ref=f4e476]: id / class / style
+                  - cell "外层 group 的标识、类名与样式。" [ref=f4e477]
+                  - cell [ref=f4e480]:
+                    - code [ref=f4e483]: string / string / JSX.CSSProperties
+                  - cell [ref=f4e484]:
+                    - code [ref=f4e487]: —
+          - region [ref=f4e488]:
+            - heading "TransferItem API" [level=2] [ref=f4e489]
+            - table "API 属性表格" [ref=f4e494]:
+              - rowgroup [ref=f4e500]:
+                - row [ref=f4e501]:
+                  - columnheader "属性" [ref=f4e502]
+                  - columnheader "说明" [ref=f4e505]
+                  - columnheader "类型" [ref=f4e508]
+                  - columnheader "默认值" [ref=f4e511]
+              - rowgroup [ref=f4e514]:
+                - row [ref=f4e515]:
+                  - cell [ref=f4e516]:
+                    - code [ref=f4e519]: key
+                  - cell "全局唯一键；数字 0 和字符串 '0' 是不同的键。" [ref=f4e520]
+                  - cell [ref=f4e523]:
+                    - code [ref=f4e526]: string | number
+                  - cell [ref=f4e527]:
+                    - code [ref=f4e530]: 必填
+                - row [ref=f4e531]:
+                  - cell [ref=f4e532]:
+                    - code [ref=f4e535]: title
+                  - cell "默认显示文本，也是行勾选与移除按钮的可访问名称。" [ref=f4e536]
+                  - cell [ref=f4e539]:
+                    - code [ref=f4e542]: string
+                  - cell [ref=f4e543]:
+                    - code [ref=f4e546]: 必填
+                - row [ref=f4e547]:
+                  - cell [ref=f4e548]:
+                    - code [ref=f4e551]: description
+                  - cell "默认搜索文本的一部分；普通行还会作为悬停提示。" [ref=f4e552]
+                  - cell [ref=f4e555]:
+                    - code [ref=f4e558]: string
+                  - cell [ref=f4e559]:
+                    - code [ref=f4e562]: —
+                - row [ref=f4e563]:
+                  - cell [ref=f4e564]:
+                    - code [ref=f4e567]: disabled
+                  - cell "禁用该行的勾选、全选参与和移动。" [ref=f4e568]
+                  - cell [ref=f4e571]:
+                    - code [ref=f4e574]: boolean
+                  - cell [ref=f4e575]:
+                    - code [ref=f4e578]: "false"
+          - region [ref=f4e579]:
+            - heading "约定与边界" [level=2] [ref=f4e580]
+            - generic [ref=f4e581]:
+              - paragraph [ref=f4e582]: key 在 dataSource 中应唯一，string 与 number 是不同的键。缺失于 dataSource 的受控目标键会保留，但没有可见行；调用方负责清理失效数据。默认值只在初始化时生效，动态数据更新不会自动清除目标键。Form.Item 可注入字段值、禁用与校验状态；显式 targetKeys/disabled/status 优先。
+              - paragraph [ref=f4e583]: 原生复选框和按钮支持 Tab、空格与 Enter；面板标题、行勾选和操作按钮都提供可访问名称。列表可滚动，但当前会渲染全部过滤结果，没有虚拟滚动、分页或异步请求协议。render/footer 的内容由调用方负责其内部交互与可访问性。
+              - paragraph [ref=f4e584]: 该物料没有公开子组件，也不提供拖拽排序或命令式 ref。真实浏览器专项以 Chromium 为准；跨浏览器、发布与部署另行验收。
+          - generic [ref=f4e585]: Solid Upthrust · 基于 Solid 2 构建

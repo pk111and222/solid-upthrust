@@ -1,0 +1,3 @@
+import { createSignal } from 'solid-js'
+import Cascader from 'upthrust-ui/source/Cascader'
+export default function Checkable() { const [value, setValue] = createSignal<Array<Array<string>>>([]); return <div class="flex flex-col gap-3 max-w-sm"><Cascader aria-label="勾选地区" mode="multiple" checkable options={[{ value: 'east', label: '华东', children: [{ value: 'sh', label: '上海' }, { value: 'hz', label: '杭州' }] }, { value: 'south', label: '华南', children: [{ value: 'gz', label: '广州' }] }]} value={value()} onChange={v => setValue((v as Array<Array<string>>) ?? [])} /><output>{value().length ? `已选 ${value().length} 项` : '尚未勾选'}</output></div> }

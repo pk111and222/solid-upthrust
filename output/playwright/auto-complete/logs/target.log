@@ -1,0 +1,10 @@
+$ vitest run headless/AutoComplete render/AutoComplete smoke/AutoComplete
+
+ RUN  v4.1.10 /Users/zhangchen327/code/github/pk111and222/solid-upthrust/packages/testing
+
+
+ Test Files  5 passed (5)
+      Tests  29 passed (29)
+   Start at  14:01:55
+   Duration  780ms (transform 958ms, setup 0ms, import 1.29s, tests 80ms, environment 1.24s)
+

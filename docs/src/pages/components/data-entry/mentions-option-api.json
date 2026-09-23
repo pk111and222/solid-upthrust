@@ -1,0 +1,5 @@
+[
+  {"name":"value","type":"string","default":"必填","description":"过滤、键盘标识与最终插入的文本。"},
+  {"name":"label","type":"string","default":"value","description":"候选显示文本，也参与默认过滤。"},
+  {"name":"disabled","type":"boolean","default":"false","description":"保留显示但不能提交。"}
+]

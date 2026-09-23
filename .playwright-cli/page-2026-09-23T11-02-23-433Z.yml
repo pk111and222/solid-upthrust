@@ -1,0 +1,419 @@
+- generic [ref=f4e1]:
+  - link "跳至正文" [ref=f4e2] [cursor=pointer]:
+    - /url: "#main-content"
+  - generic [ref=f4e3]:
+    - generic [ref=f4e4]:
+      - link "↗ Solid Upthrust" [ref=f4e5] [cursor=pointer]:
+        - /url: /
+        - generic [ref=f4e6]: ↗
+        - generic [ref=f4e7]: Solid Upthrust
+      - navigation "主导航" [ref=f4e8]:
+        - link "开发指南" [ref=f4e9] [cursor=pointer]:
+          - /url: /guide/
+        - link "组件" [ref=f4e10] [cursor=pointer]:
+          - /url: /components/
+        - generic [ref=f4e11]: Solid 2 RC
+    - generic [ref=f4e12]:
+      - complementary [ref=f4e13]:
+        - navigation "文档目录" [ref=f4e14]:
+          - menu [ref=f4e15]:
+            - generic [ref=f4e16]:
+              - generic [ref=f4e17]: 开始使用
+              - menuitem [ref=f4e18] [cursor=pointer]:
+                - link "Solid Upthrust" [ref=f4e19]:
+                  - /url: /
+              - menuitem [ref=f4e20] [cursor=pointer]:
+                - link "工程入门" [ref=f4e21]:
+                  - /url: /guide/
+              - menuitem [ref=f4e22] [cursor=pointer]:
+                - link "文档与示例渲染" [ref=f4e23]:
+                  - /url: /guide/rendering/
+            - generic [ref=f4e24]:
+              - generic [ref=f4e25]: 研发指南
+              - menuitem [ref=f4e26] [cursor=pointer]:
+                - link "架构与目录" [ref=f4e27]:
+                  - /url: /guide/architecture/
+              - menuitem [ref=f4e28] [cursor=pointer]:
+                - link "四层测试" [ref=f4e29]:
+                  - /url: /guide/testing/
+              - menuitem [ref=f4e30] [cursor=pointer]:
+                - link "功能交付清单" [ref=f4e31]:
+                  - /url: /guide/contributing/
+            - generic [ref=f4e32]:
+              - generic [ref=f4e33]: 组件
+              - menuitem [ref=f4e34] [cursor=pointer]:
+                - link "组件总览" [ref=f4e35]:
+                  - /url: /components/
+              - menuitem [ref=f4e36] [cursor=pointer]:
+                - link "Button 按钮" [ref=f4e37]:
+                  - /url: /components/general/button/
+              - menuitem [ref=f4e38] [cursor=pointer]:
+                - link "ConfigProvider 全局配置" [ref=f4e39]:
+                  - /url: /components/general/config-provider/
+              - menuitem [ref=f4e40] [cursor=pointer]:
+                - link "Icon 图标" [ref=f4e41]:
+                  - /url: /components/general/icon/
+              - menuitem [ref=f4e42] [cursor=pointer]:
+                - link "Dropdown 下拉菜单" [ref=f4e43]:
+                  - /url: /components/navigation/dropdown/
+              - menuitem [ref=f4e44] [cursor=pointer]:
+                - link "Tabs 标签页" [ref=f4e45]:
+                  - /url: /components/navigation/tabs/
+              - menuitem [ref=f4e46] [cursor=pointer]:
+                - link "Pagination 分页" [ref=f4e47]:
+                  - /url: /components/navigation/pagination/
+              - menuitem [ref=f4e48] [cursor=pointer]:
+                - link "Tree 树形控件" [ref=f4e49]:
+                  - /url: /components/data-entry/tree/
+              - menuitem [ref=f4e50] [cursor=pointer]:
+                - link "Skeleton 骨架屏" [ref=f4e51]:
+                  - /url: /components/feedback/skeleton/
+              - menuitem [ref=f4e52] [cursor=pointer]:
+                - link "Input 输入框" [ref=f4e53]:
+                  - /url: /components/data-entry/input/
+              - menuitem [ref=f4e54] [cursor=pointer]:
+                - link "Tooltip 文字提示" [ref=f4e55]:
+                  - /url: /components/data-display/tooltip/
+              - menuitem [ref=f4e56] [cursor=pointer]:
+                - link "Checkbox 多选框" [ref=f4e57]:
+                  - /url: /components/data-entry/checkbox/
+              - menuitem [ref=f4e58] [cursor=pointer]:
+                - link "Popover 气泡卡片" [ref=f4e59]:
+                  - /url: /components/data-display/popover/
+              - menuitem [ref=f4e60] [cursor=pointer]:
+                - link "Radio 单选框" [ref=f4e61]:
+                  - /url: /components/data-entry/radio/
+              - menuitem [ref=f4e62] [cursor=pointer]:
+                - link "Switch 开关" [ref=f4e63]:
+                  - /url: /components/data-entry/switch/
+              - menuitem [ref=f4e64] [cursor=pointer]:
+                - link "InputNumber 数字输入框" [ref=f4e65]:
+                  - /url: /components/data-entry/input-number/
+              - menuitem [ref=f4e66] [cursor=pointer]:
+                - link "Slider 滑动输入条" [ref=f4e67]:
+                  - /url: /components/data-entry/slider/
+              - menuitem [ref=f4e68] [cursor=pointer]:
+                - link "Rate 评分" [ref=f4e69]:
+                  - /url: /components/data-entry/rate/
+              - menuitem [ref=f4e70] [cursor=pointer]:
+                - link "Segmented 分段控制器" [ref=f4e71]:
+                  - /url: /components/data-entry/segmented/
+              - menuitem [ref=f4e72] [cursor=pointer]:
+                - link "Select 选择器" [ref=f4e73]:
+                  - /url: /components/data-entry/select/
+              - menuitem [ref=f4e74] [cursor=pointer]:
+                - link "AutoComplete 自动补全" [ref=f4e75]:
+                  - /url: /components/data-entry/auto-complete/
+              - menuitem [ref=f4e76] [cursor=pointer]:
+                - link "Cascader 级联选择" [ref=f4e77]:
+                  - /url: /components/data-entry/cascader/
+              - menuitem [ref=f4e78] [cursor=pointer]:
+                - link "Mentions 提及" [ref=f4e79]:
+                  - /url: /components/data-entry/mentions/
+              - menuitem [ref=f4e80] [cursor=pointer]:
+                - link "TreeSelect 树选择" [ref=f4e81]:
+                  - /url: /components/data-entry/tree-select/
+        - generic [ref=f4e82]: 面向 SolidJS 的企业级组件库
+      - main [ref=f4e83]:
+        - article [ref=f4e85]:
+          - generic [ref=f4e86]:
+            - generic [ref=f4e87]: 文档
+            - generic [ref=f4e88]: /
+            - generic [ref=f4e89]: Cascader 级联选择
+          - heading "Cascader 级联选择" [level=1] [ref=f4e90]
+          - paragraph [ref=f4e91]: 按树形路径选择单个或多个节点。
+          - region [ref=f4e92]:
+            - heading "使用方式" [level=2] [ref=f4e93]
+            - generic [ref=f4e94]:
+              - paragraph [ref=f4e95]: Cascader 将树形选项按路径拆成多列菜单。单选默认只提交叶节点；设置 changeOnSelect 后中间层级也可提交。多选使用 mode="multiple"，checkable 可显示父子联动复选框。
+              - paragraph [ref=f4e96]: 点击或 hover 展开子级，搜索会将匹配节点展平为完整路径。设置 allowClear 后，选中内容时清除按钮会替代下拉箭头。受控 value 需要在 onChange 中写回；Form.Item 可注入值、禁用、尺寸和校验状态。
+          - region [ref=f4e97]:
+            - heading "示例" [level=2] [ref=f4e98]
+            - generic [ref=f4e100]:
+              - region "单选路径" [ref=f4e101]:
+                - generic [ref=f4e607]:
+                  - combobox "地区" [ref=f4e609] [cursor=pointer]:
+                    - generic [ref=f4e610]: 选择地区
+                  - status [ref=f4e614]: 未选择
+                - heading "单选路径" [level=3] [ref=f4e105]
+                - group [ref=f4e106]:
+                  - generic "TSX 〈/〉 展开代码" [ref=f4e107] [cursor=pointer]:
+                    - generic [ref=f4e108]: TSX
+                    - generic [ref=f4e109]: 〈/〉 展开代码
+              - region "路径搜索" [ref=f4e110]:
+                - combobox "搜索地区" [ref=f4e616] [cursor=pointer]:
+                  - generic [ref=f4e617]: 输入城市或地区
+                  - textbox [ref=f4e618]
+                - heading "路径搜索" [level=3] [ref=f4e114]
+                - group [ref=f4e115]:
+                  - generic "TSX 〈/〉 展开代码" [ref=f4e116] [cursor=pointer]:
+                    - generic [ref=f4e117]: TSX
+                    - generic [ref=f4e118]: 〈/〉 展开代码
+              - region "多选标签" [ref=f4e119]:
+                - generic [ref=f4e622]:
+                  - combobox "多个地区" [ref=f4e624] [cursor=pointer]:
+                    - generic [ref=f4e625]: 请选择
+                  - status [ref=f4e630]: "[]"
+                - heading "多选标签" [level=3] [ref=f4e123]
+                - group [ref=f4e124]:
+                  - generic "TSX 〈/〉 展开代码" [ref=f4e125] [cursor=pointer]:
+                    - generic [ref=f4e126]: TSX
+                    - generic [ref=f4e127]: 〈/〉 展开代码
+              - region "父子联动" [ref=f4e128]:
+                - generic [ref=f4e631]:
+                  - combobox "勾选地区" [expanded] [active] [ref=f4e633] [cursor=pointer]:
+                    - generic [ref=f4e634]: 请选择
+                  - status [ref=f4e639]: 尚未勾选
+                - heading "父子联动" [level=3] [ref=f4e132]
+                - group [ref=f4e133]:
+                  - generic "TSX 〈/〉 展开代码" [ref=f4e134] [cursor=pointer]:
+                    - generic [ref=f4e135]: TSX
+                    - generic [ref=f4e136]: 〈/〉 展开代码
+              - region "提交规则与禁用" [ref=f4e137]:
+                - generic [ref=f4e640]:
+                  - combobox [ref=f4e642] [cursor=pointer]:
+                    - generic [ref=f4e643]: 任意层级提交
+                  - combobox [ref=f4e648] [cursor=pointer]:
+                    - generic [ref=f4e649]: 悬停展开
+                  - combobox [ref=f4e654] [cursor=pointer]:
+                    - generic [ref=f4e655]: 一级 / 二级
+                    - button "清空" [ref=f4e657]
+                  - combobox [disabled] [ref=f4e660]:
+                    - generic [ref=f4e661]: 一级 / 二级
+                    - generic [ref=f4e663] [cursor=pointer]
+                - heading "提交规则与禁用" [level=3] [ref=f4e141]
+                - group [ref=f4e142]:
+                  - generic "TSX 〈/〉 展开代码" [ref=f4e143] [cursor=pointer]:
+                    - generic [ref=f4e144]: TSX
+                    - generic [ref=f4e145]: 〈/〉 展开代码
+          - region [ref=f4e146]:
+            - heading "CascaderProps API" [level=2] [ref=f4e147]
+            - table "API 属性表格" [ref=f4e152]:
+              - rowgroup [ref=f4e158]:
+                - row [ref=f4e159]:
+                  - columnheader "属性" [ref=f4e160]
+                  - columnheader "说明" [ref=f4e163]
+                  - columnheader "类型" [ref=f4e166]
+                  - columnheader "默认值" [ref=f4e169]
+              - rowgroup [ref=f4e172]:
+                - row [ref=f4e173]:
+                  - cell [ref=f4e174]:
+                    - code [ref=f4e177]: options
+                  - cell "树形选项；每项 value 唯一，children 表示下一级。" [ref=f4e178]
+                  - cell [ref=f4e181]:
+                    - code [ref=f4e184]: CascaderOption[]
+                  - cell [ref=f4e185]:
+                    - code [ref=f4e188]: "[]"
+                - row [ref=f4e189]:
+                  - cell [ref=f4e190]:
+                    - code [ref=f4e193]: value
+                  - cell "受控路径；单选为一条路径，多选为路径数组。" [ref=f4e194]
+                  - cell [ref=f4e197]:
+                    - code [ref=f4e200]: (string | number)[] | (string | number)[][]
+                  - cell [ref=f4e201]:
+                    - code [ref=f4e204]: —
+                - row [ref=f4e205]:
+                  - cell [ref=f4e206]:
+                    - code [ref=f4e209]: defaultValue
+                  - cell "非受控初始路径。" [ref=f4e210]
+                  - cell [ref=f4e213]:
+                    - code [ref=f4e216]: (string | number)[] | (string | number)[][]
+                  - cell [ref=f4e217]:
+                    - code [ref=f4e220]: —
+                - row [ref=f4e221]:
+                  - cell [ref=f4e222]:
+                    - code [ref=f4e225]: mode
+                  - cell "启用多路径选择与标签展示。" [ref=f4e226]
+                  - cell [ref=f4e229]:
+                    - code [ref=f4e232]: "'multiple'"
+                  - cell [ref=f4e233]:
+                    - code [ref=f4e236]: 单选
+                - row [ref=f4e237]:
+                  - cell [ref=f4e238]:
+                    - code [ref=f4e241]: changeOnSelect
+                  - cell "点击中间层级也提交；默认只提交叶节点。" [ref=f4e242]
+                  - cell [ref=f4e245]:
+                    - code [ref=f4e248]: boolean
+                  - cell [ref=f4e249]:
+                    - code [ref=f4e252]: "false"
+                - row [ref=f4e253]:
+                  - cell [ref=f4e254]:
+                    - code [ref=f4e257]: checkable
+                  - cell "多选时显示复选框并联动父子节点。" [ref=f4e258]
+                  - cell [ref=f4e261]:
+                    - code [ref=f4e264]: boolean
+                  - cell [ref=f4e265]:
+                    - code [ref=f4e268]: "false"
+                - row [ref=f4e269]:
+                  - cell [ref=f4e270]:
+                    - code [ref=f4e273]: allowClear
+                  - cell "有值时以清除按钮替代下拉箭头；点击后清空选择并触发 onClear。" [ref=f4e274]
+                  - cell [ref=f4e277]:
+                    - code [ref=f4e280]: boolean
+                  - cell [ref=f4e281]:
+                    - code [ref=f4e284]: "false"
+                - row [ref=f4e285]:
+                  - cell [ref=f4e286]:
+                    - code [ref=f4e289]: showSearch
+                  - cell "在浮层中显示路径搜索输入。" [ref=f4e290]
+                  - cell [ref=f4e293]:
+                    - code [ref=f4e296]: boolean
+                  - cell [ref=f4e297]:
+                    - code [ref=f4e300]: "false"
+                - row [ref=f4e301]:
+                  - cell [ref=f4e302]:
+                    - code [ref=f4e305]: searchFilterOption
+                  - cell "自定义搜索过滤；false 保留全部路径。" [ref=f4e306]
+                  - cell [ref=f4e309]:
+                    - code [ref=f4e312]: ((input, path, nodes) => boolean) | false
+                  - cell [ref=f4e313]:
+                    - code [ref=f4e316]: 标签包含匹配
+                - row [ref=f4e317]:
+                  - cell [ref=f4e318]:
+                    - code [ref=f4e321]: expandTrigger
+                  - cell "展开子级的触发方式。" [ref=f4e322]
+                  - cell [ref=f4e325]:
+                    - code [ref=f4e328]: "'click' | 'hover'"
+                  - cell [ref=f4e329]:
+                    - code [ref=f4e332]: "'click'"
+                - row [ref=f4e333]:
+                  - cell [ref=f4e334]:
+                    - code [ref=f4e337]: virtual
+                  - cell "各级选项使用固定行高虚拟列表。" [ref=f4e338]
+                  - cell [ref=f4e341]:
+                    - code [ref=f4e344]: boolean
+                  - cell [ref=f4e345]:
+                    - code [ref=f4e348]: "true"
+                - row [ref=f4e349]:
+                  - cell [ref=f4e350]:
+                    - code [ref=f4e353]: listHeight / listItemHeight
+                  - cell "虚拟列表视口高度与行高，单位 px。" [ref=f4e354]
+                  - cell [ref=f4e357]:
+                    - code [ref=f4e360]: number
+                  - cell [ref=f4e361]:
+                    - code [ref=f4e364]: 256 / 32
+                - row [ref=f4e365]:
+                  - cell [ref=f4e366]:
+                    - code [ref=f4e369]: placeholder
+                  - cell "未选择时的提示。" [ref=f4e370]
+                  - cell [ref=f4e373]:
+                    - code [ref=f4e376]: string
+                  - cell [ref=f4e377]:
+                    - code [ref=f4e380]: "'请选择'"
+                - row [ref=f4e381]:
+                  - cell [ref=f4e382]:
+                    - code [ref=f4e385]: separator
+                  - cell "展示路径各级标签的分隔符。" [ref=f4e386]
+                  - cell [ref=f4e389]:
+                    - code [ref=f4e392]: string
+                  - cell [ref=f4e393]:
+                    - code [ref=f4e396]: "' / '"
+                - row [ref=f4e397]:
+                  - cell [ref=f4e398]:
+                    - code [ref=f4e401]: maxTagCount
+                  - cell "多选时最多显示的标签数，剩余显示 +N。" [ref=f4e402]
+                  - cell [ref=f4e405]:
+                    - code [ref=f4e408]: number
+                  - cell [ref=f4e409]:
+                    - code [ref=f4e412]: —
+                - row [ref=f4e413]:
+                  - cell [ref=f4e414]:
+                    - code [ref=f4e417]: disabled
+                  - cell "禁用选择、搜索与清空；禁用节点及其后代不可点击。" [ref=f4e418]
+                  - cell [ref=f4e421]:
+                    - code [ref=f4e424]: boolean
+                  - cell [ref=f4e425]:
+                    - code [ref=f4e428]: "false"
+                - row [ref=f4e429]:
+                  - cell [ref=f4e430]:
+                    - code [ref=f4e433]: onChange
+                  - cell "路径提交后触发；nodes 为对应节点数组（多选时扁平返回）。" [ref=f4e434]
+                  - cell [ref=f4e437]:
+                    - code [ref=f4e440]: (value, nodes) => void
+                  - cell [ref=f4e441]:
+                    - code [ref=f4e444]: —
+                - row [ref=f4e445]:
+                  - cell [ref=f4e446]:
+                    - code [ref=f4e449]: onSelect
+                  - cell "每次点击层级触发，包括尚未提交的中间层级。" [ref=f4e450]
+                  - cell [ref=f4e453]:
+                    - code [ref=f4e456]: (path, nodes) => void
+                  - cell [ref=f4e457]:
+                    - code [ref=f4e460]: —
+                - row [ref=f4e461]:
+                  - cell [ref=f4e462]:
+                    - code [ref=f4e465]: onSearch / onClear
+                  - cell "搜索文本变化与点击清空时触发。" [ref=f4e466]
+                  - cell [ref=f4e469]:
+                    - code [ref=f4e472]: (value) => void / () => void
+                  - cell [ref=f4e473]:
+                    - code [ref=f4e476]: —
+                - row [ref=f4e477]:
+                  - cell [ref=f4e478]:
+                    - code [ref=f4e481]: status / size / id / class / style
+                  - cell "尺寸、校验状态、标识和外观属性；可由 Form.Item 注入。" [ref=f4e482]
+                  - cell [ref=f4e485]:
+                    - code [ref=f4e488]: 组件通用属性
+                  - cell [ref=f4e489]:
+                    - code [ref=f4e492]: —
+          - region [ref=f4e493]:
+            - heading "CascaderOption API" [level=2] [ref=f4e494]
+            - table "API 属性表格" [ref=f4e499]:
+              - rowgroup [ref=f4e505]:
+                - row [ref=f4e506]:
+                  - columnheader "属性" [ref=f4e507]
+                  - columnheader "说明" [ref=f4e510]
+                  - columnheader "类型" [ref=f4e513]
+                  - columnheader "默认值" [ref=f4e516]
+              - rowgroup [ref=f4e519]:
+                - row [ref=f4e520]:
+                  - cell [ref=f4e521]:
+                    - code [ref=f4e524]: value
+                  - cell "节点键；整棵树中应保持唯一。" [ref=f4e525]
+                  - cell [ref=f4e528]:
+                    - code [ref=f4e531]: string | number
+                  - cell [ref=f4e532]:
+                    - code [ref=f4e535]: 必填
+                - row [ref=f4e536]:
+                  - cell [ref=f4e537]:
+                    - code [ref=f4e540]: label
+                  - cell "菜单、标签与搜索中显示的文字。" [ref=f4e541]
+                  - cell [ref=f4e544]:
+                    - code [ref=f4e547]: string
+                  - cell [ref=f4e548]:
+                    - code [ref=f4e551]: 必填
+                - row [ref=f4e552]:
+                  - cell [ref=f4e553]:
+                    - code [ref=f4e556]: children
+                  - cell "下一级节点。" [ref=f4e557]
+                  - cell [ref=f4e560]:
+                    - code [ref=f4e563]: CascaderOption[]
+                  - cell [ref=f4e564]:
+                    - code [ref=f4e567]: —
+                - row [ref=f4e568]:
+                  - cell [ref=f4e569]:
+                    - code [ref=f4e572]: disabled
+                  - cell "禁用本节点及其后代。" [ref=f4e573]
+                  - cell [ref=f4e576]:
+                    - code [ref=f4e579]: boolean
+                  - cell [ref=f4e580]:
+                    - code [ref=f4e583]: "false"
+                - row [ref=f4e584]:
+                  - cell [ref=f4e585]:
+                    - code [ref=f4e588]: loading
+                  - cell "显示加载图标，适合异步子节点占位。" [ref=f4e589]
+                  - cell [ref=f4e592]:
+                    - code [ref=f4e595]: boolean
+                  - cell [ref=f4e596]:
+                    - code [ref=f4e599]: "false"
+          - region [ref=f4e600]:
+            - heading "约定与边界" [level=2] [ref=f4e601]
+            - generic [ref=f4e602]:
+              - paragraph [ref=f4e603]: value 必须使用路径数组；多选的每项是完整路径。节点 value 在整棵树中应唯一。禁用节点的祖先禁用状态会传递给所有后代。
+              - paragraph [ref=f4e604]: checkable 只保存叶节点路径，父节点的全选、半选状态由后代推导；异步加载需要由调用方更新 options。当前没有公开自定义菜单渲染或浮层容器属性。
+              - paragraph [ref=f4e605]: 真实浏览器证据覆盖 Chromium 的路径选择、搜索、复选联动和静态 docs/example 产物；其他浏览器与打包消费者安装留待工程回归。
+          - generic [ref=f4e606]: Solid Upthrust · 基于 Solid 2 构建
+  - listbox [ref=f4e665]:
+    - generic [ref=f4e670]:
+      - option "华东" [ref=f4e671] [cursor=pointer]
+      - option "华南" [ref=f4e676] [cursor=pointer]

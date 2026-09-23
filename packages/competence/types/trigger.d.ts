@@ -9,7 +9,7 @@
  * and WHERE it sits.
  */
 export type TriggerPlacement = 'bottomLeft' | 'bottomRight' | 'bottom' | 'topLeft' | 'topRight' | 'top' | 'leftTop' | 'leftBottom' | 'left' | 'rightTop' | 'rightBottom' | 'right';
-export type TriggerAction = 'click' | 'hover' | 'contextMenu' | 'focus';
+export type TriggerAction = 'click' | 'hover' | 'contextMenu' | 'focus' | 'manual';
 export type TriggerConfig = {
     open?: boolean;
     defaultOpen?: boolean;
