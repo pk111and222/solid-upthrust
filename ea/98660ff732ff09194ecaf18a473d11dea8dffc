@@ -1,0 +1,193 @@
+TODO.md
+  s_9d69ce18a9319b::t_62e1a9d0f0fb3f 30,119-122,186-189
+docs/contributing/regressions/color-picker.md
+  s_9d69ce18a9319b::t_b96449951becf7 1-32
+docs/contributing/regressions/date-picker.md
+  s_9d69ce18a9319b::t_af3a81a5084549 1-34
+docs/contributing/regressions/time-picker.md
+  s_9d69ce18a9319b::t_376fa3c61c94ec 1-40
+docs/contributing/regressions/upload.md
+  s_9d69ce18a9319b::t_e9871da0db8ba8 1-35
+docs/src/examples/color-picker/basic.tsx
+  s_9d69ce18a9319b::t_7325b673eec6fb 1-11
+docs/src/examples/color-picker/custom-text.tsx
+  s_9d69ce18a9319b::t_a405231b2291c6 1-8
+docs/src/examples/color-picker/events.tsx
+  s_9d69ce18a9319b::t_c4c2cbe1c8d82e 1-14
+docs/src/examples/color-picker/form.tsx
+  s_9d69ce18a9319b::t_549c663aaea252 1-15
+docs/src/examples/color-picker/formats.tsx
+  s_9d69ce18a9319b::t_b067d159578e99 1-12
+docs/src/examples/color-picker/inline.tsx
+  s_9d69ce18a9319b::t_5bfa8f1099cff9 1-11
+docs/src/examples/color-picker/open.tsx
+  s_9d69ce18a9319b::t_572d2138bf78a5 1-13
+docs/src/examples/color-picker/preset-groups.tsx
+  s_9d69ce18a9319b::t_b7fa749c83f9c4 1-11
+docs/src/examples/color-picker/states.tsx
+  s_9d69ce18a9319b::t_c90ede7a5ed7b8 1-9
+docs/src/examples/date-picker/basic.tsx
+  s_9d69ce18a9319b::t_5b06e6ae97cf09 1-11
+docs/src/examples/date-picker/constraints.tsx
+  s_9d69ce18a9319b::t_a6c8592adeb84c 1-9
+docs/src/examples/date-picker/disabled.tsx
+  s_9d69ce18a9319b::t_9d2fb84d8fbd12 1-11
+docs/src/examples/date-picker/filter.tsx
+  s_9d69ce18a9319b::t_c1f369d7ebad9a 1-12
+docs/src/examples/date-picker/form.tsx
+  s_9d69ce18a9319b::t_08bfb156886d82 1-15
+docs/src/examples/date-picker/modes.tsx
+  s_9d69ce18a9319b::t_2d029fd61a5b97 1-13
+docs/src/examples/date-picker/open.tsx
+  s_9d69ce18a9319b::t_fadc2a2a4905fb 1-12
+docs/src/examples/date-picker/presets.tsx
+  s_9d69ce18a9319b::t_eae0517bb3949e 1-11
+docs/src/examples/date-picker/range.tsx
+  s_9d69ce18a9319b::t_03f0fafb954c09 1-10
+docs/src/examples/date-picker/time-presets.tsx
+  s_9d69ce18a9319b::t_1f1deb7acf8c38 1-11
+docs/src/examples/time-picker/basic.tsx
+  s_9d69ce18a9319b::t_535a371a8f1f66 1-17
+docs/src/examples/time-picker/clear.tsx
+  s_9d69ce18a9319b::t_047caf633b4048 1-11
+docs/src/examples/time-picker/constraints.tsx
+  s_9d69ce18a9319b::t_c3d6c42466fa85 1-12
+docs/src/examples/time-picker/form.tsx
+  s_9d69ce18a9319b::t_3aee5b06b9e47e 1-15
+docs/src/examples/time-picker/open.tsx
+  s_9d69ce18a9319b::t_c97989c8e7dba3 1-12
+docs/src/examples/time-picker/range.tsx
+  s_9d69ce18a9319b::t_3153a39b70f22b 1-10
+docs/src/examples/time-picker/shift.tsx
+  s_9d69ce18a9319b::t_f3864a1d892522 1-12
+docs/src/examples/upload/actions.tsx
+  s_9d69ce18a9319b::t_4785cf1d06d491 1-18
+docs/src/examples/upload/basic.tsx
+  s_9d69ce18a9319b::t_c02aec3d858295 1-17
+docs/src/examples/upload/constraints.tsx
+  s_9d69ce18a9319b::t_27915163340354 1-23
+docs/src/examples/upload/custom-render.tsx
+  s_9d69ce18a9319b::t_081121ff75b35b 1-23
+docs/src/examples/upload/dragger.tsx
+  s_9d69ce18a9319b::t_9786d506fac95e 1-19
+docs/src/examples/upload/form.tsx
+  s_9d69ce18a9319b::t_cdb13b3e0a2152 1-20
+docs/src/examples/upload/manual.tsx
+  s_9d69ce18a9319b::t_b809ad872e6cbb 1-16
+docs/src/examples/upload/picture-card.tsx
+  s_9d69ce18a9319b::t_a31033ed220c6b 1-20
+docs/src/examples/upload/picture.tsx
+  s_9d69ce18a9319b::t_d54769b235811c 1-21
+docs/src/pages/components/data-entry/color-picker-api.json
+  s_9d69ce18a9319b::t_10a0e3baaf4f4e 1-18
+docs/src/pages/components/data-entry/color-picker-preset-api.json
+  s_9d69ce18a9319b::t_48967a329adb34 1-4
+docs/src/pages/components/data-entry/color-picker.tsx
+  s_9d69ce18a9319b::t_74a0680ba3786f 1-41
+docs/src/pages/components/data-entry/date-picker-api.json
+  s_9d69ce18a9319b::t_467fe7c155a03a 1-19
+docs/src/pages/components/data-entry/date-picker.tsx
+  s_9d69ce18a9319b::t_fbcd89a1ca4b9a 1-43
+docs/src/pages/components/data-entry/date-range-picker-api.json
+  s_9d69ce18a9319b::t_5c1a375c97d622 1-16
+docs/src/pages/components/data-entry/time-picker-api.json
+  s_9d69ce18a9319b::t_36129200592382 1-18
+docs/src/pages/components/data-entry/time-picker.tsx
+  s_9d69ce18a9319b::t_23250ddccc3e78 1-36
+docs/src/pages/components/data-entry/time-range-picker-api.json
+  s_9d69ce18a9319b::t_db88f8883344fa 1-17
+docs/src/pages/components/data-entry/upload-api.json
+  s_9d69ce18a9319b::t_b812b4a15ffa66 1-13
+docs/src/pages/components/data-entry/upload.tsx
+  s_9d69ce18a9319b::t_cc62d3642e3da3 1-39
+example/src/pages/DatePicker.tsx
+  s_9d69ce18a9319b::t_5a0a576629c9ec 2,10,115-124
+example/src/pages/TimePicker.tsx
+  s_9d69ce18a9319b::t_9aef53cb303856 10
+packages/competence/src/trigger.ts
+  s_9d69ce18a9319b::t_f002d9d58184ea 512,514-515,517-526
+packages/competence/src/upload.ts
+  s_9d69ce18a9319b::t_f3b7571eab3372 165,170,219,222,233,334
+packages/components/lib/DatePicker/RangePicker.tsx
+  s_9d69ce18a9319b::t_2e4de7e5733cda 15,106-109,191,340
+packages/components/lib/DatePicker/index.tsx
+  s_9d69ce18a9319b::t_10e93fdfffd8f7 17,107-110,184,262
+packages/components/lib/DatePicker/rangeStyles.ts
+  s_9d69ce18a9319b::t_33bc085b359fdc 18,24-25,128
+packages/components/lib/DatePicker/styles.ts
+  s_9d69ce18a9319b::t_a7d35da1db5642 18,20
+packages/components/lib/Popover/styles.ts
+  s_9d69ce18a9319b::t_3e6ecc38fb55ac 5-6,12,18-19
+packages/components/lib/Select/PickerSuffix.tsx
+  s_9d69ce18a9319b::t_01d2f14be55d7f 1-40
+packages/components/lib/TimePicker/RangePicker.tsx
+  s_9d69ce18a9319b::t_b70754ec80fafc 3,14,90-91,94,98-100,142,144,194-195,201,285
+packages/components/lib/TimePicker/index.tsx
+  s_9d69ce18a9319b::t_66830164ec0bd8 15,94-97,137-138,187,248
+packages/components/lib/TimePicker/rangeStyles.ts
+  s_9d69ce18a9319b::t_01706cbf0fa22c 16,22-23,77
+packages/components/lib/TimePicker/styles.ts
+  s_9d69ce18a9319b::t_cf736996e08daa 17,23-24
+packages/components/lib/Upload/Dragger.tsx
+  s_9d69ce18a9319b::t_29edaba1855248 102,111,125
+packages/components/lib/Upload/index.tsx
+  s_9d69ce18a9319b::t_c59b69fedac575 177,191,326
+packages/components/lib/Upload/styles.ts
+  s_9d69ce18a9319b::t_e2505e44dbfa2e 104,143,147,174,233
+packages/testing/README.md
+  s_9d69ce18a9319b::t_2683315059f502 162-165
+packages/testing/browser/ColorPicker/interactions.spec.ts
+  s_9d69ce18a9319b::t_d530e478d12978 1-119
+packages/testing/browser/DatePicker/interactions.spec.ts
+  s_9d69ce18a9319b::t_f265d16e7f05da 1-134
+packages/testing/browser/TimePicker/interactions.spec.ts
+  s_9d69ce18a9319b::t_b01945563d2060 1-85
+packages/testing/browser/Upload/interactions.spec.ts
+  s_9d69ce18a9319b::t_beb4197caaafa7 1-81
+packages/testing/headless/TimePicker/timePicker.test.ts
+  s_9d69ce18a9319b::t_2dc3a22688b8c6 15,22,32,38,46,61,69,77,88,100,111,123,134,145,157,173,186,195,204,215,223,234,247,260,269,278,288,297,308,319,334
+packages/testing/headless/Upload/upload.test.ts
+  s_9d69ce18a9319b::t_ba230eaf835673 96-97,100
+packages/testing/headless/shared/Trigger/trigger.test.ts
+  s_9d69ce18a9319b::t_7d21ee7c4626cb 122-146
+packages/testing/playwright.color-picker.config.ts
+  s_9d69ce18a9319b::t_fd3175bf4f3194 1-20
+packages/testing/playwright.date-picker.config.ts
+  s_9d69ce18a9319b::t_f2082ad6529a6c 1-20
+packages/testing/playwright.time-picker.config.ts
+  s_9d69ce18a9319b::t_f835c27cf93bfc 1-20
+packages/testing/playwright.upload.config.ts
+  s_9d69ce18a9319b::t_35ef4aee646655 1-20
+packages/testing/render/ColorPicker/form.test.tsx
+  s_9d69ce18a9319b::t_257e934ffc9a2a 1-39
+packages/testing/render/DatePicker/contracts.test.tsx
+  s_9d69ce18a9319b::t_ce436890dae5a6 1-93
+packages/testing/render/TimePicker/contracts.test.tsx
+  s_9d69ce18a9319b::t_da01ff5f66fbcf 1-185
+packages/testing/render/Upload/form.test.tsx
+  s_9d69ce18a9319b::t_432be2efbc505d 1-72
+packages/testing/smoke/ColorPicker/exports.test.tsx
+  s_9d69ce18a9319b::t_f3bcdeb3f33fce 1-21
+packages/testing/smoke/DatePicker/exports.test.tsx
+  s_9d69ce18a9319b::t_e4893699d8ada4 1-19
+packages/testing/smoke/TimePicker/exports.test.tsx
+  s_9d69ce18a9319b::t_fb9bc02d3e88d8 1-10
+packages/testing/smoke/Upload/exports.test.tsx
+  s_9d69ce18a9319b::t_df39094a986755 1-24
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.4",
+  "base_commit_sha": "ea98660ff732ff09194ecaf18a473d11dea8dffc",
+  "prompts": {},
+  "sessions": {
+    "s_9d69ce18a9319b": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a0ce2b-b53a-7610-bdb2-c71176b24f93",
+        "model": "unknown"
+      },
+      "human_author": "pk111and222 <pk111and222@sina.cn>"
+    }
+  }
+}
