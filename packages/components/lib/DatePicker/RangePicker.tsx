@@ -12,6 +12,7 @@ import {
 } from 'upthrust-competence'
 import type { SizeType } from '../../common/type'
 import { useFormItem } from '../Input/context'
+import { PickerSuffix } from '../Select/PickerSuffix'
 import {
   datePickerGridClass,
   datePickerHeaderClass,
@@ -22,13 +23,11 @@ import {
 } from './styles'
 import {
   rangePickerCellWrapClass,
-  rangePickerClearWrapClass,
   rangePickerDropdownClass,
   rangePickerInputClass,
   rangePickerPanelClass,
   rangePickerPanelsClass,
   rangePickerSeparatorClass,
-  rangePickerSuffixClass,
 } from './rangeStyles'
 
 const WEEKDAY_LABELS = ['日', '一', '二', '三', '四', '五', '六'] as const
@@ -104,9 +103,10 @@ const RangePicker: Component<RangePickerProps> = providedProps => {
     get disabledDate() { return props.disabledDate },
     get disabled() { return resolvedDisabled() },
     get weekStart() { return props.weekStart },
-    get onChange() { return props.onChange },
-    get onFocus() { return props.onFocus ? () => props.onFocus?.(undefined as unknown as FocusEvent) : undefined },
-    get onBlur() { return props.onBlur ? () => props.onBlur?.(undefined as unknown as FocusEvent) : undefined },
+    get onChange() { return (value: RangePickerValue | null) => {
+      if (props.onChange) props.onChange(value)
+      else form.onChange(value)
+    } },
   })
 
   const trigger = createTrigger({
@@ -188,9 +188,7 @@ const RangePicker: Component<RangePickerProps> = providedProps => {
 
   // The trigger's NATIVE click on the frame stops propagation — the × must
   // use pointerdown (the Select pitfall).
-  const handleClearPointerDown = (e: PointerEvent) => {
-    e.preventDefault()
-    e.stopPropagation()
+  const clearValue = () => {
     m().clear()
     startInputRef.current?.focus()
   }
@@ -339,22 +337,7 @@ const RangePicker: Component<RangePickerProps> = providedProps => {
           onFocus={e => { m().notifyFocus('end'); props.onFocus?.(e) }}
           onBlur={e => { m().notifyBlur('end'); props.onBlur?.(e) }}
         />
-        <span class={rangePickerSuffixClass()}>
-          <Show when={props.allowClear && m().value() !== null}>
-            <span
-              class={rangePickerClearWrapClass({ visible: m().value() !== null && !resolvedDisabled() })}
-              role="button"
-              aria-label="清空"
-              tabindex={-1}
-              onPointerDown={handleClearPointerDown}
-            >
-              <span class="i-mdi-close-circle-outline" />
-            </span>
-          </Show>
-          <span class="text-[12px] flex items-center pointer-events-none">
-            <span class="i-mdi-calendar-outline" />
-          </span>
-        </span>
+        <PickerSuffix size={resolvedSize()} allowClear={props.allowClear} hasValue={m().value() !== null} disabled={resolvedDisabled()} icon="i-mdi-calendar-outline" onClear={clearValue} />
       </div>
 
       <Portal>

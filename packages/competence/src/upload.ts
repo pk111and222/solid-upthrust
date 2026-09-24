@@ -162,13 +162,12 @@ export type UploadIns = {
 let _uidSeed = 0
 const nextUid = () => `upload_${Date.now().toString(36)}_${++_uidSeed}`
 
-const toUploadFile = (f: File): UploadFile => ({
+const toUploadFile = (f: File, queued: boolean): UploadFile => ({
   uid: nextUid(),
   name: f.name,
   size: f.size,
   type: f.type,
-  percent: 0,
-  status: 'uploading',
+  ...(queued ? {} : { percent: 0, status: 'uploading' as const }),
   raw: f,
 })
 
@@ -217,9 +216,10 @@ export const defaultUploadRequest =
 
 export const createUpload = (config: UploadConfig = {}): UploadIns => {
   const controlled = (): UploadFile[] | undefined => config.value
+  const initialList = untrack(() => config.value ?? config.defaultValue ?? [])
 
   const [_list, _setList] = createSignal<UploadFile[]>(
-    (config.value ?? config.defaultValue ?? []).slice(),
+    initialList.slice(),
     { ownedWrite: true },
   )
 
@@ -230,7 +230,7 @@ export const createUpload = (config: UploadConfig = {}): UploadIns => {
   // commits writes in batches), so imperative reads (post targets, remove
   // guards) go through this synchronous mirror — same pattern as
   // form.ts's storeRef.
-  let _pending: UploadFile[] = (config.value ?? config.defaultValue ?? []).slice()
+  let _pending: UploadFile[] = initialList.slice()
   const commit = (next: UploadFile[]) => {
     _pending = next
     _setList(next)
@@ -331,7 +331,7 @@ export const createUpload = (config: UploadConfig = {}): UploadIns => {
     if (!arr.length) return
     // Everything enters as pending candidates; beforeUpload may veto.
     void source // status/meta identical for select and drag; kept for API parity
-    const modeled = arr.map(toUploadFile)
+    const modeled = arr.map(file => toUploadFile(file, config.autoUpload === false))
     const before = config.beforeUpload
     if (!before) {
       runAdd(modeled)

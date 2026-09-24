@@ -119,6 +119,31 @@ describe('createTrigger', () => {
     expect(t.actualPlacement()).toBe('topLeft')
   })
 
+  it('keeps an unmeasured layer hidden until its content has a real box', () => {
+    vi.useFakeTimers()
+    try {
+      const layerRect = { left: 0, top: 0, right: 160, bottom: 0, width: 160, height: 0 }
+      let trigger!: ReturnType<typeof createTrigger>
+      createRoot(dispose => {
+        bootRoots.push(dispose)
+        trigger = createTrigger()
+        trigger.triggerRef(makeEl({ left: 100, top: 750, right: 200, bottom: 790, width: 100, height: 40 }) as unknown as HTMLElement)
+        trigger.layerRef(makeEl(layerRect) as unknown as HTMLElement)
+      })
+      trigger.setOpen(true)
+      flush()
+      expect(trigger.layerStyle().visibility).toBe('hidden')
+      layerRect.bottom = 120
+      layerRect.height = 120
+      vi.advanceTimersByTime(16)
+      flush()
+      expect(trigger.layerStyle().visibility).toBeUndefined()
+      expect(trigger.actualPlacement()).toBe('topLeft')
+    } finally {
+      vi.useRealTimers()
+    }
+  })
+
   it('keeps bottom placement when there is room', () => {
     const t = boot({}, { left: 100, top: 300, right: 200, bottom: 340, width: 100, height: 40 })
     t.setOpen(true)

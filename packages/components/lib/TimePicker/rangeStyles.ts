@@ -13,14 +13,14 @@ import { cva, type VariantProps } from "class-variance-authority";
 const timeRangePickerDropdownVariants = cva(
   [
     "bg-surface", "rounded-lg", "shadow", "p-[4px]",
-    "transition-overlay", "duration-fast", "ease-upthrust",
+    "transition-opacity", "duration-fast", "ease-upthrust",
     "outline-none",
   ],
   {
     variants: {
       visible: {
-        true: ["opacity-100", "scale-100"],
-        false: ["opacity-0", "scale-95", "pointer-events-none"],
+        true: ["opacity-100"],
+        false: ["opacity-0", "pointer-events-none"],
       },
       placement: {
         bottomLeft: ["origin-top-left"],
@@ -74,7 +74,7 @@ export const timeRangePickerSuffixClass = () =>
 export const timeRangePickerInputClass = (variants: { size?: 'small' | 'middle' | 'large' }) =>
   twMerge([
     "flex-1", "min-w-0", "bg-transparent", "outline-none", "border-none", "p-0",
-    "text-on-surface", "placeholder:text-on-surface/25", "tabular-nums", "cursor-text", "text-center",
+    "text-on-surface", "placeholder:text-on-surface/25", "tabular-nums", "cursor-text", "text-start",
     variants.size === 'small' ? 'text-[12px]' : '',
     variants.size === 'middle' ? 'text-[14px]' : '',
     variants.size === 'large' ? 'text-[16px]' : '',

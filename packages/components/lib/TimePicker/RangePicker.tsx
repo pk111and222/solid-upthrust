@@ -1,6 +1,6 @@
 import { useComponentProps } from '../ConfigProvider/context'
 import { ConfigPortal as Portal } from '../ConfigProvider/Portal'
-import { Component, For, Show, createEffect, merge } from 'solid-js'
+import { Component, For, Show, createEffect, createSignal, merge } from 'solid-js'
 import { type JSX } from '@solidjs/web'
 import { twMerge } from 'tailwind-merge'
 import {
@@ -11,10 +11,9 @@ import {
 } from 'upthrust-competence'
 import type { SizeType } from '../../common/type'
 import { useFormItem } from '../Input/context'
+import { PickerSuffix } from '../Select/PickerSuffix'
 import {
-  timePickerClearWrapClass,
   timePickerColumnClass,
-  timePickerIconClass,
   timePickerOptionWrapClass,
 } from './styles'
 import {
@@ -24,7 +23,6 @@ import {
   timeRangePickerPanelClass,
   timeRangePickerPanelsClass,
   timeRangePickerSeparatorClass,
-  timeRangePickerSuffixClass,
 } from './rangeStyles'
 
 export type TimeRangePickerValue = [string, string]
@@ -89,15 +87,17 @@ const TimeRangePicker: Component<TimeRangePickerProps> = providedProps => {
   const rawPair = (): TimeRangePickerValue | null | undefined =>
     form.value() as TimeRangePickerValue | null | undefined
 
+  const [uncontrolledPair, setUncontrolledPair] = createSignal<TimeRangePickerValue | null>(props.defaultValue ?? null)
+
   const pair = (): TimeRangePickerValue | null => {
     const v = rawPair()
-    if (v === undefined) return null
-    if (!v) return null
-    return v
+    return v === undefined ? uncontrolledPair() : v
   }
 
   const emitPair = (next: TimeRangePickerValue | null) => {
-    props.onChange?.(next)
+    if (rawPair() === undefined) setUncontrolledPair(next)
+    if (props.onChange) props.onChange(next)
+    else form.onChange(next)
   }
 
   // The two machines — created ONCE (the createMemo-wraps-machine pitfall).
@@ -112,8 +112,6 @@ const TimeRangePicker: Component<TimeRangePickerProps> = providedProps => {
     get disabled() { return resolvedDisabled() },
     // Route both ends' changes through the range layer (the pair invariant).
     get onChange() { return (v: string | null) => handleEndChange('start', v) },
-    get onFocus() { return props.onFocus ? () => props.onFocus?.(undefined as unknown as FocusEvent) : undefined },
-    get onBlur() { return props.onBlur ? () => props.onBlur?.(undefined as unknown as FocusEvent) : undefined },
   })
 
   const endMachine = createTimePicker({
@@ -126,8 +124,6 @@ const TimeRangePicker: Component<TimeRangePickerProps> = providedProps => {
     get secondStep() { return props.secondStep },
     get disabled() { return resolvedDisabled() },
     get onChange() { return (v: string | null) => handleEndChange('end', v) },
-    get onFocus() { return props.onFocus ? () => props.onFocus?.(undefined as unknown as FocusEvent) : undefined },
-    get onBlur() { return props.onBlur ? () => props.onBlur?.(undefined as unknown as FocusEvent) : undefined },
   })
 
   /** Range layer: one end changed — keep start <= end (swap on inversion). */
@@ -143,9 +139,9 @@ const TimeRangePicker: Component<TimeRangePickerProps> = providedProps => {
       return
     }
     if (end === 'start') {
-      emitPair(v <= cur[1] ? [v, cur[1]] : [v, v])
+      emitPair(v <= cur[1] ? [v, cur[1]] : [cur[1], v])
     } else {
-      emitPair(cur[0] <= v ? [cur[0], v] : [v, v])
+      emitPair(cur[0] <= v ? [cur[0], v] : [v, cur[0]])
     }
   }
 
@@ -195,16 +191,14 @@ const TimeRangePicker: Component<TimeRangePickerProps> = providedProps => {
       for (const key of Object.keys(columnRefs)) {
         const col = columnRefs[key]
         if (!col) continue
-        const selected = col.querySelector('[data-selected="true"]')
-        selected?.scrollIntoView({ block: 'center' })
+        const selected = col.querySelector<HTMLElement>('[data-selected="true"]')
+        if (selected) col.scrollTop += selected.getBoundingClientRect().top - col.getBoundingClientRect().top - (col.clientHeight - selected.clientHeight) / 2
       }
     }, 60)
     onOwnerCleanup(() => clearTimeout(t))
   })
 
-  const handleClearPointerDown = (e: PointerEvent) => {
-    e.preventDefault()
-    e.stopPropagation()
+  const clearValue = () => {
     handleEndChange('start', null)
     startInputRef.current?.focus()
   }
@@ -288,22 +282,7 @@ const TimeRangePicker: Component<TimeRangePickerProps> = providedProps => {
           onFocus={e => { endMachine.notifyFocus(); props.onFocus?.(e) }}
           onBlur={e => { endMachine.notifyBlur(); props.onBlur?.(e) }}
         />
-        <span class={timeRangePickerSuffixClass()}>
-          <Show when={props.allowClear && pair() !== null}>
-            <span
-              class={timePickerClearWrapClass({ visible: pair() !== null && !resolvedDisabled() })}
-              role="button"
-              aria-label="清空"
-              tabindex={-1}
-              onPointerDown={handleClearPointerDown}
-            >
-              <span class="i-mdi-close-circle-outline" />
-            </span>
-          </Show>
-          <span class={timePickerIconClass()}>
-            <span class="i-mdi-clock-outline" />
-          </span>
-        </span>
+        <PickerSuffix size={resolvedSize()} allowClear={props.allowClear} hasValue={pair() !== null} disabled={resolvedDisabled()} icon="i-mdi-clock-outline" onClear={clearValue} />
       </div>
 
       <Portal>

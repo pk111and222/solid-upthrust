@@ -1,0 +1,17 @@
+[
+  { "name": "value", "type": "[string, string] | null", "default": "—", "description": "受控开始/结束时间；null 表示清空。" },
+  { "name": "defaultValue", "type": "[string, string] | null", "default": "—", "description": "非受控初始开始/结束时间。" },
+  { "name": "format", "type": "'HH:mm' | 'HH:mm:ss'", "default": "'HH:mm'", "description": "两端使用相同的时间精度。" },
+  { "name": "min / max", "type": "string", "default": "—", "description": "两端共享的包含边界。" },
+  { "name": "hourStep / minuteStep / secondStep", "type": "number", "default": "1", "description": "两端共用的对应列步长。" },
+  { "name": "disabled", "type": "boolean", "default": "false", "description": "禁用两端输入、选择和清空。" },
+  { "name": "allowClear", "type": "boolean", "default": "true", "description": "显示统一清空按钮；清空任一端会清除整个范围。" },
+  { "name": "placeholder", "type": "[string, string]", "default": "['开始时间', '结束时间']", "description": "起止输入各自的占位文本。" },
+  { "name": "size", "type": "SizeType", "default": "'middle'", "description": "控件尺寸，可从上下文继承。" },
+  { "name": "status", "type": "'error' | 'warning'", "default": "—", "description": "校验状态样式。" },
+  { "name": "open / onOpenChange", "type": "boolean / (open: boolean) => void", "default": "非受控关闭", "description": "受控面板开关与变化通知。" },
+  { "name": "id / name / class / style", "type": "string / JSX.CSSProperties", "default": "—", "description": "标识、原生 name、附加类与样式。id 会为起止输入生成后缀。" },
+  { "name": "onChange", "type": "(value: [string, string] | null) => void", "default": "—", "description": "有效选择或清空时通知；倒置区间会交换端点保持递增。" },
+  { "name": "onFocus / onBlur", "type": "(event: FocusEvent) => void", "default": "—", "description": "起止输入获得/失去焦点时通知。" },
+  { "name": "ref", "type": "(input: HTMLInputElement) => void", "default": "—", "description": "获取开始时间输入元素。" }
+]

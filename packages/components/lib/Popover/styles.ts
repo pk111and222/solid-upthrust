@@ -2,21 +2,21 @@
 import { cva, type VariantProps } from "class-variance-authority";
 import { twMerge } from "tailwind-merge";
 
-// Popover overlay: surface card, 8px radius, standard shadow, fade+scale.
-// Only opacity/transform transition — NEVER top/left (createTrigger
+// Popover overlay: surface card, 8px radius, standard shadow, fade.
+// Only opacity transitions — NEVER position or transform (createTrigger
 // re-positions on open/scroll/resize; transitioning position makes the layer
 // visibly fly across the screen).
 const popoverOverlayVariants = cva(
   [
     "bg-surface", "rounded-lg", "shadow",
-    "transition-overlay", "duration-fast", "ease-upthrust", "origin-bottom",
+    "transition-opacity", "duration-fast", "ease-upthrust", "origin-bottom",
     "outline-none",
   ],
   {
     variants: {
       visible: {
-        true: ["opacity-100", "scale-100"],
-        false: ["opacity-0", "scale-95", "pointer-events-none"],
+        true: ["opacity-100"],
+        false: ["opacity-0", "pointer-events-none"],
       },
       placement: {
         bottomLeft: ["origin-top-left"],

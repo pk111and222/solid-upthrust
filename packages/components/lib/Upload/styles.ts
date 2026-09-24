@@ -101,6 +101,7 @@ const uploadListItemVariants = cva(
   {
     variants: {
       state: {
+        pending: ["text-on-surface"],
         uploading: ["text-on-surface"],
         done: ["text-on-surface"],
         error: ["text-error"],
@@ -139,10 +140,11 @@ export const uploadItemRemoveClass = () =>
     "transition-upthrust-fast",
   ])
 
-export const uploadItemStatusIconClass = (state: 'uploading' | 'done' | 'error') =>
+export const uploadItemStatusIconClass = (state: 'pending' | 'uploading' | 'done' | 'error' | 'removed') =>
   twMerge([
     "shrink-0",
     "text-[14px]",
+    state === 'pending' ? "i-mdi-file-document-outline text-on-surface/45" : "",
     state === 'uploading' ? "i-mdi-loading animate-spin-upthrust text-primary" : "",
     state === 'done' ? "i-mdi-check-circle-outline text-primary" : "",
     state === 'error' ? "i-mdi-close-circle-outline text-error" : "",
@@ -169,6 +171,7 @@ const uploadPictureItemVariants = cva(
   {
     variants: {
       state: {
+        pending: ["border-outline-variant"],
         uploading: ["border-outline-variant"],
         done: ["border-outline-variant"],
         error: ["!border-error"],
@@ -227,6 +230,7 @@ const uploadCardItemVariants = cva(
   {
     variants: {
       state: {
+        pending: ["border-outline-variant"],
         uploading: ["border-outline-variant"],
         done: ["border-outline-variant"],
         error: ["!border-error"],

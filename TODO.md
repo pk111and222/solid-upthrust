@@ -27,7 +27,7 @@
 - Popover 收尾验证（2026-09-17）：5 文件（新增用例）、121 文件全量、1311 条 L1–L3 通过；类型与构建通过；Popover 专项 Playwright 43 条（docs+example 两项目）通过，重复两次稳定；docs 双 base 各 13 条通过；另有 Playwright MCP 交互验证。
 - Tabs 收尾验证（2026-09-17）：8 文件（新增用例）、127 文件全量、1337 条 L1–L3 通过；类型与构建通过；Tabs 专项 Playwright 15 条（docs+example 两项目）通过，重复两次稳定；docs 双 base 各 13 条通过（新增导航页触发路由/菜单套件）；另有 Playwright MCP 交互验证。C02 批次全部完成。
 - Input 收尾验证（2026-09-20）：5 文件、35 条 Input 用例通过；全量 133 文件、1373 条通过；专项浏览器 17 条、文档双 base 各 13 条通过；类型与构建通过，见 [input.md](docs/contributing/regressions/input.md)。
-- 默认下一事项：C05 已完成；按顺序处理 C06 TimePicker。
+- 默认下一事项：C06 的 TimePicker、DatePicker、ColorPicker、Upload 均已完成；后续按台账处理 C07 Form。
 
 ### 状态规则
 
@@ -116,6 +116,10 @@
 | C05 Mentions | 当前会话：Mentions 回归 | 当前工作区（main） | Mentions UI/headless、输入与候选交互、example/docs、分层测试与回归记录；不改锁文件 | 已验收 | 选中后光标位置二次修复；专项 38、浏览器 12、全量 1561、构建/类型/双 base 通过 | [执行记录](docs/contributing/regressions/mentions.md) |
 | C05 TreeSelect | 当前会话：TreeSelect 回归 | 当前工作区（main） | TreeSelect UI/headless、Tree/Trigger/Form/虚拟面板必要使用路径、example/docs；追加 Select/Cascader/TreeSelect 清除与弹层宽度统一；保护其他未提交修改 | 已验收 | 宽度策略和图标切换浏览器补验 22 条通过；全量 L1–L3 1585 条通过，类型与构建通过 | [执行记录](docs/contributing/regressions/tree-select.md) |
 | C05 Transfer | 当前任务：Transfer 完整回归 | 当前工作区（main） | Transfer UI/headless、Form 使用路径、example/docs、四层测试与回归记录；保护其他物料未提交改动 | 已验收 | 全量 1595、专项浏览器 16、docs 双 base 各 13 条通过；完整 B02/B06 后续单独验收 | [执行记录](docs/contributing/regressions/transfer.md) |
+| C06 TimePicker | 当前会话：TimePicker 物料回归 | 当前工作区（main） | TimePicker / RangePicker、示例/API、分层测试、专项浏览器与回归记录；不改共享能力与锁文件 | 已验收 | 全量 L1–L3 1606 条、类型/生产与 docs 构建、TimePicker 浏览器 7 条、docs 双 base 各 13 条通过；Form.Item 提交/resetFields 集成通过 | [执行记录](docs/contributing/regressions/time-picker.md) |
+| C06 DatePicker | 当前会话：DatePicker 物料回归 | 当前工作区（main） | DatePicker / RangePicker、示例/API、分层测试、专项浏览器与回归记录；保留 TimePicker 未提交修改 | 已验收 | 全量 L1–L3 1610 条、类型/构建、专项浏览器 12 条、docs 双 base 各 13 条通过；Form 回写与重复焦点事件已修复 | [执行记录](docs/contributing/regressions/date-picker.md) |
+| C06 ColorPicker | 当前会话：ColorPicker 物料回归 | 当前工作区（main） | 颜色转换/headless、Popover 使用路径、example/docs、分层测试及专项浏览器；保留 TimePicker/DatePicker 未提交修改 | 已验收 | 全量 L1–L3 1612 条、专项浏览器 10 条通过/4 条按范围跳过、类型/构建、docs 双 base 各 13 条通过；未发现生产逻辑缺陷 | [执行记录](docs/contributing/regressions/color-picker.md) |
+| C06 Upload | 当前会话：Upload 物料回归 | 当前工作区（main） | Upload/Dragger 异步队列、Form.Item、示例/docs、分层测试与专项浏览器；保留其他物料未提交修改 | 已验收 | 修复 Upload/Dragger Form.Item 字段回写；全量 L1–L3 1615 条、专项浏览器 7 条通过/5 条按范围跳过、类型/构建、docs 双 base 各 13 条通过 | [执行记录](docs/contributing/regressions/upload.md) |
 
 ## 3. 第一阶段：全部组件回归 C（用户指定优先）
 
@@ -179,10 +183,10 @@
 
 ### C06
 
-- [ ] TimePicker
-- [ ] DatePicker
-- [ ] ColorPicker
-- [ ] Upload
+- [x] TimePicker — 范围默认值/非受控状态、反向端点交换、focus/blur 与 Form.Item 集成已回归，见 [执行记录](docs/contributing/regressions/time-picker.md)
+- [x] DatePicker — 单值/范围 Form.Item 回写与 focus/blur 修复，四层回归、文档和示例通过，见 [执行记录](docs/contributing/regressions/date-picker.md)
+- [x] ColorPicker — 颜色转换、公开导出、Form.Item、示例/文档与专项浏览器通过，详见 [执行记录](docs/contributing/regressions/color-picker.md)
+- [x] Upload — 异步队列、拖拽、Form.Item 提交/重置与文档浏览器回归通过，详见 [执行记录](docs/contributing/regressions/upload.md)
 
 ### C07
 

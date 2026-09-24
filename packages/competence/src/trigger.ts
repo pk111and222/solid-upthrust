@@ -509,15 +509,27 @@ export const createTrigger = (config: TriggerConfig = {}) => {
       clearTimeout(_destroyTimer)
       if (isOpen) {
         _setMounted(true)
+        let revealAttempts = 0
         const reveal = () => {
+          clearTimeout(measureTimer)
+          measureTimer = undefined
           if (!open() || !_layerEl) return
+          if (_ready()) {
+            remeasure()
+            return
+          }
+          const triggerRect = _triggerEl?.getBoundingClientRect()
+          const layerRect = _layerEl.getBoundingClientRect()
+          if (!triggerRect?.width || !triggerRect.height || !layerRect.width || !layerRect.height) {
+            if (revealAttempts++ < 60) measureTimer = setTimeout(reveal, 16)
+            return
+          }
           remeasure()
           _setReady(true)
         }
         // Refs settle after the state change; support both normal frame delivery
         // and background pages whose animation frames are paused.
         reveal()
-        measureTimer = setTimeout(reveal, 0)
         measureFrame = requestAnimationFrame(reveal)
       } else if (lazy && _mounted()) {
         _destroyTimer = setTimeout(() => {

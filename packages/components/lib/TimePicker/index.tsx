@@ -12,14 +12,12 @@ import {
 import RangePicker from './RangePicker'
 import type { SizeType } from '../../common/type'
 import { useFormItem } from '../Input/context'
+import { PickerSuffix } from '../Select/PickerSuffix'
 import {
-  timePickerClearWrapClass,
   timePickerColumnClass,
   timePickerColumnsClass,
   timePickerDropdownClass,
-  timePickerIconClass,
   timePickerOptionWrapClass,
-  timePickerSuffixClass,
 } from './styles'
 
 export type { TimePickerUnit }
@@ -93,9 +91,10 @@ const TimePicker: Component<TimePickerProps> = providedProps => {
     get minuteStep() { return props.minuteStep },
     get secondStep() { return props.secondStep },
     get disabled() { return resolvedDisabled() },
-    get onChange() { return props.onChange },
-    get onFocus() { return props.onFocus ? () => props.onFocus?.(undefined as unknown as FocusEvent) : undefined },
-    get onBlur() { return props.onBlur ? () => props.onBlur?.(undefined as unknown as FocusEvent) : undefined },
+    get onChange() { return (value: string | null) => {
+      if (props.onChange) props.onChange(value)
+      else form.onChange(value)
+    } },
   })
 
   const trigger = createTrigger({
@@ -135,8 +134,8 @@ const TimePicker: Component<TimePickerProps> = providedProps => {
       for (const unit of m().units()) {
         const col = columnRefs[unit]
         if (!col) continue
-        const selected = col.querySelector('[data-selected="true"]')
-        selected?.scrollIntoView({ block: 'center' })
+        const selected = col.querySelector<HTMLElement>('[data-selected="true"]')
+        if (selected) col.scrollTop += selected.getBoundingClientRect().top - col.getBoundingClientRect().top - (col.clientHeight - selected.clientHeight) / 2
       }
     }, 60)
     onOwnerCleanup(() => clearTimeout(t))
@@ -185,9 +184,7 @@ const TimePicker: Component<TimePickerProps> = providedProps => {
 
   // The trigger's NATIVE click on the input stops propagation — the × must
   // use pointerdown (the Select pitfall).
-  const handleClearPointerDown = (e: PointerEvent) => {
-    e.preventDefault()
-    e.stopPropagation()
+  const clearValue = () => {
     m().clear()
     inputRef.current?.focus()
   }
@@ -248,22 +245,7 @@ const TimePicker: Component<TimePickerProps> = providedProps => {
             setFocusedUnit(unitAtCaret(el.value, el.selectionStart ?? 0))
           }}
         />
-        <span class={timePickerSuffixClass()}>
-          <Show when={props.allowClear && m().value() !== null}>
-            <span
-              class={timePickerClearWrapClass({ visible: m().value() !== null && !resolvedDisabled() })}
-              role="button"
-              aria-label="清空"
-              tabindex={-1}
-              onPointerDown={handleClearPointerDown}
-            >
-              <span class="i-mdi-close-circle-outline" />
-            </span>
-          </Show>
-          <span class={timePickerIconClass()}>
-            <span class="i-mdi-clock-outline" />
-          </span>
-        </span>
+        <PickerSuffix size={resolvedSize()} allowClear={props.allowClear} hasValue={m().value() !== null} disabled={resolvedDisabled()} icon="i-mdi-clock-outline" onClear={clearValue} />
       </div>
 
       <Portal>

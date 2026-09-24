@@ -1,0 +1,19 @@
+[
+  { "name": "picker", "type": "'date' | 'week' | 'month' | 'quarter' | 'year'", "default": "'date'", "description": "选择粒度；非日模式输出周期的起始日期。" },
+  { "name": "showTime", "type": "boolean | DatePickerTimeConfig", "default": "false", "description": "启用时间选择；配置可提供 defaultValue 与 HH:mm / HH:mm:ss 时间格式。" },
+  { "name": "presets", "type": "DatePreset<string, JSX.Element>[]", "default": "—", "description": "快捷日期；函数值在点击时求值。" },
+  { "name": "value", "type": "string | null", "default": "—", "description": "受控 YYYY-MM-DD 日期或带 HH:mm:ss 的日期时间；null 表示清空。" },
+  { "name": "defaultValue", "type": "string | null", "default": "—", "description": "非受控初始日期。" },
+  { "name": "min / max", "type": "string", "default": "—", "description": "包含边界的日期或日期时间。" },
+  { "name": "disabledDate", "type": "(iso: string) => boolean", "default": "—", "description": "按 YYYY-MM-DD 判断是否禁用日期。" },
+  { "name": "weekStart", "type": "0 | 1", "default": "0", "description": "日历从周日或周一开始。" },
+  { "name": "disabled / allowClear", "type": "boolean", "default": "false / true", "description": "禁用控件 / 允许清空。" },
+  { "name": "placeholder", "type": "string", "default": "请选择日期", "description": "空值占位文本。" },
+  { "name": "size / status", "type": "SizeType / 'error' | 'warning'", "default": "'middle' / —", "description": "尺寸和校验状态；可从 Form.Item 继承。" },
+  { "name": "open / onOpenChange", "type": "boolean / (open: boolean) => void", "default": "非受控关闭", "description": "受控浮层及开关通知。" },
+  { "name": "id / name / class / style", "type": "string / JSX.CSSProperties", "default": "—", "description": "输入标识、表单名及外层类与样式。" },
+  { "name": "onChange", "type": "(value: string | null) => void", "default": "—", "description": "选择、有效文本提交或清空时通知。" },
+  { "name": "onFocus / onBlur", "type": "(event: FocusEvent) => void", "default": "—", "description": "转发真实输入焦点事件。" },
+  { "name": "ref", "type": "(input: HTMLInputElement) => void", "default": "—", "description": "获取日期文本输入元素。" },
+  { "name": "DatePicker.RangePicker", "type": "RangePickerProps", "default": "—", "description": "静态范围子组件；也有独立命名导出 RangePicker。" }
+]

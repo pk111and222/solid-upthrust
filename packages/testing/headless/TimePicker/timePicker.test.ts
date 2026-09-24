@@ -12,12 +12,14 @@ import {
 const step = (fn: () => void) => { fn(); flush() }
 
 describe('pure time helpers', () => {
+  // 可解析分钟、秒格式与非补零输入。
   it('parseTime parses HH:mm and HH:mm:ss', () => {
     expect(parseTime('08:30')).toEqual({ hour: 8, minute: 30, second: 0 })
     expect(parseTime('08:30:45')).toEqual({ hour: 8, minute: 30, second: 45 })
     expect(parseTime('8:5')).toEqual({ hour: 8, minute: 5, second: 0 })
   })
 
+  // 空值、越界时分秒与非法字符串均拒绝解析。
   it('parseTime rejects invalid input', () => {
     expect(parseTime('')).toBeNull()
     expect(parseTime(null)).toBeNull()
@@ -27,11 +29,13 @@ describe('pure time helpers', () => {
     expect(parseTime('abc')).toBeNull()
   })
 
+  // 格式化输出固定两位并按格式决定秒字段。
   it('formatTime zero-pads', () => {
     expect(formatTime({ hour: 8, minute: 5, second: 3 })).toBe('08:05')
     expect(formatTime({ hour: 8, minute: 5, second: 3 }, 'HH:mm:ss')).toBe('08:05:03')
   })
 
+  // 时分秒与总秒数之间可往返转换并覆盖一天两端。
   it('toSeconds/fromSeconds round-trip', () => {
     const p = { hour: 8, minute: 30, second: 45 }
     expect(fromSeconds(toSeconds(p))).toEqual(p)
@@ -39,6 +43,7 @@ describe('pure time helpers', () => {
     expect(toSeconds({ hour: 23, minute: 59, second: 59 })).toBe(86399)
   })
 
+  // 时分选项按步长生成格点并标识非格点选项。
   it('unitOptions builds the lattice per step (off-step flagged disabled)', () => {
     const hours = unitOptions('hour', 1)
     expect(hours).toHaveLength(24)
@@ -53,6 +58,7 @@ describe('pure time helpers', () => {
 })
 
 describe('createTimePicker — value state', () => {
+  // 空实例保持 null，defaultValue 初始化非受控值。
   it('starts empty (or from defaultValue)', () => {
     createRoot(() => {
       expect(createTimePicker().value()).toBeNull()
@@ -60,6 +66,7 @@ describe('createTimePicker — value state', () => {
     })
   })
 
+  // 秒精度值保留秒字段。
   it('HH:mm:ss format keeps seconds', () => {
     createRoot(() => {
       const ins = createTimePicker({ defaultValue: '08:30:45', format: 'HH:mm:ss' })
@@ -67,6 +74,7 @@ describe('createTimePicker — value state', () => {
     })
   })
 
+  // 可解析的输入即时规范化、补零并通知变化。
   it('typing a parseable time commits immediately (normalized + padded)', () => {
     createRoot(() => {
       const onChange = vi.fn()
@@ -77,6 +85,7 @@ describe('createTimePicker — value state', () => {
     })
   })
 
+  // 未完成输入仅更新缓冲区，不提交有效值。
   it('half-typed input stays buffer-only until commit', () => {
     createRoot(() => {
       const onChange = vi.fn()
@@ -88,6 +97,7 @@ describe('createTimePicker — value state', () => {
     })
   })
 
+  // 无法解析的编辑在提交时回退到最后有效值。
   it('unparseable buffer reverts to the last valid value on commit', () => {
     createRoot(() => {
       const ins = createTimePicker({ defaultValue: '08:30' })
@@ -98,6 +108,7 @@ describe('createTimePicker — value state', () => {
     })
   })
 
+  // 失焦提交将最小值之外的时间夹到边界。
   it('blur commit snaps out-of-range into [min, max]', () => {
     createRoot(() => {
       const onChange = vi.fn()
@@ -109,6 +120,7 @@ describe('createTimePicker — value state', () => {
     })
   })
 
+  // 受控值不被内部编辑覆盖，但输入仍通知父层。
   it('controlled value wins; typing still reports', () => {
     createRoot(() => {
       const onChange = vi.fn()
@@ -119,6 +131,7 @@ describe('createTimePicker — value state', () => {
     })
   })
 
+  // 清空将内部值设为 null 并报告。
   it('clear empties the value', () => {
     createRoot(() => {
       const onClearChange = vi.fn()
@@ -129,6 +142,7 @@ describe('createTimePicker — value state', () => {
     })
   })
 
+  // 空输入失焦不会被误转换为零点。
   it('empty input stays empty through blur (not zeroed)', () => {
     createRoot(() => {
       const ins = createTimePicker()
@@ -140,6 +154,7 @@ describe('createTimePicker — value state', () => {
 })
 
 describe('createTimePicker — stepping (input steppers)', () => {
+  // 当前段按步长调整并在日内边界循环。
   it('steps the selected unit by its step, wrapping within range', () => {
     createRoot(() => {
       const ins = createTimePicker({ defaultValue: '08:30' })
@@ -155,6 +170,7 @@ describe('createTimePicker — stepping (input steppers)', () => {
     })
   })
 
+  // 小时步长参与递增并吸附到合法格点。
   it('hourStep scales the increment and snaps the lattice', () => {
     createRoot(() => {
       const ins = createTimePicker({ defaultValue: '08:30', hourStep: 3 })
@@ -167,6 +183,7 @@ describe('createTimePicker — stepping (input steppers)', () => {
     })
   })
 
+  // 空值首次步进从零点开始。
   it('stepping from empty starts at 00:00', () => {
     createRoot(() => {
       const ins = createTimePicker()
@@ -175,6 +192,7 @@ describe('createTimePicker — stepping (input steppers)', () => {
     })
   })
 
+  // 键盘步进结果限制在 min/max 内。
   it('stepSelected clamps into [min, max]', () => {
     createRoot(() => {
       const ins = createTimePicker({ defaultValue: '17:50', max: '18:00' })
@@ -183,6 +201,7 @@ describe('createTimePicker — stepping (input steppers)', () => {
     })
   })
 
+  // 禁用状态屏蔽键盘步进。
   it('disabled blocks stepping', () => {
     createRoot(() => {
       const ins = createTimePicker({ defaultValue: '08:30', disabled: true })
@@ -193,6 +212,7 @@ describe('createTimePicker — stepping (input steppers)', () => {
 })
 
 describe('createTimePicker — panel', () => {
+  // 时间格式决定面板显示的列数。
   it('units reflect the format', () => {
     createRoot(() => {
       expect(createTimePicker().units()).toEqual(['hour', 'minute'])
@@ -200,6 +220,7 @@ describe('createTimePicker — panel', () => {
     })
   })
 
+  // 活跃项初始锚定当前值，空值锚定零。
   it('active anchors at the current value (or 0 when empty)', () => {
     createRoot(() => {
       const ins = createTimePicker({ defaultValue: '08:30' })
@@ -210,6 +231,7 @@ describe('createTimePicker — panel', () => {
     })
   })
 
+  // 活跃项按格点前后移动并跳过禁用项。
   it('moveActive walks the lattice skipping disabled (off-step) options', () => {
     createRoot(() => {
       const ins = createTimePicker({ hourStep: 5 })
@@ -222,6 +244,7 @@ describe('createTimePicker — panel', () => {
     })
   })
 
+  // 选择单列选项会保留其他时分秒部分并通知。
   it('pickUnit sets one unit and keeps the others', () => {
     createRoot(() => {
       const onChange = vi.fn()
@@ -234,6 +257,7 @@ describe('createTimePicker — panel', () => {
     })
   })
 
+  // 选择新小时会把原先非格点分钟向下吸附。
   it('pickUnit snaps an off-lattice defaultValue onto the step lattice', () => {
     createRoot(() => {
       const ins = createTimePicker({ defaultValue: '08:37', minuteStep: 15 })
@@ -242,6 +266,7 @@ describe('createTimePicker — panel', () => {
     })
   })
 
+  // 非步长选项标记为禁用，格点选项可用。
   it('off-step options are flagged disabled', () => {
     createRoot(() => {
       const ins = createTimePicker({ hourStep: 5 })
@@ -250,6 +275,7 @@ describe('createTimePicker — panel', () => {
     })
   })
 
+  // 面板选项根据其余时间段上下文应用 min/max。
   it('options outside [min, max] are disabled (contextual)', () => {
     createRoot(() => {
       const ins = createTimePicker({ defaultValue: '10:00', min: '09:00', max: '12:00' })
@@ -259,6 +285,7 @@ describe('createTimePicker — panel', () => {
     })
   })
 
+  // 直接选择禁用选项不改变时间。
   it('pickUnit on a disabled option is a no-op', () => {
     createRoot(() => {
       const ins = createTimePicker({ defaultValue: '08:30', hourStep: 5 })
@@ -267,6 +294,7 @@ describe('createTimePicker — panel', () => {
     })
   })
 
+  // 面板开关状态可由 UI 同步设置。
   it('open state mirrors for the UI trigger', () => {
     createRoot(() => {
       const ins = createTimePicker()
@@ -277,6 +305,7 @@ describe('createTimePicker — panel', () => {
     })
   })
 
+  // 秒列选择保留时分并更新秒值。
   it('seconds column works in HH:mm:ss', () => {
     createRoot(() => {
       const ins = createTimePicker({ defaultValue: '08:30:15', format: 'HH:mm:ss' })
@@ -287,6 +316,7 @@ describe('createTimePicker — panel', () => {
 })
 
 describe('createTimePicker — IME-ish and focus', () => {
+  // 焦点状态及获得/失去焦点通知保持一致。
   it('focus/blur notifications track', () => {
     createRoot(() => {
       const onFocus = vi.fn()
@@ -301,6 +331,7 @@ describe('createTimePicker — IME-ish and focus', () => {
     })
   })
 
+  // 命令式赋值验证格式、吸附步长并支持清空。
   it('setValue validates and snaps (programmatic API)', () => {
     createRoot(() => {
       const ins = createTimePicker({ hourStep: 2 })

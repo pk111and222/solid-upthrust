@@ -99,6 +99,7 @@ const Dragger: Component<DraggerProps> = (rawProps) => {
   )
 
   const form = useFormItem({
+    get value() { return props.value },
     get disabled() { return props.disabled },
     get id() { return props.id },
     get size() { return props.size },
@@ -107,7 +108,7 @@ const Dragger: Component<DraggerProps> = (rawProps) => {
   const resolvedDisabled = () => form.disabled()
 
   const machine = createUpload({
-    get value() { return props.value as UploadFile[] | undefined },
+    get value() { return form.value() as UploadFile[] | undefined },
     get defaultValue() { return props.defaultValue },
     get action() { return props.action },
     get data() { return props.data },
@@ -121,7 +122,7 @@ const Dragger: Component<DraggerProps> = (rawProps) => {
     get disabled() { return resolvedDisabled() },
     get beforeUpload() { return props.beforeUpload },
     get beforeRemove() { return props.beforeRemove },
-    get onChange() { return props.onChange },
+    onChange: info => { form.onChange(info.fileList); props.onChange?.(info) },
     get onProgress() { return props.onProgress },
     get onSuccess() { return props.onSuccess },
     get onError() { return props.onError },

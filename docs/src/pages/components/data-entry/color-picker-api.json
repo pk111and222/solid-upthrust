@@ -1,0 +1,18 @@
+[
+  { "name": "value / defaultValue", "type": "ColorInput | null", "default": "—", "description": "受控颜色和非受控初始颜色；null 表示清空。支持字符串、Color、RGB/HSB 通道对象。" },
+  { "name": "format / defaultFormat", "type": "'hex' | 'rgb' | 'hsb'", "default": "'hex'", "description": "受控与非受控的文本显示格式，不改变 CSS 回调参数。" },
+  { "name": "open / defaultOpen", "type": "boolean", "default": "false", "description": "受控与非受控的浮层状态；inline 模式不使用浮层。" },
+  { "name": "disabled", "type": "boolean", "default": "false", "description": "禁用触发按钮和面板交互。" },
+  { "name": "disabledAlpha / disabledFormat", "type": "boolean", "default": "false", "description": "强制不透明且隐藏透明度滑块 / 锁定格式切换。" },
+  { "name": "allowClear", "type": "boolean", "default": "false", "description": "提供清除按钮，回调接收 null 与空 CSS 字符串。" },
+  { "name": "presets", "type": "readonly ColorPickerPreset[]", "default": "—", "description": "分组预设色；非法颜色不显示。" },
+  { "name": "showText", "type": "boolean | ((color: Color | null) => JSX.Element)", "default": "false", "description": "在触发按钮旁显示当前颜色文本或自定义内容。" },
+  { "name": "size / status", "type": "'small' | 'middle' | 'large' / 'error' | 'warning'", "default": "'middle' / —", "description": "触发按钮尺寸与校验状态；可从 Form.Item 继承。" },
+  { "name": "inline / placement", "type": "boolean / PopoverPlacement", "default": "false / 'bottomLeft'", "description": "直接渲染面板 / 弹层位置。" },
+  { "name": "id / name / aria-label", "type": "string", "default": "— / — / '选择颜色'", "description": "按钮标识、隐藏原生字段名与可访问名称。" },
+  { "name": "class / style / panelClass", "type": "string / JSX.CSSProperties / string", "default": "—", "description": "外层和面板的额外样式。" },
+  { "name": "onChange", "type": "(color: Color | null, css: string) => void", "default": "—", "description": "实时颜色变更；css 为有效 RGB(A) 字符串，清空时为空字符串。" },
+  { "name": "onChangeComplete", "type": "(color: Color | null) => void", "default": "—", "description": "取色手势、滑块、文本或预设交互完成时通知。" },
+  { "name": "onFormatChange / onOpenChange", "type": "(format: ColorFormat) => void / (open: boolean) => void", "default": "—", "description": "格式与弹层状态变化通知。" },
+  { "name": "onClear", "type": "() => void", "default": "—", "description": "清空时额外通知一次。" }
+]

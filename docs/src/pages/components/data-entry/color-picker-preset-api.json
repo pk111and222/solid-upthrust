@@ -1,0 +1,4 @@
+[
+  { "name": "label", "type": "string", "default": "必填", "description": "预设色分组的显示标题。" },
+  { "name": "colors", "type": "readonly ColorInput[]", "default": "必填", "description": "颜色列表；每项按 ColorInput 解析，非法颜色跳过。" }
+]

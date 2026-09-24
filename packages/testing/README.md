@@ -159,3 +159,7 @@ AutoComplete 专项配置为 `playwright.auto-complete.config.ts`，验证 docs/
 Mentions 专项配置为 `playwright.mentions.config.ts`，验证 docs/example 的键盘与鼠标提交、候选关闭与定位、异步候选、Form.Item、开发绘制及静态 API。见 [回归记录](../../docs/contributing/regressions/mentions.md)。
 
 Transfer 专项配置为 `playwright.transfer.config.ts`，验证 docs/example 的双向移动、搜索全选、单向移除、动态数据、窄屏键盘、Form.Item、静态页面与开发绘制。见 [回归记录](../../docs/contributing/regressions/transfer.md)。
+
+DatePicker 专项配置为 `playwright.date-picker.config.ts`，验证 docs/example 的日期选择、范围、季度、时间、快捷选择、禁用、键盘及静态 API。见 [回归记录](../../docs/contributing/regressions/date-picker.md)。
+
+Upload 专项配置为 `playwright.upload.config.ts`，验证文件选择、异步处理边界、拖拽 accept 与拒绝回调、手动上传、Form.Item 提交/重置、自定义重试及静态 API。见 [回归记录](../../docs/contributing/regressions/upload.md)。

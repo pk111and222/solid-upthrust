@@ -7,7 +7,7 @@ const TimePickerPage: Component = () => {
   const [basic, setBasic] = createSignal<string | null>(null)
   const [withSeconds, setWithSeconds] = createSignal<string | null>('09:30:15')
   const [stepped, setStepped] = createSignal<string | null>(null)
-  const [range, setRange] = createSignal<[string, string] | null>(null)
+  const [range, setRange] = createSignal<[string, string] | null>(['09:00', '17:30'])
 
   return (
     <div class="p-6 max-w-3xl">

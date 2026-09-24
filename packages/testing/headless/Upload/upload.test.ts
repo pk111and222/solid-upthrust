@@ -93,8 +93,11 @@ describe('createUpload — add pipeline', () => {
       const ins = createUpload({ request, autoUpload: false })
       step(() => ins.addFiles([mkFile('a.png')], 'select'))
       expect(calls).toHaveLength(0)
+      expect(ins.fileList()[0].status).toBeUndefined()
+      expect(ins.fileList()[0].percent).toBeUndefined()
       step(() => ins.post())
       expect(calls).toHaveLength(1)
+      expect(ins.fileList()[0].status).toBe('uploading')
     })
   })
 

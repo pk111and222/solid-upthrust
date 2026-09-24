@@ -1,0 +1,18 @@
+[
+  { "name": "value", "type": "string | null", "default": "—", "description": "受控时间值，按 format 输出；null 表示清空。" },
+  { "name": "defaultValue", "type": "string | null", "default": "—", "description": "非受控初始时间。" },
+  { "name": "format", "type": "'HH:mm' | 'HH:mm:ss'", "default": "'HH:mm'", "description": "选择面板与输入显示的精度。" },
+  { "name": "min / max", "type": "string", "default": "—", "description": "包含边界的最早/最晚时间，格式为 HH:mm 或 HH:mm:ss。" },
+  { "name": "hourStep / minuteStep / secondStep", "type": "number", "default": "1", "description": "对应列选项和步进的间隔；非步长选项不可选。" },
+  { "name": "disabled", "type": "boolean", "default": "false", "description": "禁用输入、面板选择与清空。" },
+  { "name": "allowClear", "type": "boolean", "default": "true", "description": "显示清空按钮。" },
+  { "name": "placeholder", "type": "string", "default": "请选择时间", "description": "空值时显示的提示。" },
+  { "name": "size", "type": "SizeType", "default": "'middle'", "description": "控件尺寸；可从 Form.Item / ConfigProvider 继承。" },
+  { "name": "status", "type": "'error' | 'warning'", "default": "—", "description": "校验状态样式。" },
+  { "name": "open / onOpenChange", "type": "boolean / (open: boolean) => void", "default": "非受控关闭", "description": "受控面板开关及状态变化通知。" },
+  { "name": "id / name / class / style", "type": "string / JSX.CSSProperties", "default": "—", "description": "输入标识、原生 name、附加类与样式。" },
+  { "name": "onChange", "type": "(value: string | null) => void", "default": "—", "description": "有效选择、输入提交或清空时通知。" },
+  { "name": "onFocus / onBlur", "type": "(event: FocusEvent) => void", "default": "—", "description": "输入获得/失去焦点时通知。" },
+  { "name": "ref", "type": "(input: HTMLInputElement) => void", "default": "—", "description": "获取文本输入元素。" },
+  { "name": "TimePicker.RangePicker", "type": "TimeRangePickerProps", "default": "—", "description": "范围选择器；value/defaultValue 为 [start, end] 或 null，提供相同时间配置并在反向选择时调整顺序。" }
+]

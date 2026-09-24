@@ -163,7 +163,6 @@ const Upload: Component<UploadProps> = (providedProps) => {
 
   const form = useFormItem({
     get value() { return props.value },
-    get onChange() { return undefined },
     get disabled() { return props.disabled },
     get id() { return props.id },
     get size() { return props.size },
@@ -175,7 +174,7 @@ const Upload: Component<UploadProps> = (providedProps) => {
 
   // Created ONCE in the component body (the createMemo-wraps-machine pitfall).
   const machine = createUpload({
-    get value() { return props.value as UploadFile[] | undefined },
+    get value() { return form.value() as UploadFile[] | undefined },
     get defaultValue() { return props.defaultValue },
     get action() { return props.action },
     get data() { return props.data },
@@ -189,7 +188,7 @@ const Upload: Component<UploadProps> = (providedProps) => {
     get disabled() { return resolvedDisabled() },
     get beforeUpload() { return props.beforeUpload },
     get beforeRemove() { return props.beforeRemove },
-    get onChange() { return props.onChange },
+    onChange: info => { form.onChange(info.fileList); props.onChange?.(info) },
     get onProgress() { return props.onProgress },
     get onSuccess() { return props.onSuccess },
     get onError() { return props.onError },
@@ -324,7 +323,7 @@ const Upload: Component<UploadProps> = (providedProps) => {
   }
 
   const ItemRow: Component<{ file: UploadFile }> = (p) => {
-    const state = () => (p.file.status ?? 'done') as 'uploading' | 'done' | 'error'
+    const state = () => p.file.status ?? 'pending'
     const pct = () => p.file.percent ?? 0
     const url = () => urlPool.urlOf(p.file)
     return (

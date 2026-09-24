@@ -1,0 +1,16 @@
+[
+  { "name": "value / defaultValue", "type": "[string, string] | null", "default": "—", "description": "受控区间与非受控初始区间；字符串使用 YYYY-MM-DD 或带时间格式。" },
+  { "name": "showTime", "type": "boolean | DatePickerTimeConfig", "default": "false", "description": "两端共享时间选择配置。" },
+  { "name": "presets", "type": "DatePreset<[string, string], JSX.Element>[]", "default": "—", "description": "快捷区间；函数值在点击时求值。" },
+  { "name": "min / max", "type": "string", "default": "—", "description": "两端共享的包含边界。" },
+  { "name": "disabledDate", "type": "(iso: string) => boolean", "default": "—", "description": "按单日判断是否禁用。" },
+  { "name": "weekStart", "type": "0 | 1", "default": "0", "description": "左右面板的星期起始日。" },
+  { "name": "disabled / allowClear", "type": "boolean", "default": "false / true", "description": "禁用两端 / 清空整个区间。" },
+  { "name": "placeholder", "type": "[string, string]", "default": "['开始日期', '结束日期']", "description": "起止输入各自的占位文本。" },
+  { "name": "size / status", "type": "SizeType / 'error' | 'warning'", "default": "'middle' / —", "description": "尺寸和校验状态。" },
+  { "name": "open / onOpenChange", "type": "boolean / (open: boolean) => void", "default": "非受控关闭", "description": "受控浮层及开关通知。" },
+  { "name": "id / name / class / style", "type": "string / JSX.CSSProperties", "default": "—", "description": "输入标识、表单名及外层类与样式；id 生成起止后缀。" },
+  { "name": "onChange", "type": "(value: [string, string] | null) => void", "default": "—", "description": "有效选择、输入提交或清空时通知。" },
+  { "name": "onFocus / onBlur", "type": "(event: FocusEvent) => void", "default": "—", "description": "起止输入转发真实焦点事件。" },
+  { "name": "ref", "type": "(input: HTMLInputElement) => void", "default": "—", "description": "获取开始日期输入元素。" }
+]

@@ -1,5 +1,5 @@
 import { type Component, createSignal, Show } from 'solid-js'
-import { DatePicker, RangePicker, Space, Divider, Typography } from 'upthrust-ui'
+import { DatePicker, RangePicker, Space, Divider, Typography, Form, FormItem } from 'upthrust-ui'
 
 const { Text } = Typography
 
@@ -7,6 +7,7 @@ const DatePickerPage: Component = () => {
   const [basic, setBasic] = createSignal<string | null>(null)
   const [range, setRange] = createSignal<[string, string] | null>(null)
   const [picked, setPicked] = createSignal('')
+  const [formResult, setFormResult] = createSignal('尚未提交')
 
   return (
     <div class="p-6 max-w-3xl">
@@ -111,6 +112,16 @@ const DatePickerPage: Component = () => {
       ]} onChange={setRange} />
       <p class="mt-2 text-on-surface-variant">{range()?.join(' ~ ')}</p>
       <DatePicker presets={[{ label: '项目起始日', value: '2026-09-01' }]} />
+      <Divider />
+      <h3 class="text-lg font-semibold mb-3">Form.Item 日期与区间</h3>
+      <div class="max-w-md">
+        <Form initialValues={{ date: '2026-09-15', range: ['2026-09-10', '2026-09-20'] }} onFinish={values => setFormResult(JSON.stringify(values))}>
+          <FormItem name="date" label="预约日期">{() => <DatePicker />}</FormItem>
+          <FormItem name="range" label="有效期限">{() => <DatePicker.RangePicker />}</FormItem>
+          <div class="flex gap-2"><button type="submit">提交日期</button><button type="reset">重置日期</button></div>
+        </Form>
+        <output>{formResult()}</output>
+      </div>
     </div>
   )
 }

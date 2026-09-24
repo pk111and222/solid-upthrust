@@ -14,14 +14,14 @@ import { cva, type VariantProps } from "class-variance-authority";
 const timePickerDropdownVariants = cva(
   [
     "bg-surface", "rounded-lg", "shadow", "p-[4px]",
-    "transition-overlay", "duration-fast", "ease-upthrust", "origin-top",
+    "transition-opacity", "duration-fast", "ease-upthrust", "origin-top",
     "outline-none",
   ],
   {
     variants: {
       visible: {
-        true: ["opacity-100", "scale-100"],
-        false: ["opacity-0", "scale-95", "pointer-events-none"],
+        true: ["opacity-100"],
+        false: ["opacity-0", "pointer-events-none"],
       },
       placement: {
         bottomLeft: ["origin-top-left"],

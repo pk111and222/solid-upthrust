@@ -1,0 +1,13 @@
+[
+  { "name": "value / defaultValue", "type": "UploadFile[]", "default": "[]", "description": "受控文件列表或非受控初始列表；Form.Item 未显式指定 value 时也会管理文件列表。" },
+  { "name": "action / request", "type": "string | (file) => string / UploadRequest", "default": "— / XHR", "description": "上传地址或自定义传输；request 返回 abort 方法并接收进度、成功和失败回调。" },
+  { "name": "autoUpload / maxCount", "type": "boolean / number", "default": "true / —", "description": "关闭自动上传后通过开始上传按钮提交；1 替换为新文件，大于 1 时裁剪最早项。" },
+  { "name": "beforeUpload / beforeRemove", "type": "(file, fileList) => boolean | Blob | Promise", "default": "—", "description": "上传前校验或替换原始 Blob；移除前返回 false 可取消移除。" },
+  { "name": "accept / multiple / directory", "type": "string / boolean / boolean", "default": "— / true / false", "description": "文件类型筛选、多选和目录选择；拖拽不匹配项通过 onDropReject 通知。" },
+  { "name": "listType / showUploadList", "type": "'text' | 'picture' | 'picture-card' / boolean | UploadListConfig", "default": "'text' / true", "description": "列表视觉类型和预览、移除、下载、额外内容配置。" },
+  { "name": "children / itemRender / iconRender", "type": "JSX.Element / render callbacks", "default": "—", "description": "自定义上传触发器、列表项与状态图标。" },
+  { "name": "onChange / onProgress / onSuccess / onError", "type": "callbacks", "default": "—", "description": "文件队列或上传状态变化通知；onChange 提供当前文件和完整 fileList。" },
+  { "name": "onRemove / onPreview / onDownload / onDropReject", "type": "callbacks", "default": "—", "description": "列表操作与拖拽拒绝通知。" },
+  { "name": "disabled / size / status / id / class / style", "type": "component props", "default": "—", "description": "交互、尺寸、校验和根元素属性；disabled、size、status 可从 Form.Item 继承。" },
+  { "name": "Dragger", "type": "Upload.Dragger / named Dragger / UploadDragger", "default": "—", "description": "可点击并支持拖放的虚线上传区域，共用 Upload 文件队列与异步请求逻辑。" }
+]
