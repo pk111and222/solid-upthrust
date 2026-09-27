@@ -1,9 +1,0 @@
-
- RUN  v4.1.10 /Users/zhangchen327/code/github/pk111and222/solid-upthrust/packages/testing
-
-
- Test Files  6 passed (6)
-      Tests  24 passed (24)
-   Start at  15:41:35
-   Duration  1.62s (transform 1.90s, setup 0ms, import 2.62s, tests 675ms, environment 2.22s)
-
