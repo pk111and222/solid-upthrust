@@ -1,0 +1,10 @@
+$ vitest run render/Avatar
+
+ RUN  v4.1.10 /Users/zhangchen327/code/github/pk111and222/solid-upthrust/packages/testing
+
+
+ Test Files  1 passed (1)
+      Tests  20 passed (20)
+   Start at  21:48:22
+   Duration  662ms (transform 284ms, setup 0ms, import 364ms, tests 45ms, environment 175ms)
+

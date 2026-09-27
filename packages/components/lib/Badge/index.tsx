@@ -1,21 +1,18 @@
-import { Component, Show, createMemo, merge } from 'solid-js'
+import { Match, Show, Switch, children as resolveChildren, createMemo, merge, omit } from 'solid-js'
 import type { JSX } from '@solidjs/web'
-import { twMerge } from 'tailwind-merge'
-import { createBadge, badgeOffsetStyle, type BadgeStatus } from 'upthrust-competence'
+import { badgeOffsetStyle, createBadge, resolveBadgeColorKey, type BadgeStatus, type PresetColor } from 'upthrust-competence'
+import { mergeClass } from '../../common/merge'
+import { numberToText } from '../../common/renderable'
 import {
-  badgeWrapperClass,
-  badgeCountClass,
-  badgeDotClass,
-  badgeStatusDotClass,
-  badgeStatusTextClass,
-  ribbonClass,
-  ribbonContentClass,
-  ribbonWrapperClass,
+  badgeCountClass, badgeCustomClass, badgeDotClass, badgeRootClass, badgeStatusDotClass, badgeStatusTextClass,
+  ribbonClass, ribbonContentClass, ribbonWrapperClass,
 } from './styles'
 
-export type BadgeSize = 'small' | 'middle'
-/** antd PresetStatusColorType + 'gray' (the library's neutral mapping). */
-export type BadgeColor = 'blue' | 'red' | 'green' | 'gray' | string
+export type { BadgeStatus } from 'upthrust-competence'
+/** middle 为本库命名；medium 为 antd 6 命名，两者等价。 */
+export type BadgeSize = 'small' | 'middle' | 'medium'
+/** antd 预设色板、本库扩展的 gray，或任意 CSS 颜色。 */
+export type BadgeColor = PresetColor | 'gray' | (string & {})
 export type BadgePlacement = 'start' | 'end'
 
 export interface BadgeSemanticSlots {
@@ -28,231 +25,196 @@ export interface BadgeSemanticStyles {
   indicator?: JSX.CSSProperties
 }
 
-export interface BadgeProps {
-  /** Number/string renders a pill (numbers get overflow formatting); JSX = custom badge node. */
+export interface BadgeProps extends Omit<JSX.HTMLAttributes<HTMLSpanElement>, 'title' | 'children' | 'class' | 'style' | 'color'> {
+  /** 数字/字符串渲染为圆角数字（超出 overflowCount 显示 N+）；JSX 为自定义徽标节点。 */
   count?: number | string | JSX.Element
-  /** Cap for numeric counts; above shows `${overflowCount}+`. Default 99. */
+  /** 封顶数值，默认 99。 */
   overflowCount?: number
-  /** Zero counts stay hidden unless true. */
+  /** 数值为 0 时仍然显示。 */
   showZero?: boolean
-  /** Red dot mode — no number. */
+  /** 只显示小圆点。 */
   dot?: boolean
+  /** 数字尺寸，默认 middle。 */
   size?: BadgeSize
-  /** `[x, y]` badge offset from the corner; positive x pushes further out. */
+  /** [x, y] 偏移：x 越大越向右外移（right: -x），y 为 margin-top。 */
   offset?: [number | string, number | string]
   status?: BadgeStatus
-  /** Named preset ('blue'|'red'|'green'|'gray') or any CSS color. */
   color?: BadgeColor
-  /** Status text beside the dot (status mode). */
+  /** 状态点旁的文本（status 或 color 时生效）。 */
   text?: JSX.Element
-  /** Badge tooltip; default = the count. null/false disables. */
+  /** 悬停提示，默认取 count；null/false 移除。 */
   title?: string | null | false
   classNames?: BadgeSemanticSlots
   styles?: BadgeSemanticStyles
   class?: string
+  /** 与 antd 一致：状态点模式作用于根节点，其余作用于徽标节点。 */
   style?: JSX.CSSProperties
-  /** Wrapping target — the badge anchors to its top-right corner. */
+  /** 被包裹的元素，徽标定位在其右上角。 */
   children?: JSX.Element
 }
 
-/** Named colors route to token classes; anything else inlines the background. */
-const NAMED_COLORS = ['blue', 'red', 'green', 'gray'] as const
-type NamedColor = (typeof NAMED_COLORS)[number]
+const OWN = [
+  'count', 'overflowCount', 'showZero', 'dot', 'size', 'offset', 'status', 'color', 'text', 'title',
+  'classNames', 'styles', 'class', 'style', 'children',
+] as const
 
-const namedColorOf = (color?: string): NamedColor | undefined =>
-  color && (NAMED_COLORS as readonly string[]).includes(color) ? (color as NamedColor) : undefined
+const isRenderable = (node: unknown) => node !== undefined && node !== null && node !== false && node !== true && node !== ''
 
-/** Statuses and named colors share one class-key space (see styles.ts). */
-const indicatorColorKey = (status?: BadgeStatus, color?: string): string => {
-  if (status) return status
-  const named = namedColorOf(color)
-  if (named === 'blue') return 'primary'
-  if (named === 'red') return 'error'
-  if (named === 'green') return 'success'
-  if (named === 'gray') return 'gray'
-  // an explicit non-preset color inlines its background; NO color/status at
-  // all is antd's default red (badgeColor = colorError)
-  if (color) return 'custom'
-  return 'error'
+/** 单节点直接返回，多节点保持数组；空数组视为未设置。 */
+const single = (value: unknown) => Array.isArray(value) ? (value.length === 0 ? undefined : value.length === 1 ? value[0] : value) : value
+
+/** antd ScrollNumber：style.borderColor 以内嵌阴影模拟描边。 */
+const withBorderShadow = (style: JSX.CSSProperties): JSX.CSSProperties => {
+  const border = style['border-color']
+  return border ? { ...style, 'box-shadow': `0 0 0 1px ${border} inset` } : style
 }
 
-const isCustomColor = (status?: BadgeStatus, color?: string): boolean =>
-  !status && !!color && !namedColorOf(color)
-
-const isTextNode = (v: unknown): v is string | number =>
-  typeof v === 'string' || typeof v === 'number'
-
-const Badge: Component<BadgeProps> = (rawProps) => {
+const Badge = (rawProps: BadgeProps) => {
   const props = merge({ size: 'middle' as BadgeSize, overflowCount: 99 }, rawProps)
+  const rest = omit(rawProps, ...OWN)
 
-  // antd's count prop accepts ReactNode; the headless resolver only cares
-  // about numbers/strings (a JSX node is a pass-through custom badge).
-  const countValue = createMemo<unknown>(() =>
-    isTextNode(props.count) || typeof props.count === 'number' ? props.count : props.count !== undefined && props.count !== null ? 'custom' : undefined,
-  )
+  // JSX 属性每次读取都会新建节点：children / count / text 各解析一次后复用。
+  const resolvedChildren = resolveChildren(() => props.children)
+  const resolvedCount = resolveChildren(() => props.count as JSX.Element)
+  const resolvedText = resolveChildren(() => props.text)
+  const hasChildren = createMemo(() => resolvedChildren.toArray().some(isRenderable))
+  const count = createMemo(() => single(resolvedCount()))
+  const text = createMemo(() => single(resolvedText()))
 
   const badge = createBadge({
-    get count() { return countValue() as number | string | undefined },
+    get count() { return count() },
     get overflowCount() { return props.overflowCount },
     get showZero() { return props.showZero },
     get dot() { return props.dot },
     get status() { return props.status },
     get color() { return props.color },
-    get text() { return isTextNode(props.text) ? props.text : props.text !== undefined ? 'text' : undefined },
+    get text() { return text() },
+    get hasChildren() { return hasChildren() },
   })
   const display = badge.display
 
-  const hasChildren = createMemo(() => props.children !== undefined && props.children !== null)
-
-  // Status mode = no children AND (status/color set with nothing better to show)
-  const isStatusMode = createMemo(() => {
-    if (hasChildren()) return false
+  // 离场动画期间保留最后一次可见的内容与形态（antd 的 countRef / isDotRef）。
+  const shown = createMemo<{ dot: boolean; custom: boolean; count: unknown; words: boolean; title: string | undefined }>(previous => {
     const d = display()
-    // antd isStatusBadge: !children && hasStatus && (text || hasStatusValue || !ignoreCount)
-    if (!d.hasStatus) return false
-    return d.textVisible || d.hasStatus || !d.ignoreCount
+    if (d.hidden && previous) return previous
+    const raw = count()
+    const fallbackTitle = typeof raw === 'string' || typeof raw === 'number' ? String(raw) : undefined
+    const title = props.title === null || props.title === false ? undefined : props.title ?? fallbackTitle
+    return { dot: d.showAsDot, custom: d.isCustom, count: numberToText(d.displayCount), words: d.multipleWords, title }
   })
 
   const offsetStyle = createMemo(() => badgeOffsetStyle(props.offset))
+  const isCustomColor = () => resolveBadgeColorKey('count', undefined, props.color) === 'custom'
 
-  const customInlineStyle = createMemo((): JSX.CSSProperties | undefined => {
-    if (!isCustomColor(props.status, props.color)) return undefined
-    return { 'background-color': props.color! }
-  })
-
-  // antd: title defaults to the rendered count (numbers/strings only — a
-  // custom-node count gets NO default title; the 'custom' sentinel sent to
-  // the resolver must never leak into the DOM).
-  const titleNode = createMemo(() => {
-    if (props.title === null || props.title === false) return undefined
-    if (props.title !== undefined) return props.title
-    return isTextNode(props.count) ? String(props.count) : undefined
-  })
-
-  const colorKey = createMemo(() => indicatorColorKey(props.status, props.color))
-  const sizeMode = createMemo(() => `${props.size}-${hasChildren() ? 'wrapped' : 'standalone'}` as const)
-
-  // antd Badge semantics: the top-level `style` lands on the INDICATOR
-  // (antd's legacyStyleKey routes it there), not the wrapper — the classic
-  // usage is `style={{ backgroundColor: 'transparent', color: '#999' }}`
-  // to restyle a custom count node.
-  const indicatorStyle = createMemo((): JSX.CSSProperties => ({
+  const indicatorStyle = createMemo((): JSX.CSSProperties => withBorderShadow({
     ...offsetStyle(),
-    ...customInlineStyle(),
-    ...props.style,
     ...props.styles?.indicator,
+    ...props.style,
+    // antd：自定义颜色最后写入，覆盖 style 中的背景
+    ...(isCustomColor() ? { 'background-color': props.color } : undefined),
   }))
 
-  // Pill content: a custom count node renders as-is; otherwise the formatted
-  // count. Built as a memo (NOT as <Show>{props.count}</Show> — Solid's Show
-  // requires JSX-compiled accessor children; a raw prop value passed as
-  // children throws "Comp is not a function" in Solid 2's DEV tracing).
-  const countContent = createMemo((): JSX.Element => {
-    if (typeof props.count === 'object' || typeof props.count === 'function') {
-      return props.count as JSX.Element
-    }
-    return display().displayCount as JSX.Element
-  })
+  const rootClass = (mode: 'wrapped' | 'standalone' | 'status') =>
+    mergeClass(badgeRootClass({ mode }), props.class, props.classNames?.root)
 
-  return (
-    <span
-      class={twMerge(
-        badgeWrapperClass({ mode: isStatusMode() ? 'standalone' : hasChildren() ? 'wrapped' : 'standalone' }),
-        props.class,
-        props.classNames?.root,
-      )}
-      style={props.styles?.root}
-      data-show={!display().hidden}
-    >
-      {props.children}
+  const anchor = () => hasChildren() ? 'wrapped' as const : 'standalone' as const
+  const visible = () => !display().hidden
+  const size = () => props.size === 'small' ? 'small' as const : 'middle' as const
 
-      <Show when={isStatusMode()}>
-        <span
-          class={twMerge(badgeStatusDotClass({ status: colorKey() as never }), props.classNames?.indicator)}
-          style={indicatorStyle()}
-        />
-        <Show when={display().textVisible}>
-          <span class={badgeStatusTextClass({})}>{props.text}</span>
-        </Show>
+  const statusRootStyle = createMemo((): JSX.CSSProperties => ({ ...offsetStyle(), ...props.styles?.root, ...props.style }))
+  const statusKey = createMemo(() => resolveBadgeColorKey('status', props.status, props.color))
+  const dotKey = createMemo(() => resolveBadgeColorKey('dot', props.status, props.color))
+  const countKey = createMemo(() => resolveBadgeColorKey('count', props.status, props.color))
+
+  // 三种徽标节点各自常驻：只有形态切换才重建，可见性/数字变化只改属性，缩放过渡才能播放。
+  const dataShow = () => visible() ? 'true' : 'false'
+  const ariaHidden = () => visible() ? undefined : 'true' as const
+  const title = () => visible() ? shown().title : undefined
+
+  return <Show
+    when={!display().isStatusBadge}
+    fallback={<span {...rest} class={rootClass('status')} style={statusRootStyle()}>
+      <span
+        class={mergeClass(badgeStatusDotClass({ color: statusKey(), processing: props.status === 'processing' }), props.classNames?.indicator)}
+        style={{ ...props.styles?.indicator, ...(statusKey() === 'custom' ? { color: props.color, 'background-color': props.color } : undefined) }}
+      />
+      <Show when={display().textVisible}>
+        <span class={badgeStatusTextClass} style={statusRootStyle().color ? { color: statusRootStyle().color } : undefined}>{numberToText(text()) as JSX.Element}</span>
       </Show>
-
-      <Show when={!isStatusMode()}>
-        <Show
-          when={display().showAsDot}
-          fallback={
-            <Show when={!display().hidden}>
-              <span
-                class={twMerge(
-                  badgeCountClass({
-                    sizeMode: sizeMode(),
-                    color: colorKey() as never,
-                    words: display().multipleWords,
-                    visible: true,
-                  }),
-                  props.classNames?.indicator,
-                )}
-                style={indicatorStyle()}
-                title={titleNode() as string | undefined}
-              >
-                {countContent()}
-              </span>
-            </Show>
-          }
-        >
-          <span
-            class={twMerge(
-              badgeDotClass({
-                mode: hasChildren() ? 'wrapped' : 'standalone',
-                color: colorKey() as never,
-                visible: !display().hidden,
-              }),
-              props.classNames?.indicator,
-            )}
-            style={indicatorStyle()}
-            title={titleNode()}
-          />
-        </Show>
+    </span>}
+  >
+    <span {...rest} class={rootClass(hasChildren() ? 'wrapped' : 'standalone')} style={props.styles?.root}>
+      {resolvedChildren()}
+      {/* 包裹时常驻节点以播放缩放离场；独立使用时隐藏即移除，不占位。 */}
+      <Show when={hasChildren() || visible()}>
+        <Switch>
+          <Match when={shown().custom}>
+            <span
+              data-show={dataShow()} aria-hidden={ariaHidden()} title={title()}
+              class={mergeClass(badgeCustomClass({ anchor: anchor(), visible: visible() }), props.classNames?.indicator)}
+              style={withBorderShadow({ ...offsetStyle(), ...props.styles?.indicator, ...props.style })}
+            >{shown().count as JSX.Element}</span>
+          </Match>
+          <Match when={shown().dot}>
+            <span
+              data-show={dataShow()} aria-hidden={ariaHidden()} title={title()}
+              class={mergeClass(badgeDotClass({ anchor: anchor(), color: dotKey(), visible: visible() }), props.classNames?.indicator)}
+              style={indicatorStyle()}
+            />
+          </Match>
+          <Match when={true}>
+            <span
+              data-show={dataShow()} aria-hidden={ariaHidden()} title={title()}
+              class={mergeClass(badgeCountClass({ anchor: anchor(), size: size(), color: countKey(), words: shown().words, visible: visible() }), props.classNames?.indicator)}
+              style={indicatorStyle()}
+            >{shown().count as JSX.Element}</span>
+          </Match>
+        </Switch>
+      </Show>
+      <Show when={display().textVisible}>
+        <span class={badgeStatusTextClass}>{numberToText(text()) as JSX.Element}</span>
       </Show>
     </span>
-  )
+  </Show>
 }
 
 export interface BadgeRibbonProps {
-  /** Ribbon label. */
+  /** 缎带内容。 */
   text?: JSX.Element
-  /** Named preset ('blue'|'red'|'green'|'gray') or any CSS color. Default primary. */
+  /** 预设色板、本库扩展的 gray 或任意 CSS 颜色；默认主题主色。 */
   color?: BadgeColor
-  /** Corner the ribbon hangs from. Default 'end'. */
+  /** 缎带所在的角，默认 end。 */
   placement?: BadgePlacement
   classNames?: { root?: string; indicator?: string; content?: string }
   styles?: { root?: JSX.CSSProperties; indicator?: JSX.CSSProperties; content?: JSX.CSSProperties }
+  /** 与 antd 一致作用于缎带节点（indicator）。根节点使用 classNames.root / styles.root。 */
   class?: string
   style?: JSX.CSSProperties
   children?: JSX.Element
 }
 
-const BadgeRibbon: Component<BadgeRibbonProps> = (rawProps) => {
-  const props = merge({ placement: 'end' as BadgePlacement, color: 'blue' as BadgeColor }, rawProps)
+const BadgeRibbon = (rawProps: BadgeRibbonProps) => {
+  const props = merge({ placement: 'end' as BadgePlacement }, rawProps)
+  const colorKey = createMemo(() => {
+    if (props.color === undefined || props.color === null || props.color === '') return 'primary' as const
+    const key = resolveBadgeColorKey('count', undefined, props.color)
+    return key === 'error' ? 'primary' as const : key
+  })
+  const ribbonStyle = createMemo((): JSX.CSSProperties | undefined => {
+    const custom = colorKey() === 'custom' ? { 'background-color': props.color, color: props.color } : undefined
+    if (!custom && !props.styles?.indicator && !props.style) return undefined
+    return { ...custom, ...props.styles?.indicator, ...props.style }
+  })
 
-  const named = createMemo(() => namedColorOf(props.color))
-  const colorKey = createMemo(() => (props.color ? (named() ?? 'custom') : 'blue'))
-  const customStyle = createMemo((): JSX.CSSProperties | undefined =>
-    colorKey() === 'custom' ? { 'background-color': props.color } : undefined,
-  )
-
-  return (
-    <div class={twMerge(ribbonWrapperClass({}), props.class, props.classNames?.root)} style={props.styles?.root}>
-      {props.children}
-      <div
-        class={twMerge(ribbonClass({ placement: props.placement, color: colorKey() as never }), props.classNames?.indicator)}
-        style={{ ...customStyle(), ...props.styles?.indicator }}
-      >
-        <span class={twMerge(ribbonContentClass({}), props.classNames?.content)} style={props.styles?.content}>
-          {props.text}
-        </span>
-      </div>
+  return <div class={mergeClass(ribbonWrapperClass, props.classNames?.root)} style={props.styles?.root}>
+    {props.children}
+    <div
+      class={mergeClass(ribbonClass({ placement: props.placement, color: colorKey() as never }), props.class, props.classNames?.indicator)}
+      style={ribbonStyle()}
+    >
+      <span class={mergeClass(ribbonContentClass, props.classNames?.content)} style={props.styles?.content}>{props.text}</span>
     </div>
-  )
+  </div>
 }
 
 export default Badge

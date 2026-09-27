@@ -1,48 +1,47 @@
 // @unocss-include
 import { cva, type VariantProps } from "class-variance-authority";
-import { twMerge } from "tailwind-merge";
+import { mergeClass } from "../../common/merge";
 
+/**
+ * antd 6 Statistic 样式（components/statistic/style）：
+ *  - root：resetComponent（colorText、14px、lineHeight 1.5714）
+ *  - header：paddingBottom marginXXS 4px；title：colorTextDescription、titleFontSize 14px
+ *  - content：colorTextHeading、contentFontSize = fontSizeHeading3 24px，行高继承 root
+ *  - value：inline-block + direction ltr；prefix / suffix：inline-block，与数值间距 4px
+ *  - skeleton：paddingTop 16px
+ */
 const statisticVariants = cva(
-  ["flex", "flex-col", "min-w-0"],
+  ["m-0", "p-0", "text-on-surface", "text-[14px]", "leading-[1.5714]"],
   { variants: {}, defaultVariants: {} }
 );
 
-const statisticTitleVariants = cva(
-  ["text-on-surface-variant", "text-[14px]", "leading-[1.5714]", "mb-[4px]"],
-  { variants: {}, defaultVariants: {} }
-);
+const statisticHeaderVariants = cva(["pb-[4px]"], { variants: {}, defaultVariants: {} });
 
-const statisticValueVariants = cva(
-  ["flex", "items-baseline", "gap-[4px]", "text-on-surface", "font-medium", "transition-upthrust-fast"],
+const statisticTitleVariants = cva(["text-on-surface/45", "text-[14px]"], { variants: {}, defaultVariants: {} });
+
+const statisticContentVariants = cva(["text-on-surface", "text-[24px]"], { variants: {}, defaultVariants: {} });
+
+const statisticValueVariants = cva(["inline-block", "[direction:ltr]"], { variants: {}, defaultVariants: {} });
+
+const statisticAffixVariants = cva(
+  ["inline-block"],
   {
     variants: {
-      loading: {
-        true: ["opacity-0"],
-        false: ["opacity-100"],
+      side: {
+        prefix: ["me-[4px]"],
+        suffix: ["ms-[4px]"],
       },
     },
-    defaultVariants: { loading: false },
+    defaultVariants: { side: "prefix" },
   }
 );
 
-const statisticValueIntVariants = cva(
-  ["text-[24px]", "leading-[1.33]", "tabular-nums"],
-  { variants: {}, defaultVariants: {} }
-);
+const statisticSkeletonVariants = cva(["pt-[16px]"], { variants: {}, defaultVariants: {} });
 
-const statisticPrefixSuffixVariants = cva(
-  ["text-[24px]", "leading-[1.33]"],
-  { variants: {}, defaultVariants: {} }
-);
-
-const statisticLoadingVariants = cva(
-  ["inline-block", "h-[32px]", "w-[120px]", "animate-pulse", "rounded", "bg-surface-variant"],
-  { variants: {}, defaultVariants: {} }
-);
-
-export const statisticClass = (variants: VariantProps<typeof statisticVariants>) => twMerge(statisticVariants(variants));
-export const statisticTitleClass = (variants: VariantProps<typeof statisticTitleVariants>) => twMerge(statisticTitleVariants(variants));
-export const statisticValueClass = (variants: VariantProps<typeof statisticValueVariants>) => twMerge(statisticValueVariants(variants));
-export const statisticValueIntClass = (variants: VariantProps<typeof statisticValueIntVariants>) => twMerge(statisticValueIntVariants(variants));
-export const statisticPrefixSuffixClass = (variants: VariantProps<typeof statisticPrefixSuffixVariants>) => twMerge(statisticPrefixSuffixVariants(variants));
-export const statisticLoadingClass = (variants: VariantProps<typeof statisticLoadingVariants>) => twMerge(statisticLoadingVariants(variants));
+export const statisticClass = (variants: VariantProps<typeof statisticVariants>) => mergeClass(statisticVariants(variants));
+export const statisticHeaderClass = (variants: VariantProps<typeof statisticHeaderVariants>) => mergeClass(statisticHeaderVariants(variants));
+export const statisticTitleClass = (variants: VariantProps<typeof statisticTitleVariants>) => mergeClass(statisticTitleVariants(variants));
+export const statisticContentClass = (variants: VariantProps<typeof statisticContentVariants>) => mergeClass(statisticContentVariants(variants));
+export const statisticValueClass = (variants: VariantProps<typeof statisticValueVariants>) => mergeClass(statisticValueVariants(variants));
+export const statisticAffixClass = (variants: VariantProps<typeof statisticAffixVariants>) => mergeClass(statisticAffixVariants(variants));
+export const statisticSkeletonClass = (variants: VariantProps<typeof statisticSkeletonVariants>) => mergeClass(statisticSkeletonVariants(variants));

@@ -1,0 +1,50 @@
+[
+  {
+    "name": "text",
+    "type": "string",
+    "default": "children 的文本",
+    "description": "受控文本；省略时在内部保存修改"
+  },
+  {
+    "name": "editing",
+    "type": "boolean",
+    "default": "内部控制",
+    "description": "受控编辑开关，需在 onStart/onEnd/onCancel 中更新父状态"
+  },
+  {
+    "name": "maxLength",
+    "type": "number",
+    "default": "—",
+    "description": "最大 UTF-16 长度；0 禁止输入，保存时也执行限制"
+  },
+  {
+    "name": "icon / tooltip",
+    "type": "JSX.Element / string | false",
+    "default": "编辑图标 / —",
+    "description": "编辑按钮图标与原生 title"
+  },
+  {
+    "name": "onStart",
+    "type": "() => void",
+    "default": "—",
+    "description": "点击编辑按钮时触发；外部切换 editing 不触发"
+  },
+  {
+    "name": "onChange",
+    "type": "(value: string) => void",
+    "default": "—",
+    "description": "Enter 或失焦保存时触发，取消不触发"
+  },
+  {
+    "name": "onEnd",
+    "type": "() => void",
+    "default": "—",
+    "description": "保存后触发，包括失焦保存（与 Ant Design 有差异）"
+  },
+  {
+    "name": "onCancel",
+    "type": "() => void",
+    "default": "—",
+    "description": "Escape 取消，随后恢复编辑按钮焦点"
+  }
+]

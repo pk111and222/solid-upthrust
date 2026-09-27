@@ -1,5 +1,5 @@
 import { flush } from 'solid-js'
-import { afterEach, expect, it } from 'vitest'
+import { afterEach, expect, it, onTestFinished, vi } from 'vitest'
 import { mount } from '../../utils/mount'
 import Tooltip from '../../../components/lib/Tooltip'
 
@@ -71,10 +71,13 @@ it('[tooltip.content.closed-aria] marks the still-mounted closed layer aria-hidd
 })
 
 // 箭头元素必须渲染且携带指向样式；具体几何值由 headless/shared/Trigger 覆盖。
-it('[tooltip.content.arrow] renders a pointing arrow element', () => {
+// 共享 Trigger 仅在触发器与浮层都有真实尺寸后测量并产出箭头数据，happy-dom 默认全 0，因此给元素真实盒子。
+it('[tooltip.content.arrow] renders a pointing arrow element', async () => {
+  const measure = vi.spyOn(HTMLElement.prototype, 'getBoundingClientRect').mockImplementation(() => new DOMRect(100, 300, 120, 40))
+  onTestFinished(() => measure.mockRestore())
   const { overlay } = openClickTooltip('提示')
+  await vi.waitFor(() => expect(overlay!.querySelector('span.rotate-45')).not.toBeNull())
   const arrow = overlay!.querySelector<HTMLElement>('span.rotate-45')
-  expect(arrow).not.toBeNull()
   expect(arrow!.className).toContain('bg-inverse-surface')
   const hasSideClass = ['-top-[4px]', '-bottom-[4px]', '-left-[4px]', '-right-[4px]'].some(c => arrow!.className.includes(c))
   expect(hasSideClass).toBe(true)

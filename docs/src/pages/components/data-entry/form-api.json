@@ -1,0 +1,11 @@
+[
+  {"name":"form","type":"FormInstance","default":"自动创建","description":"外部 createForm() 实例；传入后 Form.Item 共用该实例。"},
+  {"name":"initialValues","type":"Store","default":"{}","description":"表单初始值，只在实例初始化时读取；动态更新请使用 setFieldsValue。"},
+  {"name":"layout / size","type":"'horizontal' | 'vertical' | 'inline' / SizeType","default":"'horizontal' / —","description":"标签布局与控件尺寸；显式 Item/控件属性优先。"},
+  {"name":"disabled / preserve","type":"boolean / boolean","default":"false / true","description":"表单级禁用与字段卸载后的值保留策略。"},
+  {"name":"requiredMark / colon","type":"boolean | 'optional' / boolean","default":"true / true","description":"必填标记、可选提示与标签冒号。"},
+  {"name":"validateTrigger / validateMessages","type":"string | string[] | false / Record<string, any>","default":"'onChange' / —","description":"默认校验触发器与 async-validator 消息模板。"},
+  {"name":"onFinish / onFinishFailed","type":"(values) => void / (errorInfo) => void","default":"—","description":"校验成功提交或校验失败通知；submit() 仍返回 Promise。"},
+  {"name":"onValuesChange / onFieldsChange","type":"(changed, all) => void","default":"—","description":"字段变化回调；changedValues 是本次路径的对象，字段回调包含 name/value/meta。"},
+  {"name":"component / clearOnDestroy","type":"'form' | 'div' | false / boolean","default":"'form' / false","description":"原生表单元素渲染与卸载时清空外部实例。"}
+]

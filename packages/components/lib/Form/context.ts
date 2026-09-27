@@ -8,6 +8,7 @@ import type { SizeType } from '../../common/type'
  */
 export type FormContextValue = {
   form: () => FormInstance
+  reset: () => void
   validateTrigger: () => string | string[] | false
   size: () => SizeType
   disabled: () => boolean
@@ -38,6 +39,7 @@ export const useFormContext = () => useContext(FormContext)
 export type FormListContextValue = {
   prefixName: () => (string | number)[]
   getKey: (namePath: (string | number)[]) => [number, (string | number)[]]
+  resolvePath: (namePath: (string | number)[]) => () => (string | number)[]
 }
 
 export const FormListContext = createContext<FormListContextValue | null>(null)

@@ -11,7 +11,7 @@ export declare const cascaderSelectorClass: (variants: VariantProps<typeof selec
 export declare const cascaderSearchInputClass: () => string;
 /** Placeholder / value display. */
 export declare const cascaderItemClass: (props?: ({
-    state?: "value" | "placeholder" | null | undefined;
+    state?: "placeholder" | "value" | null | undefined;
     size?: "small" | "middle" | "large" | null | undefined;
 } & import('class-variance-authority/types').ClassProp) | undefined) => string;
 export declare const cascaderItemWrapClass: (variants: VariantProps<typeof cascaderItemClass>) => string;

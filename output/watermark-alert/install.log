@@ -1,0 +1,423 @@
+Scope: all 7 workspace projects
+? Verifying lockfile against supply-chain policies (250 entries)...
+Lockfile is up to date, resolution step is skipped
+Progress: resolved 1, reused 0, downloaded 0, added 0
+Packages: +204
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Progress: resolved 204, reused 204, downloaded 0, added 124
+Progress: resolved 204, reused 204, downloaded 0, added 200
+Progress: resolved 204, reused 204, downloaded 0, added 203
+Progress: resolved 204, reused 204, downloaded 0, added 204, done
+[WARN] GET http://registry.m.jd.com/@playwright%2Ftest error (23). Will retry in 10 seconds. 2 retries left.
+[WARN] GET http://registry.m.jd.com/@antfu%2Finstall-pkg error (23). Will retry in 10 seconds. 2 retries left.
+[WARN] GET http://registry.m.jd.com/@babel%2Fcode-frame error (23). Will retry in 10 seconds. 2 retries left.
+[WARN] GET http://registry.m.jd.com/@ampproject%2Fremapping error (23). Will retry in 10 seconds. 2 retries left.
+[WARN] GET http://registry.m.jd.com/@babel%2Fcompat-data error (23). Will retry in 10 seconds. 2 retries left.
+[WARN] GET http://registry.m.jd.com/@babel%2Fgenerator error (23). Will retry in 10 seconds. 2 retries left.
+[WARN] GET http://registry.m.jd.com/@babel%2Fhelper-compilation-targets error (23). Will retry in 10 seconds. 2 retries left.
+[WARN] GET http://registry.m.jd.com/@babel%2Fhelper-globals error (23). Will retry in 10 seconds. 2 retries left.
+[WARN] GET http://registry.m.jd.com/@babel%2Fcore error (23). Will retry in 10 seconds. 2 retries left.
+[WARN] GET http://registry.m.jd.com/@babel%2Fhelper-module-imports error (23). Will retry in 10 seconds. 2 retries left.
+[WARN] GET http://registry.m.jd.com/@babel%2Fhelper-plugin-utils error (23). Will retry in 10 seconds. 2 retries left.
+[WARN] GET http://registry.m.jd.com/@babel%2Fhelper-string-parser error (23). Will retry in 10 seconds. 2 retries left.
+[WARN] GET http://registry.m.jd.com/@babel%2Fhelper-module-transforms error (23). Will retry in 10 seconds. 2 retries left.
+[WARN] GET http://registry.m.jd.com/@babel%2Fhelper-validator-identifier error (23). Will retry in 10 seconds. 2 retries left.
+[WARN] GET http://registry.m.jd.com/@babel%2Fhelper-validator-option error (23). Will retry in 10 seconds. 2 retries left.
+[WARN] GET http://registry.m.jd.com/@babel%2Fhelpers error (23). Will retry in 10 seconds. 2 retries left.
+[WARN] GET http://registry.m.jd.com/@babel%2Fplugin-syntax-jsx error (23). Will retry in 10 seconds. 2 retries left.
+[WARN] GET http://registry.m.jd.com/@babel%2Ftemplate error (23). Will retry in 10 seconds. 2 retries left.
+[WARN] GET http://registry.m.jd.com/@babel%2Fparser error (23). Will retry in 10 seconds. 2 retries left.
+[WARN] GET http://registry.m.jd.com/@babel%2Ftraverse error (23). Will retry in 10 seconds. 2 retries left.
+[WARN] GET http://registry.m.jd.com/@dom-expressions%2Fbabel-plugin-jsx error (23). Will retry in 10 seconds. 2 retries left.
+[WARN] GET http://registry.m.jd.com/@dom-expressions%2Fcompiler-darwin-x64 error (23). Will retry in 10 seconds. 2 retries left.
+[WARN] GET http://registry.m.jd.com/@babel%2Ftypes error (23). Will retry in 10 seconds. 2 retries left.
+[WARN] GET http://registry.m.jd.com/@dom-expressions%2Fcompiler-darwin-arm64 error (23). Will retry in 10 seconds. 2 retries left.
+[WARN] GET http://registry.m.jd.com/@dom-expressions%2Fcompiler-linux-x64-gnu error (23). Will retry in 10 seconds. 2 retries left.
+[WARN] GET http://registry.m.jd.com/@dom-expressions%2Fcompiler-linux-arm64-gnu error (23). Will retry in 10 seconds. 2 retries left.
+[WARN] GET http://registry.m.jd.com/@dom-expressions%2Fcompiler-wasm32-wasi error (23). Will retry in 10 seconds. 2 retries left.
+[WARN] GET http://registry.m.jd.com/@dom-expressions%2Fcompiler-win32-x64-msvc error (23). Will retry in 10 seconds. 2 retries left.
+[WARN] GET http://registry.m.jd.com/@emnapi%2Fcore error (23). Will retry in 10 seconds. 2 retries left.
+[WARN] GET http://registry.m.jd.com/@emnapi%2Fruntime error (23). Will retry in 10 seconds. 2 retries left.
+[WARN] GET http://registry.m.jd.com/@dom-expressions%2Fcompiler error (23). Will retry in 10 seconds. 2 retries left.
+[WARN] GET http://registry.m.jd.com/@emnapi%2Fwasi-threads error (23). Will retry in 10 seconds. 2 retries left.
+[WARN] GET http://registry.m.jd.com/@iconify%2Ftypes error (23). Will retry in 10 seconds. 2 retries left.
+[WARN] GET http://registry.m.jd.com/@iconify-json%2Fmdi error (23). Will retry in 10 seconds. 2 retries left.
+[WARN] GET http://registry.m.jd.com/@jridgewell%2Fgen-mapping error (23). Will retry in 10 seconds. 2 retries left.
+[WARN] GET http://registry.m.jd.com/@iconify%2Futils error (23). Will retry in 10 seconds. 2 retries left.
+[WARN] GET http://registry.m.jd.com/@iconify-json%2Fmaterial-symbols error (23). Will retry in 10 seconds. 2 retries left.
+[WARN] GET http://registry.m.jd.com/@jridgewell%2Fresolve-uri error (23). Will retry in 10 seconds. 2 retries left.
+[WARN] GET http://registry.m.jd.com/@jridgewell%2Fremapping error (23). Will retry in 10 seconds. 2 retries left.
+[WARN] GET http://registry.m.jd.com/@jridgewell%2Fsourcemap-codec error (23). Will retry in 10 seconds. 2 retries left.
+[WARN] GET http://registry.m.jd.com/@material%2Fmaterial-color-utilities error (23). Will retry in 10 seconds. 2 retries left.
+[WARN] GET http://registry.m.jd.com/@jridgewell%2Ftrace-mapping error (23). Will retry in 10 seconds. 2 retries left.
+[WARN] GET http://registry.m.jd.com/@napi-rs%2Fwasm-runtime error (23). Will retry in 10 seconds. 2 retries left.
+[WARN] GET http://registry.m.jd.com/@oxc-project%2Ftypes error (23). Will retry in 10 seconds. 2 retries left.
+[WARN] GET http://registry.m.jd.com/@polka%2Furl error (23). Will retry in 10 seconds. 2 retries left.
+[WARN] GET http://registry.m.jd.com/@quansync%2Ffs error (23). Will retry in 10 seconds. 2 retries left.
+[WARN] GET http://registry.m.jd.com/@rolldown%2Fbinding-android-arm64 error (23). Will retry in 10 seconds. 2 retries left.
+[WARN] GET http://registry.m.jd.com/@rolldown%2Fbinding-darwin-x64 error (23). Will retry in 10 seconds. 2 retries left.
+[WARN] GET http://registry.m.jd.com/@rolldown%2Fbinding-darwin-arm64 error (23). Will retry in 10 seconds. 2 retries left.
+[WARN] GET http://registry.m.jd.com/@rolldown%2Fbinding-linux-arm-gnueabihf error (23). Will retry in 10 seconds. 2 retries left.
+[WARN] GET http://registry.m.jd.com/@rolldown%2Fbinding-freebsd-x64 error (23). Will retry in 10 seconds. 2 retries left.
+[WARN] GET http://registry.m.jd.com/@rolldown%2Fbinding-linux-s390x-gnu error (23). Will retry in 10 seconds. 2 retries left.
+[WARN] GET http://registry.m.jd.com/@rolldown%2Fbinding-linux-arm64-gnu error (23). Will retry in 10 seconds. 2 retries left.
+[WARN] GET http://registry.m.jd.com/@rolldown%2Fbinding-linux-arm64-musl error (23). Will retry in 10 seconds. 2 retries left.
+[WARN] GET http://registry.m.jd.com/@rolldown%2Fbinding-linux-ppc64-gnu error (23). Will retry in 10 seconds. 2 retries left.
+[WARN] GET http://registry.m.jd.com/@rolldown%2Fbinding-linux-x64-musl error (23). Will retry in 10 seconds. 2 retries left.
+[WARN] GET http://registry.m.jd.com/@rolldown%2Fbinding-openharmony-arm64 error (23). Will retry in 10 seconds. 2 retries left.
+[WARN] GET http://registry.m.jd.com/@rolldown%2Fbinding-win32-arm64-msvc error (23). Will retry in 10 seconds. 2 retries left.
+[WARN] GET http://registry.m.jd.com/@rolldown%2Fbinding-linux-x64-gnu error (23). Will retry in 10 seconds. 2 retries left.
+[WARN] GET http://registry.m.jd.com/@rolldown%2Fbinding-win32-x64-msvc error (23). Will retry in 10 seconds. 2 retries left.
+[WARN] GET http://registry.m.jd.com/@rollup%2Fpluginutils error (23). Will retry in 10 seconds. 2 retries left.
+[WARN] GET http://registry.m.jd.com/@solidjs%2Frouter error (23). Will retry in 10 seconds. 2 retries left.
+[WARN] GET http://registry.m.jd.com/@rolldown%2Fpluginutils error (23). Will retry in 10 seconds. 2 retries left.
+[WARN] GET http://registry.m.jd.com/@playwright%2Ftest error (23). Will retry in 1 minute. 1 retries left.
+[WARN] GET http://registry.m.jd.com/@antfu%2Finstall-pkg error (23). Will retry in 1 minute. 1 retries left.
+[WARN] GET http://registry.m.jd.com/@babel%2Fcode-frame error (23). Will retry in 1 minute. 1 retries left.
+[WARN] GET http://registry.m.jd.com/@ampproject%2Fremapping error (23). Will retry in 1 minute. 1 retries left.
+[WARN] GET http://registry.m.jd.com/@babel%2Fcompat-data error (23). Will retry in 1 minute. 1 retries left.
+[WARN] GET http://registry.m.jd.com/@babel%2Fgenerator error (23). Will retry in 1 minute. 1 retries left.
+[WARN] GET http://registry.m.jd.com/@babel%2Fhelper-compilation-targets error (23). Will retry in 1 minute. 1 retries left.
+[WARN] GET http://registry.m.jd.com/@babel%2Fhelper-globals error (23). Will retry in 1 minute. 1 retries left.
+[WARN] GET http://registry.m.jd.com/@babel%2Fcore error (23). Will retry in 1 minute. 1 retries left.
+[WARN] GET http://registry.m.jd.com/@babel%2Fhelper-module-imports error (23). Will retry in 1 minute. 1 retries left.
+[WARN] GET http://registry.m.jd.com/@babel%2Fhelper-plugin-utils error (23). Will retry in 1 minute. 1 retries left.
+[WARN] GET http://registry.m.jd.com/@babel%2Fhelper-string-parser error (23). Will retry in 1 minute. 1 retries left.
+[WARN] GET http://registry.m.jd.com/@babel%2Fhelper-module-transforms error (23). Will retry in 1 minute. 1 retries left.
+[WARN] GET http://registry.m.jd.com/@babel%2Fhelper-validator-identifier error (23). Will retry in 1 minute. 1 retries left.
+[WARN] GET http://registry.m.jd.com/@babel%2Fhelper-validator-option error (23). Will retry in 1 minute. 1 retries left.
+[WARN] GET http://registry.m.jd.com/@babel%2Fhelpers error (23). Will retry in 1 minute. 1 retries left.
+[WARN] GET http://registry.m.jd.com/@babel%2Fplugin-syntax-jsx error (23). Will retry in 1 minute. 1 retries left.
+[WARN] GET http://registry.m.jd.com/@babel%2Ftemplate error (23). Will retry in 1 minute. 1 retries left.
+[WARN] GET http://registry.m.jd.com/@babel%2Fparser error (23). Will retry in 1 minute. 1 retries left.
+[WARN] GET http://registry.m.jd.com/@babel%2Ftraverse error (23). Will retry in 1 minute. 1 retries left.
+[WARN] GET http://registry.m.jd.com/@dom-expressions%2Fbabel-plugin-jsx error (23). Will retry in 1 minute. 1 retries left.
+[WARN] GET http://registry.m.jd.com/@dom-expressions%2Fcompiler-darwin-x64 error (23). Will retry in 1 minute. 1 retries left.
+[WARN] GET http://registry.m.jd.com/@babel%2Ftypes error (23). Will retry in 1 minute. 1 retries left.
+[WARN] GET http://registry.m.jd.com/@dom-expressions%2Fcompiler-darwin-arm64 error (23). Will retry in 1 minute. 1 retries left.
+[WARN] GET http://registry.m.jd.com/@dom-expressions%2Fcompiler-linux-x64-gnu error (23). Will retry in 1 minute. 1 retries left.
+[WARN] GET http://registry.m.jd.com/@dom-expressions%2Fcompiler-linux-arm64-gnu error (23). Will retry in 1 minute. 1 retries left.
+[WARN] GET http://registry.m.jd.com/@dom-expressions%2Fcompiler-wasm32-wasi error (23). Will retry in 1 minute. 1 retries left.
+[WARN] GET http://registry.m.jd.com/@dom-expressions%2Fcompiler-win32-x64-msvc error (23). Will retry in 1 minute. 1 retries left.
+[WARN] GET http://registry.m.jd.com/@emnapi%2Fcore error (23). Will retry in 1 minute. 1 retries left.
+[WARN] GET http://registry.m.jd.com/@emnapi%2Fruntime error (23). Will retry in 1 minute. 1 retries left.
+[WARN] GET http://registry.m.jd.com/@dom-expressions%2Fcompiler error (23). Will retry in 1 minute. 1 retries left.
+[WARN] GET http://registry.m.jd.com/@emnapi%2Fwasi-threads error (23). Will retry in 1 minute. 1 retries left.
+[WARN] GET http://registry.m.jd.com/@iconify%2Ftypes error (23). Will retry in 1 minute. 1 retries left.
+[WARN] GET http://registry.m.jd.com/@iconify-json%2Fmdi error (23). Will retry in 1 minute. 1 retries left.
+[WARN] GET http://registry.m.jd.com/@jridgewell%2Fgen-mapping error (23). Will retry in 1 minute. 1 retries left.
+[WARN] GET http://registry.m.jd.com/@iconify%2Futils error (23). Will retry in 1 minute. 1 retries left.
+[WARN] GET http://registry.m.jd.com/@iconify-json%2Fmaterial-symbols error (23). Will retry in 1 minute. 1 retries left.
+[WARN] GET http://registry.m.jd.com/@jridgewell%2Fresolve-uri error (23). Will retry in 1 minute. 1 retries left.
+[WARN] GET http://registry.m.jd.com/@jridgewell%2Fremapping error (23). Will retry in 1 minute. 1 retries left.
+[WARN] GET http://registry.m.jd.com/@jridgewell%2Fsourcemap-codec error (23). Will retry in 1 minute. 1 retries left.
+[WARN] GET http://registry.m.jd.com/@material%2Fmaterial-color-utilities error (23). Will retry in 1 minute. 1 retries left.
+[WARN] GET http://registry.m.jd.com/@jridgewell%2Ftrace-mapping error (23). Will retry in 1 minute. 1 retries left.
+[WARN] GET http://registry.m.jd.com/@napi-rs%2Fwasm-runtime error (23). Will retry in 1 minute. 1 retries left.
+[WARN] GET http://registry.m.jd.com/@oxc-project%2Ftypes error (23). Will retry in 1 minute. 1 retries left.
+[WARN] GET http://registry.m.jd.com/@polka%2Furl error (23). Will retry in 1 minute. 1 retries left.
+[WARN] GET http://registry.m.jd.com/@quansync%2Ffs error (23). Will retry in 1 minute. 1 retries left.
+[WARN] GET http://registry.m.jd.com/@rolldown%2Fbinding-android-arm64 error (23). Will retry in 1 minute. 1 retries left.
+[WARN] GET http://registry.m.jd.com/@rolldown%2Fbinding-darwin-x64 error (23). Will retry in 1 minute. 1 retries left.
+[WARN] GET http://registry.m.jd.com/@rolldown%2Fbinding-darwin-arm64 error (23). Will retry in 1 minute. 1 retries left.
+[WARN] GET http://registry.m.jd.com/@rolldown%2Fbinding-linux-arm-gnueabihf error (23). Will retry in 1 minute. 1 retries left.
+[WARN] GET http://registry.m.jd.com/@rolldown%2Fbinding-freebsd-x64 error (23). Will retry in 1 minute. 1 retries left.
+[WARN] GET http://registry.m.jd.com/@rolldown%2Fbinding-linux-s390x-gnu error (23). Will retry in 1 minute. 1 retries left.
+[WARN] GET http://registry.m.jd.com/@rolldown%2Fbinding-linux-arm64-gnu error (23). Will retry in 1 minute. 1 retries left.
+[WARN] GET http://registry.m.jd.com/@rolldown%2Fbinding-linux-arm64-musl error (23). Will retry in 1 minute. 1 retries left.
+[WARN] GET http://registry.m.jd.com/@rolldown%2Fbinding-linux-ppc64-gnu error (23). Will retry in 1 minute. 1 retries left.
+[WARN] GET http://registry.m.jd.com/@rolldown%2Fbinding-linux-x64-musl error (23). Will retry in 1 minute. 1 retries left.
+[WARN] GET http://registry.m.jd.com/@rolldown%2Fbinding-openharmony-arm64 error (23). Will retry in 1 minute. 1 retries left.
+[WARN] GET http://registry.m.jd.com/@rolldown%2Fbinding-win32-arm64-msvc error (23). Will retry in 1 minute. 1 retries left.
+[WARN] GET http://registry.m.jd.com/@rolldown%2Fbinding-linux-x64-gnu error (23). Will retry in 1 minute. 1 retries left.
+[WARN] GET http://registry.m.jd.com/@rolldown%2Fbinding-win32-x64-msvc error (23). Will retry in 1 minute. 1 retries left.
+[WARN] GET http://registry.m.jd.com/@rollup%2Fpluginutils error (23). Will retry in 1 minute. 1 retries left.
+[WARN] GET http://registry.m.jd.com/@solidjs%2Frouter error (23). Will retry in 1 minute. 1 retries left.
+[WARN] GET http://registry.m.jd.com/@rolldown%2Fpluginutils error (23). Will retry in 1 minute. 1 retries left.
+TypeError: Cannot set property message of  which has only a getter
+    at RetryOperation._fn (file:///Users/zhangchen327/.cache/node/corepack/v1/pnpm/11.16.0/dist/pnpm.mjs:101471:27)
+TypeError: Cannot set property message of  which has only a getter
+    at RetryOperation._fn (file:///Users/zhangchen327/.cache/node/corepack/v1/pnpm/11.16.0/dist/pnpm.mjs:101471:27)
+TypeError: Cannot set property message of  which has only a getter
+    at RetryOperation._fn (file:///Users/zhangchen327/.cache/node/corepack/v1/pnpm/11.16.0/dist/pnpm.mjs:101471:27)
+TypeError: Cannot set property message of  which has only a getter
+    at RetryOperation._fn (file:///Users/zhangchen327/.cache/node/corepack/v1/pnpm/11.16.0/dist/pnpm.mjs:101471:27)
+    at runNextTicks (node:internal/process/task_queues:65:5)
+    at listOnTimeout (node:internal/timers:549:9)
+    at process.processTimers (node:internal/timers:523:7)
+TypeError: Cannot set property message of  which has only a getter
+    at RetryOperation._fn (file:///Users/zhangchen327/.cache/node/corepack/v1/pnpm/11.16.0/dist/pnpm.mjs:101471:27)
+    at runNextTicks (node:internal/process/task_queues:65:5)
+    at listOnTimeout (node:internal/timers:549:9)
+    at process.processTimers (node:internal/timers:523:7)
+TypeError: Cannot set property message of  which has only a getter
+    at RetryOperation._fn (file:///Users/zhangchen327/.cache/node/corepack/v1/pnpm/11.16.0/dist/pnpm.mjs:101471:27)
+    at runNextTicks (node:internal/process/task_queues:65:5)
+    at listOnTimeout (node:internal/timers:549:9)
+    at process.processTimers (node:internal/timers:523:7)
+TypeError: Cannot set property message of  which has only a getter
+    at RetryOperation._fn (file:///Users/zhangchen327/.cache/node/corepack/v1/pnpm/11.16.0/dist/pnpm.mjs:101471:27)
+TypeError: Cannot set property message of  which has only a getter
+    at RetryOperation._fn (file:///Users/zhangchen327/.cache/node/corepack/v1/pnpm/11.16.0/dist/pnpm.mjs:101471:27)
+    at runNextTicks (node:internal/process/task_queues:65:5)
+    at listOnTimeout (node:internal/timers:549:9)
+    at process.processTimers (node:internal/timers:523:7)
+TypeError: Cannot set property message of  which has only a getter
+    at RetryOperation._fn (file:///Users/zhangchen327/.cache/node/corepack/v1/pnpm/11.16.0/dist/pnpm.mjs:101471:27)
+    at runNextTicks (node:internal/process/task_queues:65:5)
+    at listOnTimeout (node:internal/timers:549:9)
+    at process.processTimers (node:internal/timers:523:7)
+TypeError: Cannot set property message of  which has only a getter
+    at RetryOperation._fn (file:///Users/zhangchen327/.cache/node/corepack/v1/pnpm/11.16.0/dist/pnpm.mjs:101471:27)
+    at runNextTicks (node:internal/process/task_queues:65:5)
+    at listOnTimeout (node:internal/timers:549:9)
+    at process.processTimers (node:internal/timers:523:7)
+TypeError: Cannot set property message of  which has only a getter
+    at RetryOperation._fn (file:///Users/zhangchen327/.cache/node/corepack/v1/pnpm/11.16.0/dist/pnpm.mjs:101471:27)
+TypeError: Cannot set property message of  which has only a getter
+    at RetryOperation._fn (file:///Users/zhangchen327/.cache/node/corepack/v1/pnpm/11.16.0/dist/pnpm.mjs:101471:27)
+    at runNextTicks (node:internal/process/task_queues:65:5)
+    at listOnTimeout (node:internal/timers:549:9)
+    at process.processTimers (node:internal/timers:523:7)
+TypeError: Cannot set property message of  which has only a getter
+    at RetryOperation._fn (file:///Users/zhangchen327/.cache/node/corepack/v1/pnpm/11.16.0/dist/pnpm.mjs:101471:27)
+    at runNextTicks (node:internal/process/task_queues:65:5)
+    at listOnTimeout (node:internal/timers:549:9)
+    at process.processTimers (node:internal/timers:523:7)
+TypeError: Cannot set property message of  which has only a getter
+    at RetryOperation._fn (file:///Users/zhangchen327/.cache/node/corepack/v1/pnpm/11.16.0/dist/pnpm.mjs:101471:27)
+    at runNextTicks (node:internal/process/task_queues:65:5)
+    at listOnTimeout (node:internal/timers:549:9)
+    at process.processTimers (node:internal/timers:523:7)
+TypeError: Cannot set property message of  which has only a getter
+    at RetryOperation._fn (file:///Users/zhangchen327/.cache/node/corepack/v1/pnpm/11.16.0/dist/pnpm.mjs:101471:27)
+    at runNextTicks (node:internal/process/task_queues:65:5)
+    at listOnTimeout (node:internal/timers:549:9)
+    at process.processTimers (node:internal/timers:523:7)
+TypeError: Cannot set property message of  which has only a getter
+    at RetryOperation._fn (file:///Users/zhangchen327/.cache/node/corepack/v1/pnpm/11.16.0/dist/pnpm.mjs:101471:27)
+TypeError: Cannot set property message of  which has only a getter
+    at RetryOperation._fn (file:///Users/zhangchen327/.cache/node/corepack/v1/pnpm/11.16.0/dist/pnpm.mjs:101471:27)
+    at runNextTicks (node:internal/process/task_queues:65:5)
+    at listOnTimeout (node:internal/timers:549:9)
+    at process.processTimers (node:internal/timers:523:7)
+TypeError: Cannot set property message of  which has only a getter
+    at RetryOperation._fn (file:///Users/zhangchen327/.cache/node/corepack/v1/pnpm/11.16.0/dist/pnpm.mjs:101471:27)
+    at runNextTicks (node:internal/process/task_queues:65:5)
+    at listOnTimeout (node:internal/timers:549:9)
+    at process.processTimers (node:internal/timers:523:7)
+TypeError: Cannot set property message of  which has only a getter
+    at RetryOperation._fn (file:///Users/zhangchen327/.cache/node/corepack/v1/pnpm/11.16.0/dist/pnpm.mjs:101471:27)
+    at runNextTicks (node:internal/process/task_queues:65:5)
+    at listOnTimeout (node:internal/timers:549:9)
+    at process.processTimers (node:internal/timers:523:7)
+TypeError: Cannot set property message of  which has only a getter
+    at RetryOperation._fn (file:///Users/zhangchen327/.cache/node/corepack/v1/pnpm/11.16.0/dist/pnpm.mjs:101471:27)
+    at runNextTicks (node:internal/process/task_queues:65:5)
+    at listOnTimeout (node:internal/timers:549:9)
+    at process.processTimers (node:internal/timers:523:7)
+TypeError: Cannot set property message of  which has only a getter
+    at RetryOperation._fn (file:///Users/zhangchen327/.cache/node/corepack/v1/pnpm/11.16.0/dist/pnpm.mjs:101471:27)
+    at runNextTicks (node:internal/process/task_queues:65:5)
+    at listOnTimeout (node:internal/timers:549:9)
+    at process.processTimers (node:internal/timers:523:7)
+TypeError: Cannot set property message of  which has only a getter
+    at RetryOperation._fn (file:///Users/zhangchen327/.cache/node/corepack/v1/pnpm/11.16.0/dist/pnpm.mjs:101471:27)
+    at runNextTicks (node:internal/process/task_queues:65:5)
+    at listOnTimeout (node:internal/timers:549:9)
+    at process.processTimers (node:internal/timers:523:7)
+TypeError: Cannot set property message of  which has only a getter
+    at RetryOperation._fn (file:///Users/zhangchen327/.cache/node/corepack/v1/pnpm/11.16.0/dist/pnpm.mjs:101471:27)
+    at runNextTicks (node:internal/process/task_queues:65:5)
+    at listOnTimeout (node:internal/timers:549:9)
+    at process.processTimers (node:internal/timers:523:7)
+TypeError: Cannot set property message of  which has only a getter
+    at RetryOperation._fn (file:///Users/zhangchen327/.cache/node/corepack/v1/pnpm/11.16.0/dist/pnpm.mjs:101471:27)
+    at runNextTicks (node:internal/process/task_queues:65:5)
+    at listOnTimeout (node:internal/timers:549:9)
+    at process.processTimers (node:internal/timers:523:7)
+TypeError: Cannot set property message of  which has only a getter
+    at RetryOperation._fn (file:///Users/zhangchen327/.cache/node/corepack/v1/pnpm/11.16.0/dist/pnpm.mjs:101471:27)
+TypeError: Cannot set property message of  which has only a getter
+    at RetryOperation._fn (file:///Users/zhangchen327/.cache/node/corepack/v1/pnpm/11.16.0/dist/pnpm.mjs:101471:27)
+    at runNextTicks (node:internal/process/task_queues:65:5)
+    at listOnTimeout (node:internal/timers:549:9)
+    at process.processTimers (node:internal/timers:523:7)
+TypeError: Cannot set property message of  which has only a getter
+    at RetryOperation._fn (file:///Users/zhangchen327/.cache/node/corepack/v1/pnpm/11.16.0/dist/pnpm.mjs:101471:27)
+    at runNextTicks (node:internal/process/task_queues:65:5)
+    at listOnTimeout (node:internal/timers:549:9)
+    at process.processTimers (node:internal/timers:523:7)
+TypeError: Cannot set property message of  which has only a getter
+    at RetryOperation._fn (file:///Users/zhangchen327/.cache/node/corepack/v1/pnpm/11.16.0/dist/pnpm.mjs:101471:27)
+    at runNextTicks (node:internal/process/task_queues:65:5)
+    at listOnTimeout (node:internal/timers:549:9)
+    at process.processTimers (node:internal/timers:523:7)
+TypeError: Cannot set property message of  which has only a getter
+    at RetryOperation._fn (file:///Users/zhangchen327/.cache/node/corepack/v1/pnpm/11.16.0/dist/pnpm.mjs:101471:27)
+    at runNextTicks (node:internal/process/task_queues:65:5)
+    at listOnTimeout (node:internal/timers:549:9)
+    at process.processTimers (node:internal/timers:523:7)
+TypeError: Cannot set property message of  which has only a getter
+    at RetryOperation._fn (file:///Users/zhangchen327/.cache/node/corepack/v1/pnpm/11.16.0/dist/pnpm.mjs:101471:27)
+    at runNextTicks (node:internal/process/task_queues:65:5)
+    at listOnTimeout (node:internal/timers:549:9)
+    at process.processTimers (node:internal/timers:523:7)
+TypeError: Cannot set property message of  which has only a getter
+    at RetryOperation._fn (file:///Users/zhangchen327/.cache/node/corepack/v1/pnpm/11.16.0/dist/pnpm.mjs:101471:27)
+    at runNextTicks (node:internal/process/task_queues:65:5)
+    at listOnTimeout (node:internal/timers:549:9)
+    at process.processTimers (node:internal/timers:523:7)
+TypeError: Cannot set property message of  which has only a getter
+    at RetryOperation._fn (file:///Users/zhangchen327/.cache/node/corepack/v1/pnpm/11.16.0/dist/pnpm.mjs:101471:27)
+    at runNextTicks (node:internal/process/task_queues:65:5)
+    at listOnTimeout (node:internal/timers:549:9)
+    at process.processTimers (node:internal/timers:523:7)
+TypeError: Cannot set property message of  which has only a getter
+    at RetryOperation._fn (file:///Users/zhangchen327/.cache/node/corepack/v1/pnpm/11.16.0/dist/pnpm.mjs:101471:27)
+    at runNextTicks (node:internal/process/task_queues:65:5)
+    at listOnTimeout (node:internal/timers:549:9)
+    at process.processTimers (node:internal/timers:523:7)
+TypeError: Cannot set property message of  which has only a getter
+    at RetryOperation._fn (file:///Users/zhangchen327/.cache/node/corepack/v1/pnpm/11.16.0/dist/pnpm.mjs:101471:27)
+    at runNextTicks (node:internal/process/task_queues:65:5)
+    at listOnTimeout (node:internal/timers:549:9)
+    at process.processTimers (node:internal/timers:523:7)
+TypeError: Cannot set property message of  which has only a getter
+    at RetryOperation._fn (file:///Users/zhangchen327/.cache/node/corepack/v1/pnpm/11.16.0/dist/pnpm.mjs:101471:27)
+TypeError: Cannot set property message of  which has only a getter
+    at RetryOperation._fn (file:///Users/zhangchen327/.cache/node/corepack/v1/pnpm/11.16.0/dist/pnpm.mjs:101471:27)
+TypeError: Cannot set property message of  which has only a getter
+    at RetryOperation._fn (file:///Users/zhangchen327/.cache/node/corepack/v1/pnpm/11.16.0/dist/pnpm.mjs:101471:27)
+    at runNextTicks (node:internal/process/task_queues:65:5)
+    at listOnTimeout (node:internal/timers:549:9)
+    at process.processTimers (node:internal/timers:523:7)
+TypeError: Cannot set property message of  which has only a getter
+    at RetryOperation._fn (file:///Users/zhangchen327/.cache/node/corepack/v1/pnpm/11.16.0/dist/pnpm.mjs:101471:27)
+    at runNextTicks (node:internal/process/task_queues:65:5)
+    at listOnTimeout (node:internal/timers:549:9)
+    at process.processTimers (node:internal/timers:523:7)
+TypeError: Cannot set property message of  which has only a getter
+    at RetryOperation._fn (file:///Users/zhangchen327/.cache/node/corepack/v1/pnpm/11.16.0/dist/pnpm.mjs:101471:27)
+    at runNextTicks (node:internal/process/task_queues:65:5)
+    at listOnTimeout (node:internal/timers:549:9)
+    at process.processTimers (node:internal/timers:523:7)
+TypeError: Cannot set property message of  which has only a getter
+    at RetryOperation._fn (file:///Users/zhangchen327/.cache/node/corepack/v1/pnpm/11.16.0/dist/pnpm.mjs:101471:27)
+    at runNextTicks (node:internal/process/task_queues:65:5)
+    at listOnTimeout (node:internal/timers:549:9)
+    at process.processTimers (node:internal/timers:523:7)
+TypeError: Cannot set property message of  which has only a getter
+    at RetryOperation._fn (file:///Users/zhangchen327/.cache/node/corepack/v1/pnpm/11.16.0/dist/pnpm.mjs:101471:27)
+    at runNextTicks (node:internal/process/task_queues:65:5)
+    at listOnTimeout (node:internal/timers:549:9)
+    at process.processTimers (node:internal/timers:523:7)
+TypeError: Cannot set property message of  which has only a getter
+    at RetryOperation._fn (file:///Users/zhangchen327/.cache/node/corepack/v1/pnpm/11.16.0/dist/pnpm.mjs:101471:27)
+    at runNextTicks (node:internal/process/task_queues:65:5)
+    at listOnTimeout (node:internal/timers:549:9)
+    at process.processTimers (node:internal/timers:523:7)
+TypeError: Cannot set property message of  which has only a getter
+    at RetryOperation._fn (file:///Users/zhangchen327/.cache/node/corepack/v1/pnpm/11.16.0/dist/pnpm.mjs:101471:27)
+    at runNextTicks (node:internal/process/task_queues:65:5)
+    at listOnTimeout (node:internal/timers:549:9)
+    at process.processTimers (node:internal/timers:523:7)
+TypeError: Cannot set property message of  which has only a getter
+    at RetryOperation._fn (file:///Users/zhangchen327/.cache/node/corepack/v1/pnpm/11.16.0/dist/pnpm.mjs:101471:27)
+    at runNextTicks (node:internal/process/task_queues:65:5)
+    at listOnTimeout (node:internal/timers:549:9)
+    at process.processTimers (node:internal/timers:523:7)
+TypeError: Cannot set property message of  which has only a getter
+    at RetryOperation._fn (file:///Users/zhangchen327/.cache/node/corepack/v1/pnpm/11.16.0/dist/pnpm.mjs:101471:27)
+    at runNextTicks (node:internal/process/task_queues:65:5)
+    at listOnTimeout (node:internal/timers:549:9)
+    at process.processTimers (node:internal/timers:523:7)
+TypeError: Cannot set property message of  which has only a getter
+    at RetryOperation._fn (file:///Users/zhangchen327/.cache/node/corepack/v1/pnpm/11.16.0/dist/pnpm.mjs:101471:27)
+TypeError: Cannot set property message of  which has only a getter
+    at RetryOperation._fn (file:///Users/zhangchen327/.cache/node/corepack/v1/pnpm/11.16.0/dist/pnpm.mjs:101471:27)
+    at runNextTicks (node:internal/process/task_queues:65:5)
+    at listOnTimeout (node:internal/timers:549:9)
+    at process.processTimers (node:internal/timers:523:7)
+TypeError: Cannot set property message of  which has only a getter
+    at RetryOperation._fn (file:///Users/zhangchen327/.cache/node/corepack/v1/pnpm/11.16.0/dist/pnpm.mjs:101471:27)
+    at runNextTicks (node:internal/process/task_queues:65:5)
+    at listOnTimeout (node:internal/timers:549:9)
+    at process.processTimers (node:internal/timers:523:7)
+TypeError: Cannot set property message of  which has only a getter
+    at RetryOperation._fn (file:///Users/zhangchen327/.cache/node/corepack/v1/pnpm/11.16.0/dist/pnpm.mjs:101471:27)
+    at runNextTicks (node:internal/process/task_queues:65:5)
+    at listOnTimeout (node:internal/timers:549:9)
+    at process.processTimers (node:internal/timers:523:7)
+TypeError: Cannot set property message of  which has only a getter
+    at RetryOperation._fn (file:///Users/zhangchen327/.cache/node/corepack/v1/pnpm/11.16.0/dist/pnpm.mjs:101471:27)
+    at runNextTicks (node:internal/process/task_queues:65:5)
+    at listOnTimeout (node:internal/timers:549:9)
+    at process.processTimers (node:internal/timers:523:7)
+TypeError: Cannot set property message of  which has only a getter
+    at RetryOperation._fn (file:///Users/zhangchen327/.cache/node/corepack/v1/pnpm/11.16.0/dist/pnpm.mjs:101471:27)
+    at runNextTicks (node:internal/process/task_queues:65:5)
+    at listOnTimeout (node:internal/timers:549:9)
+    at process.processTimers (node:internal/timers:523:7)
+TypeError: Cannot set property message of  which has only a getter
+    at RetryOperation._fn (file:///Users/zhangchen327/.cache/node/corepack/v1/pnpm/11.16.0/dist/pnpm.mjs:101471:27)
+    at runNextTicks (node:internal/process/task_queues:65:5)
+    at listOnTimeout (node:internal/timers:549:9)
+    at process.processTimers (node:internal/timers:523:7)
+TypeError: Cannot set property message of  which has only a getter
+    at RetryOperation._fn (file:///Users/zhangchen327/.cache/node/corepack/v1/pnpm/11.16.0/dist/pnpm.mjs:101471:27)
+    at runNextTicks (node:internal/process/task_queues:65:5)
+    at listOnTimeout (node:internal/timers:549:9)
+    at process.processTimers (node:internal/timers:523:7)
+TypeError: Cannot set property message of  which has only a getter
+    at RetryOperation._fn (file:///Users/zhangchen327/.cache/node/corepack/v1/pnpm/11.16.0/dist/pnpm.mjs:101471:27)
+    at runNextTicks (node:internal/process/task_queues:65:5)
+    at listOnTimeout (node:internal/timers:549:9)
+    at process.processTimers (node:internal/timers:523:7)
+TypeError: Cannot set property message of  which has only a getter
+    at RetryOperation._fn (file:///Users/zhangchen327/.cache/node/corepack/v1/pnpm/11.16.0/dist/pnpm.mjs:101471:27)
+    at runNextTicks (node:internal/process/task_queues:65:5)
+    at listOnTimeout (node:internal/timers:549:9)
+    at process.processTimers (node:internal/timers:523:7)
+TypeError: Cannot set property message of  which has only a getter
+    at RetryOperation._fn (file:///Users/zhangchen327/.cache/node/corepack/v1/pnpm/11.16.0/dist/pnpm.mjs:101471:27)
+    at runNextTicks (node:internal/process/task_queues:65:5)
+    at listOnTimeout (node:internal/timers:549:9)
+    at process.processTimers (node:internal/timers:523:7)
+TypeError: Cannot set property message of  which has only a getter
+    at RetryOperation._fn (file:///Users/zhangchen327/.cache/node/corepack/v1/pnpm/11.16.0/dist/pnpm.mjs:101471:27)
+    at runNextTicks (node:internal/process/task_queues:65:5)
+    at listOnTimeout (node:internal/timers:549:9)
+    at process.processTimers (node:internal/timers:523:7)
+TypeError: Cannot set property message of  which has only a getter
+    at RetryOperation._fn (file:///Users/zhangchen327/.cache/node/corepack/v1/pnpm/11.16.0/dist/pnpm.mjs:101471:27)
+    at runNextTicks (node:internal/process/task_queues:65:5)
+    at listOnTimeout (node:internal/timers:549:9)
+    at process.processTimers (node:internal/timers:523:7)
+TypeError: Cannot set property message of  which has only a getter
+    at RetryOperation._fn (file:///Users/zhangchen327/.cache/node/corepack/v1/pnpm/11.16.0/dist/pnpm.mjs:101471:27)
+    at runNextTicks (node:internal/process/task_queues:65:5)
+    at listOnTimeout (node:internal/timers:549:9)
+    at process.processTimers (node:internal/timers:523:7)
+TypeError: Cannot set property message of  which has only a getter
+    at RetryOperation._fn (file:///Users/zhangchen327/.cache/node/corepack/v1/pnpm/11.16.0/dist/pnpm.mjs:101471:27)
+    at runNextTicks (node:internal/process/task_queues:65:5)
+    at listOnTimeout (node:internal/timers:549:9)
+    at process.processTimers (node:internal/timers:523:7)
+TypeError: Cannot set property message of  which has only a getter
+    at RetryOperation._fn (file:///Users/zhangchen327/.cache/node/corepack/v1/pnpm/11.16.0/dist/pnpm.mjs:101471:27)
+    at runNextTicks (node:internal/process/task_queues:65:5)
+    at listOnTimeout (node:internal/timers:549:9)
+    at process.processTimers (node:internal/timers:523:7)
+TypeError: Cannot set property message of  which has only a getter
+    at RetryOperation._fn (file:///Users/zhangchen327/.cache/node/corepack/v1/pnpm/11.16.0/dist/pnpm.mjs:101471:27)
+    at runNextTicks (node:internal/process/task_queues:65:5)
+    at listOnTimeout (node:internal/timers:549:9)
+    at process.processTimers (node:internal/timers:523:7)
+TypeError: Cannot set property message of  which has only a getter
+    at RetryOperation._fn (file:///Users/zhangchen327/.cache/node/corepack/v1/pnpm/11.16.0/dist/pnpm.mjs:101471:27)
+    at runNextTicks (node:internal/process/task_queues:65:5)
+    at listOnTimeout (node:internal/timers:549:9)
+    at process.processTimers (node:internal/timers:523:7)
+TypeError: Cannot set property message of  which has only a getter
+    at RetryOperation._fn (file:///Users/zhangchen327/.cache/node/corepack/v1/pnpm/11.16.0/dist/pnpm.mjs:101471:27)

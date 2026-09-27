@@ -1,0 +1,38 @@
+[
+  {
+    "name": "size / shape",
+    "type": "AvatarSize / circle | square",
+    "default": "middle / circle",
+    "description": "组内默认尺寸与形状，成员显式值优先"
+  },
+  {
+    "name": "maxCount",
+    "type": "number",
+    "default": "无限制",
+    "description": "最多显示的头像数，+N 另计；小数向下取整，负数按 0，非有限数为无限制"
+  },
+  {
+    "name": "maxStyle",
+    "type": "JSX.CSSProperties",
+    "default": "—",
+    "description": "溢出按钮样式"
+  },
+  {
+    "name": "maxPopoverTrigger",
+    "type": "'hover' | 'click' | 'focus'",
+    "default": "hover",
+    "description": "溢出头像浮层触发方式"
+  },
+  {
+    "name": "class / style",
+    "type": "string / JSX.CSSProperties",
+    "default": "—",
+    "description": "头像组根节点类名与样式"
+  },
+  {
+    "name": "children",
+    "type": "JSX.Element",
+    "default": "—",
+    "description": "Avatar 成员，可动态增删"
+  }
+]

@@ -9,6 +9,7 @@ import {
   DRAWER_CLOSE_ICON, DRAWER_SIZE_PRESET,
 } from './styles'
 import Button, { type ButtonProps } from '../Button'
+import { useWatermarkPanel } from '../Watermark/context'
 import { registerDialog, unregisterDialog, isPushed } from '../_dialogStack'
 import { twMerge } from 'tailwind-merge'
 
@@ -129,6 +130,8 @@ const Drawer: Component<DrawerProps> = (providedProps) => {
 
   // ---- DOM wiring ---------------------------------------------------------
   let panelEl: HTMLDivElement | undefined
+  // antd usePanelRef：外层 Watermark（inherit）把水印也挂到弹层面板上。
+  useWatermarkPanel(() => dialog.animatedOpen(), () => panelEl)
 
   // ESC routing: register with the SHARED dialog stack (Modal uses the same
   // one) — a single document listener closes only the TOP-MOST open dialog.

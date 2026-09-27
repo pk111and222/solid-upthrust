@@ -1,13 +1,7 @@
 import { Component } from 'solid-js';
+import { AvatarSize } from 'upthrust-competence';
 import { JSX } from '@solidjs/web';
-export type AvatarSize = 'large' | 'middle' | 'small' | number | {
-    xs?: number;
-    sm?: number;
-    md?: number;
-    lg?: number;
-    xl?: number;
-    xxl?: number;
-};
+export type { AvatarSize } from 'upthrust-competence';
 export interface AvatarProps {
     /** Image source; falls back to icon, then children initials on error/absence */
     src?: string;

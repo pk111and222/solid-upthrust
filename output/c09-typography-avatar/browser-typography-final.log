@@ -1,0 +1,37 @@
+[WebServer] (node:72651) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:72657) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:72698) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:72803) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:72813) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 14 tests using 2 workers
+
+(node:72897) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:72896) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓   2 [docs] › browser/Typography/contracts.spec.ts:10:1 › [typography.browser.paint] heading sizes and text decoration (401ms)
+  ✓   1 [docs] › browser/Typography/contracts.spec.ts:20:1 › [typography.browser.ellipsis] clips text and keeps actions accessible (597ms)
+  ✓   3 [docs] › browser/Typography/contracts.spec.ts:44:1 › [typography.browser.edit] keyboard commits cancels and blur saves (409ms)
+  ✓   4 [docs] › browser/Typography/contracts.spec.ts:56:1 › [typography.browser.controlled] external editing commits (220ms)
+  ✓   6 [docs] › browser/Typography/contracts.spec.ts:71:1 › [typography.browser.link] disabled link and separate actions (145ms)
+  ✓   5 [docs] › browser/Typography/contracts.spec.ts:63:1 › [typography.browser.copy] writes clipboard and reports text (209ms)
+  ✓   8 [docs] › browser/Typography/contracts.spec.ts:83:1 › [typography.browser.ssr] API and source are server-rendered (10ms)
+(node:72957) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓   9 [example] › browser/Typography/contracts.spec.ts:10:1 › [typography.browser.paint] heading sizes and text decoration (283ms)
+  ✓  10 [example] › browser/Typography/contracts.spec.ts:20:1 › [typography.browser.ellipsis] clips text and keeps actions accessible (417ms)
+  ✓   7 [docs] › browser/Typography/contracts.spec.ts:77:1 › [typography.browser.dev] dev CSS and mounting (1.2s)
+(node:73010) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  11 [example] › browser/Typography/contracts.spec.ts:44:1 › [typography.browser.edit] keyboard commits cancels and blur saves (386ms)
+  ✓  13 [example] › browser/Typography/contracts.spec.ts:63:1 › [typography.browser.copy] writes clipboard and reports text (291ms)
+  ✓  12 [example] › browser/Typography/contracts.spec.ts:56:1 › [typography.browser.controlled] external editing commits (328ms)
+  ✓  14 [example] › browser/Typography/contracts.spec.ts:71:1 › [typography.browser.link] disabled link and separate actions (202ms)
+
+  14 passed (9.3s)

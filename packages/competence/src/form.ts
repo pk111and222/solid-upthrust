@@ -33,6 +33,7 @@ export type FormFieldEntity = {
   /** Field prop getters — the store reads them lazily on demand. */
   getInitialValue: () => StoreValue | undefined
   getRules: () => unknown[] | undefined
+  getDependencies: () => NamePath[] | undefined
   isListField: () => boolean
   isList: () => boolean
   isPreserve: () => boolean | undefined
@@ -136,6 +137,7 @@ export function createForm(config: FormConfig = {}) {
   let preserve: boolean | undefined
   let validateMessages: Record<string, any> | null = null
   let callbacks: FormCallbacks = {}
+  let callbacksOverridden = false
   /** Remembers non-preserved fields at destroy, to re-fill from initialValues. */
   let prevWithoutPreserves: NameMap<boolean> | null = null
 
@@ -149,7 +151,7 @@ export function createForm(config: FormConfig = {}) {
     }
     if (config.preserve !== undefined) preserve = config.preserve
     if (config.validateMessages) validateMessages = config.validateMessages
-    if (config.callbacks) callbacks = config.callbacks
+    if (!callbacksOverridden && config.callbacks) callbacks = config.callbacks
   }
 
   const isMergedPreserve = (fieldPreserve?: boolean | null) => {
@@ -734,7 +736,7 @@ export function createForm(config: FormConfig = {}) {
     registerField,
     initEntityValue,
     setInitialValues,
-    setCallbacks: (cb: FormCallbacks) => { callbacks = cb },
+    setCallbacks: (cb: FormCallbacks) => { callbacks = cb; callbacksOverridden = true },
     setValidateMessages: (messages: Record<string, any> | null) => { validateMessages = messages },
     getMergedValidateMessages: () => validateMessages,
     setPreserve: (p?: boolean) => { preserve = p },

@@ -1,0 +1,6 @@
+[
+  { "name": "value", "type": "number | string | Date | dayjs", "default": "—", "description": "目标时间" },
+  { "name": "format", "type": "string", "default": "'HH:mm:ss'", "description": "格式化模板" },
+  { "name": "onChange", "type": "(value: number) => void", "default": "—", "description": "倒计时刷新时触发" },
+  { "name": "onFinish", "type": "() => void", "default": "—", "description": "倒计时完成时触发" }
+]

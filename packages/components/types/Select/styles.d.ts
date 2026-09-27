@@ -11,7 +11,7 @@ export declare const selectorClass: (variants: VariantProps<typeof selectorVaria
 export declare const searchInputClass: () => string;
 /** Placeholder / single-value display text. */
 export declare const selectionItemClass: (props?: ({
-    state?: "value" | "placeholder" | null | undefined;
+    state?: "placeholder" | "value" | null | undefined;
     size?: "small" | "middle" | "large" | null | undefined;
 } & import('class-variance-authority/types').ClassProp) | undefined) => string;
 export declare const selectionItemWrapClass: (variants: VariantProps<typeof selectionItemClass>) => string;

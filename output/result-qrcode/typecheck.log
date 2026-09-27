@@ -1,0 +1,4 @@
+$ tsc --noEmit
+$ pnpm --dir docs run typecheck
+$ tsc --noEmit -p tsconfig.json
+$ tsc --noEmit -p tsconfig.browser.json

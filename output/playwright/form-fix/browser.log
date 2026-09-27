@@ -1,0 +1,465 @@
+[WebServer] (node:64318) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+[WebServer] (node:64358) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+[WebServer] (node:64420) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+[WebServer] (node:64545) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+[WebServer] (node:64610) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+
+Running 22 tests using 2 workers
+
+(node:64718) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+(node:64719) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[1/22] [docs] › browser/Form/interactions.spec.ts:16:1 › [form.browser.basic] submits and resets a required field
+[2/22] [docs] › browser/Form/interactions.spec.ts:39:1 › [form.browser.validation] reports synchronous and asynchronous validation errors
+[3/22] [docs] › browser/Form/interactions.spec.ts:52:1 › [form.browser.list] adds and removes rows while retaining list values
+[4/22] [docs] › browser/Form/interactions.spec.ts:71:1 › [form.browser.custom] custom render-props control updates the form store
+[5/22] [docs] › browser/Form/interactions.spec.ts:81:1 › [form.browser.nested] keeps nested NamePath and inner form submission independent
+  1) [docs] › browser/Form/interactions.spec.ts:71:1 › [form.browser.custom] custom render-props control updates the form store 
+
+    Error: expect(locator).toContainText(expected) failed
+
+    Locator: locator('[data-demo="form/custom"]').locator('output').first()
+    Expected substring: "CUSTOM"
+    Received string:    "尚未提交"
+    Timeout: 5000ms
+
+    Call log:
+      - Expect "toContainText" locator('[data-demo="form/custom"]').locator('output').first() with timeout 5000ms
+      - waiting for locator('[data-demo="form/custom"]').locator('output').first()
+        14 × locator resolved to <output aria-live="polite" class="mt-4 block break-all rounded bg-surface-container-low p-3 text-sm">尚未提交</output>
+           - unexpected value "尚未提交"
+
+
+      76 |   await expect(form.getByRole('textbox').first()).toHaveValue('CUSTOM')
+      77 |   await form.getByRole('button', { name: '提交自定义值', exact: true }).click()
+    > 78 |   await expect(area.locator('output').first()).toContainText('CUSTOM')
+         |                                                ^
+      79 | })
+      80 |
+      81 | test('[form.browser.nested] keeps nested NamePath and inner form submission independent', async ({ page }, info) => {
+        at /Users/zhangchen327/code/github/pk111and222/solid-upthrust/packages/testing/browser/Form/interactions.spec.ts:78:48
+
+    Error Context: test-results/form/Form-interactions--form-br-0edce-trol-updates-the-form-store-docs/error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/form/Form-interactions--form-br-0edce-trol-updates-the-form-store-docs/trace.zip
+    Usage:
+
+        pnpm exec playwright show-trace test-results/form/Form-interactions--form-br-0edce-trol-updates-the-form-store-docs/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+(node:65074) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[6/22] [docs] › browser/Form/interactions.spec.ts:95:1 › [form.browser.ssr] exposes Form API and example source in static HTML
+  2) [docs] › browser/Form/interactions.spec.ts:81:1 › [form.browser.nested] keeps nested NamePath and inner form submission independent 
+
+    Error: expect(locator).toContainText(expected) failed
+
+    Locator: locator('[data-demo="form/nested"]').locator('output').first()
+    Expected substring: "内层独立 store"
+    Received string:    "尚未提交"
+    Timeout: 5000ms
+
+    Call log:
+      - Expect "toContainText" locator('[data-demo="form/nested"]').locator('output').first() with timeout 5000ms
+      - waiting for locator('[data-demo="form/nested"]').locator('output').first()
+        14 × locator resolved to <output aria-live="polite" class="mt-4 block break-all rounded bg-surface-container-low p-3 text-sm">尚未提交</output>
+           - unexpected value "尚未提交"
+
+
+      85 |   await expect(forms).toHaveCount(1)
+      86 |   await area.getByRole('button', { name: '提交内层', exact: true }).click()
+    > 87 |   await expect(area.locator('output').first()).toContainText('内层独立 store')
+         |                                                ^
+      88 |   await forms.nth(0).getByRole('textbox', { name: '姓名' }).fill('嵌套用户')
+      89 |   await forms.nth(0).getByRole('textbox', { name: '邮箱' }).fill('nested@example.com')
+      90 |   await forms.nth(0).getByRole('button', { name: '提交外层', exact: true }).click()
+        at /Users/zhangchen327/code/github/pk111and222/solid-upthrust/packages/testing/browser/Form/interactions.spec.ts:87:48
+
+    Error Context: test-results/form/Form-interactions--form-br-9d775-form-submission-independent-docs/error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/form/Form-interactions--form-br-9d775-form-submission-independent-docs/trace.zip
+    Usage:
+
+        pnpm exec playwright show-trace test-results/form/Form-interactions--form-br-9d775-form-submission-independent-docs/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[7/22] [docs] › browser/Form/presentation.spec.ts:7:3 › [form.browser.typing.production] retains focus through consecutive keystrokes
+(node:65150) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[8/22] [docs] › browser/Form/interactions.spec.ts:107:1 › [form.browser.layout] renders label association and error styling
+[9/22] [docs] › browser/Form/presentation.spec.ts:7:3 › [form.browser.typing.development] retains focus through consecutive keystrokes
+[WebServer] 7:55:51 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in <Form> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+
+[WebServer] 7:55:51 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in <Input> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+
+[WebServer] 7:55:51 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in <Input> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+[WebServer] 7:55:51 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in <Select> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+
+[WebServer] 7:55:51 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in <Select> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+[WebServer] 7:55:51 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in <Select> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+
+[WebServer] 7:55:51 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in <Select> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+
+[WebServer] 7:55:51 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in <Select> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+
+[WebServer] 7:55:51 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in <Form> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+
+[WebServer] 7:55:51 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in <Input> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+
+[WebServer] 7:55:51 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in <Input> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+[WebServer] 7:55:51 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in <Select> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+
+[WebServer] 7:55:51 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in <Select> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+[WebServer] 7:55:51 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in <Select> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+[WebServer] 7:55:51 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in <Select> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+[WebServer] 7:55:51 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in <Select> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+
+[WebServer] 7:55:51 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in <Form> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+[WebServer] 7:55:51 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in <Input> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+
+[WebServer] 7:55:51 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in <Select> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+[WebServer] 7:55:51 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in <Select> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+
+[WebServer] 7:55:51 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in <Select> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+[WebServer] 7:55:51 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in <Select> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+
+[WebServer] 7:55:51 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in <Select> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+[WebServer] 7:55:51 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in an effect callback will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+
+[WebServer] 7:55:51 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in an effect callback will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+
+[WebServer] 7:55:51 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in an effect callback will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+[WebServer] 7:55:51 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in <Form> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+
+[WebServer] 7:55:51 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in <Select> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+
+[WebServer] 7:55:51 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in <Select> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+
+[WebServer] 7:55:51 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in <Select> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+[WebServer] 7:55:51 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in <Select> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+[WebServer] 7:55:51 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in <Select> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+
+[WebServer] 7:55:51 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in <Input> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+
+[WebServer] 7:55:51 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in <Input> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+
+[WebServer] 7:55:51 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in an effect callback will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+
+[WebServer] 7:55:51 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in <Form> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+
+[WebServer] 7:55:51 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in <FormItem> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+
+[WebServer] 7:55:51 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in <FormItem> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+
+[WebServer] 7:55:51 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in <FormItem> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+
+[WebServer] 7:55:51 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in <FormItem> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+
+[WebServer] 7:55:51 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in <Input> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+
+[WebServer] 7:55:51 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in <Form> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+
+[WebServer] 7:55:51 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in <Input> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+
+[WebServer] 7:55:51 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in <Input> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+
+[WebServer] 7:55:51 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in <Form> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+
+[WebServer] 7:55:51 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in <Select> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+
+[WebServer] 7:55:51 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in <Select> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+
+[WebServer] 7:55:51 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in <Select> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+
+[WebServer] 7:55:51 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in <Select> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+
+[WebServer] 7:55:51 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in <Select> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+
+[WebServer] 7:55:51 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in an effect callback will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+
+[WebServer] 7:55:51 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in <Form> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+
+[WebServer] 7:55:51 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in <FormItem> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+
+[WebServer] 7:55:51 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in <FormItem> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+
+[WebServer] 7:55:51 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in <FormItem> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+
+[WebServer] 7:55:51 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in <FormItem> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+
+[WebServer] 7:55:51 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in <Input> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+
+[WebServer] 7:55:51 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in <FormItem> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+
+[WebServer] 7:55:51 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in <FormItem> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+
+[WebServer] 7:55:51 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in <FormItem> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+
+[WebServer] 7:55:51 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in <FormItem> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+
+[WebServer] 7:55:51 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in <Input> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+
+[WebServer] 7:55:51 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in <Input> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+
+[WebServer] 7:55:51 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in <Form> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+
+[WebServer] 7:55:51 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in <FormItem> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+
+[WebServer] 7:55:51 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in <FormItem> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+
+[WebServer] 7:55:51 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in <FormItem> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+
+[WebServer] 7:55:51 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in <FormItem> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+
+[WebServer] 7:55:51 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in <Input> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+
+[WebServer] 7:55:51 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in <FormItem> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+
+[WebServer] 7:55:51 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in <FormItem> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+
+[WebServer] 7:55:51 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in <FormItem> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+
+[WebServer] 7:55:51 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in <FormItem> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+
+[WebServer] 7:55:51 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in <Input> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+
+[WebServer] 7:55:51 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in <Form> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+
+[WebServer] 7:55:51 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in <Input> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+
+[WebServer] 7:55:51 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in <Input> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+
+[WebServer] 7:55:51 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in <Form> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+
+[WebServer] 7:55:51 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in <Input> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+
+[WebServer] 7:55:51 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in <Form> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+
+[WebServer] 7:55:51 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in <Input> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+
+[WebServer] 7:55:51 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in <Form> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+
+[WebServer] 7:55:51 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in <Input> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+
+[WebServer] 7:55:51 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in <Select> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+
+[WebServer] 7:55:51 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in <Select> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+
+[WebServer] 7:55:51 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in <Select> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+
+[WebServer] 7:55:51 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in <Select> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+
+[WebServer] 7:55:51 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in <Select> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+
+[WebServer] 7:55:51 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in an effect callback will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+
+[WebServer] 7:55:51 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in <Form> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+
+[WebServer] 7:55:51 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in <Input> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+
+[WebServer] 7:55:51 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in <Input> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+
+[WebServer] 7:55:51 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in <Form> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+
+[WebServer] 7:55:51 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in <Input> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+
+[WebServer] 7:55:51 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in <Input> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+
+[WebServer] 7:55:51 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in <Form> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+
+[WebServer] 7:55:51 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in <Input> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+
+[WebServer] 7:55:51 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in <Form> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+
+[WebServer] 7:55:51 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in <Input> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+
+[WebServer] 7:55:51 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in <Input> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+
+[WebServer] 7:55:51 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in <Form> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+
+[WebServer] 7:55:51 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in <Input> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+
+[WebServer] 7:55:51 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in <Input> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+
+[WebServer] 7:55:51 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in <Input> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+
+[WebServer] 7:55:51 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in <Form> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+
+[WebServer] 7:55:51 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in <Input> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+
+[WebServer] 7:55:51 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in <Select> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+
+[WebServer] 7:55:51 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in <Select> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+
+[WebServer] 7:55:51 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in <Select> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+
+[WebServer] 7:55:51 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in <Select> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+
+[WebServer] 7:55:51 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in <Select> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+
+[WebServer] 7:55:51 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in an effect callback will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+[WebServer] 7:55:51 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in <Form> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+[WebServer] 7:55:51 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in <Upload> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+[WebServer] 7:55:51 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in <Form> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+[WebServer] 7:55:51 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in <FormItem> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+[WebServer] 7:55:51 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in <FormItem> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+[WebServer] 7:55:51 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in <FormItem> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+[WebServer] 7:55:51 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in <FormItem> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+[WebServer] 7:55:51 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in <Input> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+[WebServer] 7:55:51 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in <FormList> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+[WebServer] 7:55:51 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in <FormList> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+[WebServer] 7:55:51 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in <FormList> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+[WebServer] 7:55:51 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in <FormItem> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+[WebServer] 7:55:51 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in <FormItem> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+[WebServer] 7:55:51 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in <FormItem> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+[WebServer] 7:55:51 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in <FormItem> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+[WebServer] 7:55:51 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in <Input> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+[WebServer] 7:55:51 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in <Form> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+[WebServer] 7:55:51 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in <Input> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+[WebServer] 7:55:51 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in <Form> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+
+[WebServer] 7:55:51 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in <FormItem> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+
+[WebServer] 7:55:51 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in <FormItem> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+
+[WebServer] 7:55:51 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in <FormItem> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+
+[WebServer] 7:55:51 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in <FormItem> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+
+[WebServer] 7:55:51 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in <Input> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+
+[WebServer] 7:55:51 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in <FormList> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+
+[WebServer] 7:55:51 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in <FormList> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+
+[WebServer] 7:55:51 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in <FormList> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+
+[WebServer] 7:55:51 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in <FormItem> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+
+[WebServer] 7:55:51 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in <FormItem> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+
+[WebServer] 7:55:51 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in <FormItem> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+
+[WebServer] 7:55:51 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in <FormItem> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+
+[WebServer] 7:55:51 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in <Input> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+
+[WebServer] 7:55:51 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in <FormItem> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+
+[WebServer] 7:55:51 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in <FormItem> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+
+[WebServer] 7:55:51 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in <FormItem> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+
+[WebServer] 7:55:51 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in <FormItem> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+
+[WebServer] 7:55:51 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in <Form> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+
+[WebServer] 7:55:51 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in <Form> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+
+[WebServer] 7:55:51 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in <Input> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+
+[WebServer] 7:55:51 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in <Input> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+
+[WebServer] 7:55:51 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in <Input> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+
+[WebServer] 7:55:51 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in <Input> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+
+[WebServer] 7:55:51 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in <Tooltip> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+
+[WebServer] 7:55:51 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in <Tooltip> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+
+[WebServer] 7:55:51 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in <Tooltip> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+
+[WebServer] 7:55:51 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in <Tooltip> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+
+[WebServer] 7:55:51 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in <Input> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+
+[WebServer] 7:55:51 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in an effect callback will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+
+[WebServer] 7:55:51 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in <Form> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+
+[WebServer] 7:55:51 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in <Input> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+
+[WebServer] 7:55:51 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in <Input> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+
+[WebServer] 7:55:51 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in <Form> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+
+[WebServer] 7:55:51 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in <Input> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+
+[WebServer] 7:55:51 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in <Input> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+
+[WebServer] 7:55:51 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in <Form> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+
+[WebServer] 7:55:51 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in <DatePicker> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+
+[WebServer] 7:55:51 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in <DatePicker> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+
+[WebServer] 7:55:51 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in <DatePicker> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+
+[WebServer] 7:55:51 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in <DatePicker> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+
+[WebServer] 7:55:51 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in <DatePicker> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+
+[WebServer] 7:55:51 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in <TimePicker> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+
+[WebServer] 7:55:51 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in <TimePicker> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+
+[WebServer] 7:55:51 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in <TimePicker> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+
+[WebServer] 7:55:51 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in <TimePicker> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+
+[WebServer] 7:55:51 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in an effect callback will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+
+[WebServer] 7:55:51 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in an effect callback will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+
+[10/22] [docs] › browser/Form/presentation.spec.ts:23:1 › [form.browser.feedback-affixes] aligns status icons with clear and count
+[11/22] [docs] › browser/Form/presentation.spec.ts:47:1 › [form.browser.layouts] compares multi-field layouts and unique labels
+[12/22] [docs] › browser/Form/presentation.spec.ts:74:1 › [form.browser.nested-list] adds and removes both levels and recovers from empty
+[13/22] [docs] › browser/Form/presentation.spec.ts:96:1 › [form.browser.complex-list] edits nested purchase details and resets
+[14/22] [docs] › browser/Form/presentation.spec.ts:115:1 › [form.browser.list-order] refreshes row labels after a move
+[15/22] [docs] › browser/Form/presentation.spec.ts:124:1 › [form.browser.mobile] keeps form demos within the viewport
+(node:65361) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[16/22] [example] › browser/Form/interactions.spec.ts:16:1 › [form.browser.basic] submits and resets a required field
+[17/22] [example] › browser/Form/interactions.spec.ts:52:1 › [form.browser.list] adds and removes rows while retaining list values
+(node:65412) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[18/22] [example] › browser/Form/interactions.spec.ts:39:1 › [form.browser.validation] reports synchronous and asynchronous validation errors
+[19/22] [example] › browser/Form/interactions.spec.ts:71:1 › [form.browser.custom] custom render-props control updates the form store
+[20/22] [example] › browser/Form/interactions.spec.ts:81:1 › [form.browser.nested] keeps nested NamePath and inner form submission independent
+[21/22] [example] › browser/Form/interactions.spec.ts:95:1 › [form.browser.ssr] exposes Form API and example source in static HTML
+[22/22] [example] › browser/Form/interactions.spec.ts:107:1 › [form.browser.layout] renders label association and error styling
+  2 failed
+    [docs] › browser/Form/interactions.spec.ts:71:1 › [form.browser.custom] custom render-props control updates the form store 
+    [docs] › browser/Form/interactions.spec.ts:81:1 › [form.browser.nested] keeps nested NamePath and inner form submission independent 
+  4 skipped
+  16 passed (19.1s)

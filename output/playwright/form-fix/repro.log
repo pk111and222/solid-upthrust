@@ -1,0 +1,82 @@
+
+ RUN  v4.1.10 /Users/zhangchen327/code/github/pk111and222/solid-upthrust/packages/testing
+
+stderr | render/Form/contracts.test.tsx
+You appear to have multiple instances of Solid. This can lead to unexpected behavior.
+
+stderr | render/Form/contracts.test.tsx > [form.render.field] injects value, id, status and reset through Form.Item
+[NO_OWNER_CLEANUP] onCleanup called outside a reactive context will never be run
+[STRICT_READ_UNTRACKED] Reactive value read directly in <[solid-refresh]Input> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+[STRICT_READ_UNTRACKED] Reactive value read directly in <[solid-refresh]Input> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+
+stderr | render/Form/contracts.test.tsx > [form.render.custom] render props support custom controls
+[NO_OWNER_CLEANUP] onCleanup called outside a reactive context will never be run
+
+stderr | render/Form/contracts.test.tsx > [form.render.list] list rows write nested values and operations preserve submitted shape
+[NO_OWNER_CLEANUP] onCleanup called outside a reactive context will never be run
+[STRICT_READ_UNTRACKED] Reactive value read directly in an effect callback will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+[STRICT_READ_UNTRACKED] Reactive value read directly in an effect callback will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+[STRICT_READ_UNTRACKED] Reactive value read directly in <[solid-refresh]FormItem> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+[STRICT_READ_UNTRACKED] Reactive value read directly in <[solid-refresh]Input> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+[STRICT_READ_UNTRACKED] Reactive value read directly in <[solid-refresh]Input> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+[STRICT_READ_UNTRACKED] Reactive value read directly in <[solid-refresh]FormItem> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+[STRICT_READ_UNTRACKED] Reactive value read directly in <[solid-refresh]Input> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+[STRICT_READ_UNTRACKED] Reactive value read directly in <[solid-refresh]Input> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+
+stderr | render/Form/contracts.test.tsx > [form.render.list] surviving rows keep their DOM identity after removal
+[STRICT_READ_UNTRACKED] Reactive value read directly in <[solid-refresh]Form> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+[NO_OWNER_CLEANUP] onCleanup called outside a reactive context will never be run
+[STRICT_READ_UNTRACKED] Reactive value read directly in <[solid-refresh]FormItem> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+[STRICT_READ_UNTRACKED] Reactive value read directly in <[solid-refresh]Input> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+[STRICT_READ_UNTRACKED] Reactive value read directly in <[solid-refresh]Input> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+[STRICT_READ_UNTRACKED] Reactive value read directly in <[solid-refresh]FormItem> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+[STRICT_READ_UNTRACKED] Reactive value read directly in <[solid-refresh]Input> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+[STRICT_READ_UNTRACKED] Reactive value read directly in <[solid-refresh]Input> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+
+stderr | render/Form/contracts.test.tsx > [form.render.destroy] clearOnDestroy clears an externally owned form store
+[STRICT_READ_UNTRACKED] Reactive value read directly in <[solid-refresh]Form> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+[NO_OWNER_CLEANUP] onCleanup called outside a reactive context will never be run
+[STRICT_READ_UNTRACKED] Reactive value read directly in <[solid-refresh]Input> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+[STRICT_READ_UNTRACKED] Reactive value read directly in <[solid-refresh]Input> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+
+stderr | render/Form/contracts.test.tsx > [form.render.focus] retains the input node across typing and validation
+[STRICT_READ_UNTRACKED] Reactive value read directly in <[solid-refresh]Form> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+[NO_OWNER_CLEANUP] onCleanup called outside a reactive context will never be run
+[STRICT_READ_UNTRACKED] Reactive value read directly in <[solid-refresh]Input> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+[STRICT_READ_UNTRACKED] Reactive value read directly in <[solid-refresh]Input> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+
+stderr | render/Form/contracts.test.tsx > [form.render.accessor] does not treat a JSX accessor as a field renderer
+[STRICT_READ_UNTRACKED] Reactive value read directly in <[solid-refresh]Form> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+[NO_OWNER_CLEANUP] onCleanup called outside a reactive context will never be run
+
+······x
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  render/Form/contracts.test.tsx > [form.render.accessor] does not treat a JSX accessor as a field renderer
+AssertionError: expected <input …(3)></input> to be <input …(3)></input> // Object.is equality
+
+If it should pass with deep equality, replace "toBe" with "toStrictEqual"
+
+Expected: <input …(3)></input>
+Received: serializes to the same string
+
+
+Compared values have no visual difference.
+
+ ❯ render/Form/contracts.test.tsx:151:39
+    149|   input.dispatchEvent(new Event('input', { bubbles: true }))
+    150|   flush()
+    151|   expect(view.querySelector('input')).toBe(input)
+       |                                       ^
+    152|   expect(refs).toHaveBeenCalledTimes(1)
+    153| })
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  1 failed | 6 passed (7)
+   Start at  19:45:18
+   Duration  709ms (transform 326ms, setup 0ms, import 411ms, tests 39ms, environment 179ms)
+

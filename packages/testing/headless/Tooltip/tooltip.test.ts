@@ -73,11 +73,14 @@ describe('createTooltip', () => {
   })
 
   // Tooltip 固定启用箭头（createTrigger 的 arrow 不是可配置项），与 Dropdown 的默认区分开。
+  // Trigger 只在触发器与浮层都有真实尺寸后才测量（零尺寸测量会算错位置），happy-dom 默认全 0，需给两者真实盒子。
   it('[tooltip.headless.arrow-enabled] always reports arrow position data once open', () => {
     createRoot((dispose) => {
       const t = createTooltip({})
       const trigger = element()
       const layer = element()
+      vi.spyOn(trigger, 'getBoundingClientRect').mockReturnValue(new DOMRect(100, 300, 100, 40))
+      vi.spyOn(layer, 'getBoundingClientRect').mockReturnValue(new DOMRect(0, 0, 160, 60))
       t.triggerRef(trigger)
       t.layerRef(layer)
       t.setOpen(true)

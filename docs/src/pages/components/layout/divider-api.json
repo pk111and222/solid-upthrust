@@ -1,0 +1,16 @@
+[
+  { "name": "children", "type": "JSX.Element", "default": "—", "description": "标题。false、null、undefined、空串不算标题；垂直分割线不渲染标题。" },
+  { "name": "orientation", "type": "'horizontal' | 'vertical'", "default": "'horizontal'", "description": "方向（antd 6 名称）。旧版本里 orientation 表示标题位置，传入 left/right/center 时仍按 titlePlacement 兼容处理。" },
+  { "name": "vertical", "type": "boolean", "default": "false", "description": "是否垂直；orientation 为方向值时以 orientation 为准。" },
+  { "name": "type", "type": "'horizontal' | 'vertical'", "default": "—", "description": "旧写法，等价于 orientation。" },
+  { "name": "titlePlacement", "type": "'start' | 'center' | 'end' | 'left' | 'right'", "default": "'center'", "description": "标题位置；left/right 为旧写法，分别等价 start/end。优先级高于旧 orientation 的 left/right。" },
+  { "name": "orientationMargin", "type": "string | number", "default": "—", "description": "标题靠边时与该边的距离；数字与纯数字字符串按 px，其余为 CSS 长度（如 '20%'）。titlePlacement 为 center 时无效。" },
+  { "name": "variant", "type": "'solid' | 'dashed' | 'dotted'", "default": "'solid'", "description": "线型。" },
+  { "name": "dashed", "type": "boolean", "default": "false", "description": "旧写法，等价于 variant='dashed'；显式 variant 优先。" },
+  { "name": "plain", "type": "boolean", "default": "false", "description": "标题使用正文字号与常规字重；默认标题为 body-lg 字号 + 中等字重。" },
+  { "name": "size", "type": "'small' | 'middle' | 'large'", "default": "—", "description": "水平分割线的上下间距：small 8px、middle 16px（medium 为别名）、large 24px。不传时无标题 24px、带标题 16px；垂直分割线忽略。" },
+  { "name": "classNames", "type": "Partial<Record<'root' | 'rail' | 'content', string>>", "default": "—", "description": "语义化类名：root 容器、rail 标题两侧的线段、content 标题。" },
+  { "name": "styles", "type": "Partial<Record<'root' | 'rail' | 'content', JSX.CSSProperties>>", "default": "—", "description": "语义化内联样式；styles.root 覆盖 style 的同名项。" },
+  { "name": "class / style", "type": "string / JSX.CSSProperties", "default": "—", "description": "附加到根节点，class 通过 mergeClass 合并，my-0、border-primary 等可覆盖默认值。" },
+  { "name": "...rest", "type": "JSX.HTMLAttributes<HTMLDivElement>", "default": "—", "description": "原生属性、事件与 ref 透传到根节点。根节点固定 role='separator'，垂直时带 aria-orientation='vertical'。" }
+]

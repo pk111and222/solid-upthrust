@@ -1,0 +1,16 @@
+[
+  { "name": "decimalSeparator", "type": "string", "default": "'.'", "description": "设置小数点" },
+  { "name": "formatter", "type": "(value: number | string) => JSX.Element", "default": "—", "description": "自定义数值展示，接管内置格式化" },
+  { "name": "groupSeparator", "type": "string", "default": "','", "description": "设置千分位标识符" },
+  { "name": "loading", "type": "boolean", "default": "false", "description": "数值是否加载中（数值区显示骨架屏）" },
+  { "name": "precision", "type": "number", "default": "—", "description": "数值精度：截断补零，不四舍五入" },
+  { "name": "prefix", "type": "JSX.Element", "default": "—", "description": "设置数值的前缀" },
+  { "name": "suffix", "type": "JSX.Element", "default": "—", "description": "设置数值的后缀" },
+  { "name": "title", "type": "JSX.Element", "default": "—", "description": "数值的标题" },
+  { "name": "value", "type": "number | string", "default": "0", "description": "数值内容；数字字符串同样格式化，非法值原样显示" },
+  { "name": "valueRender", "type": "(node: JSX.Element) => JSX.Element", "default": "—", "description": "包装数值节点" },
+  { "name": "valueStyle", "type": "JSX.CSSProperties", "default": "—", "description": "设置数值区域的样式，已废弃，请使用 styles.content" },
+  { "name": "classNames", "type": "Record<'root' | 'header' | 'title' | 'content' | 'value' | 'prefix' | 'suffix', string>", "default": "—", "description": "语义化结构 class，不支持函数形式" },
+  { "name": "styles", "type": "Record<'root' | 'header' | 'title' | 'content' | 'value' | 'prefix' | 'suffix', JSX.CSSProperties>", "default": "—", "description": "语义化结构 style，不支持函数形式" },
+  { "name": "class / style", "type": "string / JSX.CSSProperties", "default": "—", "description": "根节点 class 与 style；其余 HTML 属性（含 onMouseEnter / onMouseLeave、aria-*、data-*）透传到根节点" }
+]

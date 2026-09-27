@@ -35,7 +35,7 @@ export default defineConfig(({ command, mode }) => {
           // only matches the exact specifier, so `dayjs/plugin/localeData`
           // would be inlined into dist with a node_modules/.pnpm relative
           // import no consumer can resolve (same fix as competence).
-          external: ["solid-js", "solid-js/web", "@solidjs/web", "@solidjs/signals", "upthrust-competence", "class-variance-authority", "tailwind-merge", "clsx", "lodash", "qrcode-generator", /^dayjs(\/|$)/, /^virtual:/, /\buno\.css$/],
+          external: ["solid-js", "solid-js/web", "@solidjs/web", "@solidjs/signals", "upthrust-competence", "class-variance-authority", "tailwind-merge", "clsx", "lodash", /^dayjs(\/|$)/, /^virtual:/, /\buno\.css$/],
           output: {
             format: 'es',
             preserveModules: true,

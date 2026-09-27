@@ -1,0 +1,20 @@
+[
+  { "name": "value", "type": "string | string[]", "default": "—", "description": "扫描后的文本；数组时按分段编码（每段自动选择数字 / 字母数字 / UTF-8 字节模式）。为空时不渲染" },
+  { "name": "type", "type": "'canvas' | 'svg'", "default": "'canvas'", "description": "渲染类型" },
+  { "name": "icon", "type": "string", "default": "—", "description": "二维码中图片的地址（目前只支持图片地址），图标区域的模块会被挖空" },
+  { "name": "size", "type": "number", "default": "160", "description": "二维码大小（px）" },
+  { "name": "iconSize", "type": "number | { width: number; height: number }", "default": "40", "description": "二维码中图片的大小" },
+  { "name": "color", "type": "string", "default": "'rgba(0, 0, 0, 0.88)'", "description": "二维码颜色" },
+  { "name": "bgColor", "type": "string", "default": "'transparent'", "description": "二维码背景颜色" },
+  { "name": "marginSize", "type": "number", "default": "0", "description": "静区（空白边距）模块数" },
+  { "name": "bordered", "type": "boolean", "default": "true", "description": "是否有边框" },
+  { "name": "errorLevel", "type": "'L' | 'M' | 'Q' | 'H'", "default": "'M'", "description": "二维码纠错等级" },
+  { "name": "boostLevel", "type": "boolean", "default": "true", "description": "在不增大二维码版本的前提下自动提升纠错等级" },
+  { "name": "status", "type": "'active' | 'expired' | 'loading' | 'scanned'", "default": "'active'", "description": "二维码状态" },
+  { "name": "statusRender", "type": "(info: StatusRenderInfo) => JSX.Element", "default": "—", "description": "自定义状态渲染器" },
+  { "name": "onRefresh", "type": "() => void", "default": "—", "description": "点击「点击刷新」的回调；不提供时过期状态不显示刷新按钮" },
+  { "name": "locale", "type": "{ expired?: string; refresh?: string; scanned?: string }", "default": "中文文案", "description": "覆盖内置文案（本库扩展，antd 走 ConfigProvider 语言包）" },
+  { "name": "classNames", "type": "Record<'root' | 'cover', string> | (info: { props }) => Record<…, string>", "default": "—", "description": "语义化结构 class，支持函数形式" },
+  { "name": "styles", "type": "Record<'root' | 'cover', JSX.CSSProperties> | (info: { props }) => Record<…, JSX.CSSProperties>", "default": "—", "description": "语义化结构 style，支持函数形式" },
+  { "name": "class / style", "type": "string / JSX.CSSProperties", "default": "—", "description": "根节点 class 与 style；style.width / height 同时作用于根节点与二维码本体；其余原生属性透传到根节点" }
+]

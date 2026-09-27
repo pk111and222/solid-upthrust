@@ -72,8 +72,13 @@ const Input: Component<InputProps> = providedProps => {
     get status() { return props.status },
   })
 
+  form.registerFeedback?.()
+
   const state = createInput({
-    get value() { const v = form.value(); return v === undefined ? undefined : String(v ?? '') },
+    get value() {
+      const v = form.value()
+      return v === undefined ? (form.hasContext ? '' : undefined) : String(v ?? '')
+    },
     get defaultValue() { return props.defaultValue },
     get disabled() { return form.disabled() },
     get readonly() { return props.readonly },
@@ -98,7 +103,7 @@ const Input: Component<InputProps> = providedProps => {
   // frame to wrapper mode. showClear is part of this because a clearable
   // input always reserves the icon slot (antd keeps the icon mounted and
   // toggles visibility, so the mode never flips while typing).
-  const hasSuffixRow = () => props.suffix !== undefined || !!props.allowClear || showCountOn()
+  const hasSuffixRow = () => props.suffix !== undefined || !!props.allowClear || showCountOn() || !!form.hasFeedback?.()
   const wrapperMode = () => hasPrefix() || hasSuffixRow()
   // Affix-side padding layout (antd): the side WITH an affix shrinks to the
   // 4px gap, the bare side keeps the full frame padding — a suffix-only
@@ -148,7 +153,7 @@ const Input: Component<InputProps> = providedProps => {
       class={twMerge(
         wrapperMode()
           ? inputWrapperClass({ size: resolvedSize(), status: resolvedStatus(), disabled: !!resolvedDisabled(), affixLayout: affixLayout() })
-          : 'inline-flex w-full',
+          : 'inline-flex w-full rounded',
         props.class,
       )}
       style={props.style}
@@ -182,31 +187,34 @@ const Input: Component<InputProps> = providedProps => {
       />
       <Show when={hasSuffixRow()}>
         <span class={affixClass({ side: 'suffix', size: resolvedSize(), clickable: false })}>
-          <Show
-            when={showClear()}
-            fallback={
-              // keep the slot present but invisible (no reflow); antd toggles visibility only
-              <span class={clearIconClass({ visible: false })} aria-hidden="true">
-                <span class="i-mdi-close-circle-outline text-[12px]" />
-              </span>
-            }
-          >
-            <span
-              class={clearIconClass({ visible: true })}
-              onClick={handleClear}
-              role="button"
-              aria-label="clear"
-              tabindex={0}
-              onMouseDown={e => e.preventDefault()}
-              onKeyDown={e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); handleClear(e) } }}
+          <Show when={!!props.allowClear}>
+            <Show
+              when={showClear()}
+              fallback={
+                // keep the slot present but invisible (no reflow); antd toggles visibility only
+                <span class={clearIconClass({ visible: false })} aria-hidden="true">
+                  <span class="i-mdi-close-circle-outline text-[12px]" />
+                </span>
+              }
             >
-              {typeof props.allowClear === 'object' && props.allowClear.clearIcon
-                ? props.allowClear.clearIcon
-                : <span class="i-mdi-close-circle-outline text-[12px]" />}
-            </span>
+              <span
+                class={clearIconClass({ visible: true })}
+                onClick={handleClear}
+                role="button"
+                aria-label="clear"
+                tabindex={0}
+                onMouseDown={e => e.preventDefault()}
+                onKeyDown={e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); handleClear(e) } }}
+              >
+                {typeof props.allowClear === 'object' && props.allowClear.clearIcon
+                  ? props.allowClear.clearIcon
+                  : <span class="i-mdi-close-circle-outline text-[12px]" />}
+              </span>
+            </Show>
           </Show>
           {countNode()}
           {props.suffix}
+          {form.feedback?.()}
         </span>
       </Show>
     </span>

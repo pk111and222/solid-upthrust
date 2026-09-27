@@ -2,9 +2,11 @@ import { render } from '@solidjs/web'
 import { flush } from 'solid-js'
 import { afterEach, expect, it, vi } from 'vitest'
 import { Paragraph, Text } from '../../../components/lib/Typography/index'
-let dispose: (() => void) | undefined
-const mount = (view: Parameters<typeof render>[0]) => { const host = document.createElement('div'); document.body.append(host); dispose = render(view, host); flush(); return host }
-afterEach(() => { dispose?.(); document.body.innerHTML = ''; vi.restoreAllMocks() })
+import { mount as mountView } from '../../utils/mount'
+let view: ReturnType<typeof mountView>
+const mount = (renderView: Parameters<typeof render>[0]) => { view = mountView(renderView); return view.host }
+afterEach(() => { view?.dispose(); vi.restoreAllMocks() })
+// 嵌套装饰只复制纯文本，成功反馈可被辅助技术读取。
 it('copies plain nested text and reports success', async () => {
   const writeText = vi.fn().mockResolvedValue(undefined)
   vi.spyOn(navigator.clipboard, 'writeText').mockImplementation(writeText)
@@ -12,6 +14,7 @@ it('copies plain nested text and reports success', async () => {
   host.querySelector('button')!.click(); await Promise.resolve(); await Promise.resolve(); flush()
   expect(writeText).toHaveBeenCalledWith('Hello world'); expect(host.querySelector('[aria-label="已复制"]')).not.toBeNull()
 })
+// 保存更新文本，取消不提交草稿。
 it('edits, saves and cancels without committing cancellation', () => {
   const host = mount(() => <Paragraph editable>before</Paragraph>)
   host.querySelector('button')!.click(); flush()

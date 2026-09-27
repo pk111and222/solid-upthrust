@@ -1,0 +1,16 @@
+{
+  "masonry": [
+    { "name": "columns", "type": "number | Partial<Record<'xs' | 'sm' | 'md' | 'lg' | 'xl' | 'xxl', number>>", "default": "3", "description": "列数。对象形式按视口断点取值：命中多个断点时取最宽的已定义值；都未命中时取 xs，再退回 1。" },
+    { "name": "gutter", "type": "MasonryGutter | [MasonryGutter, MasonryGutter]", "default": "0", "description": "间距，px 数值或 'small' | 'middle' | 'large'（8 / 16 / 24），也可以按断点取值。数组为 [水平, 垂直]，垂直未解析出值时沿用水平。" },
+    { "name": "items", "type": "MasonryItem<T>[]", "default": "—", "description": "数据项 { key, data?, column?, children? }。key 必须稳定且唯一，它决定 DOM 复用；column 把该项固定到某列（从 0 开始，超出取最后一列）；children 优先于 itemRender。设置后忽略组件 children。" },
+    { "name": "itemRender", "type": "(info: MasonryItemRenderInfo<T>) => JSX.Element", "default": "—", "description": "渲染数据项。info 包含原数据项字段、index 与 column；column 是响应式 getter，列变化时只更新读取它的地方，内容不会重建。" },
+    { "name": "fresh", "type": "boolean", "default": "false", "description": "监听每一项自身的尺寸变化（共用一个 ResizeObserver）。内容会在挂载后变高（展开、异步加载文本）时开启；图片加载无需开启。" },
+    { "name": "sequential", "type": "boolean", "default": "false", "description": "本库扩展：按阅读顺序均衡分列（12 项 5 列 → 3、3、2、2、2），不再按最短列放置。" },
+    { "name": "onLayoutChange", "type": "(items: MasonryLayoutItem<T>[]) => void", "default": "—", "description": "全部项完成定位后、且列分配发生变化时触发，参数为原数据项加上 column。高度变化但列不变时不重复触发。" },
+    { "name": "classNames", "type": "{ root?: string; item?: string }", "default": "—", "description": "语义化类名。" },
+    { "name": "styles", "type": "{ root?: CSSProperties; item?: CSSProperties }", "default": "—", "description": "语义化内联样式；组件 style 优先于 styles.root。" },
+    { "name": "children", "type": "JSX.Element", "default": "—", "description": "旧用法：每个子节点为一项，key 为下标，false / null 被忽略；items 存在时忽略。" },
+    { "name": "class / style / ref", "type": "string / CSSProperties / (el) => void", "default": "—", "description": "附加到根节点。" },
+    { "name": "...rest", "type": "JSX.HTMLAttributes<HTMLDivElement>", "default": "—", "description": "其余原生属性透传到根节点。" }
+  ]
+}

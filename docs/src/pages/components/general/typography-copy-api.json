@@ -1,0 +1,32 @@
+[
+  {
+    "name": "text",
+    "type": "string | (() => string | Promise<string>)",
+    "default": "显示文本",
+    "description": "复制内容；空字符串有效，异步期间禁用复制按钮"
+  },
+  {
+    "name": "icon",
+    "type": "JSX.Element",
+    "default": "复制图标",
+    "description": "未成功时显示的自定义图标；成功时为勾号"
+  },
+  {
+    "name": "tooltips",
+    "type": "string | false",
+    "default": "—",
+    "description": "按钮原生 title，false 隐藏"
+  },
+  {
+    "name": "onCopy",
+    "type": "(text: string) => void",
+    "default": "—",
+    "description": "写入成功回调；反馈持续 2 秒"
+  },
+  {
+    "name": "onError",
+    "type": "(error: unknown) => void",
+    "default": "—",
+    "description": "获取文案或写入失败回调；失败不显示成功反馈"
+  }
+]

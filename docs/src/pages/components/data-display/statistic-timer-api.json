@@ -1,0 +1,8 @@
+[
+  { "name": "type", "type": "'countdown' | 'countup'", "default": "—", "description": "计时类型：倒计时或正计时" },
+  { "name": "value", "type": "number | string | Date | dayjs", "default": "—", "description": "目标时间（倒计时）或起始时间（正计时）；字符串按 Date 解析" },
+  { "name": "format", "type": "string", "default": "'HH:mm:ss'", "description": "格式化模板，支持 Y M D H m s S；模板中最大的单位吸收溢出，[] 内为转义文本" },
+  { "name": "onChange", "type": "(value: number) => void", "default": "—", "description": "每次刷新（约 16ms）触发，参数为未钳制的差值毫秒数" },
+  { "name": "onFinish", "type": "() => void", "default": "—", "description": "倒计时越过目标时间时触发一次并停止刷新；正计时不触发" },
+  { "name": "其余", "type": "Statistic 属性", "default": "—", "description": "title / prefix / suffix / loading / classNames / styles 等同 Statistic；formatter / valueRender / precision 与分隔符由计时器接管" }
+]

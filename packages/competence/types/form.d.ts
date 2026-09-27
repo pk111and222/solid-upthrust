@@ -18,6 +18,7 @@ export type FormFieldEntity = {
     /** Field prop getters — the store reads them lazily on demand. */
     getInitialValue: () => StoreValue | undefined;
     getRules: () => unknown[] | undefined;
+    getDependencies: () => NamePath[] | undefined;
     isListField: () => boolean;
     isList: () => boolean;
     isPreserve: () => boolean | undefined;

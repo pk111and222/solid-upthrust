@@ -1,0 +1,28 @@
+{
+  "space": [
+    { "name": "size", "type": "'small' | 'middle' | 'large' | number | string | [水平, 垂直]", "default": "'small'", "description": "间距。small=8px、middle=16px、large=24px 走主题 spacing token（medium 是 middle 的别名）；数字按 px、其他字符串（如 '1rem'）原样写入内联 gap；数组形式为 [column-gap, row-gap]，两项可分别取预设或自定义值。" },
+    { "name": "orientation", "type": "'horizontal' | 'vertical'", "default": "'horizontal'", "description": "排列方向（antd 6 名称），优先级高于 vertical 与 direction。" },
+    { "name": "vertical", "type": "boolean", "default": "false", "description": "是否纵向排列；优先级高于 direction。" },
+    { "name": "direction", "type": "'horizontal' | 'vertical'", "default": "—", "description": "旧写法，等价于 orientation，保留兼容。" },
+    { "name": "align", "type": "'start' | 'end' | 'center' | 'baseline'", "default": "水平 'center'，纵向不设置", "description": "交叉轴对齐（align-items）。水平方向默认 center；纵向默认不设置，即 stretch。" },
+    { "name": "wrap", "type": "boolean", "default": "false", "description": "是否自动换行，仅水平方向有意义；换行后的行距由 size 的垂直分量决定。" },
+    { "name": "block", "type": "boolean", "default": "false", "description": "撑满父容器宽度（display:flex + width:100%），默认为 inline-flex。" },
+    { "name": "separator", "type": "JSX.Element", "default": "—", "description": "相邻子节点之间的分隔内容（antd 6 名称）。" },
+    { "name": "split", "type": "JSX.Element", "default": "—", "description": "separator 的旧名称，保留兼容；两者同时传入时 separator 优先。" },
+    { "name": "classNames", "type": "Partial<Record<'root' | 'item' | 'separator', string>>", "default": "—", "description": "语义化类名，分别作用于容器、每个子项包裹层、分隔符。" },
+    { "name": "styles", "type": "Partial<Record<'root' | 'item' | 'separator', JSX.CSSProperties>>", "default": "—", "description": "语义化内联样式；styles.root 覆盖 style 的同名项。" },
+    { "name": "class / style", "type": "string / JSX.CSSProperties", "default": "—", "description": "附加到容器。class 与 classNames.root 通过 mergeClass 合并。" },
+    { "name": "...rest", "type": "JSX.HTMLAttributes<HTMLDivElement>", "default": "—", "description": "原生属性、事件与 ref 透传到容器。" }
+  ],
+  "compact": [
+    { "name": "orientation", "type": "'horizontal' | 'vertical'", "default": "'horizontal'", "description": "排列方向，优先级高于 vertical 与 direction。" },
+    { "name": "vertical", "type": "boolean", "default": "false", "description": "是否纵向排列。" },
+    { "name": "direction", "type": "'horizontal' | 'vertical'", "default": "—", "description": "旧写法，等价于 orientation。" },
+    { "name": "block", "type": "boolean", "default": "false", "description": "撑满父容器宽度；子元素保持自身宽度，需要填充的子元素可以加 flex-1。" },
+    { "name": "class / style / ...rest", "type": "—", "default": "—", "description": "附加到容器，原生属性透传。" }
+  ],
+  "addon": [
+    { "name": "children", "type": "JSX.Element", "default": "—", "description": "紧凑组合里的文本单元（URL 前缀、单位等），带边框与浅色底，与相邻控件拼接。" },
+    { "name": "class / ...rest", "type": "—", "default": "—", "description": "附加到 span 元素，原生属性透传。" }
+  ]
+}

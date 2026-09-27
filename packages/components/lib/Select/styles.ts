@@ -30,7 +30,9 @@ const selectorVariants = cva(
     "w-full",
     "min-w-0",
     "bg-surface",
-    "rounded",
+    // radius INHERITS the root wrapper's `rounded`, so corner overrides on the
+    // root (Space.Compact's `!rounded-r-none`, a consumer `class`) reach the frame.
+    "rounded-[inherit]",
     "border",
     "border-solid",
     "border-outline",

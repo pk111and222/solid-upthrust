@@ -1,0 +1,12 @@
+[
+  { "name": "items", "type": "TimelineItemProps[]", "default": "—", "description": "选项配置" },
+  { "name": "mode", "type": "'start' | 'alternate' | 'end'", "default": "'start'", "description": "通过设置 mode 可以改变时间轴和内容的相对位置；'left' / 'right' 为废弃别名" },
+  { "name": "orientation", "type": "'vertical' | 'horizontal'", "default": "'vertical'", "description": "设置时间轴的方向" },
+  { "name": "variant", "type": "'outlined' | 'filled'", "default": "'outlined'", "description": "设置样式变体" },
+  { "name": "reverse", "type": "boolean", "default": "false", "description": "节点排序" },
+  { "name": "titleSpan", "type": "number | string", "default": "12", "description": "设置标题占比空间，为到圆点中心的距离；数字为 24 栅格份数，字符串为 CSS 长度；交替模式下无效" },
+  { "name": "pending", "type": "JSX.Element", "default": "—", "description": "设置幽灵节点（末尾的加载节点），已废弃，请在 items 中使用 loading" },
+  { "name": "pendingDot", "type": "JSX.Element", "default": "加载图标", "description": "幽灵节点的图标，已废弃，请在 items 中使用 icon" },
+  { "name": "classNames", "type": "Record<SemanticDOM, string> | (info: { props }) => Record<SemanticDOM, string>", "default": "—", "description": "语义化结构 class：root、item、itemWrapper、itemIcon、itemSection、itemHeader、itemTitle、itemContent、itemRail" },
+  { "name": "styles", "type": "Record<SemanticDOM, JSX.CSSProperties> | (info: { props }) => Record<SemanticDOM, JSX.CSSProperties>", "default": "—", "description": "语义化结构 style，结构同 classNames" }
+]

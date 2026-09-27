@@ -379,7 +379,10 @@ const Select: Component<SelectProps> = providedProps => {
     }
     return rows
   })
-  const activeIndex = () => menuRows().findIndex(row => row.kind === 'option' && row.option.value === m().activeKey())
+  const activeIndex = () => {
+    const key = m().activeKey()
+    return menuRows().findIndex(row => row.kind === 'option' && row.option.value === key)
+  }
 
   const renderTags = () => (
     <>
@@ -452,7 +455,7 @@ const Select: Component<SelectProps> = providedProps => {
 
   return (
     <div
-      class={twMerge('relative inline-flex w-full', props.class)}
+      class={twMerge('relative inline-flex w-full rounded', props.class)}
       style={props.style}
       onKeyDown={handleSelectorKeyDown}
     >

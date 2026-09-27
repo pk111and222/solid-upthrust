@@ -35,11 +35,12 @@ const FormPage: Component = () => {
       </p>
 
       <h3 class="text-lg font-semibold mb-3">基础表单：注册（水平布局）</h3>
-      <Form
+      <div data-form-demo="basic">
+        <Form
         ref={f => { formRef = f }}
         labelAlign="right"
         labelWidth="96px"
-        initialValues={{ nickname: '水滴' }}
+        initialValues={{ username: '', nickname: '水滴', email: '', inviteCode: '' }}
         onFinish={handleFinish}
         onFinishFailed={handleFinishFailed}
       >
@@ -103,14 +104,16 @@ const FormPage: Component = () => {
         <FormItem label="">
           <Space size="middle">
             <Button variant="solid" onClick={() => { void formRef?.submit().catch(() => {}) }}>提交</Button>
-            <Button onClick={() => { formRef?.resetFields(); setNicknameEcho(''); setSubmitResult(''); setFailInfo('') }}>重置</Button>
+            <Button htmlType="reset" onClick={() => { formRef?.resetFields(); setNicknameEcho(''); setSubmitResult(''); setFailInfo('') }}>重置</Button>
             <Button variant="text" onClick={() => {
               const values = formRef?.getFieldsValue(true)
               setSubmitResult(JSON.stringify(values, null, 2))
             }}>只取值（不校验）</Button>
           </Space>
         </FormItem>
-      </Form>
+        </Form>
+        <output data-form-result="basic">{submitResult()}</output>
+      </div>
 
       <Show when={nicknameEcho()}>
         <p class="mt-2"><Text type="secondary">昵称实时回显：{nicknameEcho()}</Text></p>
@@ -118,13 +121,13 @@ const FormPage: Component = () => {
 
       <Show when={failInfo()}>
         <div class="mt-4">
-          <Alert type="error" message={failInfo()} closable />
+          <Alert type="error" showIcon title={failInfo()} closable />
         </div>
       </Show>
 
       <Show when={submitResult()}>
         <div class="mt-4">
-          <Alert type="success" message="提交成功" description={<pre class="text-[12px] whitespace-pre-wrap">{submitResult()}</pre>} />
+          <Alert type="success" showIcon title="提交成功" description={<pre class="text-[12px] whitespace-pre-wrap">{submitResult()}</pre>} />
         </div>
       </Show>
 
@@ -166,6 +169,16 @@ const FormPage: Component = () => {
 
       <Divider />
 
+      <h3 class="text-lg font-semibold mb-3">内联筛选与操作间距</h3>
+      <div data-form-demo="inline">
+        <Form layout="inline">
+          <FormItem name="keyword" label="关键词"><Input placeholder="连续输入保持焦点" allowClear /></FormItem>
+          <FormItem name="owner" label="负责人"><Input placeholder="负责人姓名" /></FormItem>
+          <Space size={8}><Button htmlType="submit">查询</Button><Button htmlType="reset">重置</Button></Space>
+        </Form>
+      </div>
+      <Divider />
+
       <h3 class="text-lg font-semibold mb-3">warningOnly 与 validateStatus</h3>
       <Form>
         <FormItem
@@ -178,7 +191,7 @@ const FormPage: Component = () => {
             { warningOnly: true, min: 10, message: '建议 10 位以上（警告，不阻断提交）' },
           ]}
         >
-          <Input type="password" placeholder="6-9 位会警告，但不阻断" allowClear />
+          <Input type="password" placeholder="6-9 位会警告，但不阻断" allowClear showCount />
         </FormItem>
       </Form>
 
@@ -201,7 +214,8 @@ const FormPage: Component = () => {
       <p class="text-on-surface-variant mb-3">
         行 key 由 keyManager 管理：增删/移动行时已有行不会重挂载（输入焦点保持）。
       </p>
-      <Form
+      <div data-form-demo="list">
+        <Form
         ref={f => { listFormRef = f }}
         initialValues={{ users: [{ name: '预置行' }] }}
         onFinish={values => setSubmitResult(JSON.stringify(values, null, 2))}
@@ -209,7 +223,7 @@ const FormPage: Component = () => {
         <FormList name="users">
           {(fields: () => { name: number; key: number; isListField: true }[], operations: { add: (v?: unknown, i?: number) => void; remove: (i: number | number[]) => void; move: (f: number, t: number) => void }) => (
             <div class="flex flex-col gap-xs">
-              <For each={fields()}>
+              <For each={fields()} keyed>
                 {field => (
                   <div class="flex items-start gap-xs w-full">
                     <div class="flex-1">
@@ -246,7 +260,9 @@ const FormPage: Component = () => {
         <FormItem label="">
           <Button variant="solid" onClick={() => { void listFormRef?.submit().catch(() => {}) }}>提交列表</Button>
         </FormItem>
-      </Form>
+        </Form>
+        <output data-form-result="list">{submitResult()}</output>
+      </div>
 
       <Divider />
 

@@ -1,141 +1,135 @@
 // @unocss-include
 import { cva, type VariantProps } from "class-variance-authority";
-import { twMerge } from "tailwind-merge";
+import { mergeClass } from "../../common/merge";
 
-// ---- line variant ----------------------------------------------------------
+/**
+ * antd 6 Progress 样式（components/progress/style）：
+ *  - root：inline-flex、14px / 1.5714；纯线形 relative + 撑满；small 线形 12px；inline-circle 行高 1
+ *  - line body：inline-flex 居中、gap 8px；bottom 布局纵向 gap 4px
+ *  - rail：colorFillSecondary、圆角 100px、溢出隐藏；track 绝对定位、0.3s circ 缓动、min-width max-content
+ *  - steps body：横向 gap 2px；item 最小宽 2px，点亮为 colorInfo
+ *  - circle：导轨 colorFillSecondary，路径按状态着色（渐变时不着色）；数值绝对居中 1em
+ */
+const progressVariants = cva(
+  ["inline-flex", "m-0", "p-0", "text-on-surface", "text-[14px]", "leading-[1.5714]", "list-none"],
+  {
+    variants: {
+      kind: {
+        line: ["relative", "w-full"],
+        "line-small": ["relative", "w-full", "text-[12px]"],
+        steps: [],
+        circle: [],
+        "inline-circle": ["leading-none"],
+      },
+    },
+    defaultVariants: { kind: "line" },
+  }
+);
+
+const progressBodyVariants = cva([], {
+  variants: {
+    kind: {
+      line: ["inline-flex", "items-center", "w-full", "gap-[8px]"],
+      "line-bottom": ["inline-flex", "flex-col", "items-center", "w-full", "gap-[4px]"],
+      steps: ["flex", "flex-row", "items-center", "gap-[2px]"],
+      circle: ["relative", "leading-none", "bg-transparent"],
+    },
+  },
+  defaultVariants: { kind: "line" },
+});
+
+const progressRailVariants = cva(
+  ["relative", "flex-auto", "w-full", "overflow-hidden", "rounded-[100px]", "bg-on-surface/6"],
+  { variants: {}, defaultVariants: {} }
+);
 
 const progressTrackVariants = cva(
-  ["relative", "w-full", "bg-outline-variant/20", "rounded-full", "overflow-hidden", "transition-upthrust-fast"],
+  [
+    "absolute", "start-0", "inset-y-0", "rounded-[inherit]", "flex", "items-center", "min-w-max",
+    "transition-all", "duration-300", "ease-[cubic-bezier(0.78,0.14,0.15,0.86)]",
+  ],
   {
     variants: {
-      size: {
-        small: ["h-[6px]"],
-        middle: ["h-[8px]"],
-        large: ["h-[12px]"],
-      },
-      shape: {
-        round: [],
-        square: ["!rounded-none"],
+      tone: {
+        normal: ["bg-primary"],
+        active: [
+          "bg-primary",
+          "after:content-['']", "after:absolute", "after:inset-0", "after:bg-surface",
+          "after:rounded-[inherit]", "after:opacity-0", "after:animate-progress-active",
+        ],
+        exception: ["bg-error"],
+        success: ["bg-[#52c41a]"],
       },
     },
-    defaultVariants: { size: "middle", shape: "round" },
+    defaultVariants: { tone: "normal" },
   }
-)
+);
 
 const progressIndicatorVariants = cva(
-  ["h-full", "rounded-full", "transition-[width]", "duration-mid", "ease-upthrust"],
+  ["text-on-surface", "leading-none", "align-middle", "[word-break:normal]"],
   {
     variants: {
-      status: {
-        normal: ["bg-primary"],
-        active: ["bg-primary"],
-        success: ["bg-[#52c41a]"],
-        exception: ["bg-error"],
+      kind: {
+        line: ["whitespace-nowrap"],
+        "line-start": ["whitespace-nowrap", "order-[-1]"],
+        inner: ["whitespace-nowrap", "text-white", "px-[4px]", "w-full", "flex", "justify-center"],
+        "inner-start": ["whitespace-nowrap", "text-white", "px-[4px]", "w-full", "flex", "[justify-content:start]"],
+        "inner-end": ["whitespace-nowrap", "text-white", "px-[4px]", "w-full", "flex", "[justify-content:end]"],
+        steps: ["whitespace-nowrap", "ms-[8px]"],
+        circle: [
+          "absolute", "top-1/2", "start-0", "w-full", "m-0", "p-0", "text-[1em]", "whitespace-normal",
+          "text-center", "-translate-y-1/2",
+        ],
       },
-      shape: {
-        round: [],
-        square: ["!rounded-none"],
-      },
-    },
-    defaultVariants: { status: "normal", shape: "round" },
-  }
-)
-
-// Success segment layered on top of the normal indicator (antd two-tone).
-const progressSuccessVariants = cva(
-  ["h-full", "bg-[#52c41a]", "rounded-full", "absolute", "top-0", "left-0"],
-  { variants: {}, defaultVariants: {} }
-)
-
-// ---- text ------------------------------------------------------------------
-
-const progressTextVariants = cva(
-  ["text-[14px]", "text-on-surface", "whitespace-nowrap", "leading-[1]"],
-  {
-    variants: {
-      size: {
-        small: ["text-[12px]"],
-        middle: [],
-        large: ["text-[16px]"],
+      tone: {
+        normal: [],
+        exception: ["text-error"],
+        success: ["text-[#52c41a]"],
+        // 亮色进度条上的内部数值：antd 固定 rgba(0,0,0,0.45)。
+        bright: ["text-black/45"],
       },
     },
-    defaultVariants: { size: "middle" },
+    defaultVariants: { kind: "line", tone: "normal" },
   }
-)
+);
 
-// ---- steps -----------------------------------------------------------------
-
-const progressStepVariants = cva(
-  ["flex", "items-center", "gap-[8px]"],
-  { variants: {}, defaultVariants: {} }
-)
+const progressIconVariants = cva(["inline-block", "align-[-0.125em]"], {
+  variants: {
+    size: {
+      line: ["text-[14px]"],
+      "line-small": ["text-[12px]"],
+      circle: ["text-[1.1667em]"],
+    },
+  },
+  defaultVariants: { size: "line" },
+});
 
 const progressStepItemVariants = cva(
-  ["flex-1", "bg-outline-variant/20", "transition-upthrust-fast", "rounded-[2px]"],
+  ["shrink-0", "min-w-[2px]", "transition-all", "duration-300"],
   {
     variants: {
-      size: {
-        small: ["h-[6px]"],
-        middle: ["h-[8px]"],
-        large: ["h-[12px]"],
-      },
-      filled: {
-        true: [],
-        false: [],
-      },
-      status: {
-        normal: [],
-        success: [],
-        exception: [],
+      active: {
+        true: ["bg-primary"],
+        false: ["bg-on-surface/6"],
       },
     },
-    // Filled×status merged colors (UnoCSS-safe: literals in variant values).
-    defaultVariants: { size: "middle", filled: false, status: "normal" },
+    defaultVariants: { active: false },
   }
-)
+);
 
-// Step fill colors per status — kept as a plain lookup (not compoundVariants)
-// because UnoCSS must see each class literal.
-export const progressStepFillClass = (status: 'normal' | 'success' | 'exception'): string => {
-  if (status === 'success') return 'bg-[#52c41a]'
-  if (status === 'exception') return 'bg-error'
-  return 'bg-primary'
-}
+/** SVG 描边颜色：导轨、按状态着色的路径、未点亮的步骤格。字符串色走内联 stroke 覆盖。 */
+export const progressCircleStroke = {
+  rail: "stroke-on-surface/6",
+  normal: "stroke-primary",
+  active: "stroke-primary",
+  exception: "stroke-error",
+  success: "stroke-[#52c41a]",
+} as const;
 
-// ---- circle ----------------------------------------------------------------
-
-const progressCircleVariants = cva(
-  ["relative", "inline-flex", "items-center", "justify-center"],
-  { variants: {}, defaultVariants: {} }
-)
-
-const progressCircleTextVariants = cva(
-  ["absolute", "inset-0", "flex", "flex-col", "items-center", "justify-center", "text-on-surface"],
-  {
-    variants: {
-      size: {
-        small: ["text-[14px]"],
-        middle: ["text-[20px]"],
-        large: ["text-[24px]"],
-      },
-    },
-    defaultVariants: { size: "middle" },
-  }
-)
-
-export const progressTrackClass = (variants: VariantProps<typeof progressTrackVariants>) =>
-  twMerge(progressTrackVariants(variants))
-export const progressIndicatorClass = (variants: VariantProps<typeof progressIndicatorVariants>) =>
-  twMerge(progressIndicatorVariants(variants))
-export const progressSuccessClass = (variants: VariantProps<typeof progressSuccessVariants>) =>
-  twMerge(progressSuccessVariants(variants))
-export const progressTextClass = (variants: VariantProps<typeof progressTextVariants>) =>
-  twMerge(progressTextVariants(variants))
-export const progressStepClass = (variants: VariantProps<typeof progressStepVariants>) =>
-  twMerge(progressStepVariants(variants))
-export const progressStepItemClass = (variants: VariantProps<typeof progressStepItemVariants>) =>
-  twMerge(progressStepItemVariants(variants))
-export const progressCircleClass = (variants: VariantProps<typeof progressCircleVariants>) =>
-  twMerge(progressCircleVariants(variants))
-export const progressCircleTextClass = (variants: VariantProps<typeof progressCircleTextVariants>) =>
-  twMerge(progressCircleTextVariants(variants))
+export const progressClass = (v: VariantProps<typeof progressVariants>) => mergeClass(progressVariants(v));
+export const progressBodyClass = (v: VariantProps<typeof progressBodyVariants>) => mergeClass(progressBodyVariants(v));
+export const progressRailClass = (v: VariantProps<typeof progressRailVariants>) => mergeClass(progressRailVariants(v));
+export const progressTrackClass = (v: VariantProps<typeof progressTrackVariants>) => mergeClass(progressTrackVariants(v));
+export const progressIndicatorClass = (v: VariantProps<typeof progressIndicatorVariants>) => mergeClass(progressIndicatorVariants(v));
+export const progressIconClass = (v: VariantProps<typeof progressIconVariants>) => mergeClass(progressIconVariants(v));
+export const progressStepItemClass = (v: VariantProps<typeof progressStepItemVariants>) => mergeClass(progressStepItemVariants(v));

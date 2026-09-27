@@ -1,95 +1,31 @@
-import { Component } from "solid-js";
-import { Row, Col, Divider } from 'upthrust-ui';
+import Basic from '../../../docs/src/examples/grid/basic'
+import Gutter from '../../../docs/src/examples/grid/gutter'
+import Offset from '../../../docs/src/examples/grid/offset'
+import Sort from '../../../docs/src/examples/grid/sort'
+import FlexDemo from '../../../docs/src/examples/grid/flex'
+import Align from '../../../docs/src/examples/grid/align'
+import Order from '../../../docs/src/examples/grid/order'
+import FlexStretch from '../../../docs/src/examples/grid/flex-stretch'
+import Responsive from '../../../docs/src/examples/grid/responsive'
+import ResponsiveMore from '../../../docs/src/examples/grid/responsive-more'
+import UseBreakpoint from '../../../docs/src/examples/grid/use-breakpoint'
+import Playground from '../../../docs/src/examples/grid/playground'
 
-const GridPage: Component = () => {
-  const colStyle = (opacity: number) => ({
-    background: `rgba(0, 85, 255, ${opacity})`,
-    color: 'white',
-    padding: '12px 0',
-    'text-align': 'center' as const,
-    'border-radius': '4px',
-    'min-height': '40px',
-  })
-
-  return (
-    <div class="p-6 max-w-4xl">
-      <h2 class="text-2xl font-semibold mb-4">Grid 栅格</h2>
-
-      <h3 class="text-lg font-medium mb-2">基础栅格</h3>
-      <Row gutter={16}>
-        <Col span={12}><div style={colStyle(0.8)}>col-12</div></Col>
-        <Col span={12}><div style={colStyle(0.6)}>col-12</div></Col>
-      </Row>
-      <div class="h-4" />
-      <Row gutter={16}>
-        <Col span={8}><div style={colStyle(0.8)}>col-8</div></Col>
-        <Col span={8}><div style={colStyle(0.6)}>col-8</div></Col>
-        <Col span={8}><div style={colStyle(0.8)}>col-8</div></Col>
-      </Row>
-      <div class="h-4" />
-      <Row gutter={16}>
-        <Col span={6}><div style={colStyle(0.8)}>col-6</div></Col>
-        <Col span={6}><div style={colStyle(0.6)}>col-6</div></Col>
-        <Col span={6}><div style={colStyle(0.8)}>col-6</div></Col>
-        <Col span={6}><div style={colStyle(0.6)}>col-6</div></Col>
-      </Row>
-
-      <Divider />
-
-      <h3 class="text-lg font-medium mb-2">Gutter 间距</h3>
-      <Row gutter={[16, 16]}>
-        <Col span={6}><div style={colStyle(0.7)}>col-6</div></Col>
-        <Col span={6}><div style={colStyle(0.5)}>col-6</div></Col>
-        <Col span={6}><div style={colStyle(0.7)}>col-6</div></Col>
-        <Col span={6}><div style={colStyle(0.5)}>col-6</div></Col>
-        <Col span={6}><div style={colStyle(0.5)}>col-6</div></Col>
-        <Col span={6}><div style={colStyle(0.7)}>col-6</div></Col>
-        <Col span={6}><div style={colStyle(0.5)}>col-6</div></Col>
-        <Col span={6}><div style={colStyle(0.7)}>col-6</div></Col>
-      </Row>
-
-      <Divider />
-
-      <h3 class="text-lg font-medium mb-2">Offset 偏移</h3>
-      <Row>
-        <Col span={8}><div style={colStyle(0.8)}>col-8</div></Col>
-        <Col span={8} offset={8}><div style={colStyle(0.6)}>col-8 offset-8</div></Col>
-      </Row>
-      <div class="h-4" />
-      <Row>
-        <Col span={6} offset={6}><div style={colStyle(0.7)}>col-6 offset-6</div></Col>
-        <Col span={6} offset={6}><div style={colStyle(0.5)}>col-6 offset-6</div></Col>
-      </Row>
-
-      <Divider />
-
-      <h3 class="text-lg font-medium mb-2">Flex 布局</h3>
-      <Row>
-        <Col flex="100px"><div style={colStyle(0.8)}>100px</div></Col>
-        <Col flex="auto"><div style={colStyle(0.5)}>auto</div></Col>
-      </Row>
-      <div class="h-4" />
-      <Row>
-        <Col flex={2}><div style={colStyle(0.7)}>2 / 5</div></Col>
-        <Col flex={3}><div style={colStyle(0.5)}>3 / 5</div></Col>
-      </Row>
-
-      <Divider />
-
-      <h3 class="text-lg font-medium mb-2">对齐方式</h3>
-      <Row justify="center" gutter={16}>
-        <Col span={4}><div style={colStyle(0.8)}>col-4</div></Col>
-        <Col span={4}><div style={colStyle(0.6)}>col-4</div></Col>
-        <Col span={4}><div style={colStyle(0.8)}>col-4</div></Col>
-      </Row>
-      <div class="h-4" />
-      <Row justify="space-between" gutter={16}>
-        <Col span={4}><div style={colStyle(0.7)}>col-4</div></Col>
-        <Col span={4}><div style={colStyle(0.5)}>col-4</div></Col>
-        <Col span={4}><div style={colStyle(0.7)}>col-4</div></Col>
-      </Row>
-    </div>
-  )
+// 与文档站共用同一批示例文件，避免演示与文档代码漂移。
+export default function GridPage() {
+  return <div class="p-6 max-w-4xl space-y-8">
+    <h2 class="text-2xl font-bold">Grid 栅格</h2>
+    <section data-grid-demo="basic"><h3 class="mb-3">基础栅格</h3><Basic /></section>
+    <section data-grid-demo="gutter"><h3 class="mb-3">区块间隔</h3><Gutter /></section>
+    <section data-grid-demo="offset"><h3 class="mb-3">左右偏移</h3><Offset /></section>
+    <section data-grid-demo="sort"><h3 class="mb-3">栅格排序</h3><Sort /></section>
+    <section data-grid-demo="flex"><h3 class="mb-3">排版</h3><FlexDemo /></section>
+    <section data-grid-demo="align"><h3 class="mb-3">对齐</h3><Align /></section>
+    <section data-grid-demo="order"><h3 class="mb-3">排序</h3><Order /></section>
+    <section data-grid-demo="flex-stretch"><h3 class="mb-3">Flex 填充</h3><FlexStretch /></section>
+    <section data-grid-demo="responsive"><h3 class="mb-3">响应式布局</h3><Responsive /></section>
+    <section data-grid-demo="responsive-more"><h3 class="mb-3">其他属性的响应式</h3><ResponsiveMore /></section>
+    <section data-grid-demo="use-breakpoint"><h3 class="mb-3">useBreakpoint</h3><UseBreakpoint /></section>
+    <section data-grid-demo="playground"><h3 class="mb-3">栅格配置器</h3><Playground /></section>
+  </div>
 }
-
-export default GridPage

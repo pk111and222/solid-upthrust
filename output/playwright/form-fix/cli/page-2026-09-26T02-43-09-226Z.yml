@@ -1,0 +1,586 @@
+- generic [active] [ref=e1]:
+  - link "跳至正文" [ref=e2] [cursor=pointer]:
+    - /url: "#main-content"
+  - generic [ref=e3]:
+    - generic [ref=e4]:
+      - link "↗ Solid Upthrust" [ref=e5] [cursor=pointer]:
+        - /url: /
+        - generic [ref=e6]: ↗
+        - generic [ref=e7]: Solid Upthrust
+      - navigation "主导航" [ref=e8]:
+        - link "开发指南" [ref=e9] [cursor=pointer]:
+          - /url: /guide/
+        - link "组件" [ref=e10] [cursor=pointer]:
+          - /url: /components/
+        - generic [ref=e11]: Solid 2 RC
+    - generic [ref=e12]:
+      - complementary [ref=e13]:
+        - navigation "文档目录" [ref=e14]:
+          - menu [ref=e15]:
+            - generic [ref=e16]:
+              - generic [ref=e17]: 开始使用
+              - menuitem [ref=e18] [cursor=pointer]:
+                - link "Solid Upthrust" [ref=e19]:
+                  - /url: /
+              - menuitem [ref=e20] [cursor=pointer]:
+                - link "工程入门" [ref=e21]:
+                  - /url: /guide/
+              - menuitem [ref=e22] [cursor=pointer]:
+                - link "文档与示例渲染" [ref=e23]:
+                  - /url: /guide/rendering/
+            - generic [ref=e24]:
+              - generic [ref=e25]: 研发指南
+              - menuitem [ref=e26] [cursor=pointer]:
+                - link "架构与目录" [ref=e27]:
+                  - /url: /guide/architecture/
+              - menuitem [ref=e28] [cursor=pointer]:
+                - link "四层测试" [ref=e29]:
+                  - /url: /guide/testing/
+              - menuitem [ref=e30] [cursor=pointer]:
+                - link "功能交付清单" [ref=e31]:
+                  - /url: /guide/contributing/
+            - generic [ref=e32]:
+              - generic [ref=e33]: 组件
+              - menuitem [ref=e34] [cursor=pointer]:
+                - link "组件总览" [ref=e35]:
+                  - /url: /components/
+              - menuitem [ref=e36] [cursor=pointer]:
+                - link "Button 按钮" [ref=e37]:
+                  - /url: /components/general/button/
+              - menuitem [ref=e38] [cursor=pointer]:
+                - link "ConfigProvider 全局配置" [ref=e39]:
+                  - /url: /components/general/config-provider/
+              - menuitem [ref=e40] [cursor=pointer]:
+                - link "Icon 图标" [ref=e41]:
+                  - /url: /components/general/icon/
+              - menuitem [ref=e42] [cursor=pointer]:
+                - link "Dropdown 下拉菜单" [ref=e43]:
+                  - /url: /components/navigation/dropdown/
+              - menuitem [ref=e44] [cursor=pointer]:
+                - link "Tabs 标签页" [ref=e45]:
+                  - /url: /components/navigation/tabs/
+              - menuitem [ref=e46] [cursor=pointer]:
+                - link "Pagination 分页" [ref=e47]:
+                  - /url: /components/navigation/pagination/
+              - menuitem [ref=e48] [cursor=pointer]:
+                - link "Tree 树形控件" [ref=e49]:
+                  - /url: /components/data-entry/tree/
+              - menuitem [ref=e50] [cursor=pointer]:
+                - link "Skeleton 骨架屏" [ref=e51]:
+                  - /url: /components/feedback/skeleton/
+              - menuitem [ref=e52] [cursor=pointer]:
+                - link "Input 输入框" [ref=e53]:
+                  - /url: /components/data-entry/input/
+              - menuitem [ref=e54] [cursor=pointer]:
+                - link "Tooltip 文字提示" [ref=e55]:
+                  - /url: /components/data-display/tooltip/
+              - menuitem [ref=e56] [cursor=pointer]:
+                - link "Checkbox 多选框" [ref=e57]:
+                  - /url: /components/data-entry/checkbox/
+              - menuitem [ref=e58] [cursor=pointer]:
+                - link "Popover 气泡卡片" [ref=e59]:
+                  - /url: /components/data-display/popover/
+              - menuitem [ref=e60] [cursor=pointer]:
+                - link "Radio 单选框" [ref=e61]:
+                  - /url: /components/data-entry/radio/
+              - menuitem [ref=e62] [cursor=pointer]:
+                - link "Switch 开关" [ref=e63]:
+                  - /url: /components/data-entry/switch/
+              - menuitem [ref=e64] [cursor=pointer]:
+                - link "Form 表单" [ref=e65]:
+                  - /url: /components/data-entry/form/
+              - menuitem [ref=e66] [cursor=pointer]:
+                - link "InputNumber 数字输入框" [ref=e67]:
+                  - /url: /components/data-entry/input-number/
+              - menuitem [ref=e68] [cursor=pointer]:
+                - link "Slider 滑动输入条" [ref=e69]:
+                  - /url: /components/data-entry/slider/
+              - menuitem [ref=e70] [cursor=pointer]:
+                - link "Rate 评分" [ref=e71]:
+                  - /url: /components/data-entry/rate/
+              - menuitem [ref=e72] [cursor=pointer]:
+                - link "Segmented 分段控制器" [ref=e73]:
+                  - /url: /components/data-entry/segmented/
+              - menuitem [ref=e74] [cursor=pointer]:
+                - link "TimePicker 时间选择器" [ref=e75]:
+                  - /url: /components/data-entry/time-picker/
+              - menuitem [ref=e76] [cursor=pointer]:
+                - link "DatePicker 日期选择器" [ref=e77]:
+                  - /url: /components/data-entry/date-picker/
+              - menuitem [ref=e78] [cursor=pointer]:
+                - link "ColorPicker 颜色选择器" [ref=e79]:
+                  - /url: /components/data-entry/color-picker/
+              - menuitem [ref=e80] [cursor=pointer]:
+                - link "Upload 上传" [ref=e81]:
+                  - /url: /components/data-entry/upload/
+              - menuitem [ref=e82] [cursor=pointer]:
+                - link "Select 选择器" [ref=e83]:
+                  - /url: /components/data-entry/select/
+              - menuitem [ref=e84] [cursor=pointer]:
+                - link "AutoComplete 自动补全" [ref=e85]:
+                  - /url: /components/data-entry/auto-complete/
+              - menuitem [ref=e86] [cursor=pointer]:
+                - link "Cascader 级联选择" [ref=e87]:
+                  - /url: /components/data-entry/cascader/
+              - menuitem [ref=e88] [cursor=pointer]:
+                - link "Mentions 提及" [ref=e89]:
+                  - /url: /components/data-entry/mentions/
+              - menuitem [ref=e90] [cursor=pointer]:
+                - link "TreeSelect 树选择" [ref=e91]:
+                  - /url: /components/data-entry/tree-select/
+              - menuitem [ref=e92] [cursor=pointer]:
+                - link "Transfer 穿梭框" [ref=e93]:
+                  - /url: /components/data-entry/transfer/
+        - generic [ref=e94]: 面向 SolidJS 的企业级组件库
+      - main [ref=e95]:
+        - article [ref=e97]:
+          - generic [ref=e98]:
+            - generic [ref=e99]: 文档
+            - generic [ref=e100]: /
+            - generic [ref=e101]: Form 表单
+          - heading "Form 表单" [level=1] [ref=e102]
+          - paragraph [ref=e103]: 字段收集、校验、动态列表、依赖和自定义控件。
+          - region [ref=e104]:
+            - heading "使用方式" [level=2] [ref=e105]
+            - generic [ref=e106]:
+              - paragraph [ref=e107]: Form 由数据引擎与 UI 协议组成：Form 创建或接收 createForm() 实例，Form.Item 注册 NamePath 字段，首方控件通过 FormItemContext 接收 value、onChange、disabled、size、id 和校验状态。
+              - code [ref=e109]: "import Form, { FormItem, FormList } from 'upthrust-ui/source/Form' import Input from 'upthrust-ui/source/Input' <Form onFinish={values => console.log(values)}> <FormItem name=\"username\" label=\"用户名\" rules={[{ required: true }]}> <Input /> </FormItem> </Form>"
+              - paragraph [ref=e110]: 显式控件属性优先于 Form.Item 注入；显式 onChange 会接管写入，若仍需字段同步请在回调中调用 useFormItem().onChange。Solid 版本不复制 React 子节点，而是使用上下文协议。
+              - paragraph [ref=e111]: 并列操作按钮使用 Flex gap=8 wrap="wrap" 或 Space 统一留白；Button 自身不设置外边距。带参 render props 适合派生展示，编辑控件建议直接作为子组件，使用 Form.Item 上下文保持节点与焦点稳定。
+          - region [ref=e112]:
+            - heading "示例" [level=2] [ref=e113]
+            - generic [ref=e115]:
+              - region "基本使用：收集、提交与重置" [ref=e116]:
+                - status [ref=e118]: 示例加载中…
+                - heading "基本使用：收集、提交与重置" [level=3] [ref=e120]
+                - group [ref=e121]:
+                  - generic "TSX 〈/〉 展开代码" [ref=e122] [cursor=pointer]:
+                    - generic [ref=e123]: TSX
+                    - generic [ref=e124]: 〈/〉 展开代码
+              - region "表单布局：水平、垂直与内联" [ref=e125]:
+                - status [ref=e127]: 示例加载中…
+                - heading "表单布局：水平、垂直与内联" [level=3] [ref=e129]
+                - group [ref=e130]:
+                  - generic "TSX 〈/〉 展开代码" [ref=e131] [cursor=pointer]:
+                    - generic [ref=e132]: TSX
+                    - generic [ref=e133]: 〈/〉 展开代码
+              - region "复杂控件：Select、Checkbox、Radio、Switch 与 InputNumber" [ref=e134]:
+                - status [ref=e136]: 示例加载中…
+                - heading "复杂控件：Select、Checkbox、Radio、Switch 与 InputNumber" [level=3] [ref=e138]
+                - group [ref=e139]:
+                  - generic "TSX 〈/〉 展开代码" [ref=e140] [cursor=pointer]:
+                    - generic [ref=e141]: TSX
+                    - generic [ref=e142]: 〈/〉 展开代码
+              - region "表单禁用" [ref=e143]:
+                - status [ref=e145]: 示例加载中…
+                - heading "表单禁用" [level=3] [ref=e147]
+                - group [ref=e148]:
+                  - generic "TSX 〈/〉 展开代码" [ref=e149] [cursor=pointer]:
+                    - generic [ref=e150]: TSX
+                    - generic [ref=e151]: 〈/〉 展开代码
+              - region "校验状态、反馈图标与辅助信息" [ref=e152]:
+                - status [ref=e154]: 示例加载中…
+                - heading "校验状态、反馈图标与辅助信息" [level=3] [ref=e156]
+                - group [ref=e157]:
+                  - generic "TSX 〈/〉 展开代码" [ref=e158] [cursor=pointer]:
+                    - generic [ref=e159]: TSX
+                    - generic [ref=e160]: 〈/〉 展开代码
+              - region "同步、异步、warningOnly 与失败回调" [ref=e161]:
+                - status [ref=e163]: 示例加载中…
+                - heading "同步、异步、warningOnly 与失败回调" [level=3] [ref=e165]
+                - group [ref=e166]:
+                  - generic "TSX 〈/〉 展开代码" [ref=e167] [cursor=pointer]:
+                    - generic [ref=e168]: TSX
+                    - generic [ref=e169]: 〈/〉 展开代码
+              - region "字段监听：实时计算派生值" [ref=e170]:
+                - status [ref=e172]: 示例加载中…
+                - heading "字段监听：实时计算派生值" [level=3] [ref=e174]
+                - group [ref=e175]:
+                  - generic "TSX 〈/〉 展开代码" [ref=e176] [cursor=pointer]:
+                    - generic [ref=e177]: TSX
+                    - generic [ref=e178]: 〈/〉 展开代码
+              - region "校验时机与手动校验" [ref=e179]:
+                - status [ref=e181]: 示例加载中…
+                - heading "校验时机与手动校验" [level=3] [ref=e183]
+                - group [ref=e184]:
+                  - generic "TSX 〈/〉 展开代码" [ref=e185] [cursor=pointer]:
+                    - generic [ref=e186]: TSX
+                    - generic [ref=e187]: 〈/〉 展开代码
+              - region "仅校验：不写入错误状态" [ref=e188]:
+                - status [ref=e190]: 示例加载中…
+                - heading "仅校验：不写入错误状态" [level=3] [ref=e192]
+                - group [ref=e193]:
+                  - generic "TSX 〈/〉 展开代码" [ref=e194] [cursor=pointer]:
+                    - generic [ref=e195]: TSX
+                    - generic [ref=e196]: 〈/〉 展开代码
+              - region "normalize：提交前转换字段值" [ref=e197]:
+                - status [ref=e199]: 示例加载中…
+                - heading "normalize：提交前转换字段值" [level=3] [ref=e201]
+                - group [ref=e202]:
+                  - generic "TSX 〈/〉 展开代码" [ref=e203] [cursor=pointer]:
+                    - generic [ref=e204]: TSX
+                    - generic [ref=e205]: 〈/〉 展开代码
+              - region "自定义校验文案" [ref=e206]:
+                - status [ref=e208]: 示例加载中…
+                - heading "自定义校验文案" [level=3] [ref=e210]
+                - group [ref=e211]:
+                  - generic "TSX 〈/〉 展开代码" [ref=e212] [cursor=pointer]:
+                    - generic [ref=e213]: TSX
+                    - generic [ref=e214]: 〈/〉 展开代码
+              - region "条件字段与字段联动" [ref=e215]:
+                - status [ref=e217]: 示例加载中…
+                - heading "条件字段与字段联动" [level=3] [ref=e219]
+                - group [ref=e220]:
+                  - generic "TSX 〈/〉 展开代码" [ref=e221] [cursor=pointer]:
+                    - generic [ref=e222]: TSX
+                    - generic [ref=e223]: 〈/〉 展开代码
+              - region "动态增减表单项" [ref=e224]:
+                - status [ref=e226]: 示例加载中…
+                - heading "动态增减表单项" [level=3] [ref=e228]
+                - group [ref=e229]:
+                  - generic "TSX 〈/〉 展开代码" [ref=e230] [cursor=pointer]:
+                    - generic [ref=e231]: TSX
+                    - generic [ref=e232]: 〈/〉 展开代码
+              - region "动态增减嵌套字段" [ref=e233]:
+                - status [ref=e235]: 示例加载中…
+                - heading "动态增减嵌套字段" [level=3] [ref=e237]
+                - group [ref=e238]:
+                  - generic "TSX 〈/〉 展开代码" [ref=e239] [cursor=pointer]:
+                    - generic [ref=e240]: TSX
+                    - generic [ref=e241]: 〈/〉 展开代码
+              - region "动态列表排序" [ref=e242]:
+                - status [ref=e244]: 示例加载中…
+                - heading "动态列表排序" [level=3] [ref=e246]
+                - group [ref=e247]:
+                  - generic "TSX 〈/〉 展开代码" [ref=e248] [cursor=pointer]:
+                    - generic [ref=e249]: TSX
+                    - generic [ref=e250]: 〈/〉 展开代码
+              - region "复杂的动态增减表单项" [ref=e251]:
+                - status [ref=e253]: 示例加载中…
+                - heading "复杂的动态增减表单项" [level=3] [ref=e255]
+                - group [ref=e256]:
+                  - generic "TSX 〈/〉 展开代码" [ref=e257] [cursor=pointer]:
+                    - generic [ref=e258]: TSX
+                    - generic [ref=e259]: 〈/〉 展开代码
+              - region "自定义列表行与操作" [ref=e260]:
+                - status [ref=e262]: 示例加载中…
+                - heading "自定义列表行与操作" [level=3] [ref=e264]
+                - group [ref=e265]:
+                  - generic "TSX 〈/〉 展开代码" [ref=e266] [cursor=pointer]:
+                    - generic [ref=e267]: TSX
+                    - generic [ref=e268]: 〈/〉 展开代码
+              - region "preserve：字段卸载后的值处理" [ref=e269]:
+                - status [ref=e271]: 示例加载中…
+                - heading "preserve：字段卸载后的值处理" [level=3] [ref=e273]
+                - group [ref=e274]:
+                  - generic "TSX 〈/〉 展开代码" [ref=e275] [cursor=pointer]:
+                    - generic [ref=e276]: TSX
+                    - generic [ref=e277]: 〈/〉 展开代码
+              - region "表单数据变更事件" [ref=e278]:
+                - status [ref=e280]: 示例加载中…
+                - heading "表单数据变更事件" [level=3] [ref=e282]
+                - group [ref=e283]:
+                  - generic "TSX 〈/〉 展开代码" [ref=e284] [cursor=pointer]:
+                    - generic [ref=e285]: TSX
+                    - generic [ref=e286]: 〈/〉 展开代码
+              - region "自定义物料与实例回填" [ref=e287]:
+                - status [ref=e289]: 示例加载中…
+                - heading "自定义物料与实例回填" [level=3] [ref=e291]
+                - group [ref=e292]:
+                  - generic "TSX 〈/〉 展开代码" [ref=e293] [cursor=pointer]:
+                    - generic [ref=e294]: TSX
+                    - generic [ref=e295]: 〈/〉 展开代码
+              - region "嵌套结构与表单套表单" [ref=e296]:
+                - status [ref=e298]: 示例加载中…
+                - heading "嵌套结构与表单套表单" [level=3] [ref=e300]
+                - group [ref=e301]:
+                  - generic "TSX 〈/〉 展开代码" [ref=e302] [cursor=pointer]:
+                    - generic [ref=e303]: TSX
+                    - generic [ref=e304]: 〈/〉 展开代码
+              - region "登录框" [ref=e305]:
+                - status [ref=e307]: 示例加载中…
+                - heading "登录框" [level=3] [ref=e309]
+                - group [ref=e310]:
+                  - generic "TSX 〈/〉 展开代码" [ref=e311] [cursor=pointer]:
+                    - generic [ref=e312]: TSX
+                    - generic [ref=e313]: 〈/〉 展开代码
+              - region "注册新用户与确认密码" [ref=e314]:
+                - status [ref=e316]: 示例加载中…
+                - heading "注册新用户与确认密码" [level=3] [ref=e318]
+                - group [ref=e319]:
+                  - generic "TSX 〈/〉 展开代码" [ref=e320] [cursor=pointer]:
+                    - generic [ref=e321]: TSX
+                    - generic [ref=e322]: 〈/〉 展开代码
+              - region "高级搜索与内联表单" [ref=e323]:
+                - status [ref=e325]: 示例加载中…
+                - heading "高级搜索与内联表单" [level=3] [ref=e327]
+                - group [ref=e328]:
+                  - generic "TSX 〈/〉 展开代码" [ref=e329] [cursor=pointer]:
+                    - generic [ref=e330]: TSX
+                    - generic [ref=e331]: 〈/〉 展开代码
+              - region "时间类控件" [ref=e332]:
+                - status [ref=e334]: 示例加载中…
+                - heading "时间类控件" [level=3] [ref=e336]
+                - group [ref=e337]:
+                  - generic "TSX 〈/〉 展开代码" [ref=e338] [cursor=pointer]:
+                    - generic [ref=e339]: TSX
+                    - generic [ref=e340]: 〈/〉 展开代码
+              - region "校验并提交上传控件" [ref=e341]:
+                - status [ref=e343]: 示例加载中…
+                - heading "校验并提交上传控件" [level=3] [ref=e345]
+                - group [ref=e346]:
+                  - generic "TSX 〈/〉 展开代码" [ref=e347] [cursor=pointer]:
+                    - generic [ref=e348]: TSX
+                    - generic [ref=e349]: 〈/〉 展开代码
+              - region "表单方法调用" [ref=e350]:
+                - status [ref=e352]: 示例加载中…
+                - heading "表单方法调用" [level=3] [ref=e354]
+                - group [ref=e355]:
+                  - generic "TSX 〈/〉 展开代码" [ref=e356] [cursor=pointer]:
+                    - generic [ref=e357]: TSX
+                    - generic [ref=e358]: 〈/〉 展开代码
+          - region [ref=e359]:
+            - heading "校验与依赖" [level=2] [ref=e360]
+            - generic [ref=e361]:
+              - paragraph [ref=e362]: 规则支持 async-validator 的常用类型校验和自定义 validator；validator 可以返回 Promise，也可以使用 callback。validateFirst 为 true 时串行短路，parallel 时第一个失败先返回；较新的校验会淘汰旧结果，避免异步乱序覆盖。
+              - paragraph [ref=e363]: dependencies 只对已编辑字段触发级联校验；Form.List 内的相对依赖会追加当前列表行路径。validateOnly 只运行规则而不写入错误状态，dirty 只校验已编辑字段。
+              - paragraph [ref=e364]: 当前不支持 antd 的 message API、scrollToFirstError、validateFieldsAndScroll、Form.Provider、Form.useWatch 静态 Hook；对应能力请使用 onFinishFailed、form.watch、原生 focus 或应用层协调。
+          - region [ref=e365]:
+            - heading "Form 实例" [level=2] [ref=e366]
+            - generic [ref=e367]:
+              - paragraph [ref=e368]: 通过 ref 读取 getFieldValue/getFieldsValue/getFieldsError，使用 setFieldValue/setFieldsValue/setFields 更新，resetFields 重置，validateFields 校验，submit 执行校验并触发 onFinish。watch(pathOrSelector) 返回 Solid signal，并附带 dispose。
+              - paragraph [ref=e369]: initialValues 只初始化一次；不要把它当作响应式受控值。需要异步回填或编辑切换时调用 setFieldsValue，切换记录时先 resetFields 再写入新值。
+          - region [ref=e370]:
+            - heading "FormProps API" [level=2] [ref=e371]
+            - table "API 属性表格" [ref=e376]:
+              - rowgroup [ref=e382]:
+                - row [ref=e383]:
+                  - columnheader "属性" [ref=e384]
+                  - columnheader "说明" [ref=e387]
+                  - columnheader "类型" [ref=e390]
+                  - columnheader "默认值" [ref=e393]
+              - rowgroup [ref=e396]:
+                - row [ref=e397]:
+                  - cell [ref=e398]:
+                    - code [ref=e401]: form
+                  - cell "外部 createForm() 实例；传入后 Form.Item 共用该实例。" [ref=e402]
+                  - cell [ref=e405]:
+                    - code [ref=e408]: FormInstance
+                  - cell [ref=e409]:
+                    - code [ref=e412]: 自动创建
+                - row [ref=e413]:
+                  - cell [ref=e414]:
+                    - code [ref=e417]: initialValues
+                  - cell "表单初始值，只在实例初始化时读取；动态更新请使用 setFieldsValue。" [ref=e418]
+                  - cell [ref=e421]:
+                    - code [ref=e424]: Store
+                  - cell [ref=e425]:
+                    - code [ref=e428]: "{}"
+                - row [ref=e429]:
+                  - cell [ref=e430]:
+                    - code [ref=e433]: layout / size
+                  - cell "标签布局与控件尺寸；显式 Item/控件属性优先。" [ref=e434]
+                  - cell [ref=e437]:
+                    - code [ref=e440]: "'horizontal' | 'vertical' | 'inline' / SizeType"
+                  - cell [ref=e441]:
+                    - code [ref=e444]: "'horizontal' / —"
+                - row [ref=e445]:
+                  - cell [ref=e446]:
+                    - code [ref=e449]: disabled / preserve
+                  - cell "表单级禁用与字段卸载后的值保留策略。" [ref=e450]
+                  - cell [ref=e453]:
+                    - code [ref=e456]: boolean / boolean
+                  - cell [ref=e457]:
+                    - code [ref=e460]: false / true
+                - row [ref=e461]:
+                  - cell [ref=e462]:
+                    - code [ref=e465]: requiredMark / colon
+                  - cell "必填标记、可选提示与标签冒号。" [ref=e466]
+                  - cell [ref=e469]:
+                    - code [ref=e472]: boolean | 'optional' / boolean
+                  - cell [ref=e473]:
+                    - code [ref=e476]: true / true
+                - row [ref=e477]:
+                  - cell [ref=e478]:
+                    - code [ref=e481]: validateTrigger / validateMessages
+                  - cell "默认校验触发器与 async-validator 消息模板。" [ref=e482]
+                  - cell [ref=e485]:
+                    - code [ref=e488]: string | string[] | false / Record<string, any>
+                  - cell [ref=e489]:
+                    - code [ref=e492]: "'onChange' / —"
+                - row [ref=e493]:
+                  - cell [ref=e494]:
+                    - code [ref=e497]: onFinish / onFinishFailed
+                  - cell "校验成功提交或校验失败通知；submit() 仍返回 Promise。" [ref=e498]
+                  - cell [ref=e501]:
+                    - code [ref=e504]: (values) => void / (errorInfo) => void
+                  - cell [ref=e505]:
+                    - code [ref=e508]: —
+                - row [ref=e509]:
+                  - cell [ref=e510]:
+                    - code [ref=e513]: onValuesChange / onFieldsChange
+                  - cell "字段变化回调；changedValues 是本次路径的对象，字段回调包含 name/value/meta。" [ref=e514]
+                  - cell [ref=e517]:
+                    - code [ref=e520]: (changed, all) => void
+                  - cell [ref=e521]:
+                    - code [ref=e524]: —
+                - row [ref=e525]:
+                  - cell [ref=e526]:
+                    - code [ref=e529]: component / clearOnDestroy
+                  - cell "原生表单元素渲染与卸载时清空外部实例。" [ref=e530]
+                  - cell [ref=e533]:
+                    - code [ref=e536]: "'form' | 'div' | false / boolean"
+                  - cell [ref=e537]:
+                    - code [ref=e540]: "'form' / false"
+          - region [ref=e541]:
+            - heading "FormItemProps API" [level=2] [ref=e542]
+            - table "API 属性表格" [ref=e547]:
+              - rowgroup [ref=e553]:
+                - row [ref=e554]:
+                  - columnheader "属性" [ref=e555]
+                  - columnheader "说明" [ref=e558]
+                  - columnheader "类型" [ref=e561]
+                  - columnheader "默认值" [ref=e564]
+              - rowgroup [ref=e567]:
+                - row [ref=e568]:
+                  - cell [ref=e569]:
+                    - code [ref=e572]: name
+                  - cell "字段路径；省略时只渲染布局/帮助区域，不注册字段。" [ref=e573]
+                  - cell [ref=e576]:
+                    - code [ref=e579]: NamePath
+                  - cell [ref=e580]:
+                    - code [ref=e583]: —
+                - row [ref=e584]:
+                  - cell [ref=e585]:
+                    - code [ref=e588]: label / tooltip / extra
+                  - cell "标签、问号提示与持久辅助说明。" [ref=e589]
+                  - cell [ref=e592]:
+                    - code [ref=e595]: JSX.Element
+                  - cell [ref=e596]:
+                    - code [ref=e599]: —
+                - row [ref=e600]:
+                  - cell [ref=e601]:
+                    - code [ref=e604]: rules / required
+                  - cell "async-validator 规则与必填标记；支持 required、type、min/max、pattern、enum、validator、warningOnly。" [ref=e605]
+                  - cell [ref=e608]:
+                    - code [ref=e611]: FormFieldRule[] / boolean
+                  - cell [ref=e612]:
+                    - code [ref=e615]: "[] / 自动推断"
+                - row [ref=e616]:
+                  - cell [ref=e617]:
+                    - code [ref=e620]: dependencies
+                  - cell "依赖字段变化时重新校验已编辑字段；Form.List 行内路径自动追加当前列表前缀。" [ref=e621]
+                  - cell [ref=e624]:
+                    - code [ref=e627]: NamePath[]
+                  - cell [ref=e628]:
+                    - code [ref=e631]: "[]"
+                - row [ref=e632]:
+                  - cell [ref=e633]:
+                    - code [ref=e636]: validateTrigger / validateFirst / validateDebounce
+                  - cell "字段级校验触发、短路策略与防抖时间。" [ref=e637]
+                  - cell [ref=e640]:
+                    - code [ref=e643]: string | string[] | false / boolean | 'parallel' / number
+                  - cell [ref=e644]:
+                    - code [ref=e647]: 继承 Form / — / —
+                - row [ref=e648]:
+                  - cell [ref=e649]:
+                    - code [ref=e652]: normalize / getValueFromEvent
+                  - cell "写入 store 前转换值，或从事件/自定义控件参数提取字段值。" [ref=e653]
+                  - cell [ref=e656]:
+                    - code [ref=e659]: (value, prev, all) => value / (...args) => value
+                  - cell [ref=e660]:
+                    - code [ref=e663]: —
+                - row [ref=e664]:
+                  - cell [ref=e665]:
+                    - code [ref=e668]: validateStatus / hasFeedback
+                  - cell "覆盖状态展示或显示状态图标；控件会收到 error/warning。" [ref=e669]
+                  - cell [ref=e672]:
+                    - code [ref=e675]: "'error' | 'warning' | 'validating' | 'success' / boolean"
+                  - cell [ref=e676]:
+                    - code [ref=e679]: 自动 / false
+                - row [ref=e680]:
+                  - cell [ref=e681]:
+                    - code [ref=e684]: help / hidden / preserve
+                  - cell "自定义帮助、保留 DOM 与卸载后的字段值策略。" [ref=e685]
+                  - cell [ref=e688]:
+                    - code [ref=e691]: JSX.Element / boolean / boolean
+                  - cell [ref=e692]:
+                    - code [ref=e695]: — / false / 继承 Form
+          - region [ref=e696]:
+            - heading "FormListProps API" [level=2] [ref=e697]
+            - table "API 属性表格" [ref=e702]:
+              - rowgroup [ref=e708]:
+                - row [ref=e709]:
+                  - columnheader "属性" [ref=e710]
+                  - columnheader "说明" [ref=e713]
+                  - columnheader "类型" [ref=e716]
+                  - columnheader "默认值" [ref=e719]
+              - rowgroup [ref=e722]:
+                - row [ref=e723]:
+                  - cell [ref=e724]:
+                    - code [ref=e727]: name
+                  - cell "列表字段路径，可嵌套在另一个 Form.List 中。" [ref=e728]
+                  - cell [ref=e731]:
+                    - code [ref=e734]: string | (string | number)[]
+                  - cell [ref=e735]:
+                    - code [ref=e738]: 必填
+                - row [ref=e739]:
+                  - cell [ref=e740]:
+                    - code [ref=e743]: initialValue
+                  - cell "列表为空且路径没有值时写入的初始数组。" [ref=e744]
+                  - cell [ref=e747]:
+                    - code [ref=e750]: unknown
+                  - cell [ref=e751]:
+                    - code [ref=e754]: —
+                - row [ref=e755]:
+                  - cell [ref=e756]:
+                    - code [ref=e759]: children
+                  - cell "fields 提供 name/key；operations 提供 add(defaultValue?, index?), remove(index | index[]), move(from, to)。" [ref=e760]
+                  - cell [ref=e763]:
+                    - code [ref=e766]: (fields, operations) => JSX.Element
+                  - cell [ref=e767]:
+                    - code [ref=e770]: 必填
+          - region [ref=e771]:
+            - heading "布局、样式与可访问性" [level=2] [ref=e772]
+            - generic [ref=e773]:
+              - paragraph [ref=e774]: horizontal 为默认布局，labelWidth、labelAlign、labelWrap 控制标签列；vertical 将标签置于控件上方，inline 适合紧凑查询条件。requiredMark、colon、tooltip、help、extra 和 hasFeedback 都有独立语义，不要只依赖颜色表达错误。
+              - paragraph [ref=e775]: 有 name 的 Item 自动生成稳定 id 并将 label for 指向控件；自定义物料应透传 id、disabled、aria-invalid，并提供可访问名称。当前真实浏览器回归覆盖 Chromium；不据此宣称 Firefox/WebKit 已验证。
+          - region [ref=e776]:
+            - heading "与 Ant Design 6 的差异" [level=2] [ref=e777]
+            - generic [ref=e778]:
+              - paragraph [ref=e779]: 本实现参考 Ant Design 6 Form 的字段、规则、列表和实例组织，但不是 API 完全兼容实现。组件使用 Solid 2 的 signal/context 模型，onChange 以 value 为主，子组件不通过 cloneElement 注入；默认校验文案为中文。
+              - paragraph [ref=e780]: 已覆盖：Form.Item、Form.List、嵌套 NamePath、initialValues/initialValue、preserve、动态增删、依赖、异步校验、warningOnly、validateFirst、validateDebounce、normalize、getValueFromEvent、reset/submit 和自定义上下文物料。未实现或尚未承诺的差异以本页限制为准。
+          - region [ref=e781]:
+            - heading "常见用法与边缘场景" [level=2] [ref=e782]
+            - generic [ref=e783]:
+              - paragraph [ref=e784]:
+                - strong [ref=e785]: 初始值与回填：
+                - text: initialValues 只在表单实例初始化时读取；编辑页拿到接口数据后使用 setFieldsValue，切换记录时先 resetFields 再写入。字段级 initialValue 适合动态 Item，Form.List 的初始数组优先放在 Form.List 的 initialValue 或 Form 的 initialValues 中。
+              - paragraph [ref=e786]:
+                - strong [ref=e787]: 动态列表：
+                - text: Form.List 的 fields.name 是当前索引，fields.key 是稳定渲染键。遍历时使用 keyed，字段使用 [field.name, 'property']；嵌套列表继续把当前行路径传给下一级 Form.List。删除、移动后不要缓存旧索引，依赖当前 field descriptor 解析路径。
+              - paragraph [ref=e788]:
+                - strong [ref=e789]: 自定义物料：
+                - text: 编辑型控件使用上下文协议或响应式 props；带参 render props 在字段值变化时会重新执行，适合派生展示。第一方物料通过 FormItemContext 接收 value、onChange、id、disabled、size 和校验状态。自定义控件必须透传 id、aria-invalid、disabled，并在 onChange 中把值交给 Form.Item，而不是只修改本地 signal。
+              - paragraph [ref=e790]:
+                - strong [ref=e791]: 表单套表单：
+                - text: 嵌套的 Form 拥有独立实例和提交边界；内层使用 component="div" 与实例 submit()，内层提交不会触发外层 onFinish。若业务只是分组而不是独立提交，请使用 Form.Item 的无 name 布局区域，避免不必要地创建嵌套原生 form。
+              - paragraph [ref=e792]:
+                - strong [ref=e793]: 校验边缘：
+                - text: async validator 应在过期请求完成后忽略旧结果；依赖字段只重新校验已经编辑的字段。validateOnly 适合提交前预检，warningOnly 不阻止提交，validateDebounce 适合远程校验。组件当前不提供 scrollToFirstError，请在 onFinishFailed 中根据 errorFields 自行聚焦。
+          - region [ref=e794]:
+            - heading "FAQ" [level=2] [ref=e795]
+            - generic [ref=e796]:
+              - paragraph [ref=e797]:
+                - strong [ref=e798]: 为什么改变 initialValues 不会更新表单？
+                - text: 这是一次性初始化配置。响应式业务数据应调用 setFieldsValue；不要把 initialValues 当作受控 value。
+              - paragraph [ref=e799]:
+                - strong [ref=e800]: 为什么 Form.List 行内依赖要写相对路径？
+                - text: Form.Item 会自动追加当前列表行前缀，因此同一行字段依赖写 ['price']，不要手工拼接数组索引；嵌套列表按当前层级继续使用相对路径。
+              - paragraph [ref=e801]:
+                - strong [ref=e802]: 为什么自定义控件没有自动写入？
+                - text: Solid 没有 React 的 cloneElement 注入。使用第一方控件，或通过 useFormItem 协议同步值；如果显式传入 onChange，它会优先于上下文协议。
+              - paragraph [ref=e803]:
+                - strong [ref=e804]: 何时使用 FormInstance？
+                - text: 用户输入优先由 Form.Item 管理；接口回填、重置、校验、读取快照、跨字段联动和提交按钮放在表单外时，再通过 form/ref 使用命令式 API。
+          - generic [ref=e805]: Solid Upthrust · 基于 Solid 2 构建

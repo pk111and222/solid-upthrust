@@ -1,0 +1,10 @@
+$ vitest run headless/Typography render/Typography
+
+ RUN  v4.1.10 /Users/zhangchen327/code/github/pk111and222/solid-upthrust/packages/testing
+
+
+ Test Files  4 passed (4)
+      Tests  41 passed (41)
+   Start at  21:50:25
+   Duration  723ms (transform 822ms, setup 0ms, import 1.13s, tests 72ms, environment 988ms)
+

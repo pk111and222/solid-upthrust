@@ -1,4 +1,4 @@
-import { createEffect, createMemo, createSignal } from 'solid-js'
+import { createEffect, createMemo } from 'solid-js'
 import { type FormInstance, type StoreValue } from './form'
 import { type InternalNamePath, type NamePath, getNamePath, getValue, move as arrayMove } from './formUtils'
 
@@ -17,6 +17,10 @@ export type FormListField = {
   /** Stable identity key (survives remove/move; used as For key). */
   key: number
   isListField: true
+}
+
+type CachedFormListField = FormListField & {
+  setName: (name: number) => void
 }
 
 export type FormListOperations = {
@@ -43,7 +47,27 @@ export function createFormList(form: FormInstance, config: FormListConfig) {
   // identity changes ride the value signal (keys are read together with
   // value in the fields() memo).
   const keyManager = { keys: [] as number[], id: 0 }
-  const [keysVersion, setKeysVersion] = createSignal(0, { name: 'formList:keys' })
+  const fieldCache = new Map<number, CachedFormListField>()
+
+  const getField = (key: number, index: number) => {
+    const cached = fieldCache.get(key)
+    if (cached) return cached
+
+    let currentName = index
+    const field: CachedFormListField = {
+      get name() {
+        value() // Track store commits so row labels follow index changes.
+        return currentName
+      },
+      key,
+      isListField: true as const,
+      setName: (nextName: number) => {
+        currentName = nextName
+      },
+    }
+    fieldCache.set(key, field)
+    return field
+  }
 
   const seedKeys = (length: number) => {
     for (let i = 0; i < length; i += 1) {
@@ -78,14 +102,9 @@ export function createFormList(form: FormInstance, config: FormListConfig) {
   void initEffect
 
   const fields = createMemo<FormListField[]>(() => {
-    void keysVersion()
     const list = value()
     seedKeys(list.length)
-    return list.map((_, index) => ({
-      name: index,
-      key: keyManager.keys[index],
-      isListField: true as const,
-    }))
+    return list.map((_, index) => getField(keyManager.keys[index], index))
   })
 
   // ---------------------------------------------------------------- ops
@@ -99,7 +118,7 @@ export function createFormList(form: FormInstance, config: FormListConfig) {
 
   const commit = (nextValue: StoreValue[], nextKeys: number[]) => {
     keyManager.keys = nextKeys
-    setKeysVersion(v => v + 1)
+    nextKeys.forEach((key, index) => getField(key, index).setName(index))
     form.updateValue(prefixName(), nextValue)
   }
 

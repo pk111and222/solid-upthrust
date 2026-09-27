@@ -7,6 +7,7 @@ export * from './anchor'
 export * from './dropdown'
 export * from './menu'
 export * from './breakpoint'
+export * from './responsive'
 export * from './sider'
 export * from './masonry'
 export * from './splitter'
@@ -15,6 +16,8 @@ export * from './tooltip'
 export * from './popconfirm'
 export * from './skeleton'
 export * from './progress'
+export * from './timeline'
+export * from './qrcode'
 export * from './badge'
 export * from './watermark'
 export * from './message'
@@ -54,6 +57,7 @@ export * from './utils'
 
 
 export * from './tag'
+export * from './presetColors'
 export * from './transfer'
 
 export * from './table'
@@ -66,3 +70,7 @@ export * from './datePickerAdvanced'
 export * from './treeDrag'
 
 export * from './input'
+
+export * from './avatar'
+
+export * from './statistic'

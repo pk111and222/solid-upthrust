@@ -1,0 +1,10 @@
+[
+  {"name":"name","type":"NamePath","default":"—","description":"字段路径；省略时只渲染布局/帮助区域，不注册字段。"},
+  {"name":"label / tooltip / extra","type":"JSX.Element","default":"—","description":"标签、问号提示与持久辅助说明。"},
+  {"name":"rules / required","type":"FormFieldRule[] / boolean","default":"[] / 自动推断","description":"async-validator 规则与必填标记；支持 required、type、min/max、pattern、enum、validator、warningOnly。"},
+  {"name":"dependencies","type":"NamePath[]","default":"[]","description":"依赖字段变化时重新校验已编辑字段；Form.List 行内路径自动追加当前列表前缀。"},
+  {"name":"validateTrigger / validateFirst / validateDebounce","type":"string | string[] | false / boolean | 'parallel' / number","default":"继承 Form / — / —","description":"字段级校验触发、短路策略与防抖时间。"},
+  {"name":"normalize / getValueFromEvent","type":"(value, prev, all) => value / (...args) => value","default":"—","description":"写入 store 前转换值，或从事件/自定义控件参数提取字段值。"},
+  {"name":"validateStatus / hasFeedback","type":"'error' | 'warning' | 'validating' | 'success' / boolean","default":"自动 / false","description":"覆盖状态展示或显示状态图标；控件会收到 error/warning。"},
+  {"name":"help / hidden / preserve","type":"JSX.Element / boolean / boolean","default":"— / false / 继承 Form","description":"自定义帮助、保留 DOM 与卸载后的字段值策略。"}
+]

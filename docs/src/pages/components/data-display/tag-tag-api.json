@@ -1,0 +1,80 @@
+[
+  {
+    "name": "color",
+    "type": "预设色板 | `${预设色}-inverse` | success/processing/error/warning/default | string",
+    "default": "—",
+    "description": "13 个预设色板与 5 个状态色走主题类；其他 CSS 颜色：filled/outlined 为 95% 亮度底 + 原色字（outlined 加原色边），solid 为原色底白字"
+  },
+  {
+    "name": "variant",
+    "type": "'filled' | 'solid' | 'outlined'",
+    "default": "filled",
+    "description": "标签变体；-inverse 旧写法等价 solid"
+  },
+  {
+    "name": "bordered",
+    "type": "boolean",
+    "default": "—",
+    "description": "已废弃：antd 6 中不再产生描边，描边请用 variant=\"outlined\""
+  },
+  {
+    "name": "closable",
+    "type": "boolean | { closeIcon?, aria-label? }",
+    "default": "—",
+    "description": "显示关闭按钮；对象形式可设置图标与无障碍名称"
+  },
+  {
+    "name": "closeIcon",
+    "type": "JSX.Element | boolean | null",
+    "default": "—",
+    "description": "未设 closable 时，传入图标或 true 即可关闭，false/null 隐藏；closable=true 时 false/null 回退默认图标"
+  },
+  {
+    "name": "closeLabel",
+    "type": "string",
+    "default": "关闭标签",
+    "description": "本库扩展：关闭按钮的无障碍名称，closable 对象的 aria-label 优先"
+  },
+  {
+    "name": "onClose",
+    "type": "(event: MouseEvent) => void",
+    "default": "—",
+    "description": "关闭回调；调用 event.preventDefault() 可阻止关闭。事件不再冒泡；有 href 时阻止跳转"
+  },
+  {
+    "name": "icon",
+    "type": "JSX.Element",
+    "default": "—",
+    "description": "图标；有图标时文字包裹在 content 节点，间距 7px"
+  },
+  {
+    "name": "disabled",
+    "type": "boolean",
+    "default": "false",
+    "description": "禁用：不应用颜色、不可关闭、不触发 onClick；href 被移除并标注 aria-disabled"
+  },
+  {
+    "name": "href / target / rel",
+    "type": "string",
+    "default": "—",
+    "description": "设置 href 渲染为 <a>；target=_blank 且未设 rel 时默认 noopener noreferrer"
+  },
+  {
+    "name": "onClick",
+    "type": "JSX.EventHandlerUnion",
+    "default": "—",
+    "description": "点击回调，禁用时不触发"
+  },
+  {
+    "name": "classNames / styles",
+    "type": "Partial<Record<root | icon | content | close, …>>",
+    "default": "—",
+    "description": "语义化类名与内联样式；style 覆盖 styles.root"
+  },
+  {
+    "name": "class / style / 原生属性 / ref",
+    "type": "string / JSX.CSSProperties / HTMLAttributes",
+    "default": "—",
+    "description": "data-*、aria-*、id、事件与 ref 透传到根节点"
+  }
+]

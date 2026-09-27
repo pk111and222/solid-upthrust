@@ -1,6 +1,6 @@
 import { useComponentProps } from '../ConfigProvider/context'
-import { Component, Show, createMemo, merge, untrack } from 'solid-js'
-import { type JSX } from '@solidjs/web'
+import { Component, Show, createMemo, merge, onCleanup, untrack } from 'solid-js'
+import { Dynamic, type JSX } from '@solidjs/web'
 import { type FormInstance, createForm } from 'upthrust-competence'
 import type { SizeType } from '../../common/type'
 import { FormContext, type FormContextValue } from './context'
@@ -84,6 +84,23 @@ const Form: Component<FormProps> = providedProps => {
   // The internal form is created unconditionally to keep hook order stable.
   const form = createMemo<FormInstance>(() => props.form ?? internalForm)
 
+  // The provided instance is the actual store; UI props must configure it too.
+  untrack(() => {
+    const external = props.form
+    if (!external) return
+    if (props.initialValues !== undefined) external.setInitialValues(props.initialValues, true)
+    if (props.onFinish || props.onFinishFailed || props.onValuesChange || props.onFieldsChange) {
+      external.setCallbacks({
+        get onFinish() { return props.onFinish },
+        get onFinishFailed() { return props.onFinishFailed },
+        get onValuesChange() { return props.onValuesChange },
+        get onFieldsChange() { return props.onFieldsChange },
+      })
+    }
+  })
+
+  onCleanup(() => form().destroyForm(props.clearOnDestroy))
+
   // Expose the effective form through ref (runs once; form prop is static).
   // untrack: component bodies run untracked in Solid 2 — a one-time memo read
   // here would trip STRICT_READ_UNTRACKED in dev.
@@ -91,6 +108,7 @@ const Form: Component<FormProps> = providedProps => {
 
   const ctx: FormContextValue = {
     form: () => form(),
+    reset: () => form().resetFields(),
     validateTrigger: () => props.validateTrigger,
     size: () => props.size ?? 'middle',
     disabled: () => !!props.disabled,
@@ -127,16 +145,17 @@ const Form: Component<FormProps> = providedProps => {
       when={props.component !== false}
       fallback={content}
     >
-      <form
-        class={formClass(props.class)}
+      <Dynamic
+        component={props.component === 'div' ? 'div' : 'form'}
+        class={formClass(props.class, props.layout)}
         style={props.style}
         name={props.name}
         novalidate
-        onSubmit={handleSubmit}
         onReset={handleReset}
+        onSubmit={handleSubmit}
       >
         {content}
-      </form>
+      </Dynamic>
     </Show>
   )
 }

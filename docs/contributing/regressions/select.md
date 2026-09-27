@@ -69,3 +69,12 @@ Select 无公开子组件。`SelectProps`、`SelectOption`、`SelectOptionEntry`
 
 - Select 与 Cascader、TreeSelect 共用清空后的 120ms 箭头出现延迟；选中时仍立即显示清除按钮，避免两个图标同时可见。L3 断言清空后箭头先保持隐藏、延迟后出现。
 - 全量 L1–L3 180 文件、1585 条通过；Select Chromium docs/example 专项 39 条通过、3 条原有跳过项。根及 docs 类型检查与构建通过。浏览器日志：`/tmp/solid-upthrust-select-browser-full-20260923.log`。
+
+## 2026-09-26 大列表方向键性能修复
+
+`virtual-list.selector.2`（10,000 选项、30 次 ArrowDown）在全量并发下超时。根因是 `createSelect` 的 `moveActive` 和 `resetActiveWith` 对每个选项调用 `store.isDisabled`，后者每次都全量扫描，复杂度 O(n²)：单次按键约 95ms，打开约 332ms。
+
+- 改为每次调用只收集一次禁用键 Set。不跨调用缓存，以兼容 store 原地修改 `disabled` 的场景。
+- UI 的 `activeIndex` 把 `activeKey` 读取提到 findIndex 外。
+- 修复后单次按键约 0.2ms、打开约 23ms。
+- 全量 1725 条通过；Select 浏览器专项 39 条通过、3 条原有跳过。

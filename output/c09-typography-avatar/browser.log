@@ -1,0 +1,66 @@
+[WebServer] (node:70380) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:70397) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:70430) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:70513) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:70522) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 28 tests using 2 workers
+
+(node:70569) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:70570) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓   2 [docs] › browser/Avatar/contracts.spec.ts:10:1 › [avatar.browser.paint] dimensions shapes and colors (374ms)
+  ✓   1 [docs] › browser/Avatar/contracts.spec.ts:20:1 › [avatar.browser.image] loaded image and error recovery (395ms)
+  ✓   3 [docs] › browser/Avatar/contracts.spec.ts:30:1 › [avatar.browser.responsive] responds to real viewport changes (374ms)
+  ✓   5 [docs] › browser/Avatar/contracts.spec.ts:64:1 › [avatar.browser.group] overlaps members and honors overrides (156ms)
+  ✓   4 [docs] › browser/Avatar/contracts.spec.ts:41:1 › [avatar.browser.overflow] hover click and focus reveal hidden members (565ms)
+  ✓   6 [docs] › browser/Avatar/contracts.spec.ts:71:1 › [avatar.browser.characters] text updates and badge integration (223ms)
+  ✓   8 [docs] › browser/Avatar/contracts.spec.ts:87:1 › [avatar.browser.ssr] group API and demos are server-rendered (10ms)
+  ✓   9 [docs] › browser/Typography/contracts.spec.ts:10:1 › [typography.browser.paint] heading sizes and text decoration (208ms)
+  ✓  10 [docs] › browser/Typography/contracts.spec.ts:20:1 › [typography.browser.ellipsis] clips text and keeps actions accessible (352ms)
+  ✓  11 [docs] › browser/Typography/contracts.spec.ts:37:1 › [typography.browser.edit] keyboard commits cancels and blur saves (419ms)
+[WebServer] 9:48:56 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in <Popover> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+[WebServer] 9:48:56 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in <Popover> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+[WebServer] 9:48:56 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in <Popover> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+[WebServer] 9:48:56 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in <Popover> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+[WebServer] 9:48:56 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in <Popover> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+[WebServer] 9:48:56 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in <Popover> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+[WebServer] 9:48:56 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in <Popover> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+[WebServer] 9:48:56 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in <Popover> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+[WebServer] 9:48:56 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in <Popover> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+[WebServer] 9:48:56 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in <Popover> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+[WebServer] 9:48:56 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in <Popover> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+[WebServer] 9:48:56 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in <Popover> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+[WebServer] 9:48:56 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in an effect callback will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+[WebServer] 9:48:56 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in an effect callback will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+[WebServer] 9:48:56 PM [vite] (client) [console.warn] [STRICT_READ_UNTRACKED] Reactive value read directly in an effect callback will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+  ✓   7 [docs] › browser/Avatar/contracts.spec.ts:80:1 › [avatar.browser.dev] dev rendering (1.3s)
+  ✓  12 [docs] › browser/Typography/contracts.spec.ts:49:1 › [typography.browser.controlled] external editing commits (227ms)
+  ✓  13 [docs] › browser/Typography/contracts.spec.ts:56:1 › [typography.browser.copy] writes clipboard and reports text (219ms)
+  ✓  14 [docs] › browser/Typography/contracts.spec.ts:64:1 › [typography.browser.link] disabled link and separate actions (167ms)
+  ✓  16 [docs] › browser/Typography/contracts.spec.ts:76:1 › [typography.browser.ssr] API and source are server-rendered (7ms)
+(node:70720) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  15 [docs] › browser/Typography/contracts.spec.ts:70:1 › [typography.browser.dev] dev CSS and mounting (469ms)
+(node:70724) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  17 [example] › browser/Avatar/contracts.spec.ts:10:1 › [avatar.browser.paint] dimensions shapes and colors (280ms)
+  ✓  19 [example] › browser/Avatar/contracts.spec.ts:30:1 › [avatar.browser.responsive] responds to real viewport changes (374ms)
+  ✓  18 [example] › browser/Avatar/contracts.spec.ts:20:1 › [avatar.browser.image] loaded image and error recovery (313ms)
+  ✓  21 [example] › browser/Avatar/contracts.spec.ts:64:1 › [avatar.browser.group] overlaps members and honors overrides (184ms)
+  ✓  22 [example] › browser/Avatar/contracts.spec.ts:71:1 › [avatar.browser.characters] text updates and badge integration (235ms)
+  ✓  20 [example] › browser/Avatar/contracts.spec.ts:41:1 › [avatar.browser.overflow] hover click and focus reveal hidden members (502ms)
+  ✓  23 [example] › browser/Typography/contracts.spec.ts:10:1 › [typography.browser.paint] heading sizes and text decoration (254ms)
+  ✓  24 [example] › browser/Typography/contracts.spec.ts:20:1 › [typography.browser.ellipsis] clips text and keeps actions accessible (368ms)
+  ✓  26 [example] › browser/Typography/contracts.spec.ts:49:1 › [typography.browser.controlled] external editing commits (272ms)
+  ✓  25 [example] › browser/Typography/contracts.spec.ts:37:1 › [typography.browser.edit] keyboard commits cancels and blur saves (419ms)
+  ✓  28 [example] › browser/Typography/contracts.spec.ts:64:1 › [typography.browser.link] disabled link and separate actions (218ms)
+  ✓  27 [example] › browser/Typography/contracts.spec.ts:56:1 › [typography.browser.copy] writes clipboard and reports text (277ms)
+
+  28 passed (11.3s)

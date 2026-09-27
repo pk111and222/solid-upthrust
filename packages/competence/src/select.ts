@@ -254,9 +254,20 @@ export const createSelect = (config: SelectConfigFull = {}): SelectIns => {
 
   // ---- active option (keyboard highlight) -------------------------------
 
+  /** Enabled subset of `list`, equivalent to filtering by store.isDisabled.
+   *  isDisabled scans every option per call, so filtering with it is O(n²)
+   *  — ~100ms per arrow key on a 10k-option list. Collect the disabled keys
+   *  once per call instead (not cached across calls: store-backed options
+   *  can flip `disabled` in place without changing the array identity). */
+  const enabledOf = (list: SelectOption[]) => {
+    if (config.disabled) return []
+    const blocked = new Set(options().filter(o => o.disabled).map(o => o.value))
+    return blocked.size ? list.filter(o => !blocked.has(o.value)) : list
+  }
+
   /** Move by delta over the ENABLED, FILTERED options; wraps around. */
   const moveActive = (delta: number) => {
-    const list = filteredOptions().filter(o => !o.disabled && !store.isDisabled(o.value))
+    const list = enabledOf(filteredOptions())
     if (!list.length) { _setActiveKey(undefined); return }
     const cur = _activeKey()
     const idx = list.findIndex(o => o.value === cur)
@@ -277,10 +288,9 @@ export const createSelect = (config: SelectConfigFull = {}): SelectIns => {
     const q = searchOverride ?? _search()
     const all = options()
     const pred = filterPred()
-    const list = (!q || pred === null
+    const list = enabledOf(!q || pred === null
       ? all
-      : all.filter(o => pred(q, o))
-    ).filter(o => !o.disabled && !store.isDisabled(o.value))
+      : all.filter(o => pred(q, o)))
     if (list.length) {
       // Prefer the (first) selected option when it's visible.
       const sel = store.value()

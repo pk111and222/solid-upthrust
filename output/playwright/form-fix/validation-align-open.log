@@ -1,0 +1,20 @@
+
+╔════════════════════════════════════════════════════════════════════╗
+║ Update available for @playwright/cli: 0.1.18 → 0.1.21              ║
+║ Run `npm install -g @playwright/cli@latest` (global) or            ║
+║ `npm install --save-dev @playwright/cli@latest` (local) to update. ║
+╚════════════════════════════════════════════════════════════════════╝
+
+### Browser `form-validation` opened with pid 7006.
+### Ran Playwright code
+```js
+await page.goto('http://127.0.0.1:5657/components/data-entry/form/');
+```
+### Page
+- Page URL: http://127.0.0.1:5657/components/data-entry/form/
+- Page Title: Form 表单 · Solid Upthrust
+- Console: 1 errors, 0 warnings
+### Snapshot
+- [Snapshot](.playwright-cli/page-2026-09-26T02-46-38-472Z.yml)
+### Events
+- New console entries: .playwright-cli/console-2026-09-26T02-46-38-028Z.log#L1

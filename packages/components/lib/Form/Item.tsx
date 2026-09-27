@@ -1,5 +1,5 @@
-import { Component, For, Show, createMemo, merge, untrack } from 'solid-js'
-import { type JSX } from '@solidjs/web'
+import { Component, Show, createMemo, createSignal, createUniqueId, merge, onCleanup, untrack } from 'solid-js'
+import { For, type JSX } from '@solidjs/web'
 import { twMerge } from 'tailwind-merge'
 import {
   type FormFieldRule,
@@ -88,11 +88,16 @@ const FormItem: Component<FormItemProps> = rawProps => {
   }
 
   // Resolve the namePath: List prefix + own name.
+  const ownName = props.name === undefined
+    ? undefined
+    : (Array.isArray(props.name) ? props.name : [props.name])
+  const resolvedListPath = listCtx && ownName !== undefined
+    ? listCtx.resolvePath(ownName)
+    : undefined
   const namePath = createMemo<InternalNamePath>(() => {
-    if (props.name === undefined) return []
-    const prefix = listCtx?.prefixName() ?? []
-    const own = Array.isArray(props.name) ? props.name : [props.name]
-    return [...prefix, ...own]
+    if (ownName === undefined) return []
+    if (resolvedListPath) return resolvedListPath()
+    return ownName
   })
 
   // untrack: component bodies run untracked in Solid 2 — reading the form()
@@ -103,7 +108,13 @@ const FormItem: Component<FormItemProps> = rawProps => {
     get name() { return props.name === undefined ? undefined : namePath() },
     get rules() { return props.rules },
     get initialValue() { return props.initialValue },
-    get dependencies() { return props.dependencies },
+    get dependencies() {
+      const rowPrefix = listCtx ? namePath().slice(0, -1) : []
+      return props.dependencies?.map(dependency => [
+        ...rowPrefix,
+        ...(Array.isArray(dependency) ? dependency : [dependency]),
+      ])
+    },
     get validateTrigger() { return props.validateTrigger ?? formCtx?.validateTrigger() },
     get validateFirst() { return props.validateFirst },
     get validateDebounce() { return props.validateDebounce },
@@ -115,11 +126,12 @@ const FormItem: Component<FormItemProps> = rawProps => {
     get onReset() { return props.onReset },
   })
 
-  // Resolve the DOM id: htmlFor > form name + namePath.
+  // htmlFor overrides an instance-unique id, even across independent demo roots.
+  const uniqueId = createUniqueId()
   const itemId = createMemo(() => {
     if (props.htmlFor) return props.htmlFor
     if (props.name === undefined) return undefined
-    return `upthrust-form-item-${namePath().join('-')}`
+    return `upthrust-form-item-${uniqueId}-${namePath().join('-')}`
   })
 
   const layout = () => formCtx.layout?.() ?? 'horizontal'
@@ -168,14 +180,44 @@ const FormItem: Component<FormItemProps> = rawProps => {
 
   const hasLabel = () => props.label !== undefined || props.tooltip !== undefined
 
+  const [feedbackConsumers, setFeedbackConsumers] = createSignal(0, { ownedWrite: true })
+  const feedback = () => (
+    <Show when={props.hasFeedback && validateStatus()}>
+      <span class="inline-flex shrink-0 items-center" aria-hidden="true" data-form-feedback>
+        <span class={formItemFeedbackIconClass(validateStatus())}>
+          <Show when={validateStatus() === 'error'} fallback={
+            <Show when={validateStatus() === 'warning'} fallback={
+              <Show when={validateStatus() === 'validating'} fallback={<span class="i-mdi-check-circle" />}>
+                <span class="i-mdi-loading animate-spin-upthrust" />
+              </Show>
+            }>
+              <span class="i-mdi-alert" />
+            </Show>
+          }>
+            <span class="i-mdi-close-circle" />
+          </Show>
+        </span>
+      </span>
+    </Show>
+  )
+
   const control = {
-    value: () => field.value(),
+    value: () => {
+      formCtx.form().resetCountSignal()
+      return field.value()
+    },
     onChange: (value: any, event?: Event) => {
       // Form widgets pass the value directly; event is advisory.
       void event
       field.onChange(value)
     },
     validateStatus,
+    hasFeedback: () => !!props.hasFeedback,
+    feedback,
+    registerFeedback: () => {
+      setFeedbackConsumers(count => count + 1)
+      onCleanup(() => setFeedbackConsumers(count => count - 1))
+    },
     id: itemId,
     disabled: () => props.disabled ?? formCtx?.disabled(),
     size: () => formCtx?.size(),
@@ -183,10 +225,13 @@ const FormItem: Component<FormItemProps> = rawProps => {
 
 
   const renderChildren = (): JSX.Element => {
-    if (typeof props.children === 'function') {
-      return (props.children as (value: any, form: unknown) => JSX.Element)(field.value(), formCtx.form())
+    // Solid JSX (including dev refresh) can itself be a zero-argument accessor.
+    // Read children once and only invoke parameterized render props with a value.
+    const child = props.children
+    if (typeof child === 'function' && child.length > 0) {
+      return (child as (value: any, form: unknown) => JSX.Element)(field.value(), formCtx.form())
     }
-    return props.children as JSX.Element
+    return child as JSX.Element
   }
 
   // Fixed label column width — an inline style, because a runtime CSS length
@@ -239,22 +284,8 @@ const FormItem: Component<FormItemProps> = rawProps => {
               {renderChildren()}
             </FormItemContext>
           </div>
-          <Show when={props.hasFeedback && validateStatus()}>
-            <span class={formItemFeedbackIconWrapClass({ size: size() })}>
-              <span class={formItemFeedbackIconClass(validateStatus())}>
-                <Show when={validateStatus() === 'error'} fallback={
-                  <Show when={validateStatus() === 'warning'} fallback={
-                    <Show when={validateStatus() === 'validating'} fallback={<span class="i-mdi-check-circle" />}>
-                      <span class="i-mdi-loading animate-spin-upthrust" />
-                    </Show>
-                  }>
-                    <span class="i-mdi-alert" />
-                  </Show>
-                }>
-                  <span class="i-mdi-close-circle" />
-                </Show>
-              </span>
-            </span>
+          <Show when={!feedbackConsumers() && props.hasFeedback && validateStatus()}>
+            <span class={formItemFeedbackIconWrapClass({ size: size() })}>{feedback()}</span>
           </Show>
         </div>
 

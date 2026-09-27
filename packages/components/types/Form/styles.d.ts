@@ -10,7 +10,7 @@
  *  - feedback icon: zoomIn entrance, 4 status colors (feedback-icon style)
  *  - item bottom margin: marginLG 24px (itemMarginBottom)
  */
-export declare const formClass: (class_?: string) => string;
+export declare const formClass: (class_?: string, layout?: "horizontal" | "vertical" | "inline") => string;
 /**
  * Item row. horizontal: `flex items-start` with the label column and the
  * control column as flex children (antd Row > Col structure flattened);

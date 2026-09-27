@@ -1,9 +1,10 @@
 import { useComponentProps } from '../ConfigProvider/context'
-import { Component, Show, createMemo, untrack } from 'solid-js'
+import { Component, Show, createMemo, merge, untrack } from 'solid-js'
 import type { JSX } from '@solidjs/web'
 import type { SizeType } from '../../common/type'
 import { createButton, type ButtonIns, type ButtonVariant, type ButtonColor } from 'upthrust-competence'
 import { buttonClass, waveClass, type ButtonStyleVariants } from './styles'
+import { useFormContext } from '../Form/context'
 
 export type ButtonType = 'primary' | 'link' | 'text' | 'default' | 'dashed'
 export type ButtonShape = 'default' | 'circle' | 'round'
@@ -43,7 +44,17 @@ const TYPE_MAP: Record<ButtonType, { variant: ButtonVariant; color: ButtonColor 
 
 const Button: Component<ButtonProps> = (providedProps = {}) => {
   const props = useComponentProps('Button', providedProps)
-  const {loading, waveActive, button, anchor, refs} = createButton(props)
+  const formCtx = useFormContext()
+  const buttonConfig = merge(props, {
+    onClick: (event: MouseEvent) => {
+      if (props.htmlType === 'reset' && formCtx) {
+        event.preventDefault()
+        formCtx.reset()
+      }
+      props.onClick?.(event)
+    },
+  })
+  const {loading, waveActive, button, anchor, refs} = createButton(buttonConfig)
   const disabled = () => !!props.disabled
 
   const resolvedVariant = createMemo((): ButtonVariant => {

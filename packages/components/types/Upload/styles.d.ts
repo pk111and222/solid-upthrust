@@ -11,22 +11,22 @@ declare const uploadListVariants: (props?: ({
 } & import('class-variance-authority/types').ClassProp) | undefined) => string;
 export declare const uploadListClass: (v: VariantProps<typeof uploadListVariants>) => string;
 declare const uploadListItemVariants: (props?: ({
-    state?: "error" | "done" | "uploading" | "removed" | null | undefined;
+    state?: "error" | "done" | "pending" | "uploading" | "removed" | null | undefined;
     size?: "small" | "middle" | "large" | null | undefined;
 } & import('class-variance-authority/types').ClassProp) | undefined) => string;
 export declare const uploadListItemClass: (v: VariantProps<typeof uploadListItemVariants>) => string;
 export declare const uploadItemNameClass: () => string;
 export declare const uploadItemRemoveClass: () => string;
-export declare const uploadItemStatusIconClass: (state: "uploading" | "done" | "error") => string;
+export declare const uploadItemStatusIconClass: (state: "pending" | "uploading" | "done" | "error" | "removed") => string;
 declare const uploadPictureItemVariants: (props?: ({
-    state?: "error" | "done" | "uploading" | "removed" | null | undefined;
+    state?: "error" | "done" | "pending" | "uploading" | "removed" | null | undefined;
 } & import('class-variance-authority/types').ClassProp) | undefined) => string;
 export declare const uploadPictureItemClass: (v: VariantProps<typeof uploadPictureItemVariants>) => string;
 export declare const uploadPictureThumbClass: () => string;
 export declare const uploadItemMetaClass: () => string;
 export declare const uploadItemSizeClass: () => string;
 declare const uploadCardItemVariants: (props?: ({
-    state?: "error" | "done" | "uploading" | "removed" | null | undefined;
+    state?: "error" | "done" | "pending" | "uploading" | "removed" | null | undefined;
 } & import('class-variance-authority/types').ClassProp) | undefined) => string;
 export declare const uploadCardItemClass: (v: VariantProps<typeof uploadCardItemVariants>) => string;
 export declare const uploadCardTileClass: () => string;

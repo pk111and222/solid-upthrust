@@ -230,4 +230,31 @@ describe('createFormField — async validator rules', () => {
     // but the field's error state stays clean
     expect(field.errors()).toEqual([])
   })
+
+  it('revalidates a dirty dependent field when its dependency changes', async () => {
+    const form = createForm()
+    const { field: password } = bootField(form, {
+      get name() { return 'password' },
+    })
+    const { field: confirmation } = bootField(form, {
+      get name() { return 'confirmation' },
+      get dependencies() { return ['password'] },
+      get rules() {
+        return [{
+          validator: (_rule: any, value: any, callback: (error?: string | Error) => void) => {
+            callback(value === password.value() ? undefined : '两次密码不一致')
+          },
+        }]
+      },
+    })
+
+    form.setFieldsValue({ password: 'first', confirmation: 'second' })
+    await settle(form, 'confirmation')
+    expect(confirmation.errors()).toEqual(['两次密码不一致'])
+
+    password.onChange('second')
+    await new Promise(resolve => setTimeout(resolve, 20))
+    flush()
+    expect(confirmation.errors()).toEqual([])
+  })
 })

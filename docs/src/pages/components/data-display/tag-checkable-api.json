@@ -1,0 +1,44 @@
+[
+  {
+    "name": "checked",
+    "type": "boolean",
+    "default": "—",
+    "description": "受控选中状态"
+  },
+  {
+    "name": "defaultChecked",
+    "type": "boolean",
+    "default": "false",
+    "description": "本库扩展：未传 checked 时的初始状态（antd 为完全受控）"
+  },
+  {
+    "name": "onChange",
+    "type": "(checked: boolean) => void",
+    "default": "—",
+    "description": "点击或 Space 切换时触发，先于 onClick"
+  },
+  {
+    "name": "icon",
+    "type": "JSX.Element",
+    "default": "—",
+    "description": "图标"
+  },
+  {
+    "name": "disabled",
+    "type": "boolean",
+    "default": "false",
+    "description": "禁用：aria-disabled、tabindex=-1，不切换"
+  },
+  {
+    "name": "onClick / onKeyDown",
+    "type": "JSX.EventHandlerUnion",
+    "default": "—",
+    "description": "onKeyDown 中 preventDefault 可阻止 Space 切换"
+  },
+  {
+    "name": "class / style / 原生属性 / ref",
+    "type": "—",
+    "default": "—",
+    "description": "透传到 role=\"checkbox\" 的根节点"
+  }
+]

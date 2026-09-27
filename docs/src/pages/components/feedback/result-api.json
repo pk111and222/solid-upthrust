@@ -1,0 +1,11 @@
+[
+  { "name": "status", "type": "'success' | 'error' | 'info' | 'warning' | '403' | '404' | '500' | 403 | 404 | 500", "default": "'info'", "description": "结果的状态，决定图标和颜色；403 / 404 / 500 显示异常插图（无默认标题）" },
+  { "name": "title", "type": "JSX.Element", "default": "—", "description": "标题；undefined / null / false / '' 不渲染" },
+  { "name": "subTitle", "type": "JSX.Element", "default": "—", "description": "副标题" },
+  { "name": "icon", "type": "JSX.Element | null | false", "default": "—", "description": "自定义图标；null / false 隐藏图标（异常状态始终显示插图）" },
+  { "name": "extra", "type": "JSX.Element", "default": "—", "description": "操作区，子元素之间间隔 8px" },
+  { "name": "children", "type": "JSX.Element", "default": "—", "description": "补充内容区（body），浅色底" },
+  { "name": "classNames", "type": "Record<'root' | 'icon' | 'title' | 'subTitle' | 'extra' | 'body', string> | (info: { props }) => Record<…, string>", "default": "—", "description": "语义化结构 class，支持函数形式" },
+  { "name": "styles", "type": "Record<'root' | 'icon' | 'title' | 'subTitle' | 'extra' | 'body', JSX.CSSProperties> | (info: { props }) => Record<…, JSX.CSSProperties>", "default": "—", "description": "语义化结构 style，支持函数形式" },
+  { "name": "class / style", "type": "string / JSX.CSSProperties", "default": "—", "description": "根节点 class 与 style；其余原生属性（aria-* / data-* 等）透传到根节点" }
+]

@@ -1,81 +1,47 @@
 // @unocss-include
-import { cva, type VariantProps } from "class-variance-authority";
-import { twMerge } from "tailwind-merge";
+import { cva } from "class-variance-authority";
 
-// Result container: centered column like Empty, with generous padding.
-const resultContainerVariants = cva(
-  ["flex", "flex-col", "items-center", "justify-center", "text-center", "w-full", "py-[48px]"],
-  { variants: {}, defaultVariants: {} }
-)
+// antd 6 Result 实测：根 48px 32px 内边距；图标区 mb 24px 居中、图标 72px；
+// 标题 24/32 上下 8px；副标题 14/22 次要色；extra mt 24px、子项间距 8px；body mt 24px、24px 40px、colorFillAlter 底。
+export const resultClass = cva(["block", "py-[48px]", "px-[32px]", "text-[14px]", "leading-[22px]", "text-on-surface"], {
+  variants: {},
+  defaultVariants: {},
+});
 
-// Icon circle: tinted container + status-colored icon.
-const resultIconVariants = cva(
-  ["w-[72px]", "h-[72px]", "rounded-full", "flex", "items-center", "justify-center", "text-[40px]"],
-  {
-    variants: {
-      status: {
-        // /10 opacity tints instead of antd's light hex backgrounds:
-        // error/info already used this pattern, and it degrades correctly
-        // in dark themes (light hex bg + light text = unreadable).
-        // MD3 has no success/warning tokens, so the hex literals stay —
-        // see common/colors.ts for the shared values and the preset TODO.
-        success: ["bg-[#52c41a]/10", "text-[#52c41a]"],
-        error: ["bg-error/10", "text-error"],
-        warning: ["bg-[#faad14]/10", "text-[#faad14]"],
-        info: ["bg-primary/10", "text-primary"],
-        '404': ["bg-primary/10", "text-primary"],
-        '403': ["bg-primary/10", "text-primary"],
-        '500': ["bg-primary/10", "text-primary"],
-      },
+export const resultIconClass = cva(["mb-[24px]", "text-center", "[&>*]:text-[72px]"], {
+  variants: {
+    status: {
+      // 状态色：成功 / 警告 / 错误用 antd 实测色值（MD3 无对应 token），信息跟随主色。
+      success: ["text-[#52c41a]"],
+      error: ["text-[#ff4d4f]"],
+      info: ["text-primary"],
+      warning: ["text-[#faad14]"],
+      // 异常图：250×295 居中块，颜色不参与。
+      image: ["w-[250px]", "h-[295px]", "m-auto"],
     },
-    defaultVariants: { status: "info" },
-  }
-)
+  },
+  defaultVariants: { status: "info" },
+});
 
-const resultTitleVariants = cva(
-  ["text-[24px]", "font-medium", "text-on-surface", "mt-[24px]", "leading-[1.4]"],
-  { variants: {}, defaultVariants: {} }
-)
+// 内置图标：与 antd .anticon 一致（inline-flex、行高 0、vertical-align -0.125em、svg inline-block），图标区高度恰为 72px。
+export const resultBuiltinIconClass = "inline-flex items-center leading-[0] align-[-0.125em] [&>svg]:inline-block";
 
-const resultSubtitleVariants = cva(
-  ["text-[14px]", "text-on-surface-variant", "mt-[8px]", "leading-[1.5714]"],
-  { variants: {}, defaultVariants: {} }
-)
+export const resultTitleClass = cva(["my-[8px]", "text-center", "text-[24px]", "leading-[32px]", "text-on-surface"], {
+  variants: {},
+  defaultVariants: {},
+});
 
-const resultExtraVariants = cva(
-  ["mt-[24px]", "flex", "items-center", "justify-center", "gap-[8px]"],
-  { variants: {}, defaultVariants: {} }
-)
+export const resultSubtitleClass = cva(["text-center", "text-[14px]", "leading-[22px]", "text-on-surface/45"], {
+  variants: {},
+  defaultVariants: {},
+});
 
-// Built-in status pages render a big wordmark instead of an icon circle.
-const resultImageVariants = cva(
-  ["text-[72px]", "font-bold", "leading-none", "select-none"],
-  {
-    variants: {
-      status: {
-        '404': ["text-primary"],
-        '403': ["text-primary"],
-        '500': ["text-primary"],
-        // non-page statuses don't use the wordmark
-        success: [],
-        error: [],
-        warning: [],
-        info: [],
-      },
-    },
-    defaultVariants: { status: "info" },
-  }
-)
+export const resultExtraClass = cva(["mt-[24px]", "text-center", "[&>*]:me-[8px]", "[&>*:last-child]:me-0"], {
+  variants: {},
+  defaultVariants: {},
+});
 
-export const resultContainerClass = (variants: VariantProps<typeof resultContainerVariants>) =>
-  twMerge(resultContainerVariants(variants))
-export const resultIconClass = (variants: VariantProps<typeof resultIconVariants>) =>
-  twMerge(resultIconVariants(variants))
-export const resultTitleClass = (variants: VariantProps<typeof resultTitleVariants>) =>
-  twMerge(resultTitleVariants(variants))
-export const resultSubtitleClass = (variants: VariantProps<typeof resultSubtitleVariants>) =>
-  twMerge(resultSubtitleVariants(variants))
-export const resultExtraClass = (variants: VariantProps<typeof resultExtraVariants>) =>
-  twMerge(resultExtraVariants(variants))
-export const resultImageClass = (variants: VariantProps<typeof resultImageVariants>) =>
-  twMerge(resultImageVariants(variants))
+export const resultBodyClass = cva(["mt-[24px]", "py-[24px]", "px-[40px]", "bg-on-surface/2"], {
+  variants: {},
+  defaultVariants: {},
+});

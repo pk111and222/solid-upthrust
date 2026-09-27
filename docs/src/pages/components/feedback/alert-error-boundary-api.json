@@ -1,0 +1,6 @@
+[
+  { "name": "title", "type": "JSX.Element", "default": "错误信息", "description": "自定义错误标题" },
+  { "name": "message", "type": "JSX.Element", "default": "—", "description": "已废弃，请使用 title" },
+  { "name": "description", "type": "JSX.Element", "default": "错误堆栈", "description": "自定义错误内容（antd 为 componentStack，Solid 无此信息，改为 error.stack）" },
+  { "name": "id", "type": "string", "default": "—", "description": "错误 Alert 的 id" }
+]

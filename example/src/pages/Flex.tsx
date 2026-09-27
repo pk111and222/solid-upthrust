@@ -1,76 +1,23 @@
-import { Component } from "solid-js";
-import { Flex, Divider } from 'upthrust-ui';
+import Basic from '../../../docs/src/examples/flex/basic'
+import Align from '../../../docs/src/examples/flex/align'
+import Gap from '../../../docs/src/examples/flex/gap'
+import Wrap from '../../../docs/src/examples/flex/wrap'
+import Combination from '../../../docs/src/examples/flex/combination'
+import FlexItem from '../../../docs/src/examples/flex/flex-item'
+import Element from '../../../docs/src/examples/flex/element'
+import InlineEmpty from '../../../docs/src/examples/flex/inline-empty'
 
-const FlexPage: Component = () => {
-  const boxStyle = { background: 'var(--un-color-primary, #0055ff)', color: 'white', padding: '8px 16px', 'border-radius': '4px' }
-  const boxStyle2 = { background: 'var(--un-color-primary-container, #d4e3ff)', color: '#333', padding: '8px 16px', 'border-radius': '4px' }
-
-  return (
-    <div class="p-6 max-w-4xl">
-      <h2 class="text-2xl font-semibold mb-4">Flex 弹性布局</h2>
-
-      <h3 class="text-lg font-medium mb-2">基本使用</h3>
-      <Flex gap="middle">
-        <div style={boxStyle}>Item 1</div>
-        <div style={boxStyle}>Item 2</div>
-        <div style={boxStyle}>Item 3</div>
-        <div style={boxStyle}>Item 4</div>
-      </Flex>
-
-      <Divider />
-
-      <h3 class="text-lg font-medium mb-2">垂直排列</h3>
-      <Flex vertical gap="small">
-        <div style={boxStyle}>Item 1</div>
-        <div style={boxStyle2}>Item 2</div>
-        <div style={boxStyle}>Item 3</div>
-      </Flex>
-
-      <Divider />
-
-      <h3 class="text-lg font-medium mb-2">对齐方式</h3>
-      <Flex justify="space-between" align="center" style={{ height: '80px', background: '#f5f5f5', padding: '0 16px', 'border-radius': '8px' }}>
-        <div style={boxStyle}>Left</div>
-        <div style={boxStyle2}>Center</div>
-        <div style={boxStyle}>Right</div>
-      </Flex>
-
-      <Divider />
-
-      <h3 class="text-lg font-medium mb-2">自动换行</h3>
-      <Flex wrap="wrap" gap={8}>
-        {Array.from({ length: 12 }, (_, i) => (
-          <div style={{ ...boxStyle, width: '120px', 'text-align': 'center' }}>Item {i + 1}</div>
-        ))}
-      </Flex>
-
-      <Divider />
-
-      <h3 class="text-lg font-medium mb-2">Gap 大小</h3>
-      <Flex vertical gap="large">
-        <Flex gap="small">
-          <div style={boxStyle}>Small</div>
-          <div style={boxStyle}>Gap</div>
-          <div style={boxStyle}>8px</div>
-        </Flex>
-        <Flex gap="middle">
-          <div style={boxStyle2}>Middle</div>
-          <div style={boxStyle2}>Gap</div>
-          <div style={boxStyle2}>16px</div>
-        </Flex>
-        <Flex gap="large">
-          <div style={boxStyle}>Large</div>
-          <div style={boxStyle}>Gap</div>
-          <div style={boxStyle}>24px</div>
-        </Flex>
-        <Flex gap={48}>
-          <div style={boxStyle2}>Custom</div>
-          <div style={boxStyle2}>Gap</div>
-          <div style={boxStyle2}>48px</div>
-        </Flex>
-      </Flex>
-    </div>
-  )
+// 与文档站共用同一批示例文件，避免演示与文档代码漂移。
+export default function FlexPage() {
+  return <div class="p-6 max-w-4xl space-y-8">
+    <h2 class="text-2xl font-bold">Flex 弹性布局</h2>
+    <section data-flex-demo="basic"><h3 class="mb-3">基本布局</h3><Basic /></section>
+    <section data-flex-demo="align"><h3 class="mb-3">对齐方式</h3><Align /></section>
+    <section data-flex-demo="gap"><h3 class="mb-3">设置间隙</h3><Gap /></section>
+    <section data-flex-demo="wrap"><h3 class="mb-3">自动换行</h3><Wrap /></section>
+    <section data-flex-demo="combination"><h3 class="mb-3">组合使用</h3><Combination /></section>
+    <section data-flex-demo="flex-item"><h3 class="mb-3">flex 属性</h3><FlexItem /></section>
+    <section data-flex-demo="element"><h3 class="mb-3">语义元素与原生属性</h3><Element /></section>
+    <section data-flex-demo="inline-empty"><h3 class="mb-3">行内与空容器</h3><InlineEmpty /></section>
+  </div>
 }
-
-export default FlexPage

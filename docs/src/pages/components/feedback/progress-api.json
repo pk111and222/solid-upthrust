@@ -1,0 +1,20 @@
+[
+  { "name": "type", "type": "'line' | 'circle' | 'dashboard'", "default": "'line'", "description": "类型" },
+  { "name": "percent", "type": "number", "default": "0", "description": "百分比，钳制到 0~100" },
+  { "name": "status", "type": "'success' | 'exception' | 'normal' | 'active'", "default": "—", "description": "状态；未指定且进度 ≥ 100 时为 success；active 仅线形有动画" },
+  { "name": "showInfo", "type": "boolean", "default": "true", "description": "是否显示进度数值或状态图标" },
+  { "name": "format", "type": "(percent?: number, successPercent?: number) => JSX.Element", "default": "(percent) => percent + '%'", "description": "内容的模板函数" },
+  { "name": "size", "type": "number | [number | string, number] | { width?: number; height?: number } | 'small' | 'medium'", "default": "'medium'", "description": "进度条尺寸；'middle' / 'default' 为 'medium' 的别名" },
+  { "name": "strokeColor", "type": "string | string[] | { from, to, direction } | { [percent]: string }", "default": "—", "description": "进度条颜色：线形与圆形支持渐变对象，步骤模式支持数组逐格着色" },
+  { "name": "railColor", "type": "string", "default": "—", "description": "未完成部分的颜色；trailColor 为废弃别名" },
+  { "name": "strokeLinecap", "type": "'round' | 'butt' | 'square'", "default": "'round'", "description": "进度条端点形状；圆形渐变时忽略" },
+  { "name": "strokeWidth", "type": "number", "default": "线形 8 / 圆形 6", "description": "线宽：线形与步骤为 px，圆形为画布宽度的百分比" },
+  { "name": "success", "type": "{ percent?: number; strokeColor?: string }", "default": "—", "description": "成功进度条相关配置" },
+  { "name": "steps", "type": "number | { count: number; gap: number }", "default": "—", "description": "进度条总共步数；圆形支持 { count, gap }（gap 默认 2）" },
+  { "name": "rounding", "type": "(step: number) => number", "default": "Math.round", "description": "步骤模式下点亮格数的取整函数" },
+  { "name": "percentPosition", "type": "{ align?: 'start' | 'center' | 'end'; type?: 'inner' | 'outer' }", "default": "{ align: 'end', type: 'outer' }", "description": "进度数值位置，仅线形生效" },
+  { "name": "gapDegree", "type": "number", "default": "75", "description": "仪表盘缺口角度，0 ~ 295" },
+  { "name": "gapPlacement", "type": "'top' | 'bottom' | 'start' | 'end'", "default": "'bottom'", "description": "仪表盘缺口位置；gapPosition（top / bottom / left / right）为废弃别名" },
+  { "name": "classNames", "type": "Record<'root' | 'body' | 'rail' | 'track' | 'indicator', string> | (info: { props }) => …", "default": "—", "description": "语义化结构 class" },
+  { "name": "styles", "type": "Record<'root' | 'body' | 'rail' | 'track' | 'indicator', JSX.CSSProperties> | (info: { props }) => …", "default": "—", "description": "语义化结构 style" }
+]

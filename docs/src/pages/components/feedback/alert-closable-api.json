@@ -1,0 +1,6 @@
+[
+  { "name": "closeIcon", "type": "JSX.Element | true", "default": "<CloseOutlined />", "description": "自定义关闭图标；true 使用默认图标" },
+  { "name": "onClose", "type": "(e: MouseEvent) => void", "default": "—", "description": "点击关闭按钮时触发（优先于顶层 onClose）" },
+  { "name": "afterClose", "type": "() => void", "default": "—", "description": "离场动画结束后触发（优先于顶层 afterClose）" },
+  { "name": "aria-* / data-*", "type": "string", "default": "—", "description": "透传到关闭按钮" }
+]

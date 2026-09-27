@@ -120,6 +120,18 @@
 | C06 DatePicker | 当前会话：DatePicker 物料回归 | 当前工作区（main） | DatePicker / RangePicker、示例/API、分层测试、专项浏览器与回归记录；保留 TimePicker 未提交修改 | 已验收 | 全量 L1–L3 1610 条、类型/构建、专项浏览器 12 条、docs 双 base 各 13 条通过；Form 回写与重复焦点事件已修复 | [执行记录](docs/contributing/regressions/date-picker.md) |
 | C06 ColorPicker | 当前会话：ColorPicker 物料回归 | 当前工作区（main） | 颜色转换/headless、Popover 使用路径、example/docs、分层测试及专项浏览器；保留 TimePicker/DatePicker 未提交修改 | 已验收 | 全量 L1–L3 1612 条、专项浏览器 10 条通过/4 条按范围跳过、类型/构建、docs 双 base 各 13 条通过；未发现生产逻辑缺陷 | [执行记录](docs/contributing/regressions/color-picker.md) |
 | C06 Upload | 当前会话：Upload 物料回归 | 当前工作区（main） | Upload/Dragger 异步队列、Form.Item、示例/docs、分层测试与专项浏览器；保留其他物料未提交修改 | 已验收 | 修复 Upload/Dragger Form.Item 字段回写；全量 L1–L3 1615 条、专项浏览器 7 条通过/5 条按范围跳过、类型/构建、docs 双 base 各 13 条通过 | [执行记录](docs/contributing/regressions/upload.md) |
+| C07 Form docs 补修 | 当前任务：展示与交互修复 | 当前工作区 | Form/Input/Button 必要集成、27 个 docs 示例、example、专项用例和证据 | 已验收 | 原 3 条 Tooltip/Popover 箭头用例失败已于 2026-09-26 修复（见 flex.md） | [执行记录](docs/contributing/regressions/form.md) |
+| C08 Flex | 当前会话：Flex 物料回归 | 当前工作区（main） | Flex UI/样式、example/docs（新增“布局”分类首页入口）、四层测试与回归记录；不改锁文件、不改 ConfigProvider/preset | 已验收 | 旧实现 26 条缺陷已修；定向 L1–L3 94 条、专项浏览器 21 条（docs 12/example 9）、类型/构建/docs 通过；全量 4 条既有失败已修复（箭头用例补几何桩；Select 10k 选项方向键 O(n²) 修为 O(n)），全量 1725 条通过 | [执行记录](docs/contributing/regressions/flex.md) |
+| C08 Grid / Space / Divider | 当前会话：三物料合并回归 | 当前工作区（main） | Grid/Space/Divider UI/样式、competence 断点观察器（不改 BREAKPOINTS）、example/docs、四层测试与回归记录；不改锁文件、ConfigProvider、preset | 已验收 | 旧实现基线 126 条中 101 条失败，已修；定向 L1–L3 302 条、专项浏览器 68 条（docs 38/example 30）、全量 2031 条、类型/构建/docs 通过；浏览器回归发现 Space.Compact 去不掉 Input/Select 内侧圆角，已修 | [执行记录](docs/contributing/regressions/grid-space-divider.md) |
+| C08 Layout | 当前会话：Layout 物料回归 | 当前工作区（main） | Layout/Header/Content/Footer/Sider UI/样式、competence createSider、example/docs、四层测试与回归记录；不改锁文件、ConfigProvider、preset、BREAKPOINTS | 已验收 | 旧实现基线 5 个用例文件全部失败（垫片后 headless 9/16 失败、render sider 崩溃），已修；定向 L1–L3 131 条、专项浏览器 25 条（docs 13/example 12）、全量 2157 条、类型/构建/docs 通过；破坏性改动：onCollapse 类型 'breakpoint'→'responsive'、根节点 section→div | [执行记录](docs/contributing/regressions/layout.md) |
+| C08 Splitter / Masonry | 当前会话：两物料合并回归 | 当前工作区（main） | Splitter/Panel、Masonry UI/样式、competence createSplitter/createMasonry、example/docs、四层测试与回归记录；不改锁文件、ConfigProvider、preset、BREAKPOINTS | 已验收 | 旧实现基线：新用例 107 条失败、15 条通过，已修；定向 L1–L3 266 条、专项浏览器 50 条（docs 28/example 22，重复两轮无抖动）、全量 2405 条、类型/构建/docs 通过；浏览器回归发现 Splitter 测量包含边框（面板之和溢出 2px），已修；破坏性改动：Splitter aria 改为百分比，Masonry 默认 columns 4→3、gutter 'small'→0、全未命中时回退 xs ?? 1 | [执行记录](docs/contributing/regressions/splitter-masonry.md) |
+
+| C09 Typography / Avatar | 当前会话：两物料统一回归 | 当前工作区（main） | Typography/headless、Avatar/Group、17 个示例/API、分层测试与证据；保留前序修改 | 已验收 | 定向 83 条、全量 2486 条、浏览器 28 条通过；行内宽度补修后 Typography 定向 41 / 浏览器 14 条复核通过，类型/构建通过；maxCount 计数与响应式断点变化见记录，完整 B01/B04 留后续 | [执行记录](docs/contributing/regressions/typography-avatar.md) |
+| C09 Tag / Badge | 当前会话：两物料统一回归 | 当前工作区（main） | Tag/CheckableTag/新增 CheckableTagGroup、Badge/BadgeRibbon、competence tag/badge/新增 presetColors、22 个示例/API、分层测试与证据；barrel 补导出，未改 ConfigProvider/preset/锁文件 | 已验收 | 定向 83 条、全量 2550 条、浏览器 32 条通过，类型/构建/docs 通过；D12 关闭；发现 Solid RC 数字 0 插入缺陷已规避；Input/Switch 不透传 aria-label 记为待办 | [执行记录](docs/contributing/regressions/tag-badge.md) |
+| C09 Empty / Statistic | 当前会话：两物料统一回归 | 当前工作区（main） | Empty、Statistic/新增 Timer/Countdown、competence 新增 statistic 纯函数、11 个示例/4 张 API、分层测试与证据；barrel 补导出，未改 ConfigProvider/preset/锁文件 | 已验收 | 定向 35 条、全量 2585 条、浏览器 26 条通过，类型/构建/docs 通过；发现 Solid RC `draggable={false}` 被移除与 Timer 内联目标漂移并已修复 | [执行记录](docs/contributing/regressions/empty-statistic.md) |
+| C09 Timeline / Progress | 当前会话：两物料统一回归 | 当前工作区（main） | Timeline（重写为 antd 6 结构，新增横向 / title / titleSpan / variant / 语义化）、Progress（line / steps / circle / dashboard，rc-progress 几何移植）、competence 新增 timeline 纯函数并重写 progress、preset 新增进度扫光动画、28 个示例 / 3 张 API、分层测试与证据；未改 ConfigProvider / 锁文件 | 已验收 | 定向 48 条、全量 2624 条、浏览器 42 条通过，类型/构建/docs 通过；浏览器回归发现自定义时间轴图标被 flex 压缩并已修；破坏性改动：Timeline.Item 子元素写法不渲染、Progress 删除 createProgress 系列导出 | [执行记录](docs/contributing/regressions/timeline-progress.md) |
+| C09 Result / QRCode | 当前会话：两物料统一回归 | 当前工作区（main） | Result（重写为 antd 6 结构，异常插画移植、语义化）、QRCode（canvas / svg、statusRender、语义化）、competence 新增 qrcodegen 移植与 qrcode 纯函数、新增 common/antIcons、20 个示例 / 3 张 API、分层测试与证据；未改 ConfigProvider / preset / 锁文件 | 已验收 | 定向 23 条、全量 2647 条、浏览器 32 条通过，类型/构建/docs 通过；修复 qrcode-generator 中文截断（输出与 antd 路径逐字一致）；浏览器回归发现 Result 图标区 78px、QRCode 本体溢出内容盒并已修；破坏性改动：QRCode 默认 canvas / 透明底、删除 loadingContent，Result 删除异常默认标题 | [执行记录](docs/contributing/regressions/result-qrcode.md) |
+| C09 Watermark / Alert | 当前会话：两物料统一回归 | 当前工作区（main） | Watermark（canvas useClips 交错平铺、防篡改、Modal / Drawer 传导）、Alert（重写为 antd 6 结构、closable 各入口、离场动画、ErrorBoundary、语义化）、competence 重写 watermark / alert、Modal / Drawer 接入 useWatermarkPanel、18 个示例 / 5 张 API、分层测试与证据；未改 ConfigProvider / preset / 锁文件 | 已验收 | 定向 24 条、全量 2665 条、浏览器 28 条通过，类型/构建/docs 通过；回归发现 closeIcon=0 不显示、effect 未 untrack、描述态图标下偏 6px 并已修；破坏性改动：Alert 默认不显示图标、message→title，Watermark 删除 fontColor / opacity、默认 zIndex 999 | [执行记录](docs/contributing/regressions/watermark-alert.md) |
 
 ## 3. 第一阶段：全部组件回归 C（用户指定优先）
 
@@ -190,32 +202,34 @@
 
 ### C07
 
-- [ ] Form
+- 关联修复专项通过（2026-09-24）：Form docs 连续输入、图标、布局/间距、两级列表、外部实例提交及重置已修复；定向 212 条与浏览器 19 条通过，4 条按项目范围跳过。全量 1628 通过、3 条 Tooltip/Popover 箭头用例失败，详见 [补修记录](docs/contributing/regressions/form.md)。
+
+- [x] Form — 27 个 docs 示例、Form/List/实例/校验/嵌套与自定义物料完成回归，L1–L3 107 条、专项浏览器双项目 10 条通过，详见 [执行记录](docs/contributing/regressions/form.md)
 
 ### C08
 
-- [ ] Flex
-- [ ] Grid
-- [ ] Space
-- [ ] Divider
-- [ ] Layout
-- [ ] Splitter
-- [ ] Masonry
+- [x] Flex — 透传/component/flex 数值/布尔 wrap/orientation/完整对齐关键字/medium gap/empty:hidden 修复，8 个 docs 示例，L1–L3 94 条、专项浏览器 21 条通过，详见 [执行记录](docs/contributing/regressions/flex.md)
+- [x] Grid：Col 不再默认 24 格；xs…xxxl 响应式与 ColSize；响应式 gutter/justify/align；useBreakpoint；flex 语义；宿主透传。12 个 docs 示例，见[执行记录](docs/contributing/regressions/grid-space-divider.md)
+- [x] Space：子项过滤、separator（保留 split）、orientation、block、语义化、Space.Addon、Compact 纵向/block/层级；修复 Compact 与 Input/Select 内侧圆角。12 个 docs 示例，见[执行记录](docs/contributing/regressions/grid-space-divider.md)
+- [x] Divider：antd 6 orientation/titlePlacement（兼容旧写法）、variant/size、rail 继承根节点线色、plain 字号丢失修复、语义化。7 个 docs 示例，见[执行记录](docs/contributing/regressions/grid-space-divider.md)
+- [x] Layout：hasSider 自动判断（context 注册）、横向时内容区 w-0 防挤压、宿主透传；Sider 断点对齐 antd（'responsive'、新增 xxxl、无多余回调、broken 复位）、width 优先于 style、sticky 不遮挡触发器、零宽触发器、inert、语义化。10 个 docs 示例，见[执行记录](docs/contributing/regressions/layout.md)
+- [x] Splitter：受控 size、折叠（start/end、motion、自定义图标、悬停 / 常显、触屏常显）、lazy 预览线、orientation/vertical（layout 废弃）、键盘 keyboardStep 与 Home/End、aria 百分比、全视口遮罩、双击回调、destroyOnHidden、语义化；修复测量包含边框。11 个 docs 示例，见[执行记录](docs/contributing/regressions/splitter-masonry.md)
+- [x] Masonry：实测绝对定位（最短列优先、固定列）、SCREEN_QUERIES 断点与 xs ?? 1 回退、响应式 / 双向 gutter、items/itemRender、fresh、onLayoutChange、sequential 扩展、减少动效。9 个 docs 示例，见[执行记录](docs/contributing/regressions/splitter-masonry.md)
 
 ### C09
 
-- [ ] Typography
-- [ ] Avatar
-- [ ] Badge
-- [ ] Tag
-- [ ] Empty
-- [ ] Statistic
-- [ ] Timeline
-- [ ] Progress
-- [ ] Result
-- [ ] QRCode
-- [ ] Watermark
-- [ ] Alert
+- [x] Typography：Text / Title / Paragraph / Link 已统一回归，见 [记录](docs/contributing/regressions/typography-avatar.md)。
+- [x] Avatar / AvatarGroup：已统一回归，见 [记录](docs/contributing/regressions/typography-avatar.md)。
+- [x] Badge / BadgeRibbon：antd 源码逐项对齐显示逻辑、offset/style 路由、自定义节点、缩放离场与缎带折角，见 [记录](docs/contributing/regressions/tag-badge.md)。
+- [x] Tag / CheckableTag / CheckableTagGroup：variant 与预设色板、关闭判定、href、原生属性透传（D12）、checkbox 语义与新增标签组，见 [记录](docs/contributing/regressions/tag-badge.md)。
+- [x] Empty：antd 6 插画与实色主题配色、简洁/默认布局、image 判定（地址/节点/null/false）、语义节点与属性透传，见 [记录](docs/contributing/regressions/empty-statistic.md)。
+- [x] Statistic / Statistic.Timer / Countdown：antd 截断精度与字符串分组、语义节点、Skeleton 加载、新增 Timer（countdown/countup、onChange、onFinish 停止），见 [记录](docs/contributing/regressions/empty-statistic.md)。
+- [x] Timeline：antd 6 Steps-dot 结构、交替 / 另一侧 / 横向布局、title 与 titleSpan、variant 与任意色、pending 与 reverse 导轨状态、语义化，见 [记录](docs/contributing/regressions/timeline-progress.md)。
+- [x] Progress：rc-progress 圆形几何逐值对齐、dashboard 缺口、渐变 mask、步骤条 / 步骤圆、成功段、percentPosition、micro Tooltip、语义化，见 [记录](docs/contributing/regressions/timeline-progress.md)。
+- [x] Result：antd 6 结构与间距、四态 antd 图标、403 / 404 / 500 插画逐字移植、icon 隐藏与空值判定、语义化对象 / 函数，见 [记录](docs/contributing/regressions/result-qrcode.md)。
+- [x] QRCode：qrcodegen 移植（UTF-8、分段、boostLevel、marginSize，路径与 antd 逐字一致）、canvas / svg、Logo 挖空、状态遮罩与 statusRender、语义化，见 [记录](docs/contributing/regressions/result-qrcode.md)。
+- [x] Watermark：canvas 按 useClips 旋转交错平铺、多行 / 图片（失败回退文字）、offset 换算、防篡改恢复与 onRemove、容器样式恢复、inherit 传导到 Modal / Drawer，见 [记录](docs/contributing/regressions/watermark-alert.md)。
+- [x] Alert：antd 6 结构与实测色、banner 默认值、closable 对象 / 废弃入口、max-height 离场与 afterClose、ErrorBoundary、filled、语义化对象 / 函数，见 [记录](docs/contributing/regressions/watermark-alert.md)。
 
 ### C10
 
@@ -277,9 +291,10 @@ ConfigProvider 读取 `Input/context`、`Form/context`，不等于依赖完整 I
 - [ ] DatePicker.RangePicker、TimePicker.RangePicker及独立命名导出。
 - [ ] Form.Item / Form.List、实例方法、字段依赖、异步校验、重置、动态增删。
 - [ ] Grid.Row / Col、Layout 各区域、Space.Compact、Splitter.Panel。
-- [ ] Typography.Text / Title / Paragraph / Link、Statistic.Countdown。
+- [x] Typography.Text / Title / Paragraph / Link：独立示例与 API 已验收，见 [记录](docs/contributing/regressions/typography-avatar.md)。
+- [x] Statistic.Countdown（废弃别名，等同 Statistic.Timer type="countdown"；另有具名导出 StatisticTimer / StatisticCountdown），见 [记录](docs/contributing/regressions/empty-statistic.md)。
 - [x] Skeleton.Button / Avatar / Input / Node：具名与静态导出、独立文档、API 和示例已回归。
-- [ ] Badge.Ribbon、Tag.CheckableTag、Card.Grid / Meta、Image.PreviewGroup。
+- [ ] Badge.Ribbon、Tag.CheckableTag、Card.Grid / Meta、Image.PreviewGroup。（BadgeRibbon、CheckableTag 与新增 CheckableTagGroup 已在 C09 回归，见 [tag-badge.md](docs/contributing/regressions/tag-badge.md)；Card / Image 待 C12）
 - [ ] Upload.Dragger、FloatButton.Group / BackTop。
 - [ ] Modal 静态方法、Message / Notification Provider 和命令式接口。
 - [ ] 每个物料额外扫描源码中的公开子组件/类型/方法，不以本清单为封闭全集。
@@ -351,6 +366,13 @@ C 阶段可按需提前执行相关项，最终仍须完整验收本阶段。尤
 - [ ] **D07 文档与示例总验收**：每项同步文档贯穿全程；最终审计所有 API/默认值/限制/独立 CSR 示例/SSR 源码、子组件独立文档、根路径与子路径部署。
 - [ ] **D08 持续集成**：PR 跑相关回归与基础检查；定期全量浏览器、视觉、消费者安装和生产构建；不把仅有配置文件当作 CI 已成功运行。
 - [ ] **D09 发布准备**：Solid 2 正式版发布后独立升级适配与完整复验；版本、许可证、变更日志、产物检查。正式版发布本身不是可发布证明，未到条件保持待办，不猜日期。
+- [ ] **D10 twMerge → mergeClass 迁移**：默认 twMerge 不认识 preset 的间距档位与字号 token。例如 `my-lg my-0` 不算冲突；`text-body` 被当成颜色，与 `text-on-surface` 互吞。Grid/Space/Divider 已改用 `packages/components/common/merge.ts` 的 `mergeClass`，其余约 130 个文件仍用裸 twMerge，需统一迁移并补覆盖用例。见 [grid-space-divider.md](docs/contributing/regressions/grid-space-divider.md)。
+- [ ] **D11 输入类控件在 Space.Compact 中的圆角**：DatePicker/RangePicker、TimePicker/RangePicker、Cascader、TreeSelect、AutoComplete、Mentions 的边框画在内部节点上，放进 Compact 时内侧圆角很可能清不掉。按 Input/Select 已用的约定修复：根节点 `rounded`，边框节点 `rounded-[inherit]`。并补浏览器四角断言。
+- [x] **D12 Tag 原生属性透传**（C09 Tag 回归已关闭：data-*/aria-*/事件/ref 透传，见 [tag-badge.md](docs/contributing/regressions/tag-badge.md)）：Tag 目前静默丢弃 `data-*`、`aria-*` 等原生属性（C08 useBreakpoint 示例中发现）。应在 Tag 复查时补齐透传与 ref。
+- [ ] **D13 SiderContext / Menu 收起联动**：antd 的 Sider 通过 SiderContext 让 Menu 收起时自动切成图标模式（inlineCollapsed）。本库 Menu 尚无 inline 收起模式；Menu 容器还写死 `text-on-surface`，放进深色 Sider 文字不可读。Menu 回归时一并处理，再补 Layout 示例。见 [layout.md](docs/contributing/regressions/layout.md)。
+- [ ] **D14 Layout RTL**：Sider 零宽触发器、箭头方向与 reverseArrow 尚未考虑 RTL，待全库 RTL 方案确定后统一处理。
+- [ ] **D15 Splitter / Masonry RTL**：antd 在 RTL 下翻转 Splitter 水平拖拽方向与折叠按钮方向，Masonry 列从右往左排。本库两者都未处理，与 D14 一起按全库 RTL 方案统一处理。见 [splitter-masonry.md](docs/contributing/regressions/splitter-masonry.md)。
+- [ ] **D16 Masonry 离场动画与虚拟滚动**：删除项目前立即移除（其余项带过渡补位），没有 antd 那样的离场动画；大量项目时也没有虚拟滚动。需要时再设计，届时补浏览器用例。
 
 ## 7. 最终收尾与删除条件
 

@@ -38,9 +38,11 @@ const inputVariants = cva(
     "outline-none",
     "placeholder:text-on-surface/25",
     "transition-upthrust",
-    // bare (no-affix) mode: the input itself carries the frame
+    // bare (no-affix) mode: the input itself carries the frame. Its radius
+    // INHERITS the root span's `rounded`, so corner overrides on the root
+    // (Space.Compact's `!rounded-r-none`, a consumer `class`) reach the frame.
     "bg-surface",
-    "rounded",
+    "rounded-[inherit]",
     "border",
     "border-solid",
     "border-outline",

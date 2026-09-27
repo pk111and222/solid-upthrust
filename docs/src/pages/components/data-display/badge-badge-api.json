@@ -1,0 +1,80 @@
+[
+  {
+    "name": "count",
+    "type": "number | string | JSX.Element",
+    "default": "—",
+    "description": "数字超出 overflowCount 显示 N+（数字字符串同样封顶）；为 0 时隐藏；JSX 作为自定义节点，不绘制底色"
+  },
+  {
+    "name": "overflowCount",
+    "type": "number",
+    "default": "99",
+    "description": "封顶数值"
+  },
+  {
+    "name": "showZero",
+    "type": "boolean",
+    "default": "false",
+    "description": "为 0 时仍显示（也作用于 text=0）"
+  },
+  {
+    "name": "dot",
+    "type": "boolean",
+    "default": "false",
+    "description": "只显示小圆点；count 为 0 时仍隐藏"
+  },
+  {
+    "name": "size",
+    "type": "'middle' | 'medium' | 'small'",
+    "default": "middle",
+    "description": "medium 为 antd 名称，等价 middle；small 高 14px"
+  },
+  {
+    "name": "offset",
+    "type": "[number | string, number | string]",
+    "default": "—",
+    "description": "x 按 parseFloat 解析为 right: -x px，y 为 margin-top（数字补 px）"
+  },
+  {
+    "name": "status",
+    "type": "'success' | 'processing' | 'default' | 'error' | 'warning'",
+    "default": "—",
+    "description": "状态点；processing 带脉冲动画"
+  },
+  {
+    "name": "color",
+    "type": "预设色板 | gray | string",
+    "default": "—",
+    "description": "预设色板或任意 CSS 颜色；gray 为本库扩展"
+  },
+  {
+    "name": "text",
+    "type": "JSX.Element",
+    "default": "—",
+    "description": "状态点文本；为 0 时需要 showZero"
+  },
+  {
+    "name": "title",
+    "type": "string | null | false",
+    "default": "count",
+    "description": "悬停提示；null/false 移除"
+  },
+  {
+    "name": "classNames / styles",
+    "type": "{ root?, indicator? }",
+    "default": "—",
+    "description": "语义化类名与内联样式"
+  },
+  {
+    "name": "style",
+    "type": "JSX.CSSProperties",
+    "default": "—",
+    "description": "与 antd 一致：状态点模式作用于根节点（color 同时作用于文本），其余作用于徽标节点；border-color 以内嵌阴影模拟描边"
+  },
+  {
+    "name": "class / 原生属性 / ref",
+    "type": "—",
+    "default": "—",
+    "description": "作用于根节点"
+  }
+]

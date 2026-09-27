@@ -1,0 +1,56 @@
+[
+  {
+    "name": "level",
+    "type": "1 | 2 | 3 | 4 | 5",
+    "default": "1",
+    "description": "标题级别，渲染对应 h 标签"
+  },
+  {
+    "name": "type",
+    "type": "'secondary' | 'success' | 'warning' | 'danger'",
+    "default": "—",
+    "description": "文本语义颜色"
+  },
+  {
+    "name": "strong / italic / underline / delete / code / mark / keyboard",
+    "type": "boolean",
+    "default": "false",
+    "description": "加粗、斜体、下划线、删除线、代码、标记、键盘样式，可组合"
+  },
+  {
+    "name": "disabled",
+    "type": "boolean",
+    "default": "false",
+    "description": "禁用外观；隐藏复制/编辑操作，Link 同时禁止跳转和 Tab 聚焦"
+  },
+  {
+    "name": "ellipsis",
+    "type": "boolean | { rows?: number }",
+    "default": "false",
+    "description": "CSS 截断；true 或对象缺省/1 行为单行，rows > 1 为多行；需限制宽度"
+  },
+  {
+    "name": "copyable",
+    "type": "boolean | TypographyCopyConfig",
+    "default": "false",
+    "description": "启用复制操作；详见复制配置"
+  },
+  {
+    "name": "editable",
+    "type": "boolean | TypographyEditableConfig",
+    "default": "false",
+    "description": "启用编辑操作；详见编辑配置"
+  },
+  {
+    "name": "class / style",
+    "type": "string / JSX.CSSProperties",
+    "default": "—",
+    "description": "根节点类名和样式，用户样式优先"
+  },
+  {
+    "name": "children",
+    "type": "JSX.Element",
+    "default": "—",
+    "description": "显示内容；复杂子节点复制/编辑时提取 textContent"
+  }
+]

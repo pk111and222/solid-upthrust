@@ -1,0 +1,50 @@
+[
+  {
+    "name": "options",
+    "type": "Array<string | number | { value, label, class?, style? }>",
+    "default": "—",
+    "description": "选项；原始值同时作为 value 与 label"
+  },
+  {
+    "name": "multiple",
+    "type": "boolean",
+    "default": "false",
+    "description": "多选模式"
+  },
+  {
+    "name": "value",
+    "type": "V | null（单选）/ V[]（多选）",
+    "default": "—",
+    "description": "受控值；null 也视为受控"
+  },
+  {
+    "name": "defaultValue",
+    "type": "V | null / V[]",
+    "default": "null / []",
+    "description": "初始值"
+  },
+  {
+    "name": "onChange",
+    "type": "(value: V | null) => void / (value: V[]) => void",
+    "default": "—",
+    "description": "单选再次点击已选项返回 null"
+  },
+  {
+    "name": "disabled",
+    "type": "boolean",
+    "default": "false",
+    "description": "禁用全部选项"
+  },
+  {
+    "name": "classNames / styles",
+    "type": "{ root?, item? }",
+    "default": "—",
+    "description": "语义化类名与样式；选项自身 class/style 优先于 item"
+  },
+  {
+    "name": "class / style / 原生属性 / ref",
+    "type": "—",
+    "default": "—",
+    "description": "透传到根节点 div"
+  }
+]

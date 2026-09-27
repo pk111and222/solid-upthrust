@@ -1,0 +1,39 @@
+{
+  "row": [
+    { "name": "gutter", "type": "number | string | ResponsiveValue | [水平, 垂直]", "default": "0", "description": "栅格间距。数字按 px，字符串为任意 CSS 长度（如 '1rem'），对象按断点取值（如 { xs: 8, sm: 16, md: 24 }）；数组形式为 [水平, 垂直]，两项都可以是响应式对象。水平间距写成 Row 两侧 -gutter/2 的外边距 + 每个 Col 左右 gutter/2 的内边距；垂直间距写成 row-gap。" },
+    { "name": "justify", "type": "'start' | 'end' | 'center' | 'space-around' | 'space-between' | 'space-evenly' | ResponsiveValue", "default": "'start'", "description": "水平排列方式（justify-content），支持按断点取值。不传时不输出类，等同 CSS 默认的 flex-start。" },
+    { "name": "align", "type": "'top' | 'middle' | 'bottom' | 'stretch' | ResponsiveValue", "default": "—", "description": "垂直对齐方式（align-items），支持按断点取值。不传时不输出类，沿用 CSS 默认 stretch（与 antd 一致：同一行的列高度相等）。" },
+    { "name": "wrap", "type": "boolean", "default": "true", "description": "是否自动换行。为 false 时，带 flex 的列自动补 min-width:0，长内容不会撑破行宽。" },
+    { "name": "class / style", "type": "string / JSX.CSSProperties", "default": "—", "description": "附加到行容器。class 通过 mergeClass 合并，可以覆盖默认类；style 里的 margin-left/right 与 row-gap 会被 gutter 覆盖。" },
+    { "name": "...rest", "type": "JSX.HTMLAttributes<HTMLDivElement>", "default": "—", "description": "id、role、aria-*、data-*、事件与 ref 等原生属性透传到行容器。" }
+  ],
+  "col": [
+    { "name": "span", "type": "number | string", "default": "—", "description": "栅格占位格数（共 24 格）。为 0 时 display:none。不传时列宽由内容或 flex 决定（antd 行为）。数字字符串会被解析，无法解析的值被忽略。" },
+    { "name": "offset", "type": "number | string", "default": "0", "description": "左侧间隔格数（margin-inline-start）。" },
+    { "name": "push", "type": "number | string", "default": "0", "description": "向右移动格数（inset-inline-start），配合 pull 调整视觉顺序。" },
+    { "name": "pull", "type": "number | string", "default": "0", "description": "向左移动格数（inset-inline-end）。" },
+    { "name": "order", "type": "number | string", "default": "—", "description": "栅格顺序（CSS order）。" },
+    { "name": "flex", "type": "number | string", "default": "—", "description": "flex 布局属性：数字 n → 'n n auto'；带单位长度（px/em/rem/%）→ '0 0 长度'；'auto' → '1 1 auto'；其余（none、完整简写）原样透传。" },
+    { "name": "xs", "type": "number | string | ColSize", "default": "—", "description": "屏幕 < 576px。xs 没有媒体查询，与基础 props 合并，同名字段以 xs 为准；传数字等价 { span }。" },
+    { "name": "sm", "type": "number | string | ColSize", "default": "—", "description": "屏幕 ≥ 576px。" },
+    { "name": "md", "type": "number | string | ColSize", "default": "—", "description": "屏幕 ≥ 768px。" },
+    { "name": "lg", "type": "number | string | ColSize", "default": "—", "description": "屏幕 ≥ 992px。" },
+    { "name": "xl", "type": "number | string | ColSize", "default": "—", "description": "屏幕 ≥ 1200px。" },
+    { "name": "xxl", "type": "number | string | ColSize", "default": "—", "description": "屏幕 ≥ 1600px。" },
+    { "name": "xxxl", "type": "number | string | ColSize", "default": "—", "description": "屏幕 ≥ 1920px（antd 6 新增断点）。" },
+    { "name": "class / style", "type": "string / JSX.CSSProperties", "default": "—", "description": "附加到列元素。style 的同名项优先级最高（晚于间距内边距与 flex）。" },
+    { "name": "...rest", "type": "JSX.HTMLAttributes<HTMLDivElement>", "default": "—", "description": "原生属性与 ref 透传到列元素。" }
+  ],
+  "colSize": [
+    { "name": "span", "type": "number | string", "default": "—", "description": "该断点下的占位格数；0 为隐藏，更宽断点重新给出 span 时自动恢复显示。" },
+    { "name": "offset", "type": "number | string", "default": "—", "description": "该断点下的左侧间隔；显式 0 会覆盖更窄断点的 offset。" },
+    { "name": "push / pull", "type": "number | string", "default": "—", "description": "该断点下的移动格数；显式 0 回到 auto，覆盖更窄断点。" },
+    { "name": "order", "type": "number | string", "default": "—", "description": "该断点下的顺序；0 也会生效。" },
+    { "name": "flex", "type": "number | string", "default": "—", "description": "该断点下的 flex，解析规则同 Col.flex。" }
+  ],
+  "useBreakpoint": [
+    { "name": "useBreakpoint()", "type": "() => Accessor<ScreenMap>", "default": "—", "description": "返回当前命中的断点表 { xs, sm, md, lg, xl, xxl, xxxl }，随窗口变化更新。须在组件或 createRoot 内调用；没有 matchMedia（SSR）时返回空对象 {}。" },
+    { "name": "ScreenMap", "type": "Partial<Record<'xs' | 'sm' | 'md' | 'lg' | 'xl' | 'xxl' | 'xxxl', boolean>>", "default": "—", "description": "xs 表示 < 576px，其余为 min-width 命中；宽屏下多个断点同时为 true。" },
+    { "name": "createBreakpoint / resolveResponsive", "type": "upthrust-competence", "default": "—", "description": "headless 底座：createBreakpoint({ matchMedia? }) 返回 { screens }，同一 matchMedia 的所有订阅者共享 7 个监听；resolveResponsive(value, screens) 取命中断点里最宽且有定义的值。" }
+  ]
+}

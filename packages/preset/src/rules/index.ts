@@ -140,6 +140,12 @@ export function createRules(sizeTokens: SizeTokens, styleTokens: StyleTokens): R
       animation: `ut-badge-processing 1.2s ease-in-out infinite`,
     })],
 
+    // Progress status "active" sweep (antd genAntProgressActive): a white
+    // highlight grows from the track start while fading out. Applied to ::after.
+    [/^animate-progress-active$/, () => ({
+      animation: `ut-progress-active 2.4s cubic-bezier(0.23, 1, 0.32, 1) infinite`,
+    })],
+
     // Form feedback icon entrance (antd antZoomIn): scale 0.2→1 with fade.
     // Duration/easing per antd: motionDurationMid + motionEaseOutBack.
     [/^animate-feedback-zoom-in$/, () => ({

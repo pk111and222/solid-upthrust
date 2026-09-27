@@ -1,0 +1,16 @@
+[
+  { "name": "vertical", "type": "boolean", "default": "false", "description": "是否纵向排列（flex-direction: column）。orientation 为合法值时以 orientation 为准。" },
+  { "name": "orientation", "type": "'horizontal' | 'vertical'", "default": "—", "description": "主轴方向，优先级高于 vertical；传入其他值时回退到 vertical。" },
+  { "name": "wrap", "type": "boolean | 'wrap' | 'nowrap' | 'wrap-reverse'", "default": "—", "description": "换行方式。true 等价 'wrap'，false 等价 'nowrap'；不传时不输出类，沿用 CSS 初始值 nowrap。" },
+  { "name": "justify", "type": "'flex-start' | 'flex-end' | 'start' | 'end' | 'center' | 'space-between' | 'space-around' | 'space-evenly' | 'stretch' | 'normal' | 'left' | 'right'", "default": "—", "description": "主轴对齐，对应 justify-content。不传时沿用 CSS 初始值 normal。" },
+  { "name": "align", "type": "'flex-start' | 'flex-end' | 'start' | 'end' | 'self-start' | 'self-end' | 'center' | 'baseline' | 'stretch' | 'normal'", "default": "—", "description": "交叉轴对齐，对应 align-items。不传时沿用 CSS 初始值 normal（弹性容器中表现为 stretch）。" },
+  { "name": "gap", "type": "'small' | 'middle' | 'medium' | 'large' | number | string", "default": "—", "description": "子元素间距。small=8px、middle/medium=16px、large=24px，走主题 spacing token；数字按 px 写入内联 style（0 有效）；其他字符串原样写入，如 '2rem'、'8px 24px'。" },
+  { "name": "flex", "type": "string | number", "default": "—", "description": "容器自身的 flex 简写，原样写入 style。数字 1 等价 CSS flex: 1（1 1 0%）；0 有效。" },
+  { "name": "inline", "type": "boolean", "default": "false", "description": "使用 inline-flex，容器参与行内排版。" },
+  { "name": "component", "type": "ValidComponent", "default": "'div'", "description": "宿主元素：原生标签名（如 'ul'、'nav'、'section'）或 Solid 组件。组件会收到计算后的 class、style、children 与透传属性。" },
+  { "name": "class", "type": "string", "default": "—", "description": "追加到宿主元素的类名，经 twMerge 覆盖冲突的内置布局类（如 flex-col 覆盖 flex-row）。" },
+  { "name": "style", "type": "JSX.CSSProperties", "default": "—", "description": "内联样式。gap（非预设值）与 flex 属性会覆盖其中的同名项，其余样式保留。" },
+  { "name": "ref", "type": "HTMLElement | ((el: HTMLElement) => void)", "default": "—", "description": "宿主 DOM 节点。component 为自定义组件时，由该组件决定是否转发 ref。" },
+  { "name": "...HTMLAttributes", "type": "JSX.HTMLAttributes<HTMLElement>", "default": "—", "description": "id、role、aria-*、data-*、tabindex、title、onClick 等原生属性与事件原样透传到宿主元素。" },
+  { "name": "children", "type": "JSX.Element", "default": "—", "description": "子元素，直接作为弹性项目渲染，Flex 不额外包裹。没有子节点时容器 display:none。" }
+]

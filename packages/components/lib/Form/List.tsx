@@ -30,10 +30,10 @@ const FormList: Component<FormListProps> = props => {
   }
 
   // Full store prefix = enclosing list prefix + own name.
-  const fullName = createMemo<(string | number)[]>(() => [
-    ...(parentListCtx?.prefixName() ?? []),
-    ...(Array.isArray(props.name) ? props.name : [props.name]),
-  ])
+  const ownName = Array.isArray(props.name) ? props.name : [props.name]
+  const fullName = parentListCtx
+    ? parentListCtx.resolvePath(ownName)
+    : createMemo<(string | number)[]>(() => ownName)
 
   // untrack: component bodies run untracked in Solid 2 — reading the form()
   // memo directly here would trip STRICT_READ_UNTRACKED in dev. The form
@@ -47,14 +47,23 @@ const FormList: Component<FormListProps> = props => {
 
   // Inner rows/fields resolve stable keys through the closest list.
   const getKey = (namePath: (string | number)[]): [number, (string | number)[]] => {
-    if (parentListCtx) return parentListCtx.getKey(namePath)
-    const len = fullName().length
-    const rowIndex = namePath[len] as number
-    return [list.fields()[rowIndex]?.key ?? 0, namePath.slice(len + 1)]
+    const rowIndex = typeof namePath[0] === 'number' ? namePath[0] : -1
+    return [list.fields()[rowIndex]?.key ?? 0, namePath.slice(rowIndex >= 0 ? 1 : 0)]
+  }
+
+  const resolvePath = (namePath: (string | number)[]) => {
+    const [key, relativePath] = getKey(namePath)
+    const hasRowIndex = typeof namePath[0] === 'number'
+    return () => {
+      const currentIndex = list.fields().find(field => field.key === key)?.name
+      return !hasRowIndex || currentIndex === undefined
+        ? [...fullName(), ...relativePath]
+        : [...fullName(), currentIndex, ...relativePath]
+    }
   }
 
   return (
-    <FormListContext value={{ prefixName: fullName, getKey }}>
+    <FormListContext value={{ prefixName: fullName, getKey, resolvePath }}>
       {props.children(list.fields, list.operations)}
     </FormListContext>
   )

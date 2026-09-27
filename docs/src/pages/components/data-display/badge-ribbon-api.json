@@ -1,0 +1,32 @@
+[
+  {
+    "name": "text",
+    "type": "JSX.Element",
+    "default": "—",
+    "description": "缎带内容"
+  },
+  {
+    "name": "color",
+    "type": "预设色板 | gray | string",
+    "default": "主题主色",
+    "description": "自定义颜色同时作用于折角"
+  },
+  {
+    "name": "placement",
+    "type": "'start' | 'end'",
+    "default": "end",
+    "description": "缎带所在的角"
+  },
+  {
+    "name": "classNames / styles",
+    "type": "{ root?, indicator?, content? }",
+    "default": "—",
+    "description": "语义化类名与内联样式"
+  },
+  {
+    "name": "class / style",
+    "type": "string / JSX.CSSProperties",
+    "default": "—",
+    "description": "与 antd 一致作用于缎带节点（indicator）"
+  }
+]

@@ -71,3 +71,7 @@ L1 共享生产行为继续归 `headless/shared/Trigger/`，不在 Tooltip 测�
 ## 未决边界
 
 完整 B04（含上面记录的 STRICT_READ_UNTRACKED 噪音溯源）、Firefox/WebKit、屏幕阅读器认证、发布包全新消费者安装、tree shaking、Tooltip 与 Form.Item 的组合验证（依赖链 `Tooltip → Form.Item / FloatButton`，属于后续 C07/C11 范围）仍不在本次完成声明内。当前不提供 `aria-describedby` 自动关联触发元素与浮层文本；需要更强无障碍关联时由消费者自行补充。若任何适用验收未运行，TODO 保持未勾选；不据用例存在宣称通过。
+
+## 2026-09-26 箭头用例几何桩补修
+
+共享 Trigger（ea98660）只在触发器与浮层都有真实尺寸后才测量，happy-dom 恒返回零矩形，导致 L1/L3 箭头用例（`tooltip.headless.arrow-enabled`、`tooltip.content.arrow`）失败。组件未改动，用例补真实几何桩后通过，断言不变。浏览器专项中 `tooltip.browser.hover-default-delay` 在默认并行 worker 下间歇失败，单 worker 稳定通过，HEAD 干净 worktree 同样复现，属既有时序敏感用例，留待处理。详见 [flex.md](flex.md)。

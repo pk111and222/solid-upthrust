@@ -6,6 +6,7 @@ import { SizeType } from '../../common/type';
  */
 export type FormContextValue = {
     form: () => FormInstance;
+    reset: () => void;
     validateTrigger: () => string | string[] | false;
     size: () => SizeType;
     disabled: () => boolean;
@@ -30,6 +31,7 @@ export declare const useFormContext: () => FormContextValue | null;
 export type FormListContextValue = {
     prefixName: () => (string | number)[];
     getKey: (namePath: (string | number)[]) => [number, (string | number)[]];
+    resolvePath: (namePath: (string | number)[]) => () => (string | number)[];
 };
 export declare const FormListContext: import('solid-js').Context<FormListContextValue | null>;
 export declare const useFormListContext: () => FormListContextValue | null;

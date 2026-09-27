@@ -1,0 +1,62 @@
+[
+  {
+    "name": "src / srcSet",
+    "type": "string",
+    "default": "—",
+    "description": "图片地址与候选资源；任一更新都会清除失败状态"
+  },
+  {
+    "name": "alt",
+    "type": "string",
+    "default": "—",
+    "description": "图片替代文本，同时作为根节点 title"
+  },
+  {
+    "name": "icon",
+    "type": "JSX.Element",
+    "default": "—",
+    "description": "图片缺失或失败时优先于 children"
+  },
+  {
+    "name": "size",
+    "type": "'large' | 'middle' | 'small' | number | { xs?, sm?, md?, lg?, xl?, xxl? }",
+    "default": "middle (40px)",
+    "description": "large=64、small=28；数值单位 px；响应式取最近已配置的小档，无匹配回退 40"
+  },
+  {
+    "name": "shape",
+    "type": "'circle' | 'square'",
+    "default": "circle",
+    "description": "圆形或方形"
+  },
+  {
+    "name": "color / textColor",
+    "type": "string",
+    "default": "主题主色 / 主色上的文本色",
+    "description": "自定义背景和前景 CSS 颜色"
+  },
+  {
+    "name": "maxCount",
+    "type": "number",
+    "default": "2",
+    "description": "字符缩写保留末尾的 Unicode 码点数量；0 为空；JSX 不截断"
+  },
+  {
+    "name": "onError",
+    "type": "(event: Event) => boolean | void",
+    "default": "—",
+    "description": "图片失败回调；返回 false 阻止默认回退"
+  },
+  {
+    "name": "class / style",
+    "type": "string / JSX.CSSProperties",
+    "default": "—",
+    "description": "类名和样式覆盖"
+  },
+  {
+    "name": "children",
+    "type": "JSX.Element",
+    "default": "—",
+    "description": "最低优先级回退，字符串或数字取缩写，其余 JSX 原样展示"
+  }
+]

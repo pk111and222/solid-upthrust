@@ -1,56 +1,29 @@
 // @unocss-include
-import { cva, type VariantProps } from "class-variance-authority";
-import { twMerge } from "tailwind-merge";
+import { cva } from "class-variance-authority";
 
-const qrCodeVariants = cva(
-  ["relative", "inline-block", "bg-white", "p-[12px]", "rounded-lg"],
+// antd 6 QRCode 实测：flex 居中、padding 12px、1px colorSplit 边框、8px 圆角、border-box；
+// 无边框时边框透明、padding 0、圆角 0。宽高与背景色走内联 style。
+export const qrCodeClass = cva(
+  ["relative", "flex", "justify-center", "items-center", "overflow-hidden", "box-border", "text-[14px]", "leading-[22px]", "text-on-surface"],
   {
     variants: {
       bordered: {
-        true: ["border", "border-solid", "border-outline-variant", "shadow"],
-        false: [],
+        true: ["p-[12px]", "border", "border-solid", "border-on-surface/6", "rounded-lg"],
+        false: ["p-0", "border", "border-solid", "border-transparent", "rounded-none"],
       },
     },
     defaultVariants: { bordered: true },
-  }
+  },
 );
 
-// overlaid status mask (expired / loading / scanned)
-const qrMaskVariants = cva(
-  ["absolute", "inset-0", "flex", "flex-col", "items-center", "justify-center", "gap-[8px]", "bg-surface/95", "rounded-lg", "z-1"],
-  { variants: {}, defaultVariants: {} }
+// canvas 与 svg 都在 flex 里拉伸：canvas 按 antd `> canvas { align-self: stretch; flex: auto; min-width: 0 }`。
+export const qrCanvasClass = "self-stretch flex-auto min-w-0 block";
+export const qrSvgClass = "block";
+
+// 遮罩：绝对铺满、z-10、纵向居中、colorBgContainer 96% 不透明。
+export const qrCoverClass = cva(
+  ["absolute", "top-0", "start-0", "z-10", "flex", "flex-col", "justify-center", "items-center", "w-full", "h-full", "text-on-surface", "leading-[22px]", "text-center", "bg-surface/96"],
+  { variants: {}, defaultVariants: {} },
 );
 
-const qrMaskTextVariants = cva(
-  ["text-on-surface-variant", "text-[14px]"],
-  { variants: {}, defaultVariants: {} }
-)
-
-const qrExpiredIconVariants = cva(
-  ["text-on-surface-variant", "text-[48px]", "i-mdi-clock-alert-outline"],
-  { variants: {}, defaultVariants: {} }
-)
-
-const qrScannedIconVariants = cva(
-  ["text-primary", "text-[48px]", "i-mdi-check-circle-outline"],
-  { variants: {}, defaultVariants: {} }
-)
-
-const qrLoadingIconVariants = cva(
-  ["text-on-surface-variant", "text-[48px]", "i-mdi-loading", "animate-spin"],
-  { variants: {}, defaultVariants: {} }
-)
-
-// refresh link in the expired mask
-const qrRefreshVariants = cva(
-  ["text-primary", "text-[14px]", "cursor-pointer", "hover:text-primary/70", "transition-upthrust-fast"],
-  { variants: {}, defaultVariants: {} }
-)
-
-export const qrCodeClass = (variants: VariantProps<typeof qrCodeVariants>) => twMerge(qrCodeVariants(variants));
-export const qrMaskClass = (variants: VariantProps<typeof qrMaskVariants>) => twMerge(qrMaskVariants(variants));
-export const qrMaskTextClass = (variants: VariantProps<typeof qrMaskTextVariants>) => twMerge(qrMaskTextVariants(variants));
-export const qrExpiredIconClass = (variants: VariantProps<typeof qrExpiredIconVariants>) => twMerge(qrExpiredIconVariants(variants));
-export const qrScannedIconClass = (variants: VariantProps<typeof qrScannedIconVariants>) => twMerge(qrScannedIconVariants(variants));
-export const qrLoadingIconClass = (variants: VariantProps<typeof qrLoadingIconVariants>) => twMerge(qrLoadingIconVariants(variants));
-export const qrRefreshClass = (variants: VariantProps<typeof qrRefreshVariants>) => twMerge(qrRefreshVariants(variants));
+export const qrStatusTextClass = "m-0 text-on-surface";

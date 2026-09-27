@@ -4,6 +4,7 @@
 
 - `Dialog/`：Modal、Drawer 等浮层复用的 dialog 行为。
 - `Drag/`：跨物料拖拽能力。
+- `Merge/`：认识 preset token 的类名合并（mergeClass）。
 - `Selection/`：选择/数值状态基础能力。
 - `Trigger/`：浮层触发、定位和生命周期。
 

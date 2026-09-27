@@ -1,87 +1,22 @@
-import { type Component, createSignal, onCleanup } from 'solid-js'
-import { Progress, Divider, Space, Button } from 'upthrust-ui'
-
-const ProgressPage: Component = () => {
-  const [percent, setPercent] = createSignal(30)
-  const [autoPercent, setAutoPercent] = createSignal(0)
-
-  // 自动增长演示
-  const timer = setInterval(() => {
-    setAutoPercent(p => (p >= 100 ? 0 : p + 2))
-  }, 100)
-  onCleanup(() => clearInterval(timer))
-
-  return (
-    <div class="p-6 max-w-4xl">
-      <h2 class="text-2xl font-bold mb-4">Progress 进度条</h2>
-      <p class="text-on-surface-variant mb-6">展示操作的当前进度。支持线性、圆形与分段步骤三种形态。</p>
-
-      <h3 class="text-lg font-semibold mb-3">基本使用与尺寸</h3>
-      <Space size="large" direction="vertical" style={{ width: '100%' }}>
-        <Progress percent={30} />
-        <Progress percent={50} size="small" />
-        <Progress percent={70} size="large" />
-      </Space>
-
-      <Divider />
-
-      <h3 class="text-lg font-semibold mb-3">状态</h3>
-      <Space size="large" direction="vertical" style={{ width: '100%' }}>
-        <Progress percent={100} status="success" />
-        <Progress percent={50} status="exception" />
-        <Progress percent={70} status="active" />
-      </Space>
-
-      <Divider />
-
-      <h3 class="text-lg font-semibold mb-3">交互控制</h3>
-      <Space size="middle" class="mb-3">
-        <Button size="small" variant="outlined" onClick={() => setPercent(Math.max(0, percent() - 10))}>-10</Button>
-        <Button size="small" variant="outlined" onClick={() => setPercent(Math.min(100, percent() + 10))}>+10</Button>
-      </Space>
-      <Progress percent={percent()} />
-
-      <Divider />
-
-      <h3 class="text-lg font-semibold mb-3">自定义格式与隐藏文本</h3>
-      <Space size="large" direction="vertical" style={{ width: '100%' }}>
-        <Progress percent={75} format={(p) => `${p} / 100 项`} />
-        <Progress percent={88} showInfo={false} />
-      </Space>
-
-      <Divider />
-
-      <h3 class="text-lg font-semibold mb-3">自动增长（动画过渡）</h3>
-      <Progress percent={autoPercent()} status={autoPercent() >= 100 ? 'success' : 'active'} />
-
-      <Divider />
-
-      <h3 class="text-lg font-semibold mb-3">分段进度条</h3>
-      <Space size="large" direction="vertical" style={{ width: '100%' }}>
-        <Progress percent={autoPercent()} steps={5} />
-        <Progress percent={60} steps={8} size="small" showInfo={false} />
-      </Space>
-
-      <Divider />
-
-      <h3 class="text-lg font-semibold mb-3">圆形进度条</h3>
-      <Space size="large" align="center" wrap>
-        <Progress type="circle" percent={autoPercent()} />
-        <Progress type="circle" percent={100} status="success" size={80} />
-        <Progress type="circle" percent={42} status="exception" size={80} />
-        <Progress type="circle" percent={66} size={140} strokeWidth={8} />
-      </Space>
-
-      <Divider />
-
-      <h3 class="text-lg font-semibold mb-3">自定义颜色</h3>
-      <Space size="large" direction="vertical" style={{ width: '100%' }}>
-        <Progress percent={40} strokeColor="#722ed1" />
-        <Progress type="circle" percent={40} strokeColor="#722ed1" size={100} />
-        <Progress percent={60} trailColor="rgba(0,0,0,0.06)" strokeColor="#13c2c2" />
-      </Space>
-    </div>
-  )
+import Demo0 from '../../../docs/src/examples/progress/line'
+import Demo1 from '../../../docs/src/examples/progress/circle'
+import Demo2 from '../../../docs/src/examples/progress/line-mini'
+import Demo3 from '../../../docs/src/examples/progress/circle-micro'
+import Demo4 from '../../../docs/src/examples/progress/circle-mini'
+import Demo5 from '../../../docs/src/examples/progress/dynamic'
+import Demo6 from '../../../docs/src/examples/progress/format'
+import Demo7 from '../../../docs/src/examples/progress/dashboard'
+import Demo8 from '../../../docs/src/examples/progress/segment'
+import Demo9 from '../../../docs/src/examples/progress/linecap'
+import Demo10 from '../../../docs/src/examples/progress/gradient-line'
+import Demo11 from '../../../docs/src/examples/progress/steps'
+import Demo12 from '../../../docs/src/examples/progress/circle-steps'
+import Demo13 from '../../../docs/src/examples/progress/size'
+import Demo14 from '../../../docs/src/examples/progress/info-position'
+import Demo15 from '../../../docs/src/examples/progress/style-class'
+const demos = [['line', '进度条', Demo0], ['circle', '进度圈', Demo1], ['line-mini', '小型进度条', Demo2], ['circle-micro', '响应式进度圈', Demo3], ['circle-mini', '小型进度圈', Demo4], ['dynamic', '动态展示', Demo5], ['format', '自定义文字格式', Demo6], ['dashboard', '仪表盘', Demo7], ['segment', '分段进度条', Demo8], ['linecap', '边缘形状', Demo9], ['gradient-line', '自定义进度条渐变色', Demo10], ['steps', '步骤进度条', Demo11], ['circle-steps', '步骤进度圈', Demo12], ['size', '尺寸', Demo13], ['info-position', '改变进度数值位置', Demo14], ['style-class', '自定义语义结构的样式和类', Demo15]] as const
+export default function Page() {
+  return <div class="p-6 max-w-5xl"><h2 class="text-2xl font-semibold mb-6">Progress 进度条</h2>
+    {demos.map(([id, title, Demo]) => <section data-progress-demo={id} class="mb-8"><h3 class="text-lg font-semibold mb-3">{title}</h3><Demo /></section>)}
+  </div>
 }
-
-export default ProgressPage

@@ -1,0 +1,32 @@
+[WebServer] (node:6809) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+[WebServer] (node:6866) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+[WebServer] (node:6898) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+[WebServer] (node:7010) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+[WebServer] (node:7061) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+
+Running 5 tests using 2 workers
+
+(node:7130) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+(node:7129) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[1/5] [docs] › browser/Form/presentation.spec.ts:102:1 › [form.browser.complex-list] edits nested purchase details and resets
+[2/5] [docs] › browser/Form/presentation.spec.ts:134:1 › [form.browser.mobile] keeps form demos within the viewport
+[3/5] [docs] › browser/Form/presentation.spec.ts:163:1 › [form.browser.custom-list-alignment] aligns the remove action with its inputs
+[4/5] [docs] › browser/Form/presentation.spec.ts:173:3 › [form.browser.list-validation-alignment.1440] keeps controls aligned through validation
+[5/5] [docs] › browser/Form/presentation.spec.ts:173:3 › [form.browser.list-validation-alignment.390] keeps controls aligned through validation
+  5 passed (12.8s)

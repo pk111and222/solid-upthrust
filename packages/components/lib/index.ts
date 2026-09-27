@@ -3,7 +3,10 @@ import 'uno.css'
 export { default as Button } from './Button'
 export type { ButtonProps, ButtonType, ButtonShape, ButtonIns, ButtonVariant, ButtonColor } from './Button'
 export { default as Alert } from './Alert'
-export type { AlertProps } from './Alert'
+export type {
+  AlertProps, AlertType, AlertVariant, AlertClosable, AlertErrorBoundaryProps,
+  AlertSemanticClassNames, AlertSemanticStyles, AlertSemanticInfo,
+} from './Alert'
 export { default as Input } from './Input'
 export type { InputProps } from './Input'
 export { default as InputPassword } from './Input/Password'
@@ -62,19 +65,32 @@ export type { TextProps, TitleProps, ParagraphProps, LinkProps, TypographyBasePr
 
 // Layout components
 export { default as Divider } from './Divider'
-export type { DividerProps } from './Divider'
+export type {
+  DividerProps, DividerOrientation, DividerTitlePlacement, DividerVariant, DividerSize, DividerSemanticName,
+} from './Divider'
 export { default as Flex } from './Flex'
-export type { FlexProps } from './Flex'
-export { default as Grid, Row, Col } from './Grid'
-export type { RowProps, ColProps } from './Grid'
+export type { FlexProps, FlexOrientation, FlexWrap, FlexJustify, FlexAlign, FlexGap } from './Flex'
+export { default as Grid, Row, Col, useBreakpoint } from './Grid'
+export type {
+  RowProps, ColProps, RowJustify, RowAlign, Gutter, GutterValue, ColSize, ColSpanType, ResponsiveValue, ScreenMap,
+} from './Grid'
 export { default as Layout, Header, Footer, Content, Sider } from './Layout'
-export type { LayoutProps, HeaderProps, FooterProps, ContentProps, SiderProps } from './Layout'
-export { default as Space, Compact } from './Space'
-export type { SpaceProps, CompactProps } from './Space'
+export type { LayoutProps, HeaderProps, FooterProps, ContentProps, SiderProps, SiderTheme, SiderBreakpoint, SiderCollapseType, SiderSemanticName } from './Layout'
+export { default as Space, Compact, Addon as SpaceAddon } from './Space'
+export type {
+  SpaceProps, CompactProps, SpaceCompactProps, SpaceAddonProps, SpaceSize, SpacePresetSize, SpaceAlign,
+  SpaceOrientation, SpaceSemanticName,
+} from './Space'
 export { default as Splitter, Panel } from './Splitter'
-export type { SplitterProps, SplitterPanelProps } from './Splitter'
+export type {
+  SplitterProps, SplitterPanelProps, SplitterClassNames, SplitterStyles, SplitterCollapsibleConfig,
+  SplitterSize, SplitterOrientation, SplitterCollapseType, SplitterCollapsibleIconMode, SplitterPanelCollapsible,
+} from './Splitter'
 export { default as Masonry } from './Masonry'
-export type { MasonryProps } from './Masonry'
+export type {
+  MasonryProps, MasonryItem, MasonryItemRenderInfo, MasonryLayoutItem, MasonryKey,
+  MasonryColumns, MasonryGutter, MasonryGutterValue,
+} from './Masonry'
 
 // Navigation components
 export { default as Anchor } from './Anchor'
@@ -96,15 +112,31 @@ export type { TabsProps, TabsItem, TabsIns } from './Tabs'
 export { default as Avatar, AvatarGroup } from './Avatar'
 export type { AvatarProps, AvatarGroupProps, AvatarSize } from './Avatar'
 export { default as Empty, PRESENTED_IMAGE_DEFAULT, PRESENTED_IMAGE_SIMPLE } from './Empty'
-export type { EmptyProps } from './Empty'
+export type { EmptyProps, EmptyPresentedImage, EmptySemanticClassNames, EmptySemanticStyles } from './Empty'
 export { default as Popover } from './Popover'
 export type { PopoverProps, PopoverPlacement, PopoverTrigger } from './Popover'
 export { default as QRCode } from './QRCode'
-export type { QRCodeProps, QRCodeStatus, QRCodeErrorCorrectionLevel } from './QRCode'
-export { default as Statistic, StatisticCountdown } from './Statistic'
-export type { StatisticProps, CountdownProps } from './Statistic'
+export type {
+  QRCodeProps, QRCodeStatus, QRCodeErrorCorrectionLevel, QRCodeType, QRCodeLocale, QRCodeStatusRenderInfo,
+  QRCodeSemanticClassNames, QRCodeSemanticStyles, QRCodeSemanticInfo,
+} from './QRCode'
+export { default as Statistic, StatisticTimer, StatisticCountdown } from './Statistic'
+export type {
+  StatisticProps,
+  StatisticSemanticClassNames,
+  StatisticSemanticStyles,
+  StatisticValue,
+  StatisticTimerProps,
+  StatisticTimerType,
+  StatisticTimerValue,
+  CountdownProps,
+} from './Statistic'
 export { default as Timeline } from './Timeline'
-export type { TimelineProps, TimelineItemProps } from './Timeline'
+export type {
+  TimelineProps, TimelineItemProps, TimelineColor, TimelineMode, TimelineLegacyMode, TimelineOrientation, TimelinePlacement,
+  TimelineVariant, TimelineItemStatus, TimelineSemanticClassNames, TimelineSemanticStyles, TimelineSemanticInfo,
+  TimelineItemSemanticClassNames, TimelineItemSemanticStyles,
+} from './Timeline'
 export { default as Tooltip } from './Tooltip'
 export type { TooltipProps, TooltipIns, TooltipPlacement, TooltipTrigger } from './Tooltip'
 
@@ -120,15 +152,21 @@ export type { DrawerProps, DrawerPlacement } from './Drawer'
 export { default as Popconfirm } from './Popconfirm'
 export type { PopconfirmProps, PopconfirmPlacement, PopconfirmTrigger } from './Popconfirm'
 export { default as Progress } from './Progress'
-export type { ProgressProps, ProgressType, ProgressStatus } from './Progress'
+export type {
+  ProgressProps, ProgressType, ProgressStatus, ProgressSize, ProgressSteps, ProgressStrokeColor, ProgressGradient, ProgressLinecap,
+  ProgressGapPlacement, ProgressGapPosition, ProgressSuccess, ProgressPercentPosition, ProgressSemanticClassNames,
+  ProgressSemanticStyles, ProgressSemanticInfo,
+} from './Progress'
 export { default as Result } from './Result'
-export type { ResultProps, ResultStatus } from './Result'
+export type {
+  ResultProps, ResultStatus, ResultExceptionStatus, ResultSemanticClassNames, ResultSemanticStyles, ResultSemanticInfo,
+} from './Result'
 export { default as Skeleton, SkeletonButton, SkeletonAvatar, SkeletonInput, SkeletonNode } from './Skeleton'
 export type { SkeletonProps, SkeletonIns, SkeletonElementProps, SkeletonButtonProps, SkeletonAvatarProps, SkeletonInputProps, SkeletonNodeProps } from './Skeleton'
 export { default as Spin } from './Spin'
 export type { SpinProps } from './Spin'
 export { default as Watermark } from './Watermark'
-export type { WatermarkProps } from './Watermark'
+export type { WatermarkProps, WatermarkContent, WatermarkFont, WatermarkText } from './Watermark'
 
 // Data display components (carousel)
 export { default as Carousel } from './Carousel'
@@ -140,7 +178,7 @@ export type { CollapseProps, CollapseItem } from './Collapse'
 
 // Data display components (badge — antd6 API)
 export { default as Badge, BadgeRibbon } from './Badge'
-export type { BadgeProps, BadgeRibbonProps, BadgeSize, BadgeColor, BadgePlacement } from './Badge'
+export type { BadgeProps, BadgeRibbonProps, BadgeSize, BadgeColor, BadgePlacement, BadgeStatus, BadgeSemanticSlots, BadgeSemanticStyles } from './Badge'
 
 // Data display components (descriptions — antd6 API)
 export { default as Descriptions } from './Descriptions'
@@ -169,8 +207,8 @@ export type {
   CardProps, CardGridProps, CardMetaProps, CardVariant, CardSize, CardTabItem,
 } from './Card'
 
-export { default as Tag, CheckableTag } from './Tag'
-export type { TagProps, CheckableTagProps } from './Tag'
+export { default as Tag, CheckableTag, CheckableTagGroup } from './Tag'
+export type { TagProps, TagColor, TagVariant, TagClosable, TagSemanticName, CheckableTagProps, CheckableTagGroupProps, CheckableTagGroupSingleProps, CheckableTagGroupMultipleProps, CheckableTagOption, CheckableTagValue } from './Tag'
 export { default as Transfer } from './Transfer'
 export type { TransferProps, TransferItem, TransferKey, TransferDirection } from './Transfer'
 

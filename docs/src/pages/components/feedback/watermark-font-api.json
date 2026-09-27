@@ -1,0 +1,9 @@
+[
+  { "name": "color", "type": "string", "default": "rgba(0, 0, 0, 0.15)", "description": "字体颜色" },
+  { "name": "fontSize", "type": "number | string", "default": "16", "description": "字体大小" },
+  { "name": "fontWeight", "type": "'normal' | 'lighter' | 'bold' | 'bolder' | number", "default": "'normal'", "description": "字体粗细" },
+  { "name": "fontStyle", "type": "'none' | 'normal' | 'italic' | 'oblique'", "default": "'normal'", "description": "字体样式" },
+  { "name": "fontFamily", "type": "string", "default": "'sans-serif'", "description": "字体类型" },
+  { "name": "textAlign", "type": "CanvasTextAlign", "default": "'center'", "description": "文字对齐方式" },
+  { "name": "WatermarkText.text / font", "type": "string / WatermarkFont", "default": "—", "description": "content 数组项可写为 { text, font }，font 与全局 font 合并，单独设置该行样式" }
+]

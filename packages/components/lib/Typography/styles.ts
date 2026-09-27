@@ -1,6 +1,6 @@
 // @unocss-include
 import { cva, type VariantProps } from "class-variance-authority";
-import { twMerge } from "tailwind-merge";
+import { mergeClass as twMerge } from "../../common/merge";
 
 export const typographyVariants = cva(
   ["text-body", "text-on-surface"],
@@ -29,7 +29,7 @@ export const typographyVariants = cva(
 );
 
 export const titleVariants = cva(
-  ["font-semibold", "m-0", "mb-[0.5em]", "text-on-surface"],
+  ["font-semibold", "m-0", "mb-[0.5em]"],
   {
     variants: {
       level: {

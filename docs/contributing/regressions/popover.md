@@ -65,3 +65,7 @@ L1 共享生产行为继续归 `headless/shared/Trigger/`，Popover 无独立 he
 ## 未决边界
 
 完整 B04（含 STRICT_READ_UNTRACKED 噪音溯源，已在 Tooltip 记录标注）、Firefox/WebKit、屏幕阅读器认证、发布包全新消费者安装、tree shaking、Popover 与 ColorPicker 的组合验证（依赖链 `Popover → ColorPicker`，属于后续 C06 范围）仍不在本次完成声明内。当前不提供任何键盘方向导航或焦点自动管理——内容任意，交由使用者自行决定内部控件 Tab 顺序。若任何适用验收未运行，TODO 保持未勾选；不据用例存在宣称通过。
+
+## 2026-09-26 箭头用例几何桩补修
+
+共享 Trigger（ea98660）只在触发器与浮层都有真实尺寸后才测量，happy-dom 恒返回零矩形，导致 L1/L3 箭头用例（`popover.content.arrow`）失败。组件未改动，用例补真实几何桩后通过，断言不变。浏览器专项中 `popover.browser.hover-instant-open` 在默认并行 worker 下间歇失败，单 worker 稳定通过，HEAD 干净 worktree 同样复现，属既有时序敏感用例，留待处理。详见 [flex.md](flex.md)。

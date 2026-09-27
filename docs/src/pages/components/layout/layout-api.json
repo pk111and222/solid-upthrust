@@ -1,0 +1,32 @@
+{
+  "layout": [
+    { "name": "hasSider", "type": "boolean", "default": "自动", "description": "是否横向排列。不传时根据是否有 Sider 在内部注册（经 context，Sider 被包裹也能识别）自动判断；显式布尔值优先。服务端渲染时 Sider 尚未注册，需要首屏即为横向时请显式传 true。" },
+    { "name": "class / style", "type": "string / JSX.CSSProperties", "default": "—", "description": "附加到根节点 div，class 通过 mergeClass 合并（如 flex-row、min-h-screen）。" },
+    { "name": "...rest", "type": "JSX.HTMLAttributes<HTMLDivElement>", "default": "—", "description": "原生属性、事件与 ref 透传到根节点。" }
+  ],
+  "regions": [
+    { "name": "Header", "type": "<header>", "default": "—", "description": "顶栏：64px 高、横向 flex 且垂直居中、左右 24px 内边距、浅色背景 + 底边框，不参与伸缩。" },
+    { "name": "Content", "type": "<main>", "default": "—", "description": "内容区：flex-auto 占满剩余空间、min-h-0 允许在定高布局里收缩并自行滚动。在含 Sider 的横向 Layout 中宽度先归零再撑开，长内容不会挤压 Sider。" },
+    { "name": "Footer", "type": "<footer>", "default": "—", "description": "底栏：24px 内边距、次要文字色 + 顶边框，不参与伸缩。" },
+    { "name": "class / style", "type": "string / JSX.CSSProperties", "default": "—", "description": "三者一致：附加到根节点，class 通过 mergeClass 合并，h-16、px-0、bg-* 等可覆盖默认值。" },
+    { "name": "...rest", "type": "JSX.HTMLAttributes<HTMLElement>", "default": "—", "description": "原生属性、事件与 ref 透传。" }
+  ],
+  "sider": [
+    { "name": "width", "type": "number | string", "default": "200", "description": "展开宽度。数字与纯数字字符串按 px，其余 CSS 长度（'15rem'、'25%'）原样使用。同时写入 flex-basis、width、min-width、max-width，style 中的宽度声明不生效。" },
+    { "name": "collapsedWidth", "type": "number | string", "default": "80", "description": "收起宽度。为 0 时收起后完全隐藏，触发器改为挂在 Sider 外沿、距顶 64px 的零宽触发器，内容区设为 inert。" },
+    { "name": "collapsed", "type": "boolean", "default": "—", "description": "当前是否收起（受控）。" },
+    { "name": "defaultCollapsed", "type": "boolean", "default": "false", "description": "初始是否收起（非受控）。设置了 breakpoint 时挂载后会按当前宽度重新决定。" },
+    { "name": "collapsible", "type": "boolean", "default": "false", "description": "是否可收起：在底部渲染 48px 触发器（零宽模式下为外挂触发器）。" },
+    { "name": "trigger", "type": "JSX.Element | null", "default": "箭头图标", "description": "自定义触发器内容；null 时不渲染任何触发器，可配合受控 collapsed 在别处放按钮。" },
+    { "name": "reverseArrow", "type": "boolean", "default": "false", "description": "翻转触发器箭头，零宽触发器改挂到 Sider 左侧。用于放在右侧的 Sider。" },
+    { "name": "breakpoint", "type": "'xs' | 'sm' | 'md' | 'lg' | 'xl' | 'xxl' | 'xxxl'", "default": "—", "description": "响应式断点：视口宽度低于该断点（xs 480、sm 576、md 768、lg 992、xl 1200、xxl 1600、xxxl 1920）时自动收起，回到断点以上时自动展开。" },
+    { "name": "onCollapse", "type": "(collapsed: boolean, type: 'clickTrigger' | 'responsive') => void", "default": "—", "description": "收起状态变化：点击 / 键盘切换为 'clickTrigger'，断点触发为 'responsive'。断点变化但状态本就一致时不回调。" },
+    { "name": "onBreakpoint", "type": "(broken: boolean) => void", "default": "—", "description": "断点命中变化；设置 breakpoint 后挂载时也会按当前宽度调用一次。" },
+    { "name": "theme", "type": "'dark' | 'light'", "default": "'dark'", "description": "配色：dark 为 inverse-surface 深色，light 为 surface 浅色。同时作用于触发器。" },
+    { "name": "zeroWidthTriggerStyle", "type": "JSX.CSSProperties", "default": "—", "description": "零宽触发器的内联样式（例如调整 top）。" },
+    { "name": "classNames", "type": "Partial<Record<'root' | 'body', string>>", "default": "—", "description": "语义化类名：root 为 aside 根节点，body 为包裹 children 的内容容器（纵向滚动、横向裁剪）。" },
+    { "name": "styles", "type": "Partial<Record<'root' | 'body', JSX.CSSProperties>>", "default": "—", "description": "语义化内联样式；合并顺序 styles.root → style → 宽度。" },
+    { "name": "class / style", "type": "string / JSX.CSSProperties", "default": "—", "description": "附加到 aside 根节点，class 通过 mergeClass 合并。" },
+    { "name": "...rest", "type": "JSX.HTMLAttributes<HTMLElement>", "default": "—", "description": "原生属性、事件与 ref 透传到 aside。" }
+  ]
+}

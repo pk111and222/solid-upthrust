@@ -49,7 +49,8 @@ const SpinPage: Component = () => {
           <div style={{ 'min-width': '400px' }}>
             <Alert
               type="info"
-              message="嵌套加载"
+              showIcon
+              title="嵌套加载"
               description="正在加载的内容区域。切换上方按钮后，此区域会被半透明遮罩覆盖并显示加载指示器。"
             />
           </div>

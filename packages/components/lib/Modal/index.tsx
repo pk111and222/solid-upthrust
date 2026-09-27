@@ -8,6 +8,7 @@ import {
   modalTitleClass, modalBodyClass, modalFooterClass, modalCloseClass, MODAL_CLOSE_ICON,
 } from './styles'
 import Button, { type ButtonProps } from '../Button'
+import { useWatermarkPanel } from '../Watermark/context'
 import { registerDialog, unregisterDialog } from '../_dialogStack'
 import { twMerge } from 'tailwind-merge'
 import { createModalMethods } from './static'
@@ -129,6 +130,8 @@ const ModalComponent: Component<ModalProps> = (providedProps) => {
   // ---- DOM wiring ---------------------------------------------------------
   let wrapperEl: HTMLDivElement | undefined
   let panelEl: HTMLDivElement | undefined
+  // antd usePanelRef：外层 Watermark（inherit）把水印也挂到弹层面板上。
+  useWatermarkPanel(() => dialog.animatedOpen(), () => panelEl)
 
   // ESC routing: register with the SHARED dialog stack (Drawer uses the same
   // one) — a single document listener closes only the TOP-MOST open dialog,

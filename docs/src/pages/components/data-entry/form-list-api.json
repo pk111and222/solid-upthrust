@@ -1,0 +1,5 @@
+[
+  {"name":"name","type":"string | (string | number)[]","default":"必填","description":"列表字段路径，可嵌套在另一个 Form.List 中。"},
+  {"name":"initialValue","type":"unknown","default":"—","description":"列表为空且路径没有值时写入的初始数组。"},
+  {"name":"children","type":"(fields, operations) => JSX.Element","default":"必填","description":"fields 提供 name/key；operations 提供 add(defaultValue?, index?), remove(index | index[]), move(from, to)。"}
+]

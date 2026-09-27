@@ -14,8 +14,8 @@ import { twMerge } from "tailwind-merge"
  *  - item bottom margin: marginLG 24px (itemMarginBottom)
  */
 
-export const formClass = (class_?: string) =>
-  twMerge(['w-full', 'text-[14px]', 'text-on-surface'], class_)
+export const formClass = (class_?: string, layout?: 'horizontal' | 'vertical' | 'inline') =>
+  twMerge(['w-full', 'text-[14px]', 'text-on-surface', ...(layout === 'inline' ? ['flex', 'flex-wrap', 'items-start', 'gap-x-4', 'gap-y-3'] : [])], class_)
 
 /**
  * Item row. horizontal: `flex items-start` with the label column and the
@@ -32,7 +32,8 @@ export const formItemClass = (opts: {
       'mb-md',
       'relative',
       ...(opts.layout === 'vertical' ? ['flex', 'flex-col'] : []),
-      ...(opts.layout === 'horizontal' ? ['flex', 'items-start'] : []),
+      ...(opts.layout === 'horizontal' || opts.layout === 'inline' ? ['flex', 'items-start'] : []),
+      ...(opts.layout === 'inline' ? ['mb-0'] : []),
       ...(opts.hidden ? ['hidden'] : []),
     ],
     opts.class_,
@@ -64,7 +65,7 @@ export const formItemLabelWrapClass = (opts: {
       ...(opts.layout === 'vertical'
         ? ['w-full', 'text-start', 'pt-0', 'px-0', 'pb-xs']
         : [
-            opts.labelAlign === 'left' ? 'text-start' : 'text-end',
+            opts.labelAlign === 'left' ? 'justify-start text-start' : 'justify-end text-end',
             'pr-xs',
           ]),
     ],
@@ -192,9 +193,7 @@ export const formItemExtraClass = () =>
 export const formItemFeedbackIconClass = (status: 'error' | 'warning' | 'validating' | 'success' | undefined) =>
   twMerge(
     [
-      'absolute',
-      'right-[11px]',
-      'top-0',
+      'shrink-0',
       'flex',
       'items-center',
       'text-[14px]',
@@ -213,6 +212,9 @@ export const formItemFeedbackIconWrapClass = (opts: { size?: 'small' | 'middle' 
   twMerge([
     'flex',
     'items-center',
+    'shrink-0',
+    'ml-2',
+    'empty:hidden',
     opts.size === 'small' ? 'h-control-sm' : opts.size === 'large' ? 'h-control-lg' : 'h-control',
   ])
 

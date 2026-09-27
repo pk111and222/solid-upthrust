@@ -1,0 +1,19 @@
+[
+  { "name": "type", "type": "'success' | 'info' | 'warning' | 'error'", "default": "'info'，banner 模式下为 'warning'", "description": "指定警告提示的样式" },
+  { "name": "variant", "type": "'outlined' | 'filled'", "default": "'outlined'", "description": "样式变体；filled 边框透明" },
+  { "name": "title", "type": "JSX.Element", "default": "—", "description": "警告提示内容" },
+  { "name": "message", "type": "JSX.Element", "default": "—", "description": "已废弃，请使用 title" },
+  { "name": "description", "type": "JSX.Element", "default": "—", "description": "警告提示的辅助性文字介绍；存在时切换为大图标、顶端对齐布局" },
+  { "name": "showIcon", "type": "boolean", "default": "false，banner 模式下为 true", "description": "是否显示辅助图标" },
+  { "name": "icon", "type": "JSX.Element", "default": "—", "description": "自定义图标，showIcon 为 true 时有效" },
+  { "name": "banner", "type": "boolean", "default": "false", "description": "是否用作顶部公告（无边框、无圆角）" },
+  { "name": "action", "type": "JSX.Element", "default": "—", "description": "自定义操作项" },
+  { "name": "closable", "type": "boolean | AlertClosable", "default": "false", "description": "是否可关闭；对象形式可设置 closeIcon / onClose / afterClose 与透传到关闭按钮的 aria-* / data-*" },
+  { "name": "onClose", "type": "(e: MouseEvent) => void", "default": "—", "description": "已废弃，请使用 closable.onClose" },
+  { "name": "afterClose", "type": "() => void", "default": "—", "description": "已废弃，请使用 closable.afterClose" },
+  { "name": "closeIcon", "type": "JSX.Element", "default": "—", "description": "已废弃，请使用 closable.closeIcon；非空（含 0 / ''）时即可关闭，false 时隐藏" },
+  { "name": "closeText", "type": "JSX.Element", "default": "—", "description": "已废弃，请使用 closable.closeIcon" },
+  { "name": "role", "type": "string", "default": "'alert'", "description": "根节点 role" },
+  { "name": "classNames", "type": "Partial<Record<'root' | 'icon' | 'section' | 'title' | 'description' | 'actions' | 'close', string>> | (info) => …", "default": "—", "description": "语义化结构 class；函数形式收到 { props }（type / variant / showIcon / closable 已推导）" },
+  { "name": "styles", "type": "Partial<Record<'root' | 'icon' | 'section' | 'title' | 'description' | 'actions' | 'close', JSX.CSSProperties>> | (info) => …", "default": "—", "description": "语义化结构 style；函数形式同 classNames" }
+]

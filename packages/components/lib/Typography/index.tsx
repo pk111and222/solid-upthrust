@@ -2,7 +2,7 @@ import { Component, Show, createMemo, merge } from 'solid-js'
 import { createTypography, type TypographyCopyConfig, type TypographyEditableConfig } from 'upthrust-competence'
 import type { JSX } from '@solidjs/web'
 import { Dynamic } from '@solidjs/web'
-import { twMerge } from 'tailwind-merge'
+import { mergeClass as twMerge } from '../../common/merge'
 import { typographyClass, titleClass, linkClass, paragraphClass } from './styles'
 
 export interface TypographyBaseProps {
@@ -23,8 +23,10 @@ export interface TypographyBaseProps {
   children?: JSX.Element
 }
 
-const TypographyContent: Component<TypographyBaseProps> = props => {
+const TypographyContent: Component<TypographyBaseProps & { renderText?: (content: JSX.Element) => JSX.Element }> = props => {
   let content: HTMLSpanElement | undefined
+  let editButton: HTMLButtonElement | undefined
+  const restoreFocus = () => queueMicrotask(() => editButton?.isConnected && editButton.focus())
   const state = createTypography({
     text: () => typeof props.children === 'string' || typeof props.children === 'number' ? String(props.children) : content?.textContent ?? '',
     get disabled() { return props.disabled },
@@ -42,25 +44,25 @@ const TypographyContent: Component<TypographyBaseProps> = props => {
   })
   const editOptions = () => typeof props.editable === 'object' ? props.editable : {}
   const copyOptions = () => typeof props.copyable === 'object' ? props.copyable : {}
-  return <Show when={state.editing()} fallback={<>
-    <span ref={content}>{wrapDecorations(editOptions().text ?? state.localText() ?? props.children, props)}</span>
+  return <Show when={state.editing()} fallback={<span class={props.ellipsis && (props.copyable || props.editable) ? 'inline-flex w-full min-w-0 items-start' : undefined}>
+    <span ref={content} class={props.ellipsis && (props.copyable || props.editable) ? twMerge('min-w-0 flex-1', singleLine(props.ellipsis) ? 'overflow-hidden text-ellipsis whitespace-nowrap' : undefined) : undefined} style={props.copyable || props.editable ? ellipsisStyle(props.ellipsis) : undefined}>{props.renderText ? props.renderText(wrapDecorations(editOptions().text ?? state.localText() ?? props.children, props)) : wrapDecorations(editOptions().text ?? state.localText() ?? props.children, props)}</span>
     <Show when={props.editable && !props.disabled}>
-      <button type="button" class="inline-flex align-middle ml-1 p-0 border-0 bg-transparent text-primary cursor-pointer" aria-label="编辑"
+      <button ref={editButton} type="button" class="inline-flex shrink-0 align-middle ml-1 p-0 border-0 bg-transparent text-primary cursor-pointer" aria-label="编辑"
         title={editOptions().tooltip || undefined} onClick={state.startEdit}>{editOptions().icon ?? <span class="i-mdi-pencil-outline" />}</button>
     </Show>
     <Show when={props.copyable && !props.disabled}>
-      <button type="button" class="inline-flex align-middle ml-1 p-0 border-0 bg-transparent text-primary cursor-pointer" aria-label={state.copied() ? '已复制' : '复制'}
+      <button type="button" class="inline-flex shrink-0 align-middle ml-1 p-0 border-0 bg-transparent text-primary cursor-pointer" aria-label={state.copied() ? '已复制' : '复制'}
         title={copyOptions().tooltips || undefined} disabled={state.copying()} onClick={() => void state.copy()}>
         <Show when={state.copied()} fallback={copyOptions().icon ?? <span class="i-mdi-content-copy" />}><span class="i-mdi-check text-green-600" /></Show>
       </button>
       <span role="status" class="sr-only">{state.copied() ? '已复制' : ''}</span>
     </Show>
-  </>}>
+  </span>}>
     <textarea aria-label="编辑文本" class="w-full box-border rounded border border-solid border-primary bg-transparent text-inherit p-1 outline-none"
       ref={el => { el.value = state.text(); state.setDraft(state.text()); queueMicrotask(() => { if (el.isConnected) { el.focus(); el.setSelectionRange(el.value.length, el.value.length) } }) }}
       value={state.draft()} maxlength={editOptions().maxLength}
       onInput={e => state.setDraft(e.currentTarget.value)} onBlur={e => state.finishEdit(e.currentTarget.value)}
-      onKeyDown={e => { if (e.isComposing) return; if (e.key === 'Escape') { e.preventDefault(); state.cancelEdit() } else if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); state.finishEdit(e.currentTarget.value) } }} />
+      onKeyDown={e => { if (e.isComposing) return; if (e.key === 'Escape') { e.preventDefault(); state.cancelEdit(); restoreFocus() } else if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); state.finishEdit(e.currentTarget.value); restoreFocus() } }} />
   </Show>
 }
 
@@ -90,6 +92,9 @@ function wrapDecorations(children: JSX.Element, props: TypographyBaseProps): JSX
   return content
 }
 
+const singleLine = (ellipsis: TypographyBaseProps['ellipsis']) => !!ellipsis && !(typeof ellipsis === 'object' && (ellipsis.rows ?? 1) > 1)
+const rootEllipsis = (props: TypographyBaseProps) => props.copyable || props.editable ? false : props.ellipsis
+
 function ellipsisStyle(ellipsis?: boolean | { rows?: number }): JSX.CSSProperties {
   if (typeof ellipsis === 'object' && ellipsis.rows && ellipsis.rows > 1) {
     return {
@@ -107,13 +112,14 @@ export const Text: Component<TextProps> = (rawProps) => {
 
   const _class = createMemo(() =>
     twMerge(
-      typographyClass({ type: props.type, disabled: !!props.disabled, ellipsis: props.ellipsis === true }),
+      typographyClass({ type: props.type, disabled: !!props.disabled, ellipsis: singleLine(rootEllipsis(props)) }),
+      props.ellipsis && (singleLine(props.ellipsis) || props.copyable || props.editable) ? 'inline-block max-w-full align-bottom' : undefined,
       props.class || ''
     )
   )
 
   const _style = createMemo((): JSX.CSSProperties => ({
-    ...ellipsisStyle(props.ellipsis),
+    ...ellipsisStyle(rootEllipsis(props)),
     ...props.style,
   }))
 
@@ -129,14 +135,15 @@ export const Title: Component<TitleProps> = (rawProps) => {
 
   const _class = createMemo(() =>
     twMerge(
-      typographyClass({ type: props.type, disabled: !!props.disabled, ellipsis: props.ellipsis === true }),
+      typographyClass({ type: props.type, disabled: !!props.disabled, ellipsis: singleLine(rootEllipsis(props)) }),
       titleClass({ level: props.level }),
+      singleLine(rootEllipsis(props)) ? 'inline-block max-w-full align-bottom' : undefined,
       props.class || ''
     )
   )
 
   const _style = createMemo((): JSX.CSSProperties => ({
-    ...ellipsisStyle(props.ellipsis),
+    ...ellipsisStyle(rootEllipsis(props)),
     ...props.style,
   }))
 
@@ -150,14 +157,15 @@ export const Paragraph: Component<ParagraphProps> = (rawProps) => {
 
   const _class = createMemo(() =>
     twMerge(
-      typographyClass({ type: props.type, disabled: !!props.disabled, ellipsis: props.ellipsis === true }),
+      typographyClass({ type: props.type, disabled: !!props.disabled, ellipsis: singleLine(rootEllipsis(props)) }),
       paragraphClass({}),
+      singleLine(rootEllipsis(props)) ? 'inline-block max-w-full align-bottom' : undefined,
       props.class || ''
     )
   )
 
   const _style = createMemo((): JSX.CSSProperties => ({
-    ...ellipsisStyle(props.ellipsis),
+    ...ellipsisStyle(rootEllipsis(props)),
     ...props.style,
   }))
 
@@ -171,15 +179,25 @@ export const Link: Component<LinkProps> = (rawProps) => {
 
   const _class = createMemo(() =>
     twMerge(
-      typographyClass({ type: props.type, disabled: !!props.disabled, ellipsis: props.ellipsis === true }),
+      typographyClass({ type: props.type, disabled: !!props.disabled, ellipsis: singleLine(rootEllipsis(props)) }),
       linkClass({ disabled: !!props.disabled }),
+      props.type ? typographyClass({ type: props.type, disabled: !!props.disabled }) : undefined,
+      singleLine(rootEllipsis(props)) ? 'inline-block max-w-full align-bottom' : undefined,
       props.class || ''
     )
   )
 
-  return <a href={props.href} target={props.target} rel={props.rel} class={_class()} style={props.style}>
-    {wrapDecorations(props.children, props)}
-  </a>
+  const anchor = (children: JSX.Element) => <a
+    href={props.disabled ? undefined : props.href} target={props.target}
+    rel={props.rel ?? (props.target === '_blank' ? 'noopener noreferrer' : undefined)}
+    role={props.disabled ? 'link' : undefined} aria-disabled={props.disabled ? 'true' : undefined}
+    tabindex={props.disabled ? -1 : undefined}
+    class={_class()} style={props.copyable || props.editable ? ellipsisStyle(props.ellipsis) : { ...ellipsisStyle(props.ellipsis), ...props.style }}
+  >{children}</a>
+  // Keep editable/copy buttons outside the anchor to avoid nested interactive elements.
+  return <Show when={props.copyable || props.editable} fallback={anchor(wrapDecorations(props.children, props))}>
+    <span class={twMerge(_class(), props.ellipsis ? 'inline-block max-w-full align-bottom' : undefined)} style={props.style}><TypographyContent {...props} renderText={anchor} /></span>
+  </Show>
 }
 
 const Typography = { Text, Title, Paragraph, Link }

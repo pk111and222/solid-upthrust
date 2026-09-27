@@ -1,33 +1,21 @@
-import { VariantProps } from 'class-variance-authority';
-declare const alertContainerVariants: (props?: ({
-    type?: "error" | "warning" | "success" | "info" | null | undefined;
-    hasDescription?: boolean | null | undefined;
+export declare const alertClass: (props?: ({
+    tone?: "outlined-success" | "outlined-info" | "outlined-warning" | "outlined-error" | "filled-success" | "filled-info" | "filled-warning" | "filled-error" | null | undefined;
+    withDescription?: boolean | null | undefined;
     banner?: boolean | null | undefined;
-    closing?: boolean | null | undefined;
+    leaving?: boolean | null | undefined;
 } & import('class-variance-authority/types').ClassProp) | undefined) => string;
-declare const alertContentVariants: (props?: ({
-    closing?: boolean | null | undefined;
-    hasDescription?: boolean | null | undefined;
-} & import('class-variance-authority/types').ClassProp) | undefined) => string;
-declare const alertIconVariants: (props?: ({
+export declare const alertIconClass: (props?: ({
     type?: "error" | "warning" | "success" | "info" | null | undefined;
-    hasDescription?: boolean | null | undefined;
+    withDescription?: boolean | null | undefined;
 } & import('class-variance-authority/types').ClassProp) | undefined) => string;
-declare const alertMessageVariants: (props?: ({
-    hasDescription?: boolean | null | undefined;
+export declare const alertBuiltinIconClass = "inline-flex items-center leading-[0] align-[-0.125em] [&>svg]:inline-block";
+export declare const alertSectionClass = "flex-1 min-w-0";
+export declare const alertTitleClass: (props?: ({
+    withDescription?: boolean | null | undefined;
 } & import('class-variance-authority/types').ClassProp) | undefined) => string;
-declare const alertDescriptionVariants: (props?: ({} & import('class-variance-authority/types').ClassProp) | undefined) => string;
-declare const alertCloseVariants: (props?: ({
-    hasDescription?: boolean | null | undefined;
+export declare const alertDescriptionClass: (props?: ({
+    type?: "error" | "warning" | "success" | "info" | null | undefined;
 } & import('class-variance-authority/types').ClassProp) | undefined) => string;
-declare const alertActionVariants: (props?: ({
-    closable?: boolean | null | undefined;
-} & import('class-variance-authority/types').ClassProp) | undefined) => string;
-export declare const alertContainerClass: (variants: VariantProps<typeof alertContainerVariants>) => string;
-export declare const alertContentClass: (variants: VariantProps<typeof alertContentVariants>) => string;
-export declare const alertIconClass: (variants: VariantProps<typeof alertIconVariants>) => string;
-export declare const alertMessageClass: (variants: VariantProps<typeof alertMessageVariants>) => string;
-export declare const alertDescriptionClass: (variants: VariantProps<typeof alertDescriptionVariants>) => string;
-export declare const alertCloseClass: (variants: VariantProps<typeof alertCloseVariants>) => string;
-export declare const alertActionClass: (variants: VariantProps<typeof alertActionVariants>) => string;
-export {};
+export declare const alertActionsClass = "ms-[8px]";
+export declare const alertCloseClass: string;
+export declare const alertCloseIconClass = "inline-flex items-center leading-[0] align-[-0.125em] [&>svg]:inline-block text-on-surface/45 hover:text-on-surface transition-colors duration-200";

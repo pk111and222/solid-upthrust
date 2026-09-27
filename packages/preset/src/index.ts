@@ -105,6 +105,7 @@ const createPreset: PresetFactory<Theme, PresetUpthrustOptions> = (options = {})
           `@keyframes ut-badge-processing{0%{transform:scale(0.8);opacity:0.5}100%{transform:scale(2.4);opacity:0}}`,
           `@keyframes ut-zoom-in{0%{transform:scale(0.2);opacity:0}100%{transform:scale(1);opacity:1}}`,
           `@keyframes ut-form-explain-item{0%{transform:translateY(-5px);opacity:0;max-height:0}100%{transform:translateY(0);opacity:1;max-height:64px}}`,
+          `@keyframes ut-progress-active{0%{transform:translateX(-100%) scaleX(0);opacity:0.1}20%{transform:translateX(-100%) scaleX(0);opacity:0.5}100%{transform:translateX(0) scaleX(1);opacity:0}}`,
         ].join(''),
       },
     ],

@@ -1,0 +1,586 @@
+- generic [active] [ref=f17e1]:
+  - link "跳至正文" [ref=f17e2] [cursor=pointer]:
+    - /url: "#main-content"
+  - generic [ref=f17e3]:
+    - generic [ref=f17e4]:
+      - link "↗ Solid Upthrust" [ref=f17e5] [cursor=pointer]:
+        - /url: /
+        - generic [ref=f17e6]: ↗
+        - generic [ref=f17e7]: Solid Upthrust
+      - navigation "主导航" [ref=f17e8]:
+        - link "开发指南" [ref=f17e9] [cursor=pointer]:
+          - /url: /guide/
+        - link "组件" [ref=f17e10] [cursor=pointer]:
+          - /url: /components/
+        - generic [ref=f17e11]: Solid 2 RC
+    - generic [ref=f17e12]:
+      - complementary [ref=f17e13]:
+        - navigation "文档目录" [ref=f17e14]:
+          - menu [ref=f17e15]:
+            - generic [ref=f17e16]:
+              - generic [ref=f17e17]: 开始使用
+              - menuitem [ref=f17e18] [cursor=pointer]:
+                - link "Solid Upthrust" [ref=f17e19]:
+                  - /url: /
+              - menuitem [ref=f17e20] [cursor=pointer]:
+                - link "工程入门" [ref=f17e21]:
+                  - /url: /guide/
+              - menuitem [ref=f17e22] [cursor=pointer]:
+                - link "文档与示例渲染" [ref=f17e23]:
+                  - /url: /guide/rendering/
+            - generic [ref=f17e24]:
+              - generic [ref=f17e25]: 研发指南
+              - menuitem [ref=f17e26] [cursor=pointer]:
+                - link "架构与目录" [ref=f17e27]:
+                  - /url: /guide/architecture/
+              - menuitem [ref=f17e28] [cursor=pointer]:
+                - link "四层测试" [ref=f17e29]:
+                  - /url: /guide/testing/
+              - menuitem [ref=f17e30] [cursor=pointer]:
+                - link "功能交付清单" [ref=f17e31]:
+                  - /url: /guide/contributing/
+            - generic [ref=f17e32]:
+              - generic [ref=f17e33]: 组件
+              - menuitem [ref=f17e34] [cursor=pointer]:
+                - link "组件总览" [ref=f17e35]:
+                  - /url: /components/
+              - menuitem [ref=f17e36] [cursor=pointer]:
+                - link "Button 按钮" [ref=f17e37]:
+                  - /url: /components/general/button/
+              - menuitem [ref=f17e38] [cursor=pointer]:
+                - link "ConfigProvider 全局配置" [ref=f17e39]:
+                  - /url: /components/general/config-provider/
+              - menuitem [ref=f17e40] [cursor=pointer]:
+                - link "Icon 图标" [ref=f17e41]:
+                  - /url: /components/general/icon/
+              - menuitem [ref=f17e42] [cursor=pointer]:
+                - link "Dropdown 下拉菜单" [ref=f17e43]:
+                  - /url: /components/navigation/dropdown/
+              - menuitem [ref=f17e44] [cursor=pointer]:
+                - link "Tabs 标签页" [ref=f17e45]:
+                  - /url: /components/navigation/tabs/
+              - menuitem [ref=f17e46] [cursor=pointer]:
+                - link "Pagination 分页" [ref=f17e47]:
+                  - /url: /components/navigation/pagination/
+              - menuitem [ref=f17e48] [cursor=pointer]:
+                - link "Tree 树形控件" [ref=f17e49]:
+                  - /url: /components/data-entry/tree/
+              - menuitem [ref=f17e50] [cursor=pointer]:
+                - link "Skeleton 骨架屏" [ref=f17e51]:
+                  - /url: /components/feedback/skeleton/
+              - menuitem [ref=f17e52] [cursor=pointer]:
+                - link "Input 输入框" [ref=f17e53]:
+                  - /url: /components/data-entry/input/
+              - menuitem [ref=f17e54] [cursor=pointer]:
+                - link "Tooltip 文字提示" [ref=f17e55]:
+                  - /url: /components/data-display/tooltip/
+              - menuitem [ref=f17e56] [cursor=pointer]:
+                - link "Checkbox 多选框" [ref=f17e57]:
+                  - /url: /components/data-entry/checkbox/
+              - menuitem [ref=f17e58] [cursor=pointer]:
+                - link "Popover 气泡卡片" [ref=f17e59]:
+                  - /url: /components/data-display/popover/
+              - menuitem [ref=f17e60] [cursor=pointer]:
+                - link "Radio 单选框" [ref=f17e61]:
+                  - /url: /components/data-entry/radio/
+              - menuitem [ref=f17e62] [cursor=pointer]:
+                - link "Switch 开关" [ref=f17e63]:
+                  - /url: /components/data-entry/switch/
+              - menuitem [ref=f17e64] [cursor=pointer]:
+                - link "Form 表单" [ref=f17e65]:
+                  - /url: /components/data-entry/form/
+              - menuitem [ref=f17e66] [cursor=pointer]:
+                - link "InputNumber 数字输入框" [ref=f17e67]:
+                  - /url: /components/data-entry/input-number/
+              - menuitem [ref=f17e68] [cursor=pointer]:
+                - link "Slider 滑动输入条" [ref=f17e69]:
+                  - /url: /components/data-entry/slider/
+              - menuitem [ref=f17e70] [cursor=pointer]:
+                - link "Rate 评分" [ref=f17e71]:
+                  - /url: /components/data-entry/rate/
+              - menuitem [ref=f17e72] [cursor=pointer]:
+                - link "Segmented 分段控制器" [ref=f17e73]:
+                  - /url: /components/data-entry/segmented/
+              - menuitem [ref=f17e74] [cursor=pointer]:
+                - link "TimePicker 时间选择器" [ref=f17e75]:
+                  - /url: /components/data-entry/time-picker/
+              - menuitem [ref=f17e76] [cursor=pointer]:
+                - link "DatePicker 日期选择器" [ref=f17e77]:
+                  - /url: /components/data-entry/date-picker/
+              - menuitem [ref=f17e78] [cursor=pointer]:
+                - link "ColorPicker 颜色选择器" [ref=f17e79]:
+                  - /url: /components/data-entry/color-picker/
+              - menuitem [ref=f17e80] [cursor=pointer]:
+                - link "Upload 上传" [ref=f17e81]:
+                  - /url: /components/data-entry/upload/
+              - menuitem [ref=f17e82] [cursor=pointer]:
+                - link "Select 选择器" [ref=f17e83]:
+                  - /url: /components/data-entry/select/
+              - menuitem [ref=f17e84] [cursor=pointer]:
+                - link "AutoComplete 自动补全" [ref=f17e85]:
+                  - /url: /components/data-entry/auto-complete/
+              - menuitem [ref=f17e86] [cursor=pointer]:
+                - link "Cascader 级联选择" [ref=f17e87]:
+                  - /url: /components/data-entry/cascader/
+              - menuitem [ref=f17e88] [cursor=pointer]:
+                - link "Mentions 提及" [ref=f17e89]:
+                  - /url: /components/data-entry/mentions/
+              - menuitem [ref=f17e90] [cursor=pointer]:
+                - link "TreeSelect 树选择" [ref=f17e91]:
+                  - /url: /components/data-entry/tree-select/
+              - menuitem [ref=f17e92] [cursor=pointer]:
+                - link "Transfer 穿梭框" [ref=f17e93]:
+                  - /url: /components/data-entry/transfer/
+        - generic [ref=f17e94]: 面向 SolidJS 的企业级组件库
+      - main [ref=f17e95]:
+        - article [ref=f17e97]:
+          - generic [ref=f17e98]:
+            - generic [ref=f17e99]: 文档
+            - generic [ref=f17e100]: /
+            - generic [ref=f17e101]: Form 表单
+          - heading "Form 表单" [level=1] [ref=f17e102]
+          - paragraph [ref=f17e103]: 字段收集、校验、动态列表、依赖和自定义控件。
+          - region [ref=f17e104]:
+            - heading "使用方式" [level=2] [ref=f17e105]
+            - generic [ref=f17e106]:
+              - paragraph [ref=f17e107]: Form 由数据引擎与 UI 协议组成：Form 创建或接收 createForm() 实例，Form.Item 注册 NamePath 字段，首方控件通过 FormItemContext 接收 value、onChange、disabled、size、id 和校验状态。
+              - code [ref=f17e109]: "import Form, { FormItem, FormList } from 'upthrust-ui/source/Form' import Input from 'upthrust-ui/source/Input' <Form onFinish={values => console.log(values)}> <FormItem name=\"username\" label=\"用户名\" rules={[{ required: true }]}> <Input /> </FormItem> </Form>"
+              - paragraph [ref=f17e110]: 显式控件属性优先于 Form.Item 注入；显式 onChange 会接管写入，若仍需字段同步请在回调中调用 useFormItem().onChange。Solid 版本不复制 React 子节点，而是使用上下文协议。
+              - paragraph [ref=f17e111]: 并列操作按钮使用 Flex gap=8 wrap="wrap" 或 Space 统一留白；Button 自身不设置外边距。带参 render props 适合派生展示，编辑控件建议直接作为子组件，使用 Form.Item 上下文保持节点与焦点稳定。
+          - region [ref=f17e112]:
+            - heading "示例" [level=2] [ref=f17e113]
+            - generic [ref=f17e115]:
+              - region "基本使用：收集、提交与重置" [ref=f17e116]:
+                - status [ref=f17e118]: 示例加载中…
+                - heading "基本使用：收集、提交与重置" [level=3] [ref=f17e120]
+                - group [ref=f17e121]:
+                  - generic "TSX 〈/〉 展开代码" [ref=f17e122] [cursor=pointer]:
+                    - generic [ref=f17e123]: TSX
+                    - generic [ref=f17e124]: 〈/〉 展开代码
+              - region "表单布局：水平、垂直与内联" [ref=f17e125]:
+                - status [ref=f17e127]: 示例加载中…
+                - heading "表单布局：水平、垂直与内联" [level=3] [ref=f17e129]
+                - group [ref=f17e130]:
+                  - generic "TSX 〈/〉 展开代码" [ref=f17e131] [cursor=pointer]:
+                    - generic [ref=f17e132]: TSX
+                    - generic [ref=f17e133]: 〈/〉 展开代码
+              - region "复杂控件：Select、Checkbox、Radio、Switch 与 InputNumber" [ref=f17e134]:
+                - status [ref=f17e136]: 示例加载中…
+                - heading "复杂控件：Select、Checkbox、Radio、Switch 与 InputNumber" [level=3] [ref=f17e138]
+                - group [ref=f17e139]:
+                  - generic "TSX 〈/〉 展开代码" [ref=f17e140] [cursor=pointer]:
+                    - generic [ref=f17e141]: TSX
+                    - generic [ref=f17e142]: 〈/〉 展开代码
+              - region "表单禁用" [ref=f17e143]:
+                - status [ref=f17e145]: 示例加载中…
+                - heading "表单禁用" [level=3] [ref=f17e147]
+                - group [ref=f17e148]:
+                  - generic "TSX 〈/〉 展开代码" [ref=f17e149] [cursor=pointer]:
+                    - generic [ref=f17e150]: TSX
+                    - generic [ref=f17e151]: 〈/〉 展开代码
+              - region "校验状态、反馈图标与辅助信息" [ref=f17e152]:
+                - status [ref=f17e154]: 示例加载中…
+                - heading "校验状态、反馈图标与辅助信息" [level=3] [ref=f17e156]
+                - group [ref=f17e157]:
+                  - generic "TSX 〈/〉 展开代码" [ref=f17e158] [cursor=pointer]:
+                    - generic [ref=f17e159]: TSX
+                    - generic [ref=f17e160]: 〈/〉 展开代码
+              - region "同步、异步、warningOnly 与失败回调" [ref=f17e161]:
+                - status [ref=f17e163]: 示例加载中…
+                - heading "同步、异步、warningOnly 与失败回调" [level=3] [ref=f17e165]
+                - group [ref=f17e166]:
+                  - generic "TSX 〈/〉 展开代码" [ref=f17e167] [cursor=pointer]:
+                    - generic [ref=f17e168]: TSX
+                    - generic [ref=f17e169]: 〈/〉 展开代码
+              - region "字段监听：实时计算派生值" [ref=f17e170]:
+                - status [ref=f17e172]: 示例加载中…
+                - heading "字段监听：实时计算派生值" [level=3] [ref=f17e174]
+                - group [ref=f17e175]:
+                  - generic "TSX 〈/〉 展开代码" [ref=f17e176] [cursor=pointer]:
+                    - generic [ref=f17e177]: TSX
+                    - generic [ref=f17e178]: 〈/〉 展开代码
+              - region "校验时机与手动校验" [ref=f17e179]:
+                - status [ref=f17e181]: 示例加载中…
+                - heading "校验时机与手动校验" [level=3] [ref=f17e183]
+                - group [ref=f17e184]:
+                  - generic "TSX 〈/〉 展开代码" [ref=f17e185] [cursor=pointer]:
+                    - generic [ref=f17e186]: TSX
+                    - generic [ref=f17e187]: 〈/〉 展开代码
+              - region "仅校验：不写入错误状态" [ref=f17e188]:
+                - status [ref=f17e190]: 示例加载中…
+                - heading "仅校验：不写入错误状态" [level=3] [ref=f17e192]
+                - group [ref=f17e193]:
+                  - generic "TSX 〈/〉 展开代码" [ref=f17e194] [cursor=pointer]:
+                    - generic [ref=f17e195]: TSX
+                    - generic [ref=f17e196]: 〈/〉 展开代码
+              - region "normalize：提交前转换字段值" [ref=f17e197]:
+                - status [ref=f17e199]: 示例加载中…
+                - heading "normalize：提交前转换字段值" [level=3] [ref=f17e201]
+                - group [ref=f17e202]:
+                  - generic "TSX 〈/〉 展开代码" [ref=f17e203] [cursor=pointer]:
+                    - generic [ref=f17e204]: TSX
+                    - generic [ref=f17e205]: 〈/〉 展开代码
+              - region "自定义校验文案" [ref=f17e206]:
+                - status [ref=f17e208]: 示例加载中…
+                - heading "自定义校验文案" [level=3] [ref=f17e210]
+                - group [ref=f17e211]:
+                  - generic "TSX 〈/〉 展开代码" [ref=f17e212] [cursor=pointer]:
+                    - generic [ref=f17e213]: TSX
+                    - generic [ref=f17e214]: 〈/〉 展开代码
+              - region "条件字段与字段联动" [ref=f17e215]:
+                - status [ref=f17e217]: 示例加载中…
+                - heading "条件字段与字段联动" [level=3] [ref=f17e219]
+                - group [ref=f17e220]:
+                  - generic "TSX 〈/〉 展开代码" [ref=f17e221] [cursor=pointer]:
+                    - generic [ref=f17e222]: TSX
+                    - generic [ref=f17e223]: 〈/〉 展开代码
+              - region "动态增减表单项" [ref=f17e224]:
+                - status [ref=f17e226]: 示例加载中…
+                - heading "动态增减表单项" [level=3] [ref=f17e228]
+                - group [ref=f17e229]:
+                  - generic "TSX 〈/〉 展开代码" [ref=f17e230] [cursor=pointer]:
+                    - generic [ref=f17e231]: TSX
+                    - generic [ref=f17e232]: 〈/〉 展开代码
+              - region "动态增减嵌套字段" [ref=f17e233]:
+                - status [ref=f17e235]: 示例加载中…
+                - heading "动态增减嵌套字段" [level=3] [ref=f17e237]
+                - group [ref=f17e238]:
+                  - generic "TSX 〈/〉 展开代码" [ref=f17e239] [cursor=pointer]:
+                    - generic [ref=f17e240]: TSX
+                    - generic [ref=f17e241]: 〈/〉 展开代码
+              - region "动态列表排序" [ref=f17e242]:
+                - status [ref=f17e244]: 示例加载中…
+                - heading "动态列表排序" [level=3] [ref=f17e246]
+                - group [ref=f17e247]:
+                  - generic "TSX 〈/〉 展开代码" [ref=f17e248] [cursor=pointer]:
+                    - generic [ref=f17e249]: TSX
+                    - generic [ref=f17e250]: 〈/〉 展开代码
+              - region "复杂的动态增减表单项" [ref=f17e251]:
+                - status [ref=f17e253]: 示例加载中…
+                - heading "复杂的动态增减表单项" [level=3] [ref=f17e255]
+                - group [ref=f17e256]:
+                  - generic "TSX 〈/〉 展开代码" [ref=f17e257] [cursor=pointer]:
+                    - generic [ref=f17e258]: TSX
+                    - generic [ref=f17e259]: 〈/〉 展开代码
+              - region "自定义列表行与操作" [ref=f17e260]:
+                - status [ref=f17e262]: 示例加载中…
+                - heading "自定义列表行与操作" [level=3] [ref=f17e264]
+                - group [ref=f17e265]:
+                  - generic "TSX 〈/〉 展开代码" [ref=f17e266] [cursor=pointer]:
+                    - generic [ref=f17e267]: TSX
+                    - generic [ref=f17e268]: 〈/〉 展开代码
+              - region "preserve：字段卸载后的值处理" [ref=f17e269]:
+                - status [ref=f17e271]: 示例加载中…
+                - heading "preserve：字段卸载后的值处理" [level=3] [ref=f17e273]
+                - group [ref=f17e274]:
+                  - generic "TSX 〈/〉 展开代码" [ref=f17e275] [cursor=pointer]:
+                    - generic [ref=f17e276]: TSX
+                    - generic [ref=f17e277]: 〈/〉 展开代码
+              - region "表单数据变更事件" [ref=f17e278]:
+                - status [ref=f17e280]: 示例加载中…
+                - heading "表单数据变更事件" [level=3] [ref=f17e282]
+                - group [ref=f17e283]:
+                  - generic "TSX 〈/〉 展开代码" [ref=f17e284] [cursor=pointer]:
+                    - generic [ref=f17e285]: TSX
+                    - generic [ref=f17e286]: 〈/〉 展开代码
+              - region "自定义物料与实例回填" [ref=f17e287]:
+                - status [ref=f17e289]: 示例加载中…
+                - heading "自定义物料与实例回填" [level=3] [ref=f17e291]
+                - group [ref=f17e292]:
+                  - generic "TSX 〈/〉 展开代码" [ref=f17e293] [cursor=pointer]:
+                    - generic [ref=f17e294]: TSX
+                    - generic [ref=f17e295]: 〈/〉 展开代码
+              - region "嵌套结构与表单套表单" [ref=f17e296]:
+                - status [ref=f17e298]: 示例加载中…
+                - heading "嵌套结构与表单套表单" [level=3] [ref=f17e300]
+                - group [ref=f17e301]:
+                  - generic "TSX 〈/〉 展开代码" [ref=f17e302] [cursor=pointer]:
+                    - generic [ref=f17e303]: TSX
+                    - generic [ref=f17e304]: 〈/〉 展开代码
+              - region "登录框" [ref=f17e305]:
+                - status [ref=f17e307]: 示例加载中…
+                - heading "登录框" [level=3] [ref=f17e309]
+                - group [ref=f17e310]:
+                  - generic "TSX 〈/〉 展开代码" [ref=f17e311] [cursor=pointer]:
+                    - generic [ref=f17e312]: TSX
+                    - generic [ref=f17e313]: 〈/〉 展开代码
+              - region "注册新用户与确认密码" [ref=f17e314]:
+                - status [ref=f17e316]: 示例加载中…
+                - heading "注册新用户与确认密码" [level=3] [ref=f17e318]
+                - group [ref=f17e319]:
+                  - generic "TSX 〈/〉 展开代码" [ref=f17e320] [cursor=pointer]:
+                    - generic [ref=f17e321]: TSX
+                    - generic [ref=f17e322]: 〈/〉 展开代码
+              - region "高级搜索与内联表单" [ref=f17e323]:
+                - status [ref=f17e325]: 示例加载中…
+                - heading "高级搜索与内联表单" [level=3] [ref=f17e327]
+                - group [ref=f17e328]:
+                  - generic "TSX 〈/〉 展开代码" [ref=f17e329] [cursor=pointer]:
+                    - generic [ref=f17e330]: TSX
+                    - generic [ref=f17e331]: 〈/〉 展开代码
+              - region "时间类控件" [ref=f17e332]:
+                - status [ref=f17e334]: 示例加载中…
+                - heading "时间类控件" [level=3] [ref=f17e336]
+                - group [ref=f17e337]:
+                  - generic "TSX 〈/〉 展开代码" [ref=f17e338] [cursor=pointer]:
+                    - generic [ref=f17e339]: TSX
+                    - generic [ref=f17e340]: 〈/〉 展开代码
+              - region "校验并提交上传控件" [ref=f17e341]:
+                - status [ref=f17e343]: 示例加载中…
+                - heading "校验并提交上传控件" [level=3] [ref=f17e345]
+                - group [ref=f17e346]:
+                  - generic "TSX 〈/〉 展开代码" [ref=f17e347] [cursor=pointer]:
+                    - generic [ref=f17e348]: TSX
+                    - generic [ref=f17e349]: 〈/〉 展开代码
+              - region "表单方法调用" [ref=f17e350]:
+                - status [ref=f17e352]: 示例加载中…
+                - heading "表单方法调用" [level=3] [ref=f17e354]
+                - group [ref=f17e355]:
+                  - generic "TSX 〈/〉 展开代码" [ref=f17e356] [cursor=pointer]:
+                    - generic [ref=f17e357]: TSX
+                    - generic [ref=f17e358]: 〈/〉 展开代码
+          - region [ref=f17e359]:
+            - heading "校验与依赖" [level=2] [ref=f17e360]
+            - generic [ref=f17e361]:
+              - paragraph [ref=f17e362]: 规则支持 async-validator 的常用类型校验和自定义 validator；validator 可以返回 Promise，也可以使用 callback。validateFirst 为 true 时串行短路，parallel 时第一个失败先返回；较新的校验会淘汰旧结果，避免异步乱序覆盖。
+              - paragraph [ref=f17e363]: dependencies 只对已编辑字段触发级联校验；Form.List 内的相对依赖会追加当前列表行路径。validateOnly 只运行规则而不写入错误状态，dirty 只校验已编辑字段。
+              - paragraph [ref=f17e364]: 当前不支持 antd 的 message API、scrollToFirstError、validateFieldsAndScroll、Form.Provider、Form.useWatch 静态 Hook；对应能力请使用 onFinishFailed、form.watch、原生 focus 或应用层协调。
+          - region [ref=f17e365]:
+            - heading "Form 实例" [level=2] [ref=f17e366]
+            - generic [ref=f17e367]:
+              - paragraph [ref=f17e368]: 通过 ref 读取 getFieldValue/getFieldsValue/getFieldsError，使用 setFieldValue/setFieldsValue/setFields 更新，resetFields 重置，validateFields 校验，submit 执行校验并触发 onFinish。watch(pathOrSelector) 返回 Solid signal，并附带 dispose。
+              - paragraph [ref=f17e369]: initialValues 只初始化一次；不要把它当作响应式受控值。需要异步回填或编辑切换时调用 setFieldsValue，切换记录时先 resetFields 再写入新值。
+          - region [ref=f17e370]:
+            - heading "FormProps API" [level=2] [ref=f17e371]
+            - table "API 属性表格" [ref=f17e376]:
+              - rowgroup [ref=f17e382]:
+                - row [ref=f17e383]:
+                  - columnheader "属性" [ref=f17e384]
+                  - columnheader "说明" [ref=f17e387]
+                  - columnheader "类型" [ref=f17e390]
+                  - columnheader "默认值" [ref=f17e393]
+              - rowgroup [ref=f17e396]:
+                - row [ref=f17e397]:
+                  - cell [ref=f17e398]:
+                    - code [ref=f17e401]: form
+                  - cell "外部 createForm() 实例；传入后 Form.Item 共用该实例。" [ref=f17e402]
+                  - cell [ref=f17e405]:
+                    - code [ref=f17e408]: FormInstance
+                  - cell [ref=f17e409]:
+                    - code [ref=f17e412]: 自动创建
+                - row [ref=f17e413]:
+                  - cell [ref=f17e414]:
+                    - code [ref=f17e417]: initialValues
+                  - cell "表单初始值，只在实例初始化时读取；动态更新请使用 setFieldsValue。" [ref=f17e418]
+                  - cell [ref=f17e421]:
+                    - code [ref=f17e424]: Store
+                  - cell [ref=f17e425]:
+                    - code [ref=f17e428]: "{}"
+                - row [ref=f17e429]:
+                  - cell [ref=f17e430]:
+                    - code [ref=f17e433]: layout / size
+                  - cell "标签布局与控件尺寸；显式 Item/控件属性优先。" [ref=f17e434]
+                  - cell [ref=f17e437]:
+                    - code [ref=f17e440]: "'horizontal' | 'vertical' | 'inline' / SizeType"
+                  - cell [ref=f17e441]:
+                    - code [ref=f17e444]: "'horizontal' / —"
+                - row [ref=f17e445]:
+                  - cell [ref=f17e446]:
+                    - code [ref=f17e449]: disabled / preserve
+                  - cell "表单级禁用与字段卸载后的值保留策略。" [ref=f17e450]
+                  - cell [ref=f17e453]:
+                    - code [ref=f17e456]: boolean / boolean
+                  - cell [ref=f17e457]:
+                    - code [ref=f17e460]: false / true
+                - row [ref=f17e461]:
+                  - cell [ref=f17e462]:
+                    - code [ref=f17e465]: requiredMark / colon
+                  - cell "必填标记、可选提示与标签冒号。" [ref=f17e466]
+                  - cell [ref=f17e469]:
+                    - code [ref=f17e472]: boolean | 'optional' / boolean
+                  - cell [ref=f17e473]:
+                    - code [ref=f17e476]: true / true
+                - row [ref=f17e477]:
+                  - cell [ref=f17e478]:
+                    - code [ref=f17e481]: validateTrigger / validateMessages
+                  - cell "默认校验触发器与 async-validator 消息模板。" [ref=f17e482]
+                  - cell [ref=f17e485]:
+                    - code [ref=f17e488]: string | string[] | false / Record<string, any>
+                  - cell [ref=f17e489]:
+                    - code [ref=f17e492]: "'onChange' / —"
+                - row [ref=f17e493]:
+                  - cell [ref=f17e494]:
+                    - code [ref=f17e497]: onFinish / onFinishFailed
+                  - cell "校验成功提交或校验失败通知；submit() 仍返回 Promise。" [ref=f17e498]
+                  - cell [ref=f17e501]:
+                    - code [ref=f17e504]: (values) => void / (errorInfo) => void
+                  - cell [ref=f17e505]:
+                    - code [ref=f17e508]: —
+                - row [ref=f17e509]:
+                  - cell [ref=f17e510]:
+                    - code [ref=f17e513]: onValuesChange / onFieldsChange
+                  - cell "字段变化回调；changedValues 是本次路径的对象，字段回调包含 name/value/meta。" [ref=f17e514]
+                  - cell [ref=f17e517]:
+                    - code [ref=f17e520]: (changed, all) => void
+                  - cell [ref=f17e521]:
+                    - code [ref=f17e524]: —
+                - row [ref=f17e525]:
+                  - cell [ref=f17e526]:
+                    - code [ref=f17e529]: component / clearOnDestroy
+                  - cell "原生表单元素渲染与卸载时清空外部实例。" [ref=f17e530]
+                  - cell [ref=f17e533]:
+                    - code [ref=f17e536]: "'form' | 'div' | false / boolean"
+                  - cell [ref=f17e537]:
+                    - code [ref=f17e540]: "'form' / false"
+          - region [ref=f17e541]:
+            - heading "FormItemProps API" [level=2] [ref=f17e542]
+            - table "API 属性表格" [ref=f17e547]:
+              - rowgroup [ref=f17e553]:
+                - row [ref=f17e554]:
+                  - columnheader "属性" [ref=f17e555]
+                  - columnheader "说明" [ref=f17e558]
+                  - columnheader "类型" [ref=f17e561]
+                  - columnheader "默认值" [ref=f17e564]
+              - rowgroup [ref=f17e567]:
+                - row [ref=f17e568]:
+                  - cell [ref=f17e569]:
+                    - code [ref=f17e572]: name
+                  - cell "字段路径；省略时只渲染布局/帮助区域，不注册字段。" [ref=f17e573]
+                  - cell [ref=f17e576]:
+                    - code [ref=f17e579]: NamePath
+                  - cell [ref=f17e580]:
+                    - code [ref=f17e583]: —
+                - row [ref=f17e584]:
+                  - cell [ref=f17e585]:
+                    - code [ref=f17e588]: label / tooltip / extra
+                  - cell "标签、问号提示与持久辅助说明。" [ref=f17e589]
+                  - cell [ref=f17e592]:
+                    - code [ref=f17e595]: JSX.Element
+                  - cell [ref=f17e596]:
+                    - code [ref=f17e599]: —
+                - row [ref=f17e600]:
+                  - cell [ref=f17e601]:
+                    - code [ref=f17e604]: rules / required
+                  - cell "async-validator 规则与必填标记；支持 required、type、min/max、pattern、enum、validator、warningOnly。" [ref=f17e605]
+                  - cell [ref=f17e608]:
+                    - code [ref=f17e611]: FormFieldRule[] / boolean
+                  - cell [ref=f17e612]:
+                    - code [ref=f17e615]: "[] / 自动推断"
+                - row [ref=f17e616]:
+                  - cell [ref=f17e617]:
+                    - code [ref=f17e620]: dependencies
+                  - cell "依赖字段变化时重新校验已编辑字段；Form.List 行内路径自动追加当前列表前缀。" [ref=f17e621]
+                  - cell [ref=f17e624]:
+                    - code [ref=f17e627]: NamePath[]
+                  - cell [ref=f17e628]:
+                    - code [ref=f17e631]: "[]"
+                - row [ref=f17e632]:
+                  - cell [ref=f17e633]:
+                    - code [ref=f17e636]: validateTrigger / validateFirst / validateDebounce
+                  - cell "字段级校验触发、短路策略与防抖时间。" [ref=f17e637]
+                  - cell [ref=f17e640]:
+                    - code [ref=f17e643]: string | string[] | false / boolean | 'parallel' / number
+                  - cell [ref=f17e644]:
+                    - code [ref=f17e647]: 继承 Form / — / —
+                - row [ref=f17e648]:
+                  - cell [ref=f17e649]:
+                    - code [ref=f17e652]: normalize / getValueFromEvent
+                  - cell "写入 store 前转换值，或从事件/自定义控件参数提取字段值。" [ref=f17e653]
+                  - cell [ref=f17e656]:
+                    - code [ref=f17e659]: (value, prev, all) => value / (...args) => value
+                  - cell [ref=f17e660]:
+                    - code [ref=f17e663]: —
+                - row [ref=f17e664]:
+                  - cell [ref=f17e665]:
+                    - code [ref=f17e668]: validateStatus / hasFeedback
+                  - cell "覆盖状态展示或显示状态图标；控件会收到 error/warning。" [ref=f17e669]
+                  - cell [ref=f17e672]:
+                    - code [ref=f17e675]: "'error' | 'warning' | 'validating' | 'success' / boolean"
+                  - cell [ref=f17e676]:
+                    - code [ref=f17e679]: 自动 / false
+                - row [ref=f17e680]:
+                  - cell [ref=f17e681]:
+                    - code [ref=f17e684]: help / hidden / preserve
+                  - cell "自定义帮助、保留 DOM 与卸载后的字段值策略。" [ref=f17e685]
+                  - cell [ref=f17e688]:
+                    - code [ref=f17e691]: JSX.Element / boolean / boolean
+                  - cell [ref=f17e692]:
+                    - code [ref=f17e695]: — / false / 继承 Form
+          - region [ref=f17e696]:
+            - heading "FormListProps API" [level=2] [ref=f17e697]
+            - table "API 属性表格" [ref=f17e702]:
+              - rowgroup [ref=f17e708]:
+                - row [ref=f17e709]:
+                  - columnheader "属性" [ref=f17e710]
+                  - columnheader "说明" [ref=f17e713]
+                  - columnheader "类型" [ref=f17e716]
+                  - columnheader "默认值" [ref=f17e719]
+              - rowgroup [ref=f17e722]:
+                - row [ref=f17e723]:
+                  - cell [ref=f17e724]:
+                    - code [ref=f17e727]: name
+                  - cell "列表字段路径，可嵌套在另一个 Form.List 中。" [ref=f17e728]
+                  - cell [ref=f17e731]:
+                    - code [ref=f17e734]: string | (string | number)[]
+                  - cell [ref=f17e735]:
+                    - code [ref=f17e738]: 必填
+                - row [ref=f17e739]:
+                  - cell [ref=f17e740]:
+                    - code [ref=f17e743]: initialValue
+                  - cell "列表为空且路径没有值时写入的初始数组。" [ref=f17e744]
+                  - cell [ref=f17e747]:
+                    - code [ref=f17e750]: unknown
+                  - cell [ref=f17e751]:
+                    - code [ref=f17e754]: —
+                - row [ref=f17e755]:
+                  - cell [ref=f17e756]:
+                    - code [ref=f17e759]: children
+                  - cell "fields 提供 name/key；operations 提供 add(defaultValue?, index?), remove(index | index[]), move(from, to)。" [ref=f17e760]
+                  - cell [ref=f17e763]:
+                    - code [ref=f17e766]: (fields, operations) => JSX.Element
+                  - cell [ref=f17e767]:
+                    - code [ref=f17e770]: 必填
+          - region [ref=f17e771]:
+            - heading "布局、样式与可访问性" [level=2] [ref=f17e772]
+            - generic [ref=f17e773]:
+              - paragraph [ref=f17e774]: horizontal 为默认布局，labelWidth、labelAlign、labelWrap 控制标签列；vertical 将标签置于控件上方，inline 适合紧凑查询条件。requiredMark、colon、tooltip、help、extra 和 hasFeedback 都有独立语义，不要只依赖颜色表达错误。
+              - paragraph [ref=f17e775]: 有 name 的 Item 自动生成稳定 id 并将 label for 指向控件；自定义物料应透传 id、disabled、aria-invalid，并提供可访问名称。当前真实浏览器回归覆盖 Chromium；不据此宣称 Firefox/WebKit 已验证。
+          - region [ref=f17e776]:
+            - heading "与 Ant Design 6 的差异" [level=2] [ref=f17e777]
+            - generic [ref=f17e778]:
+              - paragraph [ref=f17e779]: 本实现参考 Ant Design 6 Form 的字段、规则、列表和实例组织，但不是 API 完全兼容实现。组件使用 Solid 2 的 signal/context 模型，onChange 以 value 为主，子组件不通过 cloneElement 注入；默认校验文案为中文。
+              - paragraph [ref=f17e780]: 已覆盖：Form.Item、Form.List、嵌套 NamePath、initialValues/initialValue、preserve、动态增删、依赖、异步校验、warningOnly、validateFirst、validateDebounce、normalize、getValueFromEvent、reset/submit 和自定义上下文物料。未实现或尚未承诺的差异以本页限制为准。
+          - region [ref=f17e781]:
+            - heading "常见用法与边缘场景" [level=2] [ref=f17e782]
+            - generic [ref=f17e783]:
+              - paragraph [ref=f17e784]:
+                - strong [ref=f17e785]: 初始值与回填：
+                - text: initialValues 只在表单实例初始化时读取；编辑页拿到接口数据后使用 setFieldsValue，切换记录时先 resetFields 再写入。字段级 initialValue 适合动态 Item，Form.List 的初始数组优先放在 Form.List 的 initialValue 或 Form 的 initialValues 中。
+              - paragraph [ref=f17e786]:
+                - strong [ref=f17e787]: 动态列表：
+                - text: Form.List 的 fields.name 是当前索引，fields.key 是稳定渲染键。遍历时使用 keyed，字段使用 [field.name, 'property']；嵌套列表继续把当前行路径传给下一级 Form.List。删除、移动后不要缓存旧索引，依赖当前 field descriptor 解析路径。
+              - paragraph [ref=f17e788]:
+                - strong [ref=f17e789]: 自定义物料：
+                - text: 编辑型控件使用上下文协议或响应式 props；带参 render props 在字段值变化时会重新执行，适合派生展示。第一方物料通过 FormItemContext 接收 value、onChange、id、disabled、size 和校验状态。自定义控件必须透传 id、aria-invalid、disabled，并在 onChange 中把值交给 Form.Item，而不是只修改本地 signal。
+              - paragraph [ref=f17e790]:
+                - strong [ref=f17e791]: 表单套表单：
+                - text: 嵌套的 Form 拥有独立实例和提交边界；内层使用 component="div" 与实例 submit()，内层提交不会触发外层 onFinish。若业务只是分组而不是独立提交，请使用 Form.Item 的无 name 布局区域，避免不必要地创建嵌套原生 form。
+              - paragraph [ref=f17e792]:
+                - strong [ref=f17e793]: 校验边缘：
+                - text: async validator 应在过期请求完成后忽略旧结果；依赖字段只重新校验已经编辑的字段。validateOnly 适合提交前预检，warningOnly 不阻止提交，validateDebounce 适合远程校验。组件当前不提供 scrollToFirstError，请在 onFinishFailed 中根据 errorFields 自行聚焦。
+          - region [ref=f17e794]:
+            - heading "FAQ" [level=2] [ref=f17e795]
+            - generic [ref=f17e796]:
+              - paragraph [ref=f17e797]:
+                - strong [ref=f17e798]: 为什么改变 initialValues 不会更新表单？
+                - text: 这是一次性初始化配置。响应式业务数据应调用 setFieldsValue；不要把 initialValues 当作受控 value。
+              - paragraph [ref=f17e799]:
+                - strong [ref=f17e800]: 为什么 Form.List 行内依赖要写相对路径？
+                - text: Form.Item 会自动追加当前列表行前缀，因此同一行字段依赖写 ['price']，不要手工拼接数组索引；嵌套列表按当前层级继续使用相对路径。
+              - paragraph [ref=f17e801]:
+                - strong [ref=f17e802]: 为什么自定义控件没有自动写入？
+                - text: Solid 没有 React 的 cloneElement 注入。使用第一方控件，或通过 useFormItem 协议同步值；如果显式传入 onChange，它会优先于上下文协议。
+              - paragraph [ref=f17e803]:
+                - strong [ref=f17e804]: 何时使用 FormInstance？
+                - text: 用户输入优先由 Form.Item 管理；接口回填、重置、校验、读取快照、跨字段联动和提交按钮放在表单外时，再通过 form/ref 使用命令式 API。
+          - generic [ref=f17e805]: Solid Upthrust · 基于 Solid 2 构建

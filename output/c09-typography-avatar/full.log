@@ -1,0 +1,11 @@
+$ pnpm --dir packages/testing run test --maxWorkers=2
+$ vitest run --maxWorkers=2
+
+ RUN  v4.1.10 /Users/zhangchen327/code/github/pk111and222/solid-upthrust/packages/testing
+
+
+ Test Files  228 passed (228)
+      Tests  2486 passed (2486)
+   Start at  21:48:37
+   Duration  35.58s (transform 2.85s, setup 0ms, import 13.22s, tests 6.56s, environment 34.27s)
+

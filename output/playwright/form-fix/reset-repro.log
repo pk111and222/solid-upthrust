@@ -1,0 +1,140 @@
+
+ RUN  v4.1.10 /Users/zhangchen327/code/github/pk111and222/solid-upthrust/packages/testing
+
+stderr | render/Form/contracts.test.tsx
+You appear to have multiple instances of Solid. This can lead to unexpected behavior.
+
+stderr | render/Form/contracts.test.tsx > [form.render.field] injects value, id, status and reset through Form.Item
+[NO_OWNER_CLEANUP] onCleanup called outside a reactive context will never be run
+[STRICT_READ_UNTRACKED] Reactive value read directly in <[solid-refresh]Input> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+
+stderr | render/Form/contracts.test.tsx > [form.render.custom] render props support custom controls
+[NO_OWNER_CLEANUP] onCleanup called outside a reactive context will never be run
+
+stderr | render/Form/contracts.test.tsx > [form.render.list] list rows write nested values and operations preserve submitted shape
+[NO_OWNER_CLEANUP] onCleanup called outside a reactive context will never be run
+[STRICT_READ_UNTRACKED] Reactive value read directly in an effect callback will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+[STRICT_READ_UNTRACKED] Reactive value read directly in an effect callback will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+[STRICT_READ_UNTRACKED] Reactive value read directly in <[solid-refresh]FormItem> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+[STRICT_READ_UNTRACKED] Reactive value read directly in <[solid-refresh]FormItem> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+[STRICT_READ_UNTRACKED] Reactive value read directly in <[solid-refresh]FormItem> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+[STRICT_READ_UNTRACKED] Reactive value read directly in <[solid-refresh]FormItem> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+[STRICT_READ_UNTRACKED] Reactive value read directly in <[solid-refresh]Input> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+[STRICT_READ_UNTRACKED] Reactive value read directly in <[solid-refresh]FormItem> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+[STRICT_READ_UNTRACKED] Reactive value read directly in <[solid-refresh]FormItem> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+[STRICT_READ_UNTRACKED] Reactive value read directly in <[solid-refresh]FormItem> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+[STRICT_READ_UNTRACKED] Reactive value read directly in <[solid-refresh]FormItem> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+[STRICT_READ_UNTRACKED] Reactive value read directly in <[solid-refresh]Input> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+
+stderr | render/Form/contracts.test.tsx > [form.render.list] surviving rows keep their DOM identity after removal
+[STRICT_READ_UNTRACKED] Reactive value read directly in <[solid-refresh]Form> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+[NO_OWNER_CLEANUP] onCleanup called outside a reactive context will never be run
+[STRICT_READ_UNTRACKED] Reactive value read directly in <[solid-refresh]FormItem> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+[STRICT_READ_UNTRACKED] Reactive value read directly in <[solid-refresh]FormItem> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+[STRICT_READ_UNTRACKED] Reactive value read directly in <[solid-refresh]FormItem> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+[STRICT_READ_UNTRACKED] Reactive value read directly in <[solid-refresh]FormItem> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+[STRICT_READ_UNTRACKED] Reactive value read directly in <[solid-refresh]Input> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+[STRICT_READ_UNTRACKED] Reactive value read directly in <[solid-refresh]FormItem> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+[STRICT_READ_UNTRACKED] Reactive value read directly in <[solid-refresh]FormItem> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+[STRICT_READ_UNTRACKED] Reactive value read directly in <[solid-refresh]FormItem> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+[STRICT_READ_UNTRACKED] Reactive value read directly in <[solid-refresh]FormItem> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+[STRICT_READ_UNTRACKED] Reactive value read directly in <[solid-refresh]Input> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+
+stderr | render/Form/contracts.test.tsx > [form.render.destroy] clearOnDestroy clears an externally owned form store
+[STRICT_READ_UNTRACKED] Reactive value read directly in <[solid-refresh]Form> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+[NO_OWNER_CLEANUP] onCleanup called outside a reactive context will never be run
+[STRICT_READ_UNTRACKED] Reactive value read directly in <[solid-refresh]Input> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+
+stderr | render/Form/contracts.test.tsx > [form.render.focus] retains the input node across typing and validation
+[STRICT_READ_UNTRACKED] Reactive value read directly in <[solid-refresh]Form> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+[NO_OWNER_CLEANUP] onCleanup called outside a reactive context will never be run
+[STRICT_READ_UNTRACKED] Reactive value read directly in <[solid-refresh]Input> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+
+stderr | render/Form/contracts.test.tsx > [form.render.accessor] does not treat a JSX accessor as a field renderer
+[STRICT_READ_UNTRACKED] Reactive value read directly in <[solid-refresh]Form> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+[NO_OWNER_CLEANUP] onCleanup called outside a reactive context will never be run
+
+stderr | render/Form/contracts.test.tsx > [form.render.unique-id] isolates label associations across forms
+[STRICT_READ_UNTRACKED] Reactive value read directly in <[solid-refresh]Form> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+[NO_OWNER_CLEANUP] onCleanup called outside a reactive context will never be run
+[STRICT_READ_UNTRACKED] Reactive value read directly in <[solid-refresh]Input> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+[STRICT_READ_UNTRACKED] Reactive value read directly in <[solid-refresh]Form> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+[NO_OWNER_CLEANUP] onCleanup called outside a reactive context will never be run
+[STRICT_READ_UNTRACKED] Reactive value read directly in <[solid-refresh]Input> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+
+stderr | render/Form/contracts.test.tsx > [form.render.feedback] renders one feedback slot beside clear and count
+[STRICT_READ_UNTRACKED] Reactive value read directly in <[solid-refresh]Form> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+[NO_OWNER_CLEANUP] onCleanup called outside a reactive context will never be run
+[STRICT_READ_UNTRACKED] Reactive value read directly in <[solid-refresh]Input> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+
+stderr | render/Form/contracts.test.tsx > [form.render.list-labels] updates row labels after moving without remounting
+[STRICT_READ_UNTRACKED] Reactive value read directly in <[solid-refresh]Form> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+[NO_OWNER_CLEANUP] onCleanup called outside a reactive context will never be run
+[STRICT_READ_UNTRACKED] Reactive value read directly in <[solid-refresh]FormItem> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+[STRICT_READ_UNTRACKED] Reactive value read directly in <[solid-refresh]FormItem> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+[STRICT_READ_UNTRACKED] Reactive value read directly in <[solid-refresh]FormItem> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+[STRICT_READ_UNTRACKED] Reactive value read directly in <[solid-refresh]FormItem> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+[STRICT_READ_UNTRACKED] Reactive value read directly in <[solid-refresh]Input> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+[STRICT_READ_UNTRACKED] Reactive value read directly in <[solid-refresh]FormItem> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+[STRICT_READ_UNTRACKED] Reactive value read directly in <[solid-refresh]FormItem> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+[STRICT_READ_UNTRACKED] Reactive value read directly in <[solid-refresh]FormItem> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+[STRICT_READ_UNTRACKED] Reactive value read directly in <[solid-refresh]FormItem> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+[STRICT_READ_UNTRACKED] Reactive value read directly in <[solid-refresh]Input> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+
+stderr | render/Form/contracts.test.tsx > [form.render.container] respects the div container for an independent inner store
+[STRICT_READ_UNTRACKED] Reactive value read directly in <[solid-refresh]Form> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+[NO_OWNER_CLEANUP] onCleanup called outside a reactive context will never be run
+[STRICT_READ_UNTRACKED] Reactive value read directly in <[solid-refresh]Form> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+[NO_OWNER_CLEANUP] onCleanup called outside a reactive context will never be run
+[STRICT_READ_UNTRACKED] Reactive value read directly in <[solid-refresh]Input> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+
+stderr | render/Form/contracts.test.tsx > [form.render.reset-once] resets each field once per reset-button click
+[STRICT_READ_UNTRACKED] Reactive value read directly in <[solid-refresh]Form> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+[NO_OWNER_CLEANUP] onCleanup called outside a reactive context will never be run
+[STRICT_READ_UNTRACKED] Reactive value read directly in <[solid-refresh]Input> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+[STRICT_READ_UNTRACKED] Reactive value read directly in <[solid-refresh]Button> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+[STRICT_READ_UNTRACKED] Reactive value read directly in <[solid-refresh]Button> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+[STRICT_READ_UNTRACKED] Reactive value read directly in <[solid-refresh]Button> will not update. Move it into a tracking scope (JSX, a memo, or an effect's compute function).
+
+··········xx
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 2 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  render/Form/contracts.test.tsx > [form.render.container] respects the div container for an independent inner store
+AssertionError: expected <form novalidate …(1)>…(1)</form>
+…(1) to have a length of 1 but got 2
+
+- Expected
++ Received
+
+- 1
++ 2
+
+ ❯ render/Form/contracts.test.tsx:193:41
+    191| it('[form.render.container] respects the div container for an independ…
+    192|   const view = mount(() => <Form><Form component="div"><FormItem name=…
+    193|   expect(view.querySelectorAll('form')).toHaveLength(1)
+       |                                         ^
+    194| })
+    195|
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/2]⎯
+
+ FAIL  render/Form/contracts.test.tsx > [form.render.reset-once] resets each field once per reset-button click
+AssertionError: expected "vi.fn()" to be called 1 times, but got 2 times
+ ❯ render/Form/contracts.test.tsx:204:17
+    202|   await Promise.resolve()
+    203|   flush()
+    204|   expect(reset).toHaveBeenCalledTimes(1)
+       |                 ^
+    205| })
+    206|
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/2]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  2 failed | 10 passed (12)
+   Start at  19:52:18
+   Duration  733ms (transform 317ms, setup 0ms, import 398ms, tests 48ms, environment 187ms)
+

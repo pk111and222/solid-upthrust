@@ -1,4 +1,5 @@
 import { createContext, useContext } from 'solid-js'
+import type { JSX } from '@solidjs/web'
 import type { SizeType } from '../../common/type'
 
 /**
@@ -17,6 +18,10 @@ export type FormItemControl = {
   onChange: (value: any, event?: Event) => void
   /** 'error' | 'warning' | 'validating' | 'success' | undefined */
   validateStatus: () => 'error' | 'warning' | 'validating' | 'success' | undefined
+  /** Optional feedback slot; affix-capable controls register while mounted. */
+  hasFeedback?: () => boolean
+  feedback?: () => JSX.Element
+  registerFeedback?: () => void
   /** id for label htmlFor association. */
   id: () => string | undefined
   disabled: () => boolean | undefined
@@ -63,5 +68,5 @@ export const useFormItem = (props: {
     return undefined
   }
 
-  return { value, onChange, disabled, id, size, status }
+  return { value, onChange, disabled, id, size, status, hasContext: !!ctx, hasFeedback: ctx?.hasFeedback, feedback: ctx?.feedback, registerFeedback: ctx?.registerFeedback }
 }

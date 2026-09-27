@@ -1,0 +1,10 @@
+$ vitest run headless/Statistic headless/Empty render/Empty render/Statistic smoke/Empty smoke/Statistic
+
+ RUN  v4.1.10 /Users/zhangchen327/code/github/pk111and222/solid-upthrust/packages/testing
+
+
+ Test Files  6 passed (6)
+      Tests  35 passed (35)
+   Start at  09:20:36
+   Duration  1.11s (transform 1.45s, setup 0ms, import 1.85s, tests 217ms, environment 2.20s)
+

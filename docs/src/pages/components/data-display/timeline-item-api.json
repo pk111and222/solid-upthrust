@@ -1,0 +1,11 @@
+[
+  { "name": "color", "type": "'blue' | 'red' | 'green' | 'gray' | string", "default": "'blue'", "description": "圆点颜色：预设色或任意 CSS 颜色" },
+  { "name": "content", "type": "JSX.Element", "default": "—", "description": "设置内容；children 为废弃别名" },
+  { "name": "icon", "type": "JSX.Element", "default": "—", "description": "自定义节点；dot 为废弃别名" },
+  { "name": "loading", "type": "boolean", "default": "false", "description": "加载状态：无 icon 时显示加载图标" },
+  { "name": "placement", "type": "'start' | 'end'", "default": "—", "description": "自定义节点位置，覆盖 mode 推导；position 为废弃别名" },
+  { "name": "title", "type": "JSX.Element", "default": "—", "description": "设置标题；label 为废弃别名" },
+  { "name": "classNames", "type": "Record<'root' | 'wrapper' | 'icon' | 'section' | 'header' | 'title' | 'content' | 'rail', string>", "default": "—", "description": "单个节点的语义化 class" },
+  { "name": "styles", "type": "Record<'root' | 'wrapper' | 'icon' | 'section' | 'header' | 'title' | 'content' | 'rail', JSX.CSSProperties>", "default": "—", "description": "单个节点的语义化 style" },
+  { "name": "class / style", "type": "string / JSX.CSSProperties", "default": "—", "description": "节点根元素的 class 与 style" }
+]

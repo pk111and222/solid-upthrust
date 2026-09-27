@@ -124,6 +124,7 @@ export function createFormField(form: FormInstance, config: FormFieldConfig) {
     getNamePath,
     getInitialValue: () => untrack(() => config.initialValue),
     getRules: () => untrack(() => config.rules),
+    getDependencies: () => untrack(() => config.dependencies),
     isListField: () => false,
     isList: () => false,
     isPreserve: () => untrack(() => config.preserve),

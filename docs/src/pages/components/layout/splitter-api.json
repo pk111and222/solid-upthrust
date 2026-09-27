@@ -1,0 +1,33 @@
+{
+  "splitter": [
+    { "name": "orientation", "type": "'horizontal' | 'vertical'", "default": "'horizontal'", "description": "排列方向。horizontal 左右排列、分隔条竖向；vertical 上下排列、分隔条横向。" },
+    { "name": "vertical", "type": "boolean", "default": "false", "description": "等同 orientation=\"vertical\"；与 orientation 同时设置时 orientation 优先。" },
+    { "name": "layout", "type": "'horizontal' | 'vertical'", "default": "—", "description": "已废弃，请使用 orientation；仅在 orientation 与 vertical 都未设置时生效。" },
+    { "name": "lazy", "type": "boolean", "default": "false", "description": "延迟模式：拖拽中只移动预览线（已按 min / max 夹取），松开后才一次性调整尺寸；期间不触发 onResize。" },
+    { "name": "destroyOnHidden", "type": "boolean", "default": "false", "description": "面板折叠（尺寸为 0）时卸载内容，展开时重新挂载；Panel 自身的 destroyOnHidden 优先。" },
+    { "name": "draggerIcon", "type": "JSX.Element", "default": "短线抓手", "description": "自定义分隔条中间的抓手图标。" },
+    { "name": "collapsible", "type": "{ motion?: boolean; icon?: { start?: JSX.Element; end?: JSX.Element } }", "default": "—", "description": "motion 为折叠 / 展开开启 flex-basis 过渡（拖拽中自动关闭过渡，保证跟手）；icon 替换折叠按钮图标。" },
+    { "name": "collapsibleIcon", "type": "{ start?: JSX.Element; end?: JSX.Element }", "default": "—", "description": "已废弃，请使用 collapsible.icon。" },
+    { "name": "keyboardStep", "type": "number", "default": "16", "description": "本库扩展：分隔条聚焦时方向键每次移动的像素。" },
+    { "name": "onResizeStart", "type": "(sizes: number[]) => void", "default": "—", "description": "开始拖拽时触发，参数为拖拽前各面板的像素尺寸。" },
+    { "name": "onResize", "type": "(sizes: number[]) => void", "default": "—", "description": "尺寸变化中触发（拖拽、键盘、折叠）；lazy 模式下拖拽期间不触发。受控用法在这里写回 size。" },
+    { "name": "onResizeEnd", "type": "(sizes: number[]) => void", "default": "—", "description": "拖拽结束、键盘调整或折叠后触发，参数为最终像素尺寸。" },
+    { "name": "onCollapse", "type": "(collapsed: boolean[], sizes: number[]) => void", "default": "—", "description": "点击折叠按钮后触发；collapsed[i] 表示第 i 个面板尺寸为 0。" },
+    { "name": "onDraggerDoubleClick", "type": "(index: number) => void", "default": "—", "description": "双击分隔条时触发，index 为分隔条序号（位于第 index 与 index + 1 个面板之间）。双击不会开始拖拽。" },
+    { "name": "classNames", "type": "{ root?: string; panel?: string; dragger?: string | { default?: string; active?: string } }", "default": "—", "description": "语义化类名。dragger 传字符串等同 { default }；active 只在拖拽中追加。" },
+    { "name": "styles", "type": "{ root?: CSSProperties; panel?: CSSProperties; dragger?: { default?: CSSProperties; active?: CSSProperties } }", "default": "—", "description": "语义化内联样式，规则同 classNames。" },
+    { "name": "class / style / ref", "type": "string / CSSProperties / (el) => void", "default": "—", "description": "附加到根节点；根节点默认 w-full h-full，请给它或父容器一个确定的尺寸。" },
+    { "name": "...rest", "type": "JSX.HTMLAttributes<HTMLDivElement>", "default": "—", "description": "其余原生属性透传到根节点。" }
+  ],
+  "panel": [
+    { "name": "defaultSize", "type": "number | string", "default": "—", "description": "初始尺寸（非受控）。数字或纯数字字符串按 px，'30%' 按容器百分比；未设置的面板平分剩余空间。" },
+    { "name": "size", "type": "number | string", "default": "—", "description": "受控尺寸，格式同 defaultSize。任一面板设置 size 时全部面板进入受控，拖拽只经 onResize 通知。" },
+    { "name": "min", "type": "number | string", "default": "—", "description": "最小尺寸，拖拽与键盘调整都会被夹取；折叠不受 min 限制。" },
+    { "name": "max", "type": "number | string", "default": "—", "description": "最大尺寸。" },
+    { "name": "resizable", "type": "boolean", "default": "true", "description": "是否可拖拽；相邻两个面板都可调时分隔条才可拖拽 / 聚焦。" },
+    { "name": "collapsible", "type": "boolean | { start?: boolean; end?: boolean; showCollapsibleIcon?: boolean | 'auto' }", "default": "false", "description": "快速折叠。true 两个方向都可折叠；start / end 分别在面板前后的分隔条上显示折叠按钮。showCollapsibleIcon：'auto'（默认）悬停分隔条时显示，true 常显，false 隐藏。" },
+    { "name": "destroyOnHidden", "type": "boolean", "default": "继承 Splitter", "description": "折叠时卸载内容。" },
+    { "name": "class / style / ref", "type": "string / CSSProperties / (el) => void", "default": "—", "description": "附加到面板节点，与 classNames.panel / styles.panel 合并。" },
+    { "name": "...rest", "type": "JSX.HTMLAttributes<HTMLDivElement>", "default": "—", "description": "其余原生属性透传到面板节点。" }
+  ]
+}

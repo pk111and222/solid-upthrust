@@ -174,7 +174,7 @@ it('[select.form.real] form submit and reset', async () => {
   </Form>)
   dispose = view.dispose
   const box = view.host.querySelector('[role="combobox"]')!
-  expect(box.id).toBe('upthrust-form-item-fruit')
+  expect(box.id).toMatch(/^upthrust-form-item-.+-fruit$/)
   expect(box.getAttribute('aria-disabled')).toBe('false')
   expect(box.textContent).toContain('苹果')
   expect(document.querySelectorAll<HTMLElement>('[role="option"]')[1]?.textContent).toContain('香蕉')

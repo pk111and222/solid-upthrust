@@ -1,0 +1,9 @@
+[
+  { "name": "description", "type": "JSX.Element", "default": "'暂无数据'", "description": "自定义描述内容；false / null / '' 不渲染描述区域" },
+  { "name": "image", "type": "JSX.Element | EmptyPresentedImage | string | false | null", "default": "Empty.PRESENTED_IMAGE_DEFAULT", "description": "设置显示图片：节点、内置插画或图片地址（渲染 img，alt 取字符串描述，否则为 'empty'）；null 回落默认插画，false 不渲染图片区域（本库扩展）" },
+  { "name": "imageStyle", "type": "JSX.CSSProperties", "default": "—", "description": "图片样式，已废弃，请使用 styles.image" },
+  { "name": "children", "type": "JSX.Element", "default": "—", "description": "底部内容，渲染在 footer 区域" },
+  { "name": "classNames", "type": "Record<'root' | 'image' | 'description' | 'footer', string>", "default": "—", "description": "语义化结构 class，不支持函数形式" },
+  { "name": "styles", "type": "Record<'root' | 'image' | 'description' | 'footer', JSX.CSSProperties>", "default": "—", "description": "语义化结构 style，不支持函数形式" },
+  { "name": "class / style", "type": "string / JSX.CSSProperties", "default": "—", "description": "根节点 class 与 style；其余 HTML 属性透传到根节点" }
+]

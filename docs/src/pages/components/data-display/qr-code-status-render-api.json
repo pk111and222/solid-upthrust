@@ -1,0 +1,5 @@
+[
+  { "name": "status", "type": "'expired' | 'loading' | 'scanned'", "default": "—", "description": "当前状态" },
+  { "name": "locale", "type": "{ expired: string; refresh: string; scanned: string }", "default": "—", "description": "合并后的文案" },
+  { "name": "onRefresh", "type": "() => void", "default": "—", "description": "透传的 onRefresh" }
+]
