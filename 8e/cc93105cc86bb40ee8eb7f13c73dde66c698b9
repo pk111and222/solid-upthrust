@@ -1,0 +1,1401 @@
+CLAUDE.md
+  s_deabe7994c30a2::t_07977c29cc51f0 133
+TODO.md
+  s_deabe7994c30a2::t_260ba8e5ebd09b 123-134,205-207,211-217,221-232,294-295,297,369-375
+docs/contributing/regressions/empty-statistic.md
+  s_deabe7994c30a2::t_d9fc4af92b8aea 1-55
+docs/contributing/regressions/flex.md
+  s_e34220fc676554::t_0bc3e5e1221cd6 1-106
+docs/contributing/regressions/form.md
+  s_e34220fc676554::t_23eeb9c768eb27 1-115
+docs/contributing/regressions/grid-space-divider.md
+  s_e34220fc676554::t_bda978842e6842 1-158
+docs/contributing/regressions/layout.md
+  s_e34220fc676554::t_05e27a984af2f4 1-110
+docs/contributing/regressions/popover.md
+  s_e34220fc676554::t_61f0d910bbbbb8 68-71
+docs/contributing/regressions/result-qrcode.md
+  s_deabe7994c30a2::t_22693e0a56ae26 1-79
+docs/contributing/regressions/select.md
+  s_e34220fc676554::t_8c50caed541f12 72-80
+docs/contributing/regressions/splitter-masonry.md
+  s_e34220fc676554::t_be5e2050879ddd 1-162
+docs/contributing/regressions/tag-badge.md
+  s_73ead3a6f7caeb::t_a3f91ee658e214 1-66
+docs/contributing/regressions/timeline-progress.md
+  s_deabe7994c30a2::t_2d959e9eed6ca6 1-81
+docs/contributing/regressions/tooltip.md
+  s_e34220fc676554::t_f34583d7cdad83 74-77
+docs/contributing/regressions/typography-avatar.md
+  s_d244dbd085cc34::t_41270bdc20627b 1-65
+docs/contributing/regressions/watermark-alert.md
+  s_deabe7994c30a2::t_b97dfd54f3dcd0 1-80
+docs/src/examples/alert/action.tsx
+  s_deabe7994c30a2::t_0b6b9aa81e0cf9 1-25
+docs/src/examples/alert/banner.tsx
+  s_deabe7994c30a2::t_4970bd99656b8c 1-13
+docs/src/examples/alert/basic.tsx
+  s_deabe7994c30a2::t_073dbfc481c6bc 1-5
+docs/src/examples/alert/closable.tsx
+  s_deabe7994c30a2::t_9825f8960bb056 1-17
+docs/src/examples/alert/custom-icon.tsx
+  s_deabe7994c30a2::t_41b1ac2b51a154 1-26
+docs/src/examples/alert/custom-title-alignment.tsx
+  s_deabe7994c30a2::t_a6a57d6ca5c589 1-24
+docs/src/examples/alert/description.tsx
+  s_deabe7994c30a2::t_7c602954700854 1-13
+docs/src/examples/alert/error-boundary.tsx
+  s_deabe7994c30a2::t_abed49225a98a6 1-22
+docs/src/examples/alert/filled.tsx
+  s_deabe7994c30a2::t_0629d2b06a614b 1-5
+docs/src/examples/alert/icon.tsx
+  s_deabe7994c30a2::t_9c4546185965d0 1-21
+docs/src/examples/alert/smooth-closed.tsx
+  s_deabe7994c30a2::t_ecaffc9fa7750b 1-14
+docs/src/examples/alert/style-class.tsx
+  s_deabe7994c30a2::t_f9703fdaca0dc1 1-27
+docs/src/examples/alert/style.tsx
+  s_deabe7994c30a2::t_660f1c225389ca 1-13
+docs/src/examples/avatar/badge.tsx
+  s_d244dbd085cc34::t_f5839db1b30a11 1-5
+docs/src/examples/avatar/basic.tsx
+  s_d244dbd085cc34::t_6100c007c0d977 1-4
+docs/src/examples/avatar/characters.tsx
+  s_d244dbd085cc34::t_b4bc462704bc08 1-7
+docs/src/examples/avatar/group.tsx
+  s_d244dbd085cc34::t_9f4c4425027c0e 1-4
+docs/src/examples/avatar/overflow.tsx
+  s_d244dbd085cc34::t_f94b440b443959 1-7
+docs/src/examples/avatar/recovery.tsx
+  s_d244dbd085cc34::t_6b91a288295b66 1-9
+docs/src/examples/avatar/responsive.tsx
+  s_d244dbd085cc34::t_f5df79ccaf48ce 1-5
+docs/src/examples/avatar/types.tsx
+  s_d244dbd085cc34::t_7ea117b84af75b 1-5
+docs/src/examples/badge/basic.tsx
+  s_73ead3a6f7caeb::t_a56b8638a63897 1-10
+docs/src/examples/badge/change.tsx
+  s_73ead3a6f7caeb::t_cebef69c3f927e 1-25
+docs/src/examples/badge/colorful.tsx
+  s_73ead3a6f7caeb::t_68c63ccf27b604 1-14
+docs/src/examples/badge/dot.tsx
+  s_73ead3a6f7caeb::t_66733d4832728f 1-8
+docs/src/examples/badge/link.tsx
+  s_73ead3a6f7caeb::t_f51561f9f66102 1-6
+docs/src/examples/badge/no-wrapper.tsx
+  s_73ead3a6f7caeb::t_3fc645c55f4149 1-14
+docs/src/examples/badge/offset.tsx
+  s_73ead3a6f7caeb::t_3bce8852bc65a8 1-9
+docs/src/examples/badge/overflow.tsx
+  s_73ead3a6f7caeb::t_fad30d3cc11887 1-11
+docs/src/examples/badge/ribbon.tsx
+  s_73ead3a6f7caeb::t_8c9589b136cd83 1-15
+docs/src/examples/badge/semantic.tsx
+  s_73ead3a6f7caeb::t_b829484564bddc 1-14
+docs/src/examples/badge/size.tsx
+  s_73ead3a6f7caeb::t_fbf37cbf97c3db 1-10
+docs/src/examples/badge/status.tsx
+  s_73ead3a6f7caeb::t_d9e11524ea21cb 1-11
+docs/src/examples/badge/title.tsx
+  s_73ead3a6f7caeb::t_925f9576f2d706 1-10
+docs/src/examples/divider/horizontal.tsx
+  s_e34220fc676554::t_b05c8035372178 1-15
+docs/src/examples/divider/orientation-margin.tsx
+  s_e34220fc676554::t_0de198caac61b9 1-9
+docs/src/examples/divider/plain.tsx
+  s_e34220fc676554::t_1104c4842e8706 1-13
+docs/src/examples/divider/semantic.tsx
+  s_e34220fc676554::t_71e65e18518c2a 1-17
+docs/src/examples/divider/size.tsx
+  s_e34220fc676554::t_3e73a471cdb82d 1-13
+docs/src/examples/divider/vertical.tsx
+  s_e34220fc676554::t_9c3dbc15b492b4 1-13
+docs/src/examples/divider/with-text.tsx
+  s_e34220fc676554::t_477a945277b6c2 1-15
+docs/src/examples/empty/basic.tsx
+  s_deabe7994c30a2::t_0667604abdd527 1-5
+docs/src/examples/empty/customize.tsx
+  s_deabe7994c30a2::t_9bee2faa26a0d5 1-13
+docs/src/examples/empty/description.tsx
+  s_deabe7994c30a2::t_7b8f33d3c7b00b 1-5
+docs/src/examples/empty/semantic.tsx
+  s_deabe7994c30a2::t_a1a0505b58615a 1-29
+docs/src/examples/empty/simple.tsx
+  s_deabe7994c30a2::t_0c146a070364a8 1-5
+docs/src/examples/flex/align.tsx
+  s_e34220fc676554::t_012cf3b85364fa 1-27
+docs/src/examples/flex/basic.tsx
+  s_e34220fc676554::t_226632a2f372a6 1-18
+docs/src/examples/flex/combination.tsx
+  s_e34220fc676554::t_f6eb8418ab036b 1-18
+docs/src/examples/flex/element.tsx
+  s_e34220fc676554::t_0504f5b56dc3cd 1-33
+docs/src/examples/flex/flex-item.tsx
+  s_e34220fc676554::t_56bab29b0e5d24 1-20
+docs/src/examples/flex/gap.tsx
+  s_e34220fc676554::t_9b87d9e6a36281 1-28
+docs/src/examples/flex/inline-empty.tsx
+  s_e34220fc676554::t_44de254cfbf30f 1-24
+docs/src/examples/flex/wrap.tsx
+  s_e34220fc676554::t_0c4e8fb2d6cef5 1-22
+docs/src/examples/form/basic.tsx
+  s_08d77751506c02::t_947eac2543c85c 1-18
+docs/src/examples/form/conditional.tsx
+  s_08d77751506c02::t_8952cead7624d7 1-11
+docs/src/examples/form/controls.tsx
+  s_08d77751506c02::t_1ad851bb307638 1-21
+docs/src/examples/form/custom-list.tsx
+  s_08d77751506c02::t_8b4cc63e5ecaaf 1-20
+docs/src/examples/form/custom.tsx
+  s_08d77751506c02::t_8a351f5cd17a16 1-32
+docs/src/examples/form/date-time.tsx
+  s_08d77751506c02::t_385f0a8bc7ab24 1-10
+docs/src/examples/form/disabled.tsx
+  s_08d77751506c02::t_b9c8a4c120b117 1-14
+docs/src/examples/form/feedback.tsx
+  s_08d77751506c02::t_27518d528a711a 1-12
+docs/src/examples/form/fields.tsx
+  s_08d77751506c02::t_8b4d02324bb4ac 1-9
+docs/src/examples/form/layout.tsx
+  s_08d77751506c02::t_608f2857a9db44 1-41
+docs/src/examples/form/list-complex.tsx
+  s_08d77751506c02::t_0dbd0ea4e47164 1-31
+docs/src/examples/form/list-move.tsx
+  s_08d77751506c02::t_36f246d4b40300 1-9
+docs/src/examples/form/list-nested.tsx
+  s_08d77751506c02::t_20eab4fff05731 1-29
+docs/src/examples/form/list.tsx
+  s_08d77751506c02::t_b1400abfbf1b13 1-20
+docs/src/examples/form/login.tsx
+  s_08d77751506c02::t_9d0e9fbecbc7db 1-9
+docs/src/examples/form/messages.tsx
+  s_08d77751506c02::t_428a2572ef5662 1-9
+docs/src/examples/form/nested.tsx
+  s_08d77751506c02::t_352bce42d26cea 1-19
+docs/src/examples/form/normalize.tsx
+  s_08d77751506c02::t_eda25b09e18ee0 1-9
+docs/src/examples/form/preserve.tsx
+  s_08d77751506c02::t_4d60d5c902cd8b 1-9
+docs/src/examples/form/programmatic.tsx
+  s_08d77751506c02::t_12fac074ec3ff5 1-20
+docs/src/examples/form/register.tsx
+  s_08d77751506c02::t_693c62c35b30bc 1-11
+docs/src/examples/form/search.tsx
+  s_08d77751506c02::t_cc738d489aa00f 1-18
+docs/src/examples/form/trigger.tsx
+  s_08d77751506c02::t_a496dfcfb04298 1-10
+docs/src/examples/form/upload.tsx
+  s_08d77751506c02::t_ea8a3f61eba3c1 1-11
+docs/src/examples/form/validate-only.tsx
+  s_08d77751506c02::t_38a53a0b418ec8 1-10
+docs/src/examples/form/validation.tsx
+  s_08d77751506c02::t_853b275f7a18c3 1-23
+docs/src/examples/form/watch.tsx
+  s_08d77751506c02::t_3177fdf13b300f 1-9
+docs/src/examples/grid/align.tsx
+  s_e34220fc676554::t_75ada8d5f7668b 1-23
+docs/src/examples/grid/basic.tsx
+  s_e34220fc676554::t_78e304405e10ba 1-13
+docs/src/examples/grid/flex-stretch.tsx
+  s_e34220fc676554::t_69ce3d72bece8d 1-29
+docs/src/examples/grid/flex.tsx
+  s_e34220fc676554::t_8af4dfafe4f204 1-18
+docs/src/examples/grid/gutter.tsx
+  s_e34220fc676554::t_cfa0bf06581359 1-23
+docs/src/examples/grid/offset.tsx
+  s_e34220fc676554::t_05f822966c3306 1-11
+docs/src/examples/grid/order.tsx
+  s_e34220fc676554::t_c75693f1b27ce7 1-23
+docs/src/examples/grid/playground.tsx
+  s_e34220fc676554::t_1454042e0ce7ff 1-34
+docs/src/examples/grid/responsive-more.tsx
+  s_e34220fc676554::t_6e27471b21d74d 1-25
+docs/src/examples/grid/responsive.tsx
+  s_e34220fc676554::t_3a601ca1a112de 1-11
+docs/src/examples/grid/sort.tsx
+  s_e34220fc676554::t_16d7db3b149d73 1-8
+docs/src/examples/grid/use-breakpoint.tsx
+  s_e34220fc676554::t_5cbfab071830d6 1-17
+docs/src/examples/layout/basic.tsx
+  s_e34220fc676554::t_d50c83d9280e67 1-47
+docs/src/examples/layout/custom-trigger.tsx
+  s_e34220fc676554::t_81c102eeae7915 1-37
+docs/src/examples/layout/fixed-header.tsx
+  s_e34220fc676554::t_d22a9efd19fc6c 1-19
+docs/src/examples/layout/fixed-sider.tsx
+  s_e34220fc676554::t_c28d0e5fb1e5a8 1-25
+docs/src/examples/layout/overflow.tsx
+  s_e34220fc676554::t_1ef2952eb4714a 1-23
+docs/src/examples/layout/responsive.tsx
+  s_e34220fc676554::t_441db25459777e 1-33
+docs/src/examples/layout/reverse-arrow.tsx
+  s_e34220fc676554::t_36b7dfc3b708b8 1-26
+docs/src/examples/layout/side.tsx
+  s_e34220fc676554::t_1525bcc2d5ca8e 1-39
+docs/src/examples/layout/theme.tsx
+  s_e34220fc676554::t_8b377f8b201453 1-25
+docs/src/examples/layout/top-side.tsx
+  s_e34220fc676554::t_437e958881d1ac 1-34
+docs/src/examples/masonry/basic.tsx
+  s_e34220fc676554::t_f8d19103196046 1-21
+docs/src/examples/masonry/children.tsx
+  s_e34220fc676554::t_e522b7349c16a9 1-14
+docs/src/examples/masonry/dynamic.tsx
+  s_e34220fc676554::t_b37497bdb7b026 1-39
+docs/src/examples/masonry/fresh.tsx
+  s_e34220fc676554::t_6ab72ab6933148 1-38
+docs/src/examples/masonry/image.tsx
+  s_e34220fc676554::t_d46520d93eec67 1-24
+docs/src/examples/masonry/item-render.tsx
+  s_e34220fc676554::t_cd339d509b64bb 1-28
+docs/src/examples/masonry/layout-change.tsx
+  s_e34220fc676554::t_3cc4a09d45b9f1 1-28
+docs/src/examples/masonry/responsive.tsx
+  s_e34220fc676554::t_b0a9f5acf0a36b 1-23
+docs/src/examples/masonry/sequential.tsx
+  s_e34220fc676554::t_23edb5cda2305f 1-23
+docs/src/examples/progress/circle-micro.tsx
+  s_deabe7994c30a2::t_d3c88db79efeb6 1-16
+docs/src/examples/progress/circle-mini.tsx
+  s_deabe7994c30a2::t_96c8b3129fb0fc 1-10
+docs/src/examples/progress/circle-steps.tsx
+  s_deabe7994c30a2::t_79548863bfda75 1-20
+docs/src/examples/progress/circle.tsx
+  s_deabe7994c30a2::t_e9c37bf80582dc 1-10
+docs/src/examples/progress/dashboard.tsx
+  s_deabe7994c30a2::t_1717a3fd046afd 1-28
+docs/src/examples/progress/dynamic.tsx
+  s_deabe7994c30a2::t_852bc7ecd193b0 1-22
+docs/src/examples/progress/format.tsx
+  s_deabe7994c30a2::t_8e2664ad153695 1-9
+docs/src/examples/progress/gradient-line.tsx
+  s_deabe7994c30a2::t_d07aad128e6dbf 1-22
+docs/src/examples/progress/info-position.tsx
+  s_deabe7994c30a2::t_e75a61aec6c3bf 1-16
+docs/src/examples/progress/line-mini.tsx
+  s_deabe7994c30a2::t_9353b1e16a4cca 1-11
+docs/src/examples/progress/line.tsx
+  s_deabe7994c30a2::t_715e21c4e8831a 1-12
+docs/src/examples/progress/linecap.tsx
+  s_deabe7994c30a2::t_eb137755c11bfd 1-12
+docs/src/examples/progress/segment.tsx
+  s_deabe7994c30a2::t_168ae2e5799d72 1-19
+docs/src/examples/progress/size.tsx
+  s_deabe7994c30a2::t_507fb6b6d87378 1-28
+docs/src/examples/progress/steps.tsx
+  s_deabe7994c30a2::t_5bbf41fa45ab0e 1-15
+docs/src/examples/progress/style-class.tsx
+  s_deabe7994c30a2::t_e39482da8904cd 1-24
+docs/src/examples/qr-code/base.tsx
+  s_deabe7994c30a2::t_22dcde0e866158 1-12
+docs/src/examples/qr-code/custom-color.tsx
+  s_deabe7994c30a2::t_5c185868c5f552 1-10
+docs/src/examples/qr-code/custom-size.tsx
+  s_deabe7994c30a2::t_ef17bd93afdcbf 1-22
+docs/src/examples/qr-code/custom-status-render.tsx
+  s_deabe7994c30a2::t_9a944a39f570e1 1-31
+docs/src/examples/qr-code/download.tsx
+  s_deabe7994c30a2::t_678ea722af76f2 1-39
+docs/src/examples/qr-code/errorlevel.tsx
+  s_deabe7994c30a2::t_9f59d02a35ed73 1-11
+docs/src/examples/qr-code/icon.tsx
+  s_deabe7994c30a2::t_b948e435c4be1b 1-6
+docs/src/examples/qr-code/logo.ts
+  s_deabe7994c30a2::t_4b700adcda2d12 1-3
+docs/src/examples/qr-code/popover.tsx
+  s_deabe7994c30a2::t_7d89691ee0b5a0 1-9
+docs/src/examples/qr-code/status.tsx
+  s_deabe7994c30a2::t_cafe7128b5dad1 1-12
+docs/src/examples/qr-code/style-class.tsx
+  s_deabe7994c30a2::t_a202353ab185ee 1-20
+docs/src/examples/qr-code/type.tsx
+  s_deabe7994c30a2::t_20fd7b9e467a56 1-9
+docs/src/examples/result/403.tsx
+  s_deabe7994c30a2::t_bbf1019ce5e092 1-6
+docs/src/examples/result/404.tsx
+  s_deabe7994c30a2::t_8aca21f8a76fae 1-6
+docs/src/examples/result/500.tsx
+  s_deabe7994c30a2::t_7f01af4d35f625 1-6
+docs/src/examples/result/custom-icon.tsx
+  s_deabe7994c30a2::t_f751a51ef834aa 1-11
+docs/src/examples/result/error.tsx
+  s_deabe7994c30a2::t_ccf2d03f690912 1-19
+docs/src/examples/result/info.tsx
+  s_deabe7994c30a2::t_e19056c92aaace 1-6
+docs/src/examples/result/style-class.tsx
+  s_deabe7994c30a2::t_670f7e4caaf9d3 1-36
+docs/src/examples/result/success.tsx
+  s_deabe7994c30a2::t_d03f8b67c43cbb 1-11
+docs/src/examples/result/warning.tsx
+  s_deabe7994c30a2::t_365be77342a16a 1-6
+docs/src/examples/space/addon.tsx
+  s_e34220fc676554::t_ba2de31471c60f 1-18
+docs/src/examples/space/align.tsx
+  s_e34220fc676554::t_72e487c4cc3d6d 1-18
+docs/src/examples/space/base.tsx
+  s_e34220fc676554::t_c5459b52e7c9c4 1-14
+docs/src/examples/space/block.tsx
+  s_e34220fc676554::t_a08f58be016611 1-9
+docs/src/examples/space/compact-buttons.tsx
+  s_e34220fc676554::t_71a523b06a69cc 1-20
+docs/src/examples/space/compact-vertical.tsx
+  s_e34220fc676554::t_7a95ae6177fe30 1-17
+docs/src/examples/space/compact.tsx
+  s_e34220fc676554::t_c549ea017bf203 1-21
+docs/src/examples/space/semantic.tsx
+  s_e34220fc676554::t_1358bc6d3ffdb5 1-14
+docs/src/examples/space/separator.tsx
+  s_e34220fc676554::t_ded633a286a98a 1-18
+docs/src/examples/space/size.tsx
+  s_e34220fc676554::t_e7023d03b9a0ef 1-28
+docs/src/examples/space/vertical.tsx
+  s_e34220fc676554::t_36d908ad87bd4a 1-16
+docs/src/examples/space/wrap.tsx
+  s_e34220fc676554::t_480947addaefc6 1-8
+docs/src/examples/splitter/basic.tsx
+  s_e34220fc676554::t_0c428deff71429 1-16
+docs/src/examples/splitter/collapsible-icon.tsx
+  s_e34220fc676554::t_99c92c6d42e425 1-22
+docs/src/examples/splitter/collapsible.tsx
+  s_e34220fc676554::t_b9b862a449f66b 1-30
+docs/src/examples/splitter/control.tsx
+  s_e34220fc676554::t_0222e9f59878bb 1-30
+docs/src/examples/splitter/customize.tsx
+  s_e34220fc676554::t_ff5180cd75f692 1-23
+docs/src/examples/splitter/destroy-on-hidden.tsx
+  s_e34220fc676554::t_efc8da94edbccc 1-24
+docs/src/examples/splitter/double-click.tsx
+  s_e34220fc676554::t_a06aab5a56c77e 1-19
+docs/src/examples/splitter/lazy.tsx
+  s_e34220fc676554::t_07caa83c15592d 1-26
+docs/src/examples/splitter/multiple.tsx
+  s_e34220fc676554::t_4202b4364fef39 1-23
+docs/src/examples/splitter/nested.tsx
+  s_e34220fc676554::t_0fd096bf983ec6 1-23
+docs/src/examples/splitter/vertical.tsx
+  s_e34220fc676554::t_f0c6c039235d35 1-16
+docs/src/examples/statistic/animated.tsx
+  s_deabe7994c30a2::t_f8b662de4584b1 1-34
+docs/src/examples/statistic/basic.tsx
+  s_deabe7994c30a2::t_e2e44fe4891c50 1-18
+docs/src/examples/statistic/card.tsx
+  s_deabe7994c30a2::t_a0d88d295226f8 1-20
+docs/src/examples/statistic/semantic.tsx
+  s_deabe7994c30a2::t_ad243e86871a00 1-33
+docs/src/examples/statistic/timer.tsx
+  s_deabe7994c30a2::t_4311462f3cc24f 1-39
+docs/src/examples/statistic/unit.tsx
+  s_deabe7994c30a2::t_4b8a1c63d8dbf9 1-13
+docs/src/examples/tag/basic.tsx
+  s_73ead3a6f7caeb::t_8d73140e5ec4f2 1-12
+docs/src/examples/tag/checkable.tsx
+  s_73ead3a6f7caeb::t_7e7377d6364d02 1-18
+docs/src/examples/tag/colorful.tsx
+  s_73ead3a6f7caeb::t_c60b52d878f393 1-19
+docs/src/examples/tag/control.tsx
+  s_73ead3a6f7caeb::t_d629b3c24d9672 1-44
+docs/src/examples/tag/customize.tsx
+  s_73ead3a6f7caeb::t_5ccaebb6655f2c 1-9
+docs/src/examples/tag/disabled.tsx
+  s_73ead3a6f7caeb::t_27f1dc96e44210 1-30
+docs/src/examples/tag/icon.tsx
+  s_73ead3a6f7caeb::t_e580212db7b574 1-22
+docs/src/examples/tag/semantic.tsx
+  s_73ead3a6f7caeb::t_f199b329d3ebfc 1-16
+docs/src/examples/tag/status.tsx
+  s_73ead3a6f7caeb::t_0b129899aa96a8 1-22
+docs/src/examples/timeline/alternate.tsx
+  s_deabe7994c30a2::t_2e337363128a3d 1-20
+docs/src/examples/timeline/basic.tsx
+  s_deabe7994c30a2::t_eaa006e59b3e7f 1-12
+docs/src/examples/timeline/custom.tsx
+  s_deabe7994c30a2::t_1c4ed09e919fe2 1-17
+docs/src/examples/timeline/end.tsx
+  s_deabe7994c30a2::t_6e38b7145ff0ab 1-13
+docs/src/examples/timeline/horizontal.tsx
+  s_deabe7994c30a2::t_090c2a1477ca18 1-15
+docs/src/examples/timeline/pending-legacy.tsx
+  s_deabe7994c30a2::t_089936ed93643d 1-9
+docs/src/examples/timeline/pending.tsx
+  s_deabe7994c30a2::t_e83956286c039e 1-20
+docs/src/examples/timeline/semantic.tsx
+  s_deabe7994c30a2::t_77c78fafe51168 1-19
+docs/src/examples/timeline/style-class.tsx
+  s_deabe7994c30a2::t_6a4bc133fc9ce4 1-24
+docs/src/examples/timeline/title-span.tsx
+  s_deabe7994c30a2::t_ea13e2baa68692 1-21
+docs/src/examples/timeline/title.tsx
+  s_deabe7994c30a2::t_d95e42dc9a6c42 1-24
+docs/src/examples/timeline/variant.tsx
+  s_deabe7994c30a2::t_9ae9b64b24f0c5 1-13
+docs/src/examples/typography/basic.tsx
+  s_d244dbd085cc34::t_8bfdf02e3196e6 1-4
+docs/src/examples/typography/controlled.tsx
+  s_d244dbd085cc34::t_4b1390b1455f0b 1-8
+docs/src/examples/typography/copyable.tsx
+  s_d244dbd085cc34::t_f80cc62eb8c453 1-6
+docs/src/examples/typography/editable.tsx
+  s_d244dbd085cc34::t_95fcbf1e6299aa 1-7
+docs/src/examples/typography/ellipsis.tsx
+  s_d244dbd085cc34::t_f8f92165813be2 1-5
+docs/src/examples/typography/link.tsx
+  s_d244dbd085cc34::t_1ec50faddafe8c 1-4
+docs/src/examples/typography/paragraph.tsx
+  s_d244dbd085cc34::t_bd54d1bf4a99dd 1-4
+docs/src/examples/typography/text.tsx
+  s_d244dbd085cc34::t_0e9c7cf3f2f889 1-4
+docs/src/examples/typography/title.tsx
+  s_d244dbd085cc34::t_d815eaa0a53aeb 1-4
+docs/src/examples/watermark/basic.tsx
+  s_deabe7994c30a2::t_02cd4ee12babd2 1-7
+docs/src/examples/watermark/custom.tsx
+  s_deabe7994c30a2::t_1c4c1ea85d3e68 1-63
+docs/src/examples/watermark/image-src.ts
+  s_deabe7994c30a2::t_35f5cfada9475b 1-2
+docs/src/examples/watermark/image.tsx
+  s_deabe7994c30a2::t_f310aa89e745c2 1-8
+docs/src/examples/watermark/multi-line.tsx
+  s_deabe7994c30a2::t_309dd8105338bc 1-7
+docs/src/examples/watermark/portal.tsx
+  s_deabe7994c30a2::t_eb62dc9989cf52 1-36
+docs/src/pages/components/data-display/avatar-avatar-api.json
+  s_d244dbd085cc34::t_3793c168dc3f58 1-62
+docs/src/pages/components/data-display/avatar-group-api.json
+  s_d244dbd085cc34::t_bb23f10de80a4e 1-38
+docs/src/pages/components/data-display/avatar.tsx
+  s_d244dbd085cc34::t_65d7edeec7b702 1-32
+docs/src/pages/components/data-display/badge-badge-api.json
+  s_73ead3a6f7caeb::t_610d0ffb54dc69 1-80
+docs/src/pages/components/data-display/badge-ribbon-api.json
+  s_73ead3a6f7caeb::t_54acbff005a73c 1-32
+docs/src/pages/components/data-display/badge.tsx
+  s_73ead3a6f7caeb::t_945137265aa303 1-42
+docs/src/pages/components/data-display/empty-api.json
+  s_deabe7994c30a2::t_39f00bffadf180 1-9
+docs/src/pages/components/data-display/empty.tsx
+  s_deabe7994c30a2::t_11c771c29430c3 1-25
+docs/src/pages/components/data-display/qr-code-api.json
+  s_deabe7994c30a2::t_53007cdcb1148b 1-20
+docs/src/pages/components/data-display/qr-code-status-render-api.json
+  s_deabe7994c30a2::t_20dbce67200d29 1-5
+docs/src/pages/components/data-display/qr-code.tsx
+  s_deabe7994c30a2::t_c64447688f0e09 1-38
+docs/src/pages/components/data-display/statistic-api.json
+  s_deabe7994c30a2::t_1a8ede6fbb0c16 1-16
+docs/src/pages/components/data-display/statistic-countdown-api.json
+  s_deabe7994c30a2::t_6666323f69f718 1-6
+docs/src/pages/components/data-display/statistic-timer-api.json
+  s_deabe7994c30a2::t_39530f6ed129a0 1-8
+docs/src/pages/components/data-display/statistic.tsx
+  s_deabe7994c30a2::t_1f31d30784bf2f 1-30
+docs/src/pages/components/data-display/tag-checkable-api.json
+  s_73ead3a6f7caeb::t_80a850d9bcf6cc 1-44
+docs/src/pages/components/data-display/tag-group-api.json
+  s_73ead3a6f7caeb::t_3d91d6962c6c85 1-50
+docs/src/pages/components/data-display/tag-tag-api.json
+  s_73ead3a6f7caeb::t_218ff28035a3c2 1-80
+docs/src/pages/components/data-display/tag.tsx
+  s_73ead3a6f7caeb::t_b68c73040f8ce0 1-36
+docs/src/pages/components/data-display/timeline-api.json
+  s_deabe7994c30a2::t_f1bee951dfbf12 1-12
+docs/src/pages/components/data-display/timeline-item-api.json
+  s_deabe7994c30a2::t_25921e5bcfd738 1-11
+docs/src/pages/components/data-display/timeline.tsx
+  s_deabe7994c30a2::t_d9f9d6a90339b3 1-40
+docs/src/pages/components/data-entry/form-api.json
+  s_09e1d164cfc71e::t_836bd60fbf688c 1-11
+docs/src/pages/components/data-entry/form-item-api.json
+  s_09e1d164cfc71e::t_54364535b933ce 1-10
+docs/src/pages/components/data-entry/form-list-api.json
+  s_09e1d164cfc71e::t_3e05b0df511b77 1-5
+docs/src/pages/components/data-entry/form.tsx
+  s_08d77751506c02::t_624d3159ae06fb 1-105
+docs/src/pages/components/feedback/alert-api.json
+  s_deabe7994c30a2::t_bb7155a1083e66 1-19
+docs/src/pages/components/feedback/alert-closable-api.json
+  s_deabe7994c30a2::t_c6f93e5a887c0b 1-6
+docs/src/pages/components/feedback/alert-error-boundary-api.json
+  s_deabe7994c30a2::t_d117548350ad31 1-6
+docs/src/pages/components/feedback/alert.tsx
+  s_deabe7994c30a2::t_04cb68bda38f56 1-44
+docs/src/pages/components/feedback/progress-api.json
+  s_deabe7994c30a2::t_c30aa1f1d94f68 1-20
+docs/src/pages/components/feedback/progress.tsx
+  s_deabe7994c30a2::t_4693abcccc4814 1-46
+docs/src/pages/components/feedback/result-api.json
+  s_deabe7994c30a2::t_289c084cca753f 1-11
+docs/src/pages/components/feedback/result.tsx
+  s_deabe7994c30a2::t_f89b0e756a9ddf 1-33
+docs/src/pages/components/feedback/watermark-api.json
+  s_deabe7994c30a2::t_bb68b4f9b6ae75 1-13
+docs/src/pages/components/feedback/watermark-font-api.json
+  s_deabe7994c30a2::t_a98bc682da6b50 1-9
+docs/src/pages/components/feedback/watermark.tsx
+  s_deabe7994c30a2::t_a4b34c534135e3 1-26
+docs/src/pages/components/general/typography-base-api.json
+  s_d244dbd085cc34::t_80f4a9cf2b1f6f 1-50
+docs/src/pages/components/general/typography-copy-api.json
+  s_d244dbd085cc34::t_8e7e7bd456fb0f 1-32
+docs/src/pages/components/general/typography-edit-api.json
+  s_d244dbd085cc34::t_0b72a6b5828bbd 1-50
+docs/src/pages/components/general/typography-link-api.json
+  s_d244dbd085cc34::t_fb5fea607c0813 1-56
+docs/src/pages/components/general/typography-title-api.json
+  s_d244dbd085cc34::t_11fa15b135d461 1-56
+docs/src/pages/components/general/typography.tsx
+  s_d244dbd085cc34::t_a7ed9dd5ac1550 1-41
+docs/src/pages/components/index.tsx
+  s_deabe7994c30a2::t_7a70e647b3141c 7,13-21,26,28-34
+docs/src/pages/components/layout/divider-api.json
+  s_e34220fc676554::t_81b45189abb269 1-16
+docs/src/pages/components/layout/divider.tsx
+  s_e34220fc676554::t_8130533a4aa35f 1-51
+docs/src/pages/components/layout/flex-api.json
+  s_e34220fc676554::t_94fc6f3be8520c 1-16
+docs/src/pages/components/layout/flex.tsx
+  s_e34220fc676554::t_c2dd5be9b52212 1-57
+docs/src/pages/components/layout/grid-api.json
+  s_e34220fc676554::t_8966c26f9ab8da 1-39
+docs/src/pages/components/layout/grid.tsx
+  s_e34220fc676554::t_2cfcb1f5728a69 1-74
+docs/src/pages/components/layout/layout-api.json
+  s_e34220fc676554::t_a7c9dea9bb672b 1-32
+docs/src/pages/components/layout/layout.tsx
+  s_e34220fc676554::t_f210c8a8df7b0a 1-76
+docs/src/pages/components/layout/masonry-api.json
+  s_e34220fc676554::t_c5186d78e29fc6 1-16
+docs/src/pages/components/layout/masonry.tsx
+  s_e34220fc676554::t_256d2fde57a616 1-59
+docs/src/pages/components/layout/space-api.json
+  s_e34220fc676554::t_87b0e55636cd3a 1-28
+docs/src/pages/components/layout/space.tsx
+  s_e34220fc676554::t_bc39315f8a5c1f 1-72
+docs/src/pages/components/layout/splitter-api.json
+  s_e34220fc676554::t_684b0b1c0185c5 1-33
+docs/src/pages/components/layout/splitter.tsx
+  s_e34220fc676554::t_e1140a3fc4018b 1-64
+example/src/pages/Alert.tsx
+  s_deabe7994c30a2::t_a996a4bf0869c4 1-17,19
+example/src/pages/Avatar.tsx
+  s_d244dbd085cc34::t_75a5237b4f6ecf 1-19
+example/src/pages/Badge.tsx
+  s_73ead3a6f7caeb::t_8d7640c29f7eff 1-23
+example/src/pages/Divider.tsx
+  s_e34220fc676554::t_b06b8214aa2289 1-7,9-20
+example/src/pages/Empty.tsx
+  s_deabe7994c30a2::t_87ab11f49877cc 1-13
+example/src/pages/Flex.tsx
+  s_e34220fc676554::t_39a166aedc42db 1-22
+example/src/pages/Form.tsx
+  s_deabe7994c30a2::t_6de9b08f54b380 38-39,43,107,114-116,124,130,172-181,194,217-218,226,263-265
+example/src/pages/Grid.tsx
+  s_e34220fc676554::t_412b167a43898a 1-30
+example/src/pages/Layout.tsx
+  s_e34220fc676554::t_a72af4f6abe619 1-25,27
+example/src/pages/Masonry.tsx
+  s_e34220fc676554::t_5869edf7dcbb35 1-23,25
+example/src/pages/Progress.tsx
+  s_deabe7994c30a2::t_e5678a6d8e6543 1-21
+example/src/pages/QRCode.tsx
+  s_deabe7994c30a2::t_2dd3a349b31a2e 1-16
+example/src/pages/Result.tsx
+  s_deabe7994c30a2::t_f110df702cdcef 1-14
+example/src/pages/Space.tsx
+  s_e34220fc676554::t_d8a25213d86525 1-12,14-29,31
+example/src/pages/Spin.tsx
+  s_deabe7994c30a2::t_736f4f419961d8 52-53
+example/src/pages/Splitter.tsx
+  s_e34220fc676554::t_94e77d2e9c90fe 1-27,29
+example/src/pages/Statistic.tsx
+  s_deabe7994c30a2::t_dbc4c60e65ee9a 1-14
+example/src/pages/Tag.tsx
+  s_73ead3a6f7caeb::t_34a033c5d42195 1-17
+example/src/pages/Timeline.tsx
+  s_deabe7994c30a2::t_d2a14093a7624e 1-16,18
+example/src/pages/Typography.tsx
+  s_d244dbd085cc34::t_7ad8864b7a6e23 1-22
+example/src/pages/Watermark.tsx
+  s_deabe7994c30a2::t_af470ea28f3011 1-10
+output/c09-empty-statistic/full.log
+  s_deabe7994c30a2::t_fda5ddbde7e19d 1-11
+output/c09-empty-statistic/target.log
+  s_deabe7994c30a2::t_bae7e7c438aaaa 1-10
+output/c09-tag-badge/baseline.log
+  s_73ead3a6f7caeb::t_be29e2acc090e7 1-10
+output/c09-tag-badge/browser-tag.log
+  s_73ead3a6f7caeb::t_ecffa5eb17983e 1-21
+output/c09-tag-badge/browser.log
+  s_73ead3a6f7caeb::t_7df250d580d4a7 1-37
+output/c09-tag-badge/build-example.log
+  s_73ead3a6f7caeb::t_902ab1875560ed 1-135
+output/c09-tag-badge/competence-build.log
+  s_73ead3a6f7caeb::t_609e359517b039 1-145
+output/c09-tag-badge/target.log
+  s_73ead3a6f7caeb::t_fa59264fbc7085 1-10
+output/c09-tag-badge/typecheck.log
+  s_73ead3a6f7caeb::t_e87ed66d6207f7 1
+output/c09-timeline-progress/playwright.log
+  s_deabe7994c30a2::t_7b7f2a4fdfddbb 1-108
+output/c09-timeline-progress/target.log
+  s_deabe7994c30a2::t_bca44ade8c5b98 1-10
+output/c09-typography-avatar/avatar-target.log
+  s_d244dbd085cc34::t_0dfda5185f1d12 1-10
+output/c09-typography-avatar/baseline.log
+  s_d244dbd085cc34::t_41c41d69d7e3fa 1-10
+output/c09-typography-avatar/browser-typecheck.log
+  s_d244dbd085cc34::t_cbe14cb3195b36 1
+output/c09-typography-avatar/browser-typography-final.log
+  s_d244dbd085cc34::t_e561d3733a048a 1-37
+output/c09-typography-avatar/browser.log
+  s_d244dbd085cc34::t_fbef33cf4c4feb 1-66
+output/c09-typography-avatar/build.log
+  s_d244dbd085cc34::t_fc640abaf4f33b 1-482
+output/c09-typography-avatar/docs-build.log
+  s_d244dbd085cc34::t_2299fccff25f14 1-417
+output/c09-typography-avatar/docs-typecheck.log
+  s_d244dbd085cc34::t_11e5f52291528f 1-2
+output/c09-typography-avatar/full.log
+  s_d244dbd085cc34::t_1083a7f02c9122 1-11
+output/c09-typography-avatar/repro.log
+  s_d244dbd085cc34::t_f2e32fcbf61d08 1-226
+output/c09-typography-avatar/target.log
+  s_d244dbd085cc34::t_0e41e4ec5da9b2 1-10
+output/c09-typography-avatar/typecheck.log
+  s_d244dbd085cc34::t_8831c3952a3244 1
+output/c09-typography-avatar/typography-target.log
+  s_d244dbd085cc34::t_9f6d18a13fe428 1-10
+output/playwright/form-fix/alignment-after.log
+  s_08d77751506c02::t_b6492ed57db4b3 1-31
+output/playwright/form-fix/alignment-browser-types.log
+  s_08d77751506c02::t_7de41c9025ed4e 1
+output/playwright/form-fix/alignment-build.log
+  s_08d77751506c02::t_ec7a0c497c5d96 1-323
+output/playwright/form-fix/alignment-close.log
+  s_08d77751506c02::t_43ccb6d94600dc 1-9
+output/playwright/form-fix/alignment-open.log
+  s_08d77751506c02::t_0194fd650a56e2 1-20
+output/playwright/form-fix/alignment-types.log
+  s_08d77751506c02::t_c86218ece9936c 1-2
+output/playwright/form-fix/baseline.log
+  s_08d77751506c02::t_3d16645effd716 1-185
+output/playwright/form-fix/browser-close.log
+  s_08d77751506c02::t_2d2d6f55f1c799 1-9
+output/playwright/form-fix/browser-final.log
+  s_08d77751506c02::t_ee626b5725f82b 1-355
+output/playwright/form-fix/browser-types.log
+  s_08d77751506c02::t_e848510d039cb9 1
+output/playwright/form-fix/browser.log
+  s_08d77751506c02::t_7bf382f660adb5 1-465
+output/playwright/form-fix/button-form.log
+  s_08d77751506c02::t_6cdfd7019a4db9 1-92
+output/playwright/form-fix/cli/console-2026-09-24T11-43-17-617Z.log
+  s_08d77751506c02::t_1199931e4d3fb4 1-5862
+output/playwright/form-fix/cli/console-2026-09-26T02-43-08-927Z.log
+  s_08d77751506c02::t_c9ae19fbc5b2c6 1-392
+output/playwright/form-fix/cli/console-2026-09-26T02-46-38-028Z.log
+  s_08d77751506c02::t_236a1f1bd79518 1-214
+output/playwright/form-fix/cli/page-2026-09-24T11-43-17-930Z.yml
+  s_08d77751506c02::t_93454b80d284e0 1-585
+output/playwright/form-fix/cli/page-2026-09-24T11-44-26-412Z.yml
+  s_08d77751506c02::t_40239ce9cdbba2 1-971
+output/playwright/form-fix/cli/page-2026-09-24T11-50-40-312Z.yml
+  s_08d77751506c02::t_57b3da000b4331 1-585
+output/playwright/form-fix/cli/page-2026-09-24T11-58-51-094Z.yml
+  s_08d77751506c02::t_ea7fb7b210a385 1-586
+output/playwright/form-fix/cli/page-2026-09-26T02-38-11-954Z.yml
+  s_08d77751506c02::t_a6a460b121d9c3 1-466
+output/playwright/form-fix/cli/page-2026-09-26T02-43-09-226Z.yml
+  s_08d77751506c02::t_fef6aa538ded3d 1-586
+output/playwright/form-fix/cli/page-2026-09-26T02-46-38-472Z.yml
+  s_08d77751506c02::t_b10b8eec9ba6c6 1-586
+output/playwright/form-fix/container-repro.log
+  s_08d77751506c02::t_1dc28a05780a05 1-120
+output/playwright/form-fix/detail-alignment-before.log
+  s_08d77751506c02::t_c054d3f4f5ad56 1-84
+output/playwright/form-fix/docs-build.log
+  s_08d77751506c02::t_bc223acde7291f 1-323
+output/playwright/form-fix/docs-types.log
+  s_08d77751506c02::t_c8f85fa2993e15 1-2
+output/playwright/form-fix/external-repro.log
+  s_08d77751506c02::t_f1d3bc0c254c1e 1-111
+output/playwright/form-fix/focus-fix.log
+  s_08d77751506c02::t_402582d1d716e8 1-51
+output/playwright/form-fix/full-test-final.log
+  s_08d77751506c02::t_4575e95216554c 1-86
+output/playwright/form-fix/full-test.log
+  s_08d77751506c02::t_5881229233c32c 1-90
+output/playwright/form-fix/item-compiled.js
+  s_08d77751506c02::t_27a924837f5052 1-434
+output/playwright/form-fix/mobile-final.log
+  s_08d77751506c02::t_9ccde7924e3ca1 1-30
+output/playwright/form-fix/phone-alignment-before.log
+  s_08d77751506c02::t_729b5cebec3efe 1-52
+output/playwright/form-fix/reload-final.txt
+  s_08d77751506c02::t_6140f45aca230c 1-11
+output/playwright/form-fix/reload-mobile.txt
+  s_08d77751506c02::t_cdeab7e7cf3b34 1-11
+output/playwright/form-fix/reload.txt
+  s_08d77751506c02::t_116ad63b8ab56d 1-11
+output/playwright/form-fix/repro.log
+  s_08d77751506c02::t_1f1b07d46365a3 1-82
+output/playwright/form-fix/reset-repro.log
+  s_08d77751506c02::t_8b00e8b68632f0 1-140
+output/playwright/form-fix/snapshot.txt
+  s_08d77751506c02::t_c255330b978b2c 1-978
+output/playwright/form-fix/target-2.log
+  s_08d77751506c02::t_704e1ada2b9d63 1-662
+output/playwright/form-fix/target-3.log
+  s_08d77751506c02::t_1160ee6b2c1452 1-974
+output/playwright/form-fix/target-final.log
+  s_08d77751506c02::t_b9ac9d606debfa 1-640
+output/playwright/form-fix/target.log
+  s_08d77751506c02::t_cd26226e85322f 1-164
+output/playwright/form-fix/types.log
+  s_08d77751506c02::t_e7da625e929a4f 1
+output/playwright/form-fix/unrelated-arrow.log
+  s_08d77751506c02::t_31ec706b0018f7 1-283
+output/playwright/form-fix/validation-align-after.log
+  s_08d77751506c02::t_71680ec01dca82 1-32
+output/playwright/form-fix/validation-align-before.log
+  s_08d77751506c02::t_bb876f130bcaea 1-59
+output/playwright/form-fix/validation-align-browser-types.log
+  s_08d77751506c02::t_803ee3cf61cf88 1
+output/playwright/form-fix/validation-align-build.log
+  s_08d77751506c02::t_2e1b24b847fae1 1-323
+output/playwright/form-fix/validation-align-close.log
+  s_08d77751506c02::t_f77352e3b60dea 1-9
+output/playwright/form-fix/validation-align-open.log
+  s_08d77751506c02::t_37cd61a105cc55 1-20
+output/playwright/form-fix/validation-align-types.log
+  s_08d77751506c02::t_de4a9f906a4d59 1-2
+output/result-qrcode/playwright.log
+  s_deabe7994c30a2::t_764bdde54294be 1-47
+output/result-qrcode/target.log
+  s_deabe7994c30a2::t_6aa7c94498b2ed 1-9
+output/result-qrcode/vitest.log
+  s_deabe7994c30a2::t_a5cd9d0571aacd 1-11
+output/watermark-alert/build-docs.log
+  s_deabe7994c30a2::t_9e58f21b1a94d4 1-532
+output/watermark-alert/build.log
+  s_deabe7994c30a2::t_cd8c7362bd4f48 1-504
+output/watermark-alert/install.log
+  s_deabe7994c30a2::t_73bd293175be10 1-423
+output/watermark-alert/playwright.log
+  s_deabe7994c30a2::t_95f4139361c6d4 1-2
+output/watermark-alert/target.log
+  s_deabe7994c30a2::t_3226c94a504ab0 1-9
+packages/competence/src/alert.ts
+  s_deabe7994c30a2::t_7126f91b8345f1 2-17,20-33,36-52,54-84,87-90,92-93,96-100
+packages/competence/src/avatar.ts
+  s_d244dbd085cc34::t_6294902c2ef8b7 1-34
+packages/competence/src/badge.ts
+  s_73ead3a6f7caeb::t_e37b85da952759 2,5-9,15-16,23-28,32-34,40-41,44,46-47,50,54-57,60-63,67-69,71-73,77-81,84-86,88-89,92,94,96-118,122-124,131,133-136
+packages/competence/src/breakpoint.ts
+  s_e34220fc676554::t_d8a82207e5c80e 17-47
+packages/competence/src/form.ts
+  s_08d77751506c02::t_4264d83da5162a 36,140,154,739
+packages/competence/src/formField.ts
+  s_09e1d164cfc71e::t_b1a589e3543dfe 127
+packages/competence/src/formList.ts
+  s_08d77751506c02::t_c87bdb5d94e4c6 1,22-25,50-70,107,121
+packages/competence/src/index.ts
+  s_deabe7994c30a2::t_3c622d7db7f021 10,19-20,60,73-76
+packages/competence/src/masonry.ts
+  s_e34220fc676554::t_bfd8a0072d0739 1-2,4-5,8-13,20-23,27,29-32,35-98,100-101,103-114,116-122,124-125,127,129,132,135
+packages/competence/src/presetColors.ts
+  s_73ead3a6f7caeb::t_d820e98c9121c1 1-20
+packages/competence/src/progress.ts
+  s_deabe7994c30a2::t_9f3df9780aebca 1,4-5,8-37,40-47,50-152,154-177,179-185,189-206,209-309
+packages/competence/src/qrcode.ts
+  s_deabe7994c30a2::t_3d37fa691e15ac 1-130
+packages/competence/src/qrcodegen.ts
+  s_deabe7994c30a2::t_9716aa9f58f5dd 1-1101
+packages/competence/src/responsive.ts
+  s_e34220fc676554::t_4e09861d86be33 1-108
+packages/competence/src/select.ts
+  s_e34220fc676554::t_55e4a001a8ec6d 257-267,270,291,293
+packages/competence/src/sider.ts
+  s_e34220fc676554::t_480575502f2695 1-2,4-27,33,36,41,43,45,57,68,70,74-78,84-85
+packages/competence/src/splitter.ts
+  s_e34220fc676554::t_e80b8ae2026d0d 1,4-5,7-16,19-20,25,34-47,49-59,61,64-65,68-69,72-83,85-86,88,90-102,104,106-111,114-117,120-250,257-261,264-320,322-390,392-394,396-405,407-410,412-423,426-428,431-434,438-441,444-446,449-475,478-479,481-485,487-503,507-514,518-551,553-573,576-580,583-586,589-594,598-599,601,603-604,606-607,609-611,614-616
+packages/competence/src/statistic.ts
+  s_deabe7994c30a2::t_5f77da026d6824 1-82
+packages/competence/src/tag.ts
+  s_73ead3a6f7caeb::t_01a4b2c9f50f74 1-92,96-97,101,105-106,109-111,118,125-127,131-132,137-185
+packages/competence/src/timeline.ts
+  s_deabe7994c30a2::t_401dc132fa1e51 1-110
+packages/competence/src/typography.ts
+  s_d244dbd085cc34::t_6c89705898bba0 1,37-41,44-47,50-52,58-59,63-64,68,71-73,75
+packages/competence/src/watermark.ts
+  s_deabe7994c30a2::t_6a20371c513b13 4-6,9-22,28-31,35-37,39-41,43-45,47,49-98,101-102,104-126,128-188,191
+packages/components/common/antIcons.tsx
+  s_deabe7994c30a2::t_1207aa3c4a769b 1-60
+packages/components/common/merge.ts
+  s_e34220fc676554::t_f1879f11278f7d 1-18
+packages/components/common/renderable.ts
+  s_73ead3a6f7caeb::t_2400fe77473e4e 1-6
+packages/components/common/semantic.ts
+  s_deabe7994c30a2::t_81ac63d28b27cd 1-8
+packages/components/lib/Alert/index.tsx
+  s_deabe7994c30a2::t_d53d264911ada1 1-11,13,15-30,32-38,40,42,44,46-48,50-52,54-64,67-119,121-129,131,133-172,174-182,186-200,203-204,207-241
+packages/components/lib/Alert/styles.ts
+  s_deabe7994c30a2::t_221aa140049ffe 2,4-7,10-19,21-23,26,29-31,35-36,39-46,48-50,52-54,56-57,59,61-65,67-69,71-78,80-90,92-93
+packages/components/lib/Avatar/index.tsx
+  s_d244dbd085cc34::t_332014783e9688 1-5,33,38-41,43,50-54,56-57,59-60,77,79,81,97,107,117,131-132,142-143,160-161,170,173,179-181,186,191-192
+packages/components/lib/Badge/index.tsx
+  s_73ead3a6f7caeb::t_c51f96167fc193 1,3-5,7-8,11-15,28-29,31,33,35,37,39,43,45,50,52,56-59,61,63-64,66-70,72,74,76-82,85,91-92,96-97,99-103,107,109,112-114,117-142,144-175,178,182,184,186,190,196-207,209-215,217
+packages/components/lib/Badge/styles.ts
+  s_73ead3a6f7caeb::t_cde9843ca7e445 2-22,24-55,57-62,64-72,74-77,81-84,86-89,91-92,95,97,99,101,104-106,109,111-122,125-128,133,136-137,140,142,144-147,170,172,174-187,191-192,195-196
+packages/components/lib/Button/index.tsx
+  s_08d77751506c02::t_0252c1ec6e7fa2 2,7,47-57
+packages/components/lib/Divider/index.tsx
+  s_e34220fc676554::t_d3b4fd89a39c8f 1,3-4,6-29,31-35,37-42,48-51,53-58,60-67,69-70,72-100,103-117,121-126,128-134,136-138
+packages/components/lib/Divider/styles.ts
+  s_e34220fc676554::t_bf04c61aa061d0 2,4-16,18-21,23-28,30-31,33-50,52-53,55-62
+packages/components/lib/Drawer/index.tsx
+  s_deabe7994c30a2::t_144a7d63d084fa 12,133-134
+packages/components/lib/Empty/index.tsx
+  s_deabe7994c30a2::t_7108430eb69f74 1,3-8,11-12,14-32,36-49,53-56,60-83,85-87,89-90,95-102,104-105,107-131,135-150,153-156,158-161,167-170
+packages/components/lib/Empty/styles.ts
+  s_deabe7994c30a2::t_c6398aa3288d97 3,5-12,14-23,26-37,40-47,49-69
+packages/components/lib/Flex/index.tsx
+  s_e34220fc676554::t_03d193131f2d7f 1-2,4,6,8-12,14-22,24,26,28-29,35-38,40-46,48-55,58-61,63-71,75
+packages/components/lib/Flex/styles.ts
+  s_e34220fc676554::t_031918506277ea 2-49,51-63,65-93,95
+packages/components/lib/Form/Item.tsx
+  s_08d77751506c02::t_eee19bdda0b19a 1-2,91-96,98-100,111-117,129-130,134,183-203,205-208,215-220,228-232,234,287-288
+packages/components/lib/Form/List.tsx
+  s_09e1d164cfc71e::t_14a7317efc8d69 33-36,50-62,66
+packages/components/lib/Form/context.ts
+  s_09e1d164cfc71e::t_12adb8207c8205 11,42
+packages/components/lib/Form/index.tsx
+  s_08d77751506c02::t_85b6713510fea1 2-3,87-103,111,148-150,155,158
+packages/components/lib/Form/styles.ts
+  s_08d77751506c02::t_fea991776d8c23 17-18,35-36,68,196,215-217
+packages/components/lib/Grid/index.tsx
+  s_e34220fc676554::t_2864aa49728fe3 1,3-25,32-58,64-81,83-86,89-97,99,101-102,104-110,114-115,122-134,137-149,151,155,161-171
+packages/components/lib/Grid/layout.ts
+  s_e34220fc676554::t_d38734bd6bdf2c 1-159
+packages/components/lib/Grid/styles.ts
+  s_e34220fc676554::t_cc5a5f68be9c20 4-13,15-21,23-39,41-123,125-127
+packages/components/lib/Input/context.ts
+  s_08d77751506c02::t_d428e1b28a0e0d 2,21-24,71
+packages/components/lib/Input/index.tsx
+  s_e34220fc676554::t_0a521079f2b225 75-76,78-81,106,156,190-198,200-213,217
+packages/components/lib/Input/styles.ts
+  s_e34220fc676554::t_1635c175eee98d 41-43,45
+packages/components/lib/Layout/index.tsx
+  s_e34220fc676554::t_47302375e5c87b 1,3-23,30,36,42,48-49,51,53,55,57,59-63,65,67,69-71,73-76,82-84,87-88,90-101,104-108,112-115,117-119,122-125,127-131,133-135,137-139,149-165,168-171,175-186,188-200
+packages/components/lib/Layout/styles.ts
+  s_e34220fc676554::t_4367f0863f71f9 2,4-53,56-58,64-68,70-81,85-86,92-97,99-102,106-111,113-115,122
+packages/components/lib/Masonry/index.tsx
+  s_e34220fc676554::t_79b57a93e51ab7 1-3,5-16,18,20-40,42-50,52-56,59,63-66,68-72,75,77-87,89-94,97-129,131,133-144,146-158,161-178,181-191,193-198,200-209,213-263,266-273
+packages/components/lib/Masonry/styles.ts
+  s_e34220fc676554::t_5f2ca0b23e55f6 4-10,13-15,18-19,22-29,32-39,42-43,46
+packages/components/lib/Modal/index.tsx
+  s_deabe7994c30a2::t_c713551b3236b0 11,133-134
+packages/components/lib/Progress/index.tsx
+  s_deabe7994c30a2::t_2ff2a6dce23602 1,4-16,19-36,38-39,41,43,45,47-51,53-57,59-76,81-85,87-88,90,92-95,97-98,100-106,108-113,115-148,150-170,173,175-176,178,180,182-216,219-225,230,232-233,235-273,275-317,319-320,322-341
+packages/components/lib/Progress/styles.ts
+  s_deabe7994c30a2::t_5dc7f78f0e6b5e 3,5-14,17-22,25,27,29-35,37-39,41-42,44,46-50,53-61,64,66,68-69,72-82,84,86-89,92,94,96-105,107-108,111-113,116,118-127,129-135
+packages/components/lib/QRCode/index.tsx
+  s_deabe7994c30a2::t_a5df76031ef813 1,3-9,12-13,15-36,38,40,43,45-48,50-57,62-81,84-102,105-139,141-144,146-148,152-162,164-167,169-192,195-196
+packages/components/lib/QRCode/styles.ts
+  s_deabe7994c30a2::t_ebaec1841a2456 2,4-7,11-12,16,19-21,23-27,29
+packages/components/lib/Result/images.tsx
+  s_deabe7994c30a2::t_e6d603c6a023b2 1-765
+packages/components/lib/Result/index.tsx
+  s_deabe7994c30a2::t_da60988f161f2e 1-10,12-13,15-23,27-29,31,33-34,39-40,42-44,46,48-63,66-83,85,87-88,90-91,93-94,96-97,103-108
+packages/components/lib/Result/styles.ts
+  s_deabe7994c30a2::t_0860ed0866d0f0 2,4-9,11-20,22-24,26-27,29-32,34-37,39-42,44-47
+packages/components/lib/Select/index.tsx
+  s_e34220fc676554::t_bd4f74decbf9fd 382-385,458
+packages/components/lib/Select/styles.ts
+  s_e34220fc676554::t_8181c8818d621d 33-35
+packages/components/lib/Space/index.tsx
+  s_e34220fc676554::t_282f87fe149f66 1,3-27,29-31,33,35-42,48-55,62-63,65-68,70,72-77,79-117,120-129,131-133,137-154,158,160-168,170-173,176-177
+packages/components/lib/Space/styles.ts
+  s_e34220fc676554::t_cfbe5961e78fd3 2,4-5,7,9-10,12-20,22-24,26-60,63-67,69-70,73-78,85-91,94,97-105
+packages/components/lib/Splitter/index.tsx
+  s_e34220fc676554::t_bb5f1e34d44997 1-4,8-13,16-53,55-58,60,62,64,66-70,76-99,101,103-107,113-148,151-152,155-157,159-170,172-175,179-183,185-190,192,194-198,200-210,212-216,218-227,229-230,232-236,239-272,275-383,386-388,392-397,400,402-404,406-413,417-436,440-446
+packages/components/lib/Splitter/styles.ts
+  s_e34220fc676554::t_b0256f05267fa1 4-20,23,28-29,32-36,38-39,43-44,47-48,52-67,70-75,77-83,87-89,91-94,96-97,101-120,123-125,128-130,133-134,137-197,199-200
+packages/components/lib/Statistic/styles.ts
+  s_deabe7994c30a2::t_1cfbae9102ce5d 3,5-12,14,18-22,24-27,30-32,35,39,41-47
+packages/components/lib/Tag/index.tsx
+  s_73ead3a6f7caeb::t_a55d3cd7277785 1-9,11-29,31-35,37-41,45-48,50-52,57-138,141-142,147,149-172,175-234,236-251,254
+packages/components/lib/Tag/styles.ts
+  s_73ead3a6f7caeb::t_225909fd7c2b22 4-8,10-76,78-99,103-114,117
+packages/components/lib/Timeline/index.tsx
+  s_deabe7994c30a2::t_cf56601e233966 1,4-13,16,18-27,31,34-35,37-39,41-43,45,47-50,55-73,75,77,79-86,91,93-94,96,98-100,102-111,114-115,117-118,120-121,123-127,130-134,137-143,145,147-157,159-162,164-171,173-185,187-190,192-204,206-223,225-226,230,234-237
+packages/components/lib/Timeline/styles.ts
+  s_deabe7994c30a2::t_fe2dc2505681e5 2-3,5-19,22-23,25-26,28-39,41-42,44-55,57-58,60-61,64-88,91-106,108-109,111-125,128-129,131-145,147-162,165-166,168-179,181-182,184-193
+packages/components/lib/Typography/index.tsx
+  s_d244dbd085cc34::t_389e9c148ec5ab 5,26,28-29,47-48,50,54,60,65,95-97,115-116,122,138,140,146,160,162,168,182,184-185,190-200
+packages/components/lib/Typography/styles.ts
+  s_d244dbd085cc34::t_02a8055c570a61 3,32
+packages/components/lib/Watermark/context.ts
+  s_deabe7994c30a2::t_ea420697e80f8c 1-33
+packages/components/lib/Watermark/index.tsx
+  s_deabe7994c30a2::t_ebd9d6fb889319 1,3-13,15,17,19,21-29,31-34,38,41-46,48-52,54-181,184-196,199-205
+packages/components/lib/index.ts
+  s_deabe7994c30a2::t_0b1a81b114f15d 6-9,68-70,72-76,78-83,85-88,90-93,115,119-133,135-139,155-159,161-163,169,181,210-211
+packages/components/vite.config.ts
+  s_deabe7994c30a2::t_c3c487d4e8f562 38
+packages/preset/src/index.ts
+  s_deabe7994c30a2::t_d8a9cca07733cf 108
+packages/preset/src/rules/index.ts
+  s_deabe7994c30a2::t_7c148bd61076f1 143-148
+packages/testing/browser/Alert/contracts.spec.ts
+  s_deabe7994c30a2::t_7e1dd442f9fff3 1-116
+packages/testing/browser/Avatar/contracts.spec.ts
+  s_d244dbd085cc34::t_ca6e71a7b46721 1-91
+packages/testing/browser/Badge/contracts.spec.ts
+  s_73ead3a6f7caeb::t_7d009be1d6ad9e 1-135
+packages/testing/browser/Divider/divider.spec.ts
+  s_e34220fc676554::t_931d9946545a0b 1-176
+packages/testing/browser/Empty/contracts.spec.ts
+  s_deabe7994c30a2::t_2864dac044099e 1-94
+packages/testing/browser/Flex/element.spec.ts
+  s_e34220fc676554::t_7049d4408fdd53 1-142
+packages/testing/browser/Flex/layout.spec.ts
+  s_e34220fc676554::t_8ef386138f2592 1-132
+packages/testing/browser/Form/interactions.spec.ts
+  s_08d77751506c02::t_dbd3053e276336 1-116
+packages/testing/browser/Form/presentation.spec.ts
+  s_08d77751506c02::t_176032cef28815 1-200
+packages/testing/browser/Grid/grid.spec.ts
+  s_e34220fc676554::t_e09eb806d07bfa 1-288
+packages/testing/browser/Layout/layout.spec.ts
+  s_e34220fc676554::t_659afeecb37838 1-302
+packages/testing/browser/Masonry/masonry.spec.ts
+  s_e34220fc676554::t_5b6558d7342479 1-230
+packages/testing/browser/Progress/contracts.spec.ts
+  s_deabe7994c30a2::t_558a1b2b29b0d9 1-207
+packages/testing/browser/QRCode/contracts.spec.ts
+  s_deabe7994c30a2::t_f4016041ef1744 1-179
+packages/testing/browser/Result/contracts.spec.ts
+  s_deabe7994c30a2::t_8fc570a3b87387 1-114
+packages/testing/browser/Space/space.spec.ts
+  s_e34220fc676554::t_ef0f7a9aae5f63 1-274
+packages/testing/browser/Splitter/splitter.spec.ts
+  s_e34220fc676554::t_860a36d9854776 1-353
+packages/testing/browser/Statistic/contracts.spec.ts
+  s_deabe7994c30a2::t_faf57afd2df568 1-110
+packages/testing/browser/Tag/contracts.spec.ts
+  s_73ead3a6f7caeb::t_100b2986c91d10 1-140
+packages/testing/browser/Timeline/contracts.spec.ts
+  s_deabe7994c30a2::t_2389f5469c0296 1-199
+packages/testing/browser/Tmp/m.spec.ts
+  s_deabe7994c30a2::t_88227c01a5431a 1-12
+packages/testing/browser/Typography/contracts.spec.ts
+  s_d244dbd085cc34::t_4fb2357e31b4ed 1-87
+packages/testing/browser/Watermark/contracts.spec.ts
+  s_deabe7994c30a2::t_1aa99a98efdb5d 1-76
+packages/testing/headless/Alert/theme.test.ts
+  s_deabe7994c30a2::t_c7137a2007a969 1-29
+packages/testing/headless/Avatar/size.test.ts
+  s_d244dbd085cc34::t_4d36d39b02ffee 1-16
+packages/testing/headless/Badge/badge.test.ts
+  s_73ead3a6f7caeb::t_efef65746a6244 3,5,7,14,20-33,37,42-44,46-47,50,57-58,61,66-81,84,92,97,101,104,106-107,110,118-136,138-140,143-146,149,154,156,161
+packages/testing/headless/Divider/styles.test.ts
+  s_e34220fc676554::t_9dc0036c39b7cf 1-126
+packages/testing/headless/Empty/theme.test.ts
+  s_deabe7994c30a2::t_9c4af50a30fd5c 1-34
+packages/testing/headless/Flex/styles.test.ts
+  s_e34220fc676554::t_bb5523301a3d7b 1-73
+packages/testing/headless/Form/field.test.ts
+  s_09e1d164cfc71e::t_0fb0987bf3d409 233-259
+packages/testing/headless/Grid/breakpoint.test.ts
+  s_e34220fc676554::t_37dd611aad079b 1-191
+packages/testing/headless/Grid/layout.test.ts
+  s_e34220fc676554::t_092807168fd042 1-153
+packages/testing/headless/Grid/styles.test.ts
+  s_e34220fc676554::t_e8a1e4cbf4a3f0 1-133
+packages/testing/headless/Layout/sider.test.ts
+  s_e34220fc676554::t_a91cc54a72e2e4 1-6,9-10,12-28,31-39,42-54,57-71,73-77,80-87,89-182,184-219
+packages/testing/headless/Layout/styles.test.ts
+  s_e34220fc676554::t_f4dab6e09affe8 1-103
+packages/testing/headless/Masonry/masonry.test.ts
+  s_e34220fc676554::t_da59581b581bb0 2-7,10-156,159-234
+packages/testing/headless/Masonry/styles.test.ts
+  s_e34220fc676554::t_328e5c46c94471 1-70
+packages/testing/headless/Progress/progress.test.ts
+  s_deabe7994c30a2::t_295d2bfda634a0 2-6,8-15,18-27,30-38,41-59,62-67,70-77,80-85,87,89-104,107-169,172-189
+packages/testing/headless/QRCode/antd-path.txt
+  s_deabe7994c30a2::t_87740f5cc9601c 1
+packages/testing/headless/QRCode/qrcode.test.ts
+  s_deabe7994c30a2::t_a04d70ed8f9190 1-73
+packages/testing/headless/Result/theme.test.ts
+  s_deabe7994c30a2::t_b1e007610debd5 1-25
+packages/testing/headless/Space/styles.test.ts
+  s_e34220fc676554::t_2ad88028da82b3 1-132
+packages/testing/headless/Splitter/splitter.test.ts
+  s_e34220fc676554::t_8c424bf1eef8e2 1-6,8-9,11-18,20-34,37-45,48-54,56-61,64-67,69-72,74-78,80,82-91,93-97,100-110,112-127,130-139,141-144,146-154,156-177,179-191,193-197,199-210,213-218,220-226,228-244,246-256,259-265,267-278,281-296,298-315,318-367,369-415,418-424
+packages/testing/headless/Splitter/styles.test.ts
+  s_e34220fc676554::t_20a2136faaeb98 1-176
+packages/testing/headless/Statistic/format.test.ts
+  s_deabe7994c30a2::t_bc8813eaa1498c 1-99
+packages/testing/headless/Tag/color.test.ts
+  s_73ead3a6f7caeb::t_a168ad356ea54a 1-86
+packages/testing/headless/Tag/tag.test.ts
+  s_73ead3a6f7caeb::t_34bf7cad5819e5 3,6,18,28,37,44-113
+packages/testing/headless/Timeline/theme.test.ts
+  s_deabe7994c30a2::t_2b7c5146be3e76 1-63
+packages/testing/headless/Timeline/timeline.test.ts
+  s_deabe7994c30a2::t_2290ef7905b16b 1-68
+packages/testing/headless/Tooltip/tooltip.test.ts
+  s_e34220fc676554::t_33b53dce01be3d 76,82-83
+packages/testing/headless/Typography/state.test.ts
+  s_d244dbd085cc34::t_a9fac6eb8afb14 1-83
+packages/testing/headless/Watermark/watermark.test.ts
+  s_deabe7994c30a2::t_2e2edfb9f36ee4 3-9,11-18,21-30,33-37,39-41,44-75,78-79,81,83-85,89-97,99-117,119-130
+packages/testing/headless/shared/Merge/mergeClass.test.ts
+  s_e34220fc676554::t_d0f37abcd19d50 1-31
+packages/testing/headless/shared/README.md
+  s_e34220fc676554::t_beb59f4089a26c 7
+packages/testing/playwright.empty-statistic.config.ts
+  s_deabe7994c30a2::t_de50333ca86d92 1-14
+packages/testing/playwright.flex.config.ts
+  s_e34220fc676554::t_a9a8864066b522 1-13
+packages/testing/playwright.form.config.ts
+  s_08d77751506c02::t_61923de90e4cd7 1-20
+packages/testing/playwright.grid-space-divider.config.ts
+  s_e34220fc676554::t_cf779eb5453699 1-24
+packages/testing/playwright.layout.config.ts
+  s_e34220fc676554::t_6d415918a81968 1-24
+packages/testing/playwright.result-qrcode.config.ts
+  s_deabe7994c30a2::t_fc7cb3f0e2cf22 1-14
+packages/testing/playwright.splitter-masonry.config.ts
+  s_e34220fc676554::t_0c5c15a9029b01 1-24
+packages/testing/playwright.tag-badge.config.ts
+  s_73ead3a6f7caeb::t_32818f5c2293ab 1-14
+packages/testing/playwright.timeline-progress.config.ts
+  s_deabe7994c30a2::t_1fb915bad405b2 1-14
+packages/testing/playwright.typography-avatar.config.ts
+  s_d244dbd085cc34::t_d1ab710e966393 1-14
+packages/testing/playwright.watermark-alert.config.ts
+  s_deabe7994c30a2::t_0957a9ed147c30 1-14
+packages/testing/render/Alert/contracts.test.tsx
+  s_deabe7994c30a2::t_9ef98265d493ab 1-100
+packages/testing/render/Avatar/contracts.test.tsx
+  s_d244dbd085cc34::t_62589ee76296cb 1-121
+packages/testing/render/Badge/contracts.test.tsx
+  s_73ead3a6f7caeb::t_98cb3f72ad7d94 1-218
+packages/testing/render/Divider/layout.test.tsx
+  s_e34220fc676554::t_abedc94b3cb57f 1-222
+packages/testing/render/Empty/contracts.test.tsx
+  s_deabe7994c30a2::t_bc83a4a99703b3 1-143
+packages/testing/render/Flex/element.test.tsx
+  s_e34220fc676554::t_868a08ca163ac1 1-70
+packages/testing/render/Flex/layout.test.tsx
+  s_e34220fc676554::t_b0361ce4652c7e 1-147
+packages/testing/render/Form/contracts.test.tsx
+  s_08d77751506c02::t_3ffa8bb61a9835 1-217
+packages/testing/render/Grid/element.test.tsx
+  s_e34220fc676554::t_0e4f0c07141982 1-97
+packages/testing/render/Grid/layout.test.tsx
+  s_e34220fc676554::t_c421cdd6a96b8e 1-277
+packages/testing/render/Layout/layout.test.tsx
+  s_e34220fc676554::t_b2541559bd835a 1-176
+packages/testing/render/Layout/sider.test.tsx
+  s_e34220fc676554::t_a260386bd2ae46 1-284
+packages/testing/render/Masonry/masonry.test.tsx
+  s_e34220fc676554::t_339af17a525174 1-445
+packages/testing/render/Popover/content.test.tsx
+  s_e34220fc676554::t_73825bfc2789df 2,68-71,73
+packages/testing/render/Progress/contracts.test.tsx
+  s_deabe7994c30a2::t_10ba142d6d68d3 1-285
+packages/testing/render/QRCode/contracts.test.tsx
+  s_deabe7994c30a2::t_687da7727fc945 1-125
+packages/testing/render/Result/contracts.test.tsx
+  s_deabe7994c30a2::t_460447265eb9d7 1-106
+packages/testing/render/Select/contracts.test.tsx
+  s_08d77751506c02::t_655df4977c3ccc 177
+packages/testing/render/Space/layout.test.tsx
+  s_e34220fc676554::t_268c800e910cb7 1-235
+packages/testing/render/Splitter/splitter.test.tsx
+  s_e34220fc676554::t_99dd00fb786e8d 1-625
+packages/testing/render/Statistic/contracts.test.tsx
+  s_deabe7994c30a2::t_36fc18157f00c3 1-237
+packages/testing/render/Tag/checkable.test.tsx
+  s_73ead3a6f7caeb::t_73d03713878ebb 1-160
+packages/testing/render/Tag/contracts.test.tsx
+  s_73ead3a6f7caeb::t_90a7b772e9eb35 1-213
+packages/testing/render/Timeline/contracts.test.tsx
+  s_deabe7994c30a2::t_eea0e9c2237086 1-199
+packages/testing/render/Tooltip/content.test.tsx
+  s_e34220fc676554::t_3836f46685190d 2,74-77,79
+packages/testing/render/Typography/Typography.test.tsx
+  s_d244dbd085cc34::t_b34ce96e106307 5-9,17
+packages/testing/render/Typography/contracts.test.tsx
+  s_d244dbd085cc34::t_fd51047b051b12 1-76
+packages/testing/render/Typography/editing.test.tsx
+  s_d244dbd085cc34::t_a406411f8afdee 1-44
+packages/testing/render/Watermark/contracts.test.tsx
+  s_deabe7994c30a2::t_9e293e345c661a 1-76
+packages/testing/smoke/Alert/exports.test.tsx
+  s_deabe7994c30a2::t_41f2374f136704 1-23
+packages/testing/smoke/Avatar/exports.test.tsx
+  s_d244dbd085cc34::t_e06c8072ab00f3 1-15
+packages/testing/smoke/Badge/exports.test.tsx
+  s_73ead3a6f7caeb::t_c1d1ba453313e5 1-14
+packages/testing/smoke/Divider/exports.test.tsx
+  s_e34220fc676554::t_7cb23cb799d838 1-33
+packages/testing/smoke/Empty/exports.test.tsx
+  s_deabe7994c30a2::t_239aada715a8dd 1-21
+packages/testing/smoke/Flex/exports.test.tsx
+  s_e34220fc676554::t_508fa5a209d621 1-31
+packages/testing/smoke/Form/exports.test.tsx
+  s_09e1d164cfc71e::t_342f07bc8bfee3 1-16
+packages/testing/smoke/Grid/exports.test.tsx
+  s_e34220fc676554::t_8e80cb45d590ee 1-60
+packages/testing/smoke/Layout/exports.test.tsx
+  s_e34220fc676554::t_320559412d70ad 1-68
+packages/testing/smoke/Masonry/exports.test.tsx
+  s_e34220fc676554::t_bb36b47e99f366 1-51
+packages/testing/smoke/Progress/exports.test.tsx
+  s_deabe7994c30a2::t_1b2a179c9202f7 1-32
+packages/testing/smoke/QRCode/exports.test.tsx
+  s_deabe7994c30a2::t_270ce41411b4c2 1-25
+packages/testing/smoke/Result/exports.test.tsx
+  s_deabe7994c30a2::t_c6979ddde89a9c 1-22
+packages/testing/smoke/Space/exports.test.tsx
+  s_e34220fc676554::t_2051b1cae65b79 1-51
+packages/testing/smoke/Splitter/exports.test.tsx
+  s_e34220fc676554::t_0fb5cd84c6eb67 1-63
+packages/testing/smoke/Statistic/exports.test.tsx
+  s_deabe7994c30a2::t_a42156a1df6143 1-23
+packages/testing/smoke/Tag/exports.test.tsx
+  s_73ead3a6f7caeb::t_aeebf24f568263 1-20
+packages/testing/smoke/Timeline/exports.test.tsx
+  s_deabe7994c30a2::t_9acfb886b9acaf 1-24
+packages/testing/smoke/Typography/exports.test.tsx
+  s_d244dbd085cc34::t_9d8cc8498645af 1-13
+packages/testing/smoke/Watermark/exports.test.tsx
+  s_deabe7994c30a2::t_921687a0719d51 1-18
+packages/testing/utils/color-browser.ts
+  s_73ead3a6f7caeb::t_8ae34138e3157f 1-14
+output/c09-empty-statistic/browser.log
+  s_e34220fc676554::t_e792a5472e1618 1-30
+output/c09-tag-badge/build-docs.log
+  s_e34220fc676554::t_114b261e9f9de2 1-442
+output/c09-tag-badge/build.log
+  s_e34220fc676554::t_215f42807120d0 1-489
+output/c09-tag-badge/full.log
+  s_e34220fc676554::t_a40c5b4b43b10c 1-11
+output/c09-timeline-progress/build-docs.log
+  s_e34220fc676554::t_7239573a06f357 1-487
+output/c09-timeline-progress/build.log
+  s_e34220fc676554::t_0d9a6b84faa454 1-501
+output/c09-timeline-progress/typecheck.log
+  s_e34220fc676554::t_849a2a0f274e87 1-4
+output/c09-timeline-progress/vitest.log
+  s_e34220fc676554::t_372b20006afb29 1-11
+output/playwright/form-fix/build.log
+  s_e34220fc676554::t_a420020d7f43b9 1-467
+output/result-qrcode/build-docs.log
+  s_e34220fc676554::t_bd3426098afe88 1-511
+output/result-qrcode/build.log
+  s_e34220fc676554::t_a645da5ae4dd56 1-506
+output/result-qrcode/typecheck.log
+  s_e34220fc676554::t_8730e7a56d06f0 1-4
+output/watermark-alert/test.log
+  s_e34220fc676554::t_6c7203735ef54a 1-9
+packages/competence/types/alert.d.ts
+  s_e34220fc676554::t_d401b40f6c7276 1-28,30-49,51
+packages/competence/types/avatar.d.ts
+  s_e34220fc676554::t_f4fe971fdfe618 1-6
+packages/competence/types/badge.d.ts
+  s_e34220fc676554::t_d921faa9072ed9 1,3-7,11-12,19-24,27-29,35-36,39,41-42,45,49-52,55-56,58-67
+packages/competence/types/breakpoint.d.ts
+  s_e34220fc676554::t_8f0740c8dd0ad3 15-33
+packages/competence/types/form.d.ts
+  s_e34220fc676554::t_a0c9e3a6118b5f 21
+packages/competence/types/index.d.ts
+  s_e34220fc676554::t_be4f635bcf208e 10,19-20,58,69-70
+packages/competence/types/masonry.d.ts
+  s_e34220fc676554::t_75e765ee85a0fb 1-4,6-11,17-20,23-55
+packages/competence/types/presetColors.d.ts
+  s_e34220fc676554::t_c092d267937914 1-10
+packages/competence/types/progress.d.ts
+  s_e34220fc676554::t_4491f4fdbf2abb 2-3,5-18,20-26,28-66,68-118
+packages/competence/types/qrcode.d.ts
+  s_e34220fc676554::t_5578c96a993e2e 1-66
+packages/competence/types/qrcodegen.d.ts
+  s_e34220fc676554::t_f43b43e865e10d 1-80
+packages/competence/types/responsive.d.ts
+  s_e34220fc676554::t_7517f8fbbb89c7 1-28
+packages/competence/types/sider.d.ts
+  s_e34220fc676554::t_39c977c048e810 2-13,18,21,25,27,29
+packages/competence/types/splitter.d.ts
+  s_e34220fc676554::t_b5770b47671f3d 1,3-4,6-14,16-17,22,29-40,42-52,54,57-63,67-78,80-81,83,85-97,99,101-106,109-129
+packages/competence/types/statistic.d.ts
+  s_e34220fc676554::t_9b18e38ed90c7a 1-37
+packages/competence/types/tag.d.ts
+  s_e34220fc676554::t_67f93bff1f2309 1-36,39-40,43,50,59-80
+packages/competence/types/timeline.d.ts
+  s_e34220fc676554::t_7013842f12bde3 1-63
+packages/competence/types/watermark.d.ts
+  s_e34220fc676554::t_1f1a57a1590761 2-4,6-22,28-31,34-51,55-61,63-68
+packages/components/types/Alert/index.d.ts
+  s_e34220fc676554::t_afeb5047edd572 2-34,36-42,44,46,48,50-52,54-56,58-77,80-82
+packages/components/types/Alert/styles.d.ts
+  s_e34220fc676554::t_9efe9afed0103a 1-3,5,7,9,11-14,16-17,19-21
+packages/components/types/Avatar/index.d.ts
+  s_e34220fc676554::t_e3d7864031cc66 2,4
+packages/components/types/Badge/index.d.ts
+  s_e34220fc676554::t_e1663ff510bd8b 2-7,17-18,20,22,24,26,28,32,34,39,41,44,46,48,50,62,67
+packages/components/types/Badge/styles.d.ts
+  s_e34220fc676554::t_20e61e53ee298d 1-8,10-13,17-19,22-28,30-31,33,35-36
+packages/components/types/Button/styles.d.ts
+  s_e34220fc676554::t_c698cb299b70a9 5
+packages/components/types/Calendar/styles.d.ts
+  s_e34220fc676554::t_7b6ea4a4d13859 26,32,35,38
+packages/components/types/Cascader/styles.d.ts
+  s_e34220fc676554::t_b930b21ec70e6e 14
+packages/components/types/Divider/index.d.ts
+  s_e34220fc676554::t_22f82c596bf622 2-24,26-30,32-37,42
+packages/components/types/Divider/styles.d.ts
+  s_e34220fc676554::t_f34fc18719b62a 1-8,10-18,20-21
+packages/components/types/Empty/index.d.ts
+  s_e34220fc676554::t_e7c07559f2a3d0 2-28,30-32,34-35,39-43
+packages/components/types/Empty/styles.d.ts
+  s_e34220fc676554::t_dcb098a17597af 2-15,19,22-42
+packages/components/types/Flex/index.d.ts
+  s_e34220fc676554::t_9dc272c2c38562 1-7,9-17,19,21,23-24,29
+packages/components/types/Flex/styles.d.ts
+  s_e34220fc676554::t_5a4c40532d8c15 1-21,24-26,28-36
+packages/components/types/Form/context.d.ts
+  s_e34220fc676554::t_ce92e9e6a3b0b3 9,34
+packages/components/types/Form/styles.d.ts
+  s_e34220fc676554::t_c6af28e5427a73 13
+packages/components/types/Grid/index.d.ts
+  s_e34220fc676554::t_bc9ae84f3d545e 1,3-20,26-52,57-63,65-67
+packages/components/types/Grid/layout.d.ts
+  s_e34220fc676554::t_86f39bacbe89e6 1-41
+packages/components/types/Grid/styles.d.ts
+  s_e34220fc676554::t_fc623bd2145ea1 2-8,12-31
+packages/components/types/Input/context.d.ts
+  s_e34220fc676554::t_869189c5ea637b 1,19-22,47-50
+packages/components/types/Layout/index.d.ts
+  s_e34220fc676554::t_2e7b99388760ff 2,4-13,19,24,29,34-35,37,39,41,43,45-49,51,53,55-57,59-62,67-75
+packages/components/types/Layout/styles.d.ts
+  s_e34220fc676554::t_39a6ad1aadd5a2 1-18,20-31,34-44,47-55
+packages/components/types/Masonry/index.d.ts
+  s_e34220fc676554::t_da813000af5952 2-24,26-34,36-46,49,52-53
+packages/components/types/Masonry/styles.d.ts
+  s_e34220fc676554::t_609074e1b91623 2-8,10-17,19
+packages/components/types/Progress/index.d.ts
+  s_e34220fc676554::t_43fd8cd27ef23f 2-30,32,34,36,38-42,44-48,50-67,71
+packages/components/types/Progress/styles.d.ts
+  s_e34220fc676554::t_6208bd4255356f 2-16,18,21-22,24-25,28,30-44
+packages/components/types/QRCode/index.d.ts
+  s_e34220fc676554::t_350eb8cad235a2 2-3,5-33,35,40-52,54-61,65
+packages/components/types/QRCode/styles.d.ts
+  s_e34220fc676554::t_8c70ee45598292 1,4-7
+packages/components/types/Result/images.d.ts
+  s_e34220fc676554::t_6b607f1d944deb 1-5
+packages/components/types/Result/index.d.ts
+  s_e34220fc676554::t_cf3cfde7648e77 2-25,29-31,33,35-36,40-46
+packages/components/types/Result/styles.d.ts
+  s_e34220fc676554::t_b5f304d5988493 1-3,5-9
+packages/components/types/Select/PickerSuffix.d.ts
+  s_e34220fc676554::t_d01771a38a4b78 1-9
+packages/components/types/Select/styles.d.ts
+  s_e34220fc676554::t_599f77ab72fd98 14
+packages/components/types/Space/index.d.ts
+  s_e34220fc676554::t_e3504042bb26d4 2-19,21-23,25,27-34,39-46,52-64
+packages/components/types/Space/styles.d.ts
+  s_e34220fc676554::t_289c734968dc5f 1-11,14-16,18-21,23-27,29,31,33-37
+packages/components/types/Splitter/index.d.ts
+  s_e34220fc676554::t_c23d0884ad8d1a 2-33,35,37,39,41-45,50-76,78,80-84,89-92
+packages/components/types/Splitter/styles.d.ts
+  s_e34220fc676554::t_de552f33d5d047 2-17,19-25,27-29,31-39,41-71,73-74
+packages/components/types/Statistic/index.d.ts
+  s_e34220fc676554::t_a3e5e55e505b9d 2-22,24-26,28,30,32-35,38,40,42-43,47-49,51-56,58-60,63-70
+packages/components/types/Statistic/styles.d.ts
+  s_e34220fc676554::t_9a25e17eace5c5 2-9,11,13-16,18,20,22,24-25
+packages/components/types/Tag/index.d.ts
+  s_e34220fc676554::t_ddb14eee9679ec 2-10,12-16,18-22,26-29,31-33,37,40-49,53-85
+packages/components/types/Tag/styles.d.ts
+  s_e34220fc676554::t_43a4ea0e496a0f 1-5,7-14,17,19
+packages/components/types/Timeline/index.d.ts
+  s_e34220fc676554::t_943161f64ba40e 2-4,6-27,30,33-34,36-38,40-42,44,46-49,53-88,90,92,94-101,105-108
+packages/components/types/Timeline/styles.d.ts
+  s_e34220fc676554::t_635f7514b1e16a 2-11,15-16,18,20-21,23-25,27-28,30-32,35,38-53
+packages/components/types/Typography/styles.d.ts
+  s_e34220fc676554::t_cd895d1c0f53d0 8
+packages/components/types/Upload/styles.d.ts
+  s_e34220fc676554::t_0494793bc54670 14,20,22,29
+packages/components/types/Watermark/context.d.ts
+  s_e34220fc676554::t_972ef6508b085a 1-12
+packages/components/types/Watermark/index.d.ts
+  s_e34220fc676554::t_ed877c33c19647 2-5,7,9,11,13-21,23-26,30,32
+packages/components/types/common/antIcons.d.ts
+  s_e34220fc676554::t_ac1fcaeb03d7cd 1-14
+packages/components/types/common/merge.d.ts
+  s_e34220fc676554::t_8d29e3b78ddd06 1-9
+packages/components/types/common/renderable.d.ts
+  s_e34220fc676554::t_0b5f9bb9837835 1-5
+packages/components/types/common/semantic.d.ts
+  s_e34220fc676554::t_de4557a5347508 1-6
+packages/components/types/index.d.ts
+  s_e34220fc676554::t_f69d4bd320cc35 4,61,63-65,67-69,71,73,91,95-97,99,113,115,121,127,140-141
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.4",
+  "base_commit_sha": "8ecc93105cc86bb40ee8eb7f13c73dde66c698b9",
+  "prompts": {},
+  "sessions": {
+    "s_08d77751506c02": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a0d339-35a8-7941-97f4-805dae5f60df",
+        "model": "unknown"
+      },
+      "human_author": "pk111and222 <pk111and222@sina.cn>"
+    },
+    "s_09e1d164cfc71e": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a0d250-9b9f-7f40-8c07-83970da4bca1",
+        "model": "unknown"
+      },
+      "human_author": "pk111and222 <pk111and222@sina.cn>"
+    },
+    "s_73ead3a6f7caeb": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "5675cbe8-b86a-44b1-8132-8a1d89204d07",
+        "model": "unknown"
+      },
+      "human_author": "pk111and222 <pk111and222@sina.cn>"
+    },
+    "s_d244dbd085cc34": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a0dde6-ab61-7021-ba3e-f2410722ae9d",
+        "model": "unknown"
+      },
+      "human_author": "pk111and222 <pk111and222@sina.cn>"
+    },
+    "s_deabe7994c30a2": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "e086d8a4-04e7-4c07-ae07-e5260dec8ab6",
+        "model": "unknown"
+      },
+      "human_author": "pk111and222 <pk111and222@sina.cn>"
+    },
+    "s_e34220fc676554": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "11474836-643a-4f72-8c88-a251036755b8",
+        "model": "unknown"
+      },
+      "human_author": "pk111and222 <pk111and222@sina.cn>"
+    }
+  }
+}
