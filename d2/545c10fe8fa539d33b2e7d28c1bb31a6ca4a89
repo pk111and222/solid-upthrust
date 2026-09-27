@@ -1,0 +1,19 @@
+.gitignore
+  s_deabe7994c30a2::t_762369fe7ebc43 4-6
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.4",
+  "base_commit_sha": "d2545c10fe8fa539d33b2e7d28c1bb31a6ca4a89",
+  "prompts": {},
+  "sessions": {
+    "s_deabe7994c30a2": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "e086d8a4-04e7-4c07-ae07-e5260dec8ab6",
+        "model": "unknown"
+      },
+      "human_author": "pk111and222 <pk111and222@sina.cn>"
+    }
+  }
+}
