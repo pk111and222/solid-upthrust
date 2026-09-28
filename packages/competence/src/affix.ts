@@ -9,15 +9,24 @@ export interface AffixConfig {
   target?: () => HTMLElement | Window | undefined | null
   onChange?: (affixed: boolean) => void
 }
-/** Viewport coordinates; top takes precedence if both offsets are supplied. */
+/**
+ * Viewport coordinates (antd getFixedTop / getFixedBottom). With neither offset
+ * set, offsetTop defaults to 0. With both set, both apply and the top fix wins
+ * when both qualify — the bottom fix still applies when the top one does not.
+ */
 export function calculateAffix(placeholder: AffixRect, target: { top: number; bottom: number }, config: Pick<AffixConfig, 'offsetTop' | 'offsetBottom' | 'disabled'>): AffixPosition | undefined {
   if (config.disabled || placeholder.width <= 0 || placeholder.height <= 0 || target.bottom <= target.top) return
-  const topMode = config.offsetTop !== undefined || config.offsetBottom === undefined
-  const offset = topMode ? config.offsetTop ?? 0 : config.offsetBottom ?? 0
-  if (!Number.isFinite(offset)) return
-  const top = topMode ? target.top + offset : target.bottom - offset - placeholder.height
-  if (topMode ? placeholder.top >= top : placeholder.top <= top) return
-  return { top, left: placeholder.left, width: placeholder.width, height: placeholder.height, relativeTop: top - placeholder.top }
+  const offsetTop = config.offsetTop === undefined && config.offsetBottom === undefined ? 0 : config.offsetTop
+  const pinned = (top: number): AffixPosition => ({ top, left: placeholder.left, width: placeholder.width, height: placeholder.height, relativeTop: top - placeholder.top })
+  if (offsetTop !== undefined && Number.isFinite(offsetTop)) {
+    const top = target.top + offsetTop
+    if (placeholder.top < top) return pinned(top)
+  }
+  const offsetBottom = config.offsetBottom
+  if (offsetBottom !== undefined && Number.isFinite(offsetBottom)) {
+    const top = target.bottom - offsetBottom - placeholder.height
+    if (placeholder.top > top) return pinned(top)
+  }
 }
 export function createAffix(config: AffixConfig = {}) {
   const [placeholder, setPlaceholder] = createSignal<HTMLElement | undefined>(undefined, { ownedWrite: true })

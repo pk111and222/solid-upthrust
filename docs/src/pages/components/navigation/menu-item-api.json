@@ -1,0 +1,92 @@
+[
+  {
+    "name": "key",
+    "type": "string",
+    "default": "—",
+    "description": "唯一标识；分组、分割线可省略"
+  },
+  {
+    "name": "label",
+    "type": "JSX.Element",
+    "default": "—",
+    "description": "标题"
+  },
+  {
+    "name": "icon",
+    "type": "JSX.Element | string",
+    "default": "—",
+    "description": "图标；字符串按图标类名渲染"
+  },
+  {
+    "name": "title",
+    "type": "string | false",
+    "default": "—",
+    "description": "悬浮 title 与收起提示文字；false 关闭该项提示"
+  },
+  {
+    "name": "extra",
+    "type": "JSX.Element",
+    "default": "—",
+    "description": "右侧附加内容（如快捷键）"
+  },
+  {
+    "name": "disabled",
+    "type": "boolean",
+    "default": "false",
+    "description": "禁用"
+  },
+  {
+    "name": "danger",
+    "type": "boolean",
+    "default": "false",
+    "description": "危险样式（仅菜单项）"
+  },
+  {
+    "name": "children",
+    "type": "MenuItemType[]",
+    "default": "—",
+    "description": "子菜单项"
+  },
+  {
+    "name": "type",
+    "type": "'item' | 'submenu' | 'group' | 'divider'",
+    "default": "—",
+    "description": "节点类型；有 children 时默认为子菜单"
+  },
+  {
+    "name": "dashed",
+    "type": "boolean",
+    "default": "false",
+    "description": "分割线：虚线"
+  },
+  {
+    "name": "theme",
+    "type": "'light' | 'dark'",
+    "default": "跟随 Menu",
+    "description": "子菜单：弹层主题"
+  },
+  {
+    "name": "popupClassName",
+    "type": "string",
+    "default": "—",
+    "description": "子菜单：弹层类名（inline 无效）"
+  },
+  {
+    "name": "popupOffset",
+    "type": "[number, number]",
+    "default": "—",
+    "description": "子菜单：弹层偏移 px（inline 无效）"
+  },
+  {
+    "name": "popupRender",
+    "type": "MenuPopupRender",
+    "default": "—",
+    "description": "子菜单：自定义弹层内容"
+  },
+  {
+    "name": "onTitleClick",
+    "type": "({ key, domEvent }) => void",
+    "default": "—",
+    "description": "子菜单：点击标题"
+  }
+]

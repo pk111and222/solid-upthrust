@@ -1,0 +1,56 @@
+[
+  {
+    "name": "items",
+    "type": "BreadcrumbItemType[]",
+    "default": "—",
+    "description": "路由栈信息；传入时忽略 children"
+  },
+  {
+    "name": "separator",
+    "type": "JSX.Element",
+    "default": "'/'",
+    "description": "分隔符；'' / null 时不自动插入（配合 type: 'separator'）"
+  },
+  {
+    "name": "params",
+    "type": "Record<string, string>",
+    "default": "—",
+    "description": "路由参数，替换 path 与字符串 title 中的 :name"
+  },
+  {
+    "name": "itemRender",
+    "type": "(route, params, routes, paths) => JSX.Element",
+    "default": "—",
+    "description": "自定义项内容，替代默认的 a / span"
+  },
+  {
+    "name": "classNames",
+    "type": "BreadcrumbClassNames | (info) => BreadcrumbClassNames",
+    "default": "—",
+    "description": "语义化类名：root / item / separator"
+  },
+  {
+    "name": "styles",
+    "type": "BreadcrumbStyles | (info) => BreadcrumbStyles",
+    "default": "—",
+    "description": "语义化内联样式：root / item / separator"
+  },
+  {
+    "name": "class",
+    "type": "string",
+    "default": "—",
+    "description": "根节点 nav 的类名"
+  },
+  {
+    "name": "style",
+    "type": "JSX.CSSProperties",
+    "default": "—",
+    "description": "根节点 nav 的样式"
+  },
+  {
+    "name": "children",
+    "type": "JSX.Element",
+    "default": "—",
+    "description": "旧写法：Breadcrumb.Item 子元素"
+  }
+]

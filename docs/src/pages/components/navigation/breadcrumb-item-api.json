@@ -1,0 +1,74 @@
+[
+  {
+    "name": "key",
+    "type": "string",
+    "default": "—",
+    "description": "唯一标识"
+  },
+  {
+    "name": "title",
+    "type": "JSX.Element",
+    "default": "—",
+    "description": "名称；为 null / undefined 时整项不渲染"
+  },
+  {
+    "name": "href",
+    "type": "string",
+    "default": "—",
+    "description": "链接地址；存在时渲染为 a，否则为 span"
+  },
+  {
+    "name": "path",
+    "type": "string",
+    "default": "—",
+    "description": "路由片段，与前面各项累积为 #/a/b 并覆盖 href"
+  },
+  {
+    "name": "menu",
+    "type": "{ items: BreadcrumbMenuItem[]; onClick?: (key) => void }",
+    "default": "—",
+    "description": "下拉菜单，悬浮打开"
+  },
+  {
+    "name": "dropdownProps",
+    "type": "trigger / placement / open / defaultOpen / onOpenChange / disabled / overlayClass / overlayStyle",
+    "default": "{ trigger: 'hover', placement: 'bottom' }",
+    "description": "透传给 Dropdown 的属性"
+  },
+  {
+    "name": "onClick",
+    "type": "(e: MouseEvent) => void",
+    "default": "—",
+    "description": "点击回调，a 与 span 均生效"
+  },
+  {
+    "name": "class",
+    "type": "string",
+    "default": "—",
+    "description": "该项 a / span 的类名"
+  },
+  {
+    "name": "style",
+    "type": "JSX.CSSProperties",
+    "default": "—",
+    "description": "该项 a / span 的样式"
+  },
+  {
+    "name": "type",
+    "type": "'separator'",
+    "default": "—",
+    "description": "独立分隔符项"
+  },
+  {
+    "name": "separator",
+    "type": "JSX.Element",
+    "default": "'/'",
+    "description": "type 为 'separator' 时的内容"
+  },
+  {
+    "name": "dropdownRender",
+    "type": "JSX.Element",
+    "default": "—",
+    "description": "已废弃：替代 title 渲染，请改用 menu"
+  }
+]

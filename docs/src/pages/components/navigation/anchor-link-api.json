@@ -1,0 +1,8 @@
+[
+  { "name": "key", "type": "string", "default": "—", "description": "唯一标识" },
+  { "name": "href", "type": "string", "default": "—", "description": "锚点链接，取最后一个 # 之后的部分作为目标元素 id" },
+  { "name": "title", "type": "JSX.Element", "default": "—", "description": "文字内容；为字符串时同时作为 a 的 title 属性" },
+  { "name": "target", "type": "string", "default": "—", "description": "原生 a 的 target 属性" },
+  { "name": "replace", "type": "boolean", "default": "—", "description": "覆盖 Anchor 的 replace" },
+  { "name": "children", "type": "AnchorLinkItemProps[]", "default": "—", "description": "嵌套链接（horizontal 方向不支持）" }
+]

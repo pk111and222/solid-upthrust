@@ -98,8 +98,7 @@
 
 ## 边界与后续
 
-- **SiderContext / Menu inlineCollapsed（未做）**：antd 通过 SiderContext 让 Menu 在 Sider 收起时自动切成图标模式。本库 Menu 尚无 inline 收起模式，已记入 TODO；示例用 `onCollapse` 自行隐藏文字。
-- **Menu 在深色 Sider 中不可读（未改）**：Menu 容器写死 `text-on-surface`。属于 Menu 回归范围，已记入 TODO。
+- **SiderContext / Menu inlineCollapsed（已在 Menu 回归中完成，见 menu.md）**：Sider 通过 `Layout/context.ts` 的 SiderContext 暴露 `siderCollapsed`，Menu 未传 inlineCollapsed 时跟随；深色 Sider 内使用 `<Menu theme="dark">`。
 - **与 antd 6 的差异**：
   - xxxl 阈值 1919.98px（antd 1839.98px）。
   - 触发器 sticky 而非 fixed。

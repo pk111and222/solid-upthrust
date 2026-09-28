@@ -74,8 +74,8 @@ export { default as Grid, Row, Col, useBreakpoint } from './Grid'
 export type {
   RowProps, ColProps, RowJustify, RowAlign, Gutter, GutterValue, ColSize, ColSpanType, ResponsiveValue, ScreenMap,
 } from './Grid'
-export { default as Layout, Header, Footer, Content, Sider } from './Layout'
-export type { LayoutProps, HeaderProps, FooterProps, ContentProps, SiderProps, SiderTheme, SiderBreakpoint, SiderCollapseType, SiderSemanticName } from './Layout'
+export { default as Layout, Header, Footer, Content, Sider, SiderContext } from './Layout'
+export type { LayoutProps, HeaderProps, FooterProps, ContentProps, SiderProps, SiderTheme, SiderBreakpoint, SiderCollapseType, SiderSemanticName, SiderContextProps } from './Layout'
 export { default as Space, Compact, Addon as SpaceAddon } from './Space'
 export type {
   SpaceProps, CompactProps, SpaceCompactProps, SpaceAddonProps, SpaceSize, SpacePresetSize, SpaceAlign,
@@ -94,17 +94,26 @@ export type {
 
 // Navigation components
 export { default as Anchor } from './Anchor'
-export type { AnchorProps } from './Anchor'
+export type { AnchorProps, AnchorLinkItemProps, AnchorDirection, AnchorContainer } from './Anchor'
 export { default as Breadcrumb, BreadcrumbItem } from './Breadcrumb'
-export type { BreadcrumbProps, BreadcrumbItemProps, BreadcrumbItemType } from './Breadcrumb'
+export type {
+  BreadcrumbProps, BreadcrumbItemProps, BreadcrumbItemType, BreadcrumbMenuItem, BreadcrumbMenuProps, BreadcrumbDropdownProps,
+  BreadcrumbParams, BreadcrumbItemRender, BreadcrumbClassNames, BreadcrumbStyles, BreadcrumbSemanticInfo,
+} from './Breadcrumb'
 export { default as Dropdown } from './Dropdown'
 export type { DropdownProps, DropdownMenuProps, DropdownMenuItem, DropdownPlacement, DropdownTrigger } from './Dropdown'
 export { default as Menu } from './Menu'
-export type { MenuProps } from './Menu'
+export type {
+  MenuProps, MenuItem, MenuItemType, MenuMode, MenuTheme, MenuRef, MenuClickInfo, MenuSelectInfo, MenuClassNames, MenuStyles,
+  MenuSemanticInfo, MenuSubMenuSemantic, MenuTooltipConfig, MenuExpandIconInfo, MenuPopupRender,
+} from './Menu'
 export { default as Pagination } from './Pagination'
 export type { PaginationProps } from './Pagination'
 export { default as Steps } from './Steps'
-export type { StepsProps } from './Steps'
+export type {
+  StepsProps, StepItem, StepStatus, StepsClassNames, StepsStyles, StepsSemanticInfo, StepsSemanticName,
+  StepsProgressDotRender, StepsProgressDotInfo, StepsOrientation, StepsTitlePlacement, StepsSize, StepsType, StepsVariant,
+} from './Steps'
 export { default as Tabs } from './Tabs'
 export type { TabsProps, TabsItem, TabsIns } from './Tabs'
 

@@ -70,7 +70,7 @@ export default function Page() {
       <p><strong>断点：</strong>xs…xxl 的阈值为 BREAKPOINTS − 0.02px（与 antd 一致，例如 lg 为 max-width: 991.98px）；xxxl 取 1919.98px，与本库 Grid 的 xxxl（≥1920）对齐，而 antd Sider 为 1839.98px。设置 breakpoint 后，挂载时的断点结果覆盖 defaultCollapsed（与 antd 一致）；清空 breakpoint 时 broken 复位，但保留当前收起状态。</p>
       <p><strong>触发器：</strong>collapsible 时总是渲染；非 collapsible 时仅在 collapsedWidth 为 0 且低于断点时渲染零宽触发器（与 antd 同条件）。触发器是 role="button" 的可聚焦元素，支持 Enter / 空格切换，aria-expanded 反映展开状态。</p>
       <p><strong>与 antd 的差异：</strong>底部触发器用 sticky 贴底并占据文档流中的 48px，而不是 antd 的 position: fixed——嵌在卡片或弹窗里的布局不会跑出容器，也不会遮挡菜单最后一项。Header 保持浅色（antd 默认 #001529 深色、行高 64px），需要深色顶栏时用 class 覆盖。零宽模式收起后内容设为 inert，键盘无法再聚焦到隐藏的菜单。</p>
-      <p><strong>暂不支持：</strong>RTL 方向；向 Menu 注入 inlineCollapsed 的 SiderContext（Menu 尚无 inline 收起模式，收起后请自行隐藏菜单文字，参见“侧边布局”示例）；ConfigProvider 的 layout 全局配置。</p>
+      <p><strong>暂不支持：</strong>RTL 方向；ConfigProvider 的 layout 全局配置。Sider 内的 Menu 未传 inlineCollapsed 时自动跟随 Sider 收起状态（SiderContext），深色 Sider 请使用 theme="dark" 的 Menu（参见“侧边布局”示例）。</p>
     </Section>
   </>
 }

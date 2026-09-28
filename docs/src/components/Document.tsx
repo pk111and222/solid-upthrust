@@ -13,7 +13,7 @@ export function Document(props: DocumentProps) {
     class="!border-0 !bg-transparent [&_[role=menuitem]]:!p-0 [&_[role=menuitem]]:!h-auto [&_[role=menuitem]]:!rounded-lg [&_[role=menuitem]]:mb-1"
     items={groups.map(group => ({ key:group, label:group, type:'group', children:props.routes.filter(route => route.meta.group === group).map(route => ({key:route.path,label:route.meta.title})) }))}
     renderLabel={item => item.type === 'group' ? <span class="text-[11px] tracking-wider text-slate-400">{item.label}</span> :
-      <a class="block w-full px-4 py-2.5 text-[13px] no-underline text-inherit transition-colors hover:text-blue-600" href={withBase(props.base,item.key)} aria-current={item.key === props.path ? 'page' : undefined}>{item.label}</a>} />
+      <a class="block w-full px-4 py-2.5 text-[13px] no-underline text-inherit transition-colors hover:text-blue-600" href={withBase(props.base,item.key!)} aria-current={item.key === props.path ? 'page' : undefined}>{item.label}</a>} />
   const componentPage = props.path.startsWith('/components/general/')
   return <html lang="zh-CN">
     <head>

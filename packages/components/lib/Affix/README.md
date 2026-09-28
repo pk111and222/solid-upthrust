@@ -8,7 +8,7 @@ import { Affix, Button } from 'upthrust-ui'
 ```
 
 - `offsetTop`：距目标可视区域顶部的像素距离；未设置任何偏移时默认 0。
-- `offsetBottom`：距目标可视区域底部的像素距离。上下都传时 offsetTop 优先。
+- `offsetBottom`：距目标可视区域底部的像素距离。上下都传时两者都生效：先判断顶部，顶部不满足再判断底部（antd 6）。
 - `target`：返回滚动容器 HTMLElement 或 Window，默认 window。自定义元素必须包含固钉组件；返回 null/undefined 时暂停固钉。响应式 target 改变会重新绑定监听。
 - `disabled`：恢复正常文档流；`onChange` 仅在固钉状态切换时触发，不会每次滚动重复触发。
 - `zIndex`：默认 10；`class/style` 用于占位外层，`affixClass` 仅在固定时作用于内容层。
@@ -18,4 +18,4 @@ import { Affix, Button } from 'upthrust-ui'
 
 固定时保留内容高度，内容不迁移到 Portal，不重建子组件。内容宽度和高度变化会重新测量。祖先的 transform/zoom 可能改变坐标系，建议避免在经过变换的祖先下使用；未引起滚动或尺寸变化的外部布局位移，可通过 updatePosition 手动刷新。
 
-示例：`example/src/pages/Affix.tsx`。纯位置计算与生命周期逻辑位于 `packages/competence/src/affix.ts`。
+文档：`docs/src/pages/components/navigation/affix.tsx`，示例源码 `docs/src/examples/affix/`。纯位置计算与生命周期逻辑位于 `packages/competence/src/affix.ts`。

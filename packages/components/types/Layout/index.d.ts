@@ -1,6 +1,7 @@
 import { JSX } from '@solidjs/web';
 import { SiderBreakpoint, SiderCollapseType } from 'upthrust-competence';
 import { SiderTheme } from './styles';
+import { SiderContext, SiderContextProps } from './context';
 export type { SiderTheme };
 export type { SiderBreakpoint, SiderCollapseType };
 /** Sider 可语义化定制的节点：根节点 aside 与内容容器。 */
@@ -64,6 +65,8 @@ export interface SiderProps extends Omit<SectionAttributes<HTMLElement>, 'onBrea
     style?: JSX.CSSProperties;
     children?: JSX.Element;
 }
+export { SiderContext };
+export type { SiderContextProps };
 export declare const Header: (props: HeaderProps) => JSX.Element;
 export declare const Footer: (props: FooterProps) => JSX.Element;
 export declare const Content: (props: ContentProps) => JSX.Element;

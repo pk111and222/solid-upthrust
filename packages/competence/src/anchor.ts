@@ -14,15 +14,31 @@ export type AnchorConfig = {
   /** Extra distance (px) from viewport top when positioning the active section. */
   targetOffset?: number
   onChange?: (activeKey: string) => void
-  /** Controlled override: when provided its return value wins over scroll-spy. */
-  getCurrentAnchor?: () => string
+  /**
+   * Controlled override: receives the scroll-spy key and its return value wins
+   * (antd getCurrentAnchor(activeLink)). Zero-arg functions stay compatible.
+   */
+  getCurrentAnchor?: (activeKey: string) => string
   /** px of slack used when deciding whether a section counts as "reached". */
   bounds?: number
   /** Dependency injection for tests / non-browser environments. */
   getScrollContainer?: () => HTMLElement | Window | undefined
   requestAnimationFrame?: (cb: () => void) => number
   cancelAnimationFrame?: (id: number) => void
+  /** Timer injection for the click-scroll settle window (tests). */
+  setTimeout?: (cb: () => void, ms: number) => unknown
+  clearTimeout?: (id: unknown) => void
 }
+
+/**
+ * Quiet period (ms) after the last scroll event of a click-initiated smooth
+ * scroll before scroll-spy resumes. Smooth scrolling emits an event per frame,
+ * so a gap this long means the animation has settled.
+ */
+export const ANCHOR_SCROLL_SETTLE = 120
+
+/** Section id of an href: the part after the last `#` (antd `#([\S ]+)$`). */
+export const anchorTargetId = (href: string): string | undefined => /#([\S ]+)$/.exec(href)?.[1]
 
 export type AnchorIns = {
   activeKey: () => string
@@ -68,7 +84,7 @@ export const createAnchor = (config: AnchorConfig) => {
   let _clickScrolling = false
 
   const activeKey = createMemo(() => {
-    if (config.getCurrentAnchor) return config.getCurrentAnchor()
+    if (config.getCurrentAnchor) return config.getCurrentAnchor(_activeKey())
     return _activeKey()
   })
 
@@ -89,7 +105,9 @@ export const createAnchor = (config: AnchorConfig) => {
       const c = config.getScrollContainer()
       if (c) return c
     }
-    return _containerEl || docElement()
+    // Window by default: page scroll events are dispatched on document /
+    // window, never on documentElement, so listening there never fires.
+    return _containerEl || (typeof window !== 'undefined' ? window : docElement())
   }
 
   const setActive = (key: string) => {
@@ -118,7 +136,8 @@ export const createAnchor = (config: AnchorConfig) => {
 
     let currentKey = ''
     for (const item of flatItems()) {
-      const el = document.getElementById(item.href.replace(/^#/, ''))
+      const id = anchorTargetId(item.href)
+      const el = id ? document.getElementById(id) : null
       if (!el) continue
       const top = el.getBoundingClientRect().top + scrollTop - containerTop
       if (top <= line) {
@@ -128,8 +147,25 @@ export const createAnchor = (config: AnchorConfig) => {
     return currentKey
   }
 
+  const setTimer = (cb: () => void, ms: number) => (config.setTimeout ?? globalThis.setTimeout)(cb, ms)
+  const clearTimer = (id: unknown) => (config.clearTimeout ?? ((value: unknown) => globalThis.clearTimeout(value as ReturnType<typeof setTimeout>)))(id)
+  let _settleTimer: unknown
+  /** (Re)arm the settle window: scroll-spy resumes once scrolling has been quiet for ANCHOR_SCROLL_SETTLE ms. */
+  const armSettle = () => {
+    if (_settleTimer !== undefined) clearTimer(_settleTimer)
+    _settleTimer = setTimer(() => {
+      _settleTimer = undefined
+      // No recompute on release: the clicked link stays active even when the
+      // container cannot scroll it to the top (e.g. the last short section).
+      _clickScrolling = false
+    }, ANCHOR_SCROLL_SETTLE)
+  }
+
   const handleScroll = () => {
-    if (_clickScrolling) return
+    if (_clickScrolling) {
+      armSettle()
+      return
+    }
     if (_rafId !== undefined) caf(config)(_rafId)
     _rafId = raf(config)(() => {
       _rafId = undefined
@@ -140,7 +176,8 @@ export const createAnchor = (config: AnchorConfig) => {
   const scrollTo = (key: string) => {
     const item = flatItems().find(i => i.key === key)
     if (!item) return
-    const el = document.getElementById(item.href.replace(/^#/, ''))
+    const id = anchorTargetId(item.href)
+    const el = id ? document.getElementById(id) : null
     if (!el) return
     const offset = config.targetOffset ?? 0
     const container = resolveContainer()
@@ -153,11 +190,12 @@ export const createAnchor = (config: AnchorConfig) => {
     container.scrollTo({ top: Math.max(targetTop, 0), behavior: 'smooth' })
     // Suppress the scroll events fired while smooth-scrolling towards the
     // target: sections passed along the way would flip the active key back.
+    // Every scroll event re-arms the settle window, so suppression lasts until
+    // the animation has actually stopped (a single frame was not enough).
     _clickScrolling = true
+    if (_rafId !== undefined) { caf(config)(_rafId); _rafId = undefined }
     setActive(key)
-    // One rAF tick after the last scroll event of the animation is enough in
-    // practice; a longer animation simply extends the suppression window.
-    raf(config)(() => { _clickScrolling = false })
+    armSettle()
   }
 
   const containerRef = (el: HTMLElement) => {
@@ -167,9 +205,8 @@ export const createAnchor = (config: AnchorConfig) => {
   // Bind scroll listeners after render (containerRef attached) and rebind
   // whenever the item set changes so scroll-spy tracks fresh targets.
   createEffect(
-    () => flatItems(),
-    () => {
-      const container = resolveContainer()
+    () => ({ items: flatItems(), container: resolveContainer() }),
+    ({ container }) => {
       container.addEventListener('scroll', handleScroll, { passive: true })
       // Initial position may already be mid-page (e.g. deep link).
       handleScroll()
@@ -179,6 +216,7 @@ export const createAnchor = (config: AnchorConfig) => {
 
   onOwnerCleanup(() => {
     if (_rafId !== undefined) caf(config)(_rafId)
+    if (_settleTimer !== undefined) clearTimer(_settleTimer)
   })
 
   const refs: AnchorIns = {
@@ -203,4 +241,6 @@ export const anchorSplits: (keyof AnchorConfig)[] = [
   'getScrollContainer',
   'requestAnimationFrame',
   'cancelAnimationFrame',
+  'setTimeout',
+  'clearTimeout',
 ]

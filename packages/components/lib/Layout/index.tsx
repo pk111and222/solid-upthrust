@@ -7,6 +7,7 @@ import {
   layoutVariants, siderTriggerVariants, siderVariants, siderZeroTriggerVariants,
   type SiderTheme,
 } from './styles'
+import { SiderContext, type SiderContextProps } from './context'
 
 export type { SiderTheme }
 export type { SiderBreakpoint, SiderCollapseType }
@@ -87,6 +88,9 @@ interface LayoutContextValue {
 // 可选注入：Sider 不在 Layout 内时拿到 null（Solid 2 无 Provider 且无默认值时会抛错）。
 const LayoutContext = createContext<LayoutContextValue | null>(null)
 
+export { SiderContext }
+export type { SiderContextProps }
+
 const REGION_PROPS = ['class', 'style', 'children'] as const
 
 const LayoutBase = (props: LayoutProps) => {
@@ -165,6 +169,10 @@ export const Sider = (props: SiderProps) => {
     return { ...props.styles?.root, ...props.style, flex: `0 0 ${value}`, 'max-width': value, 'min-width': value, width: value }
   })
 
+  const siderContext: SiderContextProps = {
+    get siderCollapsed() { return sider.collapsed() },
+  }
+
   const onTriggerKeyDown = (event: KeyboardEvent) => {
     if (event.key !== 'Enter' && event.key !== ' ') return
     event.preventDefault()
@@ -174,7 +182,7 @@ export const Sider = (props: SiderProps) => {
   return (
     <aside {...rest} class={mergeClass(siderVariants({ theme: theme() }), props.class, props.classNames?.root)} style={rootStyle()}>
       <div class={mergeClass(SIDER_BODY_CLASS, props.classNames?.body)} style={props.styles?.body} inert={hidden() || undefined}>
-        {props.children}
+        <SiderContext value={siderContext}>{props.children}</SiderContext>
       </div>
       <Show when={showTrigger()}>
         <Show

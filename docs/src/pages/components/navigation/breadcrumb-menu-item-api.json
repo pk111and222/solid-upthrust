@@ -1,0 +1,56 @@
+[
+  {
+    "name": "key",
+    "type": "string",
+    "default": "索引",
+    "description": "菜单项 key，传给 menu.onClick"
+  },
+  {
+    "name": "label",
+    "type": "JSX.Element",
+    "default": "—",
+    "description": "菜单项内容"
+  },
+  {
+    "name": "title",
+    "type": "JSX.Element",
+    "default": "—",
+    "description": "label 的别名（label 优先）"
+  },
+  {
+    "name": "path",
+    "type": "string",
+    "default": "—",
+    "description": "渲染为 <a href={item.href + path}>"
+  },
+  {
+    "name": "icon",
+    "type": "string",
+    "default": "—",
+    "description": "图标类名"
+  },
+  {
+    "name": "disabled",
+    "type": "boolean",
+    "default": "false",
+    "description": "禁用"
+  },
+  {
+    "name": "danger",
+    "type": "boolean",
+    "default": "false",
+    "description": "危险项"
+  },
+  {
+    "name": "type",
+    "type": "'divider'",
+    "default": "—",
+    "description": "分割线"
+  },
+  {
+    "name": "onClick",
+    "type": "() => void",
+    "default": "—",
+    "description": "菜单项点击，先于 menu.onClick"
+  }
+]

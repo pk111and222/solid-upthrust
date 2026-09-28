@@ -89,7 +89,9 @@ test('[layout.browser.collapse] click and keyboard toggle', async ({ page }, inf
   await expectWidth(sider, 80)
   await expect(button).toHaveAttribute('aria-expanded', 'false')
   await expect(button.locator('.i-mdi-chevron-right')).toBeAttached()
-  await expect(sider.locator('li span[hidden]').first()).toBeAttached()
+  // SiderContext 联动：Menu 跟随收起，宽 80px，文字区宽度收为 0。
+  await expectWidth(sider.getByRole('menu').first(), 80)
+  await expect.poll(() => width(sider.getByRole('menuitem', { name: '仪表盘' }).locator('span').last())).toBeLessThan(1)
   near(await width(content), before + 120, 1)
   await area.screenshot({ path: info.outputPath('side-collapsed.png') })
 

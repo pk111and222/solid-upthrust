@@ -8,6 +8,7 @@ const mount = (view: Parameters<typeof render>[0]) => { const host = document.cr
 const rect = (top: number, height = 50, width = 200) => ({ top, left: 40, width, height, right: 40 + width, bottom: top + height, x: 40, y: top, toJSON() {} })
 afterEach(() => { dispose?.(); document.body.innerHTML = ''; vi.restoreAllMocks(); flush() })
 describe('Affix material', () => {
+  // 窗口目标：进入 / 离开 fixed 时占位保留高度，子节点不重建，onChange 只在切换时触发。
   it('preserves layout and children while entering and leaving window affix', () => {
     let instance!: AffixIns
     const onChange = vi.fn()
@@ -24,6 +25,7 @@ describe('Affix material', () => {
     top = 100; instance.updatePosition(); flush(); expect(content.style.position).toBe(''); expect(placeholder.style.height).toBe('')
     expect(onChange.mock.calls).toEqual([[true], [false]])
   })
+  // 元素目标：在占位块内 absolute 相对定位；响应式 disabled 立即恢复文档流。
   it('uses relative positioning inside a custom target and responds to disabling', () => {
     let target!: HTMLDivElement, instance!: AffixIns
     const [disabled, setDisabled] = createSignal(false, { ownedWrite: true })
@@ -37,6 +39,7 @@ describe('Affix material', () => {
     expect(content.style.position).toBe('absolute'); expect(content.style.top).toBe('-340px')
     setDisabled(true); flush(); expect(instance.affixed()).toBe(false)
   })
+  // 响应式 target 变空时解除固定并移除监听；卸载后 updatePosition 不再固定。
   it('releases affix when a reactive target disappears and cleans up listeners', () => {
     const remove = vi.spyOn(window, 'removeEventListener')
     let instance!: AffixIns
@@ -51,6 +54,7 @@ describe('Affix material', () => {
     dispose?.(); dispose = undefined
     instance.updatePosition(); expect(instance.affixed()).toBe(false)
   })
+  // scroll / resize 用 rAF 合并；卸载时取消挂起的帧并不再响应事件。
   it('coalesces scroll/resize work and cancels a pending frame on disposal', () => {
     const request = vi.spyOn(window, 'requestAnimationFrame').mockReturnValue(123)
     const cancel = vi.spyOn(window, 'cancelAnimationFrame')

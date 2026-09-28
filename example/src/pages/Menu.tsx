@@ -1,119 +1,42 @@
-import { type Component, createSignal } from 'solid-js'
-import { Menu, Divider } from 'upthrust-ui'
+import type { Component } from 'solid-js'
+import Horizontal from '../../../docs/src/examples/menu/horizontal'
+import HorizontalDark from '../../../docs/src/examples/menu/horizontal-dark'
+import Inline from '../../../docs/src/examples/menu/inline'
+import InlineCollapsed from '../../../docs/src/examples/menu/inline-collapsed'
+import TooltipDemo from '../../../docs/src/examples/menu/tooltip'
+import SiderCurrent from '../../../docs/src/examples/menu/sider-current'
+import Vertical from '../../../docs/src/examples/menu/vertical'
+import Theme from '../../../docs/src/examples/menu/theme'
+import SubmenuTheme from '../../../docs/src/examples/menu/submenu-theme'
+import SwitchMode from '../../../docs/src/examples/menu/switch-mode'
+import StyleClass from '../../../docs/src/examples/menu/style-class'
+import CustomPopupRender from '../../../docs/src/examples/menu/custom-popup-render'
+import Extra from '../../../docs/src/examples/menu/extra'
+import RenderLabel from '../../../docs/src/examples/menu/render-label'
+import Multiple from '../../../docs/src/examples/menu/multiple'
 
-const MenuPage: Component = () => {
-  const [selected, setSelected] = createSignal<string[]>(['1'])
-  const [openKeys, setOpenKeys] = createSignal<string[]>(['sub1'])
-
-  return (
-    <div class="p-6 max-w-4xl">
-      <h2 class="text-2xl font-bold mb-4">Menu 导航菜单</h2>
-      <p class="text-on-surface-variant mb-6">为页面和功能提供导航的菜单列表。</p>
-
-      <h3 class="text-lg font-semibold mb-3">原生链接标签</h3>
-      <Menu items={[{key:'Icon',label:'Icon 图标'},{key:'ConfigProvider',label:'ConfigProvider 全局配置'}]}
-        renderLabel={item => <a href={`/${item.key}`}>{item.label}</a>} />
-      <h3 class="text-lg font-semibold mb-3">垂直菜单</h3>
-      <div class="w-60 rounded-lg border border-outline-variant p-2">
-        <Menu
-          items={[
-            { key: '1', label: '导航一', icon: 'i-mdi-home' },
-            { key: '2', label: '导航二', icon: 'i-mdi-inbox' },
-            { key: 'sub1', label: '导航三 - 子菜单', icon: 'i-mdi-cog', children: [
-              { key: '3', label: '选项一' },
-              { key: '4', label: '选项二' },
-              { key: '5', label: '选项三' },
-            ]},
-            { key: '6', label: '导航四', icon: 'i-mdi-account' },
-          ]}
-          selectedKeys={selected()}
-          onSelect={({ selectedKeys }) => setSelected(selectedKeys)}
-          openKeys={openKeys()}
-          onOpenChange={setOpenKeys}
-        />
-      </div>
-      <p class="mt-2 text-sm text-on-surface-variant">当前选中: {selected().join(', ')}</p>
-
-      <Divider />
-
-      <h3 class="text-lg font-semibold mb-3">水平菜单（子菜单浮层弹出）</h3>
-      <Menu
-        mode="horizontal"
-        items={[
-          { key: 'h1', label: '首页', icon: 'i-mdi-home' },
-          { key: 'h2', label: '文档', icon: 'i-mdi-file-document', children: [
-            { key: 'h2-1', label: '快速上手' },
-            { key: 'h2-2', label: 'API 参考' },
-            { key: 'h2-3', label: '更新日志' },
-          ]},
-          { key: 'h3', label: '组件', icon: 'i-mdi-puzzle', children: [
-            { key: 'h3-1', label: '通用' },
-            { key: 'h3-2', label: '布局' },
-            { key: 'h3-3', label: '导航' },
-          ]},
-          { key: 'h4', label: '关于', icon: 'i-mdi-information' },
-        ]}
-        defaultSelectedKeys={['h1']}
-      />
-      <p class="mt-2 text-sm text-on-surface-variant">水平模式下子菜单以浮层弹出，不再挤压下方内容。</p>
-
-      <Divider />
-
-      <h3 class="text-lg font-semibold mb-3">分组和分割线</h3>
-      <div class="w-60 rounded-lg border border-outline-variant p-2">
-        <Menu
-          items={[
-            { key: 'g1', label: '分组一', type: 'group', children: [
-              { key: '1', label: '选项一' },
-              { key: '2', label: '选项二' },
-            ]},
-            { key: 'd1', label: '', type: 'divider' },
-            { key: 'g2', label: '分组二', type: 'group', children: [
-              { key: '3', label: '选项三' },
-              { key: '4', label: '选项四' },
-            ]},
-          ]}
-        />
-      </div>
-
-      <Divider />
-
-      <h3 class="text-lg font-semibold mb-3">禁用与危险项</h3>
-      <div class="w-60 rounded-lg border border-outline-variant p-2">
-        <Menu
-          items={[
-            { key: '1', label: '正常项' },
-            { key: '2', label: '禁用项', disabled: true },
-            { key: '3', label: '危险项', danger: true },
-            { key: '4', label: '正常项' },
-          ]}
-        />
-      </div>
-
-      <Divider />
-
-      <h3 class="text-lg font-semibold mb-3">多级嵌套（inline 展开）</h3>
-      <div class="w-64 rounded-lg border border-outline-variant p-2">
-        <Menu
-          items={[
-            { key: '1', label: '用户管理', icon: 'i-mdi-account-group', children: [
-              { key: '1-1', label: '用户列表' },
-              { key: '1-2', label: '角色管理', children: [
-                { key: '1-2-1', label: '管理员' },
-                { key: '1-2-2', label: '普通用户' },
-              ]},
-            ]},
-            { key: '2', label: '系统设置', icon: 'i-mdi-cog', children: [
-              { key: '2-1', label: '基本设置' },
-              { key: '2-2', label: '安全设置' },
-            ]},
-            { key: '3', label: '帮助', icon: 'i-mdi-help-circle' },
-          ]}
-          defaultOpenKeys={['1']}
-        />
-      </div>
+const MenuPage: Component = () => (
+  <div class="p-6 max-w-5xl flex flex-col gap-8">
+    <div>
+      <h2 class="text-2xl font-bold mb-2">Menu 导航菜单</h2>
+      <p class="text-on-surface-variant">为页面和功能提供导航的菜单列表。</p>
     </div>
-  )
-}
+    <section data-menu-demo="horizontal"><h3 class="text-lg font-semibold mb-3">顶部导航</h3><Horizontal /></section>
+    <section data-menu-demo="horizontal-dark"><h3 class="text-lg font-semibold mb-3">顶部导航（深色）</h3><HorizontalDark /></section>
+    <section data-menu-demo="inline"><h3 class="text-lg font-semibold mb-3">内嵌菜单</h3><Inline /></section>
+    <section data-menu-demo="inline-collapsed"><h3 class="text-lg font-semibold mb-3">缩起内嵌菜单</h3><InlineCollapsed /></section>
+    <section data-menu-demo="tooltip"><h3 class="text-lg font-semibold mb-3">菜单项提示</h3><TooltipDemo /></section>
+    <section data-menu-demo="sider-current"><h3 class="text-lg font-semibold mb-3">只展开当前父级菜单</h3><SiderCurrent /></section>
+    <section data-menu-demo="vertical"><h3 class="text-lg font-semibold mb-3">垂直菜单</h3><Vertical /></section>
+    <section data-menu-demo="theme"><h3 class="text-lg font-semibold mb-3">主题</h3><Theme /></section>
+    <section data-menu-demo="submenu-theme"><h3 class="text-lg font-semibold mb-3">子菜单主题</h3><SubmenuTheme /></section>
+    <section data-menu-demo="switch-mode"><h3 class="text-lg font-semibold mb-3">切换菜单类型</h3><SwitchMode /></section>
+    <section data-menu-demo="style-class"><h3 class="text-lg font-semibold mb-3">语义化 classNames / styles</h3><StyleClass /></section>
+    <section data-menu-demo="custom-popup-render"><h3 class="text-lg font-semibold mb-3">自定义弹层</h3><CustomPopupRender /></section>
+    <section data-menu-demo="extra"><h3 class="text-lg font-semibold mb-3">附加内容、危险与禁用</h3><Extra /></section>
+    <section data-menu-demo="render-label"><h3 class="text-lg font-semibold mb-3">原生链接标签</h3><RenderLabel /></section>
+    <section data-menu-demo="multiple"><h3 class="text-lg font-semibold mb-3">多选与点击触发</h3><Multiple /></section>
+  </div>
+)
 
 export default MenuPage

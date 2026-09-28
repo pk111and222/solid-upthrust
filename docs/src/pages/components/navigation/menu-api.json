@@ -1,0 +1,170 @@
+[
+  {
+    "name": "items",
+    "type": "MenuItemType[]",
+    "default": "—",
+    "description": "菜单内容：菜单项、子菜单（children）、分组（type: 'group'）、分割线（type: 'divider'）"
+  },
+  {
+    "name": "mode",
+    "type": "'vertical' | 'horizontal' | 'inline'",
+    "default": "'vertical'",
+    "description": "菜单类型"
+  },
+  {
+    "name": "theme",
+    "type": "'light' | 'dark'",
+    "default": "'light'",
+    "description": "主题"
+  },
+  {
+    "name": "selectedKeys",
+    "type": "string[]",
+    "default": "—",
+    "description": "受控选中项"
+  },
+  {
+    "name": "defaultSelectedKeys",
+    "type": "string[]",
+    "default": "[]",
+    "description": "初始选中项"
+  },
+  {
+    "name": "openKeys",
+    "type": "string[]",
+    "default": "—",
+    "description": "受控展开的子菜单"
+  },
+  {
+    "name": "defaultOpenKeys",
+    "type": "string[]",
+    "default": "[]",
+    "description": "初始展开的子菜单"
+  },
+  {
+    "name": "multiple",
+    "type": "boolean",
+    "default": "false",
+    "description": "是否允许多选"
+  },
+  {
+    "name": "selectable",
+    "type": "boolean",
+    "default": "true",
+    "description": "是否允许选中"
+  },
+  {
+    "name": "inlineCollapsed",
+    "type": "boolean",
+    "default": "—",
+    "description": "inline 收起；不传时跟随所在 Sider 的收起状态"
+  },
+  {
+    "name": "inlineIndent",
+    "type": "number",
+    "default": "24",
+    "description": "inline 模式每级缩进（px）"
+  },
+  {
+    "name": "subMenuOpenDelay",
+    "type": "number",
+    "default": "0",
+    "description": "子菜单展开延时（秒）"
+  },
+  {
+    "name": "subMenuCloseDelay",
+    "type": "number",
+    "default": "0.1",
+    "description": "子菜单收起延时（秒）"
+  },
+  {
+    "name": "triggerSubMenuAction",
+    "type": "'hover' | 'click'",
+    "default": "'hover'",
+    "description": "子菜单弹层的触发方式"
+  },
+  {
+    "name": "forceSubMenuRender",
+    "type": "boolean",
+    "default": "false",
+    "description": "子菜单弹层首次打开前也渲染 DOM"
+  },
+  {
+    "name": "expandIcon",
+    "type": "JSX.Element | ((info) => JSX.Element) | null | false",
+    "default": "—",
+    "description": "自定义展开图标；函数参数为 { ...item, isSubMenu, isOpen }；null/false 不渲染"
+  },
+  {
+    "name": "tooltip",
+    "type": "false | MenuTooltipConfig",
+    "default": "—",
+    "description": "收起时一级菜单项的悬浮提示（placement 默认 right）；false 关闭"
+  },
+  {
+    "name": "popupRender",
+    "type": "(node, { item, keys }) => JSX.Element",
+    "default": "—",
+    "description": "自定义子菜单弹层；子菜单自身的 popupRender 优先"
+  },
+  {
+    "name": "renderLabel",
+    "type": "(item) => JSX.Element",
+    "default": "—",
+    "description": "把标签渲染为 JSX（如原生链接），分组标题同样生效"
+  },
+  {
+    "name": "classNames",
+    "type": "MenuClassNames | ((info) => MenuClassNames)",
+    "default": "—",
+    "description": "语义化类名：root / itemTitle / list / item / itemIcon / itemContent / popup / subMenu"
+  },
+  {
+    "name": "styles",
+    "type": "MenuStyles | ((info) => MenuStyles)",
+    "default": "—",
+    "description": "语义化内联样式，节点同 classNames"
+  },
+  {
+    "name": "onClick",
+    "type": "(info: MenuClickInfo) => void",
+    "default": "—",
+    "description": "点击菜单项；info 含 key、keyPath（叶子在前）、item / itemData、domEvent"
+  },
+  {
+    "name": "onSelect",
+    "type": "(info: MenuSelectInfo) => void",
+    "default": "—",
+    "description": "选中菜单项；在 onClick 之后触发"
+  },
+  {
+    "name": "onDeselect",
+    "type": "(info: MenuSelectInfo) => void",
+    "default": "—",
+    "description": "取消选中（仅 multiple）"
+  },
+  {
+    "name": "onOpenChange",
+    "type": "(openKeys: string[]) => void",
+    "default": "—",
+    "description": "展开的子菜单变化"
+  },
+  {
+    "name": "id",
+    "type": "string",
+    "default": "自动生成",
+    "description": "根节点 id，也作为键盘导航的标记前缀"
+  },
+  {
+    "name": "ref",
+    "type": "(ref: MenuRef) => void",
+    "default": "—",
+    "description": "获取 { menu, focus(options) }"
+  },
+  {
+    "name": "class / style",
+    "type": "string / JSX.CSSProperties",
+    "default": "—",
+    "description": "根节点类名与样式"
+  }
+]

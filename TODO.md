@@ -132,6 +132,10 @@
 | C09 Timeline / Progress | 当前会话：两物料统一回归 | 当前工作区（main） | Timeline（重写为 antd 6 结构，新增横向 / title / titleSpan / variant / 语义化）、Progress（line / steps / circle / dashboard，rc-progress 几何移植）、competence 新增 timeline 纯函数并重写 progress、preset 新增进度扫光动画、28 个示例 / 3 张 API、分层测试与证据；未改 ConfigProvider / 锁文件 | 已验收 | 定向 48 条、全量 2624 条、浏览器 42 条通过，类型/构建/docs 通过；浏览器回归发现自定义时间轴图标被 flex 压缩并已修；破坏性改动：Timeline.Item 子元素写法不渲染、Progress 删除 createProgress 系列导出 | [执行记录](docs/contributing/regressions/timeline-progress.md) |
 | C09 Result / QRCode | 当前会话：两物料统一回归 | 当前工作区（main） | Result（重写为 antd 6 结构，异常插画移植、语义化）、QRCode（canvas / svg、statusRender、语义化）、competence 新增 qrcodegen 移植与 qrcode 纯函数、新增 common/antIcons、20 个示例 / 3 张 API、分层测试与证据；未改 ConfigProvider / preset / 锁文件 | 已验收 | 定向 23 条、全量 2647 条、浏览器 32 条通过，类型/构建/docs 通过；修复 qrcode-generator 中文截断（输出与 antd 路径逐字一致）；浏览器回归发现 Result 图标区 78px、QRCode 本体溢出内容盒并已修；破坏性改动：QRCode 默认 canvas / 透明底、删除 loadingContent，Result 删除异常默认标题 | [执行记录](docs/contributing/regressions/result-qrcode.md) |
 | C09 Watermark / Alert | 当前会话：两物料统一回归 | 当前工作区（main） | Watermark（canvas useClips 交错平铺、防篡改、Modal / Drawer 传导）、Alert（重写为 antd 6 结构、closable 各入口、离场动画、ErrorBoundary、语义化）、competence 重写 watermark / alert、Modal / Drawer 接入 useWatermarkPanel、18 个示例 / 5 张 API、分层测试与证据；未改 ConfigProvider / preset / 锁文件 | 已验收 | 定向 24 条、全量 2665 条、浏览器 28 条通过，类型/构建/docs 通过；回归发现 closeIcon=0 不显示、effect 未 untrack、描述态图标下偏 6px 并已修；破坏性改动：Alert 默认不显示图标、message→title，Watermark 删除 fontColor / opacity、默认 zIndex 999 | [执行记录](docs/contributing/regressions/watermark-alert.md) |
+| C10 Menu | 当前会话：单物料回归（含 D13） | 当前工作区（main） | Menu 对齐 antd 6.6.5（inline 收起 / tooltip / 语义化 / popupRender / 键盘导航 / 深色主题）、competence menu 重写、Layout SiderContext 独立文件并导出（D13）、15 个示例 / 2 张 API、分层测试与证据；未改 ConfigProvider / preset / 锁文件 | 已验收 | 定向 16 条、全量 2680 条、浏览器 20 条（Layout 25、docs design 4）通过，类型/构建/docs 通过；回归发现示例 .ts 数据文件图标未被 UnoCSS 提取并已修；破坏性改动：根节点 div→ul、子菜单默认 hover 弹出、MenuItem.key 可选 | [执行记录](docs/contributing/regressions/menu.md) |
+| C10 Breadcrumb | 当前会话：C10 导航四物料逐个回归 | 当前工作区（main） | Breadcrumb 对齐 antd 6（nav/ol/li 结构、path 累积与 params、itemRender、独立分隔符、dropdownProps、语义化）、8 个示例 / 3 张 API、分层测试与证据；未改 Dropdown / ConfigProvider / preset / 锁文件 | 已验收 | 定向 84 条（四物料合计）、全量 2730 条、浏览器 47 条通过，类型/构建/docs 通过；修复最后一项链接被强制为 span、无 href 丢 onClick、merge 默认值被 undefined 覆盖；破坏性改动：根节点 div→nav/ol/li | [执行记录](docs/contributing/regressions/breadcrumb.md) |
+| C10 Steps | 当前会话：C10 导航四物料逐个回归 | 当前工作区（main） | Steps 对齐 antd 6（filled / outlined、inline / stack / vertical rail、点状、percent 圆环、initial / orientation / titlePlacement、语义化、整项 button a11y）、16 个示例 / 2 张 API、分层测试与证据；createSteps 未改 | 已验收 | 同上一轮；修复 UI 点击守卫限制跳转、点状标题位置、percent 未渲染；破坏性改动：默认 filled、点击自由跳转、StepItem 为 UI 超集 | [执行记录](docs/contributing/regressions/steps.md) |
+| C10 Anchor / Affix | 当前会话：C10 导航四物料逐个回归 | 当前工作区（main） | Anchor（默认 window 容器、点击滚动静默恢复、2px 轨道 + ink、hash 写入 / replace、affix / showInkInFixed / onClick / getContainer）、Affix（上下偏移优先级、target 回退 window）、competence anchor / affix 修订、13 个示例 / 3 张 API、分层测试与证据 | 已验收 | 同上一轮；修复 scroll-spy 监听 documentElement 永不触发、点击途中高亮闪烁、双重指示条、offsetBottom 被忽略；破坏性改动：onChange 参数为 href、affix 默认开启、点击写 hash | [执行记录](docs/contributing/regressions/anchor-affix.md) |
 
 ## 3. 第一阶段：全部组件回归 C（用户指定优先）
 
@@ -233,11 +237,11 @@
 
 ### C10
 
-- [ ] Menu
-- [ ] Breadcrumb
-- [ ] Steps
-- [ ] Anchor
-- [ ] Affix
+- [x] Menu：key 路径注册表、点击 / 选中 / 展开语义、inline 收起与首层 tooltip、createTrigger 子菜单弹层（hover / click、嵌套、最小宽度）、键盘导航、深浅主题与子菜单主题、语义化对象 / 函数、popupRender / extra，D13 SiderContext 联动，见 [记录](docs/contributing/regressions/menu.md)。
+- [x] Breadcrumb：nav/ol/li 结构、path 累积与 params、itemRender、独立分隔符与空分隔符、下拉菜单 dropdownProps、语义化，见 [记录](docs/contributing/regressions/breadcrumb.md)。
+- [x] Steps：filled / outlined、三种布局 rail、点状与自定义点、percent 圆环、initial / orientation / titlePlacement、整项 button 键盘可达、语义化，见 [记录](docs/contributing/regressions/steps.md)。
+- [x] Anchor：默认 window 容器、点击滚动静默后恢复 scroll-spy、2px 轨道与 ink、hash 写入 / replace、affix / showInkInFixed / onClick，见 [记录](docs/contributing/regressions/anchor-affix.md)。
+- [x] Affix：offsetTop / offsetBottom 优先级修复、target 容器与 window 回退、onChange / updatePosition，见 [记录](docs/contributing/regressions/anchor-affix.md)。
 
 ### C11
 
@@ -369,7 +373,7 @@ C 阶段可按需提前执行相关项，最终仍须完整验收本阶段。尤
 - [ ] **D10 twMerge → mergeClass 迁移**：默认 twMerge 不认识 preset 的间距档位与字号 token。例如 `my-lg my-0` 不算冲突；`text-body` 被当成颜色，与 `text-on-surface` 互吞。Grid/Space/Divider 已改用 `packages/components/common/merge.ts` 的 `mergeClass`，其余约 130 个文件仍用裸 twMerge，需统一迁移并补覆盖用例。见 [grid-space-divider.md](docs/contributing/regressions/grid-space-divider.md)。
 - [ ] **D11 输入类控件在 Space.Compact 中的圆角**：DatePicker/RangePicker、TimePicker/RangePicker、Cascader、TreeSelect、AutoComplete、Mentions 的边框画在内部节点上，放进 Compact 时内侧圆角很可能清不掉。按 Input/Select 已用的约定修复：根节点 `rounded`，边框节点 `rounded-[inherit]`。并补浏览器四角断言。
 - [x] **D12 Tag 原生属性透传**（C09 Tag 回归已关闭：data-*/aria-*/事件/ref 透传，见 [tag-badge.md](docs/contributing/regressions/tag-badge.md)）：Tag 目前静默丢弃 `data-*`、`aria-*` 等原生属性（C08 useBreakpoint 示例中发现）。应在 Tag 复查时补齐透传与 ref。
-- [ ] **D13 SiderContext / Menu 收起联动**：antd 的 Sider 通过 SiderContext 让 Menu 收起时自动切成图标模式（inlineCollapsed）。本库 Menu 尚无 inline 收起模式；Menu 容器还写死 `text-on-surface`，放进深色 Sider 文字不可读。Menu 回归时一并处理，再补 Layout 示例。见 [layout.md](docs/contributing/regressions/layout.md)。
+- [x] **D13 SiderContext / Menu 收起联动**：antd 的 Sider 通过 SiderContext 让 Menu 收起时自动切成图标模式（inlineCollapsed）。本库 Menu 尚无 inline 收起模式；Menu 容器还写死 `text-on-surface`，放进深色 Sider 文字不可读。Menu 回归时一并处理，再补 Layout 示例。见 [layout.md](docs/contributing/regressions/layout.md)。
 - [ ] **D14 Layout RTL**：Sider 零宽触发器、箭头方向与 reverseArrow 尚未考虑 RTL，待全库 RTL 方案确定后统一处理。
 - [ ] **D15 Splitter / Masonry RTL**：antd 在 RTL 下翻转 Splitter 水平拖拽方向与折叠按钮方向，Masonry 列从右往左排。本库两者都未处理，与 D14 一起按全库 RTL 方案统一处理。见 [splitter-masonry.md](docs/contributing/regressions/splitter-masonry.md)。
 - [ ] **D16 Masonry 离场动画与虚拟滚动**：删除项目前立即移除（其余项带过渡补位），没有 antd 那样的离场动画；大量项目时也没有虚拟滚动。需要时再设计，届时补浏览器用例。

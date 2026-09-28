@@ -1,0 +1,18 @@
+[
+  { "name": "items", "type": "AnchorLinkItemProps[]", "default": "—", "description": "锚点链接数据，支持 children 嵌套（horizontal 方向忽略 children）" },
+  { "name": "direction", "type": "'vertical' | 'horizontal'", "default": "'vertical'", "description": "锚点方向" },
+  { "name": "affix", "type": "boolean", "default": "true", "description": "是否用 Affix 固定；固定目标为 getContainer 的返回值" },
+  { "name": "offsetTop", "type": "number", "default": "—", "description": "距窗口顶部达到该值时固定（传给 Affix），同时是 targetOffset 的默认值" },
+  { "name": "targetOffset", "type": "number", "default": "offsetTop ?? 0", "description": "锚点滚动偏移量，也用于高亮判定线" },
+  { "name": "bounds", "type": "number", "default": "5", "description": "锚点区域边界（px），判定线 = scrollTop + targetOffset + bounds" },
+  { "name": "getContainer", "type": "() => HTMLElement | Window | undefined", "default": "() => window", "description": "滚动容器；scroll-spy 与点击滚动都作用于它" },
+  { "name": "getScrollContainer", "type": "() => HTMLElement | Window | undefined", "default": "—", "description": "getContainer 的旧名，保留兼容；两者都传时以 getContainer 为准" },
+  { "name": "getCurrentAnchor", "type": "(activeLink: string) => string", "default": "—", "description": "自定义高亮：参数为滚动计算出的 href，返回要高亮的 href（兼容返回 key）" },
+  { "name": "onChange", "type": "(currentActiveLink: string) => void", "default": "—", "description": "高亮链接变化时回调，参数为 href；无高亮时为空字符串" },
+  { "name": "onClick", "type": "(e: MouseEvent, link: { title: JSX.Element; href: string }) => void", "default": "—", "description": "点击链接回调；调用 e.preventDefault() 可阻止写入地址栏 hash（仍会滚动）" },
+  { "name": "replace", "type": "boolean", "default": "false", "description": "点击时用 history.replaceState 替换当前历史记录" },
+  { "name": "showInkInFixed", "type": "boolean", "default": "false", "description": "affix={false} 时是否显示 ink 指示条（仅 vertical；horizontal 始终显示）" },
+  { "name": "class", "type": "string", "default": "—", "description": "根节点类名" },
+  { "name": "style", "type": "JSX.CSSProperties", "default": "—", "description": "根节点样式" },
+  { "name": "ref", "type": "(instance: AnchorIns) => void", "default": "—", "description": "取得 headless 实例：activeKey()、scrollTo(key)" }
+]

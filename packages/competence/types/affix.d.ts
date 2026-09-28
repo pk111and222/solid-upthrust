@@ -18,7 +18,11 @@ export interface AffixConfig {
     target?: () => HTMLElement | Window | undefined | null;
     onChange?: (affixed: boolean) => void;
 }
-/** Viewport coordinates; top takes precedence if both offsets are supplied. */
+/**
+ * Viewport coordinates (antd getFixedTop / getFixedBottom). With neither offset
+ * set, offsetTop defaults to 0. With both set, both apply and the top fix wins
+ * when both qualify — the bottom fix still applies when the top one does not.
+ */
 export declare function calculateAffix(placeholder: AffixRect, target: {
     top: number;
     bottom: number;

@@ -1,148 +1,44 @@
-import { type Component, createSignal } from 'solid-js'
-import { Steps, Divider, Button } from 'upthrust-ui'
-import { createSteps } from 'upthrust-competence'
+import type { Component } from 'solid-js'
+import Basic from '../../../docs/src/examples/steps/basic'
+import Small from '../../../docs/src/examples/steps/small'
+import Icon from '../../../docs/src/examples/steps/icon'
+import StepSwitch from '../../../docs/src/examples/steps/step-switch'
+import Vertical from '../../../docs/src/examples/steps/vertical'
+import VerticalSmall from '../../../docs/src/examples/steps/vertical-small'
+import ErrorStatus from '../../../docs/src/examples/steps/error'
+import ProgressDot from '../../../docs/src/examples/steps/progress-dot'
+import CustomDot from '../../../docs/src/examples/steps/custom-dot'
+import TitlePlacement from '../../../docs/src/examples/steps/title-placement'
+import Clickable from '../../../docs/src/examples/steps/clickable'
+import ProgressDemo from '../../../docs/src/examples/steps/progress'
+import Variant from '../../../docs/src/examples/steps/variant'
+import Initial from '../../../docs/src/examples/steps/initial'
+import StyleClass from '../../../docs/src/examples/steps/style-class'
+import HeadlessWizard from '../../../docs/src/examples/steps/headless-wizard'
 
-// Headless 消费预览：状态机直接驱动表单式向导 —— 步骤切换守卫（不能跳过
-// 未完成步骤）完全由 createSteps.canGoTo/navigateTo 承担。
-const WizardDemo: Component = () => {
-  const wizard = createSteps({
-    items: [
-      { title: '填写信息' },
-      { title: '确认订单' },
-      { title: '支付' },
-      { title: '完成' },
-    ],
-  })
-
-  return (
+const StepsPage: Component = () => (
+  <div class="p-6 max-w-5xl flex flex-col gap-8">
     <div>
-      <Steps
-        current={wizard.current()}
-        onChange={(c) => wizard.navigateTo(c)}
-        items={[
-          { title: '填写信息', description: ' 基本信息' },
-          { title: '确认订单', description: ' 核对商品' },
-          { title: '支付', description: ' 在线支付' },
-          { title: '完成' },
-        ]}
-      />
-      <div class="mt-4 flex items-center gap-2">
-        <Button size="small" variant="outlined" disabled={!wizard.canGoTo(wizard.current() - 1)} onClick={() => wizard.prev()}>
-          上一步
-        </Button>
-        <Button size="small" disabled={!wizard.canGoTo(wizard.current() + 1)} onClick={() => wizard.next()}>
-          下一步
-        </Button>
-        <span class="text-sm text-on-surface-variant ml-2">
-          当前进度 {wizard.percentOf()}%（第 {wizard.current() + 1} / 4 步）
-        </span>
-      </div>
-      <p class="mt-2 text-sm text-on-surface-variant">
-        注意：点击“下一步”只能前进一格，点击已完成的步骤可以回退 —— 守卫逻辑全部来自 headless 层。
-      </p>
+      <h2 class="text-2xl font-bold mb-2">Steps 步骤条</h2>
+      <p class="text-on-surface-variant">引导用户按照流程完成任务的导航条。</p>
     </div>
-  )
-}
-
-const StepsPage: Component = () => {
-  const [current, setCurrent] = createSignal(1)
-  const [errCurrent, setErrCurrent] = createSignal(1)
-
-  return (
-    <div class="p-6 max-w-4xl">
-      <h2 class="text-2xl font-bold mb-4">Steps 步骤条</h2>
-      <p class="text-on-surface-variant mb-6">引导用户按照流程完成任务的导航条。</p>
-
-      <h3 class="text-lg font-semibold mb-3">基本使用</h3>
-      <Steps
-        current={current()}
-        items={[
-          { title: '登录' },
-          { title: '验证' },
-          { title: '付款' },
-          { title: '完成' },
-        ]}
-      />
-      <div class="mt-4 flex gap-2">
-        <Button size="small" variant="outlined" onClick={() => setCurrent(p => Math.max(0, p - 1))}>上一步</Button>
-        <Button size="small" onClick={() => setCurrent(p => Math.min(3, p + 1))}>下一步</Button>
-      </div>
-
-      <Divider />
-
-      <h3 class="text-lg font-semibold mb-3">带副标题与描述</h3>
-      <Steps
-        current={1}
-        items={[
-          { title: '已完成', subTitle: '10:00', description: '这是描述信息' },
-          { title: '进行中', subTitle: '11:00', description: '这是描述信息' },
-          { title: '待执行', subTitle: '12:00', description: '这是描述信息' },
-        ]}
-      />
-
-      <Divider />
-
-      <h3 class="text-lg font-semibold mb-3">小尺寸</h3>
-      <Steps
-        current={1}
-        size="small"
-        items={[
-          { title: '已完成' },
-          { title: '进行中' },
-          { title: '待执行' },
-        ]}
-      />
-
-      <Divider />
-
-      <h3 class="text-lg font-semibold mb-3">错误状态（可重试）</h3>
-      <Steps
-        current={errCurrent()}
-        status="error"
-        onChange={(c) => setErrCurrent(c)}
-        items={[
-          { title: '已完成' },
-          { title: '验证失败' },
-          { title: '付款' },
-          { title: '完成' },
-        ]}
-      />
-
-      <Divider />
-
-      <h3 class="text-lg font-semibold mb-3">竖直方向</h3>
-      <Steps
-        current={1}
-        direction="vertical"
-        items={[
-          { title: '已完成', description: '这是描述信息' },
-          { title: '进行中', description: '这是描述信息' },
-          { title: '待执行', description: '这是描述信息' },
-        ]}
-      />
-
-      <Divider />
-
-      <h3 class="text-lg font-semibold mb-3">点状进度</h3>
-      <Steps
-        current={1}
-        percent={60}
-        progressDot
-        items={[
-          { title: '第一步' },
-          { title: '第二步' },
-          { title: '第三步' },
-          { title: '第四步' },
-        ]}
-      />
-      <p class="mt-2 text-sm text-on-surface-variant">percent=60，整体进度 {(1 + 0.6) / 4 * 100 | 0}%</p>
-
-      <Divider />
-
-      <h3 class="text-lg font-semibold mb-3">可点击（带导航守卫）</h3>
-      <WizardDemo />
-    </div>
-  )
-}
+    <section data-steps-demo="basic"><h3 class="text-lg font-semibold mb-3">基本用法</h3><Basic /></section>
+    <section data-steps-demo="small"><h3 class="text-lg font-semibold mb-3">迷你版</h3><Small /></section>
+    <section data-steps-demo="icon"><h3 class="text-lg font-semibold mb-3">带图标的步骤条</h3><Icon /></section>
+    <section data-steps-demo="step-switch"><h3 class="text-lg font-semibold mb-3">步骤切换</h3><StepSwitch /></section>
+    <section data-steps-demo="vertical"><h3 class="text-lg font-semibold mb-3">竖直方向的步骤条</h3><Vertical /></section>
+    <section data-steps-demo="vertical-small"><h3 class="text-lg font-semibold mb-3">竖直方向的小型步骤条</h3><VerticalSmall /></section>
+    <section data-steps-demo="error"><h3 class="text-lg font-semibold mb-3">步骤运行错误</h3><ErrorStatus /></section>
+    <section data-steps-demo="progress-dot"><h3 class="text-lg font-semibold mb-3">点状步骤条</h3><ProgressDot /></section>
+    <section data-steps-demo="custom-dot"><h3 class="text-lg font-semibold mb-3">自定义点状步骤条</h3><CustomDot /></section>
+    <section data-steps-demo="title-placement"><h3 class="text-lg font-semibold mb-3">标题位置</h3><TitlePlacement /></section>
+    <section data-steps-demo="clickable"><h3 class="text-lg font-semibold mb-3">可点击</h3><Clickable /></section>
+    <section data-steps-demo="progress"><h3 class="text-lg font-semibold mb-3">带有进度的步骤</h3><ProgressDemo /></section>
+    <section data-steps-demo="variant"><h3 class="text-lg font-semibold mb-3">变体</h3><Variant /></section>
+    <section data-steps-demo="initial"><h3 class="text-lg font-semibold mb-3">起始序号</h3><Initial /></section>
+    <section data-steps-demo="style-class"><h3 class="text-lg font-semibold mb-3">语义化 classNames / styles</h3><StyleClass /></section>
+    <section data-steps-demo="headless-wizard"><h3 class="text-lg font-semibold mb-3">Headless 向导</h3><HeadlessWizard /></section>
+  </div>
+)
 
 export default StepsPage

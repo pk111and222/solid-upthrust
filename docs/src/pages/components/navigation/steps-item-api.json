@@ -1,0 +1,56 @@
+[
+  {
+    "name": "title",
+    "type": "JSX.Element",
+    "default": "—",
+    "description": "标题"
+  },
+  {
+    "name": "subTitle",
+    "type": "JSX.Element",
+    "default": "—",
+    "description": "子标题"
+  },
+  {
+    "name": "content",
+    "type": "JSX.Element",
+    "default": "—",
+    "description": "步骤详情（antd 6 名称）；与 description 同时存在时优先"
+  },
+  {
+    "name": "description",
+    "type": "JSX.Element",
+    "default": "—",
+    "description": "步骤详情（旧名称）"
+  },
+  {
+    "name": "icon",
+    "type": "string | JSX.Element",
+    "default": "—",
+    "description": "图标：字符串按图标类名渲染；设置后替换序号圆"
+  },
+  {
+    "name": "status",
+    "type": "'wait' | 'process' | 'finish' | 'error'",
+    "default": "—",
+    "description": "覆盖由 current 推导出的状态"
+  },
+  {
+    "name": "disabled",
+    "type": "boolean",
+    "default": "false",
+    "description": "禁止点击"
+  },
+  {
+    "name": "class",
+    "type": "string",
+    "default": "—",
+    "description": "步骤项类名"
+  },
+  {
+    "name": "style",
+    "type": "JSX.CSSProperties",
+    "default": "—",
+    "description": "步骤项样式"
+  }
+]

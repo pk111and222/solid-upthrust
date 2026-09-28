@@ -3,6 +3,7 @@ import { describe, expect, it, vi } from 'vitest'
 import { createSteps } from '../../../competence/src/steps'
 
 describe('createSteps status derivation', () => {
+  // 当前步骤之前为 finish、当前为 process、之后为 wait。
   it('derives finish/process/wait from current', () => {
     createRoot((dispose) => {
       const s = createSteps({ current: 1, items: [{ title: 'a' }, { title: 'b' }, { title: 'c' }] })
@@ -16,6 +17,7 @@ describe('createSteps status derivation', () => {
     })
   })
 
+  // 单项 status 覆盖由 current 推导出的状态。
   it('per-item status overrides derivation', () => {
     createRoot((dispose) => {
       const s = createSteps({
@@ -31,6 +33,7 @@ describe('createSteps status derivation', () => {
     })
   })
 
+  // config.status 只作用于当前步骤。
   it('config.status overrides the current step status', () => {
     createRoot((dispose) => {
       const s = createSteps({ current: 1, status: 'error', items: [{ title: 'a' }, { title: 'b' }] })
@@ -41,6 +44,7 @@ describe('createSteps status derivation', () => {
 })
 
 describe('createSteps navigation', () => {
+  // next / prev 在范围内移动并回调 onChange，越界时不移动也不回调。
   it('next/prev move within bounds and fire onChange', () => {
     createRoot((dispose) => {
       const onChange = vi.fn()
@@ -60,6 +64,7 @@ describe('createSteps navigation', () => {
     })
   })
 
+  // 受控 current 优先于内部状态：next 不改变显示的当前步骤。
   it('controlled current wins over internal state', () => {
     createRoot((dispose) => {
       const s = createSteps({ current: 2, items: [{ title: 'a' }, { title: 'b' }, { title: 'c' }] })
@@ -70,6 +75,7 @@ describe('createSteps navigation', () => {
     })
   })
 
+  // 非受控时从 0 开始，由内部信号前进。
   it('uncontrolled mode starts at 0 and navigates internally', () => {
     createRoot((dispose) => {
       const s = createSteps({ items: [{ title: 'a' }, { title: 'b' }] })
@@ -81,6 +87,7 @@ describe('createSteps navigation', () => {
     })
   })
 
+  // goTo 不带前跳守卫，可直接跳到任意步骤，但禁用步骤不可到达。
   it('goTo skips nothing but blocks disabled steps', () => {
     createRoot((dispose) => {
       const s = createSteps({
@@ -96,6 +103,7 @@ describe('createSteps navigation', () => {
     })
   })
 
+  // navigateTo 走前跳守卫：可回退或前进一步，不能越过未完成步骤；越界不可到达。
   it('navigateTo honors the click guard: no forward jumps over unfinished steps', () => {
     createRoot((dispose) => {
       const s = createSteps({ items: [{ title: 'a' }, { title: 'b' }, { title: 'c' }] })
@@ -116,6 +124,7 @@ describe('createSteps navigation', () => {
     })
   })
 
+  // clickNavigable=false 关闭守卫，navigateTo 可自由跳转。
   it('clickNavigable=false allows free navigation', () => {
     createRoot((dispose) => {
       const s = createSteps({ clickNavigable: false, items: [{ title: 'a' }, { title: 'b' }, { title: 'c' }] })
@@ -127,6 +136,7 @@ describe('createSteps navigation', () => {
     })
   })
 
+  // reset 回到第一步并回调 onChange(0)。
   it('reset returns to the first step', () => {
     createRoot((dispose) => {
       const onChange = vi.fn()
@@ -142,6 +152,7 @@ describe('createSteps navigation', () => {
     })
   })
 
+  // 下一步为禁用步骤时，next 经守卫拦截停在原地。
   it('next skips disabled steps via the guard path', () => {
     createRoot((dispose) => {
       const s = createSteps({
@@ -156,6 +167,7 @@ describe('createSteps navigation', () => {
 })
 
 describe('createSteps percent', () => {
+  // 整体进度 = (current + percent/100) / 总数，四舍五入。
   it('blends current step percent into overall progress', () => {
     createRoot((dispose) => {
       const s = createSteps({ current: 1, percent: 50, items: [{ title: 'a' }, { title: 'b' }, { title: 'c' }, { title: 'd' }] })
@@ -165,6 +177,7 @@ describe('createSteps percent', () => {
     })
   })
 
+  // 未设置 percent 时当前步骤贡献 0。
   it('without percent the current step contributes 0', () => {
     createRoot((dispose) => {
       const s = createSteps({ current: 2, items: [{ title: 'a' }, { title: 'b' }, { title: 'c' }] })
@@ -174,6 +187,7 @@ describe('createSteps percent', () => {
     })
   })
 
+  // percent 超出 0–100 时被钳制。
   it('clamps out-of-range percent', () => {
     createRoot((dispose) => {
       const s = createSteps({ current: 0, percent: 200, items: [{ title: 'a' }, { title: 'b' }] })
@@ -183,6 +197,7 @@ describe('createSteps percent', () => {
     })
   })
 
+  // 空步骤列表的进度与总数都为 0。
   it('empty items yield 0', () => {
     createRoot((dispose) => {
       const s = createSteps({ items: [] })

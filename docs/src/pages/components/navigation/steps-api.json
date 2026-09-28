@@ -1,0 +1,110 @@
+[
+  {
+    "name": "items",
+    "type": "StepItem[]",
+    "default": "—",
+    "description": "步骤列表，见 StepItem"
+  },
+  {
+    "name": "current",
+    "type": "number",
+    "default": "0",
+    "description": "当前步骤（以 initial 为起点计数）"
+  },
+  {
+    "name": "initial",
+    "type": "number",
+    "default": "0",
+    "description": "起始序号：影响显示编号、current 基准与 onChange 参数"
+  },
+  {
+    "name": "status",
+    "type": "'wait' | 'process' | 'finish' | 'error'",
+    "default": "'process'",
+    "description": "当前步骤的状态"
+  },
+  {
+    "name": "orientation",
+    "type": "'horizontal' | 'vertical'",
+    "default": "'horizontal'",
+    "description": "方向；优先于 direction"
+  },
+  {
+    "name": "direction",
+    "type": "'horizontal' | 'vertical'",
+    "default": "'horizontal'",
+    "description": "方向（旧名称，orientation 的别名）"
+  },
+  {
+    "name": "size",
+    "type": "'default' | 'small'",
+    "default": "'default'",
+    "description": "尺寸：图标 32px / 24px"
+  },
+  {
+    "name": "titlePlacement",
+    "type": "'horizontal' | 'vertical'",
+    "default": "'horizontal'",
+    "description": "标题位置（仅水平方向）：图标右侧或下方居中"
+  },
+  {
+    "name": "labelPlacement",
+    "type": "'horizontal' | 'vertical'",
+    "default": "—",
+    "description": "titlePlacement 的旧名称"
+  },
+  {
+    "name": "type",
+    "type": "'default' | 'dot'",
+    "default": "'default'",
+    "description": "'dot' 为点状步骤条"
+  },
+  {
+    "name": "progressDot",
+    "type": "boolean | (iconDot, { index, status, title, content, description }) => JSX.Element",
+    "default": "false",
+    "description": "点状步骤条；传函数自定义点的渲染；为真时等价 type=\"dot\""
+  },
+  {
+    "name": "variant",
+    "type": "'filled' | 'outlined'",
+    "default": "'filled'",
+    "description": "外观：浅色底图标 / 描边图标"
+  },
+  {
+    "name": "percent",
+    "type": "number",
+    "default": "—",
+    "description": "当前步骤的进度 0–100，在图标外显示进度环（点状模式不显示）"
+  },
+  {
+    "name": "onChange",
+    "type": "(current: number) => void",
+    "default": "—",
+    "description": "点击步骤回调，参数为 initial + 序号；设置后未禁用的非当前步骤可点击、可键盘操作"
+  },
+  {
+    "name": "classNames",
+    "type": "Record<SemanticDOM, string> | (info: { props }) => Record<SemanticDOM, string>",
+    "default": "—",
+    "description": "语义化类名，节点：root / item / itemIcon / itemTitle / itemSubtitle / itemContent / itemRail"
+  },
+  {
+    "name": "styles",
+    "type": "Record<SemanticDOM, CSSProperties> | (info: { props }) => Record<SemanticDOM, CSSProperties>",
+    "default": "—",
+    "description": "语义化内联样式，节点同 classNames"
+  },
+  {
+    "name": "class",
+    "type": "string",
+    "default": "—",
+    "description": "根节点类名"
+  },
+  {
+    "name": "style",
+    "type": "JSX.CSSProperties",
+    "default": "—",
+    "description": "根节点样式"
+  }
+]

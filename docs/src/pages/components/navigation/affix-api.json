@@ -1,0 +1,12 @@
+[
+  { "name": "offsetTop", "type": "number", "default": "0", "description": "距目标可视区域顶部达到该值时固定；offsetTop 与 offsetBottom 都未设置时为 0" },
+  { "name": "offsetBottom", "type": "number", "default": "—", "description": "距目标可视区域底部达到该值时固定；与 offsetTop 同时设置时两者都生效，都满足时顶部优先" },
+  { "name": "target", "type": "() => HTMLElement | Window | undefined | null", "default": "() => window", "description": "滚动目标；自定义元素必须包含 Affix，返回空值时暂停固定" },
+  { "name": "onChange", "type": "(affixed: boolean) => void", "default": "—", "description": "固定状态切换时回调（只在切换时触发）" },
+  { "name": "disabled", "type": "boolean", "default": "false", "description": "禁用固定，恢复文档流" },
+  { "name": "zIndex", "type": "number", "default": "10", "description": "固定时内容层的 z-index" },
+  { "name": "class", "type": "string", "default": "—", "description": "占位外层类名" },
+  { "name": "style", "type": "JSX.CSSProperties", "default": "—", "description": "占位外层样式" },
+  { "name": "affixClass", "type": "string", "default": "—", "description": "仅在固定时作用于内容层的类名" },
+  { "name": "ref", "type": "(instance: AffixIns) => void", "default": "—", "description": "取得 headless 实例：updatePosition()、affixed()、position()" }
+]
