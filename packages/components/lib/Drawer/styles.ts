@@ -1,150 +1,176 @@
 // @unocss-include
 import { cva, type VariantProps } from "class-variance-authority";
-import { twMerge } from "tailwind-merge";
+import { mergeClass } from "../../common/merge";
 
-// Mask layer: same scrim family as Modal.
+// Root: fixed full-screen layer (absolute when rendered in place); hidden
+// (keep-alive) after the leave animation.
+const drawerRootVariants = cva(["inset-0", "pointer-events-none"], {
+  variants: {
+    inline: { true: ["absolute", "overflow-hidden"], false: ["fixed"] },
+    hidden: { true: ["hidden"], false: [] },
+  },
+  defaultVariants: { inline: false, hidden: false },
+})
+
+// Mask: antd colorBgMask; `blur` adds backdrop-filter blur(4px).
 const drawerMaskVariants = cva(
-  ["fixed", "inset-0", "bg-black/45", "transition-opacity", "duration-mid", "ease-upthrust"],
+  ["absolute", "inset-0", "pointer-events-auto", "bg-black/45", "transition-opacity", "duration-slow", "ease-upthrust"],
   {
     variants: {
       visible: {
         true: ["opacity-100"],
         false: ["opacity-0"],
       },
+      blur: { true: ["backdrop-blur-[4px]"], false: [] },
     },
-    defaultVariants: { visible: false },
+    defaultVariants: { visible: false, blur: false },
   }
 )
 
-// The panel wrapper hugs one screen edge; the panel slides along that edge.
-// placement owns both the anchoring classes and the slide direction.
+// Wrapper (antd .ant-drawer-content-wrapper): hugs one edge, carries the
+// slide transform, the push offset and the size. No radius (antd drawers are
+// square); the shadow faces the page.
 const drawerWrapperVariants = cva(
-  ["fixed", "inset-0", "outline-none"],
+  ["absolute", "pointer-events-auto", "max-w-[100vw]", "max-h-[100vh]", "transition-overlay", "duration-slow", "ease-upthrust"],
   {
     variants: {
       placement: {
-        left: [],
-        right: [],
-        top: [],
-        bottom: [],
+        left: ["left-0", "top-0", "bottom-0", "shadow-[6px_0_16px_0_rgba(0,0,0,0.08),3px_0_6px_-4px_rgba(0,0,0,0.12),9px_0_28px_8px_rgba(0,0,0,0.05)]"],
+        right: ["right-0", "top-0", "bottom-0", "shadow-[-6px_0_16px_0_rgba(0,0,0,0.08),-3px_0_6px_-4px_rgba(0,0,0,0.12),-9px_0_28px_8px_rgba(0,0,0,0.05)]"],
+        top: ["top-0", "left-0", "right-0", "shadow-[0_6px_16px_0_rgba(0,0,0,0.08),0_3px_6px_-4px_rgba(0,0,0,0.12),0_9px_28px_8px_rgba(0,0,0,0.05)]"],
+        bottom: ["bottom-0", "left-0", "right-0", "shadow-[0_-6px_16px_0_rgba(0,0,0,0.08),0_-3px_6px_-4px_rgba(0,0,0,0.12),0_-9px_28px_8px_rgba(0,0,0,0.05)]"],
       },
+      // Merged placement × visibility keys (no compoundVariants): hidden
+      // slides fully off its edge and fades to .7 (antd panel motion).
+      motion: {
+        "left-hidden": ["-translate-x-full", "opacity-70"],
+        "right-hidden": ["translate-x-full", "opacity-70"],
+        "top-hidden": ["-translate-y-full", "opacity-70"],
+        "bottom-hidden": ["translate-y-full", "opacity-70"],
+        visible: ["opacity-100"],
+      },
+      dragging: { true: ["transition-none"], false: [] },
     },
-    defaultVariants: { placement: "right" },
+    defaultVariants: { placement: "right", motion: "visible", dragging: false },
   }
 )
 
-// Panel: elevated surface, no radius on the anchored edge (antd drawer has
-// square corners on the screen edge side). Slide via translate — the panel
-// starts off-screen and eases in. The anchored axes span the FULL viewport
-// (antd drawers are edge-to-edge); only the thickness axis carries a max so an
-// oversized explicit width/height still leaves breathing room.
-const drawerPanelVariants = cva(
-  [
-    "absolute", "bg-surface", "shadow", "flex", "flex-col", "outline-none",
-    "transition-transform", "duration-mid", "ease-upthrust",
-    "max-w-[100vw]", "max-h-[100vh]",
-  ],
-  {
-    variants: {
-      placement: {
-        left: ["left-0", "top-0", "bottom-0", "rounded-r-lg"],
-        right: ["right-0", "top-0", "bottom-0", "rounded-l-lg"],
-        top: ["top-0", "left-0", "right-0", "rounded-b-lg"],
-        bottom: ["bottom-0", "left-0", "right-0", "rounded-t-lg"],
-      },
-      visible: {
-        true: ["translate-x-0", "translate-y-0"],
-        // Slide back off-screen toward the anchored edge. Both axes are
-        // declared so twMerge keeps only the placement-relevant one.
-        false: [],
-      },
-    },
-    compoundVariants: [
-      // Off-screen transforms per placement. compoundVariants are safe here:
-      // pure transforms with no color classes, and each pair is exclusive.
-      { placement: "left", visible: false, class: ["-translate-x-full"] },
-      { placement: "right", visible: false, class: ["translate-x-full"] },
-      { placement: "top", visible: false, class: ["-translate-y-full"] },
-      { placement: "bottom", visible: false, class: ["translate-y-full"] },
-    ],
-    defaultVariants: { placement: "right", visible: false },
-  }
+// Section (antd .ant-drawer-section): the elevated surface column.
+const drawerSectionVariants = cva(
+  ["flex", "flex-col", "w-full", "h-full", "overflow-auto", "bg-surface", "outline-none", "pointer-events-auto",
+    "text-[14px]", "text-on-surface", "leading-[1.5714]"],
+  { variants: {}, defaultVariants: {} }
 )
 
-// Header: title + close row, borderless bottom (antd keeps hairline via
-// header styles; we use border-outline-variant/40 like Divider).
+// Header: 16px 24px, hairline bottom (colorSplit).
 const drawerHeaderVariants = cva(
-  [
-    "flex", "items-center", "justify-between",
-    "px-lg", "pt-md", "pb-sm",
-    "border-b", "border-solid", "border-outline-variant/40",
-  ],
+  ["flex", "items-center", "shrink-0", "py-md", "px-lg", "text-[16px]", "leading-[1.5]",
+    "border-0", "border-b", "border-solid", "border-outline-variant"],
   {
     variants: {
-      // Headerless drawer keeps no reserved block.
-      bare: { true: [], false: [] },
+      // Close-only header drops the divider (antd header-close-only).
+      closeOnly: { true: ["border-b-0", "pb-0"], false: [] },
     },
-    defaultVariants: { bare: false },
+    defaultVariants: { closeOnly: false },
   }
 )
+
+const drawerHeaderTitleVariants = cva(["flex", "flex-1", "items-center", "min-w-0", "min-h-0"], { variants: {}, defaultVariants: {} })
 
 const drawerTitleVariants = cva(
-  ["text-[16px]", "font-medium", "text-on-surface", "leading-[1.5]", "break-words", "flex-1", "min-w-0"],
+  ["flex-1", "m-0", "text-[16px]", "font-semibold", "leading-[1.5]", "text-on-surface", "break-words", "min-w-0"],
   { variants: {}, defaultVariants: {} }
 )
 
-// Body: scrollable flex-1 region.
+const drawerExtraVariants = cva(["flex-none"], { variants: {}, defaultVariants: {} })
+
+// Body: 24px padding, scrollable.
 const drawerBodyVariants = cva(
-  ["flex-1", "overflow-auto", "px-lg", "py-md", "text-[14px]", "text-on-surface", "leading-[1.5714]", "break-words"],
-  { variants: {}, defaultVariants: {} }
+  ["flex-1", "min-w-0", "min-h-0", "p-lg", "overflow-auto", "break-words"],
+  {
+    variants: {
+      loading: { true: ["flex", "items-center", "justify-center"], false: [] },
+    },
+    defaultVariants: { loading: false },
+  }
 )
 
-// Footer: right-aligned actions over a top hairline.
+// Footer: 8px 16px over a hairline.
 const drawerFooterVariants = cva(
-  [
-    "flex", "justify-end", "gap-xs",
-    "px-lg", "pt-sm", "pb-lg",
-    "border-t", "border-solid", "border-outline-variant/40",
-  ],
+  ["shrink-0", "py-xs", "px-md", "border-0", "border-t", "border-solid", "border-outline-variant"],
   { variants: {}, defaultVariants: {} }
 )
 
-// Close button inside the header row (22px hit area, Alert family).
+// Close: 24px square (fontSizeLG + paddingXS), 8px from the title on the
+// placement side.
 const drawerCloseVariants = cva(
   [
-    "inline-flex", "items-center", "justify-center", "shrink-0",
-    "w-[22px]", "h-[22px]",
-    "text-[14px]", "text-on-surface-variant",
-    "cursor-pointer", "border-none",
-    "rounded-sm", "outline-none",
-    "transition-upthrust-fast",
+    "inline-flex", "items-center", "justify-center", "shrink-0", "p-0",
+    "w-[24px]", "h-[24px]", "text-[16px]", "leading-none",
+    "text-on-surface-variant", "bg-transparent", "cursor-pointer", "border-none",
+    "rounded-sm", "outline-none", "transition-upthrust",
     "hover:text-on-surface", "hover:bg-on-surface/6",
+    "focus-visible:outline-2", "focus-visible:outline-solid", "focus-visible:outline-primary/30",
   ],
-  { variants: {}, defaultVariants: {} }
+  {
+    variants: {
+      side: { start: ["mr-xs"], end: ["ml-xs"] },
+      disabled: { true: ["cursor-not-allowed", "opacity-25", "hover:bg-transparent"], false: [] },
+    },
+    defaultVariants: { side: "start", disabled: false },
+  }
 )
 
-export const drawerMaskClass = (variants: VariantProps<typeof drawerMaskVariants>) =>
-  twMerge(drawerMaskVariants(variants))
-export const drawerWrapperClass = (variants: VariantProps<typeof drawerWrapperVariants>) =>
-  twMerge(drawerWrapperVariants(variants))
-export const drawerPanelClass = (variants: VariantProps<typeof drawerPanelVariants>) =>
-  twMerge(drawerPanelVariants(variants))
-export const drawerHeaderClass = (variants: VariantProps<typeof drawerHeaderVariants>) =>
-  twMerge(drawerHeaderVariants(variants))
-export const drawerTitleClass = (variants: VariantProps<typeof drawerTitleVariants>) =>
-  twMerge(drawerTitleVariants(variants))
-export const drawerBodyClass = (variants: VariantProps<typeof drawerBodyVariants>) =>
-  twMerge(drawerBodyVariants(variants))
-export const drawerFooterClass = (variants: VariantProps<typeof drawerFooterVariants>) =>
-  twMerge(drawerFooterVariants(variants))
-export const drawerCloseClass = (variants: VariantProps<typeof drawerCloseVariants>) =>
-  twMerge(drawerCloseVariants(variants))
+// Resize handle on the inner edge: 4px, primary tint on hover / drag.
+const drawerDraggerVariants = cva(
+  ["absolute", "z-1", "bg-transparent", "pointer-events-auto", "transition-upthrust", "hover:bg-primary/20"],
+  {
+    variants: {
+      placement: {
+        right: ["left-0", "top-0", "bottom-0", "w-[4px]", "cursor-col-resize"],
+        left: ["right-0", "top-0", "bottom-0", "w-[4px]", "cursor-col-resize"],
+        bottom: ["top-0", "left-0", "right-0", "h-[4px]", "cursor-row-resize"],
+        top: ["bottom-0", "left-0", "right-0", "h-[4px]", "cursor-row-resize"],
+      },
+      dragging: { true: ["bg-primary/30", "hover:bg-primary/30"], false: [] },
+    },
+    defaultVariants: { placement: "right", dragging: false },
+  }
+)
 
-export const DRAWER_CLOSE_ICON = 'i-mdi-close'
+export const drawerRootClass = (v: VariantProps<typeof drawerRootVariants>) => mergeClass(drawerRootVariants(v))
+export const drawerMaskClass = (v: VariantProps<typeof drawerMaskVariants>) => mergeClass(drawerMaskVariants(v))
+export const drawerWrapperClass = (v: VariantProps<typeof drawerWrapperVariants>) => mergeClass(drawerWrapperVariants(v))
+export const drawerSectionClass = (v: VariantProps<typeof drawerSectionVariants>) => mergeClass(drawerSectionVariants(v))
+export const drawerHeaderClass = (v: VariantProps<typeof drawerHeaderVariants>) => mergeClass(drawerHeaderVariants(v))
+export const drawerHeaderTitleClass = (v: VariantProps<typeof drawerHeaderTitleVariants>) => mergeClass(drawerHeaderTitleVariants(v))
+export const drawerTitleClass = (v: VariantProps<typeof drawerTitleVariants>) => mergeClass(drawerTitleVariants(v))
+export const drawerExtraClass = (v: VariantProps<typeof drawerExtraVariants>) => mergeClass(drawerExtraVariants(v))
+export const drawerBodyClass = (v: VariantProps<typeof drawerBodyVariants>) => mergeClass(drawerBodyVariants(v))
+export const drawerFooterClass = (v: VariantProps<typeof drawerFooterVariants>) => mergeClass(drawerFooterVariants(v))
+export const drawerCloseClass = (v: VariantProps<typeof drawerCloseVariants>) => mergeClass(drawerCloseVariants(v))
+export const drawerDraggerClass = (v: VariantProps<typeof drawerDraggerVariants>) => mergeClass(drawerDraggerVariants(v))
 
-// antd size presets (default 378px, large 736px) — horizontal placements
-// map to width, vertical to height.
+// antd size presets (default 378px, large 736px); horizontal placements map
+// to width, vertical to height.
 export const DRAWER_SIZE_PRESET: Record<'default' | 'large', number> = {
   default: 378,
   large: 736,
+}
+
+/** Every variant combination, for dead-class tests. */
+export const drawerClassMatrix = (): string[] => {
+  const out: string[] = []
+  const placements = ["left", "right", "top", "bottom"] as const
+  for (const b of [true, false]) {
+    out.push(drawerRootClass({ inline: b, hidden: b }), drawerMaskClass({ visible: b, blur: b }), drawerMaskClass({ visible: b, blur: !b }),
+      drawerHeaderClass({ closeOnly: b }), drawerBodyClass({ loading: b }),
+      drawerCloseClass({ side: "start", disabled: b }), drawerCloseClass({ side: "end", disabled: b }))
+    for (const placement of placements) {
+      out.push(drawerWrapperClass({ placement, motion: `${placement}-hidden`, dragging: b }), drawerWrapperClass({ placement, motion: "visible", dragging: b }),
+        drawerDraggerClass({ placement, dragging: b }))
+    }
+  }
+  out.push(drawerSectionClass({}), drawerHeaderTitleClass({}), drawerTitleClass({}), drawerExtraClass({}), drawerFooterClass({}))
+  return out
 }

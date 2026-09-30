@@ -1,69 +1,93 @@
 // @unocss-include
 import { cva, type VariantProps } from "class-variance-authority";
-import { twMerge } from "tailwind-merge";
+import { mergeClass } from "../../common/merge";
 
-// The provider viewport layer: fixed full-width column anchoring the stack
-// to top, bottom, or the exact vertical center. pointer-events-none so the
-// page below stays clickable; each notice re-enables pointer events on itself.
-const messageViewportVariants = cva(
-  ["fixed", "left-0", "right-0", "z-[1010]", "pointer-events-none", "flex", "flex-col", "items-center"],
+/**
+ * antd 6 Message（message/style + notification/style 共享的 list / item 样式）：
+ *  - list：fixed、z-index zIndexPopupBase 1000 + CONTAINER_MAX_OFFSET 1000 + 10 = 2010，水平居中，
+ *    可见 notice 顶边距视口 `top`（默认 8px），pointer-events none。
+ *  - listContent：flex 纵向，notice 间距 notificationMarginBottom = margin 16px。
+ *  - notice：padding (40 − 14×1.5714)/2 = 9px × paddingSM 12px，colorBgElevated、borderRadiusLG 8px、boxShadow，
+ *    width max-content、max-width calc(100vw − 48px)，14px / 1.5714 / colorText，word-wrap break-word。
+ *  - wrapper：flex items-center gap marginXS 8px；icon：flex none、fontSizeLG 16px、line-height 1，
+ *    success / warning / error 各自色、info 与 loading 用 colorInfo（主色）。
+ *  - 动效：transform / opacity motionDurationMid 0.2s；进出场自 translateY(∓64px) + opacity 0。
+ */
+
+// list 只负责定位；top / bottom 的 px 偏移走内联 style（message.config({ top })）。
+const messageListVariants = cva(
+  ["fixed", "inset-x-0", "z-2010", "pointer-events-none", "text-[14px]", "text-on-surface", "leading-[1.5714]"],
   {
     variants: {
       placement: {
-        top: ["top-[8px]"],
-        bottom: ["bottom-[8px]", "flex-col-reverse"],
-        // Vertically centered: the column is a 0-height strip at the viewport
-        // middle; stacking grows downward from that point (flex-col, items
-        // below the anchor). justify-start keeps the FIRST notice centered —
-        // the stack reads as "grew from the middle" rather than floating up.
-        center: ["top-1/2", "-translate-y-1/2"],
+        top: [],
+        bottom: [],
+        // 本库扩展：首条 notice（高 40px）垂直居中于视口，栈向下生长。
+        center: ["top-1/2", "-mt-[20px]"],
       },
     },
     defaultVariants: { placement: "top" },
   }
 )
 
-// One notice: surface card, 8px radius, standard shadow. Only
-// opacity/transform transition — the stack re-flows on insert/remove, and
-// transitioning layout properties would make the whole column wobble.
-const messageNoticeVariants = cva(
-  [
-    "pointer-events-auto", "flex", "items-center", "gap-[8px]",
-    "min-w-[180px]", "max-w-[calc(100vw-48px)]", "px-[12px]", "py-[9px]",
-    "mb-[8px]",  // stack gap; transitions with the notice so removal slides
-    "bg-surface", "rounded-lg", "shadow",
-    "text-[14px]", "text-on-surface", "leading-[1.5714]",
-    // margin is part of the transition: on removal the notice fades while
-    // its margin collapses, so the rest of the stack GLIDES up instead of
-    // jumping. (margin-b, not margin-t: the notice below owns the gap.)
-    "transition-overlay-stack", "duration-mid", "ease-upthrust",
-  ],
+const messageListContentVariants = cva(["flex", "w-full"], {
+  variants: {
+    placement: { top: ["flex-col"], center: ["flex-col"], bottom: ["flex-col-reverse"] },
+  },
+  defaultVariants: { placement: "top" },
+})
+
+// 每条一行：grid 行高 1fr → 0fr 过渡，关闭时其余 notice 平滑补位（antd 用绝对定位 + inset 过渡达到同样效果）。
+// 间距用行内边距而非 flex gap，收起时间距随行一起收掉。
+const messageRowVariants = cva(
+  ["grid", "w-full", "[transition:grid-template-rows_0.2s_cubic-bezier(0.645,0.045,0.355,1)]"],
   {
     variants: {
-      type: {
-        info: [],
-        success: [],
-        warning: [],
-        error: [],
-        loading: [],
-      },
-      state: {
-        enter: ["opacity-0", "scale-95"],
-        visible: ["opacity-100", "scale-100"],
-        // Margin collapses to the negative of the gap so the space the
-        // notice occupied disappears smoothly — the stack below slides up
-        // over the leave animation instead of teleporting.
-        closing: ["opacity-0", "scale-90", "-mb-[41px]"],
-      },
+      closing: { true: ["grid-rows-[0fr]"], false: ["grid-rows-[1fr]"] },
     },
-    defaultVariants: { type: "info", state: "visible" },
+    defaultVariants: { closing: false },
   }
 )
 
-// Status icon tint. success/warning hex literals: MD3 has no such tokens;
-// see the shared values in Alert/Result styles (same antd palette family).
+// grid 子项本身不能有 padding（padding 撑住 0fr 轨道，收不到 0），间距放在内层 pad 上。
+const messageRowInnerVariants = cva(["min-h-0"], {
+  variants: {
+    // 关闭时才裁剪：平时 overflow visible，保证阴影不被切掉。
+    closing: { true: ["overflow-hidden"], false: [] },
+  },
+  defaultVariants: { closing: false },
+})
+
+const messageRowPadVariants = cva(["flex", "justify-center"], {
+  variants: {
+    placement: { top: ["pb-md"], center: ["pb-md"], bottom: ["pt-md"] },
+  },
+  defaultVariants: { placement: "top" },
+})
+
+// 只过渡 transform / opacity（transition-overlay），不过渡布局属性。
+const messageNoticeVariants = cva(
+  [
+    "relative", "box-border", "pointer-events-auto", "w-max", "max-w-[calc(100vw-48px)]", "px-sm", "py-[9px]",
+    "bg-surface", "rounded-lg", "shadow", "text-[14px]", "text-on-surface", "leading-[1.5714]", "break-words",
+    "transition-overlay", "duration-mid", "ease-upthrust",
+  ],
+  {
+    variants: {
+      state: {
+        visible: ["opacity-100", "translate-y-0"],
+        "enter-top": ["opacity-0", "-translate-y-[64px]"],
+        "enter-bottom": ["opacity-0", "translate-y-[64px]"],
+      },
+    },
+    defaultVariants: { state: "visible" },
+  }
+)
+
+const messageWrapperVariants = cva(["flex", "items-center", "gap-xs"], { variants: {}, defaultVariants: {} })
+
 const messageIconVariants = cva(
-  ["shrink-0", "text-[16px]"],
+  ["flex", "flex-none", "text-[16px]", "leading-none"],
   {
     variants: {
       type: {
@@ -72,31 +96,39 @@ const messageIconVariants = cva(
         warning: ["text-[#faad14]"],
         error: ["text-error"],
         loading: ["text-primary"],
+        // open() 不带 type 但传了自定义 icon：antd 不加类型色。
+        none: [],
       },
     },
-    defaultVariants: { type: "info" },
+    defaultVariants: { type: "none" },
   }
 )
 
-const messageContentVariants = cva(
-  ["min-w-0", "break-words"],
-  { variants: {}, defaultVariants: {} }
-)
+const messageTitleVariants = cva(["min-w-0", "text-on-surface", "text-[14px]", "leading-[1.5714]"], { variants: {}, defaultVariants: {} })
 
-export const messageViewportClass = (variants: VariantProps<typeof messageViewportVariants>) =>
-  twMerge(messageViewportVariants(variants))
-export const messageNoticeClass = (variants: VariantProps<typeof messageNoticeVariants>) =>
-  twMerge(messageNoticeVariants(variants))
-export const messageIconClass = (variants: VariantProps<typeof messageIconVariants>) =>
-  twMerge(messageIconVariants(variants))
-export const messageContentClass = (variants: VariantProps<typeof messageContentVariants>) =>
-  twMerge(messageContentVariants(variants))
+export const messageListClass = (variants: VariantProps<typeof messageListVariants>) => mergeClass(messageListVariants(variants))
+export const messageListContentClass = (variants: VariantProps<typeof messageListContentVariants>) => mergeClass(messageListContentVariants(variants))
+export const messageRowClass = (variants: VariantProps<typeof messageRowVariants>) => mergeClass(messageRowVariants(variants))
+export const messageRowInnerClass = (variants: VariantProps<typeof messageRowInnerVariants>) => mergeClass(messageRowInnerVariants(variants))
+export const messageRowPadClass = (variants: VariantProps<typeof messageRowPadVariants>) => mergeClass(messageRowPadVariants(variants))
+export const messageNoticeClass = (variants: VariantProps<typeof messageNoticeVariants>) => mergeClass(messageNoticeVariants(variants))
+export const messageWrapperClass = (variants: VariantProps<typeof messageWrapperVariants>) => mergeClass(messageWrapperVariants(variants))
+export const messageIconClass = (variants: VariantProps<typeof messageIconVariants>) => mergeClass(messageIconVariants(variants))
+export const messageTitleClass = (variants: VariantProps<typeof messageTitleVariants>) => mergeClass(messageTitleVariants(variants))
 
-// Icon glyph per type; loading spins with the shared spinner animation.
-export const MESSAGE_ICONS: Record<string, string> = {
-  info: 'i-mdi-information',
-  success: 'i-mdi-check-circle',
-  warning: 'i-mdi-alert-circle',
-  error: 'i-mdi-close-circle',
-  loading: 'i-mdi-loading animate-spin-upthrust',
+/** LoadingOutlined 的 1s 线性旋转。 */
+export const MESSAGE_LOADING_SPIN = "animate-spin"
+
+/** Every variant combination, for dead-class tests. */
+export const messageClassMatrix = (): string[] => {
+  const out: string[] = [MESSAGE_LOADING_SPIN]
+  for (const placement of ["top", "bottom", "center"] as const) {
+    out.push(messageListClass({ placement }), messageListContentClass({ placement }))
+    out.push(messageRowPadClass({ placement }))
+  }
+  for (const closing of [true, false]) out.push(messageRowClass({ closing }), messageRowInnerClass({ closing }))
+  for (const state of ["visible", "enter-top", "enter-bottom"] as const) out.push(messageNoticeClass({ state }))
+  for (const type of ["info", "success", "warning", "error", "loading", "none"] as const) out.push(messageIconClass({ type }))
+  out.push(messageWrapperClass({}), messageTitleClass({}))
+  return out
 }

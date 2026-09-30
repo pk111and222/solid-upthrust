@@ -21,7 +21,7 @@ const ModalPage: Component = () => {
       <p class="text-on-surface-variant mb-6">模态对话框：遮罩 + 居中面板，需要用户处理事务。关闭意图（遮罩点击 / ESC / × / 取消 / 确定）统一经过同一套状态机——支持 veto 与异步门（Promise 未决时保持打开）。与 Drawer 共用同一 headless 层。</p>
 
       <h3 class="text-lg font-semibold mb-3">基础用法</h3>
-      <Space size="middle" wrap>
+      <Space size="middle" wrap data-modal-demo="basic">
         <Button variant="solid" onClick={() => { setBasicOpen(true); setLastAction('打开基础弹窗') }}>打开弹窗</Button>
       </Space>
       <Modal
@@ -33,13 +33,13 @@ const ModalPage: Component = () => {
         onOk={() => { setBasicOpen(false); setLastAction('onOk 关闭') }}
       >
         <p>这是一段正文内容，支持多行。</p>
-        <p class="text-on-surface-variant">点击遮罩或按 ESC 也会触发 onCancel（maskClosable / keyboard 默认开启）。</p>
+        <p class="text-on-surface-variant">点击遮罩或按 ESC 也会触发 onCancel（mask.closable / keyboard 默认开启）。</p>
       </Modal>
 
       <Divider />
 
       <h3 class="text-lg font-semibold mb-3">异步关闭（onOk 返回 Promise）</h3>
-      <Space size="middle" wrap>
+      <Space size="middle" wrap data-modal-demo="async">
         <Button onClick={() => { setAsyncOpen(true); setLastAction('打开异步弹窗') }}>异步提交</Button>
       </Space>
       <Modal
@@ -58,7 +58,7 @@ const ModalPage: Component = () => {
       <Divider />
 
       <h3 class="text-lg font-semibold mb-3">自定义页脚 / 隐藏页脚</h3>
-      <Space size="middle" wrap>
+      <Space size="middle" wrap data-modal-demo="footer">
         <Button onClick={() => { setCustomOpen(true); setLastAction('打开自定义页脚弹窗') }}>自定义页脚</Button>
       </Space>
       <Modal
@@ -82,7 +82,7 @@ const ModalPage: Component = () => {
       <p class="mt-2"><Text type="secondary">afterClose 在离场动画结束后触发；afterOpenChange 在开/关两侧都会触发（ true → 打开完成，false → 关闭完成）。快速开关时（动画未结束就重开），pending 的销毁会被取消，DOM 复用。</Text></p>
       <Divider />
       <h3 class="text-lg font-semibold mb-3">静态方法与更新</h3>
-      <Space wrap>
+      <Space wrap data-modal-demo="static">
         <Button onClick={() => Modal.confirm({ title: '删除确认', content: '确认后异步提交，失败将保留弹窗以便重试。', onOk: () => new Promise(resolve => setTimeout(resolve, 800)) })}>Modal.confirm</Button>
         <Button onClick={() => Modal.info({ title: '提示', content: '支持无需预先挂载的静态入口。' })}>info</Button>
         <Button onClick={() => Modal.success({ title: '完成', content: '操作成功' })}>success</Button>

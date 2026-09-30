@@ -126,6 +126,15 @@ export function createRules(sizeTokens: SizeTokens, styleTokens: StyleTokens): R
       animation: `ut-spin-rotate ${styleTokens.motionDurationSlow} cubic-bezier(0.42, 0, 0.58, 1) infinite`,
     })],
 
+    // Spin dot indicator (antd): the holder square rotates 1.2s linear; each
+    // dot pulses its opacity 0.3→1 over 1s alternate (delays set per dot).
+    [/^animate-spin-dot$/, () => ({
+      animation: 'ut-spin-dot-rotate 1.2s linear infinite',
+    })],
+    [/^animate-spin-dot-item$/, () => ({
+      animation: 'ut-spin-dot-move 1s linear infinite alternate',
+    })],
+
     // Skeleton wave sweep — requires a gradient background (linear 90deg
     // from base to highlight back to base) sized 200%+ so the 100%→0
     // background-position animation actually travels.

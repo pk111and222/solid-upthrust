@@ -301,7 +301,7 @@ const ItemNode = (p: NodeProps) => {
                     {(arrow) => (
                       <span
                         class={tooltipArrowClass(arrow().side)}
-                        style={arrow().side === 'left' || arrow().side === 'right' ? { top: `${arrow().y}px` } : { left: `${arrow().x}px` }}
+                        style={arrow().side === 'left' || arrow().side === 'right' ? { top: `${arrow().y - 4}px` } : { left: `${arrow().x - 4}px` } /* computeArrow 给出中心点 */}
                       />
                     )}
                   </Show>

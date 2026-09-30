@@ -1,0 +1,194 @@
+[
+  {
+    "name": "steps",
+    "type": "TourStep[]",
+    "default": "—",
+    "description": "引导步骤，见下方 TourStep"
+  },
+  {
+    "name": "open",
+    "type": "boolean",
+    "default": "—",
+    "description": "受控打开状态"
+  },
+  {
+    "name": "defaultOpen",
+    "type": "boolean",
+    "default": "false",
+    "description": "默认是否打开"
+  },
+  {
+    "name": "current",
+    "type": "number",
+    "default": "—",
+    "description": "当前处于哪一步（受控）"
+  },
+  {
+    "name": "defaultCurrent",
+    "type": "number",
+    "default": "0",
+    "description": "默认步骤；从关闭重新打开时回到第 0 步"
+  },
+  {
+    "name": "onChange",
+    "type": "(current: number, previous: number) => void",
+    "default": "—",
+    "description": "步骤改变时的回调"
+  },
+  {
+    "name": "onOpenChange",
+    "type": "(open: boolean) => void",
+    "default": "—",
+    "description": "打开状态变化时的回调"
+  },
+  {
+    "name": "onClose",
+    "type": "(current: number, reason: 'close' | 'skip' | 'escape' | 'mask' | 'finish') => void",
+    "default": "—",
+    "description": "关闭引导时的回调；结束时以 finish 触发，随后触发 onFinish"
+  },
+  {
+    "name": "onFinish",
+    "type": "(current: number) => void",
+    "default": "—",
+    "description": "引导完成时的回调"
+  },
+  {
+    "name": "type",
+    "type": "'default' | 'primary'",
+    "default": "'default'",
+    "description": "类型，影响底色与文字颜色"
+  },
+  {
+    "name": "placement",
+    "type": "'center' | 'left' | 'leftTop' | 'leftBottom' | 'right' | 'rightTop' | 'rightBottom' | 'top' | 'topLeft' | 'topRight' | 'bottom' | 'bottomLeft' | 'bottomRight'",
+    "default": "'bottom'",
+    "description": "引导卡片相对于目标元素的位置；无 target 时居中"
+  },
+  {
+    "name": "arrow",
+    "type": "boolean | { pointAtCenter: boolean }",
+    "default": "true",
+    "description": "是否显示箭头，包含是否指向元素中心的配置"
+  },
+  {
+    "name": "mask",
+    "type": "boolean | { style?: JSX.CSSProperties; color?: string }",
+    "default": "true",
+    "description": "是否启用蒙层，也可传入配置改变蒙层样式和填充色"
+  },
+  {
+    "name": "gap",
+    "type": "number | { offset?: number | [number, number]; radius?: number }",
+    "default": "{ offset: 6, radius: 2 }",
+    "description": "控制高亮区域的外扩与圆角；数字为旧写法（等同 offset）"
+  },
+  {
+    "name": "scrollIntoViewOptions",
+    "type": "boolean | ScrollIntoViewOptions",
+    "default": "{ block: 'center', inline: 'center' }",
+    "description": "目标不在视口内时的滚动方式；false 不滚动。scrollIntoView 为废弃别名"
+  },
+  {
+    "name": "disabledInteraction",
+    "type": "boolean",
+    "default": "false",
+    "description": "禁用高亮区域交互"
+  },
+  {
+    "name": "closable",
+    "type": "boolean | { closeIcon?: JSX.Element; 'aria-*'?: string }",
+    "default": "true",
+    "description": "是否显示关闭按钮，对象形态可带图标与 aria 属性；false 时 Escape 也不关闭"
+  },
+  {
+    "name": "closeIcon",
+    "type": "JSX.Element | boolean",
+    "default": "CloseOutlined",
+    "description": "自定义关闭按钮；false 隐藏"
+  },
+  {
+    "name": "keyboard",
+    "type": "boolean",
+    "default": "true",
+    "description": "是否启用键盘：Escape 关闭，←/→ 切换步骤（输入框内不响应）"
+  },
+  {
+    "name": "zIndex",
+    "type": "number",
+    "default": "1001",
+    "description": "Tour 的层级"
+  },
+  {
+    "name": "indicatorsRender",
+    "type": "(current: number, total: number) => JSX.Element",
+    "default": "—",
+    "description": "自定义指示器（仅 steps > 1 时渲染）"
+  },
+  {
+    "name": "actionsRender",
+    "type": "(originNode: JSX.Element, info: { current: number; total: number }) => JSX.Element",
+    "default": "—",
+    "description": "自定义操作按钮"
+  },
+  {
+    "name": "classNames",
+    "type": "Partial<Record<SemanticSlot, string>> | (info) => …",
+    "default": "—",
+    "description": "语义化结构 class：root / cover / mask / section / header / title / description / footer / actions / indicators / indicator"
+  },
+  {
+    "name": "styles",
+    "type": "Partial<Record<SemanticSlot, JSX.CSSProperties>> | (info) => …",
+    "default": "—",
+    "description": "语义化结构 style，槽位同上"
+  },
+  {
+    "name": "width",
+    "type": "number | string",
+    "default": "520",
+    "description": "扩展：面板宽度（max-width: fit-content）"
+  },
+  {
+    "name": "beforeChange",
+    "type": "(next: number, current: number) => boolean | void | Promise<boolean | void>",
+    "default": "—",
+    "description": "扩展：切换守卫，返回 false 否决；Promise 期间主按钮 loading"
+  },
+  {
+    "name": "onError",
+    "type": "(error: unknown) => void",
+    "default": "—",
+    "description": "扩展：beforeChange 抛错时的回调"
+  },
+  {
+    "name": "maskClosable",
+    "type": "boolean",
+    "default": "false",
+    "description": "扩展：点击蒙层关闭（reason mask）"
+  },
+  {
+    "name": "showSkip / skipText",
+    "type": "boolean / JSX.Element",
+    "default": "false / '跳过'",
+    "description": "扩展：在操作区显示跳过按钮（reason skip）"
+  },
+  {
+    "name": "showIndicators",
+    "type": "boolean",
+    "default": "true",
+    "description": "扩展：是否显示指示器"
+  },
+  {
+    "name": "footerRender",
+    "type": "(instance: TourIns) => JSX.Element",
+    "default": "—",
+    "description": "已废弃，使用 actionsRender"
+  },
+  {
+    "name": "finishText",
+    "type": "JSX.Element",
+    "default": "'结束导览'",
+    "description": "已废弃，使用末步 nextButtonProps.children"
+  }
+]

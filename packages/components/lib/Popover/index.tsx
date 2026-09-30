@@ -6,6 +6,9 @@ import { createTrigger, type TriggerPlacement, type TriggerAction } from 'upthru
 import { popoverOverlayClass, popoverTitleClass, popoverInnerClass, popoverArrowClass } from './styles'
 import { twMerge } from 'tailwind-merge'
 
+// computeArrow reports the arrow CENTER; the 8px square is placed by its top-left corner.
+const ARROW_HALF = 4
+
 export type PopoverPlacement = TriggerPlacement
 export type PopoverTrigger = TriggerAction
 
@@ -90,8 +93,8 @@ const Popover: Component<PopoverProps> = (providedProps) => {
                   // the main axis. Never set both (over-constrained).
                   style={
                     arrow().side === 'left' || arrow().side === 'right'
-                      ? { top: `${arrow().y}px` }
-                      : { left: `${arrow().x}px` }
+                      ? { top: `${arrow().y - ARROW_HALF}px` }
+                      : { left: `${arrow().x - ARROW_HALF}px` }
                   }
                 />
               )}

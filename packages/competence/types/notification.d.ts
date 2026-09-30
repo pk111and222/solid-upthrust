@@ -1,77 +1,103 @@
 /**
- * Headless logic for Notification — a GLOBAL SINGLETON notification system,
- * mirroring the rc-notification / antd semantics that Message deliberately
- * simplified away:
+ * Headless logic for Notification — a GLOBAL SINGLETON notification system
+ * with rc-notification semantics (antd 6):
  *
- *  - SIX per-placement queues (topLeft/top/topRight/bottomLeft/bottom/
- *    bottomRight). A notification remembers the placement it was opened
- *    with; switching the manager default only affects FUTURE opens.
- *  - duration is per-item and measured in SECONDS (antd parity: 4.5s
- *    default, 0/null = never auto-close).
- *  - pauseOnHover: the countdown pauses while the pointer rests on the
- *    notice. The headless layer tracks the elapsed budget and reports
- *    `progress()` (0..1) so the renderer can drive a progress bar without
- *    owning any timing state of its own.
+ *  - ONE flat queue in open order; each notice carries its placement
+ *    (topLeft/top/topRight/bottomLeft/bottom/bottomRight) and the renderer
+ *    filters per corner. A same-key reopen REPLACES the config in place — a
+ *    new placement therefore moves the notice.
+ *  - maxCount trims the OLDEST notices of the whole queue (rc parity), not
+ *    per placement. Default unlimited.
+ *  - duration is in SECONDS (4.5 default; 0 / null / false = never), resolved
+ *    at open time like rc's merged share-config.
+ *  - onClose fires when ONE notice closes (countdown, × button, close(key));
+ *    closing everything (destroy()) does NOT fire it.
+ *  - stack: antd 6 collapses a corner into a card stack beyond `threshold`
+ *    (default 3) live notices; `notificationStackLayout` is the pure layout
+ *    math (rc NoticeList) so the renderer only measures and applies it.
  *
- * Design contract with the renderer (same split as Message): the headless
- * layer owns the QUEUE and the CLOSE/REMOVE sequencing (closing flag +
- * removal after the leave animation); the renderer owns timers, hover
- * tracking and every DOM concern.
+ * Contract with the renderer (same split as Message): the headless layer owns
+ * the QUEUE and the close/remove sequencing (closing flag, removal after the
+ * leave animation); the renderer owns timers, hover, measurement and the DOM.
  */
 export type NotificationPlacement = 'topLeft' | 'top' | 'topRight' | 'bottomLeft' | 'bottom' | 'bottomRight';
 export type NotificationType = 'info' | 'success' | 'warning' | 'error';
-/** antd ArgsProps subset (message/description/btn/icon + behaviour flags). */
+/** antd ArgsProps subset the queue models (presentation lives in `extra`). */
 export type NotificationConfig = {
     /** Title line. */
-    message: unknown;
-    /** Optional body under the title. */
+    title?: unknown;
+    /** @deprecated Use `title`. */
+    message?: unknown;
     description?: unknown;
-    /** Optional custom icon node replacing the type icon. */
+    /** Custom icon node replacing the type icon. */
     icon?: unknown;
-    /** Optional action area (usually buttons) floated to the right. */
+    /** Action area (usually buttons) under the description. */
+    actions?: unknown;
+    /** @deprecated Use `actions`. */
     btn?: unknown;
     type?: NotificationType;
-    /** Seconds before auto-close; 0/null = never. Default from manager (4.5s). */
-    duration?: number | null;
-    /** Show the countdown progress bar. Default from manager. */
+    /** Seconds before auto-close; 0 / null / false = never. Default from manager (4.5). */
+    duration?: number | null | false;
+    /** Show the countdown progress bar. Default from manager (false). */
     showProgress?: boolean;
     /** Pause the countdown while hovered. Default from manager (true). */
     pauseOnHover?: boolean;
-    /** Unique key: reopening with the same key updates in place. */
+    /** Unique key: reopening with the same key replaces the notice in place. */
     key?: string | number;
-    /** Which corner stack this notification joins. Default from manager (topRight). */
+    /** Default from manager (topRight). */
     placement?: NotificationPlacement;
-    /** Fires when the notice is closed (by timer, X, or destroy). */
+    /** Fires once when this notice closes (countdown, × or close(key)); not by close(). */
     onClose?: () => void;
+    /** Renderer-owned presentation bag. */
+    extra?: unknown;
 };
 export type NotificationItem = {
     key: string;
-    type: NotificationType;
-    message: unknown;
+    /** Undefined when opened without a type (no type icon). */
+    type?: NotificationType;
+    title: unknown;
     description: unknown;
     icon: unknown;
-    btn: unknown;
-    /** Seconds; 0 = never. Stored per item so update() can change it. */
-    duration: number | null;
+    actions: unknown;
+    /** Seconds; 0 = never. */
+    duration: number;
     showProgress: boolean;
     pauseOnHover: boolean;
     placement: NotificationPlacement;
     onClose?: () => void;
-    /** Monotonic revision — bumped by update; the renderer restarts timers/enter on change. */
+    extra?: unknown;
+    /** Monotonic revision — bumped by a same-key reopen / update; the renderer restarts its countdown on change. */
     revision: number;
-    /** False once close() marks the notice; the renderer plays leave then calls remove(). */
+    /** True once closed; the renderer plays the leave animation then calls remove(). */
     closing: boolean;
 };
+export type NotificationDefaults = {
+    placement: NotificationPlacement;
+    /** Seconds; 0 = never. */
+    duration: number;
+    showProgress: boolean;
+    pauseOnHover: boolean;
+    /** 0 = unlimited. */
+    maxCount: number;
+    /** Distance of the top stacks from the viewport top, px. */
+    top: number;
+    /** Distance of the bottom stacks from the viewport bottom, px. */
+    bottom: number;
+    /** Collapse a corner into a card stack. */
+    stack: boolean;
+    /** Live notices a corner shows expanded before collapsing. */
+    threshold: number;
+};
 export type NotificationIns = {
-    /** Snapshot of one placement's queue in stacking order. */
+    /** Live queue of one placement, in open order. */
     items: (placement: NotificationPlacement) => NotificationItem[];
-    /** Flat snapshot across placements (renderers iterate placements). */
+    /** The whole queue, in open order. */
     allItems: () => NotificationItem[];
-    /** Open (or update, when `key` matches) a notification. Returns its key. */
+    /** Open (or replace, when `key` matches) a notification. Returns its key. */
     open: (config: NotificationConfig) => string;
-    /** Update an existing notification by key. No-op if absent. */
+    /** Merge a patch into an existing notification. False if absent. */
     update: (key: string, patch: Partial<Omit<NotificationConfig, 'key'>>) => boolean;
-    /** Start the leave animation for one (or all, without a key) notifications. */
+    /** Start the leave animation of one notice (fires onClose) or of every notice (no onClose). */
     close: (key?: string) => void;
     /** Remove from the queue — called by the renderer AFTER the leave animation. */
     remove: (key: string) => void;
@@ -79,29 +105,34 @@ export type NotificationIns = {
     placement: () => NotificationPlacement;
 };
 export type NotificationManager = NotificationIns & {
-    configure: (defaults: {
-        placement?: NotificationPlacement;
-        duration?: number | null;
-        showProgress?: boolean;
-        pauseOnHover?: boolean;
-        maxCount?: number;
+    configure: (defaults: Partial<Omit<NotificationDefaults, 'duration'>> & {
+        duration?: number | null | false;
     }) => void;
-    defaults: () => {
-        placement: NotificationPlacement;
-        duration: number | null;
-        showProgress: boolean;
-        pauseOnHover: boolean;
-        maxCount: number;
-    };
+    defaults: () => NotificationDefaults;
 };
 export declare const NOTIFICATION_PLACEMENTS: NotificationPlacement[];
+export declare const NOTIFICATION_DEFAULTS: NotificationDefaults;
 export declare const createNotificationManager: () => NotificationManager;
+export type NotificationStackBox = {
+    height: number;
+    width: number;
+};
+export type NotificationStackStyle = {
+    transform: string;
+    /** Explicit wrapper height (index > 0 only). */
+    height?: number;
+};
+/**
+ * Stack transforms for one corner. `boxes` are the measured notice sizes of
+ * the LIVE notices ordered NEWEST FIRST (index 0 hugs the anchor edge).
+ * Expanded: every older notice is pushed away from the edge by the heights of
+ * the newer ones plus `gap`. Collapsed: older notices peek `offset` px behind
+ * the newest, take its height and shrink horizontally by `offset` per side.
+ */
+export declare const notificationStackLayout: (placement: NotificationPlacement, boxes: NotificationStackBox[], expanded: boolean, offset?: number, gap?: number) => NotificationStackStyle[];
 /** The page-wide notification manager. Creates it on first call. */
 export declare const getNotificationManager: () => NotificationManager;
-/**
- * Convenience bound to the singleton — the imperative API surface.
- * `notification.open({ message, type: 'success' })` from anywhere.
- */
+/** Convenience bound to the singleton. */
 export declare const notification: NotificationIns;
 export type NotificationKey = string;
 export declare const notificationSplits: (keyof NotificationConfig)[];

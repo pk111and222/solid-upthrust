@@ -1,0 +1,44 @@
+[
+  {
+    "name": "title / content",
+    "type": "JSX.Element",
+    "default": "—",
+    "description": "标题与内容"
+  },
+  {
+    "name": "icon",
+    "type": "JSX.Element | null",
+    "default": "按类型",
+    "description": "自定义图标；null 隐藏"
+  },
+  {
+    "name": "onOk / onCancel",
+    "type": "(close) => void | boolean | Promise",
+    "default": "—",
+    "description": "Promise resolve 后关闭，reject 保持打开；声明了 close 参数时需手动调用"
+  },
+  {
+    "name": "width",
+    "type": "number | string",
+    "default": "416",
+    "description": "宽度"
+  },
+  {
+    "name": "maskClosable / closable",
+    "type": "boolean",
+    "default": "false",
+    "description": "静态方法默认不可点遮罩关闭、无 ×"
+  },
+  {
+    "name": "okText / okType / okButtonProps / cancelText / cancelButtonProps",
+    "type": "—",
+    "default": "—",
+    "description": "同 Modal"
+  },
+  {
+    "name": "返回值",
+    "type": "{ destroy(), update(config | fn) }",
+    "default": "—",
+    "description": "销毁或更新；Modal.destroyAll() 关闭全部静态弹窗"
+  }
+]

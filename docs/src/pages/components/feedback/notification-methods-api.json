@@ -1,0 +1,98 @@
+[
+  {
+    "name": "notification.success / error / info / warning / open",
+    "type": "(config: ArgsProps) => NotificationResult",
+    "default": "—",
+    "description": "打开一条通知"
+  },
+  {
+    "name": "notification.destroy",
+    "type": "(key?: string) => void",
+    "default": "—",
+    "description": "关闭指定 key（触发 onClose）；不传时关闭全部（不触发 onClose）"
+  },
+  {
+    "name": "notification.close",
+    "type": "(key: string) => void",
+    "default": "—",
+    "description": "destroy(key) 的别名"
+  },
+  {
+    "name": "notification.config",
+    "type": "(options: ConfigOptions) => void",
+    "default": "—",
+    "description": "全局配置，只影响之后打开的通知（stack / getContainer / 语义化即时生效）"
+  },
+  {
+    "name": "notification.useNotification",
+    "type": "(options?) => [api, contextHolder]",
+    "default": "—",
+    "description": "返回带上下文的 api 与 holder 节点"
+  },
+  {
+    "name": "NotificationResult",
+    "type": "{ key, update(patch), close() }",
+    "default": "—",
+    "description": "本库扩展：open 的返回句柄，update 合并字段、close 关闭"
+  },
+  {
+    "name": "NotificationProvider",
+    "type": "ConfigOptions & { class? }",
+    "default": "—",
+    "description": "在组件树中挂载渲染容器，props 与 config 等价"
+  },
+  {
+    "name": "config.placement",
+    "type": "NotificationPlacement",
+    "default": "'topRight'",
+    "description": "默认弹出位置"
+  },
+  {
+    "name": "config.top / bottom",
+    "type": "number",
+    "default": "24",
+    "description": "距顶部 / 底部的偏移（px）"
+  },
+  {
+    "name": "config.duration",
+    "type": "number | null | false",
+    "default": "4.5",
+    "description": "默认自动关闭延时（秒）"
+  },
+  {
+    "name": "config.showProgress / pauseOnHover",
+    "type": "boolean",
+    "default": "false / true",
+    "description": "默认进度条与悬停暂停"
+  },
+  {
+    "name": "config.maxCount",
+    "type": "number",
+    "default": "不限",
+    "description": "最大显示数量，超出时关闭最旧的（跨方位）"
+  },
+  {
+    "name": "config.stack",
+    "type": "boolean | { threshold: number }",
+    "default": "{ threshold: 3 }",
+    "description": "堆叠：同一角落超过 threshold 条折叠，悬停展开"
+  },
+  {
+    "name": "config.getContainer",
+    "type": "() => HTMLElement",
+    "default": "() => document.body",
+    "description": "兜底 holder 的挂载容器"
+  },
+  {
+    "name": "config.closeIcon / closable",
+    "type": "同 ArgsProps",
+    "default": "—",
+    "description": "全局关闭图标与可关闭配置"
+  },
+  {
+    "name": "config.classNames / styles",
+    "type": "同 ArgsProps",
+    "default": "—",
+    "description": "全局语义化类名 / 样式，与单条合并"
+  }
+]

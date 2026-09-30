@@ -58,3 +58,30 @@ export const CloseOutlined = (props: IconProps): JSX.Element => (
     </svg>
   </span>
 )
+
+/** LoadingOutlined（不自带旋转；调用方加 animate-spin，对应 anticon-spin 1s linear）。 */
+export const LoadingOutlined = (props: IconProps): JSX.Element => (
+  <span role="img" aria-label="loading" class={props.class} data-result-icon={props.name}>
+    <svg viewBox="0 0 1024 1024" width="1em" height="1em" fill="currentColor" aria-hidden="true">
+      <path d="M988 548c-19.9 0-36-16.1-36-36 0-59.4-11.6-117-34.6-171.3a440.45 440.45 0 0 0-94.3-139.9 437.71 437.71 0 0 0-139.9-94.3C629 83.6 571.4 72 512 72c-19.9 0-36-16.1-36-36s16.1-36 36-36c69.1 0 136.2 13.5 199.3 40.3C772.3 66 827 103 874 150c47 47 83.9 101.8 109.7 162.7 26.7 63.1 40.2 130.2 40.2 199.3.1 19.9-16 36-35.9 36z" />
+    </svg>
+  </span>
+)
+
+/** FloatButton 默认图标（无 icon 且无 content 时）。 */
+export const FileTextOutlined = (props: IconProps): JSX.Element => (
+  <span role="img" aria-label="file-text" class={props.class} data-result-icon={props.name}>
+    <svg viewBox="64 64 896 896" width="1em" height="1em" fill="currentColor" aria-hidden="true">
+      <path d="M854.6 288.6L639.4 73.4c-6-6-14.1-9.4-22.6-9.4H192c-17.7 0-32 14.3-32 32v832c0 17.7 14.3 32 32 32h640c17.7 0 32-14.3 32-32V311.3c0-8.5-3.4-16.7-9.4-22.7zM790.2 326H602V137.8L790.2 326zm1.8 562H232V136h302v216a42 42 0 0042 42h216v494zM504 618H320c-4.4 0-8 3.6-8 8v48c0 4.4 3.6 8 8 8h184c4.4 0 8-3.6 8-8v-48c0-4.4-3.6-8-8-8zM312 490v48c0 4.4 3.6 8 8 8h384c4.4 0 8-3.6 8-8v-48c0-4.4-3.6-8-8-8H320c-4.4 0-8 3.6-8 8z" />
+    </svg>
+  </span>
+)
+
+/** FloatButton.BackTop 默认图标。 */
+export const VerticalAlignTopOutlined = (props: IconProps): JSX.Element => (
+  <span role="img" aria-label="vertical-align-top" class={props.class} data-result-icon={props.name}>
+    <svg viewBox="64 64 896 896" width="1em" height="1em" fill="currentColor" aria-hidden="true">
+      <path d="M859.9 168H164.1c-4.5 0-8.1 3.6-8.1 8v60c0 4.4 3.6 8 8.1 8h695.8c4.5 0 8.1-3.6 8.1-8v-60c0-4.4-3.6-8-8.1-8zM518.3 355a8 8 0 00-12.6 0l-112 141.7a7.98 7.98 0 006.3 12.9h73.9V848c0 4.4 3.6 8 8 8h60c4.4 0 8-3.6 8-8V509.7H624c6.7 0 10.4-7.7 6.3-12.9L518.3 355z" />
+    </svg>
+  </span>
+)

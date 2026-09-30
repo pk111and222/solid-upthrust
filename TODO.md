@@ -136,6 +136,13 @@
 | C10 Breadcrumb | 当前会话：C10 导航四物料逐个回归 | 当前工作区（main） | Breadcrumb 对齐 antd 6（nav/ol/li 结构、path 累积与 params、itemRender、独立分隔符、dropdownProps、语义化）、8 个示例 / 3 张 API、分层测试与证据；未改 Dropdown / ConfigProvider / preset / 锁文件 | 已验收 | 定向 84 条（四物料合计）、全量 2730 条、浏览器 47 条通过，类型/构建/docs 通过；修复最后一项链接被强制为 span、无 href 丢 onClick、merge 默认值被 undefined 覆盖；破坏性改动：根节点 div→nav/ol/li | [执行记录](docs/contributing/regressions/breadcrumb.md) |
 | C10 Steps | 当前会话：C10 导航四物料逐个回归 | 当前工作区（main） | Steps 对齐 antd 6（filled / outlined、inline / stack / vertical rail、点状、percent 圆环、initial / orientation / titlePlacement、语义化、整项 button a11y）、16 个示例 / 2 张 API、分层测试与证据；createSteps 未改 | 已验收 | 同上一轮；修复 UI 点击守卫限制跳转、点状标题位置、percent 未渲染；破坏性改动：默认 filled、点击自由跳转、StepItem 为 UI 超集 | [执行记录](docs/contributing/regressions/steps.md) |
 | C10 Anchor / Affix | 当前会话：C10 导航四物料逐个回归 | 当前工作区（main） | Anchor（默认 window 容器、点击滚动静默恢复、2px 轨道 + ink、hash 写入 / replace、affix / showInkInFixed / onClick / getContainer）、Affix（上下偏移优先级、target 回退 window）、competence anchor / affix 修订、13 个示例 / 3 张 API、分层测试与证据 | 已验收 | 同上一轮；修复 scroll-spy 监听 documentElement 永不触发、点击途中高亮闪烁、双重指示条、offsetBottom 被忽略；破坏性改动：onChange 参数为 href、affix 默认开启、点击写 hash | [执行记录](docs/contributing/regressions/anchor-affix.md) |
+| C11 Modal / Drawer | 当前会话：C11 弹层回归（Modal / Drawer 共用 headless） | 当前工作区（main） | createDialog 修订（reject 保持、mounted 保活 / forceRender / destroyOnHidden）、新增 _dialogLayer（焦点陷阱 / 回焦 / 滚动锁计数）、_dialogStack push 仅 Drawer、Modal / Drawer 按 antd 6 重写视觉与 API、24 个示例 / 3 张 API、分层测试与证据 | 已验收 | 全量 2755 条、浏览器 14 条（两轮）通过，类型/构建/docs 通过；破坏性改动：Drawer 无默认 footer、Modal 在上不推 Drawer、保活改隐藏、× aria-label=Close | [执行记录](docs/contributing/regressions/modal-drawer.md) |
+| C11 Spin | 当前会话：C11 逐个回归（Spin） | 当前工作区（main） | 四点方阵指示器 + preset 动画规则、嵌套蒙层、fullscreen / percent(auto) / description / 语义化 / setDefaultIndicator / aria-busy、9 个示例 / 1 张 API、分层测试与证据 | 已验收 | 全量 2766 条、浏览器 27 条（两轮，含 QRCode）通过，类型/构建/docs 通过；破坏性改动：指示器视觉、tip→description、wrapperClass 废弃、样式导出重命名 | [执行记录](docs/contributing/regressions/spin.md) |
+| C11 Popconfirm | 当前会话：C11 逐个回归（Popconfirm） | 当前工作区（main） | createPopconfirm ActionButton 语义（reject 保持 / 防重复 / 先关后 cancel）、antd 6 视觉与 okType / showCancel / 语义化 / onPopupClick / zIndex、共享箭头中心偏移修复（Tooltip / Popover / Menu）、8 个示例 / 1 张 API、分层测试与证据 | 已验收 | 全量 2778 条、浏览器 117 条（两轮，含 Tooltip / Popover / Menu）通过，类型/构建/docs 通过；破坏性改动：reject 不关闭、默认图标与取消按钮样式、overlayClass 废弃 | [执行记录](docs/contributing/regressions/popconfirm.md) |
+| C11 Message | 当前会话：C11 逐个回归（Message） | 当前工作区（main） | createMessageManager 秒制 duration / 同 key 替换 / onClose 语义 / maxCount 同步镜像、可调用 thenable、config / destroy / useMessage / 无 Provider 兜底 holder、antd 6 视觉与语义化、8 个示例 / 2 张 API、分层测试与证据 | 已验收 | 全量 2798 条、浏览器 11 条（两轮）通过，类型/构建/docs 通过；破坏性改动：duration 毫秒→秒、open 无默认 info、maxCount 默认不限、返回值改 thenable、样式导出重命名 | [执行记录](docs/contributing/regressions/message.md) |
+| C11 Notification | 当前会话：C11 逐个回归（Notification） | 当前工作区（main） | createNotificationManager 扁平队列 / 全局 maxCount / 同 key 替换与换位 / onClose 语义、rc stack 折叠展开与整角暂停、antd 6 视觉 / closable 对象 / role / props / 语义化、config / destroy / useNotification / 兜底 holder、11 个示例 / 2 张 API、分层测试与证据 | 已验收 | 全量 2818 条、浏览器 12 条（两轮）通过，类型/构建/docs 通过；破坏性改动：open 无默认 info、destroy() 不触发 onClose、maxCount 改全局默认不限、message/btn 更名 title/actions、样式导出重命名 | [执行记录](docs/contributing/regressions/notification.md) |
+| C11 FloatButton | 当前会话：C11 逐个回归（FloatButton） | 当前工作区（main） | createFloatButton 可见性 / 缓动回顶、createFloatButtonGroup 受控开合 / 组外关闭 / placement、antd 6 视觉（fixed 40px / circle 间距 16 / square Compact / 菜单动效 / BackTop 淡入 / 徽标偏移）、content / tooltip / href / badge / 语义化、12 个示例 / 3 张 API、分层测试与证据 | 已验收 | 全量 2838 条、浏览器 14 条（三轮）通过，类型/构建/docs 通过；破坏性改动：删除 rt/lb 等 placement / size / visible / backTop 开关，direction 废弃为 placement，getScrollTop 更名 getFloatScrollTop | [执行记录](docs/contributing/regressions/float-button.md) |
+| C11 Tour | 当前会话：C11 逐个回归（Tour） | 当前工作区（main） | createTour 重开归零 / finish 关闭语义、placeTour 12 方位 + center / 翻转 / 箭头 / pointAtCenter、tourGap / tourClosable、目标仅视口外滚动、antd 6 视觉（520 面板 / SVG 镂空遮罩 + 覆盖矩形 / 指示点 / small 按钮 / primary）、←/→ 与 Escape、锁滚动、按钮 props / actionsRender / 语义化、9 个示例 / 2 张 API、分层测试与证据 | 已验收 | 全量 2855 条、浏览器 12 条（三轮）通过，类型/构建/docs 通过；破坏性改动：默认 gap 6 / 圆角 2、宽 520、z-index 1001、描边高亮移除、文案“结束导览”/“关闭”、指示点替代“1 / 2”、showSkip 默认关闭、footerRender / finishText / nextText 废弃 | [执行记录](docs/contributing/regressions/tour.md) |
 
 ## 3. 第一阶段：全部组件回归 C（用户指定优先）
 
@@ -245,14 +252,14 @@
 
 ### C11
 
-- [ ] Modal
-- [ ] Drawer
-- [ ] Popconfirm
-- [ ] Message
-- [ ] Notification
-- [ ] Spin
-- [ ] FloatButton
-- [ ] Tour
+- [x] Modal：共享 dialog 状态机与弹层层、antd 6 视觉、footer 函数 / 响应式 width / loading / mask 对象 / 语义化、静态方法 416，见 [记录](docs/contributing/regressions/modal-drawer.md)。
+- [x] Drawer：size / resizable / push / extra / loading / closable 位置 / 原地渲染，onClose 否决，见 [记录](docs/contributing/regressions/modal-drawer.md)。
+- [x] Popconfirm：ActionButton 异步语义（reject 保持打开）、antd 6 视觉、okType / showCancel / 语义化，修复共享箭头 4px 偏移，见 [记录](docs/contributing/regressions/popconfirm.md)。
+- [x] Message：duration 秒、同 key 整体替换、可调用 thenable、config / destroy / useMessage / 无 Provider 兜底、antd 6 视觉与语义化，见 [记录](docs/contributing/regressions/message.md)。
+- [x] Notification：扁平单例队列 / 全局 maxCount、rc stack 折叠展开与整角暂停、closable 对象 / 语义化 / config.stack / useNotification / 兜底 holder、antd 6 视觉，见 [记录](docs/contributing/regressions/notification.md)。
+- [x] Spin：antd 四点方阵指示器、嵌套蒙层、fullscreen / percent / description / 语义化 / setDefaultIndicator，见 [记录](docs/contributing/regressions/spin.md)。
+- [x] FloatButton：可见性 / 缓动回顶、Group 受控开合 / 组外关闭 / placement、circle 间距与 square Compact、菜单与 BackTop 动效、content / tooltip / href / badge / 语义化，见 [记录](docs/contributing/regressions/float-button.md)。
+- [x] Tour：重开归零、12 方位 + center 翻转与箭头、SVG 镂空遮罩与点击穿透、gap / closable / mask 配置、←/→ 与 Escape、锁滚动、指示点 / small 按钮 / primary、按钮 props / actionsRender / 语义化，见 [记录](docs/contributing/regressions/tour.md)。
 
 ### C12
 
@@ -299,7 +306,7 @@ ConfigProvider 读取 `Input/context`、`Form/context`，不等于依赖完整 I
 - [x] Statistic.Countdown（废弃别名，等同 Statistic.Timer type="countdown"；另有具名导出 StatisticTimer / StatisticCountdown），见 [记录](docs/contributing/regressions/empty-statistic.md)。
 - [x] Skeleton.Button / Avatar / Input / Node：具名与静态导出、独立文档、API 和示例已回归。
 - [ ] Badge.Ribbon、Tag.CheckableTag、Card.Grid / Meta、Image.PreviewGroup。（BadgeRibbon、CheckableTag 与新增 CheckableTagGroup 已在 C09 回归，见 [tag-badge.md](docs/contributing/regressions/tag-badge.md)；Card / Image 待 C12）
-- [ ] Upload.Dragger、FloatButton.Group / BackTop。
+- [ ] Upload.Dragger、FloatButton.Group / BackTop。（FloatButton.Group / BackTop 已在 C11 回归，见 [float-button.md](docs/contributing/regressions/float-button.md)；Upload.Dragger 待回归）
 - [ ] Modal 静态方法、Message / Notification Provider 和命令式接口。
 - [ ] 每个物料额外扫描源码中的公开子组件/类型/方法，不以本清单为封闭全集。
 
@@ -351,7 +358,7 @@ C 阶段可按需提前执行相关项，最终仍须完整验收本阶段。尤
 - [ ] **B02 表单共享协议**：FormContext / FormItemContext、控件独立使用、字段注入、显式 props 与上下文默认值优先级。
 - [ ] **B03 全局配置与 Portal**：嵌套、关闭继承、动态更新、弹层主题作用域、自定义容器；ConfigProvider wrapper=false 的 DOM/主题边界。
 - [ ] **B04 Trigger**：触发方式、开关、定位、边界调整、滚动/缩放重定位、外部点击、Escape、监听清理。
-- [ ] **B05 Dialog 与弹层栈**：多层 Modal/Drawer、最高层 Escape、遮罩、滚动锁、焦点恢复、销毁栈清理。
+- [x] **B05 Dialog 与弹层栈**：多层 Modal/Drawer、最高层 Escape、遮罩、滚动锁、焦点恢复、销毁栈清理。见 [C11 记录](docs/contributing/regressions/modal-drawer.md)。
 - [ ] **B06 Selection / Drag**：选中、禁用项、键盘切换、拖拽开始/取消/结束、事件与监听清理。
 - [ ] **B07 虚拟列表与断点**：可见范围、索引/key、数据更新、滚动定位、尺寸变化、响应式边界。
 - [ ] **B08 基础工具**：颜色解析、日期计算、字段路径/校验、样式合并；分别放对应物料或 shared 测试目录。

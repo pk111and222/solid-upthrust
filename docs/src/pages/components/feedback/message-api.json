@@ -1,0 +1,68 @@
+[
+  {
+    "name": "content",
+    "type": "JSX.Element",
+    "default": "—",
+    "description": "提示内容"
+  },
+  {
+    "name": "duration",
+    "type": "number | null",
+    "default": "3",
+    "description": "自动关闭的延时，单位秒；0 / null 不自动关闭"
+  },
+  {
+    "name": "type",
+    "type": "'info' | 'success' | 'warning' | 'error' | 'loading'",
+    "default": "—",
+    "description": "提示类型；不传时不显示类型图标"
+  },
+  {
+    "name": "icon",
+    "type": "JSX.Element",
+    "default": "类型图标",
+    "description": "自定义图标"
+  },
+  {
+    "name": "key",
+    "type": "string | number",
+    "default": "自动生成",
+    "description": "当前提示的唯一标志；同 key 再次打开会原地更新"
+  },
+  {
+    "name": "pauseOnHover",
+    "type": "boolean",
+    "default": "true",
+    "description": "悬停时是否暂停计时器"
+  },
+  {
+    "name": "onClose",
+    "type": "() => void",
+    "default": "—",
+    "description": "关闭时触发（倒计时结束、调用返回值或 destroy(key)）；destroy() 全部关闭时不触发"
+  },
+  {
+    "name": "onClick",
+    "type": "(e: MouseEvent) => void",
+    "default": "—",
+    "description": "点击 message 时触发"
+  },
+  {
+    "name": "class / style",
+    "type": "string / JSX.CSSProperties",
+    "default": "—",
+    "description": "notice 卡片的类名与内联样式"
+  },
+  {
+    "name": "classNames",
+    "type": "Record<SemanticDOM, string> | (info: { props }) => Record<SemanticDOM, string>",
+    "default": "—",
+    "description": "语义化结构 class：list / listContent / root / wrapper / icon / title"
+  },
+  {
+    "name": "styles",
+    "type": "Record<SemanticDOM, CSSProperties> | (info: { props }) => Record<SemanticDOM, CSSProperties>",
+    "default": "—",
+    "description": "语义化结构行内样式"
+  }
+]

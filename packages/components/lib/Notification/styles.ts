@@ -1,188 +1,187 @@
 // @unocss-include
 import { cva, type VariantProps } from "class-variance-authority";
-import { twMerge } from "tailwind-merge";
+import { mergeClass } from "../../common/merge";
 
-// The placement viewport: fixed full-height column pinned to one screen edge
-// or corner. pointer-events-none so the page below stays clickable; each
-// notice re-enables pointer events on itself. Bottom stacks are column-reverse
-// so the newest notice hugs the anchor edge, exactly like rc-notification.
-const notificationViewportVariants = cva(
-  [
-    "fixed", "top-0", "bottom-0", "z-[1000]", "pointer-events-none",
-    "flex", "flex-col", "p-md",
-  ],
+/**
+ * antd 6 Notification（notification/style：index、placement、stack）：
+ *  - list：fixed，z-index zIndexPopupBase 1000 + CONTAINER_MAX_OFFSET 1000 + 50 = 2050；top / bottom 偏移默认 24（内联 style），
+ *    左右角距屏幕边 marginEdge 24px，top / bottom 水平居中。
+ *  - wrapper：colorBgElevated、borderRadiusLG 8px、boxShadow；stack 模式下绝对定位贴 list 锚边，
+ *    位置由 transform 表达（rc NoticeList 算法，transition transform 0.3s）。
+ *  - notice：padding paddingMD 20px × paddingContentHorizontalLG 24px，width 384，max-width calc(100vw − 48px)，
+ *    14px / 1.5714，word-wrap break-word，overflow hidden。
+ *  - title：fontSizeLG 16 / lineHeightLG 1.5、colorTextHeading、margin-bottom 8；可关闭时右留 24；有图标时左让 12 + 24 = 36。
+ *  - description：14px colorText、margin-top 8；首元素时 margin-top 0、右 12。
+ *  - icon：absolute，24px（16 × 1.5）line-height 1；success / info / warning / error 各自语义色。
+ *  - close：absolute top 20 / end 24，22×22（40 × 0.55），borderRadiusSM 4，colorIcon 0.45 → hover colorText + colorFillSecondary 0.06，
+ *    active colorFill 0.15，color / background-color 0.2s。
+ *  - actions：float right，margin-top 12。
+ *  - progress：absolute bottom 0，左右内缩 8（borderRadiusLG），高 2，底 rgba(0,0,0,.04)，值为 primaryBorderHover → primary 渐变，显示剩余比例。
+ *  - 动效：右侧角 translateX(100%)、左侧角 translateX(−100%)、top 自 −150px、bottom 自 +150px，配合 opacity 0.2s。
+ */
+
+const notificationListVariants = cva(
+  ["fixed", "z-2050", "pointer-events-none", "text-[14px]", "text-on-surface", "leading-[1.5714]"],
   {
     variants: {
       placement: {
-        topLeft: ["left-0", "items-start"],
-        top: ["left-1/2", "-translate-x-1/2", "items-center"],
-        topRight: ["right-0", "items-end"],
-        bottomLeft: ["left-0", "items-start", "flex-col-reverse"],
-        bottom: ["left-1/2", "-translate-x-1/2", "items-center", "flex-col-reverse"],
-        bottomRight: ["right-0", "items-end", "flex-col-reverse"],
+        topLeft: ["left-0", "ml-lg"],
+        top: ["left-1/2", "-translate-x-1/2"],
+        topRight: ["right-0", "mr-lg"],
+        bottomLeft: ["left-0", "ml-lg"],
+        bottom: ["left-1/2", "-translate-x-1/2"],
+        bottomRight: ["right-0", "mr-lg"],
       },
     },
     defaultVariants: { placement: "topRight" },
   }
 )
 
-// One notice card: elevated surface, lg radius, standard shadow (antd
-// notification visual family). Slide/fade is driven by the `state` variant —
-// the slide DIRECTION follows the placement's horizontal side so corner
-// stacks enter from their own edge (antd parity: right stacks slide in from
-// the right, left stacks from the left, top/bottom fade down/up).
+// 进场 translate 与 stack 的 transform 是两个独立属性，互不覆盖；只过渡 opacity / translate / transform，绝不过渡 top / left。
+const notificationWrapperVariants = cva(
+  ["pointer-events-auto", "bg-surface", "rounded-lg", "shadow"],
+  {
+    variants: {
+      // stack：绝对定位贴锚边，位置全由 transform 表达；关闭 stack 时按文档流排列，离场收起 max-height / margin（内联值）。
+      stacked: {
+        true: ["absolute", "[transition:opacity_0.2s_cubic-bezier(0.645,0.045,0.355,1),translate_0.2s_cubic-bezier(0.645,0.045,0.355,1),transform_0.3s_cubic-bezier(0.645,0.045,0.355,1)]"],
+        false: ["relative", "ms-auto", "mb-md", "[transition:opacity_0.2s_cubic-bezier(0.645,0.045,0.355,1),translate_0.2s_cubic-bezier(0.645,0.045,0.355,1),max-height_0.2s_cubic-bezier(0.645,0.045,0.355,1),margin_0.2s_cubic-bezier(0.645,0.045,0.355,1)]"],
+      },
+      anchor: {
+        topLeft: ["top-0", "left-0"],
+        top: ["top-0", "left-0"],
+        topRight: ["top-0", "right-0"],
+        bottomLeft: ["bottom-0", "left-0"],
+        bottom: ["bottom-0", "left-0"],
+        bottomRight: ["bottom-0", "right-0"],
+      },
+      state: {
+        visible: ["opacity-100", "translate-x-0"],
+        "enter-right": ["opacity-0", "translate-x-full"],
+        "enter-left": ["opacity-0", "-translate-x-full"],
+        "enter-top": ["opacity-0", "-translate-y-[150px]"],
+        "enter-bottom": ["opacity-0", "translate-y-[150px]"],
+        leave: ["opacity-0", "pointer-events-none"],
+      },
+      // 折叠态：第 2、3 张只露出卡片边（内容透明 + 背景模糊），更旧的完全隐藏；
+      // 展开态每张下方挂 16px 透明伪元素桥接缝隙，指针穿过缝隙时不会丢 hover（antd stack-expanded ::after）。
+      layer: {
+        front: [],
+        peek: ["overflow-hidden", "bg-transparent", "backdrop-blur-[10px]"],
+        hidden: ["opacity-0", "overflow-hidden", "pointer-events-none"],
+        bridge: ["after:content-empty", "after:absolute", "after:inset-x-0", "after:h-[16px]", "after:-bottom-[16px]", "after:pointer-events-auto"],
+      },
+    },
+    defaultVariants: { stacked: true, anchor: "topRight", state: "visible", layer: "front" },
+  }
+)
+
 const notificationNoticeVariants = cva(
   [
-    "pointer-events-auto", "relative", "overflow-hidden",
-    "w-[384px]", "max-w-[calc(100vw-48px)]",
-    "mb-md",  // stack gap; margin is transitioned so removal glides the stack
-    "bg-surface", "rounded-lg", "shadow",
-    "transition-overlay-stack",
-    "duration-mid", "ease-upthrust",
+    "relative", "box-border", "w-[384px]", "max-w-[calc(100vw-48px)]", "py-[20px]", "px-lg",
+    "rounded-lg", "overflow-hidden", "break-words", "text-[14px]", "text-on-surface", "leading-[1.5714]",
   ],
-  {
-    variants: {
-      state: {
-        enter: ["opacity-0"],
-        visible: ["opacity-100"],
-        // max-height + padding collapse: the card below slides up over the
-        // leave animation instead of teleporting (mirrors antd fadeOut which
-        // animates max-height to 0).
-        closing: ["opacity-0", "max-h-0", "py-0", "!mb-0", "!border-0", "scale-95"],
-      },
-      side: {
-        left: [],
-        right: [],
-        center: [],
-      },
-    },
-    // Slide-in direction composed with the state classes via compound would
-    // break UnoCSS scanning, so direction classes live in a dedicated variant
-    // pair below (enter transform only — see notificationEnterVariants).
-    defaultVariants: { state: "visible", side: "right" },
-  }
-)
-
-// Enter transform per side: applied only in the `enter` state, removed on
-// `visible` so the card transitions from off-screen to its resting place.
-const notificationEnterVariants = cva(
-  ["transition-overlay-stack", "duration-mid", "ease-upthrust"],
-  {
-    variants: {
-      side: {
-        left: ["-translate-x-full"],
-        right: ["translate-x-full"],
-        center: ["translate-y-[16px]", "scale-95"],
-      },
-    },
-    defaultVariants: { side: "right" },
-  }
-)
-
-// Card body padding: py-md px-lg (antd notificationPadding = 16px 24px).
-const notificationBodyVariants = cva(
-  ["relative", "py-md", "px-lg"],
   { variants: {}, defaultVariants: {} }
 )
 
-// Message title: 16px medium heading color (antd fontSizeLG + colorTextHeading).
-const notificationMessageVariants = cva(
-  ["text-on-surface", "text-[16px]", "font-medium", "leading-[1.5]", "pr-lg"],
-  {
-    variants: {
-      withIcon: { true: ["ml-[36px]"], false: [] },
-    },
-    defaultVariants: { withIcon: false },
-  }
-)
+// 折叠露边时整块 notice 淡出（antd stack：`wrapper > notice` opacity 0，transition opacity 0.2s）。
+const notificationContentVariants = cva(["[transition:opacity_0.2s]"], {
+  variants: {
+    concealed: { true: ["opacity-0"], false: ["opacity-100"] },
+  },
+  defaultVariants: { concealed: false },
+})
 
-// Description body: 14px regular, secondary color.
-const notificationDescriptionVariants = cva(
-  ["text-on-surface", "text-[14px]", "leading-[1.5714]", "mt-xs", "break-words"],
-  {
-    variants: {
-      withIcon: { true: ["ml-[36px]"], false: [] },
-    },
-    defaultVariants: { withIcon: false },
-  }
-)
-
-// Type icon: 24px (fontSizeLG * lineHeightLG), absolutely positioned at the
-// card's top-left padding corner like antd's notice-icon.
 const notificationIconVariants = cva(
-  ["absolute", "left-lg", "top-md", "text-[24px]", "leading-none", "w-[24px]", "h-[24px]"],
+  ["absolute", "top-[20px]", "left-[24px]", "flex", "text-[24px]", "leading-none"],
   {
     variants: {
       type: {
-        info: ["text-primary", "i-mdi-information"],
-        success: ["text-[#52c41a]", "i-mdi-check-circle"],
-        warning: ["text-[#faad14]", "i-mdi-alert-circle"],
-        error: ["text-error", "i-mdi-close-circle"],
+        info: ["text-primary"],
+        success: ["text-[#52c41a]"],
+        warning: ["text-[#faad14]"],
+        error: ["text-error"],
+        // 自定义 icon：antd 不加类型色。
+        none: [],
       },
     },
-    defaultVariants: { type: "info" },
+    defaultVariants: { type: "none" },
   }
 )
 
-// Close button: 22px square hit area in the card's top-right padding corner.
+const notificationTitleVariants = cva(["mb-xs", "text-on-surface", "text-[16px]", "leading-[1.5]"], {
+  variants: {
+    closable: { true: ["pe-lg"], false: [] },
+    withIcon: { true: ["ms-[36px]"], false: [] },
+  },
+  defaultVariants: { closable: true, withIcon: false },
+})
+
+const notificationDescriptionVariants = cva(["text-on-surface", "text-[14px]"], {
+  variants: {
+    first: { true: ["mt-0", "me-sm"], false: ["mt-xs"] },
+    withIcon: { true: ["ms-[36px]"], false: [] },
+  },
+  defaultVariants: { first: false, withIcon: false },
+})
+
+const notificationActionsVariants = cva(["float-right", "mt-sm"], { variants: {}, defaultVariants: {} })
+
+// 关闭按钮：图标是子元素（SVG），hover 背景不会盖住图标。
 const notificationCloseVariants = cva(
   [
-    "absolute", "top-[11px]", "right-[11px]",
-    "inline-flex", "items-center", "justify-center",
-    "w-[22px]", "h-[22px]",
-    "text-[14px]", "text-on-surface-variant",
-    "cursor-pointer", "border-none",
-    "rounded-sm", "outline-none",
-    "transition-upthrust-fast",
-    "hover:text-on-surface", "hover:bg-on-surface/6",
+    "absolute", "top-[20px]", "right-[24px]", "flex", "items-center", "justify-center", "p-0",
+    "w-[22px]", "h-[22px]", "text-[14px]", "leading-none", "rounded-sm", "border-none", "bg-transparent", "cursor-pointer",
+    "text-on-surface/45", "outline-none", "transition-upthrust",
+    "hover:text-on-surface", "hover:bg-on-surface/6", "active:bg-on-surface/15",
+    "focus-visible:outline-2", "focus-visible:outline-solid", "focus-visible:outline-primary/30",
   ],
   { variants: {}, defaultVariants: {} }
 )
 
-// Action area (btn slot): floated right under the description like antd's
-// notice-btn (float:right + margin-top).
-const notificationActionsVariants = cva(
-  ["mt-sm", "flex", "justify-end"],
-  { variants: {}, defaultVariants: {} }
-)
-
-// Countdown progress bar: 2px strip along the card's bottom, rounded ends,
-// primary gradient fill (antd notificationProgressBg gradient family).
 const notificationProgressVariants = cva(
-  [
-    "absolute", "bottom-0", "left-lg", "right-lg", "h-[2px]",
-    "rounded-full", "bg-on-surface/8", "overflow-hidden",
-  ],
+  ["absolute", "bottom-0", "left-[8px]", "right-[8px]", "h-[2px]", "rounded-lg", "overflow-hidden", "bg-on-surface/4"],
   { variants: {}, defaultVariants: {} }
 )
 
 const notificationProgressFillVariants = cva(
-  ["h-full", "rounded-full", "bg-primary"],
+  ["h-full", "rounded-lg", "bg-[linear-gradient(90deg,rgb(var(--upthrust-colors-primary)/0.55),rgb(var(--upthrust-colors-primary)))]"],
   { variants: {}, defaultVariants: {} }
 )
 
-export const notificationViewportClass = (variants: VariantProps<typeof notificationViewportVariants>) =>
-  twMerge(notificationViewportVariants(variants))
-export const notificationNoticeClass = (variants: VariantProps<typeof notificationNoticeVariants>) =>
-  twMerge(notificationNoticeVariants(variants))
-export const notificationEnterClass = (variants: VariantProps<typeof notificationEnterVariants>) =>
-  twMerge(notificationEnterVariants(variants))
-export const notificationBodyClass = (variants: VariantProps<typeof notificationBodyVariants>) =>
-  twMerge(notificationBodyVariants(variants))
-export const notificationMessageClass = (variants: VariantProps<typeof notificationMessageVariants>) =>
-  twMerge(notificationMessageVariants(variants))
-export const notificationDescriptionClass = (variants: VariantProps<typeof notificationDescriptionVariants>) =>
-  twMerge(notificationDescriptionVariants(variants))
-export const notificationIconClass = (variants: VariantProps<typeof notificationIconVariants>) =>
-  twMerge(notificationIconVariants(variants))
-export const notificationCloseClass = (variants: VariantProps<typeof notificationCloseVariants>) =>
-  twMerge(notificationCloseVariants(variants))
-export const notificationActionsClass = (variants: VariantProps<typeof notificationActionsVariants>) =>
-  twMerge(notificationActionsVariants(variants))
-export const notificationProgressClass = (variants: VariantProps<typeof notificationProgressVariants>) =>
-  twMerge(notificationProgressVariants(variants))
-export const notificationProgressFillClass = (variants: VariantProps<typeof notificationProgressFillVariants>) =>
-  twMerge(notificationProgressFillVariants(variants))
+export const notificationListClass = (variants: VariantProps<typeof notificationListVariants>) => mergeClass(notificationListVariants(variants))
+export const notificationWrapperClass = (variants: VariantProps<typeof notificationWrapperVariants>) => mergeClass(notificationWrapperVariants(variants))
+export const notificationNoticeClass = (variants: VariantProps<typeof notificationNoticeVariants>) => mergeClass(notificationNoticeVariants(variants))
+export const notificationContentClass = (variants: VariantProps<typeof notificationContentVariants>) => mergeClass(notificationContentVariants(variants))
+export const notificationIconClass = (variants: VariantProps<typeof notificationIconVariants>) => mergeClass(notificationIconVariants(variants))
+export const notificationTitleClass = (variants: VariantProps<typeof notificationTitleVariants>) => mergeClass(notificationTitleVariants(variants))
+export const notificationDescriptionClass = (variants: VariantProps<typeof notificationDescriptionVariants>) => mergeClass(notificationDescriptionVariants(variants))
+export const notificationActionsClass = (variants: VariantProps<typeof notificationActionsVariants>) => mergeClass(notificationActionsVariants(variants))
+export const notificationCloseClass = (variants: VariantProps<typeof notificationCloseVariants>) => mergeClass(notificationCloseVariants(variants))
+export const notificationProgressClass = (variants: VariantProps<typeof notificationProgressVariants>) => mergeClass(notificationProgressVariants(variants))
+export const notificationProgressFillClass = (variants: VariantProps<typeof notificationProgressFillVariants>) => mergeClass(notificationProgressFillVariants(variants))
 
-// Close glyph (shared with Alert's ×).
-export const NOTIFICATION_CLOSE_ICON = 'i-mdi-close'
+const PLACEMENTS = ["topLeft", "top", "topRight", "bottomLeft", "bottom", "bottomRight"] as const
+
+/** Every variant combination, for dead-class tests. */
+export const notificationClassMatrix = (): string[] => {
+  const out: string[] = []
+  for (const placement of PLACEMENTS) {
+    out.push(notificationListClass({ placement }))
+    for (const state of ["visible", "enter-right", "enter-left", "enter-top", "enter-bottom", "leave"] as const) {
+      for (const layer of ["front", "peek", "hidden", "bridge"] as const) {
+        for (const stacked of [true, false]) out.push(notificationWrapperClass({ stacked, anchor: placement, state, layer }))
+      }
+    }
+  }
+  for (const flag of [true, false]) {
+    out.push(notificationContentClass({ concealed: flag }))
+    for (const withIcon of [true, false]) out.push(notificationTitleClass({ closable: flag, withIcon }), notificationDescriptionClass({ first: flag, withIcon }))
+  }
+  for (const type of ["info", "success", "warning", "error", "none"] as const) out.push(notificationIconClass({ type }))
+  out.push(
+    notificationNoticeClass({}), notificationActionsClass({}), notificationCloseClass({}),
+    notificationProgressClass({}), notificationProgressFillClass({}),
+  )
+  return out
+}

@@ -1,0 +1,9 @@
+[
+  { "name": "duration", "type": "number", "default": "450", "description": "回到顶部所需时间（ms），easeInOutCubic 缓动" },
+  { "name": "target", "type": "() => HTMLElement | Window | Document", "default": "() => window", "description": "设置需要监听其滚动事件的元素" },
+  { "name": "visibilityHeight", "type": "number", "default": "400", "description": "滚动高度达到此参数值才出现 BackTop；0 表示一开始就显示" },
+  { "name": "onClick", "type": "(e: MouseEvent) => void", "default": "—", "description": "点击按钮的回调函数（在开始滚动后触发）" },
+  { "name": "onVisibleChange", "type": "(visible: boolean) => void", "default": "—", "description": "可见性变化回调（本库扩展）" },
+  { "name": "icon", "type": "JSX.Element", "default": "<VerticalAlignTopOutlined />", "description": "自定义图标" },
+  { "name": "其余", "type": "FloatButtonProps", "default": "—", "description": "与 FloatButton 相同（type / shape / tooltip / badge / classNames / styles …）" }
+]

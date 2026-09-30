@@ -1,4 +1,7 @@
-import { TourRect, TourStepConfig } from './index';
+import { TourPosition, TourRect, TourStepConfig } from './index';
+export interface TourHighlight extends TourRect {
+    radius: number;
+}
 export declare function createTourPosition(config: {
     open: () => boolean;
     step: () => TourStepConfig | undefined;
@@ -6,10 +9,6 @@ export declare function createTourPosition(config: {
     defaults: () => TourStepConfig;
 }): {
     target: import('solid-js').SourceAccessor<HTMLElement | undefined>;
-    rect: import('solid-js').SourceAccessor<TourRect | undefined>;
-    position: import('solid-js').SourceAccessor<{
-        left: number;
-        top: number;
-        placement: import('./index').TourPlacement;
-    }>;
+    rect: import('solid-js').SourceAccessor<TourHighlight | undefined>;
+    position: import('solid-js').SourceAccessor<TourPosition>;
 };

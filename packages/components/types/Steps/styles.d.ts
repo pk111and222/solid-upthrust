@@ -23,7 +23,7 @@ declare const stepDotWrapVariants: (props?: ({
     layout?: "stack" | "vertical-default" | "vertical-small" | null | undefined;
 } & import('class-variance-authority/types').ClassProp) | undefined) => string;
 declare const stepDotVariants: (props?: ({
-    tone?: "error" | "wait" | "process" | "finish" | null | undefined;
+    tone?: "error" | "wait" | "finish" | "process" | null | undefined;
     size?: "small" | "default" | "default-current" | "small-current" | null | undefined;
 } & import('class-variance-authority/types').ClassProp) | undefined) => string;
 declare const stepRailVariants: (props?: ({
@@ -37,12 +37,12 @@ declare const stepBodyVariants: (props?: ({
 } & import('class-variance-authority/types').ClassProp) | undefined) => string;
 declare const stepTitleVariants: (props?: ({
     layout?: "vertical-default" | "vertical-small" | "inline-default" | "inline-small" | "stack-default" | "stack-small" | null | undefined;
-    tone?: "error" | "wait" | "process" | "finish" | null | undefined;
+    tone?: "error" | "wait" | "finish" | "process" | null | undefined;
     hover?: boolean | null | undefined;
 } & import('class-variance-authority/types').ClassProp) | undefined) => string;
 export declare const STEP_SUBTITLE_CLASS: string[];
 declare const stepContentVariants: (props?: ({
-    tone?: "error" | "wait" | "process" | "finish" | null | undefined;
+    tone?: "error" | "wait" | "finish" | "process" | null | undefined;
     layout?: "vertical" | "inline" | "stack" | null | undefined;
 } & import('class-variance-authority/types').ClassProp) | undefined) => string;
 export declare const stepsRootClass: (v: VariantProps<typeof stepsRootVariants>) => string;

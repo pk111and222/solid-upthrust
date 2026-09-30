@@ -101,6 +101,9 @@ const createPreset: PresetFactory<Theme, PresetUpthrustOptions> = (options = {})
         getCSS: () => [
           `@keyframes wave-spread{0%{box-shadow:0 0 0 0 currentColor;opacity:.35}100%{box-shadow:0 0 0 6px currentColor;opacity:0}}`,
           `@keyframes ut-spin-rotate{0%{transform:rotate(0deg)}50%{transform:rotate(180deg)}100%{transform:rotate(360deg)}}`,
+          // Spin dot indicator (antd antRotate / antSpinMove): the 4-dot square turns 45°→405° while each dot fades in.
+          `@keyframes ut-spin-dot-rotate{to{transform:rotate(405deg)}}`,
+          `@keyframes ut-spin-dot-move{to{opacity:1}}`,
           `@keyframes ut-skeleton-wave{0%{background-position:100% 50%}100%{background-position:0 50%}}`,
           `@keyframes ut-badge-processing{0%{transform:scale(0.8);opacity:0.5}100%{transform:scale(2.4);opacity:0}}`,
           `@keyframes ut-zoom-in{0%{transform:scale(0.2);opacity:0}100%{transform:scale(1);opacity:1}}`,

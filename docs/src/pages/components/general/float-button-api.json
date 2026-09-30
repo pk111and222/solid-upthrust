@@ -1,0 +1,19 @@
+[
+  { "name": "type", "type": "'default' | 'primary'", "default": "'default'", "description": "设置按钮类型" },
+  { "name": "shape", "type": "'circle' | 'square'", "default": "'circle'", "description": "设置按钮形状；在 Group 内由 Group 的 shape 决定" },
+  { "name": "icon", "type": "JSX.Element", "default": "—", "description": "自定义图标；icon 与 content 都未设置时显示文档图标（FileTextOutlined）" },
+  { "name": "content", "type": "JSX.Element", "default": "—", "description": "文字及其它内容（建议 square 形状、短文本）" },
+  { "name": "description", "type": "JSX.Element", "default": "—", "description": "已废弃，请使用 content" },
+  { "name": "tooltip", "type": "JSX.Element | TooltipProps", "default": "—", "description": "气泡卡片的内容；传对象时作为 Tooltip 属性（title / placement / trigger / open 等）" },
+  { "name": "href", "type": "string", "default": "—", "description": "点击跳转的地址，指定后渲染为 <a>" },
+  { "name": "target", "type": "string", "default": "—", "description": "相当于 a 标签的 target 属性，href 存在时生效" },
+  { "name": "htmlType", "type": "'button' | 'submit' | 'reset'", "default": "'button'", "description": "设置 button 原生的 type 值" },
+  { "name": "badge", "type": "Omit<BadgeProps, 'status' | 'text' | 'title' | 'children'>", "default": "—", "description": "带徽标的悬浮按钮（不支持 status 以及相关属性）" },
+  { "name": "disabled", "type": "boolean", "default": "false", "description": "禁用按钮（本库扩展；链接模式下移除 href 并阻止点击）" },
+  { "name": "onClick", "type": "(e: MouseEvent) => void", "default": "—", "description": "点击按钮时的回调" },
+  { "name": "aria-label", "type": "string", "default": "—", "description": "按钮的无障碍名称" },
+  { "name": "classNames", "type": "Record<'root' | 'icon' | 'content', string> | (info: { props }) => Record<…>", "default": "—", "description": "语义化结构 class，支持函数（info.props 含合并后的 type / shape）" },
+  { "name": "styles", "type": "Record<'root' | 'icon' | 'content', JSX.CSSProperties> | (info: { props }) => Record<…>", "default": "—", "description": "语义化结构 style，支持函数" },
+  { "name": "class / style", "type": "string / JSX.CSSProperties", "default": "—", "description": "作用于根节点（button / a）；style 可覆盖默认的 right / bottom 定位" },
+  { "name": "ref", "type": "(el: HTMLElement) => void", "default": "—", "description": "根节点引用" }
+]

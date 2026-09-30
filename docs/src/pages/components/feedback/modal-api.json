@@ -1,0 +1,194 @@
+[
+  {
+    "name": "open",
+    "type": "boolean",
+    "default": "—",
+    "description": "对话框是否可见（受控）"
+  },
+  {
+    "name": "defaultOpen",
+    "type": "boolean",
+    "default": "false",
+    "description": "非受控初始可见"
+  },
+  {
+    "name": "title",
+    "type": "JSX.Element",
+    "default": "—",
+    "description": "标题"
+  },
+  {
+    "name": "footer",
+    "type": "JSX.Element | null | false | (originNode, { OkBtn, CancelBtn }) => JSX.Element",
+    "default": "取消 / 确定",
+    "description": "底部内容；null / false 隐藏；函数形式可组合默认按钮；loading 时隐藏"
+  },
+  {
+    "name": "okText / cancelText",
+    "type": "JSX.Element",
+    "default": "'确定' / '取消'",
+    "description": "按钮文字"
+  },
+  {
+    "name": "okType",
+    "type": "'primary' | 'default' | 'dashed' | 'text' | 'link'",
+    "default": "'primary'",
+    "description": "确定按钮类型"
+  },
+  {
+    "name": "okButtonProps / cancelButtonProps",
+    "type": "Partial<ButtonProps>",
+    "default": "—",
+    "description": "按钮属性"
+  },
+  {
+    "name": "confirmLoading",
+    "type": "boolean",
+    "default": "false",
+    "description": "确定按钮 loading"
+  },
+  {
+    "name": "onOk",
+    "type": "(e: MouseEvent) => void | boolean | Promise",
+    "default": "—",
+    "description": "点击确定；返回 false 或 reject 保持打开，Promise 挂起期间确定按钮 loading"
+  },
+  {
+    "name": "onCancel",
+    "type": "(e: MouseEvent | KeyboardEvent) => void | boolean | Promise",
+    "default": "—",
+    "description": "遮罩 / Escape / × / 取消；否决规则同 onOk"
+  },
+  {
+    "name": "afterClose",
+    "type": "() => void",
+    "default": "—",
+    "description": "完全关闭（离场动画结束）后回调"
+  },
+  {
+    "name": "afterOpenChange",
+    "type": "(open: boolean) => void",
+    "default": "—",
+    "description": "打开 / 关闭动画结束后回调"
+  },
+  {
+    "name": "mask",
+    "type": "boolean | { enabled?, blur?, closable? }",
+    "default": "true",
+    "description": "遮罩；blur 背景模糊；closable 点击遮罩是否关闭"
+  },
+  {
+    "name": "maskClosable",
+    "type": "boolean",
+    "default": "true",
+    "description": "已废弃，请使用 mask.closable"
+  },
+  {
+    "name": "keyboard",
+    "type": "boolean",
+    "default": "true",
+    "description": "Escape 关闭（只作用于最上层弹层）"
+  },
+  {
+    "name": "closable",
+    "type": "boolean | { closeIcon?, disabled?, onClose?, afterClose? }",
+    "default": "true",
+    "description": "是否显示右上角关闭按钮"
+  },
+  {
+    "name": "closeIcon",
+    "type": "JSX.Element | null | false",
+    "default": "<CloseOutlined />",
+    "description": "自定义关闭图标；null / false 隐藏"
+  },
+  {
+    "name": "centered",
+    "type": "boolean",
+    "default": "false",
+    "description": "垂直居中"
+  },
+  {
+    "name": "width",
+    "type": "number | string | { xs?, sm?, md?, lg?, xl?, xxl?, xxxl? }",
+    "default": "520",
+    "description": "宽度；断点对象以 xs 为基准逐级覆盖"
+  },
+  {
+    "name": "loading",
+    "type": "boolean",
+    "default": "false",
+    "description": "显示骨架屏并隐藏 footer"
+  },
+  {
+    "name": "destroyOnHidden",
+    "type": "boolean",
+    "default": "false",
+    "description": "关闭后销毁 DOM（默认保活隐藏）"
+  },
+  {
+    "name": "forceRender",
+    "type": "boolean",
+    "default": "false",
+    "description": "首次打开前预渲染"
+  },
+  {
+    "name": "focusable",
+    "type": "{ trap?: boolean; focusTriggerAfterClose?: boolean }",
+    "default": "{ trap: true, focusTriggerAfterClose: true }",
+    "description": "焦点锁定与关闭后焦点回到触发元素"
+  },
+  {
+    "name": "modalRender",
+    "type": "(node: JSX.Element) => JSX.Element",
+    "default": "—",
+    "description": "自定义渲染容器"
+  },
+  {
+    "name": "scrollLock",
+    "type": "boolean",
+    "default": "true",
+    "description": "打开时锁定页面滚动（含滚动条宽度补偿）"
+  },
+  {
+    "name": "zIndex",
+    "type": "number",
+    "default": "1000",
+    "description": "层级"
+  },
+  {
+    "name": "getContainer",
+    "type": "(() => HTMLElement) | false",
+    "default": "document.body",
+    "description": "挂载节点；false 原地渲染"
+  },
+  {
+    "name": "class / style",
+    "type": "string / JSX.CSSProperties",
+    "default": "—",
+    "description": "对话框面板的类与样式"
+  },
+  {
+    "name": "rootClass / rootStyle",
+    "type": "string / JSX.CSSProperties",
+    "default": "—",
+    "description": "根节点的类与样式"
+  },
+  {
+    "name": "wrapClass",
+    "type": "string",
+    "default": "—",
+    "description": "滚动容器（wrapper）的类"
+  },
+  {
+    "name": "classNames / styles",
+    "type": "对象 | (info: { props }) => 对象",
+    "default": "—",
+    "description": "语义化结构：root、mask、wrapper、container、header、title、body、footer、close"
+  },
+  {
+    "name": "ref",
+    "type": "(dialog: DialogIns) => void",
+    "default": "—",
+    "description": "headless 实例（open / setOpen / requestClose / busy 等）"
+  }
+]

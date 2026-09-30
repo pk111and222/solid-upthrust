@@ -5,9 +5,10 @@ import { TriggerAction, TriggerPlacement } from './trigger';
  *
  * Popconfirm-specific behavior layered on top:
  *  - default trigger is `click`, placement `top` (antd parity)
- *  - confirm / cancel intents close the panel and fire the matching callback
- *    (with optional loading state on the OK button — `onConfirm` may return a
- *    promise; the panel stays open until it settles)
+ *  - antd ActionButton semantics for OK: a sync `onConfirm` closes at once; a
+ *    returned promise shows a loading OK button, closes on resolve and STAYS
+ *    OPEN on reject; clicks while in flight are ignored (no double submit)
+ *  - cancel closes first, then fires `onCancel` (never async-gated)
  *  - the raw trigger API (layerStyle, actualPlacement, …) passes through so
  *    the UI layer reuses the Dropdown rendering pipeline
  */
@@ -23,6 +24,12 @@ export type PopconfirmConfig = {
     getContainer?: () => HTMLElement;
     onConfirm?: (e?: Event) => void | Promise<unknown>;
     onCancel?: (e?: Event) => void | Promise<unknown>;
+    /** Render the pointing arrow. Default true. */
+    arrow?: boolean;
+    /** Hover open delay, ms (hover trigger only). Default 100. */
+    mouseEnterDelay?: number;
+    /** Hover close delay, ms. Default 100. */
+    mouseLeaveDelay?: number;
 };
 export type PopconfirmIns = {
     open: () => boolean;

@@ -1,127 +1,161 @@
 // @unocss-include
-import { twMerge } from "tailwind-merge";
 import { cva, type VariantProps } from "class-variance-authority";
+import { mergeClass } from "../../common/merge";
 
 /**
- * FloatButton styles — antd6 spec:
- *  - button: 40×40 circle (square variant: 40×40 rounded), elevated shadow,
- *    primary tint on hover; icon centered
- *  - shape: circle (default) | square (rounded-lg like a mini card)
- *  - group: children fan out along `direction` with the trigger at the base;
- *    the fan container is a flex column/row REVERSED so the trigger sits at
- *    the visual bottom/right of the stack (antd renders trigger LAST)
- *  - entry/exit: scale + opacity through transition-overlay
+ * FloatButton styles — antd 6 `float-button/style` (button.js + group.js):
+ *  - button: Button size=large as a 40px column (width 40, min-height 40,
+ *    height auto, padding 4px 0, gap 2px), text wraps; icon-only → icon 18px
+ *    (fontSizeIcon × 1.5), content 12px (fontSizeSM)
+ *  - shape: circle 50% | square borderRadiusLG 8px
+ *  - individual (not in a group): fixed, z-index 1000 (zIndexPopupBase),
+ *    inset-inline-end 24 (marginLG), bottom 48 (marginXXL), boxShadowSecondary
+ *  - group: fixed at the same corner; the list is a Flex (circle: gap 16,
+ *    every item keeps its own shadow) or a Space.Compact (square: borders
+ *    collapse, the list carries the shadow + 8px radius); menu mode (trigger)
+ *    positions the list absolutely one size + padding (56px) from the trigger
+ *    and animates it from translate(±40px) + opacity 0 over 0.3s
+ *  - badge: absolute top / inline-end, translate(50%, -50%) unless dot; the
+ *    circle shape insets it by r·(√2−1)/√2 (controlHeight / 2 based)
  */
-import type { FloatButtonDirection } from 'upthrust-competence'
 
 const floatButtonVariants = cva(
   [
-    "inline-flex",
-    "items-center",
-    "justify-center",
-    "cursor-pointer",
-    "select-none",
-    "bg-surface",
-    "text-on-surface",
-    "shadow",
-    "transition-upthrust",
-    "hover:bg-primary-container",
-    "hover:text-on-surface",
-    "outline-none",
-    "focus-visible:ring-2",
-    "focus-visible:ring-primary/20",
+    "relative", "inline-flex", "flex-col", "items-center", "justify-center",
+    "m-0", "py-xxs", "px-0", "w-[40px]", "min-h-[40px]", "h-auto", "gap-[2px]",
+    "border", "border-solid", "break-words", "whitespace-normal",
+    "text-[16px]", "leading-[1.5714]", "select-none", "transition-upthrust", "no-underline",
+    "focus-visible:outline-2", "focus-visible:outline-offset-1",
   ],
   {
     variants: {
+      colorScheme: {
+        default: ["bg-surface", "border-outline", "text-on-surface", "hover:border-primary", "hover:text-primary", "active:border-primary/80", "active:text-primary/80", "focus-visible:outline-primary/40"],
+        primary: ["bg-primary", "border-transparent", "text-on-primary", "hover:bg-primary/85", "active:bg-primary/70", "focus-visible:outline-primary/40"],
+        disabled: ["bg-on-surface/4", "border-outline", "text-on-surface/25", "cursor-not-allowed"],
+      },
       shape: {
         circle: ["rounded-full"],
         square: ["rounded-lg"],
       },
-      size: {
-        middle: ["w-[40px]", "h-[40px]", "text-[18px]"],
-        large: ["w-[48px]", "h-[48px]", "text-[20px]"],
+      /** fixed: standalone; item: inside a circle group (own shadow); compact: inside a square group (list shadow). */
+      layout: {
+        fixed: ["fixed", "z-[1000]", "right-[24px]", "bottom-[48px]", "shadow-secondary"],
+        item: ["shadow-secondary"],
+        compact: ["rounded-none", "hover:z-1", "focus-visible:z-1"],
       },
-      hidden: {
-        true: ["opacity-0", "scale-75", "pointer-events-none"],
-        false: ["opacity-100", "scale-100"],
+      /** Space.Compact joins: overlap borders by 1px and round only the outer corners. */
+      compact: {
+        none: [],
+        vertical: ["mt-[-1px]", "first:mt-0", "first:rounded-t-lg", "last:rounded-b-lg"],
+        horizontal: ["ml-[-1px]", "first:ml-0", "first:rounded-l-lg", "last:rounded-r-lg"],
       },
-      disabled: {
-        true: ["cursor-not-allowed", "!bg-on-surface/4", "!text-on-surface/25", "pointer-events-none"],
+      clickable: {
+        true: ["cursor-pointer"],
         false: [],
       },
     },
-    defaultVariants: {
-      shape: "circle",
-      size: "middle",
-      hidden: false,
-      disabled: false,
+    defaultVariants: { colorScheme: "default", shape: "circle", layout: "fixed", compact: "none", clickable: true },
+  },
+);
+
+export type FloatButtonStyleVariants = VariantProps<typeof floatButtonVariants>
+export const floatButtonClass = (v: FloatButtonStyleVariants) => mergeClass(floatButtonVariants(v))
+
+const floatButtonIconVariants = cva(["inline-flex", "items-center", "justify-center", "leading-none"], {
+  variants: {
+    iconOnly: {
+      true: ["text-[18px]"],
+      false: [],
     },
   },
-)
+  defaultVariants: { iconOnly: true },
+})
+export const floatButtonIconClass = (v: VariantProps<typeof floatButtonIconVariants>) => floatButtonIconVariants(v)
 
-export const floatButtonClass = (v: VariantProps<typeof floatButtonVariants>) =>
-  twMerge(floatButtonVariants(v))
+export const floatButtonContentClass = "text-[12px] leading-[1.5714]"
 
-// ---------------------------------------------------------------------------
-// Group — the stack + fan-out container
-// ---------------------------------------------------------------------------
-
-const floatGroupVariants = cva(
-  ["fixed", "z-[900]", "flex", "items-end", "gap-[16px]"],
-  {
-    variants: {
-      direction: {
-        // Children sit ABOVE the trigger; the stack reads bottom-up.
-        up: ["flex-col-reverse"],
-        down: ["flex-col"],
-        left: ["flex-row-reverse"],
-        right: ["flex-row"],
-      },
-      placement: {
-        rt: ["right-[24px]", "bottom-[40px]"],
-        rb: ["right-[24px]", "bottom-[24px]"],
-        lt: ["left-[24px]", "bottom-[40px]"],
-        lb: ["left-[24px]", "bottom-[24px]"],
-      },
+const floatButtonBadgeVariants = cva(["absolute", "top-0", "right-0"], {
+  variants: {
+    offset: {
+      'circle': ["translate-x-1/2", "-translate-y-1/2", "mt-[4.686px]", "mr-[4.686px]"],
+      'circle-dot': ["mt-[4.686px]", "mr-[4.686px]"],
+      'square': ["translate-x-1/2", "-translate-y-1/2"],
+      'square-dot': ["mt-[1.757px]", "mr-[1.757px]"],
     },
-    defaultVariants: { direction: "up", placement: "rt" },
   },
-)
-
-export const floatGroupClass = (v: VariantProps<typeof floatGroupVariants>) =>
-  twMerge(floatGroupVariants(v))
-
-/** The fanned children wrapper — collapses via grid-rows trick (max-height
- * animation without measuring). Reversed axes must ALSO reverse the fan gap
- * direction; the transition lives on each child instead (see itemClass). */
-export const floatGroupItemsClass = (direction: FloatButtonDirection) =>
-  twMerge([
-    "flex",
-    "items-center",
-    "gap-[16px]",
-    direction === 'up' || direction === 'down' ? "flex-col" : "flex-row",
-    direction === 'up' && "order-1",
-    // Children animate in staggered via inline transition-delay; visibility
-    // collapses instantly so the fan opens/closes cleanly.
-  ])
-
-export const floatGroupItemClass = () =>
-  twMerge([
-    "transition-overlay",
-    "duration-normal",
-  ])
+  defaultVariants: { offset: 'circle' },
+})
+export const floatButtonBadgeClass = (v: VariantProps<typeof floatButtonBadgeVariants>) => floatButtonBadgeVariants(v)
 
 // ---------------------------------------------------------------------------
-// BackTop trigger glyph
+// BackTop — antd `-fade` motion (opacity, motionDurationMid 0.2s linear)
 // ---------------------------------------------------------------------------
 
-export const backTopIconClass = () =>
-  twMerge(["i-mdi-arrow-up", "text-[20px]"])
+const backTopFadeVariants = cva(["transition-opacity", "duration-mid", "ease-linear"], {
+  variants: {
+    visible: {
+      true: ["opacity-100"],
+      false: ["opacity-0", "pointer-events-none"],
+    },
+  },
+  defaultVariants: { visible: true },
+})
+export const backTopFadeClass = (v: VariantProps<typeof backTopFadeVariants>) => backTopFadeVariants(v)
 
-export const floatTriggerIconClass = (open: boolean) =>
-  twMerge([
-    "text-[20px]",
-    "transition-transform",
-    "duration-200",
-    open ? "rotate-45" : "",
-  ])
+// ---------------------------------------------------------------------------
+// Group
+// ---------------------------------------------------------------------------
+
+export const floatGroupClass = ["fixed", "z-[1000]", "right-[24px]", "bottom-[48px]", "block", "border-0", "p-0", "m-0", "text-[14px]", "leading-[1.5714]"].join(" ")
+
+const floatGroupListVariants = cva(["flex", "rounded-lg"], {
+  variants: {
+    axis: {
+      vertical: ["flex-col"],
+      horizontal: ["flex-row"],
+    },
+    individual: {
+      true: ["gap-md"],
+      false: ["shadow-secondary"],
+    },
+    /** Menu mode: absolute, one button size + padding (56px) away from the trigger. */
+    menu: {
+      none: [],
+      top: ["absolute", "bottom-[56px]"],
+      bottom: ["absolute", "top-[56px]"],
+      left: ["absolute", "right-[56px]"],
+      right: ["absolute", "left-[56px]"],
+    },
+    /** Menu motion: `transition: all 0.3s`, enter / leave from translate(±40px) + opacity 0. */
+    motion: {
+      none: [],
+      visible: ["transition-all", "duration-slow", "opacity-100", "translate-x-0", "translate-y-0"],
+      'hidden-top': ["transition-all", "duration-slow", "opacity-0", "translate-y-[40px]", "pointer-events-none"],
+      'hidden-bottom': ["transition-all", "duration-slow", "opacity-0", "-translate-y-[40px]", "pointer-events-none"],
+      'hidden-left': ["transition-all", "duration-slow", "opacity-0", "translate-x-[40px]", "pointer-events-none"],
+      'hidden-right': ["transition-all", "duration-slow", "opacity-0", "-translate-x-[40px]", "pointer-events-none"],
+    },
+  },
+  defaultVariants: { axis: "vertical", individual: true, menu: "none", motion: "none" },
+})
+export const floatGroupListClass = (v: VariantProps<typeof floatGroupListVariants>) => floatGroupListVariants(v)
+
+/** Every class the variants can emit — the dead-class theme test walks this. */
+export const floatButtonClassMatrix = (): string[] => {
+  const out: string[] = []
+  for (const colorScheme of ["default", "primary", "disabled"] as const)
+    for (const shape of ["circle", "square"] as const)
+      for (const layout of ["fixed", "item", "compact"] as const)
+        for (const compact of ["none", "vertical", "horizontal"] as const)
+          out.push(floatButtonClass({ colorScheme, shape, layout, compact, clickable: true }))
+  out.push(floatButtonIconClass({ iconOnly: true }), floatButtonIconClass({ iconOnly: false }), floatButtonContentClass)
+  for (const offset of ["circle", "circle-dot", "square", "square-dot"] as const) out.push(floatButtonBadgeClass({ offset }))
+  out.push(backTopFadeClass({ visible: true }), backTopFadeClass({ visible: false }), floatGroupClass)
+  for (const axis of ["vertical", "horizontal"] as const)
+    for (const individual of [true, false])
+      for (const menu of ["none", "top", "bottom", "left", "right"] as const)
+        for (const motion of ["none", "visible", "hidden-top", "hidden-bottom", "hidden-left", "hidden-right"] as const)
+          out.push(floatGroupListClass({ axis, individual, menu, motion }))
+  return out
+}

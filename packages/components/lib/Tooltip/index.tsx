@@ -6,6 +6,9 @@ import { createTooltip, type TooltipIns, type TriggerPlacement, type TriggerActi
 import { tooltipOverlayClass, tooltipArrowClass } from './styles'
 import { twMerge } from 'tailwind-merge'
 
+// computeArrow reports the arrow CENTER; the 8px square is placed by its top-left corner.
+const ARROW_HALF = 4
+
 export type { TooltipIns } from 'upthrust-competence'
 export type TooltipPlacement = TriggerPlacement
 export type TooltipTrigger = TriggerAction
@@ -88,8 +91,8 @@ const Tooltip: Component<TooltipProps> = (providedProps) => {
                   // inline one win and drops the arrow off the layer.
                   style={
                     arrow().side === 'left' || arrow().side === 'right'
-                      ? { top: `${arrow().y}px` }
-                      : { left: `${arrow().x}px` }
+                      ? { top: `${arrow().y - ARROW_HALF}px` }
+                      : { left: `${arrow().x - ARROW_HALF}px` }
                   }
                 />
               )}

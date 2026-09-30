@@ -35,12 +35,13 @@ import { CardProps } from '../Card';
 import { DescriptionsProps } from '../Descriptions';
 import { PopoverProps } from '../Popover';
 import { TooltipProps } from '../Tooltip';
+import { PopconfirmProps } from '../Popconfirm';
 import { ModalProps } from '../Modal';
 import { DrawerProps } from '../Drawer';
 import { TourProps } from '../Tour';
 import { TabsProps } from '../Tabs';
 import { SpinProps } from '../Spin';
-type DefaultKeys = 'size' | 'disabled' | 'variant' | 'color' | 'type' | 'shape' | 'block' | 'ghost' | 'allowClear' | 'showCount' | 'placeholder' | 'placement' | 'trigger' | 'keyboard' | 'closable' | 'maskClosable' | 'showSkip' | 'showIndicators' | 'width' | 'zIndex' | 'gap' | 'radius' | 'bordered' | 'virtual' | 'pagination' | 'showHeader' | 'stripe' | 'rowHoverable' | 'layout' | 'labelAlign' | 'labelWidth' | 'labelWrap' | 'requiredMark' | 'colon' | 'validateTrigger' | 'preserve' | 'clearOnDestroy' | 'fullscreen' | 'format' | 'showTime' | 'showToday' | 'showNow' | 'showSearch' | 'searchPlaceholder' | 'filterOption' | 'maxTagCount' | 'notFoundContent' | 'loading' | 'tip' | 'delay';
+type DefaultKeys = 'size' | 'disabled' | 'variant' | 'color' | 'type' | 'shape' | 'block' | 'ghost' | 'allowClear' | 'showCount' | 'placeholder' | 'placement' | 'trigger' | 'keyboard' | 'closable' | 'maskClosable' | 'showSkip' | 'showIndicators' | 'width' | 'zIndex' | 'gap' | 'radius' | 'bordered' | 'virtual' | 'pagination' | 'showHeader' | 'stripe' | 'rowHoverable' | 'layout' | 'labelAlign' | 'labelWidth' | 'labelWrap' | 'requiredMark' | 'colon' | 'validateTrigger' | 'preserve' | 'clearOnDestroy' | 'fullscreen' | 'format' | 'showTime' | 'showToday' | 'showNow' | 'showSearch' | 'searchPlaceholder' | 'filterOption' | 'maxTagCount' | 'notFoundContent' | 'loading' | 'tip' | 'description' | 'delay' | 'indicator' | 'okType' | 'arrow' | 'mouseEnterDelay' | 'mouseLeaveDelay';
 type Defaults<T> = Partial<Pick<T, Extract<keyof T, DefaultKeys>>>;
 export interface ComponentDefaults {
     TimeRangePicker?: Defaults<TimeRangePickerConfigProps>;
@@ -79,6 +80,7 @@ export interface ComponentDefaults {
     Descriptions?: Defaults<DescriptionsProps>;
     Popover?: Defaults<PopoverProps>;
     Tooltip?: Defaults<TooltipProps>;
+    Popconfirm?: Defaults<PopconfirmProps>;
     Modal?: Defaults<ModalProps>;
     Drawer?: Defaults<DrawerProps>;
     Tour?: Defaults<TourProps>;

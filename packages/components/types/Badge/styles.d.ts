@@ -10,13 +10,13 @@ export declare const badgeRootClass: (props?: ({
 export declare const badgeCountClass: (props?: ({
     anchor?: "wrapped" | "standalone" | null | undefined;
     size?: "small" | "middle" | null | undefined;
-    color?: "error" | "warning" | "success" | "default" | "blue" | "cyan" | "gold" | "gray" | "green" | "lime" | "magenta" | "orange" | "pink" | "purple" | "red" | "yellow" | "primary" | "custom" | "processing" | "volcano" | "geekblue" | null | undefined;
+    color?: "error" | "warning" | "success" | "default" | "blue" | "cyan" | "gold" | "gray" | "green" | "lime" | "magenta" | "orange" | "pink" | "purple" | "red" | "yellow" | "primary" | "processing" | "volcano" | "geekblue" | "custom" | null | undefined;
     words?: boolean | null | undefined;
     visible?: boolean | null | undefined;
 } & import('class-variance-authority/types').ClassProp) | undefined) => string;
 export declare const badgeDotClass: (props?: ({
     anchor?: "wrapped" | "standalone" | null | undefined;
-    color?: "error" | "warning" | "success" | "default" | "blue" | "cyan" | "gold" | "gray" | "green" | "lime" | "magenta" | "orange" | "pink" | "purple" | "red" | "yellow" | "primary" | "custom" | "processing" | "volcano" | "geekblue" | null | undefined;
+    color?: "error" | "warning" | "success" | "default" | "blue" | "cyan" | "gold" | "gray" | "green" | "lime" | "magenta" | "orange" | "pink" | "purple" | "red" | "yellow" | "primary" | "processing" | "volcano" | "geekblue" | "custom" | null | undefined;
     visible?: boolean | null | undefined;
 } & import('class-variance-authority/types').ClassProp) | undefined) => string;
 export declare const badgeCustomClass: (props?: ({
@@ -24,13 +24,13 @@ export declare const badgeCustomClass: (props?: ({
     visible?: boolean | null | undefined;
 } & import('class-variance-authority/types').ClassProp) | undefined) => string;
 export declare const badgeStatusDotClass: (props?: ({
-    color?: "error" | "warning" | "success" | "default" | "blue" | "cyan" | "gold" | "gray" | "green" | "lime" | "magenta" | "orange" | "pink" | "purple" | "red" | "yellow" | "primary" | "custom" | "processing" | "volcano" | "geekblue" | null | undefined;
+    color?: "error" | "warning" | "success" | "default" | "blue" | "cyan" | "gold" | "gray" | "green" | "lime" | "magenta" | "orange" | "pink" | "purple" | "red" | "yellow" | "primary" | "processing" | "volcano" | "geekblue" | "custom" | null | undefined;
     processing?: boolean | null | undefined;
 } & import('class-variance-authority/types').ClassProp) | undefined) => string;
 export declare const badgeStatusTextClass = "ms-[8px] text-[14px] text-on-surface leading-[inherit]";
 export declare const ribbonClass: (props?: ({
     placement?: "start" | "end" | null | undefined;
-    color?: "blue" | "cyan" | "gold" | "gray" | "green" | "lime" | "magenta" | "orange" | "pink" | "purple" | "red" | "yellow" | "primary" | "custom" | "volcano" | "geekblue" | null | undefined;
+    color?: "blue" | "cyan" | "gold" | "gray" | "green" | "lime" | "magenta" | "orange" | "pink" | "purple" | "red" | "yellow" | "primary" | "volcano" | "geekblue" | "custom" | null | undefined;
 } & import('class-variance-authority/types').ClassProp) | undefined) => string;
 export declare const ribbonContentClass = "text-[#fff]";
 export declare const ribbonWrapperClass = "relative";

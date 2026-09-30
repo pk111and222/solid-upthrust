@@ -49,7 +49,12 @@ export type { UploadFile, UploadRequest } from './Upload'
 export { default as Segmented } from './Segmented'
 export type { SegmentedProps, SegmentedOption, SegmentedItem } from './Segmented'
 export { default as FloatButton, BackTop, Group as FloatButtonGroup } from './FloatButton'
-export type { FloatButtonProps, BackTopProps, FloatButtonGroupProps } from './FloatButton'
+export type {
+  FloatButtonProps, BackTopProps, FloatButtonGroupProps, FloatButtonType, FloatButtonShape, FloatButtonBadgeProps,
+  FloatButtonTooltipProps, FloatButtonSemanticClassNames, FloatButtonSemanticStyles, FloatButtonSemanticInfo,
+  FloatButtonGroupSemanticClassNames, FloatButtonGroupSemanticStyles, FloatButtonGroupSemanticInfo,
+  FloatButtonGroupPlacement, FloatButtonGroupTrigger,
+} from './FloatButton'
 export { default as Slider } from './Slider'
 export type { SliderProps, SliderMark } from './Slider'
 export { default as Rate } from './Rate'
@@ -151,15 +156,15 @@ export type { TooltipProps, TooltipIns, TooltipPlacement, TooltipTrigger } from 
 
 // Feedback components
 export { default as Message, MessageProvider, message } from './Message'
-export type { MessageOpenProps, MessageResult, MessagePlacement, MessageType } from './Message'
+export type { MessageOpenProps, MessageArgsProps, MessageJointContent, MessageResult, MessageTypeOpen, MessageConfigOptions, MessageProviderProps, MessageInstance, MessageSemanticClassNames, MessageSemanticStyles, MessageSemanticInfo, MessagePlacement, MessageType } from './Message'
 export { default as Notification, NotificationProvider, notification } from './Notification'
-export type { NotificationOpenProps, NotificationResult, NotificationPlacement, NotificationType } from './Notification'
+export type { NotificationOpenProps, NotificationArgsProps, NotificationResult, NotificationConfigOptions, NotificationProviderProps, NotificationInstance, NotificationClosableConfig, NotificationSemanticClassNames, NotificationSemanticStyles, NotificationSemanticInfo, NotificationPlacement, NotificationType } from './Notification'
 export { default as Modal } from './Modal'
-export type { ModalProps, ModalStaticConfig, ModalStaticResult } from './Modal'
+export type { ModalProps, ModalStaticConfig, ModalStaticResult, ModalClosableConfig, ModalSemanticClassNames, ModalSemanticStyles, ModalSemanticInfo, ModalFooterExtra, ModalMaskConfig, ModalFocusable } from './Modal'
 export { default as Drawer } from './Drawer'
-export type { DrawerProps, DrawerPlacement } from './Drawer'
+export type { DrawerProps, DrawerPlacement, DrawerClosableConfig, DrawerResizableConfig, DrawerSemanticClassNames, DrawerSemanticStyles, DrawerSemanticInfo, DrawerMaskConfig, DrawerFocusable } from './Drawer'
 export { default as Popconfirm } from './Popconfirm'
-export type { PopconfirmProps, PopconfirmPlacement, PopconfirmTrigger } from './Popconfirm'
+export type { PopconfirmProps, PopconfirmPlacement, PopconfirmTrigger, PopconfirmOkType, PopconfirmIns, PopconfirmSemanticClassNames, PopconfirmSemanticStyles, PopconfirmSemanticInfo } from './Popconfirm'
 export { default as Progress } from './Progress'
 export type {
   ProgressProps, ProgressType, ProgressStatus, ProgressSize, ProgressSteps, ProgressStrokeColor, ProgressGradient, ProgressLinecap,
@@ -173,7 +178,7 @@ export type {
 export { default as Skeleton, SkeletonButton, SkeletonAvatar, SkeletonInput, SkeletonNode } from './Skeleton'
 export type { SkeletonProps, SkeletonIns, SkeletonElementProps, SkeletonButtonProps, SkeletonAvatarProps, SkeletonInputProps, SkeletonNodeProps } from './Skeleton'
 export { default as Spin } from './Spin'
-export type { SpinProps } from './Spin'
+export type { SpinProps, SpinSemanticClassNames, SpinSemanticStyles, SpinSemanticInfo, SpinIndicator } from './Spin'
 export { default as Watermark } from './Watermark'
 export type { WatermarkProps, WatermarkContent, WatermarkFont, WatermarkText } from './Watermark'
 
@@ -231,7 +236,7 @@ export { default as Affix } from './Affix'
 export type { AffixProps } from './Affix'
 export type { AffixIns } from 'upthrust-competence'
 export { default as Tour } from './Tour'
-export type { TourProps, TourStep, TourPlacement, TourCloseReason, TourIns } from './Tour'
+export type { TourProps, TourStep, TourPlacement, TourCloseReason, TourIns, TourGap, TourMaskConfig, TourButtonProps, TourClosable, TourSemanticSlot, TourSemanticClassNames, TourSemanticStyles, TourSemanticInfo } from './Tour'
 
 export { default as ConfigProvider, useConfig, useComponentProps } from './ConfigProvider'
 export type { ConfigProviderProps, ConfigTheme, ComponentDefaults, ConfigComponentName } from './ConfigProvider'

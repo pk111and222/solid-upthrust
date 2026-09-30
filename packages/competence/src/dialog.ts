@@ -1,4 +1,4 @@
-import { createSignal, createMemo } from "solid-js";
+import { createSignal, createMemo, createEffect, untrack } from "solid-js";
 
 /**
  * Headless logic shared by Modal and Drawer — the rc-dialog / rc-drawer state
@@ -6,19 +6,20 @@ import { createSignal, createMemo } from "solid-js";
  *
  *  - controlled or uncontrolled `open`
  *  - `animatedOpen` lags `open` by one leave-animation: while a close plays,
- *    the panel must stay mounted and visible; the DOM is only allowed to
- *    disappear when the animation finishes
- *  - lazy mount + destroyOnHidden teardown sequencing (reopen cancels the
- *    pending destroy and reuses the live DOM)
+ *    the panel must stay mounted and visible; it flips false only when the
+ *    animation finishes
+ *  - `mounted`: rc-dialog keep-alive — the DOM is created on the first open
+ *    (or immediately with `forceRender`) and survives later closes (hidden),
+ *    unless `destroyOnHidden` drops it after the leave animation
  *  - an async close GATE: a closing intent whose handler returns a promise
- *    keeps the dialog open (busy) until it settles — antd's confirmLoading
- *    pattern generalized
+ *    keeps the dialog open (busy) until it settles; a rejection or `false`
+ *    keeps it open (antd Modal.confirm: reject = stay for retry)
  *  - intent routing (mask click / Escape / close icon / ok / cancel) with a
  *    single `shouldClose` hook the consumer can veto or defer
  *
- * The UI layer owns: portal, mask/panel DOM, the actual animation classes,
- * focus trapping internals and scroll-lock side effects (all driven by the
- * signals exposed here).
+ * DOM side effects (stack, focus trap/restore, scroll lock, enter phase) live
+ * in the UI package's shared `createDialogLayer` (components/lib/_dialogLayer),
+ * which consumes this machine for both Modal and Drawer.
  */
 
 export type DialogIntent = 'mask' | 'keyboard' | 'close' | 'ok' | 'cancel'
@@ -26,32 +27,26 @@ export type DialogIntent = 'mask' | 'keyboard' | 'close' | 'ok' | 'cancel'
 export type DialogConfig = {
   open?: boolean
   defaultOpen?: boolean
-  /** veto/defer a close intent; return false (or a promise resolving false) to stay open. */
+  /** veto/defer a close intent; return false (or a promise resolving false / rejecting) to stay open. */
   shouldClose?: (intent: DialogIntent) => boolean | Promise<boolean>
   onClose?: (intent: DialogIntent) => void
   afterClose?: () => void
   afterOpenChange?: (open: boolean) => void
-  /**
-   * Unmount the panel DOM after the leave animation instead of keeping it
-   * alive. Default false (rc-dialog keep-alive; antd destroyOnHidden).
-   */
+  /** Unmount the panel DOM after the leave animation instead of keeping it alive. Default false. */
   destroyOnHidden?: boolean
-  /** Extra ms after the animation window before the destroy fires. Default 0. */
-  destroyDelay?: number
+  /** Create the DOM before the first open. Default false. */
+  forceRender?: boolean
 }
 
 export type DialogIns = {
   /** Effective open (controlled value wins over the internal signal). */
   open: () => boolean
   setOpen: (v: boolean) => void
-  /**
-   * True from the first open until the leave animation finishes — the panel
-   * DOM must exist and stay interactive-blocked while this is true. Flips
-   * false only after the leave window, which is when destroyOnHidden may
-   * unmount it.
-   */
+  /** True from open until the leave animation finishes. */
   animatedOpen: () => boolean
-  /** True while an async shouldClose/onClose promise is pending. */
+  /** Whether the dialog DOM should exist (keep-alive / forceRender / destroyOnHidden). */
+  mounted: () => boolean
+  /** True while an async shouldClose promise is pending. */
   busy: () => boolean
   /** Route a closing intent through the gate (mask/Escape/×/ok/cancel). */
   requestClose: (intent: DialogIntent) => void
@@ -62,143 +57,117 @@ export type DialogIns = {
   setLastActiveElement: (el: HTMLElement | undefined) => void
 }
 
-/** Leave-animation headroom before the DOM may be destroyed, ms. */
-const LEAVE_ANIMATION_MS = 300
+/** Leave-animation headroom before the machine forces the leave to finish, ms. */
+export const DIALOG_LEAVE_MS = 300
+
+const isThenable = (value: unknown): value is PromiseLike<unknown> =>
+  !!value && typeof (value as PromiseLike<unknown>).then === 'function'
 
 export const createDialog = (config: DialogConfig = {}): DialogIns => {
+  const initial = (config.open ?? config.defaultOpen ?? false) === true
   const [_open, _setOpen] = createSignal(config.defaultOpen ?? false, { ownedWrite: true })
-  // Seed from the effective open so a defaultOpen dialog starts animated.
-  const [_animatedOpen, _setAnimatedOpen] = createSignal(
-    (config.open ?? config.defaultOpen ?? false) === true,
-    { ownedWrite: true },
-  )
+  const [_animatedOpen, _setAnimatedOpen] = createSignal(initial, { ownedWrite: true })
+  const [_everOpened, _setEverOpened] = createSignal(initial, { ownedWrite: true })
   const [_busy, _setBusy] = createSignal(false, { ownedWrite: true })
   const [_lastActive, _setLastActive] = createSignal<HTMLElement | undefined>(undefined, { ownedWrite: true })
+  // Synchronous mirrors: signal writes commit in batches, so imperative calls
+  // in the same tick (setOpen(false) then setOpen(true)) must read these.
+  let openNow = initial
+  let animatedNow = initial
+  let busyNow = false
+  let leaveTimer: ReturnType<typeof setTimeout> | undefined
 
-  let _destroyTimer: ReturnType<typeof setTimeout> | undefined
+  const open = createMemo(() => config.open !== undefined ? config.open === true : _open())
 
-  const open = createMemo(() => config.open !== undefined ? config.open : _open())
+  const clearLeave = () => { if (leaveTimer) { clearTimeout(leaveTimer); leaveTimer = undefined } }
 
-  const setOpen = (v: boolean) => {
-    if (v === open()) return
-    if (!v) {
-      // Leave: keep animatedOpen true for the animation window; the renderer
-      // calls notifyLeaveDone() when it finishes (or the timer below forces
-      // it — belt and braces for renderers that forget).
-      if (config.open === undefined) _setOpen(false)
-      scheduleLeaveDone()
-    } else {
-      // Reopen cancels any pending destroy so quick toggles reuse the DOM.
-      if (_destroyTimer) { clearTimeout(_destroyTimer); _destroyTimer = undefined }
-      if (config.open === undefined) _setOpen(true)
-      _setAnimatedOpen(true)
-      config.afterOpenChange?.(true)
-    }
+  const rise = () => {
+    clearLeave()
+    openNow = true
+    animatedNow = true
+    _setAnimatedOpen(true)
+    _setEverOpened(true)
+    config.afterOpenChange?.(true)
   }
 
   const finishLeave = () => {
-    if (!open() && _animatedOpen()) {
-      _setAnimatedOpen(false)
-      config.afterClose?.()
-      config.afterOpenChange?.(false)
-      if (config.destroyOnHidden) {
-        // destroyOnHidden: drop the DOM a beat after the animation ended.
-        // (The renderer gates its <Show> on animatedOpen, so the unmount
-        // happens when the flag flips; the timer exists for reopen-race
-        // safety and to expose the destroyDelay contract.)
-        const delay = config.destroyDelay ?? 0
-        if (delay <= 0) return
-        _destroyTimer = setTimeout(() => { _destroyTimer = undefined }, delay)
-      }
-    }
+    clearLeave()
+    if (openNow || !animatedNow) return
+    animatedNow = false
+    _setAnimatedOpen(false)
+    config.afterClose?.()
+    config.afterOpenChange?.(false)
   }
 
-  const scheduleLeaveDone = () => {
-    if (_destroyTimer) { clearTimeout(_destroyTimer); _destroyTimer = undefined }
-    _destroyTimer = setTimeout(() => {
-      _destroyTimer = undefined
-      finishLeave()
-    }, LEAVE_ANIMATION_MS)
+  // The renderer reports completion via notifyLeaveDone; the timer is the
+  // belt-and-braces fallback for renderers without a transition.
+  const fall = () => {
+    openNow = false
+    clearLeave()
+    if (animatedNow) leaveTimer = setTimeout(finishLeave, DIALOG_LEAVE_MS)
   }
 
-  const notifyLeaveDone = () => {
-    if (_destroyTimer) { clearTimeout(_destroyTimer); _destroyTimer = undefined }
-    finishLeave()
+  const setOpen = (v: boolean) => {
+    if (config.open !== undefined) return
+    if (v === openNow) return
+    _setOpen(v)
+    if (v) rise(); else fall()
   }
 
-  /** Intent gate: sync veto → async gate → close. */
+  // Controlled prop flips: observed by an effect (the renderer's owner), so
+  // no signal is written from inside a memo.
+  createEffect(
+    () => config.open,
+    (value, prev) => {
+      if (value === undefined) return
+      if (value === true && openNow !== true) rise()
+      else if (value === false && (openNow || prev === true)) fall()
+    },
+  )
+
   const requestClose = (intent: DialogIntent) => {
-    if (!open() || _busy()) return
+    // Controlled: the prop is the truth (the watcher effect may not have run
+    // yet in this tick); uncontrolled: the synchronous mirror.
+    const isOpen = config.open !== undefined ? untrack(() => config.open) === true : openNow
+    if (!isOpen || busyNow) return
     const verdict = config.shouldClose?.(intent)
     if (verdict === false) return
-    if (verdict && typeof (verdict as Promise<boolean>).then === 'function') {
-      // Async gate: hold the dialog open (busy) until the promise settles.
+    const close = () => { config.onClose?.(intent); setOpen(false) }
+    if (isThenable(verdict)) {
+      busyNow = true
       _setBusy(true)
-      ;(verdict as Promise<boolean>).then(allowed => {
+      const settle = (allowed: boolean) => {
+        busyNow = false
         _setBusy(false)
-        if (allowed === false) return
-        config.onClose?.(intent)
-        setOpen(false)
-      }).catch(() => {
-        // A rejected gate reads as "allow" (matching the Popconfirm
-        // convention: errors surface to the app, the dialog still closes).
-        _setBusy(false)
-        config.onClose?.(intent)
-        setOpen(false)
-      })
+        if (allowed) close()
+      }
+      Promise.resolve(verdict).then(value => settle(value !== false), () => settle(false))
       return
     }
-    config.onClose?.(intent)
-    setOpen(false)
+    close()
   }
 
-  // Controlled-prop synchronization: in controlled mode setOpen() is bypassed,
-  // so the memo below is the ONLY place that observes prop flips. It plays the
-  // same role setOpen does for uncontrolled dialogs:
-  //  - open prop flipping TRUE must raise _animatedOpen (and cancel a pending
-  //    destroy so a quick toggle reuses the DOM)
-  //  - open prop flipping FALSE must start the leave sequencing
-  // Checked lazily on every animatedOpen() read — a subscribe-free watcher
-  // keeps this layer free of effects (headless purity: no owner required).
-  const controlledClose = createMemo(() => config.open === false)
-  const controlledOpen = createMemo(() => config.open === true)
-  let _prevControlledClose = false
-  let _prevControlledOpen = false
-  const syncControlled = () => {
-    if (controlledOpen() && !_prevControlledOpen) {
-      if (_destroyTimer) { clearTimeout(_destroyTimer); _destroyTimer = undefined }
-      _setAnimatedOpen(true)
-      config.afterOpenChange?.(true)
-    }
-    if (controlledClose() && !_prevControlledClose) {
-      if (_animatedOpen()) scheduleLeaveDone()
-    }
-    _prevControlledOpen = controlledOpen()
-    _prevControlledClose = controlledClose()
-  }
-  const animatedOpen = createMemo(() => {
-    syncControlled()
-    // While open (or until the leave finishes) the panel stays mounted.
-    return open() || _animatedOpen() || _busy()
+  const animatedOpen = createMemo(() => open() || _animatedOpen() || _busy())
+  const mounted = createMemo(() => {
+    if (animatedOpen()) return true
+    if (config.destroyOnHidden) return false
+    return _everOpened() || !!config.forceRender
   })
-
-  const requestOpen = () => setOpen(true)
 
   return {
     open,
     setOpen,
     animatedOpen,
+    mounted,
     busy: () => _busy(),
     requestClose,
-    notifyLeaveDone,
+    notifyLeaveDone: finishLeave,
     lastActiveElement: () => _lastActive(),
     setLastActiveElement: (el) => { _setLastActive(el) },
-    // re-exported for consumers that open programmatically
-    ...({ requestOpen } as object),
-  } as DialogIns
+  }
 }
 
 export const dialogSplits: (keyof DialogConfig)[] = [
   'open', 'defaultOpen', 'shouldClose', 'onClose', 'afterClose',
-  'afterOpenChange', 'destroyOnHidden', 'destroyDelay',
+  'afterOpenChange', 'destroyOnHidden', 'forceRender',
 ]

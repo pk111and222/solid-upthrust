@@ -1,0 +1,15 @@
+[
+  { "name": "shape", "type": "'circle' | 'square'", "default": "'circle'", "description": "子按钮形状；circle 各自独立间距 16，square 合并为紧凑列表" },
+  { "name": "trigger", "type": "'click' | 'hover'", "default": "—", "description": "触发方式（设置后进入菜单模式）" },
+  { "name": "open", "type": "boolean", "default": "—", "description": "受控展开，需配合 trigger 一起使用" },
+  { "name": "defaultOpen", "type": "boolean", "default": "false", "description": "非受控初始展开（本库保留）" },
+  { "name": "onOpenChange", "type": "(open: boolean) => void", "default": "—", "description": "展开收起时的回调，需配合 trigger 一起使用" },
+  { "name": "placement", "type": "'top' | 'left' | 'right' | 'bottom'", "default": "'top'", "description": "自定义菜单弹出位置" },
+  { "name": "direction", "type": "'up' | 'down' | 'left' | 'right'", "default": "—", "description": "已废弃，请使用 placement（up → top、down → bottom）" },
+  { "name": "icon", "type": "JSX.Element", "default": "<FileTextOutlined />", "description": "菜单模式下触发按钮的图标" },
+  { "name": "closeIcon", "type": "JSX.Element", "default": "<CloseOutlined />", "description": "展开时触发按钮的图标" },
+  { "name": "type / content / tooltip / badge / onClick …", "type": "FloatButtonProps", "default": "—", "description": "菜单模式下透传给触发按钮" },
+  { "name": "classNames", "type": "Record<'root' | 'list' | 'item' | 'itemIcon' | 'itemContent' | 'trigger' | 'triggerIcon' | 'triggerContent', string> | (info: { props }) => Record<…>", "default": "—", "description": "语义化结构 class；item* 作用于子按钮，trigger* 作用于触发按钮；函数 info.props 含合并后的 shape / type / placement" },
+  { "name": "styles", "type": "同 classNames 的语义节点 → JSX.CSSProperties", "default": "—", "description": "语义化结构 style，支持函数" },
+  { "name": "class / style", "type": "string / JSX.CSSProperties", "default": "—", "description": "作用于组根节点（fixed 在右下角）" }
+]

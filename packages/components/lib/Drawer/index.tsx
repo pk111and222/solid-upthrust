@@ -1,22 +1,51 @@
 import { ConfigPortal as Portal } from '../ConfigProvider/Portal'
 import { useComponentProps } from '../ConfigProvider/context'
-import { Component, createEffect, createMemo, createSignal, merge, onCleanup, Show } from 'solid-js'
+import { Component, createMemo, createSignal, merge, onCleanup, Show } from 'solid-js'
 import { type JSX } from '@solidjs/web'
-import { createDialog, type DialogIns } from 'upthrust-competence'
+import { createDialog, type DialogIns, type DialogIntent } from 'upthrust-competence'
 import {
-  drawerMaskClass, drawerWrapperClass, drawerPanelClass, drawerHeaderClass,
-  drawerTitleClass, drawerBodyClass, drawerFooterClass, drawerCloseClass,
-  DRAWER_CLOSE_ICON, DRAWER_SIZE_PRESET,
+  drawerRootClass, drawerMaskClass, drawerWrapperClass, drawerSectionClass, drawerHeaderClass, drawerHeaderTitleClass,
+  drawerTitleClass, drawerExtraClass, drawerBodyClass, drawerFooterClass, drawerCloseClass, drawerDraggerClass,
+  DRAWER_SIZE_PRESET,
 } from './styles'
-import Button, { type ButtonProps } from '../Button'
+import Skeleton from '../Skeleton'
+import { CloseOutlined } from '../../common/antIcons'
+import { mergeClass } from '../../common/merge'
+import { resolveSemantic, type SemanticInput } from '../../common/semantic'
 import { useWatermarkPanel } from '../Watermark/context'
-import { registerDialog, unregisterDialog, isPushed } from '../_dialogStack'
-import { twMerge } from 'tailwind-merge'
+import {
+  createDialogLayer, cssSize, resolveClosable, resolveMask, type DialogFocusable, type DialogMaskConfig,
+} from '../_dialogLayer'
+export type { DialogMaskConfig as DrawerMaskConfig, DialogFocusable as DrawerFocusable } from '../_dialogLayer'
 
 export type DrawerPlacement = 'left' | 'right' | 'top' | 'bottom'
 
 /** Default push distance, px (antd default 180). */
 const PUSH_DISTANCE = 180
+
+export interface DrawerClosableConfig {
+  closeIcon?: JSX.Element
+  disabled?: boolean
+  /** Close button position relative to the title. Default 'start'. */
+  placement?: 'start' | 'end'
+}
+
+export interface DrawerResizableConfig {
+  onResizeStart?: () => void
+  onResize?: (size: number) => void
+  onResizeEnd?: () => void
+}
+
+export interface DrawerSemanticClassNames {
+  root?: string; mask?: string; wrapper?: string; section?: string; header?: string; title?: string
+  extra?: string; body?: string; footer?: string; dragger?: string; close?: string
+}
+export interface DrawerSemanticStyles {
+  root?: JSX.CSSProperties; mask?: JSX.CSSProperties; wrapper?: JSX.CSSProperties; section?: JSX.CSSProperties
+  header?: JSX.CSSProperties; title?: JSX.CSSProperties; extra?: JSX.CSSProperties; body?: JSX.CSSProperties
+  footer?: JSX.CSSProperties; dragger?: JSX.CSSProperties; close?: JSX.CSSProperties
+}
+export interface DrawerSemanticInfo { props: DrawerProps }
 
 export interface DrawerProps {
   open?: boolean
@@ -24,277 +53,292 @@ export interface DrawerProps {
   /** Which screen edge the panel hugs. Default 'right'. */
   placement?: DrawerPlacement
   title?: JSX.Element
+  /** Operations at the right of the header. */
+  extra?: JSX.Element
   children?: JSX.Element
-  /** Custom footer; null hides it, undefined renders default ok/cancel row. */
+  /** Footer; nothing is rendered when omitted. */
   footer?: JSX.Element | null
-  okText?: JSX.Element
-  cancelText?: JSX.Element
-  okButtonProps?: Partial<ButtonProps>
-  cancelButtonProps?: Partial<ButtonProps>
-  onClose?: (e: MouseEvent | KeyboardEvent) => void | Promise<unknown>
+  /** Every close intent (mask / Escape / ×). A promise holds the drawer; false or a rejection keeps it open. */
+  onClose?: (e: MouseEvent | KeyboardEvent) => void | boolean | Promise<unknown>
   afterClose?: () => void
   afterOpenChange?: (open: boolean) => void
-  /** Close on mask click. Default true. */
+  /** Mask: boolean or { enabled, blur, closable }. Default true. */
+  mask?: boolean | DialogMaskConfig
+  /** @deprecated Use mask.closable. Close on mask click. Default true. */
   maskClosable?: boolean
   /** Close on Escape. Default true. */
   keyboard?: boolean
-  /** Show the × button. Default true. */
-  closable?: boolean
-  /** Render the mask scrim. Default true. */
-  mask?: boolean
-  /** Panel size: named preset or explicit px. Horizontal = width, vertical = height. */
-  size?: 'default' | 'large'
+  /** Show the × button; an object customises it. Default true. */
+  closable?: boolean | DrawerClosableConfig
+  /** Custom × icon; null / false hides the button. */
+  closeIcon?: JSX.Element | null | false
+  /** Preset ('default' 378 / 'large' 736), px or CSS length. Width for left/right, height for top/bottom. */
+  size?: 'default' | 'large' | number | string
+  /** @deprecated Use size. */
   width?: number | string
+  /** @deprecated Use size. */
   height?: number | string
-  /**
-   * Push the drawer aside when a higher-layer drawer opens on top (antd
-   * push). Default true; false disables the offset. A number sets the
-   * distance in px (default 180).
-   */
-  push?: boolean | number
-  /** Unmount the panel after close. Default false. */
+  /** Upper bound of a resizable drawer, px. */
+  maxSize?: number
+  /** Drag the inner edge to resize. */
+  resizable?: boolean | DrawerResizableConfig
+  /** Nested-drawer push. Default { distance: 180 }; a number sets the distance. */
+  push?: boolean | number | { distance?: number | string }
+  /** Show a skeleton instead of the body. */
+  loading?: boolean
+  /** Unmount the DOM after close. Default false (kept alive, hidden). */
   destroyOnHidden?: boolean
+  /** Render the DOM before the first open. */
+  forceRender?: boolean
+  /** Focus trap and restore. Default { trap: true, focusTriggerAfterClose: true }. */
+  focusable?: DialogFocusable
+  /** Wrap the section node. */
+  drawerRender?: (node: JSX.Element) => JSX.Element
   zIndex?: number
-  getContainer?: () => HTMLElement
+  /** Portal target; false renders in place (the parent must be positioned). */
+  getContainer?: (() => HTMLElement) | false
+  /** Class on the section (antd className). */
   class?: string
-  /** Extra class on the panel element. */
-  panelClass?: string
+  /** Style on the section. */
   style?: JSX.CSSProperties
+  rootClass?: string
+  rootStyle?: JSX.CSSProperties
+  /** @deprecated Use class. */
+  panelClass?: string
+  classNames?: SemanticInput<DrawerSemanticClassNames, DrawerSemanticInfo>
+  styles?: SemanticInput<DrawerSemanticStyles, DrawerSemanticInfo>
   ref?: (val: DialogIns) => void
 }
 
 const Drawer: Component<DrawerProps> = (providedProps) => {
   const rawProps = useComponentProps('Drawer', providedProps)
-  const props = merge(
-    {
-      placement: 'right' as DrawerPlacement,
-      maskClosable: true,
-      keyboard: true,
-      closable: true,
-      mask: true,
-      size: 'default' as const,
-    } as Partial<DrawerProps>,
-    rawProps,
-  )
+  const props = merge({ keyboard: true } as Partial<DrawerProps>, rawProps)
+  const placement = () => props.placement ?? 'right'
 
-  // ---- shared dialog state machine (identical to Modal) ------------------
+  let closeEvent: MouseEvent | KeyboardEvent | undefined
+  // rc-drawer routes EVERY close intent (mask/Escape/×) through onClose.
   const dialog = createDialog({
     get open() { return props.open },
     get defaultOpen() { return props.defaultOpen },
     get destroyOnHidden() { return props.destroyOnHidden },
-    // rc-drawer routes EVERY close intent (mask/Escape/×) through onClose;
-    // an async onClose holds the drawer open until it settles.
-    get shouldClose() {
-      return () => {
-        const r = props.onClose?.(undefined as unknown as MouseEvent)
-        if (r && typeof (r as Promise<unknown>).then === 'function') {
-          return (r as Promise<unknown>).then(() => true, () => true)
-        }
-        return true
+    get forceRender() { return props.forceRender },
+    shouldClose: () => {
+      try {
+        const result = props.onClose?.(closeEvent as MouseEvent | KeyboardEvent)
+        return result && typeof (result as PromiseLike<unknown>).then === 'function'
+          ? Promise.resolve(result).then(value => value !== false)
+          : result !== false
+      } catch {
+        return false
       }
     },
     get afterClose() { return props.afterClose },
     get afterOpenChange() { return props.afterOpenChange },
   })
+  const requestClose = (intent: DialogIntent, event?: MouseEvent | KeyboardEvent) => {
+    closeEvent = event
+    dialog.requestClose(intent)
+  }
 
   props.ref?.(dialog)
 
-  // ---- enter phase ---------------------------------------------------------
-  // The panel mounts (via <Show when={animatedOpen}>) already carrying its
-  // final visible class — a freshly-inserted element cannot transition from
-  // anything, so the slide-in would never play. The component itself,
-  // however, is created ONCE at page setup (long before the first open), so
-  // the enter phase must restart on every animatedOpen RISING EDGE: flip
-  // phase to 'enter' the moment the panel is about to mount, and to 'live'
-  // one macrotask later — the class change then lands on a mounted element
-  // and the transform transition runs.
-  const [phase, setPhase] = createSignal<'idle' | 'enter' | 'live'>('idle')
-  createEffect(
-    () => dialog.animatedOpen(),
-    (animated, prev) => {
-      // Rising edge only (prev is the previous COMPUTE value — undefined on
-      // the first run). Reading phase in the callback would be an untracked
-      // read, and writing it from the compute would loop; the edge test
-      // avoids both. A reopen DURING the leave window (animatedOpen never
-      // dipped false) needs no re-enter — the live DOM just plays the
-      // reverse transition.
-      if (animated && prev !== true) {
-        setPhase('enter')
-        setTimeout(() => setPhase('live'), 0)
-      }
-    },
-  )
-  // Effective visible state for class purposes: always false during the enter
-  // frame; afterwards it simply mirrors the dialog's open signal.
-  const panelVisible = createMemo(() => phase() === 'enter' ? false : dialog.open())
+  const semanticInfo = (): DrawerSemanticInfo => ({ props })
+  const classNames = createMemo(() => resolveSemantic(props.classNames, semanticInfo()))
+  const styles = createMemo(() => resolveSemantic(props.styles, semanticInfo()))
+  const maskInfo = createMemo(() => resolveMask(props.mask, props.maskClosable))
+  const closableInfo = createMemo(() => resolveClosable(props.closable, props.closeIcon, true))
 
-  // ---- DOM wiring ---------------------------------------------------------
-  let panelEl: HTMLDivElement | undefined
-  // antd usePanelRef：外层 Watermark（inherit）把水印也挂到弹层面板上。
-  useWatermarkPanel(() => dialog.animatedOpen(), () => panelEl)
-
-  // ESC routing: register with the SHARED dialog stack (Modal uses the same
-  // one) — a single document listener closes only the TOP-MOST open dialog.
-  // Per-dialog listeners would all fire at once and one Escape would close
-  // every layer.
-  const stackId = Symbol('drawer')
-  const effectiveZIndex = () => props.zIndex ?? 1000
-  createEffect(
-    () => dialog.animatedOpen(),
-    (animated) => {
-      if (animated) {
-        registerDialog({ id: stackId, zIndex: effectiveZIndex(), onEscape: () => { if (props.keyboard !== false) dialog.requestClose('keyboard') } })
-      } else {
-        unregisterDialog(stackId)
-      }
-    },
-  )
-  onCleanup(() => unregisterDialog(stackId))
-
-  // Save focus on open; restore after the leave completes.
-  createEffect(
-    () => dialog.open(),
-    (isOpen) => {
-      if (isOpen && !dialog.lastActiveElement()) {
-        dialog.setLastActiveElement(document.activeElement as HTMLElement)
-      }
-      if (!isOpen) {
-        const el = dialog.lastActiveElement()
-        if (el instanceof HTMLElement) {
-          try { el.focus({ preventScroll: true }) } catch { /* detached */ }
-          dialog.setLastActiveElement(undefined)
-        }
-      }
-    },
-  )
-
-  // Scroll lock (shared body-counter protocol with Modal for nesting).
-  let locked = false
-  const lockScroll = () => {
-    if (locked) return
-    locked = true
-    const count = Number(document.body.dataset.utDialogLock ?? '0') + 1
-    document.body.dataset.utDialogLock = String(count)
-    document.body.style.overflow = 'hidden'
-  }
-  const unlockScroll = () => {
-    if (!locked) return
-    locked = false
-    const count = Number(document.body.dataset.utDialogLock ?? '1') - 1
-    if (count <= 0) {
-      delete document.body.dataset.utDialogLock
-      document.body.style.overflow = ''
-    } else {
-      document.body.dataset.utDialogLock = String(count)
-    }
-  }
-  createEffect(
-    () => dialog.animatedOpen(),
-    (animated) => {
-      if (animated) lockScroll()
-      else unlockScroll()
-    },
-  )
-  onCleanup(unlockScroll)
-
-  // Panel size: explicit width/height beats the size preset. Horizontal
-  // placements use width; vertical use height.
-  const isVertical = createMemo(() => props.placement === 'top' || props.placement === 'bottom')
-  const panelSizeStyle = createMemo(() => {
-    const style: Record<string, string> = {}
-    if (!isVertical()) {
-      const w = props.width !== undefined ? props.width : DRAWER_SIZE_PRESET[props.size ?? 'default']
-      style.width = typeof w === 'number' ? `${w}px` : w
-    } else {
-      const h = props.height !== undefined ? props.height : DRAWER_SIZE_PRESET[props.size ?? 'default'] / 2
-      style.height = typeof h === 'number' ? `${h}px` : h
-    }
-    return style
+  let sectionEl: HTMLDivElement | undefined
+  let wrapperEl: HTMLDivElement | undefined
+  const layer = createDialogLayer({
+    dialog,
+    kind: 'drawer',
+    zIndex: () => props.zIndex ?? 1000,
+    keyboard: () => props.keyboard !== false,
+    onEscape: () => requestClose('keyboard', new KeyboardEvent('keydown', { key: 'Escape' })),
+    panel: () => sectionEl,
+    trap: () => props.focusable?.trap !== false && maskInfo().enabled,
+    restoreFocus: () => props.focusable?.focusTriggerAfterClose !== false,
+    lock: () => maskInfo().enabled && props.getContainer !== false,
   })
+  // antd usePanelRef：外层 Watermark（inherit）把水印也挂到弹层面板上。
+  useWatermarkPanel(() => dialog.animatedOpen(), () => sectionEl)
+
+  // ---- size ----------------------------------------------------------------
+  const isVertical = createMemo(() => placement() === 'top' || placement() === 'bottom')
+  const [dragSize, setDragSize] = createSignal<number | undefined>(undefined, { ownedWrite: true })
+  const [dragging, setDragging] = createSignal(false, { ownedWrite: true })
+  const baseSize = createMemo(() => {
+    const size = props.size
+    if (size === 'default' || size === 'large') return DRAWER_SIZE_PRESET[size]
+    if (size !== undefined) return size
+    const legacy = isVertical() ? props.height : props.width
+    return legacy ?? DRAWER_SIZE_PRESET.default
+  })
+  const sizeStyle = createMemo((): JSX.CSSProperties => {
+    const value = cssSize(dragSize() ?? baseSize())
+    return isVertical() ? { height: value } : { width: value }
+  })
+
+  // ---- resize --------------------------------------------------------------
+  const resizeConfig = () => typeof props.resizable === 'object' ? props.resizable : undefined
+  let stopDrag: (() => void) | undefined
+  const onDraggerDown = (e: PointerEvent) => {
+    if (!wrapperEl) return
+    e.preventDefault()
+    const rect = wrapperEl.getBoundingClientRect()
+    const start = isVertical() ? rect.height : rect.width
+    const origin = isVertical() ? e.clientY : e.clientX
+    // Growing direction: a right drawer grows when the pointer moves left.
+    const sign = placement() === 'right' || placement() === 'bottom' ? -1 : 1
+    setDragging(true)
+    resizeConfig()?.onResizeStart?.()
+    const move = (ev: PointerEvent) => {
+      const delta = ((isVertical() ? ev.clientY : ev.clientX) - origin) * sign
+      const viewport = isVertical() ? window.innerHeight : window.innerWidth
+      const next = Math.round(Math.max(0, Math.min(start + delta, props.maxSize ?? viewport, viewport)))
+      setDragSize(next)
+      resizeConfig()?.onResize?.(next)
+    }
+    const up = () => {
+      stopDrag?.()
+      setDragging(false)
+      resizeConfig()?.onResizeEnd?.()
+    }
+    stopDrag = () => {
+      window.removeEventListener('pointermove', move)
+      window.removeEventListener('pointerup', up)
+      stopDrag = undefined
+    }
+    window.addEventListener('pointermove', move)
+    window.addEventListener('pointerup', up)
+  }
+  onCleanup(() => stopDrag?.())
 
   // ---- push (nested drawers) ----------------------------------------------
-  // While a HIGHER-zIndex dialog is open (drawer OR modal — one shared stack),
-  // this panel is PUSHED TOWARD THE SCREEN CENTER by the push distance —
-  // rc-drawer's exact transforms: right → translateX(-d), left → translateX(+d),
-  // top → translateY(+d), bottom → translateY(-d). The underlying drawer
-  // stays visible, nudged inward, instead of sliding off-screen or being
-  // fully covered. The slide rides the SAME transform transition as the
-  // open/close motion.
-  const pushDistance = () => typeof props.push === 'number' ? props.push : props.push === false ? 0 : PUSH_DISTANCE
-  const pushed = createMemo(() => dialog.open() && props.push !== false && isPushed(stackId, effectiveZIndex()))
-  const pushStyle = createMemo(() => {
-    if (!pushed() || pushDistance() === 0) return {}
-    const placement = props.placement ?? 'right'
-    const sign = { right: '-', left: '', top: '', bottom: '-' }[placement] ?? '-'
-    const axis = isVertical() ? 'Y' : 'X'
-    return { transform: `translate${axis}(${sign}${pushDistance()}px)` }
+  // While a HIGHER drawer is open, this one is pushed toward the screen center
+  // (rc-drawer: right → -X, left → +X, top → +Y, bottom → -Y).
+  const pushDistance = () => {
+    const push = props.push
+    if (push === false) return 0
+    if (typeof push === 'number') return push
+    if (typeof push === 'object' && push !== null && push.distance !== undefined) return push.distance
+    return PUSH_DISTANCE
+  }
+  const pushStyle = createMemo((): JSX.CSSProperties => {
+    const distance = pushDistance()
+    if (!layer.pushed() || !distance) return {}
+    const sign = placement() === 'right' || placement() === 'bottom' ? '-' : ''
+    return { transform: `translate${isVertical() ? 'Y' : 'X'}(${sign}${cssSize(distance)})` }
   })
 
-  const hasHeader = createMemo(() =>
-    (props.title !== undefined && props.title !== null) || props.closable)
-  const showFooter = createMemo(() => props.footer !== null)
-  const busy = createMemo(() => dialog.busy())
+  const hasTitle = createMemo(() => props.title !== undefined && props.title !== null && props.title !== false)
+  const hasExtra = createMemo(() => props.extra !== undefined && props.extra !== null && props.extra !== false)
+  const hasHeader = createMemo(() => hasTitle() || hasExtra() || closableInfo().show)
+  const closeSide = () => closableInfo().config?.placement === 'end' ? 'end' : 'start'
+  const hasFooter = createMemo(() => props.footer !== undefined && props.footer !== null && props.footer !== false)
 
   const ariaId = `ut-drawer-${Math.random().toString(36).slice(2, 9)}`
 
-  return (
-    <Portal mount={props.getContainer?.()}>
-      <Show when={dialog.animatedOpen()}>
-        <div class={drawerWrapperClass({ placement: props.placement })} style={{ 'z-index': String(props.zIndex ?? 1000) }}>
-          <Show when={props.mask}>
-            <div
-              class={drawerMaskClass({ visible: dialog.open() })}
-              onClick={() => { if (props.maskClosable) dialog.requestClose('mask') }}
-            />
-          </Show>
-          <div
-            ref={panelEl}
-            role="dialog"
-            aria-modal="true"
-            aria-labelledby={props.title !== undefined && props.title !== null ? ariaId : undefined}
-            tabindex={-1}
-            class={twMerge(drawerPanelClass({ placement: props.placement, visible: panelVisible() }), props.panelClass)}
-            style={{ ...props.style, ...panelSizeStyle(), ...pushStyle() }}
-            onTransitionEnd={(e) => {
-              if (!dialog.open() && e.target === panelEl) dialog.notifyLeaveDone()
-            }}
-          >
-            <Show when={hasHeader()}>
-              <div class={drawerHeaderClass({})}>
-                <div id={ariaId} class={drawerTitleClass({})}>{props.title}</div>
-                <Show when={props.closable}>
-                  {/* Glyph is a CHILD span — hover:bg-on-surface/6 on the same
-                      element would override the mask icon's currentColor fill. */}
-                  <button
-                    type="button"
-                    class={drawerCloseClass({})}
-                    aria-label="close"
-                    onClick={() => dialog.requestClose('close')}
-                  >
-                    <span class={DRAWER_CLOSE_ICON} />
-                  </button>
-                </Show>
-              </div>
-            </Show>
-            <div class={drawerBodyClass({})}>
-              {props.children}
-            </div>
-            <Show when={showFooter()}>
-              <Show when={props.footer === undefined} fallback={<div class={drawerFooterClass({})}>{props.footer}</div>}>
-                <div class={drawerFooterClass({})}>
-                  <Button variant="outlined" {...props.cancelButtonProps} onClick={() => dialog.requestClose('cancel')}>
-                    {props.cancelText ?? '取消'}
-                  </Button>
-                  <Button variant="solid" color="primary" loading={busy()} {...props.okButtonProps} onClick={() => dialog.requestClose('ok')}>
-                    {props.okText ?? '确定'}
-                  </Button>
-                </div>
-              </Show>
+  const closeButton = () => (
+    <button
+      type="button"
+      class={mergeClass(drawerCloseClass({ side: closeSide(), disabled: closableInfo().disabled }), classNames().close)}
+      style={styles().close}
+      aria-label="Close"
+      disabled={closableInfo().disabled}
+      onClick={e => requestClose('close', e)}
+    >
+      {(closableInfo().icon as JSX.Element) ?? <CloseOutlined />}
+    </button>
+  )
+
+  const section = () => (
+    <div
+      ref={sectionEl}
+      role="dialog"
+      aria-modal={maskInfo().enabled ? 'true' : undefined}
+      aria-labelledby={hasTitle() ? ariaId : undefined}
+      tabindex={-1}
+      class={mergeClass(drawerSectionClass({}), classNames().section, props.panelClass, props.class)}
+      style={{ ...styles().section, ...props.style }}
+      data-drawer-part="section"
+    >
+      <Show when={hasHeader()}>
+        <div
+          class={mergeClass(drawerHeaderClass({ closeOnly: closableInfo().show && !hasTitle() && !hasExtra() }), classNames().header)}
+          style={styles().header}
+          data-drawer-part="header"
+        >
+          <div class={drawerHeaderTitleClass({})}>
+            <Show when={closableInfo().show && closeSide() === 'start'}>{closeButton()}</Show>
+            <Show when={hasTitle()}>
+              <div id={ariaId} class={mergeClass(drawerTitleClass({}), classNames().title)} style={styles().title}>{props.title}</div>
             </Show>
           </div>
+          <Show when={hasExtra()}>
+            <div class={mergeClass(drawerExtraClass({}), classNames().extra)} style={styles().extra}>{props.extra}</div>
+          </Show>
+          <Show when={closableInfo().show && closeSide() === 'end'}>{closeButton()}</Show>
         </div>
       </Show>
-    </Portal>
+      <div class={mergeClass(drawerBodyClass({ loading: !!props.loading }), classNames().body)} style={styles().body} data-drawer-part="body">
+        <Show when={props.loading} fallback={props.children}>
+          <Skeleton active title={false} paragraph={{ rows: 5 }} />
+        </Show>
+      </div>
+      <Show when={hasFooter()}>
+        <div class={mergeClass(drawerFooterClass({}), classNames().footer)} style={styles().footer} data-drawer-part="footer">{props.footer}</div>
+      </Show>
+    </div>
+  )
+
+  const tree = () => (
+    <div
+      class={mergeClass(drawerRootClass({ inline: props.getContainer === false, hidden: !dialog.animatedOpen() }), props.rootClass, classNames().root)}
+      style={{ 'z-index': String(props.zIndex ?? 1000), ...props.rootStyle, ...styles().root }}
+      data-drawer-part="root"
+      data-placement={placement()}
+    >
+      <Show when={maskInfo().enabled}>
+        <div
+          class={mergeClass(drawerMaskClass({ visible: layer.visible(), blur: maskInfo().blur }), classNames().mask)}
+          style={styles().mask}
+          data-drawer-part="mask"
+          onClick={(e) => { if (maskInfo().closable) requestClose('mask', e) }}
+        />
+      </Show>
+      <div
+        ref={wrapperEl}
+        class={mergeClass(
+          drawerWrapperClass({ placement: placement(), motion: layer.visible() ? 'visible' : `${placement()}-hidden`, dragging: dragging() }),
+          classNames().wrapper,
+        )}
+        style={{ ...sizeStyle(), ...pushStyle(), ...styles().wrapper }}
+        data-drawer-part="wrapper"
+        onTransitionEnd={(e) => {
+          if (!dialog.open() && e.target === wrapperEl) dialog.notifyLeaveDone()
+        }}
+      >
+        <Show when={props.resizable}>
+          <div
+            class={mergeClass(drawerDraggerClass({ placement: placement(), dragging: dragging() }), classNames().dragger)}
+            style={styles().dragger}
+            data-drawer-part="dragger"
+            onPointerDown={onDraggerDown}
+          />
+        </Show>
+        {props.drawerRender ? props.drawerRender(section()) : section()}
+      </div>
+    </div>
+  )
+
+  return (
+    <Show when={dialog.mounted()}>
+      <Show when={props.getContainer !== false} fallback={tree()}>
+        <Portal mount={typeof props.getContainer === 'function' ? props.getContainer() : undefined}>{tree()}</Portal>
+      </Show>
+    </Show>
   )
 }
 

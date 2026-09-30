@@ -1,6 +1,36 @@
-export declare const tourPanelClass: (props?: ({
+export declare const tourRootClass: (props?: ({
     type?: "default" | "primary" | null | undefined;
 } & import('class-variance-authority/types').ClassProp) | undefined) => string;
-export declare const tourButtonClass = "rounded px-3 py-1.5 text-[13px] border border-solid border-current bg-transparent text-inherit cursor-pointer disabled:opacity-40 disabled:cursor-not-allowed focus-visible:outline-2 focus-visible:outline-current";
-export declare const tourCloseClass = "absolute right-3 top-3 w-7 h-7 flex items-center justify-center border-0 rounded bg-transparent text-inherit opacity-70 hover:opacity-100 cursor-pointer p-1 focus-visible:outline-2 focus-visible:outline-current";
-export declare const tourCloseIcon = "i-mdi-close inline-block w-4 h-4";
+export declare const tourSectionClass: (props?: ({
+    type?: "default" | "primary" | null | undefined;
+} & import('class-variance-authority/types').ClassProp) | undefined) => string;
+export declare const tourCloseClass: (props?: ({
+    type?: "default" | "primary" | null | undefined;
+} & import('class-variance-authority/types').ClassProp) | undefined) => string;
+export declare const tourCoverClass: string[];
+export declare const tourHeaderClass: string[];
+export declare const tourTitleClass: string[];
+export declare const tourDescriptionClass: string[];
+export declare const tourFooterClass: string[];
+export declare const tourIndicatorsClass: string[];
+export declare const tourActionsClass: string[];
+export declare const tourIndicatorClass: (props?: ({
+    state?: "default-idle" | "default-active" | "primary-idle" | "primary-active" | null | undefined;
+} & import('class-variance-authority/types').ClassProp) | undefined) => string;
+export declare const tourPrevButtonClass: (props?: ({
+    type?: "default" | "primary" | null | undefined;
+} & import('class-variance-authority/types').ClassProp) | undefined) => string;
+export declare const tourSkipButtonClass: (props?: ({
+    type?: "default" | "primary" | null | undefined;
+} & import('class-variance-authority/types').ClassProp) | undefined) => string;
+export declare const tourNextButtonClass: (props?: ({
+    type?: "default" | "primary" | null | undefined;
+} & import('class-variance-authority/types').ClassProp) | undefined) => string;
+export declare const tourArrowClass: (props?: ({
+    type?: "default" | "primary" | null | undefined;
+    side?: "left" | "right" | "bottom" | "top" | null | undefined;
+} & import('class-variance-authority/types').ClassProp) | undefined) => string;
+export declare const tourMaskClass: string[];
+export declare const tourHoleClass: string[];
+/** 全部静态类，供主题死类测试。 */
+export declare const tourClassMatrix: () => string[];

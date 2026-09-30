@@ -1,29 +1,62 @@
-import { Component } from 'solid-js';
 import { JSX } from '@solidjs/web';
+import { SemanticInput } from '../../common/semantic';
 import { SizeType } from '../../common/type';
-export interface SpinProps {
-    /** Spinner state; defaults true (a bare <Spin /> spins). */
+export interface SpinSemanticClassNames {
+    root?: string;
+    section?: string;
+    indicator?: string;
+    description?: string;
+    container?: string;
+    /** @deprecated Use description. */
+    tip?: string;
+    /** @deprecated Use root. */
+    mask?: string;
+}
+export interface SpinSemanticStyles {
+    root?: JSX.CSSProperties;
+    section?: JSX.CSSProperties;
+    indicator?: JSX.CSSProperties;
+    description?: JSX.CSSProperties;
+    container?: JSX.CSSProperties;
+    /** @deprecated Use description. */
+    tip?: JSX.CSSProperties;
+    /** @deprecated Use root. */
+    mask?: JSX.CSSProperties;
+}
+export interface SpinSemanticInfo {
+    props: SpinProps;
+}
+/** A node, or a factory so one indicator can be rendered by many Spins at once. */
+export type SpinIndicator = JSX.Element | (() => JSX.Element);
+export interface SpinProps extends Omit<JSX.HTMLAttributes<HTMLDivElement>, 'children' | 'class' | 'style'> {
+    /** Loading state. Default true (a bare <Spin /> spins). */
     spinning?: boolean;
-    /** Debounce before the spinner appears, ms — avoids flicker on fast loads. */
+    /** Delay before the spinner appears, ms (prevents flashing); hiding is immediate. */
     delay?: number;
     size?: SizeType;
-    /** Text under the spinner (standalone mode) or over the backdrop (nested). */
+    /** Description under the indicator. */
+    description?: JSX.Element;
+    /** @deprecated Use description. */
     tip?: JSX.Element;
-    /** Custom indicator node replaces the default ring. */
-    indicator?: JSX.Element;
-    /** Nested mode: children get the spinner overlay while spinning. */
+    /** Custom indicator; sized by the Spin size (1em icons fit). */
+    indicator?: SpinIndicator;
+    /** Fullscreen backdrop loader. */
+    fullscreen?: boolean;
+    /** Progress 0–100; 'auto' estimates a progress that never finishes. */
+    percent?: number | 'auto';
+    /** Nested mode: children get a dimmed overlay while spinning. */
     children?: JSX.Element;
+    /** @deprecated Use classNames.root. */
     wrapperClass?: string;
+    rootClass?: string;
     class?: string;
     style?: JSX.CSSProperties;
+    classNames?: SemanticInput<SpinSemanticClassNames, SpinSemanticInfo>;
+    styles?: SemanticInput<SpinSemanticStyles, SpinSemanticInfo>;
+    ref?: HTMLDivElement | ((el: HTMLDivElement) => void);
 }
-/**
- * Spin keeps no headless counterpart — the only "logic" is a small debounced
- * visibility state, inlined here:
- *  - `delay` defers the spinner's APPEARANCE (a flip to false hides
- *    immediately — antd semantics)
- *  - the initial appearance is debounced too when spinning starts on
- *    mount with a delay configured
- */
-declare const Spin: Component<SpinProps>;
+export declare const nextAutoPercent: (prev: number) => number;
+declare const Spin: ((providedProps: SpinProps) => JSX.Element) & {
+    setDefaultIndicator: (indicator: SpinIndicator | undefined) => void;
+};
 export default Spin;

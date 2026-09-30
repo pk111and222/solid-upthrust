@@ -3,6 +3,7 @@ import { render, type JSX } from '@solidjs/web'
 import type { DialogIns } from 'upthrust-competence'
 import type { ModalProps } from './index'
 import Button from '../Button'
+import { CheckCircleFilled, CloseCircleFilled, ExclamationCircleFilled, InfoCircleFilled } from '../../common/antIcons'
 
 export interface ModalStaticConfig extends Omit<ModalProps, 'open' | 'defaultOpen' | 'onOk' | 'onCancel' | 'children' | 'ref'> {
   content?: JSX.Element
@@ -16,6 +17,15 @@ export interface ModalStaticResult {
   update: (config: Partial<ModalStaticConfig> | ((previous: ModalStaticConfig) => Partial<ModalStaticConfig>)) => void
 }
 type Kind = 'confirm' | 'info' | 'success' | 'warning' | 'error'
+
+// antd static icons: 22px filled glyphs in the semantic colors.
+const ICONS: Record<Kind, { Icon: Component; color: string }> = {
+  confirm: { Icon: ExclamationCircleFilled, color: 'text-[#faad14]' },
+  warning: { Icon: ExclamationCircleFilled, color: 'text-[#faad14]' },
+  info: { Icon: InfoCircleFilled, color: 'text-primary' },
+  success: { Icon: CheckCircleFilled, color: 'text-[#52c41a]' },
+  error: { Icon: CloseCircleFilled, color: 'text-error' },
+}
 
 /** DOM and roots are allocated only when an imperative method is called. */
 export function createModalMethods(ModalView: Component<ModalProps>) {
@@ -55,7 +65,9 @@ export function createModalMethods(ModalView: Component<ModalProps>) {
     }
     instances.add(result)
     dispose = render(() => <ModalView
+      width={416}
       {...config()}
+      title={undefined}
       defaultOpen
       maskClosable={config().maskClosable ?? false}
       closable={config().closable ?? false}
@@ -63,19 +75,26 @@ export function createModalMethods(ModalView: Component<ModalProps>) {
       afterClose={cleanup}
       onOk={() => invoke(config().onOk)}
       onCancel={() => invoke(config().onCancel)}
-      footer={config().footer !== undefined ? config().footer : <div class="flex justify-end gap-2">
+      footer={config().footer !== undefined ? config().footer : <>
         <Show when={kind === 'confirm'}>
           <Button {...config().cancelButtonProps} onClick={() => dialog()?.requestClose('cancel')}>{config().cancelText ?? '取消'}</Button>
         </Show>
-        <Button variant={config().okVariant ?? 'solid'} color="primary" {...config().okButtonProps}
-          loading={dialog()?.busy() || config().confirmLoading} onClick={() => dialog()?.requestClose('ok')}>{config().okText ?? '确定'}</Button>
-      </div>}
+        <Button type={config().okType ?? 'primary'} {...config().okButtonProps}
+          loading={dialog()?.busy() || config().confirmLoading} onClick={() => dialog()?.requestClose('ok')}>{config().okText ?? (kind === 'confirm' ? '确定' : '知道了')}</Button>
+      </>}
     >
-      <div class="flex items-start gap-3">
+      <div class="flex items-start gap-sm" data-modal-part="confirm-body">
         <Show when={config().icon !== null}>
-          {config().icon ?? <span aria-hidden="true" class={`shrink-0 text-[24px] ${kind === 'error' ? 'i-mdi-close-circle text-error' : kind === 'success' ? 'i-mdi-check-circle text-green-600' : kind === 'info' ? 'i-mdi-information text-primary' : 'i-mdi-alert-circle text-amber-500'}`} />}
+          <span aria-hidden="true" class={`flex shrink-0 text-[22px] leading-none ${ICONS[kind].color}`}>
+            {config().icon ?? (() => { const { Icon } = ICONS[kind]; return <Icon /> })()}
+          </span>
         </Show>
-        <div class="min-w-0 flex-1">{config().content}</div>
+        <div class="min-w-0 flex-1">
+          <Show when={config().title !== undefined && config().title !== null}>
+            <div class="text-[16px] font-semibold leading-[1.5] text-on-surface">{config().title}</div>
+          </Show>
+          <div class={config().title !== undefined && config().title !== null ? 'mt-xs' : ''}>{config().content}</div>
+        </div>
       </div>
     </ModalView>, host)
     return result

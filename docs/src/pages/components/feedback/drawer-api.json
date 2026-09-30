@@ -1,0 +1,170 @@
+[
+  {
+    "name": "open",
+    "type": "boolean",
+    "default": "—",
+    "description": "抽屉是否可见（受控）"
+  },
+  {
+    "name": "defaultOpen",
+    "type": "boolean",
+    "default": "false",
+    "description": "非受控初始可见"
+  },
+  {
+    "name": "placement",
+    "type": "'top' | 'right' | 'bottom' | 'left'",
+    "default": "'right'",
+    "description": "方向"
+  },
+  {
+    "name": "title",
+    "type": "JSX.Element",
+    "default": "—",
+    "description": "标题"
+  },
+  {
+    "name": "extra",
+    "type": "JSX.Element",
+    "default": "—",
+    "description": "头部右侧操作区"
+  },
+  {
+    "name": "footer",
+    "type": "JSX.Element | null",
+    "default": "—",
+    "description": "底部内容；不传不渲染"
+  },
+  {
+    "name": "onClose",
+    "type": "(e: MouseEvent | KeyboardEvent) => void | boolean | Promise",
+    "default": "—",
+    "description": "遮罩 / Escape / × 触发；返回 false 或 reject 保持打开"
+  },
+  {
+    "name": "afterClose / afterOpenChange",
+    "type": "() => void / (open) => void",
+    "default": "—",
+    "description": "动画结束后回调"
+  },
+  {
+    "name": "size",
+    "type": "'default' | 'large' | number | string",
+    "default": "'default'",
+    "description": "378 / 736 或自定义；left/right 为宽度，top/bottom 为高度"
+  },
+  {
+    "name": "width / height",
+    "type": "number | string",
+    "default": "—",
+    "description": "已废弃，请使用 size"
+  },
+  {
+    "name": "resizable",
+    "type": "boolean | { onResizeStart?, onResize?(size), onResizeEnd? }",
+    "default": "false",
+    "description": "拖动内沿调整尺寸"
+  },
+  {
+    "name": "maxSize",
+    "type": "number",
+    "default": "视口尺寸",
+    "description": "可调整的最大尺寸"
+  },
+  {
+    "name": "push",
+    "type": "boolean | number | { distance? }",
+    "default": "{ distance: 180 }",
+    "description": "多层抽屉时被上层推开的距离；false 关闭"
+  },
+  {
+    "name": "mask",
+    "type": "boolean | { enabled?, blur?, closable? }",
+    "default": "true",
+    "description": "遮罩；无遮罩时不锁滚动、不设 aria-modal"
+  },
+  {
+    "name": "maskClosable",
+    "type": "boolean",
+    "default": "true",
+    "description": "已废弃，请使用 mask.closable"
+  },
+  {
+    "name": "keyboard",
+    "type": "boolean",
+    "default": "true",
+    "description": "Escape 关闭（只作用于最上层）"
+  },
+  {
+    "name": "closable",
+    "type": "boolean | { closeIcon?, disabled?, placement?: 'start' | 'end' }",
+    "default": "true",
+    "description": "关闭按钮；placement 控制在标题前或头部最右"
+  },
+  {
+    "name": "closeIcon",
+    "type": "JSX.Element | null | false",
+    "default": "<CloseOutlined />",
+    "description": "自定义关闭图标；null / false 隐藏"
+  },
+  {
+    "name": "loading",
+    "type": "boolean",
+    "default": "false",
+    "description": "显示骨架屏"
+  },
+  {
+    "name": "destroyOnHidden / forceRender",
+    "type": "boolean",
+    "default": "false",
+    "description": "关闭后销毁 / 预渲染"
+  },
+  {
+    "name": "focusable",
+    "type": "{ trap?, focusTriggerAfterClose? }",
+    "default": "{ trap: true, focusTriggerAfterClose: true }",
+    "description": "焦点锁定与恢复"
+  },
+  {
+    "name": "drawerRender",
+    "type": "(node: JSX.Element) => JSX.Element",
+    "default": "—",
+    "description": "自定义渲染面板"
+  },
+  {
+    "name": "zIndex",
+    "type": "number",
+    "default": "1000",
+    "description": "层级"
+  },
+  {
+    "name": "getContainer",
+    "type": "(() => HTMLElement) | false",
+    "default": "document.body",
+    "description": "挂载节点；false 原地渲染（父元素需定位）"
+  },
+  {
+    "name": "class / style",
+    "type": "string / JSX.CSSProperties",
+    "default": "—",
+    "description": "面板（section）的类与样式"
+  },
+  {
+    "name": "rootClass / rootStyle",
+    "type": "string / JSX.CSSProperties",
+    "default": "—",
+    "description": "根节点的类与样式"
+  },
+  {
+    "name": "classNames / styles",
+    "type": "对象 | (info: { props }) => 对象",
+    "default": "—",
+    "description": "语义化结构：root、mask、wrapper、section、header、title、extra、body、footer、dragger、close"
+  },
+  {
+    "name": "ref",
+    "type": "(dialog: DialogIns) => void",
+    "default": "—",
+    "description": "headless 实例"
+  }
+]

@@ -1,0 +1,128 @@
+[
+  {
+    "name": "title",
+    "type": "JSX.Element",
+    "default": "—",
+    "description": "通知标题（必选，antd 6 新名）"
+  },
+  {
+    "name": "message",
+    "type": "JSX.Element",
+    "default": "—",
+    "description": "已废弃，等同 title"
+  },
+  {
+    "name": "description",
+    "type": "JSX.Element",
+    "default": "—",
+    "description": "通知内容"
+  },
+  {
+    "name": "actions",
+    "type": "JSX.Element",
+    "default": "—",
+    "description": "自定义操作区，位于右下角"
+  },
+  {
+    "name": "btn",
+    "type": "JSX.Element",
+    "default": "—",
+    "description": "已废弃，等同 actions"
+  },
+  {
+    "name": "icon",
+    "type": "JSX.Element",
+    "default": "—",
+    "description": "自定义图标，替换类型图标"
+  },
+  {
+    "name": "type",
+    "type": "'success' | 'info' | 'warning' | 'error'",
+    "default": "—",
+    "description": "通知类型；不传时无图标"
+  },
+  {
+    "name": "key",
+    "type": "string",
+    "default": "自动生成",
+    "description": "唯一标识，同 key 再次 open 原地更新"
+  },
+  {
+    "name": "duration",
+    "type": "number | null | false",
+    "default": "4.5",
+    "description": "自动关闭延时，单位秒；0 / null / false 不自动关闭"
+  },
+  {
+    "name": "showProgress",
+    "type": "boolean",
+    "default": "false",
+    "description": "显示剩余时间进度条"
+  },
+  {
+    "name": "pauseOnHover",
+    "type": "boolean",
+    "default": "true",
+    "description": "悬停时暂停倒计时"
+  },
+  {
+    "name": "placement",
+    "type": "'top' | 'topLeft' | 'topRight' | 'bottom' | 'bottomLeft' | 'bottomRight'",
+    "default": "'topRight'",
+    "description": "弹出位置"
+  },
+  {
+    "name": "closable",
+    "type": "boolean | { closeIcon?, onClose?, 'aria-*' }",
+    "default": "true",
+    "description": "是否显示关闭按钮；对象形式可自定义图标、回调与 aria 属性"
+  },
+  {
+    "name": "closeIcon",
+    "type": "JSX.Element | null",
+    "default": "<CloseOutlined />",
+    "description": "自定义关闭图标；null / false 时不显示"
+  },
+  {
+    "name": "onClick",
+    "type": "() => void",
+    "default": "—",
+    "description": "点击通知时触发"
+  },
+  {
+    "name": "onClose",
+    "type": "() => void",
+    "default": "—",
+    "description": "关闭时触发（closable.onClose 之后）"
+  },
+  {
+    "name": "role",
+    "type": "'alert' | 'status' | …",
+    "default": "'alert'",
+    "description": "内容区 role"
+  },
+  {
+    "name": "props",
+    "type": "Record<string, unknown>",
+    "default": "—",
+    "description": "透传到通知根节点的属性（如 data-testid）"
+  },
+  {
+    "name": "class / style",
+    "type": "string / JSX.CSSProperties",
+    "default": "—",
+    "description": "根节点类名与内联样式"
+  },
+  {
+    "name": "classNames",
+    "type": "Record<SemanticDOM, string> | (info) => Record<SemanticDOM, string>",
+    "default": "—",
+    "description": "语义化类名：root / title / description / actions / icon"
+  },
+  {
+    "name": "styles",
+    "type": "Record<SemanticDOM, CSSProperties> | (info) => Record<SemanticDOM, CSSProperties>",
+    "default": "—",
+    "description": "语义化内联样式；函数形式接收 { props }"
+  }
+]

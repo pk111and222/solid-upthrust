@@ -1,0 +1,98 @@
+[
+  {
+    "name": "target",
+    "type": "HTMLElement | null | () => HTMLElement | null | undefined",
+    "default": "—",
+    "description": "获取引导卡片指向的元素，为空时居中于屏幕"
+  },
+  {
+    "name": "title",
+    "type": "JSX.Element",
+    "default": "—",
+    "description": "标题"
+  },
+  {
+    "name": "description",
+    "type": "JSX.Element",
+    "default": "—",
+    "description": "主要描述部分"
+  },
+  {
+    "name": "cover",
+    "type": "JSX.Element",
+    "default": "—",
+    "description": "展示的图片或视频"
+  },
+  {
+    "name": "placement",
+    "type": "同 Tour",
+    "default": "'bottom'",
+    "description": "引导卡片相对于目标元素的位置"
+  },
+  {
+    "name": "arrow",
+    "type": "boolean | { pointAtCenter: boolean }",
+    "default": "true",
+    "description": "是否显示箭头"
+  },
+  {
+    "name": "mask",
+    "type": "boolean | { style?; color? }",
+    "default": "true",
+    "description": "是否启用蒙层，覆盖 Tour 级配置"
+  },
+  {
+    "name": "gap",
+    "type": "同 Tour",
+    "default": "—",
+    "description": "覆盖 Tour 级高亮区配置"
+  },
+  {
+    "name": "scrollIntoViewOptions",
+    "type": "boolean | ScrollIntoViewOptions",
+    "default": "—",
+    "description": "覆盖 Tour 级滚动配置"
+  },
+  {
+    "name": "disabledInteraction",
+    "type": "boolean",
+    "default": "—",
+    "description": "覆盖 Tour 级交互配置"
+  },
+  {
+    "name": "type",
+    "type": "'default' | 'primary'",
+    "default": "—",
+    "description": "覆盖 Tour 级类型"
+  },
+  {
+    "name": "nextButtonProps",
+    "type": "{ children?: JSX.Element; onClick?: () => void; class?: string; style?: JSX.CSSProperties }",
+    "default": "—",
+    "description": "下一步按钮的属性"
+  },
+  {
+    "name": "prevButtonProps",
+    "type": "{ children?: JSX.Element; onClick?: () => void; class?: string; style?: JSX.CSSProperties }",
+    "default": "—",
+    "description": "上一步按钮的属性"
+  },
+  {
+    "name": "closable / closeIcon",
+    "type": "同 Tour",
+    "default": "—",
+    "description": "覆盖 Tour 级关闭按钮配置"
+  },
+  {
+    "name": "class / style",
+    "type": "string / JSX.CSSProperties",
+    "default": "—",
+    "description": "面板根节点的类名与样式"
+  },
+  {
+    "name": "classNames / styles",
+    "type": "同 Tour（对象）",
+    "default": "—",
+    "description": "步骤级语义化 class / style，与 Tour 级合并"
+  }
+]

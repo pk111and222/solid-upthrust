@@ -3,6 +3,7 @@ import { Spin, Divider, Button, Space, Alert } from 'upthrust-ui'
 
 const SpinPage: Component = () => {
   const [loading, setLoading] = createSignal(false)
+  const [fullscreen, setFullscreen] = createSignal(false)
 
   // 模拟一个 200ms 的快速请求：无 delay 时会闪烁，有 delay 时完全无感
   const [fastFlash, setFastFlash] = createSignal(false)
@@ -22,7 +23,7 @@ const SpinPage: Component = () => {
       <p class="text-on-surface-variant mb-6">用于页面和区块的加载中状态。支持独立使用、嵌入内容、延迟出现与自定义指示器。</p>
 
       <h3 class="text-lg font-semibold mb-3">基本使用与尺寸</h3>
-      <Space size="middle" align="center">
+      <Space size="middle" align="center" data-spin-demo="size">
         <Spin />
         <Spin size="small" />
         <Spin size="large" />
@@ -32,7 +33,7 @@ const SpinPage: Component = () => {
 
       <h3 class="text-lg font-semibold mb-3">文案与自定义指示器</h3>
       <Space size="large" align="center">
-        <Spin tip="加载中..." />
+        <Spin description="加载中..." />
         <Spin indicator={<span class="i-mdi-loading text-[24px] text-primary inline-block animate-spin-upthrust" />} />
       </Space>
 
@@ -44,7 +45,7 @@ const SpinPage: Component = () => {
           {loading() ? '停止加载' : '开始加载'}
         </Button>
       </Space>
-      <div class="mt-4">
+      <div class="mt-4" data-spin-demo="nested">
         <Spin spinning={loading()}>
           <div style={{ 'min-width': '400px' }}>
             <Alert
@@ -75,11 +76,30 @@ const SpinPage: Component = () => {
       <Divider />
 
       <h3 class="text-lg font-semibold mb-3">带 tip 的嵌套加载</h3>
-      <Spin spinning={loading()} tip="数据加载中...">
+      <Spin spinning={loading()} description="数据加载中...">
         <div class="h-24 rounded-lg border border-outline-variant flex items-center justify-center text-on-surface-variant" style={{ 'min-width': '400px' }}>
           内容区域
         </div>
       </Spin>
+
+      <Divider />
+
+      <h3 class="text-lg font-semibold mb-3">进度（percent）</h3>
+      <p class="text-sm text-on-surface-variant mb-3">percent 大于 0 时四点指示器收起、显示进度环；percent="auto" 预估一个永远不会结束的进度。</p>
+      <Space size="large" align="center" data-spin-demo="percent">
+        <Spin percent={30} size="small" />
+        <Spin percent={60} />
+        <Spin percent={90} size="large" />
+        <Spin percent="auto" />
+      </Space>
+
+      <Divider />
+
+      <h3 class="text-lg font-semibold mb-3">全屏（fullscreen）</h3>
+      <Space data-spin-demo="fullscreen">
+        <Button onClick={() => { setFullscreen(true); setTimeout(() => setFullscreen(false), 1500) }}>显示全屏加载 1.5s</Button>
+      </Space>
+      <Spin fullscreen spinning={fullscreen()} description="加载中..." />
     </div>
   )
 }

@@ -1,0 +1,15 @@
+[
+  { "name": "spinning", "type": "boolean", "default": "true", "description": "是否为加载中状态" },
+  { "name": "delay", "type": "number（毫秒）", "default": "—", "description": "延迟显示加载效果的时间（防止闪烁）；停止加载立即隐藏" },
+  { "name": "size", "type": "'small' | 'middle' | 'large'", "default": "'middle'", "description": "组件大小（指示器 14 / 20 / 32px）" },
+  { "name": "description", "type": "JSX.Element", "default": "—", "description": "自定义描述文案" },
+  { "name": "tip", "type": "JSX.Element", "default": "—", "description": "已废弃，请使用 description" },
+  { "name": "indicator", "type": "JSX.Element | (() => JSX.Element)", "default": "—", "description": "加载指示符；按 size 设置字号，1em 图标自适应" },
+  { "name": "fullscreen", "type": "boolean", "default": "false", "description": "显示带有 Spin 组件的全屏背景" },
+  { "name": "percent", "type": "number | 'auto'", "default": "—", "description": "展示进度；'auto' 时预估一个永远不会停止的进度" },
+  { "name": "wrapperClass", "type": "string", "default": "—", "description": "已废弃，请使用 classNames.root" },
+  { "name": "rootClass", "type": "string", "default": "—", "description": "根节点 class" },
+  { "name": "classNames", "type": "Partial<Record<'root' | 'section' | 'indicator' | 'description' | 'container', string>> | (info) => …", "default": "—", "description": "语义化结构 class；函数形式收到 { props }（spinning / percent 为当前值）；tip / mask 为废弃别名" },
+  { "name": "styles", "type": "Partial<Record<'root' | 'section' | 'indicator' | 'description' | 'container', JSX.CSSProperties>> | (info) => …", "default": "—", "description": "语义化结构 style；函数形式同 classNames" },
+  { "name": "Spin.setDefaultIndicator", "type": "(indicator: JSX.Element | (() => JSX.Element) | undefined) => void", "default": "—", "description": "静态方法：设置全局默认指示器；多个 Spin 同时显示时请传工厂函数" }
+]

@@ -1,0 +1,2 @@
+// 演示用封面：内联 SVG，避免外链图片。
+export const coverSrc = `data:image/svg+xml;utf8,${encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="488" height="160" viewBox="0 0 488 160"><rect width="488" height="160" rx="6" fill="#e6f4ff"/><circle cx="92" cy="80" r="40" fill="#1677ff" opacity=".85"/><rect x="160" y="56" width="240" height="14" rx="7" fill="#1677ff" opacity=".5"/><rect x="160" y="84" width="180" height="14" rx="7" fill="#1677ff" opacity=".3"/></svg>')}`

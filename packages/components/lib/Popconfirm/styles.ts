@@ -1,16 +1,24 @@
 // @unocss-include
 import { cva, type VariantProps } from "class-variance-authority";
-import { twMerge } from "tailwind-merge";
+import { mergeClass } from "../../common/merge";
 
-// Popconfirm overlay: surface card, 8px radius, standard shadow, fade+scale.
-// Only opacity/transform transition — NEVER top/left (createTrigger
-// re-positions on open/scroll/resize; transitioning position makes the layer
-// visibly fly across the screen).
+/**
+ * antd 6 Popconfirm（popconfirm/style + popover/style）：
+ *  - 浮层：Popover 容器 colorBgElevated、borderRadiusLG 8px、padding 12px、width max-content / max-width 100vw，
+ *    fontSize 14 / colorText，zIndexPopup = 1000 + 60。
+ *  - message：flex nowrap items-start，margin-bottom 8px；图标 colorWarning、14px、line-height 1、右距 8px。
+ *  - title：fontWeightStrong 600、colorTextHeading；无描述（only-child）时 normal。
+ *  - description：margin-top 4px、colorText。
+ *  - buttons：text-align end、nowrap、按钮之间 margin-inline-start 8px。
+ */
+
+// 只过渡 opacity / transform（transition-overlay），绝不过渡 top/left：
+// createTrigger 在打开 / 滚动 / 缩放时重新定位，位置过渡会让浮层飞过屏幕。
 const popconfirmOverlayVariants = cva(
   [
-    "bg-surface", "rounded-lg", "shadow",
-    "transition-overlay", "duration-fast", "ease-upthrust", "origin-bottom",
-    "outline-none",
+    "bg-surface", "rounded-lg", "shadow", "outline-none",
+    "text-[14px]", "text-on-surface", "leading-[1.5714]", "w-max", "max-w-[100vw]",
+    "transition-overlay", "duration-fast", "ease-upthrust",
   ],
   {
     variants: {
@@ -37,56 +45,70 @@ const popconfirmOverlayVariants = cva(
   }
 )
 
-const popconfirmMessageVariants = cva(
-  ["text-[14px]", "text-on-surface", "leading-[1.5714]", "min-w-[180px]", "max-w-[300px]"],
+const popconfirmContainerVariants = cva(["relative", "p-sm"], { variants: {}, defaultVariants: {} })
+
+const popconfirmMessageVariants = cva(["flex", "flex-nowrap", "items-start", "mb-xs"], { variants: {}, defaultVariants: {} })
+
+// 图标容器 flex 且高度等于标题首行（14px × 1.5714 = 22px），图标在首行内垂直居中；
+// 让 inline 的 anticon 靠基线对齐会下偏约 4px。
+const popconfirmIconVariants = cva(
+  ["shrink-0", "flex", "items-center", "h-[22px]", "me-xs", "text-[14px]", "leading-none", "text-[#faad14]"],
+  { variants: {}, defaultVariants: {} }
+)
+
+const popconfirmTitleVariants = cva(["text-on-surface"], {
+  variants: {
+    strong: { true: ["font-semibold"], false: ["font-normal"] },
+  },
+  defaultVariants: { strong: true },
+})
+
+const popconfirmDescriptionVariants = cva(["mt-xxs", "text-on-surface"], { variants: {}, defaultVariants: {} })
+
+const popconfirmButtonsVariants = cva(
+  ["flex", "justify-end", "flex-nowrap", "whitespace-nowrap", "gap-xs"],
+  { variants: {}, defaultVariants: {} }
+)
+
+export const popconfirmOverlayClass = (variants: VariantProps<typeof popconfirmOverlayVariants>) => mergeClass(popconfirmOverlayVariants(variants))
+export const popconfirmContainerClass = (variants: VariantProps<typeof popconfirmContainerVariants>) => mergeClass(popconfirmContainerVariants(variants))
+export const popconfirmMessageClass = (variants: VariantProps<typeof popconfirmMessageVariants>) => mergeClass(popconfirmMessageVariants(variants))
+export const popconfirmIconClass = (variants: VariantProps<typeof popconfirmIconVariants>) => mergeClass(popconfirmIconVariants(variants))
+export const popconfirmTitleClass = (variants: VariantProps<typeof popconfirmTitleVariants>) => mergeClass(popconfirmTitleVariants(variants))
+export const popconfirmDescriptionClass = (variants: VariantProps<typeof popconfirmDescriptionVariants>) => mergeClass(popconfirmDescriptionVariants(variants))
+export const popconfirmButtonsClass = (variants: VariantProps<typeof popconfirmButtonsVariants>) => mergeClass(popconfirmButtonsVariants(variants))
+
+// 箭头（与 Popover 一致）：8px 方块旋转 45° 并居中压在浮层边上，内半与浮层同色融合，只露出外半三角。
+// 不要同时写内联 top 与 -bottom 类：绝对定位过约束时 top 胜出，箭头会整个落到浮层外。
+const popconfirmArrowVariants = cva(
+  ["absolute", "w-[8px]", "h-[8px]", "bg-surface", "rotate-45", "pointer-events-none"],
   {
     variants: {
-      hasDescription: {
-        true: ["font-medium"],
-        false: [],
+      side: {
+        top: ["-top-[4px]"],
+        bottom: ["-bottom-[4px]"],
+        left: ["-left-[4px]"],
+        right: ["-right-[4px]"],
       },
     },
-    defaultVariants: { hasDescription: false },
+    defaultVariants: { side: "top" },
   }
 )
+export const popconfirmArrowClass = (side: 'top' | 'bottom' | 'left' | 'right') => mergeClass(popconfirmArrowVariants({ side }))
 
-const popconfirmDescriptionVariants = cva(
-  ["text-[14px]", "text-on-surface-variant", "leading-[1.5714]", "mt-[4px]"],
-  { variants: {}, defaultVariants: {} }
-)
-
-const popconfirmIconVariants = cva(
-  ["shrink-0", "text-[16px]", "text-[#faad14]", "i-mdi-help-circle-outline"],
-  { variants: {}, defaultVariants: {} }
-)
-
-const popconfirmActionsVariants = cva(
-  ["flex", "justify-end", "gap-[8px]", "mt-[10px]"],
-  { variants: {}, defaultVariants: {} }
-)
-
-export const popconfirmOverlayClass = (variants: VariantProps<typeof popconfirmOverlayVariants>) =>
-  twMerge(popconfirmOverlayVariants(variants))
-export const popconfirmMessageClass = (variants: VariantProps<typeof popconfirmMessageVariants>) =>
-  twMerge(popconfirmMessageVariants(variants))
-export const popconfirmDescriptionClass = (variants: VariantProps<typeof popconfirmDescriptionVariants>) =>
-  twMerge(popconfirmDescriptionVariants(variants))
-export const popconfirmIconClass = (variants: VariantProps<typeof popconfirmIconVariants>) =>
-  twMerge(popconfirmIconVariants(variants))
-export const popconfirmActionsClass = (variants: VariantProps<typeof popconfirmActionsVariants>) =>
-  twMerge(popconfirmActionsVariants(variants))
-
-// The pointing triangle (antd parity): an 8px square rotated 45°, CENTERED on
-// the layer edge — the inner half merges into the layer background (same
-// color) and only the outer half reads as a triangle. Do NOT set both inline
-// `top` and the `-bottom` class: over-constrained absolute positioning makes
-// `top` win and drops the arrow fully outside the layer.
-export const popconfirmArrowClass = (side: 'top' | 'bottom' | 'left' | 'right') =>
-  twMerge([
-    "absolute", "w-[8px]", "h-[8px]", "bg-surface",
-    "rotate-45", "pointer-events-none",
-    side === 'top' && "-top-[4px]",
-    side === 'bottom' && "-bottom-[4px]",
-    side === 'left' && "-left-[4px]",
-    side === 'right' && "-right-[4px]",
-  ].filter(Boolean) as string[])
+/** Every variant combination, for dead-class tests. */
+export const popconfirmClassMatrix = (): string[] => {
+  const out: string[] = []
+  for (const visible of [true, false]) {
+    for (const placement of ["bottomLeft", "bottomRight", "bottom", "topLeft", "topRight", "top", "leftTop", "leftBottom", "left", "rightTop", "rightBottom", "right"] as const) {
+      out.push(popconfirmOverlayClass({ visible, placement }))
+    }
+    out.push(popconfirmTitleClass({ strong: visible }))
+  }
+  for (const side of ["top", "bottom", "left", "right"] as const) out.push(popconfirmArrowClass(side))
+  out.push(
+    popconfirmContainerClass({}), popconfirmMessageClass({}), popconfirmIconClass({}),
+    popconfirmDescriptionClass({}), popconfirmButtonsClass({}),
+  )
+  return out
+}

@@ -11,6 +11,8 @@ const PopconfirmPage: Component = () => {
   // Promise 结束后气泡自动关闭。
   const asyncConfirm = () =>
     new Promise<void>((resolve) => setTimeout(resolve, 1500))
+  const asyncReject = () =>
+    new Promise<void>((_, reject) => setTimeout(() => reject(new Error('提交失败，保持打开')), 800))
 
   return (
     <div class="p-6 max-w-4xl">
@@ -18,7 +20,7 @@ const PopconfirmPage: Component = () => {
       <p class="text-on-surface-variant mb-6">点击元素弹出气泡式的确认框。点击确认或取消前的谨慎操作，常用于删除等危险动作的二次确认。</p>
 
       <h3 class="text-lg font-semibold mb-3">基本使用</h3>
-      <Space size="middle">
+      <Space size="middle" data-popconfirm-demo="basic">
         <Popconfirm
           title="确定删除这个任务吗？"
           onConfirm={() => { setLastAction(() => '确认删除') }}
@@ -35,13 +37,13 @@ const PopconfirmPage: Component = () => {
       <Divider />
 
       <h3 class="text-lg font-semibold mb-3">描述文本与自定义按钮</h3>
-      <Space size="middle">
+      <Space size="middle" wrap data-popconfirm-demo="description">
         <Popconfirm
           title="确定删除这条记录吗？"
           description="删除后无法恢复，请谨慎操作。"
           okText="确认删除"
           cancelText="再想想"
-          okButtonProps={{ danger: true }}
+          okType="danger"
           onConfirm={() => { setLastAction(() => '删除了记录') }}
         >
           <Button danger variant="outlined">带描述的确认</Button>
@@ -49,9 +51,12 @@ const PopconfirmPage: Component = () => {
         <Popconfirm title="隐藏图标的确认框" icon={false} onConfirm={() => { setLastAction(() => '无图标确认') }}>
           <Button variant="outlined">无图标</Button>
         </Popconfirm>
+        <Popconfirm title="仅确认" showCancel={false} okText="知道了" onConfirm={() => { setLastAction(() => '知道了') }}>
+          <Button variant="outlined">隐藏取消</Button>
+        </Popconfirm>
         <Popconfirm
           title="确定操作吗？"
-          icon={<span class="i-mdi-alert text-[16px] text-error" />}
+          icon={<span class="i-mdi-alert text-[14px] text-error" />}
           onConfirm={() => { setLastAction(() => '自定义图标确认') }}
         >
           <Button variant="outlined">自定义图标</Button>
@@ -61,18 +66,27 @@ const PopconfirmPage: Component = () => {
       <Divider />
 
       <h3 class="text-lg font-semibold mb-3">异步确认（loading）</h3>
-      <Popconfirm
-        title="该操作需要一点时间"
-        description="点击确定后按钮进入 loading，1.5 秒后自动关闭。"
-        onConfirm={asyncConfirm}
-      >
-        <Button>异步确认</Button>
-      </Popconfirm>
+      <Space size="middle" data-popconfirm-demo="async">
+        <Popconfirm
+          title="该操作需要一点时间"
+          description="点击确定后按钮进入 loading，1.5 秒后自动关闭。"
+          onConfirm={asyncConfirm}
+        >
+          <Button>异步确认</Button>
+        </Popconfirm>
+        <Popconfirm
+          title="提交会失败"
+          description="Promise reject 时保持打开，可再次尝试。"
+          onConfirm={() => asyncReject().catch((e: Error) => { setLastAction(() => e.message); throw e })}
+        >
+          <Button>异步失败</Button>
+        </Popconfirm>
+      </Space>
 
       <Divider />
 
       <h3 class="text-lg font-semibold mb-3">位置</h3>
-      <div class="flex flex-wrap gap-4">
+      <div class="flex flex-wrap gap-4" data-popconfirm-demo="placement">
         <Popconfirm title="上左" placement="topLeft" onConfirm={() => { setLastAction(() => 'TL') }}><Button variant="outlined">TL</Button></Popconfirm>
         <Popconfirm title="上中" placement="top" onConfirm={() => { setLastAction(() => 'Top') }}><Button variant="outlined">Top</Button></Popconfirm>
         <Popconfirm title="上右" placement="topRight" onConfirm={() => { setLastAction(() => 'TR') }}><Button variant="outlined">TR</Button></Popconfirm>

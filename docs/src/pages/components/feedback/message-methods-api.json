@@ -1,0 +1,80 @@
+[
+  {
+    "name": "message.success / error / info / warning / loading",
+    "type": "(content, duration?, onClose?) => MessageResult",
+    "default": "—",
+    "description": "content 可以是节点或 config 对象；duration 位置可直接传 onClose"
+  },
+  {
+    "name": "message.open",
+    "type": "(config) => MessageResult",
+    "default": "—",
+    "description": "以对象形式打开"
+  },
+  {
+    "name": "MessageResult",
+    "type": "(() => void) & PromiseLike<boolean>",
+    "default": "—",
+    "description": "调用即关闭；then 在关闭后以 true 兑现；另保留 key / update(patch) / close()"
+  },
+  {
+    "name": "message.destroy",
+    "type": "(key?: string | number) => void",
+    "default": "—",
+    "description": "传 key 关闭单条，不传关闭全部"
+  },
+  {
+    "name": "message.config",
+    "type": "(options) => void",
+    "default": "—",
+    "description": "全局配置，见下方 top / duration / maxCount 等"
+  },
+  {
+    "name": "message.useMessage",
+    "type": "(options?) => [api, holder]",
+    "default": "—",
+    "description": "holder 放进组件树，消息渲染在当前 ConfigProvider 作用域；队列仍为页面单例"
+  },
+  {
+    "name": "top",
+    "type": "number",
+    "default": "8",
+    "description": "（config）消息距离顶部的位置，px；placement=bottom 时为距底部"
+  },
+  {
+    "name": "duration",
+    "type": "number",
+    "default": "3",
+    "description": "（config）默认自动关闭延时，单位秒"
+  },
+  {
+    "name": "maxCount",
+    "type": "number",
+    "default": "不限",
+    "description": "（config）最大显示数，超过时最早的消息被移除"
+  },
+  {
+    "name": "pauseOnHover",
+    "type": "boolean",
+    "default": "true",
+    "description": "（config）悬停暂停的默认值"
+  },
+  {
+    "name": "getContainer",
+    "type": "() => HTMLElement",
+    "default": "() => document.body",
+    "description": "（config）渲染节点的输出位置，依旧全屏定位"
+  },
+  {
+    "name": "placement",
+    "type": "'top' | 'center' | 'bottom'",
+    "default": "'top'",
+    "description": "（config / MessageProvider，本库扩展）堆叠锚点"
+  },
+  {
+    "name": "classNames / styles",
+    "type": "同上",
+    "default": "—",
+    "description": "（config）全局语义化 class / style，与单条的合并"
+  }
+]

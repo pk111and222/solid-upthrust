@@ -7,9 +7,10 @@ import { createTrigger, type TriggerAction, type TriggerPlacement } from "./trig
  *
  * Popconfirm-specific behavior layered on top:
  *  - default trigger is `click`, placement `top` (antd parity)
- *  - confirm / cancel intents close the panel and fire the matching callback
- *    (with optional loading state on the OK button — `onConfirm` may return a
- *    promise; the panel stays open until it settles)
+ *  - antd ActionButton semantics for OK: a sync `onConfirm` closes at once; a
+ *    returned promise shows a loading OK button, closes on resolve and STAYS
+ *    OPEN on reject; clicks while in flight are ignored (no double submit)
+ *  - cancel closes first, then fires `onCancel` (never async-gated)
  *  - the raw trigger API (layerStyle, actualPlacement, …) passes through so
  *    the UI layer reuses the Dropdown rendering pipeline
  */
@@ -26,6 +27,12 @@ export type PopconfirmConfig = {
   getContainer?: () => HTMLElement
   onConfirm?: (e?: Event) => void | Promise<unknown>
   onCancel?: (e?: Event) => void | Promise<unknown>
+  /** Render the pointing arrow. Default true. */
+  arrow?: boolean
+  /** Hover open delay, ms (hover trigger only). Default 100. */
+  mouseEnterDelay?: number
+  /** Hover close delay, ms. Default 100. */
+  mouseLeaveDelay?: number
 }
 
 export type PopconfirmIns = {
@@ -45,32 +52,40 @@ export const createPopconfirm = (config: PopconfirmConfig = {}) => {
     get placement() { return config.placement ?? 'top' },
     get onOpenChange() { return config.onOpenChange },
     get getContainer() { return config.getContainer },
-    arrow: true,
+    get arrow() { return config.arrow ?? true },
+    get hoverOpenDelay() { return config.mouseEnterDelay ?? 100 },
+    get hoverDelay() { return config.mouseLeaveDelay ?? 100 },
   })
 
   // True while an async onConfirm is in flight — the OK button renders its
   // loading state and the panel refuses to close.
   const [_loading, _setLoading] = createSignal(false, { ownedWrite: true })
 
-  const runIntent = (action: 'confirm' | 'cancel', e?: Event) => {
-    const cb = action === 'confirm' ? config.onConfirm : config.onCancel
-    const result = cb?.(e)
-    if (result && typeof (result as Promise<unknown>).then === 'function') {
-      // Async handler: hold the panel open with a loading OK button until the
-      // promise settles, then close. Rejection closes too — surfacing errors
-      // is the app's job, not the popconfirm's.
-      _setLoading(true)
-      ;(result as Promise<unknown>).finally(() => {
-        _setLoading(false)
-        trigger.setOpen(false)
-      })
+  // Synchronous in-flight guard: the loading signal commits in a batch, so a
+  // second click in the same tick would still read false.
+  let pending = false
+
+  const confirm = (e?: Event) => {
+    if (pending) return
+    const result = config.onConfirm?.(e)
+    if (!result || typeof (result as Promise<unknown>).then !== 'function') {
+      trigger.setOpen(false)
       return
     }
-    trigger.setOpen(false)
+    pending = true
+    _setLoading(true)
+    ;(result as Promise<unknown>).then(
+      () => { pending = false; _setLoading(false); trigger.setOpen(false) },
+      // Rejection keeps the panel open so the user can retry; surfacing the
+      // error is the app's job.
+      () => { pending = false; _setLoading(false) },
+    )
   }
 
-  const confirm = (e?: Event) => runIntent('confirm', e)
-  const cancel = (e?: Event) => runIntent('cancel', e)
+  const cancel = (e?: Event) => {
+    trigger.setOpen(false)
+    config.onCancel?.(e)
+  }
 
   const open = createMemo(() => trigger.open())
   const loading = createMemo(() => _loading())
@@ -95,5 +110,5 @@ export const createPopconfirm = (config: PopconfirmConfig = {}) => {
 
 export const popconfirmSplits: (keyof PopconfirmConfig)[] = [
   'open', 'defaultOpen', 'disabled', 'trigger', 'placement',
-  'onOpenChange', 'getContainer', 'onConfirm', 'onCancel',
+  'onOpenChange', 'getContainer', 'onConfirm', 'onCancel', 'arrow', 'mouseEnterDelay', 'mouseLeaveDelay',
 ]

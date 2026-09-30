@@ -1,66 +1,113 @@
 import { type Component, createSignal } from 'solid-js'
-import { FloatButton, Divider, Typography } from 'upthrust-ui'
+import type { JSX } from '@solidjs/web'
+import { FloatButton, Divider, Switch, Typography } from 'upthrust-ui'
 
-const { Text, Title } = Typography
+const { Text } = Typography
+
+/** translateZ(0) 让 fixed 的悬浮按钮锚在演示框内（right 24 / bottom 48 相对演示框）。 */
+const Stage = (props: { demo: string; height: number; children: JSX.Element }) => (
+  <div
+    data-float-button-demo={props.demo}
+    class="relative rounded-lg border border-solid border-outline-variant bg-surface-variant/30 mb-4"
+    style={{ height: `${props.height}px`, transform: 'translateZ(0)' }}
+  >{props.children}</div>
+)
 
 const FloatButtonPage: Component = () => {
-  const [, setClicked] = createSignal<string | null>(null)
+  const [open, setOpen] = createSignal(true)
+  const [clicks, setClicks] = createSignal(0)
+  let pane: HTMLDivElement | undefined
 
   return (
     <div class="p-6 max-w-3xl">
       <h2 class="text-2xl font-bold mb-4">FloatButton 悬浮按钮</h2>
       <p class="text-on-surface-variant mb-6">
-        headless createFloatButton 拥有滚动可见性（阈值显隐 + rAF 去抖 + 容器 DI，
-        与 createAnchor 同形）和 BackTop 滚顶意图；createFloatButtonGroup 管展开/
-        收起（受控镜像）。渲染层 Portal 到 body——position:fixed 在 transformed
-        祖先内会被其吞掉，这是必须 portal 的原因。展开方向 up/down/left/right，
-        触发器是扇形的视觉基座。
+        对标 antd 6：40px 纵向按钮，单独使用时 fixed 在右下角（right 24 / bottom 48、z 1000）。
+        Group 圆形为独立按钮 + 16px 间距，方形为紧凑列表；设置 trigger 进入菜单模式。BackTop 滚动超过阈值后淡入。
       </p>
 
-      <div class="rounded border border-outline-variant p-6 mb-4">
-        <Title level={5}>本页试玩</Title>
-        <Text type="secondary">
-          右下角已挂了：一个带 tooltip 的纯按钮、一个 BackTop（滚动 400px 出现）、
-          一个 Group（direction="up"）。向下滚动页面看 BackTop 显隐。
-        </Text>
-        <div class="h-[600px]" />
-      </div>
+      <h3 class="text-lg font-semibold mb-3">类型、形状与内容</h3>
+      <Stage demo="basic" height={140}>
+        <FloatButton onClick={() => setClicks(c => c + 1)} style={{ right: '24px' }} />
+        <FloatButton type="primary" icon={<span class="i-mdi-help-circle-outline" />} style={{ right: '88px' }} />
+        <FloatButton shape="square" type="primary" icon={<span class="i-mdi-headset" />} style={{ right: '152px' }} />
+        <FloatButton shape="square" icon={<span class="i-mdi-file-document-outline" />} content="文档" style={{ right: '216px' }} />
+        <FloatButton shape="square" content="HELP INFO" style={{ right: '280px' }} />
+        <FloatButton href="https://ant.design" target="_blank" tooltip={{ title: '链接 + 气泡', placement: 'top' }} style={{ right: '344px' }} />
+        <div class="p-md text-[13px]"><Text type="secondary">默认按钮点击次数：{clicks()}</Text></div>
+      </Stage>
+
+      <h3 class="text-lg font-semibold mb-3">徽标</h3>
+      <Stage demo="badge" height={140}>
+        <FloatButton badge={{ count: 5 }} style={{ right: '24px' }} />
+        <FloatButton badge={{ dot: true }} style={{ right: '88px' }} />
+        <FloatButton shape="square" badge={{ count: 12, color: 'blue' }} style={{ right: '152px' }} />
+        <FloatButton shape="square" badge={{ dot: true }} style={{ right: '216px' }} />
+      </Stage>
 
       <Divider />
 
-      <h3 class="text-lg font-semibold mb-3">基础 + tooltip</h3>
-      <FloatButton
-        icon={<span class="i-mdi-customer-service" />}
-        tooltip="客服"
-        placement="rt"
-        onClick={() => setClicked('service')}
-      />
+      <h3 class="text-lg font-semibold mb-3">按钮组（circle / square）</h3>
+      <Stage demo="group" height={240}>
+        <FloatButton.Group shape="circle" style={{ right: '24px' }}>
+          <FloatButton icon={<span class="i-mdi-help-circle-outline" />} />
+          <FloatButton />
+          <FloatButton.BackTop visibilityHeight={0} />
+        </FloatButton.Group>
+        <FloatButton.Group shape="square" style={{ right: '88px' }}>
+          <FloatButton icon={<span class="i-mdi-help-circle-outline" />} />
+          <FloatButton />
+          <FloatButton icon={<span class="i-mdi-sync" />} />
+          <FloatButton.BackTop visibilityHeight={0} />
+        </FloatButton.Group>
+      </Stage>
 
-      <h3 class="text-lg font-semibold mb-3 mt-8">BackTop（滚动出现）</h3>
-      <FloatButton.BackTop
-        visibilityHeight={400}
-        placement="rb"
-        onClick={() => setClicked('backtop')}
-      />
+      <h3 class="text-lg font-semibold mb-3">菜单模式（click / hover / 受控）</h3>
+      <Stage demo="menu" height={260}>
+        <FloatButton.Group trigger="click" type="primary" icon={<span class="i-mdi-headset" />} style={{ right: '24px' }}>
+          <FloatButton />
+          <FloatButton icon={<span class="i-mdi-comment-outline" />} />
+        </FloatButton.Group>
+        <FloatButton.Group trigger="hover" type="primary" icon={<span class="i-mdi-headset" />} style={{ right: '88px' }}>
+          <FloatButton />
+          <FloatButton icon={<span class="i-mdi-comment-outline" />} />
+        </FloatButton.Group>
+        <FloatButton.Group trigger="click" shape="square" open={open()} onOpenChange={setOpen} style={{ right: '152px' }}>
+          <FloatButton />
+          <FloatButton icon={<span class="i-mdi-comment-outline" />} />
+        </FloatButton.Group>
+        <div class="p-md"><Switch checked={open()} onChange={setOpen} checkedChildren="展开" unCheckedChildren="收起" /></div>
+      </Stage>
 
-      <h3 class="text-lg font-semibold mb-3 mt-8">Group（up 展开）</h3>
-      <FloatButton.Group placement="lt" direction="up">
-        <FloatButton icon={<span class="i-mdi-file-document-outline" />} tooltip="文档" onClick={() => setClicked('doc')} />
-        <FloatButton icon={<span class="i-mdi-cog-outline" />} tooltip="设置" onClick={() => setClicked('settings')} />
-        <FloatButton icon={<span class="i-mdi-help-circle-outline" />} tooltip="帮助" onClick={() => setClicked('help')} />
-      </FloatButton.Group>
+      <h3 class="text-lg font-semibold mb-3">弹出方向</h3>
+      <Stage demo="placement" height={300}>
+        <FloatButton.Group trigger="click" placement="top" style={{ right: '210px', bottom: '190px' }} icon={<span class="i-mdi-arrow-up" />}><FloatButton /><FloatButton /></FloatButton.Group>
+        <FloatButton.Group trigger="click" placement="right" style={{ right: '290px', bottom: '110px' }} icon={<span class="i-mdi-arrow-right" />}><FloatButton /><FloatButton /></FloatButton.Group>
+        <FloatButton.Group trigger="click" placement="bottom" style={{ right: '210px', bottom: '30px' }} icon={<span class="i-mdi-arrow-down" />}><FloatButton /><FloatButton /></FloatButton.Group>
+        <FloatButton.Group trigger="click" placement="left" style={{ right: '130px', bottom: '110px' }} icon={<span class="i-mdi-arrow-left" />}><FloatButton /><FloatButton /></FloatButton.Group>
+      </Stage>
 
       <Divider />
 
-      <Title level={5}>API 要点</Title>
-      <ul class="list-disc pl-6 text-on-surface-variant text-sm leading-6">
-        <li><Text code>backTop</Text>：BackTop 模式（上箭头 + 点击滚顶，阈值默认 400）</li>
-        <li><Text code>visibilityHeight</Text>：滚动多少 px 后出现（不设 = 恒显）</li>
-        <li><Text code>target</Text>：监听的滚动容器（默认 window）</li>
-        <li><Text code>shape</Text>：circle / square；<Text code>placement</Text>：rt/rb/lt/lb</li>
-        <li><Text code>FloatButton.Group</Text>：<Text code>direction</Text> up/down/left/right，触发器 + 渐次展开</li>
-        <li>compound：<Text code>{'<FloatButton.BackTop />'}</Text>、<Text code>{'<FloatButton.Group>'}</Text>，亦可裸导入 <Text code>BackTop</Text></li>
-      </ul>
+      <h3 class="text-lg font-semibold mb-3">回到顶部（容器滚动，阈值 100）</h3>
+      <Stage demo="back-top" height={240}>
+        <div ref={el => { pane = el }} data-back-top-pane class="h-full overflow-auto px-md">
+          <div class="h-[1200px] pt-md text-[13px] text-on-surface-variant">向下滚动这个容器，右下角出现回到顶部按钮。</div>
+        </div>
+        <FloatButton.BackTop target={() => pane!} visibilityHeight={100} tooltip="回到顶部" />
+      </Stage>
+
+      <h3 class="text-lg font-semibold mb-3">语义化 classNames / styles</h3>
+      <Stage demo="semantic" height={200}>
+        <FloatButton
+          type="primary" shape="square" content="HOT" style={{ right: '88px' }}
+          styles={({ props }) => props.type === 'primary' ? { root: { 'background-color': '#fa541c', 'border-color': '#fa541c' } } : {}}
+        />
+        <FloatButton.Group shape="square" styles={{ list: { 'box-shadow': '0 0 0 2px #1677ff' }, itemContent: { color: '#1677ff' } }}>
+          <FloatButton content="A" />
+          <FloatButton content="B" />
+        </FloatButton.Group>
+      </Stage>
     </div>
   )
 }
